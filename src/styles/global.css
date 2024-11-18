@@ -3,6 +3,7 @@
 * {
     padding: 0;
     margin: 0;
+    font-family: var(--font-pop);
 }
 
 :root {
@@ -10,6 +11,7 @@
     --secondary: #00A699;
 
     --gray-200: #C4C4C4;
+    --gray-300: #666;
     --gray-600: #1B1B1B;
 
     --font-pop: 'Poppins', sans-serif;
@@ -17,4 +19,9 @@
     --title-size: 2rem;
     --subtitle-size: 1.5rem;
     --paragraph-size: 1rem;
+    --border-input: 1px solid var(--gray-300);
+}
+
+body {
+    background-color: black;
 }
