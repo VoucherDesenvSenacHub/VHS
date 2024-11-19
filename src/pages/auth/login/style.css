@@ -1,0 +1,133 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #0C0118;
+}
+
+h1,h2{
+    color: white;
+    margin-top: 0.7rem;
+}
+
+p{
+    color: #c4c4c4;
+}
+
+a{
+    color: #660BAD;
+}
+
+#wrapper{
+    max-width: 90rem;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    gap: 10rem;
+}
+
+#wrapper .cassete{
+    width: 47.62rem;
+    height: 28.12rem;
+}
+
+.logo{
+    display: flex;
+    justify-content: center;
+}
+
+.logo img{
+    width: 10rem;
+}
+
+.data p{
+    margin-top: 0.7rem;
+    margin-left: 0.4rem;
+}
+
+.data h2{
+    text-align: center;
+}
+
+.data-control{
+    display: flex;
+    flex-direction: column;
+}
+
+.config{
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    margin-top: 0.7rem;
+}
+.config input{
+    width: 1rem;
+    height: rem;
+}
+
+#direct-acess{
+    background-color: #6C00C0;
+    color: white;
+}
+
+#google-acess{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    background-color: white;
+    color: black;
+}
+
+#google-acess img{
+    width: 1.3rem;
+    height: 1.3rem;
+
+}
+
+.or{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 1.5rem 0 1.5rem 0;
+}
+
+.or hr{
+    width: 10.6rem;
+    border: none;
+    height: 0.1rem;
+    background-color: #666666;
+}
+
+.or p{
+    color: white;
+}
+
+.entry-acess{
+    margin-top: 1rem;
+}
+
+.entry-acess .config{
+    margin-left: 1rem;
+}
+
+.entry-acess button{
+    padding: 0.4rem;
+    width: 21rem;
+    height: 3rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.4rem;
+    cursor: pointer;;
+}
+
+.btn-div:last-child {
+    background-color: #fff;
+}
