@@ -12,16 +12,16 @@ body{
 }
 
 h1,h2{
-    color: white;
+    color: var(--secondary);
     margin-top: 0.7rem;
 }
 
 p{
-    color: #c4c4c4;
+    color: var(--gray-200);
 }
 
 a{
-    color: #660BAD;
+    color: var(--primary);
 }
 
 #wrapper{
@@ -49,10 +49,17 @@ a{
 .data p{
     margin-top: 0.7rem;
     margin-left: 0.4rem;
+    margin-bottom: 1rem;
 }
 
 .data h2{
     text-align: center;
+}
+
+#Inputs{
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
 }
 
 .data-control{
@@ -71,19 +78,6 @@ a{
     height: rem;
 }
 
-#direct-acess{
-    background-color: #6C00C0;
-    color: white;
-}
-
-#google-acess{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    background-color: white;
-    color: black;
-}
 
 #google-acess img{
     width: 1.3rem;
@@ -110,24 +104,17 @@ a{
     color: white;
 }
 
-.entry-acess{
-    margin-top: 1rem;
-}
 
-.entry-acess .config{
-    margin-left: 1rem;
-}
 
-.entry-acess button{
-    padding: 0.4rem;
-    width: 21rem;
-    height: 3rem;
-    font-size: 1rem;
-    border: none;
-    border-radius: 0.4rem;
-    cursor: pointer;;
+.top {
+    margin-bottom: 1rem;
 }
 
 .btn-div:last-child {
     background-color: #fff;
+    border: none;
+}
+
+.btn-div:last-child button {
+    color: black;
 }

@@ -22,54 +22,55 @@
                 <p>Informe seus dados para entrar em sua conta</p>
             </div>
             
-                <?php
-                require "../../../components/utils/input.component.php";
-                require "../../../components/utils/input.style.php";
-                
-                use function Src\Components\Utils\inputComponent;
-                use function Src\Components\Utils\inputStyle;
-                
-                inputStyle();
-                inputComponent(null,null,"E-mail","Insira seu email",null);
-                inputComponent(null,null,"Senha","Insira seu email",null);
-                
-                ?>
+            <?php
+            require "../../../components/utils/input.component.php";
+            require "../../../components/utils/input.style.php";
+            
+            use function Src\Components\Utils\inputComponent;
+            use function Src\Components\Utils\inputStyle;
+            
+            inputStyle();
+            inputComponent(null,null,"E-mail","Insira seu email",null);
+            inputComponent(null,null,"Senha","Insira seu email",null);
+            ?>
         
             <div class="config">
                 <p>Esqueceu a senha?</p>
                 <a href="">Redefinir</a>
             </div>
             
-            <div class="config">
+            <div class="config top">
                 <input type="checkbox" id="checkbox">
                 <p>Lembrar de mim</p>
             </div>
 
             <?php
-                require "../../../components/utils/button.component.php";
-                require "../../../components/utils/button.style.php";
-                
-                use function Src\Components\Utils\buttonComponent;
-                use function Src\Components\Utils\buttonStyle;
+            require "../../../components/utils/button.component.php";
+            require "../../../components/utils/button.style.php";
             
-                buttonStyle();
-                buttonComponent(null,"Acessar plataforma",null);
+            use function Src\Components\Utils\buttonComponent;
+            use function Src\Components\Utils\buttonStyle;
+            
+            buttonStyle();
+            buttonComponent(null,"Acessar plataforma",null);
+            ?>
+
+            <div class="or">
+                <hr>
+                <p>OU</p>
+                <hr>
+            </div>
+
+            <div>
+                <?php
                 buttonComponent(null,"Entrar pelo Google","../../../../public/logos/logo-google.png");
-
                 ?>
-
-                <div class="or">
-                    <hr>
-                    <p>OU</p>
-                    <hr>
-                </div>
-
-                
-
-                <div class="config">
-                    <p>Ainda não tem uma conta?</p>
-                    <a href="">Cadastrar</a>
-                </div>
+            </div>
+            
+            <div class="config">
+                <p>Ainda não tem uma conta?</p>
+                <a href="">Cadastrar</a>
+            </div>
             </div>
             
         </div>
