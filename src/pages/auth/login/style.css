@@ -1,0 +1,120 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #0C0118;
+}
+
+h1,h2{
+    color: var(--secondary);
+    margin-top: 0.7rem;
+}
+
+p{
+    color: var(--gray-200);
+}
+
+a{
+    color: var(--primary);
+}
+
+#wrapper{
+    max-width: 90rem;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    gap: 10rem;
+}
+
+#wrapper .cassete{
+    width: 47.62rem;
+    height: 28.12rem;
+}
+
+.logo{
+    display: flex;
+    justify-content: center;
+}
+
+.logo img{
+    width: 10rem;
+}
+
+.data p{
+    margin-top: 0.7rem;
+    margin-left: 0.4rem;
+    margin-bottom: 1rem;
+}
+
+.data h2{
+    text-align: center;
+}
+
+#Inputs{
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.data-control{
+    display: flex;
+    flex-direction: column;
+}
+
+.config{
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    margin-top: 0.7rem;
+}
+.config input{
+    width: 1rem;
+    height: rem;
+}
+
+
+#google-acess img{
+    width: 1.3rem;
+    height: 1.3rem;
+
+}
+
+.or{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 1.5rem 0 1.5rem 0;
+}
+
+.or hr{
+    width: 10.6rem;
+    border: none;
+    height: 0.1rem;
+    background-color: #666666;
+}
+
+.or p{
+    color: white;
+}
+
+
+
+.top {
+    margin-bottom: 1rem;
+}
+
+.btn-div:last-child {
+    background-color: #fff;
+    border: none;
+}
+
+.btn-div:last-child button {
+    color: black;
+}
