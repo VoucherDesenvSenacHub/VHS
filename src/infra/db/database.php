@@ -16,9 +16,6 @@ class Database {
         $this->user = getenv('DB_USER') ?? 'root';
         $this->password = getenv('DB_PASSWORD') ?? '';
 
-        echo "Driver: {$this->driver}\n";
-        echo "Host: {$this->host}\n";
-
         $this->connection = new PDO("{$this->driver}:host={$this->host};dbname={$this->database_name}", $this->user, $this->password);
     }
 
