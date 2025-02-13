@@ -1,6 +1,6 @@
 <?php
 namespace Src\Views\Components;
-function perfilComponent($photo_profile,$creator_name,$subscribers,$category){
+function ProfileComponent($photo_profile,$creator_name,$subscribers,$category){
   return " 
     <div class='flex items-center'>
       <img class='bg-blue-500 size-14.5 rounded-2xl' src='$photo_profile' alt=''>
