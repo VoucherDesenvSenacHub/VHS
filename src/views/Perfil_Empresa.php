@@ -23,7 +23,7 @@
             <p class="p-0 mt-0 text-gray-200 ml-55 bold text-[15px] font-[Poppins]">4.5k de seguidores</p>
             <p class="p-0 mt-0 ml-1 text-gray-200 bold text-[15px] font-[Poppins]">|</p>
             <p class="p-0 mt-0 ml-1 text-white bold text-[15px] font-[Poppins]">Parceiro</p>
-            
+            <button class="w-[160px] bg-none text-white px-4 py-2 rounded-md border border-violet-500">Seguir</button>
             </div>
         </div>
     </div>
