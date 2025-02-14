@@ -36,7 +36,7 @@
                 <h2 class="flex ml-10 mt-0.7rem text-3xl font-semibold text-secondary">Entrar na sua conta</h2>
                 <p class="text-gray200 flex ml-3 mb-2 mt-2">Informe seus dados para entrar em sua conta</p>
             </div>
-        
+
             <div class="flex flex-row gap-0.5rem mt-0.7rem ">
                 <p>Esqueceu a senha?</p>
                 <u class="text-primary" href="">Redefinir</u>
@@ -46,7 +46,6 @@
                 <input type="checkbox" class="flex " id="checkbox">
                 <p>Lembrar de mim</p>
             </div>
-
 
             <div class="flex flex-row  items-center gap-0.4rem m-1.5 rem 0 1.5rem 0">
                 <hr>
