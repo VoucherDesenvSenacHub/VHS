@@ -2,10 +2,12 @@
 
 namespace Src\Application\Controllers;
 
+use function Src\Application\Utils\verifyRecaptcha;
+
 class SignUpController {
     public function handle() {
 
-        if(!isset($_POST["email"]) || !isset($_POST["name"]) || !isset($_POST["age"]) || !isset($_POST["password"]) || !isset($_POST["password_confirmation"]) || !isset($_POST["token_recaptcha"]) || !isset($_POST["interests"])) {
+        if(!isset($_POST["email"]) || !isset($_POST["name"]) || !isset($_POST["age"]) || !isset($_POST["password"]) || !isset($_POST["password_confirmation"]) || !isset($_POST["token_recaptcha"])) {
             http_response_code(400);
            
             return;
@@ -17,26 +19,23 @@ class SignUpController {
         $password = $_POST["password"];
         $password_confirmation = $_POST["password_confirmation"];
         $token_recaptcha = $_POST["token_recaptcha"];
-        $interests = $_POST["interests"];
 
-        $secret = getenv("RECAPTCHA_SECRET");
-        $url = "https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$token_recaptcha";
+    
+        $res = verifyRecaptcha($token_recaptcha);
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $response = curl_exec($ch);
-
-        curl_close($ch);
-
-        if(!$response["success"]) {
+        if(!$res) {
             http_response_code(400);
             return [
                 "success" => false,
-                "message" => "Recaptcha inválido"
+                "errors" => [
+                    "error" => true,
+                    "recaptcha" => [
+                        "error_code" => 1,
+                        "message" => "Recaptcha inválido"
+                    ]
+                ]
             ];
-        };
+        }
 
 
 
