@@ -23,15 +23,11 @@
             </div>
             
             <?php
-            require "../../../components/utils/input.component.php";
-            require "../../../components/utils/input.style.php";
+            require "../../components/utils/inputComponent.php";
             
-            use function Src\Components\Utils\inputComponent;
-            use function Src\Components\Utils\inputStyle;
+            use function Src\Views\Components\Utils\inputComponent;
             
-            inputStyle();
-            inputComponent(null,null,"E-mail","Insira seu email",null);
-            inputComponent(null,null,"Senha","Insira seu email",null);
+            echo inputComponent(placeholder: "Teste", type: "text");
             ?>
         
             <div class="config">
@@ -44,27 +40,10 @@
                 <p>Lembrar de mim</p>
             </div>
 
-            <?php
-            require "../../../components/utils/button.component.php";
-            require "../../../components/utils/button.style.php";
-            
-            use function Src\Components\Utils\buttonComponent;
-            use function Src\Components\Utils\buttonStyle;
-            
-            buttonStyle();
-            buttonComponent(null,"Acessar plataforma",null);
-            ?>
-
             <div class="or">
                 <hr>
                 <p>OU</p>
                 <hr>
-            </div>
-
-            <div>
-                <?php
-                buttonComponent(null,"Entrar pelo Google","../../../../public/logos/logo-google.png");
-                ?>
             </div>
             
             <div class="config">
