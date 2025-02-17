@@ -2,24 +2,32 @@
     
     namespace Src\Views\Components\Utils;
 
-    function ButtonComponent(string $text, bool $outline = false, string $outiline_color = null, string $icon = null, string $background = null, string $text_color = null, string $font_size = null) {
-        
-        $outline = $outline ? "!bg-transparent outline outline-1 $outiline_color" : '';
-        
-        $outiline_color = $outiline_color ? "outiline-$outiline_color" : "";
+    function ButtonComponent(string $text, string $variant ,string $icon = null) {
         
         $icon = $icon ? "<img src='$icon' class='w-4 h-4'>" : "";
 
-        $background = $background ? "!bg-$background" : "bg-white";
-        
-        $text_color = $text_color ? "text-$text_color" : "";
+        $button_style = "flex justify-center items-center w-[380px] h-[50px] gap-2 rounded-md cursor-pointer ";
 
-        $font_size = $font_size ? "text-[$font_size]" : "";
+        switch ($variant) {
+            case 'outline':
+                $button_style = $button_style . "outline outline-1 outline-purple-500 text-white";
+                break;
+            
+            case 'icon':
+                $button_style = $button_style . "bg-white";
+                break;
 
-        echo "
-        <button class='flex justify-center items-center w-[380px] h-[50px] gap-2 rounded-md cursor-pointer $outline $background $text_color $font_size'>
-            $icon
-            $text
-        </button>
-        ";
+            default:
+                $button_style = $button_style . "bg-purple-700 text-white";
+                break;
+        }
+
+        return(
+            "
+                <button class='$button_style'>
+                    $icon
+                    $text
+                </button>
+            "
+        ); 
     }
