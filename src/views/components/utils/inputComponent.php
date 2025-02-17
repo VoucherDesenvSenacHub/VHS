@@ -12,7 +12,8 @@
         string $description_size = null,
         string $background = null, 
         string $iconPosition = null,
-        string $width = null
+        string $width = null,
+        string $height = null
         ){
         
         $type = htmlspecialchars($type, ENT_QUOTES, 'UTF-8');
@@ -30,17 +31,18 @@
             $margin = "pr-10";
         }
 
-        $label = $label ? "<label class='$label_size font-medium text-white mb-2'>" . htmlspecialchars($label, ENT_QUOTES, 'UTF-8') . "</label>" : "";
-
-        $label_size = $label_size ? "text-[$label_size]" : "text-sm";
-    
-        $description = $description ? "<p class='$description_size text-gray-200 mb-3'>" . htmlspecialchars($description, ENT_QUOTES, 'UTF-8') . "</p>" : "";
+        $label_size = $label_size ? "text-$label_size" : "text-md";
         
-        $description_size = $description_size ? "text-[$description_size]" : "text-xs";
+        $label = $label ? "<label class='$label_size font-medium text-white'>" . htmlspecialchars($label, ENT_QUOTES, 'UTF-8') . "</label>" : "";
+        
+        $description_size = $description_size ? "text-$description_size" : "text-sm";
+       
+        $description = $description ? "<p class='$description_size text-gray-200'>" . htmlspecialchars($description, ENT_QUOTES, 'UTF-8') . "</p>" : ""; 
 
         $classes = [
-            "!px-3 py-1.5 outline outline-1 outline-gray-500 rounded-md placeholder-slate-600 text-zinc-200 h-[35px]",
-            $width = $width ? "w-[$width]" : "w-full",
+            "!px-3 py-1.5 outline outline-1 outline-gray-500 rounded-md placeholder-slate-600 text-zinc-200",
+            $width = $width ? "w-$width" : "w-full",
+            $height = $height ? "h-$height" : "h-[45px]",
             $background ? "bg-$background" : "bg-transparent",
             $margin
         ];
@@ -49,12 +51,12 @@
 
         return (
             "
-            <div class='w-full'>
-                <div class='flex flex-col mb-1'> 
+            <div class='flex flex-col gap-3'>
+                <div class='flex flex-col w-full gap-1'> 
                     $label
                     $description
                 </div>
-                <div class='relative mt-1 flex justify-center items-center'> 
+                <div class='relative flex justify-center items-center'> 
                     <input type='$type' placeholder='$placeholder' class='$input_style'onfocus='this.placeholder=\"\"' onblur='this.placeholder=\"$placeholder\"'>
                     $icon
                 </div>
