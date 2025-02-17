@@ -44,16 +44,17 @@
                 <img class="w-12 h-12 bg-red-500 rounded-full" src="../../../../public/images/ProfilePhoto.png" alt="">
               </div>
               <div class="h-14">
-                <p class="font-pop paragraph-size text-[#fff]">Freitasdev</p>
+                <p class="font-pop paragraph-size text-[#FFFFFF]">Freitasdev</p>
                 <p class="text-[#666]">eu@freitasdev...</p>
-                <p class="font-pop text-[#C4C4C4]">Desenvolvedor</p>
+                <p class="font-pop text-xs text-[#C4C4C4]">Desenvolvedor</p>
               </div>
             </div>
-            
-        
+            <div>
+              <div>
+                <img src="../../../../public/icons/Settings.svg" alt="">
+              </div>
+
+            </div>
           </div>
-          
-
-
         </body>
 
