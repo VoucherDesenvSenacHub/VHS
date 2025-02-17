@@ -10,13 +10,16 @@ class Database {
     
 
     public function __construct() {
-        $this->driver = getenv('DB_DRIVER') ?? 'mysql';
-        $this->host = getenv('DB_HOST') ?? 'localhost';
-        $this->database_name = getenv('DB_DATABASE') ?? 'vhs_dev_db';
-        $this->user = getenv('DB_USER') ?? 'root';
-        $this->password = getenv('DB_PASSWORD') ?? '';
 
-        $this->connection = new PDO("{$this->driver}:host={$this->host};dbname={$this->database_name}", $this->user, $this->password);
+        $this->driver = $_ENV['DB_DRIVER'] ?? 'mysql';
+        $this->host = $_ENV['DB_HOST'] ?? 'localhost';
+        $this->database_name = $_ENV['DB_DATABASE'] ?? 'vhs_dev_db';
+        $this->user = $_ENV['DB_USER'] ?? 'root';
+        $this->password = $_ENV['DB_PASSWORD'] ?? '';
+
+        $dsn = "{$this->driver}:host={$this->host};dbname={$this->database_name}";
+
+        $this->connection = new PDO($dsn, $this->user, $this->password);
     }
 
     public function getConnection(): PDO {
