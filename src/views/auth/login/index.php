@@ -33,9 +33,9 @@ use function Src\Views\Components\Utils\InputComponent;
 
 <div class="flex w-100 h-screen bg-background  text-white " id="wrapper">
         <div class="flex justify-center mr-24">
-            <img src="../../../../public/images/Cassete.svg" alt="" class="h-full relative right-[121px] mr-28 w-[1200px]">
+            <img src="../../../../public/images/Cassete.svg" alt="" class=" relative right-[110px] mr-28 w-[1100px]">
         </div>
-        <div class="flex jusfity-center mt-24 h-full flex-col w-1/2 h-full ">    
+            
         <div class="flex jusfity-center mt-24  flex-col ">    
             <div class="flex mt-20 ml-20 mb-5">
                 <img src="../../../../public/logos/Logo.svg" alt="Logo">
@@ -59,24 +59,42 @@ use function Src\Views\Components\Utils\InputComponent;
             <div class="flex flex-row gap-0.5rem mt-0.7rem ">
                 <p>Esqueceu a senha?</p>
                 <u class="text-primary" href="">Redefinir</u>
-
-                <p>Lembrar de mim</p>
             </div>
 
-            <div class="flex flex-row  items-center gap-0.4rem m-1.5 rem 0 1.5rem 0">
-                <hr>
-                <p>OU</p>
-                <hr>
+            <div class="flex items-center mt-2 cursor-pointer">
+                      <input type="checkbox" id="checkbox" class="hidden">
+                      <div id="customCheckbox" class="w-5 h-5 flex items-center justify-center bg-[#0C0118] rounded-md border border-[#666666] transition-all">
+                          <svg id="checkIcon" class="w-4 h-4 text-white hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                      </div>
+                <span class="text-white text-xs font-7">Lembrar de mim</span>
+            </div>
+
             <div class="flex items-center text-white">
                 <div class="flex-grow border-t border-gray600"></div>
                     <span class="px-3 text-sm font-semibold">OU</span>
                 <div class="flex-grow border-t border-gray600"></div>
             </div>
 
-            
+            <div class="flex bt-4">
+                <p>Ainda não tem uma conta?</p>
+                <u class="text-primary">Cadastrar</u>
+            </div>
 
-        </div>
-    </div>
-
+        </div>  
+</div>
+<script>
+        const checkbox = document.getElementById("checkbox");
+        const customCheckbox = document.getElementById("customCheckbox");
+        const checkIcon = document.getElementById("checkIcon");
+ 
+        customCheckbox.addEventListener("click", () => {
+            checkbox.checked = !checkbox.checked;
+            customCheckbox.classList.toggle("bg-purple-700");
+            customCheckbox.classList.toggle("border-[#666666]");
+            checkIcon.classList.toggle("hidden");
+        });
+    </script>
 
 </html>
