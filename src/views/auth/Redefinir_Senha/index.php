@@ -1,0 +1,52 @@
+<?php
+ 
+require "../../components/utils/inputComponent.php";
+           
+use function Src\Views\Components\Utils\InputComponent;
+ 
+?>
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#0C0118',
+                        primary: "#6C00C0",
+                        secondary: "#fff",
+                        gray200: "#C4C4C4",
+                        gray300: "#666",
+                        gray600: "#1B1B1B"
+                    }
+                }
+            }
+        }  
+    </script>
+</head>
+ 
+<div class="flex w-100 h-screen bg-background  text-white " id="wrapper">
+        <div class="flex justify-center mr-24">
+            <img src="../../../../public/images/Cassete.svg" alt="" class=" relative right-[110px] mr-28 w-[1100px]">
+        </div>
+           
+        <div class="flex jusfity-center mt-24  flex-col ">    
+            <div class="flex mt-20 ml-20 mb-5">
+                <img src="../../../../public/logos/Logo.svg" alt="Logo">
+            </div>
+ 
+            <div class="">
+                <h2 class="flex ml-10 mt-0.7rem text-3xl font-semibold text-secondary">Redefinir Senha</h2>
+                <p class="text-gray200 flex  ml-10 mb-2 mt-2">Informe o e-mail de sua conta</p>
+ 
+            </div>
+ 
+            <div class="mb-5 w-[300px]">
+                <?= InputComponent(placeholder:"Insira seu e-mail", type:"email", label:"Email", icon:"../../../../public/images/E-mail.svg",iconPosition: "right-3") ?>
+            </div>
