@@ -4,7 +4,7 @@
 
     function ButtonComponent(string $text, string $variant ,string $icon = null) {
         
-        $icon = $icon ? "<img src='$icon' class='w-4 h-4'>" : "";
+        $icon = $icon ? "<img src='$icon' class='w-6 h-6'>" : "";
 
         $button_style = "flex justify-center items-center w-[380px] h-[50px] gap-2 rounded-md cursor-pointer ";
 

@@ -1,8 +1,10 @@
 <?php
 
 require "../../components/utils/inputComponent.php";
+require "../../components/utils/buttonComponent.php";
             
 use function Src\Views\Components\Utils\InputComponent;
+use function Src\Views\Components\Utils\ButtonComponent;
 
 ?>
 
@@ -33,11 +35,11 @@ use function Src\Views\Components\Utils\InputComponent;
 
 <div class="flex w-100 h-screen bg-background  text-white " id="wrapper">
         <div class="flex justify-center mr-24">
-            <img src="../../../../public/images/Cassete.svg" alt="" class=" relative right-[110px] mr-28 w-[1100px]">
+            <img src="../../../../public/images/Cassete.svg" alt="" class="relative right-[110px] mr-28 w-[1100px]">
         </div>
-            
-        <div class="flex jusfity-center mt-24  flex-col ">    
-            <div class="flex mt-20 ml-20 mb-5">
+
+        <div class="flex mt-24  flex-col ">    
+            <div class="flex mt-20 ml-24 mb-5">
                 <img src="../../../../public/logos/Logo.svg" alt="Logo">
             </div>
 
@@ -57,8 +59,8 @@ use function Src\Views\Components\Utils\InputComponent;
 
 
             <div class="flex flex-row gap-0.5rem mt-0.7rem ">
-                <p>Esqueceu a senha?</p>
-                <u class="text-primary" href="">Redefinir</u>
+                <p class="text-gray200">Esqueceu a senha?</p>
+                <a class="text-primary ml-2 underline" href="">Redefinir</a>
             </div>
 
             <div class="flex items-center mt-2 cursor-pointer">
@@ -68,18 +70,26 @@ use function Src\Views\Components\Utils\InputComponent;
                               <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
                           </svg>
                       </div>
-                <span class="text-white text-xs font-7">Lembrar de mim</span>
+                <span class="text-white text-xs font-7 ml-2">Lembrar de mim</span>
             </div>
 
-            <div class="flex items-center text-white">
-                <div class="flex-grow border-t border-gray600"></div>
+            <div class="mt-3">
+                <?= ButtonComponent("Acessar Plataforma", "default") ?>
+            </div>
+
+            <div class="flex mt-4 mb-4 items-center text-white">
+                <div class="flex-grow border-t border-[#666666]"></div>
                     <span class="px-3 text-sm font-semibold">OU</span>
-                <div class="flex-grow border-t border-gray600"></div>
+                <div class="flex-grow border-t border-[#666666]"></div>
             </div>
 
-            <div class="flex bt-4">
+            <div class="text-black">
+                <?= ButtonComponent("Entrar pelo Google", "icon", "../../../../public/images/LogoGoogle.svg" ) ?>
+            </div>
+
+            <div class="flex bt-4 mt-3 justify-center">
                 <p>Ainda não tem uma conta?</p>
-                <u class="text-primary">Cadastrar</u>
+                <a class="text-primary ml-2 underline">Cadastrar</a>
             </div>
 
         </div>  
