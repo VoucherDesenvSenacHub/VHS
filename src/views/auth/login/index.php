@@ -33,6 +33,12 @@ use function Src\Views\Components\Utils\ButtonComponent;
     </script>
 </head>
 
+<body>
+    
+
+
+
+
 <div class="flex w-100 h-screen bg-background  text-white " id="wrapper">
         <div class="flex justify-center mr-24">
             <img src="../../../../public/images/Cassete.svg" alt="" class="relative right-[110px] mr-28 w-[1100px]">
@@ -106,5 +112,5 @@ use function Src\Views\Components\Utils\ButtonComponent;
             checkIcon.classList.toggle("hidden");
         });
     </script>
-
+</body>
 </html>
