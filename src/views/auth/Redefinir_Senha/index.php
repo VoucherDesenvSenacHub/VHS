@@ -44,7 +44,8 @@ use function Src\Views\Components\Utils\InputComponent;
     }
   }
 </style>
- 
+<body>
+    
 <div class="bg-[#0C0118]  h-full w-full items-center flex justify-between" >
     <div class="flex items-center justify-center h-full ">
         <img class="h-full relative right-[61px] mr-28 w-[1200px] " src="../../../../public/images/Cassete.svg" alt="">
@@ -69,6 +70,5 @@ use function Src\Views\Components\Utils\InputComponent;
         </div>
     </div>
 </div>
-       
-<script>
-</script>
+    
+</body>
