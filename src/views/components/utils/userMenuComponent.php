@@ -49,9 +49,13 @@
                 <p class="font-pop text-xs text-[#C4C4C4]">Desenvolvedor</p>
               </div>
             </div>
-            <div>
+            <div class="flex items-center gap-2">
               <div>
                 <img src="../../../../public/icons/Settings.svg" alt="">
+              </div>
+              <div class="flex flex-col gap-1">
+                <p>Minha Conta</p>
+                <p>Gerencie dados e preferência</p>
               </div>
 
             </div>
