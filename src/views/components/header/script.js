@@ -1,17 +1,13 @@
 
-const Menu = document.getElementById("Menu");
-const Lupa = document.getElementById("Lupa");
-const Body = document.body;
-const Header = document.getElementById("Header");
+const menu = document.getElementById("menu");
+const search = document.getElementById("search");
+const body = document.body;
+const header = document.getElementById("header");
 
-Menu.addEventListener('click', function() {
-Body.classList.toggle('Menu')
-console.log(Body.classList)    
+menu.addEventListener('click', function() {
+body.classList.toggle('menu')
 })
 
-Lupa.addEventListener('click', function() {
-Header.classList.toggle('Header')
-console.log(Header.classList)    
-
-    
+search.addEventListener('click', function() {
+header.classList.toggle('header')   
 })
