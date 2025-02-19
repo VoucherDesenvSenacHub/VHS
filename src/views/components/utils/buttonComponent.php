@@ -6,7 +6,7 @@
         
         $icon = $icon ? "<img src='$icon' class='w-6 h-6'>" : "";
 
-        $button_style = "flex justify-center items-center w-[380px] h-[50px] gap-2 rounded-md cursor-pointer ";
+        $button_style = "flex justify-center items-center w-full h-[50px] gap-2 rounded-md cursor-pointer ";
 
         switch ($variant) {
             case 'outline':

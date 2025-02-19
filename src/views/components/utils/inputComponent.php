@@ -40,7 +40,7 @@
         $description = $description ? "<p class='$description_size text-gray-200'>" . htmlspecialchars($description, ENT_QUOTES, 'UTF-8') . "</p>" : ""; 
 
         $classes = [
-            "!px-3 py-1.5 outline outline-1 outline-gray-500 rounded-md placeholder-slate-600 text-zinc-200",
+            "!px-3 py-1.5 outline outline-1 outline-[#666666] rounded-md placeholder-[#666666] text-zinc-200",
             $width = $width ? "w-$width" : "w-full",
             $height = $height ? "h-$height" : "h-[45px]",
             $background ? "bg-$background" : "bg-transparent",
