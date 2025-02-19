@@ -51,7 +51,7 @@ use function Src\Views\Components\Utils\InputComponent;
     </div>
     <div class="mx-20  w-1/2 flex items-center justify-center shadow-[ -10px_0_30px_10px_rgba(255, 255, 255, 1)]">
         <div class="flex flex-col gap-4">
-            <div class="flex items-center flex-col gap-4">
+            <div class="flex items-center flex-col gap-2">
                 <img src="../../../../public/logos/Logo.svg" alt="">
                 <p class=" font-pop font-semibold title-size text-[#fff]">Criar sua Conta</p>
                 <p class=" font-pop paragraph-size text-gray-200">Informe seus dados para criar sua conta</p>
