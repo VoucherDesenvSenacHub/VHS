@@ -34,12 +34,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
 </head>
 
 <body>
-    
-
-
-
-
-<div class="flex w-100 h-screen bg-background  text-white " id="wrapper">
+    <div class="flex w-100 h-screen bg-background  text-white " id="wrapper">
         <div class="flex justify-center mr-24">
             <img src="../../../../public/images/Cassete.svg" alt="" class="relative right-[110px] mr-28 w-[1100px]">
         </div>
@@ -70,12 +65,12 @@ use function Src\Views\Components\Utils\ButtonComponent;
             </div>
 
             <div class="flex items-center mt-2 cursor-pointer">
-                      <input type="checkbox" id="checkbox" class="hidden">
-                      <div id="customCheckbox" class="w-5 h-5 flex items-center justify-center bg-[#0C0118] rounded-md border border-[#666666] transition-all">
-                          <svg id="checkIcon" class="w-4 h-4 text-white hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-                          </svg>
-                      </div>
+                    <input type="checkbox" id="checkbox" class="hidden">
+                    <div id="customCheckbox" class="w-5 h-5 flex items-center justify-center bg-[#0C0118] rounded-md border border-[#666666] transition-all">
+                        <svg id="checkIcon" class="w-4 h-4 text-white hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
                 <span class="text-white text-xs font-7 ml-2">Lembrar de mim</span>
             </div>
 
@@ -99,12 +94,12 @@ use function Src\Views\Components\Utils\ButtonComponent;
             </div>
 
         </div>  
-</div>
-<script>
+    </div>
+    <script>
         const checkbox = document.getElementById("checkbox");
         const customCheckbox = document.getElementById("customCheckbox");
         const checkIcon = document.getElementById("checkIcon");
- 
+
         customCheckbox.addEventListener("click", () => {
             checkbox.checked = !checkbox.checked;
             customCheckbox.classList.toggle("bg-purple-700");
