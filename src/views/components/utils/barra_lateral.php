@@ -6,9 +6,9 @@
         <script src="https://cdn.tailwindcss.com"></script>
         <title>Barra Lateral</title>
     </head>
-    <body class="flex">
+    <body class="flex bg-gray-950   ">
 
-        <aside class="w-[9.25rem] ml-[1.87rem] h-screen bg-gray-950">
+        <aside class="w-[9.25rem] ml-[1.87rem] h-screen">
             <h2 class=" pt-[1.18rem] ml-[0.31rem] text-gray-400 text-xs font-semibold">HOME</h2>
             <ul>
                 <li class="flex items-center text-gray-300 rounded-lg cursor-pointer mt-[1.5rem]">
@@ -92,31 +92,56 @@
             <hr class="w-[8.06rem] mt-[1.81rem] border-gray-800">
         </aside>
 
-        <script>
+    <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const items = document.querySelectorAll("li");
 
-        document.addEventListener("DOMContentLoaded", function () {
-        const items = document.querySelectorAll("li");
+                const barraLateral = {
+                    "Inicio.php": "home-icon",
+                    "Fast.php": "fast-icon",
+                    "Eventos.php": "eventos-icon",
+                    [encodeURIComponent("Histórico.php")]: "historico-icon",
+                    "Tecnologia.php": "tecnologia-icon",
+                    [encodeURIComponent("Saúde.php")]: "saude-icon",
+                    "Moda.php": "moda-icon",
+                    [encodeURIComponent("Estética.php")]: "estetica-icon"
+                };
 
-        const barraLateral = {
-            "Inicio.php": "home-icon",
-            "Fast.php": "fast-icon",
-            "Eventos.php": "eventos-icon",
-            [encodeURIComponent("Histórico.php")]: "historico-icon",
-            "Tecnologia.php": "tecnologia-icon",
-            [encodeURIComponent("Saúde.php")]: "saude-icon",
-            "Moda.php": "moda-icon",
-            [encodeURIComponent("Estética.php")]: "estetica-icon"
-        };
+                for (const barra in barraLateral) {
+                    if (location.pathname.includes(barra)) {
+                        const iconDiv = document.querySelector(`.${barraLateral[barra]}`);
+                        if (iconDiv) {
+                            iconDiv.classList.add("bg-[#660BAD]", "bg-opacity-100");
+                            const img = iconDiv.querySelector("img");
+                            const text = iconDiv.parentElement.querySelector("h2");
+                            if (img) img.style.filter = "brightness(0) invert(1)";
+                            if (text) text.classList.add("text-white");
+                        }
+                    }
+                }
 
-        for (const barra in barraLateral) {
+                items.forEach(item => {
+                    item.addEventListener("click", function () {
+                        items.forEach(i => {
+                            const iconDiv = i.querySelector(".icon");
+                            const icon = i.querySelector(".icon img");
+                            const text = i.querySelector("h2");
 
-        if (location.pathname.includes(barra)) {
-            console.log(barra)
-            document.querySelector(`.${barraLateral[barra]}`).classList.add("bg-[#660BAD]", "bg-opacity-100");
-        }
-    }
+                            if (iconDiv) iconDiv.classList.remove("bg-[#660BAD]", "bg-opacity-100");
+                            if (icon) icon.style.filter = "";
+                            if (text) text.classList.remove("text-white");
+                        });
 
-    });
-        </script>
-    </body>
-    </html>
+                        const iconDiv = this.querySelector(".icon");
+                        const icon = this.querySelector(".icon img");
+                        const text = this.querySelector("h2");
+
+                        if (iconDiv) iconDiv.classList.add("bg-[#660BAD]", "bg-opacity-100");
+                        if (icon) icon.style.filter = "brightness(0) invert(1)";
+                        if (text) text.classList.add("text-white");
+                    });
+                });
+            });
+    </script>
+</body>
+</html>
