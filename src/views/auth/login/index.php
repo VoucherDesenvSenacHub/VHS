@@ -15,22 +15,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        background: '#0C0118',
-                        primary: "#6C00C0",
-                        secondary: "#fff",
-                        gray200: "#C4C4C4",
-                        gray300: "#666",
-                        gray600: "#1B1B1B"
-                    }
-                }
-            }
-        }   
-    </script>
+    <script src="../../../styles/tailwindglobal.js"></script>
 </head>
 
 <body>
