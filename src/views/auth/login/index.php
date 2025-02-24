@@ -29,7 +29,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
                 <img src="../../../../public/logos/Logo.svg" alt="Logo">
             </div>
 
-            <div class="">
+            <div>
                 <h2 class="flex ml-10 mt-0.7rem text-3xl font-semibold text-secondary">Entrar na sua conta</h2>
                 <p class="text-gray200 flex ml-3 mb-2 mt-2">Informe seus dados para entrar em sua conta</p>
 
