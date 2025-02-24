@@ -28,9 +28,9 @@ use function Src\Views\Components\Utils\ButtonComponent;
         <div class="flex items-center justify-center">
             <div class="flex flex-col gap-2">
                 <div class="flex items-center flex-col gap-2">
-                    <img src="../../../../public/logos/Logo.svg" alt="">
+                    <img src="../../../../public/logos/Logo.svg" alt="" class="mb-1.5">
                     <p class=" font-pop font-semibold title-size text-3xl text-secondary">Redefinir Senha</p>
-                    <p class=" font-pop paragraph-size text-gray300">Informe o e-mail sua conta</p>
+                    <p class=" font-pop paragraph-size text-gray200">Informe o e-mail sua conta</p>
                 </div>
                 <div class="flex flex-col gap-4 w-[380px]">
                     <?= InputComponent(placeholder: "Insira seu e-mail", type: "email", label: "Email", icon: "../../../../public/icons/Vector.svg", iconPosition: "right-3") ?>
