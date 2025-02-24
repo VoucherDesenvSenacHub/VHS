@@ -7,6 +7,10 @@ require "../../src/views/components/header/headerComponent.php";
 
 use function src\views\components\header\HeaderComponent;
 
+require "../../src/views/components/utils/footerComponent.php";
+
+use function src\views\components\utils\footerComponent;
+
 ?>
 
 <!DOCTYPE html>
@@ -29,8 +33,8 @@ use function src\views\components\header\HeaderComponent;
             <img src="../../public/logos/B&W.jpg" class="absolute right-0 h-full w-full object-cover" alt="Grande">
         </div>
         
-        <div class="absolute xs:left-8 sm:left-70 top-55 xs:top-40 sm:top-95 w-24 xs:w-32 sm:w-40 h-24 xs:h-32 sm:h-40 rounded-[20%] border border-white/20 overflow-hidden z-10">
-            <img src="../../public/logos/BillGates.webp" class="w-full h-full object-cover" alt="Pequena">
+        <div class="absolute xs:left-8 sm:left-70 top-120 xs:top-40 sm:top-138 w-24 xs:w-32 sm:w-40 h-24 xs:h-32 sm:h-40 rounded-[20%] border border-white/20 overflow-hidden z-10">
+            <img src="../../public/logos/BillGates.webp" class=" sm: w-full h-full object-cover" alt="Pequena">
         </div>
         <div class="mt-0 sm:ml-0 xs:mt-20 sm:mt-0">
             <h1 class="text-white ml-2 xs:ml-4 sm:ml-55 text-xl xs:text-2xl sm:text-[30px] font-[Poppins] mb-0">Microsoft</h1>
@@ -74,8 +78,11 @@ use function src\views\components\header\HeaderComponent;
                 <p class="text-gray-200 font-[Poppins] mt-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sed lobortis urna. Suspendisse suscipit lorem in accumsan venenatis. Nunc iaculis vitae orci sed consequat. Suspendisse semper dolor urna, et dictum sem egestas egestas. Mauris dapibus aliquet neque, sit amet sodales lectus vehicula ac. Nulla non est quis tortor aliquam mollis eu et sem. Nullam tempus volutpat vestibulum. Nam porttitor fermentum est nec dapibus. Nulla cursus ante purus, at posuere justo venenatis sed. Etiam lacinia quam vitae mauris tincidunt ultricies. Maecenas ipsum dolor, blandit a sem </p>
             </div>
         </div>
-        <h1 class="text-white ml-2 xs:ml-4 text-xl xs:text-2xl sm:text-[30px] font-[Poppins] mb-0">Conteúdo do canal</h1>
+        <h1 class=" mt-20 text-white ml-2 xs:ml-4 text-xl xs:text-2xl sm:text-[30px] font-[Poppins] mb-0">Conteúdo do canal</h1>
         <p class="p-0 mt-0 text-gray-200 text-xs xs:text-sm sm:text-[15px] font-[Poppins]">Confira os vídeos mais populares da nossa plataforma VHS</p>
+    </div>
+    <div>
+        <?php echo footer(); ?>
     </div>
     
 </body>
