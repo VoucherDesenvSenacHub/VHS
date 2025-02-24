@@ -19,12 +19,12 @@ use function Src\Views\Components\Utils\ButtonComponent;
 </head>
 
 <body>
-    <div class="flex w-100 h-screen bg-background  text-white " id="wrapper">
+    <div class="flex w-100 h-screen bg-background text-white">
         <div class="flex justify-center mr-24">
             <img src="../../../../public/images/Cassete.svg" alt="" class="relative right-[110px] mr-28 w-[1100px]">
         </div>
 
-        <div class="flex mt-24  flex-col ">    
+        <div class="flex mt-24 flex-col">    
             <div class="flex mt-20 ml-24 mb-5">
                 <img src="../../../../public/logos/Logo.svg" alt="Logo">
             </div>
@@ -77,7 +77,6 @@ use function Src\Views\Components\Utils\ButtonComponent;
                 <p>Ainda não tem uma conta?</p>
                 <a class="text-primary ml-2 underline">Cadastrar</a>
             </div>
-
         </div>  
     </div>
     <script>
