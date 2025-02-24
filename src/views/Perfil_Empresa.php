@@ -3,6 +3,10 @@ require "../../src/views/components/utils/buttonComponent.php";
             
 use function Src\Views\Components\Utils\ButtonComponent;
 
+require "../../src/views/components/header/headerComponent.php";
+
+use function src\views\components\header\HeaderComponent;
+
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +20,10 @@ use function Src\Views\Components\Utils\ButtonComponent;
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Syne:wght@400..800&display=swap" rel="stylesheet">
 </head>
 <body class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center">
-    <div class="p-4 sm:p-6 md:p-8 mt-25 sm:mt-50 sm:ml-50 xs:p-4">
+    <div>
+        <?php echo headerComponent(); ?>
+    </div>
+    <div class="p-4 sm:p-6 md:p-8 sm:ml-50 xs:p-4">
         <div class="relative w-full h-36 xs:h-48 sm:h-60 overflow-hidden z-0">
             <!-- Imagem maior -->
             <img src="../../public/logos/B&W.jpg" class="absolute right-0 h-full w-full object-cover" alt="Grande">
@@ -67,6 +74,8 @@ use function Src\Views\Components\Utils\ButtonComponent;
                 <p class="text-gray-200 font-[Poppins] mt-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sed lobortis urna. Suspendisse suscipit lorem in accumsan venenatis. Nunc iaculis vitae orci sed consequat. Suspendisse semper dolor urna, et dictum sem egestas egestas. Mauris dapibus aliquet neque, sit amet sodales lectus vehicula ac. Nulla non est quis tortor aliquam mollis eu et sem. Nullam tempus volutpat vestibulum. Nam porttitor fermentum est nec dapibus. Nulla cursus ante purus, at posuere justo venenatis sed. Etiam lacinia quam vitae mauris tincidunt ultricies. Maecenas ipsum dolor, blandit a sem </p>
             </div>
         </div>
+        <h1 class="text-white ml-2 xs:ml-4 text-xl xs:text-2xl sm:text-[30px] font-[Poppins] mb-0">Conteúdo do canal</h1>
+        <p class="p-0 mt-0 text-gray-200 text-xs xs:text-sm sm:text-[15px] font-[Poppins]">Confira os vídeos mais populares da nossa plataforma VHS</p>
     </div>
     
 </body>
