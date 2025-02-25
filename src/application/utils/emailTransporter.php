@@ -22,7 +22,6 @@ class EmailTransporter {
         $this->mail->Password = $_ENV["SMTP_PASS"];
         $this->mail->Port = $_ENV["SMTP_PORT"];
         $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $this->mail->Port = $_ENV["SMTP_PORT"];
     }
 
     public function sendEmail(string $email, string $name, string $subject, string $body) {
