@@ -37,4 +37,23 @@ class UserModel {
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function findById(string $id): array {
+        $sql = "SELECT * FROM users WHERE id = :id";
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function updateEmailVerified(string $id): bool {
+        $sql = "UPDATE users SET verified_email = 1 WHERE id = :id";
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam(":id", $id);
+
+        return $stmt->execute();
+    }
 }
