@@ -29,7 +29,7 @@
                 <img class='w-6 h-6' src='../../../../public/icons/Studioo.svg' alt=''>
               </div>
               <div >
-                <p class='font-pop paragraph-size text-secondary hover:text-primary'>VSH Studio</p>
+                <p class='font-pop text-paragraph text-secondary hover:text-primary'>VSH Studio</p>
                 <p class='font-pop text-xs text-gray300'>Gerencie seu canal</p>
               </div>
             </div>
