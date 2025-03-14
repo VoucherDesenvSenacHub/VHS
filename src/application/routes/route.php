@@ -14,5 +14,6 @@ $dotenv->load();
 $router = new Router();
 
 $router->post('/api/v1/auth/signup', SignUpController::class);
+$router->post('/api/v1/auth/verify-email', VerifyEmailController::class);
 
 $router->run();
