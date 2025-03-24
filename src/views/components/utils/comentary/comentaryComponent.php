@@ -3,7 +3,7 @@
 function comentary(){
 
     echo '
-    <div class="max-w-96 h-28 block flex bg-black">
+    <div class="max-w-96 h-28 block flex">
 
         <div class="w-10 h-11 rounded-[100%] mt-mt-1">
             <img class="w-full h-full rounded-full" src="../../../../../public/images/image.svg" alt="">
