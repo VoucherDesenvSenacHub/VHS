@@ -2,11 +2,11 @@
     
     namespace Src\Views\Components\Utils;
 
-    function ButtonComponent(string $text, string $variant ,string $icon = null) {
+    function ButtonComponent(string $text, string $variant ,string $icon = null, string $width = "380px", string $height = "50px") {
         
-        $icon = $icon ? "<img src='$icon' class='w-6 h-6'>" : "";
+        $icon = $icon ? "<img src='$icon' class='w-4 h-4'>" : "";
 
-        $button_style = "flex justify-center items-center w-full h-[50px] gap-2 rounded-md cursor-pointer ";
+        $button_style = "flex justify-center items-center w-[$width] h-[$height] gap-2 rounded-md cursor-pointer ";
 
         switch ($variant) {
             case 'outline':
