@@ -42,8 +42,5 @@ use function Src\Views\Components\Utils\ButtonComponent;
             </div>
         </div>
     </div>
-    </div>
-    </script>
 </body>
-
 </html>
