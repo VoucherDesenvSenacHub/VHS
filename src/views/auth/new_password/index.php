@@ -20,16 +20,16 @@ use function Src\Views\Components\Utils\ButtonComponent;
 </head>
 
 <body>
-    <div class="flex w-100 h-screen bg-background text-white">
+    <div class="flex h-screen bg-background text-white">
         <div class="flex justify-center mr-24">
-            <img src="../../../../public/images/Cassete.svg" alt="" class="relative right-[61px] mr-28 w-[1392px]">
+            <img src="../../../../public/images/Cassete.svg" alt="" class="relative right-14 mr-28 w-6/160">
         </div>
 
         <div class="relative mx-20 w-1/2 flex items-center justify-center shadow-[-10px_0_30px_10px_rgba(255, 255, 255, 1)]">
             <div class="flex flex-col gap-4">
                 <div class="flex items-center flex-col gap-2">
                     <img src="../../../../public/logos/Logo.svg" alt="">
-                    <p class="text-[33px] font-pop font-semibold title-size text-[#fff]">Redefenir senha</p>
+                    <p class="text-4xl font-pop font-semibold title-size text-white">Redefenir senha</p>
                     <p class="font-pop paragraph-size text-gray-200">Insira uma nova senha</p>
                 </div>
                 <div class="flex flex-col gap-4 w-96">
