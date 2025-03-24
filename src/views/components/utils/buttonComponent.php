@@ -2,7 +2,7 @@
     
     namespace Src\Views\Components\Utils;
 
-    function ButtonComponent(string $text, string $variant ,string $icon = null) {
+    function ButtonComponent(string $text, string $variant ,string $icon = null, string $id=null) {
         
         $icon = $icon ? "<img src='$icon' class='w-6 h-6'>" : "";
 
@@ -24,7 +24,7 @@
 
         return(
             "
-                <button class='$button_style'>
+                <button id='$id' class='$button_style'>
                     $icon
                     $text
                 </button>
