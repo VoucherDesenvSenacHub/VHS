@@ -1,4 +1,4 @@
-const menuBtn = document.getElementById('3botao');
+const menuBtn = document.getElementById('opcoes');
 const menu = document.getElementById('menu');
 
 menuBtn.addEventListener('click', () => {
