@@ -5,11 +5,18 @@ require "../../components/utils/buttonComponent.php";
 require "../../components/utils/inputComponent.php";
            
 use function Src\Views\Components\Utils\InputComponent;
+
 ?>
 
-<title>Criar Conta</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="../../../styles/tailwindglobal.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../../../styles/tailwindglobal.js"></script>
+</head>
 
 <body>
   <div class="bg-background h-full w-full items-center flex justify-between" >
@@ -64,11 +71,11 @@ use function Src\Views\Components\Utils\InputComponent;
 
   customCheckbox.addEventListener("click", () => {
   checkbox.checked = !checkbox.checked;
-  customCheckbox.classList.toggle("bg-primary");
-  customCheckbox.classList.toggle("border-gray600");
+  customCheckbox.classList.toggle("bg-purple-700");
+  customCheckbox.classList.toggle("border-gray300");
   checkIcon.classList.toggle("hidden");
   }
 );
 </script>
-     
-
+</body>
+</html>
