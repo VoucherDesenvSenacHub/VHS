@@ -20,7 +20,7 @@
         
         $placeholder = htmlspecialchars($placeholder, ENT_QUOTES, 'UTF-8');
         
-        $icon = $icon ? "<img src='" . htmlspecialchars($icon, ENT_QUOTES, 'UTF-8') . "' class='absolute $iconPosition w-4 h-4 fill-blue-500'>" : "";
+        $icon = $icon ? "<img src='" . htmlspecialchars($icon, ENT_QUOTES, 'UTF-8') . "' class='absolute $iconPosition w-5 h-5 fill-blue-500'>" : "";
 
         $margin = "";
 
