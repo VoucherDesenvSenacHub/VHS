@@ -1,13 +1,12 @@
-
-const menu = document.getElementById("menu");
 const search = document.getElementById("search");
 const body = document.body;
 const header = document.getElementById("header");
+const menu = document.getElementById("menu");
 
 menu.addEventListener('click', function() {
-body.classList.toggle('menu')
-})
+    body.classList.toggle('menu');
+});
 
 search.addEventListener('click', function() {
-header.classList.toggle('header')   
-})
+    header.classList.toggle('header');   
+});
