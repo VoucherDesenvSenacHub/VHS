@@ -34,7 +34,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
                 </div>
 
                 <div>
-                    <img src="../../../../public/images/catGif.gif" alt="" class="flex rounded-lg w-80 justify-center ml-5">
+                    <img src="../../../../public/images/catGif.gif" alt="" class="flex rounded-lg w-96 justify-center ml-5">
                 </div>
                 
                 <div class="justify-center ml-5">

@@ -19,16 +19,17 @@ use function Src\Views\Components\Utils\InputComponent;
 </head>
 
 <body>
-  <div class="bg-background h-screen w-screen items-center flex justify-between" >
-      <div class="flex items-center justify-center h-full ">
-          <img class="h-full relative right-[58px] mr-28 w-[1600px] " src="../../../../public/images/Cassete.svg" alt="">
-      </div>
-      <div class="mx-20  w-1/2 flex items-center justify-center shadow-[ -10px_0_30px_10px_rgba(255, 255, 255, 1)]">
-          <div class="flex flex-col gap-4">
+      <div class="flex h-screen bg-background text-white">
+          <div class="flex justify-center mr-24">
+            <img src="../../../../public/images/Cassete.svg" alt="" class="relative right-14 mr-28 w-6/16">
+          </div>
+
+          <div class="relative mx-20 w-1/2 flex items-center justify-center shadow-[-10px_0_30px_10px_rgba(255, 255, 255, 1)]">
+            <div class="flex flex-col gap-4">
               <div class="flex items-center flex-col gap-2">
-                  <img src="../../../../public/logos/Logo.svg" alt="">
-                  <p class=" font-pop font-semibold text-3xl text-secondary">Criar sua Conta</p>
-                  <p class=" font-pop paragraph-size text-gray-200">Informe seus dados para criar sua conta.</p>
+                <img src="../../../../public/logos/Logo.svg" alt="">
+                <p class="text-4xl font-pop font-semibold title-size text-white">Criar sua Conta</p>
+                <p class="font-pop paragraph-size text-gray-200">Informe seus dados para criar sua conta</p>
               </div>
               <div class="flex flex-col gap-4 w-96">
                   <?= InputComponent(placeholder:"Insira seu Usuário", type:"text", label:"Usuário", icon:"../../../../public/icons/userRound.svg",iconPosition: "right-3") ?>

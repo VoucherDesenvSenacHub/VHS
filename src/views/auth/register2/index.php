@@ -7,16 +7,16 @@ require "../../components/utils/inputComponent.php";
 use function Src\Views\Components\Utils\InputComponent;
 ?>
 
-<title>Criar Conta</title>
+<title>register2</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="../../../styles/tailwindglobal.js"></script>
 
 <body>
-  <div class="bg-background h-screen w-screen items-center flex justify-between" >
-      <div class="flex items-center justify-center h-full ">
-          <img class="h-full relative right-[58px] mr-28 w-[1600px] " src="../../../../public/images/Cassete.svg" alt="">
-      </div>
-      <div class="mx-20  w-1/2 flex items-center justify-center shadow-[ -10px_0_30px_10px_rgba(255, 255, 255, 1)]">
+<div class="flex h-screen bg-background text-white">
+    <div class="flex justify-center mr-24">
+      <img src="../../../../public/images/Cassete.svg" alt="" class="relative right-14 mr-28 w-6/16">
+    </div>
+      <div class="mx-20  w-1/2 flex items-center justify-center shadow-[-10px_0_30px_10px_rgba(255, 255, 255, 1)]">
           <div class="flex flex-col gap-4">
               <div class="flex items-center flex-col gap-2">
                   <img src="../../../../public/logos/Logo.svg" alt="">
