@@ -24,12 +24,12 @@
 
 </head>
 
-<body class="m-0 p-0 w-[100vw] h-[100vh] flex items-center justify-center bg-gray-900">
+<body class="m-0 p-0 w-[100vw] h-[100vh] flex items-center justify-center bg-gray-700">
 <div id="container" class="w-full h-full flex items-center justify-center">
 
     <div class="modal absolute flex inset-0 bg-black/25 items-center justify-center">
 
-        <div class="flex flex-col bg-[#1B1B1B] w-auto h-60 rounded-2xl p-4 justify-between">
+        <div class="flex flex-col bg-[#1B1B1B] w-auto h-64 rounded-2xl p-6 justify-between shadow-xl">
             <div class="w-full flex flex-row justify-between items-center">
                 <h2 class="text-white text-xl">Compartilhar</h2>
     
@@ -47,7 +47,7 @@
             </div>
 
             <div class="flex flex-row justify-between gap-3">
-                <input type="text" value="https://youtube.com/@freitasdev" class="text-gray-500 text-sm p-2 w-72 border-[1px] border-[#666666] bg-transparent rounded-[10px]">
+                <input type="text" value="https://youtube.com/@freitasdev" class="focus:outline-none text-gray-500 text-sm p-2 w-72 border-[1px] border-[#666666] bg-transparent rounded-[10px]">
                 <button class="bg-[#6C00C0] p-3 px-7 rounded-[10px] text-white">Copiar</button>
             </div>
         </div>
