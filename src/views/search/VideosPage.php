@@ -33,8 +33,7 @@ $botoes = [
     <?= Title_and_buttons("Videos","loren",$botoes)?>
         <div class="flex-1 p-4 sm:p-6 md:pt-16">
             <!--conteudo aqui !!! -->
-
-            </div>
         </div>
+    </div>
 </body>
 </html>

@@ -33,10 +33,9 @@ $botoes = [
         <div class="flex-1 p-4 sm:p-6 md:pt-16">
             <div class="mt-6">
                 <div class="flex items-center justify-between py-4 border-b border-gray-700/50">
-                    <di class="w-full grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <!--conteudo aqui !!! -->
-
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>
