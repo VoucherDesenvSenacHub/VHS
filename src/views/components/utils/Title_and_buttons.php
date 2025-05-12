@@ -25,7 +25,7 @@ function Title_and_buttons($titulo, $subtitulo, $botoes, $conteudos = []) {
             }
         }
 
-        $html = "<div class='flex flex-col md:flex-row min-h-screen mt-10 ml-20'>
+        $html = "<div class='flex flex-col md:flex-row '>
             <div class='flex-1 p-4 sm:p-6 md:pt-16'>
                 <h1 class='text-xl sm:text-3xl font-bold text-white'> $titulo</h1>
                 <p class='text-gray-400 mb-2'>$subtitulo</p>
@@ -33,6 +33,7 @@ function Title_and_buttons($titulo, $subtitulo, $botoes, $conteudos = []) {
                 <div class='mb-4 sm:mb-6 flex space-x-4'>
                     $botoesHtml
                 </div>
+        </div>
         </div>";
 
         return $html;

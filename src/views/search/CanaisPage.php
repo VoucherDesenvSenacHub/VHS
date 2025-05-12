@@ -35,6 +35,7 @@ $botoes = [
             <div class="mt-6">
                 <div class="flex items-center justify-between py-4 border-b border-gray-700/50">
                 <!--CONTEUDO AQUI !!!-->
+                </div>
             </div>
         </div>
     </div>

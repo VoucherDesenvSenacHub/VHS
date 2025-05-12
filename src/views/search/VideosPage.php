@@ -36,6 +36,5 @@ $botoes = [
 
             </div>
         </div>
-    </div>
 </body>
 </html>

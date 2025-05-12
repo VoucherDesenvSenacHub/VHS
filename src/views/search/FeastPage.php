@@ -36,6 +36,7 @@ $botoes = [
                     <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <!--conteudo aqui !!! -->
 
+                        </div>
                 </div>
             </div>
         </div>
