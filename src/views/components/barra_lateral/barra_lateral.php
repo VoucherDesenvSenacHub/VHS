@@ -5,7 +5,7 @@
 
         echo ' 
         <script src="https://cdn.tailwindcss.com"></script>
-            <body class=" bg-gray-950   ">
+            <body >
             
                 <aside class="w-[9.25rem] ml-[1.87rem] h-screen">
                     <h2 class=" pt-[1.18rem] ml-[0.31rem] text-gray-400 text-xs font-poppins">HOME</h2>
