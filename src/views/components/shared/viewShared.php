@@ -42,15 +42,19 @@
                 <div id="telegram" class="w-12 h-12 bg-white/5 rounded-full">
                     <img src="../../../../public/icons/telegram.svg" alt="">
                 </div>
+
                 <div id="facebook" class="w-12 h-12 bg-white/5 rounded-full">
                     <img src="../../../../public/icons/facebook.svg" alt="">
                 </div>
+
                 <div id="whatsapp" class="w-12 h-12 bg-white/5 rounded-full">
                     <img src="../../../../public/icons/whats.svg" alt="">
                 </div>
+
                 <div id="instagram" class="w-12 h-12 bg-white/5 rounded-full">
                     <img src="../../../../public/icons/insta.svg" alt="">
                 </div>
+                
                 <div id="twitter" class="w-12 h-12 bg-white/5 rounded-full">
                     <img src="../../../../public/icons//twitter.svg" alt="">
                 </div>
