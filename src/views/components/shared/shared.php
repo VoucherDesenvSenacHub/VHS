@@ -36,7 +36,7 @@
 
                     <div class="flex flex-row justify-between gap-3">
                         <input type="text" value="https://youtube.com/@freitasdev" class="focus:outline-none text-gray-500 text-sm p-2 w-72 border-[1px] border-[#666666] bg-transparent rounded-[10px]">
-                        <button class="bg-[#6C00C0] p-3 px-7 rounded-[10px] text-white">Copiar</button>
+                        <button class="bg-[#6C00C0] p-3 px-7 rounded-[10px] text-white onclick="copyLink()"">Copiar</button>
                     </div>
                 </div>
             </div>

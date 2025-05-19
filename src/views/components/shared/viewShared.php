@@ -31,6 +31,15 @@
 
 </div> <!-- # -->
     <script defer>
+        function copyLink() {
+            const currentUrl = window.location.href;
+            navigator.clipboard.writeText(currentUrl).then(() => {
+                alert("Link copiado para a área de transferência!");
+            }).catch(err => {
+                console.error("Falha ao copiar o link: ", err);
+            });
+        }
+
         function showPopup() {
             document.querySelector('.modal').classList.remove('hidden');
         }
