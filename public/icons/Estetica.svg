@@ -1,14 +1,1 @@
-<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_1782_8430)">
-<path d="M13.3333 1.3335C13.3333 1.3335 12 4.45909 12 7.04778C12 7.87661 12.284 8.57019 12.6667 9.26093C13.107 10.0559 13.6781 10.8471 14.0972 11.8364C14.4298 12.6215 14.6667 13.5313 14.6667 14.6668" stroke="#808191" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M2.66732 1.3335C2.66732 1.3335 4.00065 4.45909 4.00065 7.04778C4.00065 7.87661 3.71664 8.57019 3.33399 9.26093C2.89362 10.0559 2.32259 10.8471 1.90349 11.8364C1.5709 12.6215 1.33398 13.5313 1.33398 14.6668" stroke="#808191" stroke-linecap="round" stroke-linejoin="round"/>
-<path opacity="0.5" d="M4 8.6665H12" stroke="#808191" stroke-linecap="round"/>
-<path d="M8 14.6665C8.33333 13.6665 10 11.6665 14 11.6665" stroke="#808191" stroke-linecap="round"/>
-<path d="M8 14.6665C7.66667 13.6665 6 11.6665 2 11.6665" stroke="#808191" stroke-linecap="round"/>
-</g>
-<defs>
-<clipPath id="clip0_1782_8430">
-<rect width="16" height="16" fill="white"/>
-</clipPath>
-</defs>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#808191" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles-icon lucide-sparkles"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
