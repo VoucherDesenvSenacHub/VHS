@@ -27,26 +27,8 @@
 <div id="container" class="w-full h-full flex items-center justify-center">
 
     <button name="send" class="border-0 bg-blue-600 p-4 rounded-full font-bold text-white shadow-md hover:bg-blue-500" onclick="showPopup()">Compartilhar</button>
-    <?php sharedComponent(); ?>
-
-</div> <!-- # -->
-    <script defer>
-        function copyLink() {
-            const currentUrl = window.location.href;
-            navigator.clipboard.writeText(currentUrl).then(() => {
-                alert("Link copiado para a área de transferência!");
-            }).catch(err => {
-                console.error("Falha ao copiar o link: ", err);
-            });
-        }
-
-        function showPopup() {
-            document.querySelector('.modal').classList.remove('hidden');
-        }
-        
-        function closePopup() {
-            document.querySelector('.modal').classList.add('hidden');
-        }
-    </script>
+    <?php echo sharedComponent(); ?>
+    
+</div>
 </body>
 </html>
