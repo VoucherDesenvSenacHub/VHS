@@ -1,12 +1,14 @@
 <?php
 require "../components/utils/buttonComponent.php";
 require "../components/utils/inputComponent.php";
+require "../components/utils/textareaComponent.php";
 require "../components/header/headerComponent.php";
 require "../components/studioSideMenu/studioSideMenuComponent.php";
 require "../components/utils/Title_and_buttons.php";
 
 use function Src\Views\Components\Utils\ButtonComponent;
 use function Src\Views\Components\Utils\InputComponent;
+use function Src\Views\Components\Utils\TextareaComponent;
 use function Src\views\components\header\HeaderComponent;
 use function src\views\components\header\StudioSideMenuComponent as HeaderStudioSideMenuComponent;
 use function src\views\components\utils\Title_and_buttons;
@@ -61,23 +63,23 @@ $conteudos = []
                 </label>
             </div>
         </div>
-        <div id="Titulo">
+        <div id="Title">
             <h1 class="text-3xl text-white font-bold mt-4">Título</h1>
             <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
             <?= InputComponent(type: "text", placeholder: "Tudo sobre o Next.js 15, nova arquitetura de pasta") ?>
         </div>
-        <div id="Descrição">
+        <div id="Description">
             <h1 class="text-3xl text-white font-bold mt-4">Descrição</h1>
             <p class="text-paragraph text-gray-400 p-0 mb-2">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl.
             </p>
             <div class="">
-                <?= InputComponent(type: "text", 
+                <?= TextareaComponent(type: "text", 
             placeholder: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.  😍😍😍", height:"96", multiline: true
             ) ?>    
             </div>
         </div>
-        <div id="Público">
+        <div id="Public">
             <h1 class="text-3xl text-white font-bold mt-4">Público</h1>
             <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
             <?= InputComponent(type: "text", placeholder: "Estudante de Nível Técnico de tecnologia, Entusiasta em foguetes") ?>
