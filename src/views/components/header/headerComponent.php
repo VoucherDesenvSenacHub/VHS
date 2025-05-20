@@ -31,6 +31,7 @@ function HeaderComponent(){
       <script src='./script.js'></script>
     ";
 }
+?>
 
-HeaderComponent();
-SidebarComponent();
+<?= HeaderComponent() ?>
+<?= SidebarComponent() ?>

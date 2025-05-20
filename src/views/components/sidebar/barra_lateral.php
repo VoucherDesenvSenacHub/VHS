@@ -6,9 +6,7 @@ require_once __DIR__ . '/../header/headerComponent.php';
 
 function SidebarComponent(){
 
-        echo ' 
-        <script src="https://cdn.tailwindcss.com"></script>
-            <body class="bg-gray-950">
+        return '  
                 <aside class="w-[9.25rem] ml-[1.87rem] h-screen transition-all duration-500 ease-in-out bg-gray-950/50 backdrop-blur-sm" id="sidebar">
                     <h2 class=" pt-[1.18rem] ml-[0.31rem] text-gray-400 text-xs font-poppins">HOME</h2>
                     <ul>
@@ -93,8 +91,6 @@ function SidebarComponent(){
             
                     <hr class="divides w-[8.06rem] mt-[1.81rem] border-gray-800 transition-all duration-300 ease-in-out">
                 </aside>
-            </body>
-            
             <script src="script.js"></script>
         ';
     }
