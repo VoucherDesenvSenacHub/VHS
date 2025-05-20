@@ -20,6 +20,6 @@
           <img src="../../../public/images/Avatar.svg" alt="Foto de perfil" class="h-8 w-8 rounded-full p-41">
         </div>
       </header>
-      <script src="./header/headerScript.js"></script>
+      <script src="../components/header/headerScript.js"></script>
         ';
     }

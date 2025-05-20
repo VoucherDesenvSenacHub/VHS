@@ -36,6 +36,6 @@ function StudioSideMenuComponent() {
 
     echo '</ul></aside></div>';
 
-    echo '<script src="./studioSideMenu/studioSideMenuScript.js"></script>';
+    echo '<script src="../components/studioSideMenu/studioSideMenuScript.js"></script>';
 }
 ?>
