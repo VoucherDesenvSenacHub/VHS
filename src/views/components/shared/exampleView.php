@@ -1,6 +1,7 @@
 <?php
 
     require_once './shared.php';
+    use function Src\Views\Components\Shared\sharedComponent\sharedComponent;
 
 ?>
 
@@ -26,8 +27,8 @@
 <body class="m-0 p-0 w-[100vw] h-[100vh] flex items-center justify-center bg-gray-700">
 <div id="container" class="w-full h-full flex items-center justify-center">
 
-    <button name="send" class="border-0 bg-blue-600 p-4 rounded-full font-bold text-white shadow-md hover:bg-blue-500" onclick="showPopup()">Compartilhar</button>
-    <?php echo sharedComponent(); ?>
+    <button name="send" class="border-0 bg-blue-600 p-4 rounded-full font-bold text-white shadow-md hover:bg-blue-500" onclick="openShared()">Compartilhar</button>
+    <?= sharedComponent(); ?>
     
 </div>
 </body>
