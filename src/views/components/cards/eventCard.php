@@ -3,10 +3,11 @@
     require_once './formatCard.php';
 
     function createEventCard($video) {
+
         $thumbnail_url = htmlspecialchars($video['thumbnail']);
         $type_card = htmlspecialchars($video['type_card']);
         $title = htmlspecialchars($video['title']);
-        $url = htmlspecialchars($video('url'));
+        $url = htmlspecialchars($video['url']);
         $description = htmlspecialchars($video['description']);
         
         $visualizations = htmlspecialchars(formatViews($video['views']));

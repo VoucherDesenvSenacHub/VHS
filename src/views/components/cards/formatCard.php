@@ -2,6 +2,7 @@
 
     $videos = [
         [
+        "url" => "https://youtube.com/@freitasdev",
         "type_card" => "Evento",
         "description" => "Gratuito",
         "duration" => 360,

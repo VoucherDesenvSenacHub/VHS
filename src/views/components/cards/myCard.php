@@ -3,12 +3,12 @@
     require_once './formatCard.php';
 
     function createMyCard($video) {
-        $thumbnail_url = $video['thumbnail'];
-        $username = $video['username'];
-        $title = $video['title'];
-        $url = '#';
-        $comments = 12;
-        $likes = 4.5;
+        $thumbnail_url = htmlspecialchars($video['thumbnail']);
+        $username = htmlspecialchars($video['username']);
+        $title = htmlspecialchars($video['title']);
+        $url = htmlspecialchars('#');
+        $comments = htmlspecialchars(13);
+        $likes = htmlspecialchars(4.5);
 
         $duration = formatTime($video['duration']);
         $visualizations = formatViews($video['views']);

@@ -1,18 +1,20 @@
 <?php
 
     require_once './formatCard.php';
-
+    
     function createVideoCard($video) {
-        $thumbnail_url = $video['thumbnail'];
-        $username = $video['username'];
-        $photo_url = $video['photo'];
-        $title = $video['title'];
-        $url = '#';
 
-        // $account_type = verificarConta($video['account_type']);
-        $duration = formatTime($video['duration']);
-        $visualizations = formatViews($video['views']);
-        $create_at = formatDate($video['created_at']);
+        $thumbnail_url = htmlspecialchars($video['thumbnail']);
+        $username = htmlspecialchars($video['username']);
+        $photo_url = htmlspecialchars($video['photo']);
+        $title = htmlspecialchars($video['title']);
+        $url = htmlspecialchars($video['url']);
+
+        $duration = htmlspecialchars(formatTime($video['duration']));
+        $visualizations = htmlspecialchars(formatViews($video['views']));
+        $create_at = htmlspecialchars(formatDate($video['created_at']));
+
+        // R E T U R N
 
         if (verifyTypeAccount($video['account_type']) == true) {
             return "
@@ -51,7 +53,7 @@
                             </div>
                             
                             <div class='w-[75px] h-[75px] absolute'>
-                                <img src='../../../../public/icons/verified.svg' class='w-full h-full'>
+                                <img src='../../../../../public/icons/verified.svg' class='w-full h-full'>
                             </div>
                         </div>
                     </div>
@@ -102,6 +104,7 @@
                 </a>
             ";
         }
+    
     }
 
 ?>
