@@ -1,7 +1,7 @@
 <?php
 
     require_once './formatCard.php';
-    
+
     function createVideoCard($video) {
 
         $thumbnail_url = htmlspecialchars($video['thumbnail']);
@@ -53,7 +53,7 @@
                             </div>
                             
                             <div class='w-[75px] h-[75px] absolute'>
-                                <img src='../../../../../public/icons/verified.svg' class='w-full h-full'>
+                                <img src='../../../../public/icons/cards/verify.svg' class='w-full h-full'>
                             </div>
                         </div>
                     </div>
