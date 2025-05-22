@@ -3,7 +3,11 @@
     namespace Src\Views\Components\Shared\sharedComponent;
     use Src\Views\Components\Utils\ButtonComponent;
 
-    function sharedComponent($link = 'https://youtube.com/@freitasdev') {
+    function sharedComponent(
+        $url = 'https://youtube.com/@freitasdev',
+        $title = 'Como roubar o celular do Kayke em 3 passos simples'
+    ) {
+
         return "
             <div class='modal hidden absolute flex inset-0 overflow-hidden bg-black/25 items-center justify-center'>
                 <div class='flex flex-col bg-[#1B1B1B] w-auto h-64 rounded-2xl p-6 justify-between shadow-xl'>
@@ -20,13 +24,23 @@
                             <img src='../../../../public/icons/telegram.svg' class='w-full h-full'>
                         </button>
 
-                        <button id='facebook' title='Facebook' class='flex items-center justify-center w-12 h-12 bg-white/5 rounded-xl overflow-hidden'>
+                        <a href='https://www.facebook.com/sharer/sharer.php?u=" . urlencode($url) . "'
+                         id='facebook'
+                         target='_blank' 
+                         title='Facebook'
+                         class='flex items-center justify-center w-12 h-12 bg-white/5 rounded-xl overflow-hidden'>
                             <img src='../../../../public/icons/facebook.svg' class='w-full h-full'>
-                        </button>
+                        </a>
 
-                        <button id='whatsapp' title='WhatsApp' class='flex items-center justify-center w-12 h-12 bg-white/5 rounded-xl overflow-hidden'>
+                        <a href='https://wa.me/?text=" . urlencode($title . ' ' . $url) . "'
+                         id='whatsapp'
+                         target='_blank' 
+                         title='WhatsApp' 
+                         class='flex items-center justify-center w-12 h-12 bg-white/5 rounded-xl overflow-hidden'>
                             <img src='../../../../public/icons/whats.svg' class='w-full h-full'>
-                        </button>
+                        </a>
+
+
 
                         <button id='instagram' title='Instagram' class='flex items-center justify-center w-12 h-12 bg-white/5 rounded-xl overflow-hidden'>
                             <img src='../../../../public/icons/insta.svg' class='w-full h-full'>
@@ -38,7 +52,7 @@
                     </div>
 
                     <div class='flex flex-row justify-between gap-3'>
-                        <input type='text' id='shareLink' value='$link' class='focus:outline-none text-gray-500 text-sm p-2 w-72 border-[1px] border-[#666666] bg-transparent rounded-[10px]' readonly>
+                        <input type='text' id='shareLink' value='$url' class='focus:outline-none text-gray-500 text-sm p-2 w-72 border-[1px] border-[#666666] bg-transparent rounded-[10px]' readonly>
                         <button class='bg-[#6C00C0] hover:bg-[#981AFF] p-3 px-7 rounded-[10px] text-white' onclick='copyLink()'>Copiar</button>
                     </div>
                 </div>
