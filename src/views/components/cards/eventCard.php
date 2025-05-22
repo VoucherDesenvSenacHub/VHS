@@ -3,15 +3,15 @@
     require_once './formatCard.php';
 
     function createEventCard($video) {
-        $thumbnail_url = $video['thumbnail'];
-        $type_card = $video['type_card'];
-        $title = $video['title'];
-        $url = '#';
-        $description = $video['description'];
+        $thumbnail_url = htmlspecialchars($video['thumbnail']);
+        $type_card = htmlspecialchars($video['type_card']);
+        $title = htmlspecialchars($video['title']);
+        $url = htmlspecialchars($video('url'));
+        $description = htmlspecialchars($video['description']);
         
-        $visualizations = formatViews($video['views']);
-        $create_at_title = formatDateEvent($video['created_at']);
-        $create_at = formatDate($video['created_at']);
+        $visualizations = htmlspecialchars(formatViews($video['views']));
+        $create_at_title = htmlspecialchars(formatDateEvent($video['created_at']));
+        $create_at = htmlspecialchars(formatDate($video['created_at']));
         
         return "
             <a href='$url' class='cursor-pointer w-[320px] h-[400px] bg-[#1e1e2a] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
