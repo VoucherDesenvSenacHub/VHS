@@ -6,16 +6,16 @@
         $thumbnail_url = htmlspecialchars($video['thumbnail']);
         $username = htmlspecialchars($video['username']);
         $title = htmlspecialchars($video['title']);
-        $url = htmlspecialchars('#');
+        $url = htmlspecialchars($video['url']);
         $comments = htmlspecialchars(13);
         $likes = htmlspecialchars(4.5);
 
-        $duration = formatTime($video['duration']);
-        $visualizations = formatViews($video['views']);
-        $create_at = formatDate($video['created_at']);
+        $duration = htmlspecialchars(formatTime($video['duration']));
+        $visualizations = htmlspecialchars(formatViews($video['views']));
+        $create_at = htmlspecialchars(formatDate($video['created_at']));
         
         return "
-            <a href='$url' class='cursor-pointer w-[320px] h-[400px] bg-[#1e1e2a] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
+            <a href='$url' class='card cursor-pointer w-[320px] h-[400px] bg-[#1e1e2a] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
                 
                 <!-- Capa do vídeo -->
 
@@ -43,21 +43,21 @@
                     <div class='flex justify-between'>
                         <div class='flex gap-2'>
                             <div>
-                                <img src='../../../../public/icons/message_icon.svg' class='w-full h-full'>
+                                <img src='../../../../public/icons/cards/comments.svg' class='w-full h-full'>
                             </div>
                             <p class='text-gray-400 text-lg'>$comments</p>
                         </div>
 
                         <div class='flex gap-2'>
                             <div>
-                                <img src='../../../../public/icons/like.svg' class='w-full h-full'>
+                                <img src='../../../../public/icons/cards/stars.svg' class='w-full h-full'>
                             </div>
                             <p class='text-gray-400 text-lg'>$likes</p>
                         </div>
 
                         <div class='flex gap-2'>
                             <div>
-                                <img src='../../../../public/icons/eye.svg' class='w-full h-full'>
+                                <img src='../../../../public/icons/cards/views.svg' class='w-full h-full'>
                             </div>
                             <p class='text-gray-400 text-lg'>$visualizations</p>
                         </div>

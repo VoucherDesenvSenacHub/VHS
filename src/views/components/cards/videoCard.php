@@ -18,7 +18,7 @@
 
         if (verifyTypeAccount($video['account_type']) == true) {
             return "
-                <a href='$url' class='cursor-pointer relative w-[320px] h-[400px] bg-[#1e1e2a] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
+                <a href='$url' class='card cursor-pointer relative w-[320px] h-[400px] bg-[#1e1e2a] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
                     
                     <!-- Capa do vídeo -->
 
@@ -53,7 +53,7 @@
                             </div>
                             
                             <div class='w-[75px] h-[75px] absolute'>
-                                <img src='../../../../public/icons/cards/verify.svg' class='w-full h-full'>
+                                <img src='../../../../public/icons/cards/verified.svg' class='w-full h-full'>
                             </div>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
 
         if (verifyTypeAccount($video['account_type']) == false) {
             return "
-                <a href='$url' class='cursor-pointer relative w-[320px] h-[400px] bg-[#1e1e2a] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
+                <a href='$url' class='card cursor-pointer relative w-[320px] h-[400px] bg-[#1e1e2a] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
                     
                     <!-- Capa do vídeo -->
 

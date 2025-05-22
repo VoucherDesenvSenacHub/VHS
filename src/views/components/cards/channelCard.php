@@ -3,17 +3,17 @@
     require_once './formatCard.php';
 
     function createChannelCard($video) {
-        $thumbnail_url = $video['thumbnail'];
-        $username = $video['username'];
-        $title = $video['title'];
-        $url = '#';
+        $thumbnail_url = htmlspecialchars($video['thumbnail']);
+        $username = htmlspecialchars($video['username']);
+        $title = htmlspecialchars($video['title']);
+        $url = htmlspecialchars($video['url']);
         
-        $duration = formatTime($video['duration']);
-        $visualizations = formatViews($video['views']);
-        $create_at = formatDate($video['created_at']);
+        $duration = htmlspecialchars(formatTime($video['duration']));
+        $visualizations = htmlspecialchars(formatViews($video['views']));
+        $create_at = htmlspecialchars(formatDate($video['created_at']));
         
         return "
-            <a href='$url' class='cursor-pointer w-[320px] h-[400px] bg-[#1e1e2a] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
+            <a href='$url' class='card cursor-pointer w-[320px] h-[400px] bg-[#1e1e2a] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
                 
                 <!-- Capa do vídeo -->
 
