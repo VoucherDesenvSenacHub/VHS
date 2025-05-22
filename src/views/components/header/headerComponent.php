@@ -9,7 +9,7 @@
           <button id="menu" class="p-2 rounded-lg">
               <img src="../../../public/icons/header/Menu.svg" alt="">
           </button>
-          <img src="../../../public/logos/Logo.svg" alt="Logo" class="h-8">
+          <img src="/../../..public/logos/Logo.svg" alt="Logo" class="h-8">
         </div>
       
         <div class="flex items-center gap-4">
