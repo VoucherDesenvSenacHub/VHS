@@ -1,7 +1,7 @@
 <?php
 
     require_once './shared.php';
-    use function Src\Views\Components\Shared\sharedComponent\sharedComponent;
+    use function Src\Views\Components\Shared\sharedComponent;
 
 ?>
 
