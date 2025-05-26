@@ -1,6 +1,6 @@
 <?php
 
-    require_once './shared.php';
+    require_once __DIR__ . '/shared.php';
     use function Src\Views\Components\Shared\sharedComponent;
 
 ?>
@@ -28,7 +28,7 @@
 <div id="container" class="w-full h-full flex items-center justify-center">
 
     <button name="send" class="border-0 bg-blue-600 p-4 rounded-full font-bold text-white shadow-md hover:bg-blue-500" onclick="openShared()">Compartilhar</button>
-    <?= sharedComponent(); ?>
+    <?= sharedComponent('https://youtu.be/UG5O35YtgTA?feature=shared', 'Como roubar o celular do Kayke em 3 passos simples'); ?>
     
 </div>
 </body>
