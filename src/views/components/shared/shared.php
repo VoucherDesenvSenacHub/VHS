@@ -1,16 +1,15 @@
 <?php
 
     namespace Src\Views\Components\Shared;
-    use Src\Views\Components\Utils\ButtonComponent;
+    
+    function sharedComponent($url, $title) {
+        $iframe = '
+            <iframe width="560" height="315" src="' . htmlspecialchars($url, ENT_QUOTES) . '" frameborder="0" allowfullscreen></iframe>
+        ';
 
-    function sharedComponent(
-        $url = 'https://youtube.com/@freitasdev',
-        $title = 'Como roubar o celular do Kayke em 3 passos simples'
-    ) {
-
-        return "
-            <div class='modal-shared hidden absolute flex inset-0 overflow-hidden bg-black/25 items-center justify-center'>
-                <div class='flex flex-col bg-[#1B1B1B] w-auto h-64 rounded-2xl p-6 justify-between shadow-xl'>
+        return ("
+            <div class='modal-shared hidden absolute flex inset-0 overflow-hidden bg-black/25 items-center justify-center opacity-0 transition-opacity duration-500'>
+                <div class='modal-content flex flex-col bg-[#1B1B1B] w-auto h-64 rounded-2xl p-6 justify-between shadow-xl scale-95 opacity-0 transition-all duration-300 transform'>
                     <div class='w-full flex flex-row justify-between items-center'>
                         <h2 class='text-white text-xl'>Compartilhar</h2>
             
@@ -23,6 +22,8 @@
                         <button
                          id='incorporar'
                          title='Incorporar'
+                         onclick='copyIframe(this)'
+                         data-iframe=\"" . htmlspecialchars($iframe, ENT_QUOTES) . "\"
                          class='flex items-center justify-center w-12 h-12 bg-white/5 rounded-xl overflow-hidden'>
                             <img src='../../../../public/icons/shared/incorporar.svg'>
                         </button>
@@ -55,7 +56,7 @@
                         <a href='https://twitter.com/intent/tweet?url=" . urlencode($url) . "&text=" . urlencode($title) . "'
                          id='twitter'
                          target='_blank'
-                         title='Twitter'
+                         title='X'
                          class='flex items-center justify-center w-12 h-12 bg-white/5 rounded-xl overflow-hidden'>
                             <img src='../../../../public/icons/shared/twitter.svg' class='w-full h-full'>
                         </a>
@@ -67,24 +68,26 @@
                     </div>
                 </div>
             </div>
-        ";
+        ");
     }
 
+    // #
+
     function copyNotify() {
-        return "
-            <div id='copy-notification' class='hidden overflow-hidden fixed flex bottom-0 right-0 mb-4 mr-4 min-w-20 min-h-10 bg-[#202024] rounded-xl items-center p-4 gap-4 border-b-4 border-[#660BAD] opacity-0 translate-y-5 transition-all duration-300'>
-                <div class='w-12 h-12 bg-[#303746] rounded-full flex items-center justify-center p-2' style='box-shadow: 0 0 50px 0 #660BAD;'>
+        return ("
+            <div id='copy-notification' class='hidden overflow-hidden fixed flex bottom-0 right-0 mb-4 mr-4 min-w-20 min-h-10 bg-[#202024] rounded-xl items-center p-4 gap-4 border-b-4 border-[#660BAD] translate-y-5 opacity-0 transition-all duration-300'>
+                <div class='w-12 h-12 bg-[#373450] rounded-full flex items-center justify-center p-2' style='box-shadow: 0 0 75px 0 #660BAD;'>
                     <svg width='100%' height='100%' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'>
                         <path d='M10 0C4.48 0 0 4.48 0 10C0 15.52 4.48 20 10 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 10 0ZM11 15H9V13H11V15ZM11 11H9V5H11V11Z' fill='#660BAD'/>
                     </svg>
                 </div>
 
                 <div class='flex flex-col text-white'>
-                    <h1 class='text-xl'>Link copiado</h1>
-                    <span class='text-gray-500 text-base'>O link foi copiado com sucesso!</span>
+                    <h1 class='title text-xl'></h1>
+                    <span class='subtitle text-gray-500 text-base'></span>
                 </div>
             </div>
-        ";
+        ");
     }
 ?>
 
@@ -92,42 +95,88 @@
 
 <script>
 
+    function openShared() {
+        const overlay = document.querySelector('.modal-shared');
+        const modal = overlay.querySelector('.modal-content');
+        overlay.classList.remove('hidden');
+        
+        requestAnimationFrame(() => {
+            overlay.classList.remove('opacity-0');
+            overlay.classList.add('opacity-100');
+
+            modal.classList.remove('opacity-0', 'scale-95');
+            modal.classList.add('opacity-100', 'scale-100');
+        });
+    }
+
+    function closeShared() {
+        const overlay = document.querySelector('.modal-shared');
+        const modal = overlay.querySelector('.modal-content');
+
+        overlay.classList.remove('opacity-100');
+        overlay.classList.add('opacity-0');
+
+        modal.classList.remove('opacity-100', 'scale-100');
+        modal.classList.add('opacity-0', 'scale-95');
+
+        setTimeout(() => {
+            overlay.classList.add('hidden');
+        }, 300);
+    }
+
     function copyLink() {
         const linkInput = document.getElementById('share-link');
         linkInput.select();
 
         navigator.clipboard.writeText(linkInput.value).then(() => {
-
-            document.body.insertAdjacentHTML('beforeend', `<?= copyNotify(); ?>`);
-            const notification = document.getElementById('copy-notification');
-
-            notification.classList.remove('hidden');
-            requestAnimationFrame(() => {
-                notification.classList.remove('opacity-0', 'translate-y-5');
-                notification.classList.add('opacity-100', 'translate-y-0');
-            });
-
-            setTimeout(() => {
-                notification.classList.remove('opacity-100', 'translate-y-0');
-                notification.classList.add('opacity-0', 'translate-y-5');
-
-                setTimeout(() => {
-                    notification.classList.add('hidden');
-                }, 300);
-            }, 2000);
+            showNotification("Link copiado!", "O link foi copiado com sucesso");
 
         }).catch(err => {
             console.error('Falha ao copiar o link: ', err);
-            alert('Falha ao copiar o link!');
+        });
+    }
+
+    function copyIframe(button) {
+        const iframe = button.getAttribute('data-iframe');
+
+        navigator.clipboard.writeText(iframe).then(() => {
+            showNotification("Código copiado!", "O código foi copiado com sucesso");
+        }).catch(err => {
+            console.error('Erro ao copiar o iframe:', err);
         });
     }
     
-    function openShared() {
-        document.querySelector('.modal-shared').classList.remove('hidden');
-    }
-    
-    function closeShared() {
-        document.querySelector('.modal-shared').classList.add('hidden');
+</script>
+
+<!-- # -->
+
+<script>
+
+    function showNotification(title, subtitle) {
+        const existing = document.getElementById('copy-notification');
+        if (existing) existing.remove();
+
+        document.body.insertAdjacentHTML('beforeend', `<?= copyNotify(); ?>`);
+        const notification = document.getElementById('copy-notification');
+
+        notification.querySelector('.title').textContent = title;
+        notification.querySelector('.subtitle').textContent = subtitle;
+
+        notification.classList.remove('hidden');
+
+        requestAnimationFrame(() => {
+            notification.classList.remove('opacity-0', 'translate-y-5');
+            notification.classList.add('opacity-100', 'translate-y-0');
+        });
+
+        setTimeout(() => {
+            notification.classList.remove('opacity-100', 'translate-y-0');
+            notification.classList.add('opacity-0', 'translate-y-5');
+
+            setTimeout(() => {
+                notification.remove();
+            }, 300);
+        }, 2000);
     }
 
 </script>
