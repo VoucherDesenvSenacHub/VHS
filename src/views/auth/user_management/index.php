@@ -1,13 +1,11 @@
 <?php
 require "../../components/utils/inputComponent.php";
-require "../../components/utils/buttonComponent.php";
 require "../../components/gridUsuarios/gridUsuariosComponent.php";
 require "../../components/header/HeaderComponent.php";
 
 
 
 use function Src\Views\Components\Utils\InputComponent;
-use function Src\Views\Components\Utils\ButtonComponent;
 use function Src\Views\Components\GridUsuarios\GridUsuariosComponent;
 use function Src\Views\Components\header\HeaderComponent;
 
@@ -22,17 +20,16 @@ use function Src\Views\Components\header\HeaderComponent;
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../../../styles/tailwindglobal.js"></script>
 </head>
-<body class="h-screen w-screen bg-background">
-    
+<body class="h-screen w-full bg-background">
+    <?= HeaderComponent();?>
     <div class="p-7">
-        <?= HeaderComponent();?>
         <div>
             <p class="text-title font-pop font-semibold title-size text-white">Gerenciamento de usuários</p>
             <p class="text-subtitile font-semibold title-size text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
         </div>
         <div class="flex h-5 mt-5 gap-5">
-            <p class="rounded-full w-30 p-3 bg-gray600 flex justify-center items-center text-white">Usuários</p>
-            <p class="rounded-full w-30 p-3 bg-gray600 flex justify-center items-center text-white">Denúncias</p>
+            <p class="rounded-full w-30 p-3 bg-gray600 flex justify-center items-center text-white w-24">Usuários</p>
+            <p class="rounded-full w-30 p-3 bg-gray600 flex justify-center items-center text-white w-24">Denúncias</p>
         </div>
         <div class="mt-5 flex gap-4">
             <div class="mt-9 ml-4">
