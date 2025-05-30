@@ -7,8 +7,8 @@ function isActive($page)
 }
 
 $menuItems = [
-    'Analytics.php' => ['icon' => 'chart.svg', 'label' => 'Analytics', 'class' => 'analytics-icon'],
-    'usuarios.php' => ['icon' => 'group.svg', 'label' => 'Usuários', 'class' => 'usuarios-icon'],
+    'teste2.php' => ['icon' => 'chart.svg', 'label' => 'Analytics', 'class' => 'analytics-icon'],
+    'teste.php' => ['icon' => 'group.svg', 'label' => 'Usuários', 'class' => 'usuarios-icon'],
 ];
 
 function barra_admin() {
@@ -20,12 +20,13 @@ function barra_admin() {
 
     foreach ($menuItems as $page => $data) {
         echo '<li class="flex items-center text-gray-300 rounded-lg cursor-pointer mt-[1.5rem]">
-            <a href="/VHS/src/views/auth/'.$page.'" class="flex items-center w-full p-2">
+            <a href="/VHS/src/views/'.$page.'" class="flex items-center w-full p-2">
                 <div class="icon w-[2rem] h-[2rem] flex items-center justify-center bg-[#660BAD] '.(isActive($page) ? 'bg-opacity-100' : 'bg-opacity-10').' rounded-[12px] ml-[0.31rem] '.$data['class'].'">
                     <img src="/VHS/public/icons/sidebar_admin/'.$data["icon"].'" alt="'.$data["label"].'" class="'.(isActive($page) ? 'filter invert brightness-0' : '').'">
                 </div>
                 
-                <h2 class="menu-text ml-[1rem] text-gray-400 text-sm font-semibold ' .(isActive($page) ? 'text-white' : '').'" style="display: none;" >'.$data["label"].'</h2>
+                <h2 class="menu-text ml-[1rem] text-gray-400 text-sm font-semibold '.(isActive($page) ? 'text-white' : '').'" style="display: none;">'.$data["label"].'</h2>
+
 
             </a>
         </li>';
@@ -35,6 +36,7 @@ function barra_admin() {
 
     echo '</ul></aside></div>';
 
-    echo '<script src="/VHS/src/views/components/barra_admin/barra_admin.js"></script>';
+    echo '<script src="/VHS/src/views/components/barra_admin/barra.js"></script>';
 }
 ?>
+

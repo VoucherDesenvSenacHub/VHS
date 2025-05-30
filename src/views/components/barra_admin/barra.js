@@ -1,25 +1,41 @@
 document.addEventListener("DOMContentLoaded", function () {
     const body = document.body;
-    const sideMenu = document.querySelector("#sideMenuContainer aside");
     const menutexto = document.getElementsByClassName("menu-text");
-
+    
+    const menuAberto = localStorage.getItem("menuAberto");
+    if (menuAberto === "true") {
+        body.classList.add("menu");
+    }
+    
+    for (let i = 0; i < menutexto.length; i++) {
+        menutexto[i].style.transition = "opacity 0.3s ease, transform 0.3s ease";
+        menutexto[i].style.opacity = "0";
+        menutexto[i].style.transform = "translateX(-20px)";
+    }
 
     function updateMenuVisibility() {
+
         if (body.classList.contains("menu")) {
-            for (let i=0; i < menutexto.length; i++){
+            for (let i = 0; i < menutexto.length; i++) {
                 menutexto[i].style.setProperty("display", "block", "important");
-            };
-
+                setTimeout(() => {
+                    menutexto[i].style.opacity = "1";
+                    menutexto[i].style.transform = "translateX(0)";
+                }, 10);
+            }
+                localStorage.setItem("menuAberto", "true");
         } else {
+            
+            for (let i = 0; i < menutexto.length; i++) {
+                menutexto[i].style.opacity = "0";
+                menutexto[i].style.transform = "translateX(-20px)";
+                setTimeout(() => {
+                    menutexto[i].style.setProperty("display", "none", "important");
+                }, 300);
+            }
 
-            for (let i=0; i < menutexto.length; i++){
-                menutexto[i].style.setProperty("display", "none", "important");
-                
-            };
+            localStorage.setItem("menuAberto", "false");
         }
-
-
-
     }
 
     updateMenuVisibility();
@@ -30,9 +46,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const items = document.querySelectorAll("li");
     const barraLateral = {
 
-        "analytcs.php": "analytics-icon",
+        "teste2.php": "analytics-icon",
 
-        "usuarios.php": "usuarios-icon",
+        "teste.php": "usuarios-icon",
         
     };
 
