@@ -46,9 +46,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const items = document.querySelectorAll("li");
     const barraLateral = {
 
-        "teste2.php": "analytics-icon",
+        "analytics.php": "analytics-icon",
 
-        "teste.php": "usuarios-icon",
+        "usuarios.php": "usuarios-icon",
         
     };
 
