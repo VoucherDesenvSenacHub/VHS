@@ -1,10 +1,12 @@
 <?php
 require "../components/utils/Title_and_buttons.php";
 require "../components/header/headerComponent.php";
+require "../components/Five_stars/Estrelas.php";
 
 
 use function src\views\components\header\HeaderComponent;
 use function src\views\components\utils\Title_and_buttons;
+
 
 $botoes = [
     ['texto' => 'Vídeos', 'link' => './VideosPage.php'],
@@ -12,6 +14,7 @@ $botoes = [
     ['texto' => 'Eventos', 'link' => './EventosPage.php'],
     ['texto' => 'Canais', 'link' => './CanaisPage.php']
 ];
+
 ?>
 
 <!DOCTYPE html>
