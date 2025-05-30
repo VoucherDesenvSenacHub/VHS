@@ -11,7 +11,7 @@ $menuItems = [
     'teste.php' => ['icon' => 'group.svg', 'label' => 'Usuários', 'class' => 'usuarios-icon'],
 ];
 
-function barra_admin() {
+function Barra_Admin() {
     global $menuItems;
 
     echo '<div id="sideMenuContainer">';

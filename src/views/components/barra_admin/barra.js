@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
         menutexto[i].style.transform = "translateX(-20px)";
     }
 
-    function updateMenuVisibility() {
+    function UpdateMenuVisibility() {
 
         if (body.classList.contains("menu")) {
             for (let i = 0; i < menutexto.length; i++) {
@@ -38,9 +38,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    updateMenuVisibility();
+    UpdateMenuVisibility();
 
-    const observer = new MutationObserver(updateMenuVisibility);
+    const observer = new MutationObserver(UpdateMenuVisibility);
     observer.observe(body, { attributes: true, attributeFilter: ["class"] });
 
     const items = document.querySelectorAll("li");
