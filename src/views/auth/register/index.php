@@ -19,7 +19,7 @@ use function Src\Views\Components\Utils\InputComponent;
 </head>
 
 <body>
-  <div class="bg-background h-screen w-screen items-center flex justify-between" >
+  <div class="bg-background h-full w-full items-center flex justify-between" >
       <div class="flex items-center justify-center h-full ">
           <img class="h-full relative right-[58px] mr-28 w-[1600px] " src="../../../../public/images/Cassete.svg" alt="">
       </div>
@@ -44,9 +44,7 @@ use function Src\Views\Components\Utils\InputComponent;
                     <span class="cursor-default text-white text-xs font-medium">Lembrar de mim</span>
                   </div>
                   <div>
-                    <a href="../register2/index.php">
-                      <?= ButtonComponent("Criar Conta", "default") ?>
-                    </a>
+                    <?= ButtonComponent("Criar Conta", "default") ?>
                   </div>
                   <div class="flex items-center text-white cursor-default">
                     <div class="flex-grow border-t border-gray300"></div>
