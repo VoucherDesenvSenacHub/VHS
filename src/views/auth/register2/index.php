@@ -12,7 +12,7 @@ use function Src\Views\Components\Utils\InputComponent;
 <script src="../../../styles/tailwindglobal.js"></script>
 
 <body>
-  <div class="bg-background h-screen w-screen items-center flex justify-between" >
+  <div class="bg-background h-full w-full items-center flex justify-between" >
       <div class="flex items-center justify-center h-full ">
           <img class="h-full relative right-[58px] mr-28 w-[1600px] " src="../../../../public/images/Cassete.svg" alt="">
       </div>
@@ -27,9 +27,7 @@ use function Src\Views\Components\Utils\InputComponent;
                   <?= InputComponent(placeholder:"Insira sua senha", type:"password", label:"Senha", icon:"../../../../public/icons/eyeOff.svg",iconPosition: "right-3") ?>
                   <?= InputComponent(placeholder:"Confirme sua senha", type:"password", label:"Confirmar senha", icon:"../../../../public/icons/eyeOff.svg",iconPosition: "right-3") ?>
                   <div class="mt-3">
-                    <a href="../email_verification/index.php">
-                      <?= ButtonComponent("Continuar", "default") ?>
-                    </a>
+                    <?= ButtonComponent("Continuar", "default") ?>
                   </div>
               </div>
           </div>
