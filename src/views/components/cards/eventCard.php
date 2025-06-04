@@ -4,7 +4,7 @@
 
     function createEventCard($video) {
 
-        $thumbnail_url = htmlspecialchars($video['thumbnail']);
+        $thumbnail_url = htmlspecialchars($video['thumbnail_url']);
         $type_card = htmlspecialchars($video['type_card']);
         $title = htmlspecialchars($video['title']);
         $url = htmlspecialchars($video['url']);
@@ -15,7 +15,7 @@
         $create_at = htmlspecialchars(formatDate($video['created_at']));
         
         return "
-            <a href='$url' class='card cursor-pointer w-[320px] h-[400px] bg-[#1e1e2a] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
+            <a href='$url' class='card cursor-pointer w-[320px] h-[400px] bg-[#1B1B1B] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
                 
                 <!-- Capa do vídeo -->
 

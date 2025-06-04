@@ -8,8 +8,8 @@
         "duration" => 360,
         "title" => "Como aprender programação do zero e se tornar um excelente desenvolvedor full stack",
         "username" => "Canal Dev",
-        "thumbnail" => "https://t.ctcdn.com.br/69rFkwz-cdviPGZn2p_l6rJH0UA=/1200x675/smart/i533291.png",
-        "photo" => "https://cdn.awsli.com.br/10/10790/produto/292478529/fix-copo-bola-foto-1-7hxddc8b9q.jpg",
+        "thumbnail_url" => "https://t.ctcdn.com.br/69rFkwz-cdviPGZn2p_l6rJH0UA=/1200x675/smart/i533291.png",
+        "avatar_url" => "https://cdn.awsli.com.br/10/10790/produto/292478529/fix-copo-bola-foto-1-7hxddc8b9q.jpg",
         "account_type" => "verified",
         "views" => 1250000,
         "created_at" => "2024-03-10 15:00:00" 
