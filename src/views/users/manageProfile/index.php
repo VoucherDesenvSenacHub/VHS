@@ -24,15 +24,15 @@ use function src\views\Components\barra_lateral\BarraLateralComponent;
 </head>
 <body class="bg-background flex">
     
-        <div class="fixed">
+        <div class="fixed w-screen">
             <?= HeaderComponent() ?>
         </div>
-        <div class="flex mt-24">
+        <div class="flex ">
             <?= BarraLateralComponent() ?> 
         </div>
 
     
-    <div class="flex ml-72 mt-28 w-full">
+    <div class="flex ml-72 mt-14 w-full">
         <div class="flex flex-col gap-4 p-6 flex-grow">
             <p class="font-sans font-semibold text-3xl text-gray-200">Gerenciar Perfil</p>
             <div class="w-[550px] flex flex-col gap-8">
@@ -58,14 +58,14 @@ use function src\views\Components\barra_lateral\BarraLateralComponent;
                         placeholder: "Usuário123@gmail.com",
                         type: "email",
                         label: "E-mail",
-                        icon: "../../../../public/icons/userRound.svg",
+                        icon: "../../../../public/icons/mail.svg",
                         iconPosition: "right-3"
                         ) ?>
                     <?= InputComponent(
                         placeholder: "Senha123",
                         type: "password",
                         label: "Senha",
-                        icon: "../../../../public/icons/userRound.svg",
+                        icon: "../../../../public/icons/lock.svg",
                         iconPosition: "right-3"
                         ) ?>
                     <?= InputComponent(
