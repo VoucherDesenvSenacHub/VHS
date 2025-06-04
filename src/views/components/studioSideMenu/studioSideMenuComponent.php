@@ -25,7 +25,7 @@ function StudioSideMenuComponent() {
         echo '<li class="flex items-center text-gray-300 rounded-lg cursor-pointer mt-[1.5rem]">
             <a href="../utils/'.$page.'" class="flex items-center w-full p-2">
                 <div class="icon w-[2rem] h-[2rem] flex items-center justify-center bg-[#660BAD] '.(isActive($page) ? 'bg-opacity-100' : 'bg-opacity-10').' rounded-[12px] ml-[0.31rem] '.$data['class'].'">
-                    <img src="../../../public/icons/sidebar_studio/'.$data["icon"].'" alt="'.$data["label"].'" class="'.(isActive($page) ? 'filter invert brightness-0' : '').'">
+                    <img src="../../public/icons/sidebar_studio/'.$data["icon"].'" alt="'.$data["label"].'" class="'.(isActive($page) ? 'filter invert brightness-0' : '').'">
                 </div>
                 <h2 class="menu-text ml-[1rem] text-gray-400 text-sm font-semibold '.(isActive($page) ? 'text-white' : '').'">'.$data["label"].'</h2>
             </a>
@@ -36,6 +36,6 @@ function StudioSideMenuComponent() {
 
     echo '</ul></aside></div>';
 
-    echo '<script src="./studioSideMenu/studioSideMenuScript.js"></script>';
+    echo '<script src="./components/studioSideMenu/studioSideMenuScript.js"></script>';
 }
 ?>
