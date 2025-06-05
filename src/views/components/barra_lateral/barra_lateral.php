@@ -2,9 +2,6 @@
 
 namespace src\views\components\sidebar;
 
-use function src\views\components\header\HeaderComponent;
-require_once __DIR__ . '/../header/headerComponent.php';
-
 function SidebarComponent(){
         return '  
             <aside class="w-[9.25rem] ml-[1.87rem] h-screen transition-all duration-500 ease-in-out bg-gray-950/50 backdrop-blur-sm" id="sidebar">
@@ -93,6 +90,3 @@ function SidebarComponent(){
             <script src="script.js"></script>
         ';
     }
-
-SidebarComponent();
-HeaderComponent();
