@@ -17,7 +17,7 @@
               <img src="/VHS/public/icons/lupa.svg" alt="" class="">
           </button>
           <div><img src="/VHS/public/icons/Rectangle.svg" alt=""></div>
-          <img src="/VHS/public/images/Avatar.svg" alt="Foto de perfil" class="h-8 w-8 rounded-full p-41">
+          <img src="/VHS/public/images/Avatar.svg" alt="Foto de perfil" class="h-8 w-8 rounded-full">
         </div>
       </header>
       <script src="/VHS/src/views/components/header/headerScript.js"></script>
