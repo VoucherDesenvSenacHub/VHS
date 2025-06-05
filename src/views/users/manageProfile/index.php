@@ -1,7 +1,4 @@
 <?php
-
-namespace Src\Views\Pages;
-
 require __DIR__ . '/../../components/utils/buttonComponent.php';
 require __DIR__ . '/../../components/utils/inputComponent.php';
 require __DIR__ . '/../../components/header/headerComponent.php';
