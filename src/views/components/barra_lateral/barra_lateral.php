@@ -2,9 +2,6 @@
 
 namespace src\views\components\sidebar;
 
-use function src\views\components\header\HeaderComponent;
-require_once __DIR__ . '/../header/headerComponent.php';
-
 function SidebarComponent(){
 
         return '  
@@ -95,6 +92,3 @@ function SidebarComponent(){
             <script src="script.js"></script>
         ';
     }
-
-SidebarComponent();
-HeaderComponent();
