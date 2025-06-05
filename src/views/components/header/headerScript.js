@@ -1,3 +1,4 @@
+
 const menu = document.getElementById("menu");
 const search = document.getElementById("search");
 const body = document.body;

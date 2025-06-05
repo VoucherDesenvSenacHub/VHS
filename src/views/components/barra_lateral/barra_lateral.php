@@ -95,3 +95,6 @@ function SidebarComponent(){
             <script src="script.js"></script>
         ';
     }
+
+SidebarComponent();
+HeaderComponent();
