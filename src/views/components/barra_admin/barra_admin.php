@@ -8,7 +8,7 @@ function isActive($page)
 
 $menuItems = [
     'analytics.php' => ['icon' => 'chart.svg', 'label' => 'Analytics', 'class' => 'analytics-icon'],
-    'usuarios.php' => ['icon' => 'group.svg', 'label' => 'Usuários', 'class' => 'usuarios-icon'],
+    'user_management/index.php' => ['icon' => 'group.svg', 'label' => 'Usuários', 'class' => 'usuarios-icon'],
 ];
 
 function Barra_Admin() {

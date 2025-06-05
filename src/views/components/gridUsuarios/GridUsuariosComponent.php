@@ -1,6 +1,6 @@
 <?php
 namespace src\views\components\gridUsuarios;
-
+ 
 function GridUsuariosComponent($usuarios = []) {
     if (empty($usuarios)) {
         $usuarios = [
@@ -14,14 +14,14 @@ function GridUsuariosComponent($usuarios = []) {
             ['id' => 8, 'username' => '@rafael_', 'description' => '4506022 - Ofba - 4678 - 9793 - 93ab0fe', 'profession' => 'Criador de conteúdo'],
         ];
     }
-
+ 
     echo '
     <!-- Tailwind CSS via CDN -->
     <script src="../../../styles/tailwindglobal.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <div id="grid-usuarios" class="w-full bg-[#0C0118] rounded-lg p-4">
     ';
-
+ 
     foreach ($usuarios as $usuario) {
         echo '
         <div class="flex items-center py-2   last:border-b-0">
@@ -51,10 +51,11 @@ function GridUsuariosComponent($usuarios = []) {
         </div>
         ';
     }
-
+ 
     echo '
     </div>
     <script src="./gridUsuarios/gridUsuariosScript.js"></script>
     ';
 }
 ?>
+ 
