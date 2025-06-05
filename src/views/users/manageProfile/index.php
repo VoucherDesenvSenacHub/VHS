@@ -5,12 +5,12 @@ namespace Src\Views\Pages;
 require __DIR__ . '/../../components/utils/buttonComponent.php';
 require __DIR__ . '/../../components/utils/inputComponent.php';
 require __DIR__ . '/../../components/header/headerComponent.php';
-require __DIR__ . '/../../components/sidebar/barra_lateral.php';
+require __DIR__ . '/../../components/barra_lateral/barra_lateral.php';
 
 use function Src\Views\Components\Utils\ButtonComponent;
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\Header\HeaderComponent;
-use function src\views\Components\sidebar\SidebarComponent;
+use function Src\views\Components\sidebar\SidebarComponent;
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +31,7 @@ use function src\views\Components\sidebar\SidebarComponent;
     </div>
     <div class="flex ml-24 mt-14 w-full">
         <div class="flex flex-col gap-4 p-6 flex-grow">
-            <p class="font-sans font-semibold text-3xl text-gray-200">Gerenciar Perfil</p>
+            <p class="font-sans font-semibold text-3xl text-gray-200 mb-2">Gerenciar Perfil</p>
             <div class="w-[550px] flex flex-col gap-8">
                 <div class="flex items-center justify-between gap-2 w-full">
                     <div class="w-36 h-36 relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
