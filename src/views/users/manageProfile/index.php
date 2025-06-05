@@ -5,12 +5,12 @@ namespace Src\Views\Pages;
 require __DIR__ . '/../../components/utils/buttonComponent.php';
 require __DIR__ . '/../../components/utils/inputComponent.php';
 require __DIR__ . '/../../components/header/headerComponent.php';
-require __DIR__ . '/../../components/barra_lateral/barra_lateral.php';
+require __DIR__ . '/../../components/sidebar/barra_lateral.php';
 
 use function Src\Views\Components\Utils\ButtonComponent;
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\Header\HeaderComponent;
-use function src\views\Components\barra_lateral\BarraLateralComponent;
+use function src\views\Components\sidebar\SidebarComponent;
 ?>
 
 <!DOCTYPE html>
@@ -23,16 +23,13 @@ use function src\views\Components\barra_lateral\BarraLateralComponent;
     <script src="../../../styles/tailwindglobal.js"></script>
 </head>
 <body class="bg-background flex">
-    
-        <div class="fixed w-screen">
-            <?= HeaderComponent() ?>
-        </div>
-        <div class="flex ">
-            <?= BarraLateralComponent() ?> 
-        </div>
-
-    
-    <div class="flex ml-72 mt-14 w-full">
+    <div class="fixed w-screen">
+        <?= HeaderComponent() ?>
+    </div>
+    <div class="flex mt-20">
+        <?= SidebarComponent() ?> 
+    </div>
+    <div class="flex ml-24 mt-14 w-full">
         <div class="flex flex-col gap-4 p-6 flex-grow">
             <p class="font-sans font-semibold text-3xl text-gray-200">Gerenciar Perfil</p>
             <div class="w-[550px] flex flex-col gap-8">
@@ -72,7 +69,6 @@ use function src\views\Components\barra_lateral\BarraLateralComponent;
                         placeholder: "Inovações de Tecnologias",
                         type: "text",
                         label: "Categorias de Interesse",
-                        icon: "../../../../public/icons/userRound.svg",
                         iconPosition: "right-3"
                         ) ?>
                 </div>
@@ -86,23 +82,23 @@ use function src\views\Components\barra_lateral\BarraLateralComponent;
 </body>
 </html>
 <script>
-        document.getElementById('uploadButton').addEventListener('click', function() {
-            document.getElementById('imageUpload').click();
-        });
+    document.getElementById('uploadButton').addEventListener('click', function() {
+        document.getElementById('imageUpload').click();
+    });
 
-        document.getElementById('imageUpload').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('profileImage').src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
+    document.getElementById('imageUpload').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('profileImage').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
 
-        document.getElementById('deleteButton').addEventListener('click', function() {
-            document.getElementById('profileImage').src = '../../../../public/images/foto-sem-perfil.jpg';
-            document.getElementById('imageUpload').value = '';
-        });
-    </script>
+    document.getElementById('deleteButton').addEventListener('click', function() {
+        document.getElementById('profileImage').src = '../../../../public/images/foto-sem-perfil.jpg';
+        document.getElementById('imageUpload').value = '';
+    });
+</script>
