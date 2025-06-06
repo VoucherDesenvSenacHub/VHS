@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const adminTitle = document.querySelector(".admin-title");
 
-    const menutexto = document.getElementsByClassName("menu-text"); //
+    const menutext = document.getElementsByClassName("menu-text"); //
  
 
     if (adminTitle) {
@@ -17,19 +17,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
  
-    for (let i = 0; i < menutexto.length; i++) {
+    for (let i = 0; i < menutext.length; i++) {
 
-        menutexto[i].style.transition = "opacity 0.3s ease, transform 0.3s ease";
+        menutext[i].style.transition = "opacity 0.3s ease, transform 0.3s ease";
 
-        menutexto[i].style.opacity = "0";
+        menutext[i].style.opacity = "0";
 
-        menutexto[i].style.transform = "translateX(-20px)";
+        menutext[i].style.transform = "translateX(-20px)";
 
     }
  
-    const menuAberto = localStorage.getItem("menuAberto");
+    const menuopen = localStorage.getItem("menuopen");
 
-    if (menuAberto === "true") {
+    if (menuopen === "true") {
 
         body.classList.add("menu");
 
@@ -37,31 +37,31 @@ document.addEventListener("DOMContentLoaded", function () {
  
     function UpdateMenuVisibility() {
 
-        const aberto = body.classList.contains("menu");
+        const open = body.classList.contains("menu");
  
-        for (let i = 0; i < menutexto.length; i++) {
+        for (let i = 0; i < menutext.length; i++) {
 
-            if (aberto) {
+            if (open) {
 
-                menutexto[i].style.setProperty("display", "block", "important");
+                menutext[i].style.setProperty("display", "block", "important");
 
                 setTimeout(() => {
 
-                    menutexto[i].style.opacity = "1";
+                    menutext[i].style.opacity = "1";
 
-                    menutexto[i].style.transform = "translateX(0)";
+                    menutext[i].style.transform = "translateX(0)";
 
                 }, 10);
 
             } else {
 
-                menutexto[i].style.opacity = "0";
+                menutext[i].style.opacity = "0";
 
-                menutexto[i].style.transform = "translateX(-20px)";
+                menutext[i].style.transform = "translateX(-20px)";
 
                 setTimeout(() => {
 
-                    menutexto[i].style.setProperty("display", "none", "important");
+                    menutext[i].style.setProperty("display", "none", "important");
 
                 }, 300);
 
@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
  
         if (adminTitle) {
 
-            if (aberto) {
+            if (open) {
 
                 adminTitle.style.setProperty("display", "block", "important");
 
@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         }
  
-        localStorage.setItem("menuAberto", aberto.toString());
+        localStorage.setItem("menuopen", open.toString());
 
     }
  
