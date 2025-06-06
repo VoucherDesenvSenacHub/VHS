@@ -3,8 +3,7 @@
     namespace src\views\components\barra_lateral;
     function BarraLateralComponent(){
 
-        echo ' 
-        <script src="https://cdn.tailwindcss.com"></script>
+        return <<< HTML
             <body >
             
                 <aside class="w-[9.25rem] ml-[1.87rem] h-screen">
@@ -94,6 +93,7 @@
             </body>
             
             <script src="script.js"></script>
-        ';
+        HTML
+        ;
     }
 BarraLateralComponent();

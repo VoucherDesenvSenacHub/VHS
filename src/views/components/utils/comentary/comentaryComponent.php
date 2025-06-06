@@ -17,52 +17,41 @@ function Comment(string $name, string $text, string $created_at = null, string $
 
     return (
         "
-        <div class='max-w-1/2 h-28 block flex'>
-            <div class='w-14 h-14 rounded-full mt-1'>
+        <div class='w-full flex gap-4 py-2'>
+            <div class='w-14 h-14 rounded-full mt-1 shrink-0'>
                 $userImg
             </div>
-
-            <div class='block ml-3'>
-            
-                <div class='max-w-80 h-5 flex items-baseline'>
+    
+            <div class='flex flex-col flex-1'>
+                <div class='flex items-baseline'>
                     <p class='text-lg text-white font-semibold'>$name</p> 
-                    <p class='text-base text-gray-300 font-semibold ml-1'>$created_at</p>
+                    $created_at
                 </div>
-
-                <div class='max-w-md h-20 mt-1 text-xs font-semibold text-gray-400'>
+    
+                <div class='mt-1 text-xs font-semibold text-gray-400 max-w-xl'>
                     <p>$text</p>
                 </div>
-
             </div>
-
-            <div class='size-20 ml-9 mt-2 cursor-pointer relative' id='opcoes'>
-                <img src='/Voucher-dev-142-VHS/public/icons/comments/ellipsis-vertical.svg'>
-            <div>
+    
+            <div class='w-5 h-5 ml-3 mt-2 cursor-pointer relative' id='opcoes'>
+                <img src='/VHS/public/icons/comments/ellipsis-vertical.svg'>
+                <div class='w-24 h-16 bg-gray-800 rounded-[0.22rem] flex items-center justify-center border-[0.1rem] border-solid border-gray-600 
+                top-0 ml-5 absolute hidden' id='menu'>
+                    <ul class='w-full flex flex-col gap-3'>  
+                        <li class='hover:bg-gray-700 text-white font-semibold flex w-16 h-5 text-xs gap-2 items-center ml-1'>
+                            <img src='/VHS/public/icons/comments/trash.svg'>
+                            <p class='text-red-500'>Excluir</p>
+                        </li>
+                        <li class='hover:bg-gray-700 text-white font-semibold flex items-center w-16 h-5 text-xs gap-1 ml-1'>
+                            <img src='/VHS/public/icons/comments/pencil.svg'>
+                            <p class='ml-1'>Editar</p>   
+                        </li>
+                    </ul>    
+                </div>
+            </div>
         </div>
-        <div class='w-24 h-16 bg-gray-800 rounded-[0.22rem] flex items-center justify-center border-[0.1rem] border-solid border-gray-600 
-        top-0 ml-5 absolute hidden' id='menu'>
-            <ul class='w-full flex flex-col gap-3'>  
-                <li class='hover:bg-gray-700 text-white font-semibold flex w-16 h-5 text-xs gap-2 items-center ml-1'>
-                    <div>
-                        <img src='/Voucher-dev-142-VHS/public/icons/comments/trash.svg'>
-                    </div>
-                    <div class='text-red-500'>
-                        <p>Excluir</p>
-                    </div>
-                </li>
-                <li class=' hover:bg-gray-700 text-white font-semibold flex items-center w-16 h-5 text-xs gap-1 ml-1'>
-                    <div>
-                        <img src='/Voucher-dev-142-VHS/public/icons/comments/pencil.svg'>
-                    </div>
-                    <div class='ml-1'>
-                        <p>Editar</p>   
-                    </div>
-                </li>
-                
-            </ul>    
-        </div>
-
-        <script src='/Voucher-dev-142-VHS/src/views/components/utils/comentary/script.js'></script>
+    
+        <script src='/VHS/src/views/components/utils/comentary/script.js'></script>
         "
     );
 }

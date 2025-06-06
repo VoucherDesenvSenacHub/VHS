@@ -16,6 +16,10 @@
             case 'icon':
                 $button_style = $button_style . "bg-white hover:bg-gray-300 transition-colors";
                 break;
+            
+            case 'studio':
+                $button_style = $button_style . "bg-gray-800 hover:bg-purple-600 transition-colors text-white";
+                break;
 
             default:
                 $button_style = $button_style . "bg-purple-700 transition-colors hover:bg-purple-800 text-white";
