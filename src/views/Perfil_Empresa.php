@@ -12,6 +12,18 @@ use function Src\Views\Components\sidebar\SidebarComponent;
 use function src\views\components\header\HeaderComponent;
 use function src\views\components\utils\footerComponent;
 
+$dados = [
+    ['texto' => 'Microsoft', 
+    'link1' => 'https://www.microsoft.com/pt-br', 
+    'link2' => 'https://www.instagram.com/microsoft/', 
+    'link3' => 'https://www.office.com/'],
+    ['Seguidores' => '4.5k', 'tipo' => 'Parceiro']
+
+];
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -44,17 +56,73 @@ use function src\views\components\utils\footerComponent;
                     
                 </div>
 
-                <div class="self-cente w-32 h-32 rounded-3xl border border-white/20 overflow-hidden z-10 -mt-12 ml-6">
+                <div class="r w-42 h-42 rounded-4xl border border-white/20 overflow-hidden absolute -mt-24 ml-6 flex flex-row">
                      <!-- Imagem menor -->
-                   <img src="../../public/logos/BillGates.webp" class="w-full h-full object-cover" alt="Pequena">
-                
+                   <img src="../../public/logos/BillGates.webp" class="w-full h-full object-cover " alt="Pequena">
+                   
                 </div>
+
+                <div class="flex flex-row justify-between ml-52 self-start">
+                    
+                    <div>
+                        <h1 class="p-0 text-white font-bold text-2xl"><?= $dados[0]['texto'] ; ?></h1>
+                        
+                        <div class=" flex flex-row">
+
+                            <p class="p-0 text-gray-300">
+                                <?= $dados[1]['Seguidores']?> Seguidores | <p class="ml-1 p-0 text-white"><?= $dados[1]['tipo'] ?></p>
+                            </p>
+                            
+                        </div>
+                    </div>
+                    <div class="mt-1">
+                        <button> <?= ButtonComponent('Seguir','outline', null, "160px", "35px")?> </button>
+                    </div>
+                </div>
+
+                    <div class="flex flex-row justify-between">
+
+                        <div class="w-2/4 mt-12">
+                            <p class="text-gray-300 text-xl">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sed lobortis urna. Suspendisse suscipit lorem in accumsan venenatis. Nunc iaculis vitae orci sed consequat. Suspendisse semper dolor urna, et dictum sem egestas egestas. Mauris dapibus aliquet neque, sit amet sodales lectus vehicula ac. Nulla non est quis tortor aliquam mollis eu et sem. Nullam tempus volutpat vestibulum. Nam porttitor fermentum est nec dapibus. Nulla cursus ante purus, at posuere justo venenatis sed. Etiam lacinia quam vitae mauris tincidunt ultricies. Maecenas ipsum dolor, blandit a sem </p>                  
+                            
+                        </div>
+                        <table class="text-white mt-5 border-separate border-spacing-6 ">
+                            <tr>
+                                <td><img src="../../public/icons/Union.svg" alt=""></td>
+                                <td><a class="text-cyan-500" href=""><?= $dados[0]['link1']?></a></td>
+                            </tr>
+                            <tr>
+                                <td><img src="../../public/icons/Vector1.svg" alt=""></td>
+                                <td><a class="text-cyan-500" href=""><?= $dados[0]['link2']?></a></td>
+                            </tr>
+                            <tr>
+                                <td><img src="../../public/icons/World.svg" alt=""></td>
+                                <td><a class="text-cyan-500" href=""><?= $dados[0]['link3']?></a></td>
+                            </tr>
+                        </table>
+                        
+                    </div>
+
+                    <div class="mt-12">
+                        <div>
+
+                            <div>
+                                
+                                <h1 class="p-0 text-white font-bold text-2xl">Conteúdo do Canal</h1>
+                                <p class="p-0 text-gray-300">Confira os vídeo mais populares da nossa plataforma VHS</p>
+                                
+                            </div>
+
+                            
+
+                        </div>
+                    </div>
 
             </div>
                 
         </div class="absolute">
         
-        <footer id="footer" class="absolute">
+        <footer id="footer" class="">
             <?= Footer() ?>
             
         </footer>
