@@ -96,4 +96,3 @@
         HTML
         ;
     }
-BarraLateralComponent();
