@@ -18,7 +18,10 @@
                 break;
             
             case 'studio':
-                $button_style = $button_style . "bg-gray-800 hover:bg-purple-600 transition-colors text-white";
+
+                $button_style = "flex justify-center items-center w-[$width] h-[$height] gap-2 rounded-full cursor-pointer ";
+
+                $button_style = $button_style . "bg-[#202024] transition-colors hover:bg-[#2a2a2e] text-white rounded-full";
                 break;
 
             default:

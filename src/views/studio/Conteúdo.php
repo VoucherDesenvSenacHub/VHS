@@ -8,7 +8,7 @@ use function src\views\components\header\HeaderComponent;
 require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/buttonComponent.php";
 use function src\views\components\Utils\ButtonComponent;
 
-require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/comentary/comentaryComponent.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/comments/comentaryComponent.php";
 use function src\views\components\Utils\Comment;
 
 require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/footer.php";
@@ -27,31 +27,26 @@ use function src\views\components\Utils\Footer;
 </head>
 <body class="bg-gradient-to-b from-[#20002c] via-black to-[#20002c] min-h-screen text-white font-[Poppins]">
 
-  <!-- Header -->
   <?php echo HeaderComponent(); ?>
 
   <div class="flex">
-    <!-- Side Menu -->
     <?php echo StudioSideMenuComponent(); ?>
 
-    <!-- Main Content -->
     <div class="flex-1 px-10 py-6">
       <h1 class="text-2xl font-semibold mb-2">Comentários do vídeo</h1>
       <p class="text-sm text-gray-300 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
 
-      <!-- Tabs -->
       <div class="flex gap-3 mb-6">
         <?php echo ButtonComponent("Edição", "studio", "", "170px", "40px"); ?>
         <?php echo ButtonComponent("Comentários", "studio", "", "170px", "40px"); ?>
         <?php echo ButtonComponent("Analytics", "studio", "", "170px", "40px"); ?>
       </div>
 
-      <!-- Search -->
-      <div class="mb-6">
+      <div class="mb-6 flex gap-3">
+        <img class="w-8 h-8 pt-2" src="/VHS/public/icons/Filter.svg" alt="">
         <input type="text" placeholder="Pesquisar" class="w-full bg-[#15141A] text-white px-4 py-2 rounded-md border border-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-600">
       </div>
 
-      <!-- Comentários -->
       <div class="w-full flex flex-col gap-4">
         <?php
         for ($i = 0; $i < 8; $i++) {
