@@ -1,6 +1,6 @@
 <?php
-
-    require_once './formatCard.php';
+    namespace Src\Views\Components\Cards;
+    require_once 'formatCard.php';
 
     function createEventCard($video) {
 
