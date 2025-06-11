@@ -10,12 +10,26 @@ use function src\views\components\header\Barra_Admin;
 use function Src\Views\Components\Utils\Comment;
 
 $commets_lista = [
-    [   "name" => "Rafael",
-        "id" => "1234",
+    [   
+        "name" => "Rafael",
         "text" => "cara muuit legal odio todos vsz seus caras chtos",
         "thumbnail_url" => "https://www.uai.com.br/uainoticias/wp-content/uploads/2025/04/Ornitorrinco_1744132096128.jpg","há 2 dias","https://www.uai.com.br/uainoticias/wp-content/uploads/2025/04/Ornitorrinco_1744132096128.jpg",
         "created_at" => "há 2 dias",
-        "user" => "https://www.uai.com.br/uainoticias/wp-content/uploads/2025/04/Ornitorrinco_1744132096128.jpg","há 2 dias","https://www.uai.com.br/uainoticias/wp-content/uploads/2025/04/Ornitorrinco_1744132096128.jpg"
+        "user_img" => "https://www.uai.com.br/uainoticias/wp-content/uploads/2025/04/Ornitorrinco_1744132096128.jpg","há 2 dias","https://www.uai.com.br/uainoticias/wp-content/uploads/2025/04/Ornitorrinco_1744132096128.jpg"
+    ],
+    [
+        "name" => "CAVALO",
+        "text" => "cCAVALO CAVALO VACALO LAVALO CAVALO",
+        "thumbnail_url" => "https://www.uai.com.br/uainoticias/wp-content/uploads/2025/04/Ornitorrinco_1744132096128.jpg","há 2 dias","https://www.uai.com.br/uainoticias/wp-content/uploads/2025/04/Ornitorrinco_1744132096128.jpg",
+        "created_at" => "há 200 dias",
+        "user_img" => "https://pm1.aminoapps.com/7041/8504e31011da6a7ea6973a12ab60b7b423d1f8f7r1-800-1000v2_00.jpg"
+    ],
+    [
+        "name" => "Bruno",
+        "text" => "Muito interessante, parabéns!",
+        "thumbnail_url" => "https://www.uai.com.br/uainoticias/wp-content/uploads/2025/04/Ornitorrinco_1744132096128.jpg",
+        "created_at" => "há 3 dias",
+        "user_img" => "https://styles.redditmedia.com/t5_2s2lo/styles/communityIcon_vfzhs4a90gue1.png"
     ]
 ];
 
@@ -45,8 +59,8 @@ $commets_lista = [
                 <p class="text-subtitile font-semibold title-size text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
             </div>
             <div class="flex h-5 mt-5 gap-5">
-                <a class="text-white bg-gray600 rounded-full w-28 h-8 flex items-center justify-center">Usuários</a>
-                <a href="../Perfil_Empresa.php" class="text-gray-500 bg-gray600 rounded-full w-28 h-8 flex items-center justify-center">Denúncias</a>
+                <a class="text-gray-500 bg-gray600 rounded-full w-28 h-8 flex items-center justify-center">Usuários</a>
+                <a class="text-white bg-gray600 rounded-full w-28 h-8 flex items-center justify-center">Denúncias</a>
             </div>
             <div class="mt-10 flex items-center gap-4 h-16 cavalo">
                 <button id="btn_filter" onclick="filter(event)">
@@ -67,7 +81,15 @@ $commets_lista = [
             <div class="colocaraqui mt-10 flex flex-col gap-4">
             
                 <?php
-                    echo Comment("RAFAEL","MUITO TEXTO MESMO MESMO","https://www.uai.com.br/uainoticias/wp-content/uploads/2025/04/Ornitorrinco_1744132096128.jpg","há 2 dias","https://www.uai.com.br/uainoticias/wp-content/uploads/2025/04/Ornitorrinco_1744132096128.jpg");
+                foreach($commets_lista as $commet) {
+                    echo Comment(
+                        $commet["name"],
+                        $commet["text"],
+                        $commet["thumbnail_url"],
+                        $commet["created_at"],
+                        $commet["user_img"]
+                    );
+                }
                 ?>
             </div>
         </div>
