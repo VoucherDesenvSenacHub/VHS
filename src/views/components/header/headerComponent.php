@@ -1,25 +1,29 @@
-<?php 
+<?php
 
-    namespace src\views\components\header;
-    function HeaderComponent(){
+namespace src\views\components\header;
 
-        echo '
-        <header id="header" class="flex items-center justify-between p-5 shadow-md">
-        <div class="flex items-center gap-4">
-          <button id="menu" class="p-2 rounded-lg">
-              <img src="../../../public/icons/header/Menu.svg" alt="">
-          </button>
-          <img src="../../../public/logos/Logo.svg" alt="Logo" class="h-8">
+require_once __DIR__ . '/../utils/barComponent.php';
+
+use function src\views\components\utils\BarComponent;
+
+function HeaderComponent(){
+  $bar = BarComponent();
+
+  return "
+      <header id='header' class='flex items-center justify-between p-5 sticky top-1'>  
+        <div class='flex items-center gap-4'>
+            $bar
+          <img src='/VHS/public/logos/Logo.svg' alt='Logo' class='h-8'>
         </div>
       
-        <div class="flex items-center gap-4">
-          <button id="search" class="p-1 rounded-lg">
-              <img src="../../../public/icons/lupa.svg" alt="" class="">
+        <div class='flex items-center gap-4'>
+          <button id='search' class='p-1 rounded-lg'>
+              <img src='/VHS/public/icons/lupa.svg' alt=''>
           </button>
-          <div><img src="../../../public/icons/Rectangle.svg" alt=""></div>
-          <img src="../../../public/images/Avatar.svg" alt="Foto de perfil" class="h-8 w-8 rounded-full p-41">
+          <div><img src='/VHS/public/icons/Rectangle.svg' alt=''></div>
+          <img src='/VHS/public/images/Avatar.svg' alt='Foto de perfil' class='h-8 w-8 rounded-full'>
         </div>
       </header>
-      <script src="./header/headerScript.js"></script>
-        ';
-    }
+      <script src='/VHS/src/views/components/header/headerScript.js'></script>
+        ";
+}
