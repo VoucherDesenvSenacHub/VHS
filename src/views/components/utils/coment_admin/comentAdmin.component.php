@@ -40,9 +40,6 @@ function Comment(string $name, string $text, string $thumbnail_url, string $crea
                             <img src='/VHS/public/icons/comments/Trash.svg'>
                         </li>
                         <li>
-                            <img src='/VHS/public/icons/comments/favorite-comment.svg'>
-                        </li>
-                        <li>
                             <img src='/VHS/public/icons/comments/user-block.svg'>
                         </li>
                     </ul>    
