@@ -1,6 +1,6 @@
 <?php
 
-    require_once './formatCard.php';
+    require_once(__DIR__ . '/formatCard.php');
 
     function createEventCard($video) {
 
