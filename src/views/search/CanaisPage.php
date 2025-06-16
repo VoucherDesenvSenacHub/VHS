@@ -61,15 +61,12 @@ $botoes = [
     <div>
         <?=HeaderComponent() ?>
     </div>
-    <!-- -->
 
-    
-    
-    <div class="px-4 sm:px-6 py-8 ">
+    <div class="ml-8 px-4 sm:px-6 py-8 !mx-auto max-w-[95rem]">
         <?= Title_and_buttons("Canais", "loren", $botoes) ?>
         <div class="flex flex-wrap gap-12">
-            <div class="space-y-6">
-                <?php
+    <div class="space-y-6">
+        <?php
             foreach ($videos as $video) {
                 echo '<div class="flex items-center space-x-6">';
                 echo '<img src="' . htmlspecialchars($video['avatar_url'], ENT_QUOTES, 'UTF-8') . '" alt="Avatar" class="w-16 h-16 rounded-md object-cover border-2 border-purple-500">';
@@ -81,7 +78,7 @@ $botoes = [
                 echo '</div>';
             }
             
-            ?>
+        ?>
     </div>
 </div>
 </body>
