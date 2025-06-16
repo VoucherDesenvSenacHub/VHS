@@ -208,7 +208,7 @@ $videos = [
         <div class="flex flex-wrap gap-12">
             <?php foreach ($videos as $video): ?>
                 <?= createVideoCard($video) ?>
-                <?= createVideoCard($video) ?>
+
             <?php endforeach; ?>
         </div>
     </div>
