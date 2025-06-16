@@ -14,9 +14,9 @@ $menuItems = [
 function Barra_Admin() {
     global $menuItems;
 
-    echo '<div id="sideMenuContainer">';
-    echo '<aside class="w-[9.25rem] ml-[1.87rem] h-screen">';
-    echo '<h2 class="pt-[1.18rem] ml-[0.31rem] text-gray-400 text-xs font-poppins">ADMINISTRAÇÃO</h2><ul>';
+    echo '<div id="sideMenuContainer" class="sticky top-16 max-h-[100vh]">';
+    echo '<aside class=" max-w-36 ml-8 ">';
+    echo '<h2 class="admin-title pt-5 ml-2 text-gray-400 text-xs font-poppins">ADMINISTRAÇÃO</h2><ul>';
 
     foreach ($menuItems as $page => $data) {
         echo '<li class="flex items-center text-gray-300 rounded-lg cursor-pointer mt-[1.5rem]">
