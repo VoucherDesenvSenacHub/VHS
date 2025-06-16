@@ -1,9 +1,9 @@
 <?php
 require "../components/utils/Title_and_buttons.php";
 require "../components/header/headerComponent.php";
+require "../components/sidebar/barra_lateral.php";
 
-
-
+use function src\views\components\sidebar\SidebarComponent;
 use function src\views\components\header\HeaderComponent;
 use function src\views\components\utils\Title_and_buttons;
 
@@ -29,13 +29,23 @@ $botoes = [
     <div>
         <?=HeaderComponent() ?>
     </div>
-    <div class="ml-8 px-4 sm:px-6 py-8 !mx-auto max-w-[95rem]">
-        <?= Title_and_buttons("Videos", "loren", $botoes) ?>
-        <div class="flex flex-wrap gap-12">
-            <?php foreach ($videos as $video): ?>
+    <div class="flex flex-col md:flex-row w-full">
 
-            <?php endforeach; ?>
+        <div class="hidden md:block">
+            <?= SidebarComponent() ?>
         </div>
+        <main class="-mt-14">
+
+
+            <div class="ml-8 px-4 sm:px-6 py-8 !mx-auto max-w-[95rem]">
+                <?= Title_and_buttons("Eventos", "loren", $botoes) ?>
+                <div class="flex flex-wrap gap-12">
+                    <div class="space-y-6">
+
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
 </body>
 </html>

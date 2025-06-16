@@ -202,15 +202,27 @@ $videos = [
     <div class="mb-8">
         <?= HeaderComponent() ?>
     </div>
-    
-    <div class="ml-8 px-4 sm:px-6 py-8 !mx-auto max-w-[95rem]">
-        <?= Title_and_buttons("Videos", "loren", $botoes) ?>
-        <div class="flex flex-wrap gap-12">
-            <?php foreach ($videos as $video): ?>
-                <?= createVideoCard($video) ?>
 
-            <?php endforeach; ?>
+    <div class="flex flex-col md:flex-row w-full">
+
+        
+        <div class="hidden md:block">
+            <?= SidebarComponent()?>
         </div>
-    </div>
-</body>
+        
+        <main class="-mt-14">
+
+            
+            <div class="ml-8 px-4 sm:px-6 py-8 !mx-auto max-w-[95rem]">
+                <?= Title_and_buttons("Videos", "loren", $botoes) ?>
+                <div class="flex flex-wrap gap-12">
+                    <?php foreach ($videos as $video): ?>
+                        <?= createVideoCard($video) ?>
+                        
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </body>
 </html>
