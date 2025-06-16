@@ -63,9 +63,6 @@ $botoes = [
     </div>
     <!-- -->
 
-        <div >
-            <?=SidebarComponent() ?>
-    </div>
     
     
     <div class="px-4 sm:px-6 py-8 ">
