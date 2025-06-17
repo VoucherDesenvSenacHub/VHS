@@ -121,7 +121,7 @@
 
         private function Event(): string {
             return "
-                <a href='{$this->url}' class='card cursor-pointer max-w-[280px] h-[300px] 2xl:max-w-[320px] 2xl:h-[340px] bg-[#1B1B1B] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
+                <a href='{$this->url}' class='card flex cursor-pointer max-w-[280px] h-[300px] 2xl:max-w-[320px] 2xl:h-[340px] bg-[#1B1B1B] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
                     <div class='relative w-full h-[50%]'>
                         <img src='{$this->thumbnail_url}' class='w-full h-full object-cover'>
 
@@ -151,7 +151,7 @@
 
         private function Channel(): string {
             return "
-                <a href='{$this->url}' class='card cursor-pointer max-w-[280px] h-[300px] 2xl:max-w-[320px] 2xl:h-[340px] bg-[#1B1B1B] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
+                <a href='{$this->url}' class='card flex cursor-pointer max-w-[280px] h-[300px] 2xl:max-w-[320px] 2xl:h-[340px] bg-[#1B1B1B] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
                     <div class='relative w-full h-[50%]'>
                         <img src='{$this->thumbnail_url}' class='w-full h-full object-cover'>
                         
@@ -202,7 +202,7 @@
 
         private function Channels(): string {
             return "
-                <a href='{$this->url}' class='card cursor-pointer max-w-[280px] h-[300px] 2xl:max-w-[320px] 2xl:h-[340px] bg-[#1B1B1B] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
+                <a href='{$this->url}' class='card flex cursor-pointer max-w-[280px] h-[300px] 2xl:max-w-[320px] 2xl:h-[340px] bg-[#1B1B1B] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
                     <div class='relative w-full h-[50%]'>
                         <img src='{$this->thumbnail_url}' class='w-full h-full object-cover'>
 
