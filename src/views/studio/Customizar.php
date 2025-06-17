@@ -57,7 +57,7 @@ use function src\views\components\Utils\Footer;
         </form>
         <div class="mt-5">
           <h2 class="text-lg font-medium mb-2">Foto de perfil</h2>
-          <p class="text-sm text-gray-300 mb-8">lorem sjdpifpdfpsdoikjdmgpsdkmfpsfpmsdlfsdfdfsdmkfsdkfsm</p>
+          <p class="text-sm text-gray-300 mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
         </div>
       </section>
 
@@ -66,7 +66,7 @@ use function src\views\components\Utils\Footer;
       <section class="mb-10">
         <h2 class="text-lg font-medium mb-2">Banner do canal</h2>
         <p class="text-sm text-gray-400 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        <img src="https://i.imgur.com/UvnbC0y.png" alt="Banner do canal" class="w-full max-w-2xl rounded-md border border-gray-700" />
+        <img src="https://i.imgur.com/UvnbC0y.png" alt="Banner do canal" class="h-50 w-full max-w-4xl rounded-md border border-gray-700" />
       </section>
 
       <!-- Nome do canal -->
