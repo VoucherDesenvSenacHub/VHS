@@ -1,9 +1,11 @@
 <?php
 require "../components/sidebar/barra_lateral.php";
 require "../components/header/headerComponent.php";
-require_once "../components/cards/myCard.php";
-require_once "../components/cards/formatCard.php";
+require_once "../components/cards/index.php";
 require_once "../components/studioSideMenu/studioSideMenuComponent.php";
+
+use function Src\Views\Components\Cards\renderCards;
+
 
 use function Src\Views\Components\header\HeaderComponent;
 use function src\views\components\header\isActive;
@@ -127,11 +129,11 @@ $videos = [
         "account_type" => "verified",
         "views" => 500000,
         "created_at" => "2023-11-05 17:30:00"
-    ]
-];
-
-
-?>
+        ]
+    ];
+    
+    
+    ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -143,17 +145,17 @@ $videos = [
         <script src="../../styles/tailwindglobal.js"></script>
     </head>
     <body class="w-full bg-[#0C0118]">
-   
-
+        
+        
         <?php echo HeaderComponent();?>
     <div class="flex">
         <div class="max-xl:hidden mr-4">
             <?php  
                 echo SidebarComponent();
                 echo StudioSideMenuComponent();
-            ?>
+                ?>
         </div>
-        <div class="p-7 w-full">
+        <div class="p-7 max-w-[1440px]">
             <div>
                 <p class="font-pop font-semibold text-title text-white">Gerenciamento de usuários</p>
                 <p class="text-subtitile font-semibold title-size text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
@@ -179,14 +181,12 @@ $videos = [
                     <p class="text-[13px] flex items-center text-gray-200">Mais antigos</p>
                 </div>
             </div>
-            <div class="colocaraqui mt-10 flex flex-wrap max-w-[1440px]">
-                    <?php
+            <div class="colocaraqui mt-10 flex gap-[2.15rem] flex-wrap ">
+                <?php
                         foreach($videos as $video){
-                            
-                            echo createMyCard($video);
-                            
+                            echo renderCards($cards, 'channel');
                         }
-                    ?>
+                        ?>
             </div>
         </div>
     </div>
