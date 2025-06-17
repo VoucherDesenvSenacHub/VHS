@@ -10,7 +10,7 @@ function HeaderComponent(){
   $bar = BarComponent();
 
   return "
-      <header id='header' class='flex items-center justify-between p-5 sticky top-1'>  
+      <header id='sideMenu' class='flex items-center justify-between p-5 sticky top-1'>  
         <div class='flex items-center gap-4'>
             $bar
           <img src='/VHS/public/logos/Logo.svg' alt='Logo' class='h-8'>

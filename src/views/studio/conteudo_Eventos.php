@@ -3,14 +3,15 @@ require "../components/sidebar/barra_lateral.php";
 require "../components/header/headerComponent.php";
 require_once "../components/cards/index.php";
 require_once "../components/studioSideMenu/studioSideMenuComponent.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/buttonComponent.php";
+use function src\views\components\Utils\ButtonComponent;
+
+
+
 
 use function Src\Views\Components\Cards\renderCards;
-
-
 use function Src\Views\Components\header\HeaderComponent;
-use function src\views\components\header\isActive;
-use function src\views\components\header\StudioSideMenuComponent;
-use function src\views\components\sidebar\SidebarComponent;
+use function src\views\components\studioSideMenu\StudioSideMenuComponent;
 
 $videos = [
     [
@@ -151,7 +152,6 @@ $videos = [
     <div class="flex">
         <div class="max-xl:hidden mr-4">
             <?php  
-                echo SidebarComponent();
                 echo StudioSideMenuComponent();
                 ?>
         </div>
@@ -161,9 +161,11 @@ $videos = [
                 <p class="text-subtitile font-semibold title-size text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
             </div>
             <div class="flex h-5 mt-5 gap-5">
-                <a class="text-[#C4C4C4] bg-[#202024] rounded-full w-28 h-8 flex items-center justify-center">Videos</a>
-                <a class="text-[#C4C4C4] bg-[#202024] rounded-full w-28 h-8 flex items-center justify-center">Fast</a>
-                <a class="text-white bg-[#202024] rounded-full w-28 h-8 flex items-center justify-center">Eventos</a>
+            <?php 
+                echo ButtonComponent("Videos", "studio", "", "170px", "40px"); 
+                echo ButtonComponent("Fast", "studio", "", "170px", "40px");
+                echo ButtonComponent("Eventos", "studio", "", "170px", "40px"); 
+            ?>
             </div>
             <div class="mt-10 flex items-center gap-4 h-16 cavalo">
                 <button id="btn_filter" onclick="filter(event)">
