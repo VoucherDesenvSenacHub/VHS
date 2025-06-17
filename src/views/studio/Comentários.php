@@ -8,8 +8,8 @@ use function src\views\components\header\HeaderComponent;
 require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/buttonComponent.php";
 use function src\views\components\Utils\ButtonComponent;
 
-require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/comments/comentaryComponent.php";
-use function src\views\components\Utils\Comment;
+require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/comments_studio/comentary_studio_Component.php";
+use function src\views\components\Utils\Comment_Studio;
 
 require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/footer.php";
 use function src\views\components\Utils\Footer;
@@ -50,7 +50,7 @@ use function src\views\components\Utils\Footer;
       <div class="w-full flex flex-col gap-4">
         <?php
         for ($i = 0; $i < 8; $i++) {
-          echo Comment(
+          echo Comment_Studio(
             "Celestino",
             "Muito emocionante! Eu sei! Não teria coragem de entrar nessas casas como você kkk Tudo sobre o Next.js 15, nova arquitetura de pasta!",
             "há 5 dias",
