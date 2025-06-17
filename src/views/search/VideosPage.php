@@ -199,7 +199,7 @@ $videos = [
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center text-white">
-    <div class="mb-8">
+    <div class="">
         <?= HeaderComponent() ?>
     </div>
 
@@ -219,7 +219,7 @@ $videos = [
                     <?php foreach ($videos as $video): ?>
                         <?= createVideoCard($video) ?>
                         
-                        <?php endforeach; ?>
+                        <?php endforeach; ?>    
                     </div>
                 </div>
             </main>
