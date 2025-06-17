@@ -1,16 +1,23 @@
 <?php
-include __DIR__ . '/../components/utils/inputComponent.php';
-
-include __DIR__ . '/../components/studioSideMenu/studioSideMenuComponent.php';
-
-include __DIR__ . '/../components/header/headerComponent.php';
-
 
 use function Src\Views\Components\Utils\InputComponent;
 
+use function Src\Views\Components\header\HeaderComponent;
+
 use function src\views\components\header\StudioSideMenuComponent;
+
+
+require "../components/utils/inputComponent.php";
+
+require "../components/header/HeaderComponent.php";
+
+require "../components/studioSideMenu/studioSideMenuComponent.php";
+
+require "../components/CardFastComponent/cardFast.php";
  
-use function src\views\components\header\HeaderComponent;
+ 
+
+
  
 ?>
 
@@ -25,17 +32,14 @@ use function src\views\components\header\HeaderComponent;
 </head>
 <body class=" w-full bg-background">
 
-<?php
-HeaderComponent();
-?>
+<?= HeaderComponent() ?>
 
    
     <div class="flex ">
             <div class="max-xl:hidden">
-                <?php
-                StudioSideMenuComponent();
-            
-                ?>
+
+            <?= StudioSideMenuComponent() ?>
+
                 </div>
                 <div class="p-7 w-full">
 
@@ -49,7 +53,7 @@ HeaderComponent();
                         <p class="rounded-full w-30 p-3 bg-gray600 flex justify-center items-center text-white w-24">Denúncias</p>
                     </div>
 
-                    <div class="flex items-center">
+                    <div class="flex items-center m-8">
 
                         <div class="flex justify-center items-center m-3">
                             <img src="/VHS/public/icons/Filter.svg" alt="Filter">
@@ -60,6 +64,31 @@ HeaderComponent();
                             <?= InputComponent(placeholder: "Pesquisar", type: "text")?>
                             
                         </div>
+
+                    </div>
+
+                    <div class="flex flex-wrap justify-evenly gap-14">
+
+                        
+                    <?= CardFast() ?>
+
+                    <?= CardFast() ?>
+
+                    <?= CardFast() ?>
+
+                    <?= CardFast() ?>
+
+                    <?= CardFast() ?>
+
+                    <?= CardFast() ?>
+
+                    <?= CardFast() ?>
+
+                    <?= CardFast() ?>
+
+                    <?= CardFast() ?>
+
+
 
                     </div>
 

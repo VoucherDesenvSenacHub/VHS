@@ -86,6 +86,7 @@
         .play {
             animation: smooth 0.15s ease-in;
         }
+        
  
         .play.paused {
             animation: hidden_smooth 0.15s ease-in;
