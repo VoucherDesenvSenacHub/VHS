@@ -30,5 +30,4 @@
 
             <script src='/VHS/src/views/components/header/headerScript.js'></script>
         ";
-    }
-?>
+}
