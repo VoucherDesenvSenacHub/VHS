@@ -1,9 +1,9 @@
 <?php
-require "./components/sidebar/barra_lateral.php";
-require "./components/header/headerComponent.php";
-require_once "./components/cards/myCard.php";
-require_once "./components/cards/formatCard.php";
-require_once "./components/studioSideMenu/studioSideMenuComponent.php";
+require "../components/sidebar/barra_lateral.php";
+require "../components/header/headerComponent.php";
+require_once "../components/cards/myCard.php";
+require_once "../components/cards/formatCard.php";
+require_once "../components/studioSideMenu/studioSideMenuComponent.php";
 
 use function Src\Views\Components\header\HeaderComponent;
 use function src\views\components\header\isActive;
@@ -149,6 +149,7 @@ $videos = [
     <div class="flex">
         <div class="max-xl:hidden mr-4">
             <?php  
+                echo SidebarComponent();
                 echo StudioSideMenuComponent();
             ?>
         </div>
@@ -178,8 +179,7 @@ $videos = [
                     <p class="text-[13px] flex items-center text-gray-200">Mais antigos</p>
                 </div>
             </div>
-            <div class="colocaraqui mt-10 flex flex-col gap-4 max-w-[1440px]">
-                <div class="flex flex-wrap gap-10">
+            <div class="colocaraqui mt-10 flex flex-wrap max-w-[1440px]">
                     <?php
                         foreach($videos as $video){
                             
@@ -187,7 +187,6 @@ $videos = [
                             
                         }
                     ?>
-                </div>
             </div>
         </div>
     </div>
