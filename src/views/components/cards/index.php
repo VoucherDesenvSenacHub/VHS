@@ -8,7 +8,7 @@
 
         require_once __DIR__ . '/index.php';
         use function Src\Views\Components\Cards\renderCards;
-        renderCards($cards, 'event');
+        renderCards($cards, 'video');
     */
 
     namespace Src\Views\Components\Cards;
