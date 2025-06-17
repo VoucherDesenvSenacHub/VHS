@@ -140,8 +140,6 @@ $videos = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Syne:wght@400..800&display=swap" rel="stylesheet">
 </head>
-<!-- ...cabeçalho e PHP acima permanecem iguais... -->
-
 <body class="bg-gradient-to-b from-[#20002c] via-black to-[#20002c] bg-no-repeat bg-cover bg-center font-[Poppins]">
     <div class="flex flex-col min-h-screen justify-between"> 
         <header>
@@ -149,12 +147,12 @@ $videos = [
         </header>
         
         <div class="flex flex-col md:flex-row w-full">
-            <!-- Sidebar (oculta em mobile e aparece em md+) -->
+            <!-- Sidebar -->
             <div class="hidden md:block">
                 <?= SidebarComponent(); ?>
             </div>
 
-            <main class="flex flex-col flex-grow px-4 sm:px-8 md:px-12 -mt-12">
+            <main class="flex flex-col flex-grow px-4 sm:px-8 md:px-12 -mt-8">
                 <!-- Banner principal -->
                 <div id="Content" class="mt-6 sm:mt-12 w-full">
                     <div class="relative rounded-2xl overflow-hidden">
@@ -163,10 +161,10 @@ $videos = [
                     <div class="flex flex-col lg:flex-row">
                         
                         <!-- Imagem de perfil sobreposta -->
-                        <div class="w-24 h-24 sm:w-36 sm:h-36 rounded-2xl border-1 border-white/20 overflow-hidden -mt-12 sm:-mt-20 ml-4 sm:ml-6 z-10 relative">
-                            <img src="../../public/logos/BillGates.webp" class="w-full h-full object-cover" alt="Perfil">
+                        <div class="w-24 h-24 sm:w-36 sm:h-36 rounded-2xl border-1 border-white/20 overflow-hidden -mt-20 md:-mt-16 ml-4 sm:ml-6 z-10 relative">
+                            <img src="../../public/logos/BillGates.webp" class="h-full object-cover" alt="Perfil">
                         </div>
-                        <div class="flex flex-col md:flex-row justify-between items-start sm:items-center mt-4 sm:mt-6 ml-4 sm:ml-6 gap-4 md:w-full">
+                        <div class="flex flex-col md:flex-row justify-between items-start sm:items-center mt-4 sm:mt-6 ml-4 sm:ml-6 gap-4 2xl:w-full">
                             <div>
                                 <h1 class="text-white font-bold text-2xl"><?= $dados[0]['texto'] ; ?></h1>
                                 <p class="text-gray-300">
@@ -181,7 +179,7 @@ $videos = [
                     </div>
                 </div>
                 <!-- Bio e Links -->
-                <div class="flex flex-col md:flex-row justify-between mt-6 gap-6">
+                <div class="flex flex-col lg:flex-row justify-between mt-6 gap-6">
                     <div class="md:w-2/3">
                         <p class="text-gray-300 text-sm sm:text-base">
                             <?= $dados[0]['Descrição']?>
