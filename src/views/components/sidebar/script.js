@@ -50,14 +50,12 @@ document.addEventListener("DOMContentLoaded", function () {
         [encodeURIComponent("Estética.php")]: "estetica-icon"
     };
 
-    // Restaurar o estado salvo no localStorage
     const lastPage = localStorage.getItem("lastSelectedPage");
     let selectedIconDiv = null;
     if (lastPage && barraLateral.hasOwnProperty(lastPage)) {
         selectedIconDiv = document.querySelector(`.${barraLateral[lastPage]}`);
     }
 
-    // Inicializar com base no location.pathname ou último estado salvo
     for (const barra in barraLateral) {
         const decodedBarra = decodeURIComponent(barra);
         if (location.pathname.includes(decodedBarra) || (selectedIconDiv && barra === lastPage)) {
@@ -69,15 +67,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 const text = iconDiv.parentElement.querySelector("h2");
                 if (img) img.style.filter = "brightness(0) invert(1)";
                 if (text) text.style.color = "white";
-                break; // Garante que apenas um item seja destacado
+                break;
             }
         }
     }
 
-    // Lógica de clique com salvamento do estado
     items.forEach(item => {
         item.addEventListener("click", function () {
-            // Remover estilização de todos os itens
             items.forEach(i => {
                 const iconDiv = i.querySelector(".icon");
                 const icon = i.querySelector(".icon img");
@@ -91,13 +87,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (text) text.style.color = "";
             });
 
-            // Adicionar estilização ao item clicado
             const iconDiv = this.querySelector(".icon");
             const icon = this.querySelector(".icon img");
             const text = this.querySelector("h2");
             let pageName = null;
 
-            // Determinar o nome da página com base no texto ou na estrutura
             const menuText = this.querySelector(".menu-text")?.textContent;
             for (const barra in barraLateral) {
                 if (this.querySelector(`.${barraLateral[barra]}`)) {
@@ -118,7 +112,6 @@ document.addEventListener("DOMContentLoaded", function () {
             if (icon) icon.style.filter = "brightness(0) invert(1)";
             if (text) text.style.color = "white";
 
-            // Salvar o estado no localStorage
             if (pageName) {
                 localStorage.setItem("lastSelectedPage", pageName);
             }

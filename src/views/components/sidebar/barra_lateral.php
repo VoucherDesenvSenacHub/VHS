@@ -4,7 +4,7 @@ namespace src\views\components\sidebar;
 
 function SidebarComponent(){
         return '  
-            <aside class="w-[9.25rem] ml-[1.87rem] h-screen transition-all duration-500 ease-in-out backdrop-blur-sm" id="sidebar">
+            <aside class="w-[9.25rem] ml-[1.87rem] h-full top-20 sticky transition-all duration-500 ease-in-out backdrop-blur-sm" id="sidebar">
                 <h2 class=" pt-[1.18rem] ml-[0.31rem] text-gray-400 text-xs font-poppins">HOME</h2>
                 <ul>
                     <li class="menu-item flex items-center text-gray-300 rounded-lg cursor-pointer mt-[1.5rem] transition-transform duration-200">

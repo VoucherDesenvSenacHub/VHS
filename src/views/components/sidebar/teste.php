@@ -4,6 +4,7 @@ use function Src\Views\Components\header\HeaderComponent;
 
 require __DIR__ . "/barra_lateral.php";
 use function Src\Views\Components\sidebar\SidebarComponent;
+
 ?>
 
 <!DOCTYPE html>
