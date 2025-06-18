@@ -1,13 +1,12 @@
 <?php
 
-namespace src\views\components\header;
+    namespace Src\Views\Components\Header;
 
-require_once __DIR__ . '/../utils/barComponent.php';
-
-use function src\views\components\utils\BarComponent;
-
-function HeaderComponent(){
-  $bar = BarComponent();
+    require_once __DIR__ . '/../utils/barComponent.php';
+    use function src\views\components\utils\BarComponent;
+    
+    function HeaderComponent(){
+        $bar = BarComponent();
 
   return "
       <header id='header' class='flex items-center justify-between p-5  sticky top-1'>  

@@ -1,11 +1,11 @@
-<?php 
+<?php
 
-namespace src\views\components\sidebar;
+    namespace Src\Views\Components\Sidebar;
 
-function SidebarComponent(){
+    function SidebarComponent() {
         return '  
-            <aside class="w-[9.25rem] ml-[1.87rem] h-screen transition-all duration-500 ease-in-out bg-gray-950/50 backdrop-blur-sm" id="sidebar">
-                <h2 class="  ml-[0.31rem] text-gray-400 text-xs font-poppins">HOME</h2>
+            <aside class="w-[9.25rem] ml-[1.87rem] h-screen transition-all duration-500 ease-in-out backdrop-blur-sm" id="sidebar">
+                <h2 class="pt-[1.18rem] ml-[0.31rem] text-gray-400 text-xs font-poppins">HOME</h2>
                 <ul>
                     <li class="menu-item flex items-center text-gray-300 rounded-lg cursor-pointer mt-[1.5rem] transition-transform duration-200">
                         <a href="/VHS/utils/Inicio.php" class="flex items-center w-full p-2">
@@ -90,3 +90,4 @@ function SidebarComponent(){
             <script src="script.js"></script>
         ';
     }
+?>
