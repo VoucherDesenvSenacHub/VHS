@@ -10,29 +10,33 @@ document.addEventListener("DOMContentLoaded", (e) => {
         header.classList.toggle('header') ;  
     });
 
-    buttonUserMenu.addEventListener("click", (e) => {
-        e.stopPropagation();
-        userMenu.classList.remove("hidden");
-        void userMenu.offsetWidth;
-        
-        userMenu.classList.remove("opacity-0");
-        userMenu.classList.add("opacity-100");
-        userMenu.classList.remove("scale-95");
-        userMenu.classList.add("scale-100");
-    });
+    if (userMenu.classList.contains("w-full")) {
 
-    document.addEventListener("click", (e) => {
-        if (!userMenu.contains(e.target) && !buttonUserMenu.contains(e.target)) {
-            userMenu.classList.remove("opacity-100");
-            userMenu.classList.add("opacity-0");
-            userMenu.classList.remove("scale-100");
-            userMenu.classList.add("scale-95");
+        buttonUserMenu.addEventListener("click", (e) => {
+            e.stopPropagation();
+            userMenu.classList.remove("hidden");
+            void userMenu.offsetWidth;
+            
+            userMenu.classList.remove("translate-y-full");
+            userMenu.classList.add("translate-y-0");
+            userMenu.classList.remove("opacity-0");
+            userMenu.classList.add("opacity-100");
+        });
 
-            setTimeout(() => {
-                userMenu.classList.add("hidden")
-            }, 200);
-        }
-    });
+        document.addEventListener("click", (e) => {
+            if (!userMenu.contains(e.target) && !buttonUserMenu.contains(e.target)) {
+                userMenu.classList.remove("opacity-100");
+                userMenu.classList.add("opacity-0");
+                
+                userMenu.classList.remove("translate-y-0");
+                userMenu.classList.add("translate-y-full");
+
+                setTimeout(() => {
+                    userMenu.classList.add("hidden")
+                }, 200);
+            }
+        });
+    }
     
     document.getElementById('button-myaccount').addEventListener('click', () => {
         window.location.href = '#';
