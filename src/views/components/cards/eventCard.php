@@ -1,6 +1,6 @@
 <?php
-
-    require_once './formatCard.php';
+    namespace Src\Views\Components\Cards;
+    require_once 'formatCard.php';
 
     function createEventCard($video) {
 
@@ -19,7 +19,7 @@
                 
                 <!-- Capa do vídeo -->
 
-                <div class='relative w-full h-[50%]'>
+                <div class='relative w-full'>
                     <img src='$thumbnail_url' class='w-full h-full object-cover'>
 
                     <div class='absolute top-3 right-3 bg-black bg-opacity-70 text-white text-xs px-4 py-1 rounded-md'>
@@ -29,7 +29,7 @@
 
                 <!-- Informações do vídeo -->
 
-                <div class='p-3 text-white flex flex-col justify-between h-[50%]'>
+                <div class='p-3 text-white flex flex-col justify-between'>
                 <p class='text-gray-400 text-base'>$create_at_title | $description</p>
                 <p class='text-gray-400 text-base'>$type_card</p>
 

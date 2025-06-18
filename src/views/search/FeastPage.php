@@ -1,8 +1,9 @@
 <?php
 require "../components/utils/Title_and_buttons.php";
 require "../components/header/headerComponent.php";
+require "../components/sidebar/barra_lateral.php";
 
-
+use function src\views\components\sidebar\SidebarComponent;
 use function src\views\components\header\HeaderComponent;
 use function src\views\components\utils\Title_and_buttons;
 
@@ -28,17 +29,23 @@ $botoes = [
     <div>
         <?=HeaderComponent() ?>
     </div>
-    <div class="flex flex-col md:flex-row min-h-screen mt-10 ml-20">
-    <?= Title_and_buttons("Feast","loren",$botoes)?>
-        <div class="flex-1 p-4 sm:p-6 md:pt-16">
-            <div class="mt-6">
-                <div class="flex items-center justify-between py-4 border-b border-gray-700/50">
-                    <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <!--conteudo aqui !!! -->
+    <div class="flex flex-col md:flex-row w-full">
+
+        <div class="hidden md:block">
+            <?= SidebarComponent() ?>
+        </div>
+        <main class="-mt-14">
+
+
+            <div class="ml-8 px-4 sm:px-6 py-8 !mx-auto max-w-[95rem]">
+                <?= Title_and_buttons("Eventos", "loren", $botoes) ?>
+                <div class="flex flex-wrap gap-12">
+                    <div class="space-y-6">
+
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
     </div>
 </body>
 </html>
