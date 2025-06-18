@@ -15,13 +15,15 @@ function StarRatingComponent(array $config = [])
     $config = array_merge($defaults, $config);
     ob_start();
     ?>
-    <div class="star-rating inline-flex gap-1.5 justify-end w-full" id="<?php echo htmlspecialchars($config['id']); ?>" role="radiogroup"
-        aria-label="Classificação por estrelas">
+    <div class="star-rating inline-flex gap-1.5 justify-end w-full" id="<?php echo htmlspecialchars($config['id']); ?>"
+        role="radiogroup" aria-label="Classificação por estrelas">
         <?php for ($i = 1; $i <= $config['num_stars']; $i++):
             $is_active = $i <= $config['initial_rating'] ? 'active' : ''; ?>
-            <span class="star cursor-pointer transition-transform duration-200 <?php echo $is_active; ?>" data-rating="<?php echo $i; ?>" role="radio"
-                aria-checked="<?php echo $is_active ? 'true' : 'false'; ?>" tabindex="0">
-                <svg xmlns="http://www.w3.org/2000/svg" class="star-svg w-<?php echo $config['star_size']/4; ?> h-<?php echo $config['star_size']/4; ?> stroke-<?php echo $config['color_default']; ?> <?php echo $is_active ? 'fill-' . $config['color_active'] . ' stroke-' . $config['color_active'] : 'fill-none'; ?> hover:stroke-<?php echo $config['color_active']; ?> hover:fill-<?php echo $config['color_active']; ?> focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-<?php echo $config['color_active']; ?> hover:scale-110"
+            <span class="star cursor-pointer transition-transform duration-200 <?php echo $is_active; ?>"
+                data-rating="<?php echo $i; ?>" role="radio" aria-checked="<?php echo $is_active ? 'true' : 'false'; ?>"
+                tabindex="0">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    class="star-svg w-<?php echo $config['star_size'] / 4; ?> h-<?php echo $config['star_size'] / 4; ?> stroke-<?php echo $config['color_default']; ?> <?php echo $is_active ? 'fill-' . $config['color_active'] . ' stroke-' . $config['color_active'] : 'fill-none'; ?> hover:stroke-<?php echo $config['color_active']; ?> hover:fill-<?php echo $config['color_active']; ?> focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-<?php echo $config['color_active']; ?> hover:scale-110"
                     viewBox="0 0 24 24">
                     <polygon
                         points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
@@ -90,4 +92,30 @@ function StarRatingComponent(array $config = [])
     <?php
     return ob_get_clean();
 }
+/*
+METODO DE USAR 
+
+require '../components/starrating/StarRatingComponent.php';
+
+// Função de callback (opcional)
+function meuCallback($rating) {
+    echo "console.log('Avaliação selecionada: ' + $rating);";
+}
+
+NA DIV Q FOR CHAMADO 
+
+<?php
+            // Renderiza o componente de estrelas
+            echo \src\views\components\starrating\StarRatingComponent([
+                'num_stars' => 5,
+                'initial_rating' => 3,
+                'star_size' => 24,
+                'color_default' => 'gray-400',
+                'color_active' => 'purple-600',
+                'on_click_callback' => 'meuCallback'
+            ]);
+            ?>
+
+*/
+
 ?>
