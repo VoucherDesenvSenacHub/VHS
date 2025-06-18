@@ -5,8 +5,8 @@
 
 function CardFast(){
     return'
-        <div class="w-64 h-[29rem] relative flex items-center justify-center current_fast">
-        <img src="/VHS/public/images/imgCardtst.jpg" class="object-cover h-full absolute" ></img>
+        <div class="w-64 h-[30rem] relative flex items-center justify-center current_fast ">
+        <img src="/VHS/public/images/imgCardtst.jpg" class="object-cover h-full absolute rounded-2xl" ></img>
         
         <div class="block w-full bottom-12 absolute">
 

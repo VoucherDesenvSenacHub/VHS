@@ -4,7 +4,10 @@ use function Src\Views\Components\Utils\InputComponent;
 
 use function Src\Views\Components\header\HeaderComponent;
 
-use function src\views\components\header\StudioSideMenuComponent;
+use function src\views\components\studioSideMenu\StudioSideMenuComponent;
+
+use function src\Views\Components\Utils\ButtonComponent;
+use function src\Views\Components\Utils\Footer;
 
 
 require "../components/utils/inputComponent.php";
@@ -14,6 +17,9 @@ require "../components/header/HeaderComponent.php";
 require "../components/studioSideMenu/studioSideMenuComponent.php";
 
 require "../components/CardFastComponent/cardFast.php";
+
+require "../components/utils/buttonComponent.php";
+require "../components/utils/footer.php";
  
  
 
@@ -35,31 +41,39 @@ require "../components/CardFastComponent/cardFast.php";
 <?= HeaderComponent() ?>
 
    
-    <div class="flex ">
-            <div class="max-xl:hidden">
+    <div class="flex">
 
-            <?= StudioSideMenuComponent() ?>
+        <div class="max-xl:hidden">
 
-                </div>
-                <div class="p-7 w-full">
+                <?= StudioSideMenuComponent() ?>
 
-                    <div>
-                        <p class="text-title font-pop font-semibold title-size text-white">Conteúdo do canal</p>
-                        <p class="text-subtitile font-semibold title-size text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
-                    </div>
+        </div>
 
-                    <div class="flex h-5 mt-5 gap-5">
-                        <p class="rounded-full w-30 p-3 bg-gray600 flex justify-center items-center text-white w-24">Usuários</p>
-                        <p class="rounded-full w-30 p-3 bg-gray600 flex justify-center items-center text-white w-24">Denúncias</p>
-                    </div>
+            <div class="p-7">
 
-                    <div class="flex items-center m-8">
-
-                        <div class="flex justify-center items-center m-3">
-                            <img src="/VHS/public/icons/Filter.svg" alt="Filter">
+                    <div class="ml-14">
+                        <div>
+                            <p class="text-title font-pop font-semibold title-size text-white">Conteúdo do canal</p>
+                            <p class="text-subtitile font-semibold title-size text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
                         </div>
 
-                        <div class="w-full">
+                        <div class="flex h-5 mt-5 gap-5">
+
+                            <?=ButtonComponent("Videos", "studio", "", "108px", "30px"); ?>
+
+                            <?=ButtonComponent("Fast", "studio", "", "108px", "30px"); ?>
+
+                            <?=ButtonComponent("Eventos", "studio", "", "108px", "30px"); ?>
+
+                            
+                        </div>
+                    </div>
+
+                    <div class="flex items-center m-7">
+
+                            <img class="mt-3"  src="/VHS/public/icons/Filter.svg" alt="Filter">
+                            
+                        <div class="w-full ml-3">
 
                             <?= InputComponent(placeholder: "Pesquisar", type: "text")?>
                             
@@ -67,7 +81,7 @@ require "../components/CardFastComponent/cardFast.php";
 
                     </div>
 
-                    <div class="flex flex-wrap justify-evenly gap-14">
+                <div class="flex flex-wrap  gap-14  justify-center">
 
                         
                     <?= CardFast() ?>
@@ -86,15 +100,22 @@ require "../components/CardFastComponent/cardFast.php";
 
                     <?= CardFast() ?>
 
-                    <?= CardFast() ?>
 
 
 
-                    </div>
+
+                </div>
 
                 
             </div>
-        </div>
+    </div>
+
+    <div class="mt-60">
+
+        <?= Footer()?>
+
+    </div>
+
 </body>
 </html>
  
