@@ -89,7 +89,7 @@ $conteudos = []
             <?= InputComponent(type: "text", placeholder: "Estudante de Nível Técnico de tecnologia, Entusiasta em foguetes") ?>
         </div>
         
-        <div class="flex justify-center items-end gap-10 mb-4">
+        <div class="flex justify-center items-end gap-10 my-6">
             <?= ButtonComponent(text: "Cancelar", variant: "outline", id: "cancel-button", width:"480px") ?>
             <?= ButtonComponent(text: "Salvar Alterações", variant: "default", id: "publish-button", width:"480px") ?>
         </div>
