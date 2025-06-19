@@ -21,15 +21,13 @@ document.addEventListener("DOMContentLoaded", (e) => {
     });
 
     document.addEventListener("click", (e) => {
-        if (menuOpen && !userMenu.contains(e.target)) {
+        if (!userMenu.contains(e.target)) {
             userMenu.classList.remove("opacity-100", "translate-y-0", "scale-100");
             userMenu.classList.add("opacity-0", "translate-y-full", "scale-95");
             
             setTimeout(() => {
                 userMenu.classList.add("hidden");
             }, 300);
-
-            menuOpen = false;
         }
     });
 
