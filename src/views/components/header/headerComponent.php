@@ -13,7 +13,7 @@
         echo UserMenu();
 
         return "
-            <header id='header' class='flex items-center justify-between p-5 sticky top-1'>  
+            <header id='header' class='flex items-center justify-between p-5 sticky top-0'>  
                 <div class='flex items-center gap-4'>
                     $BarComponent
                     <img src='/VHS/public/logos/Logo.svg' alt='Logo' class='h-8'>
@@ -28,7 +28,7 @@
                         <img src='/VHS/public/icons/Rectangle.svg' alt=''>
                     </div>
                     
-                    <img id='open-user-menu' src='/VHS/public/images/Avatar.svg' class='cursor-pointer h-8 w-8 rounded-full'>
+                    <img id='open-user-menu' src='/VHS/public/images/avatar.svg' class='cursor-pointer h-8 w-8 rounded-full'>
                 </div>
             </header>
 
