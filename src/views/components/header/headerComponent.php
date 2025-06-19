@@ -2,10 +2,10 @@
 
     namespace Src\Views\Components\Header;
 
-    require_once __DIR__ . '/../utils/barComponent.php';
+    require_once __DIR__ . '/VHS/src/views/components/utils/barComponent.php';
     use function Src\Views\Components\Utils\BarComponent;
 
-    require_once __DIR__ . '/../utils/userMenu.php';
+    require_once __DIR__ . '/VHS/src/views/components/utils/userMenu.php';
     use function Src\Views\Components\Utils\UserMenu;
 
     function HeaderComponent() {
