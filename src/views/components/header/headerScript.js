@@ -1,43 +1,38 @@
 document.addEventListener("DOMContentLoaded", (e) => {
 
-    const search = document.getElementById("search");
-    const header = document.getElementById("header");
+    const body = document.body;
     const buttonUserMenu = document.getElementById("open-user-menu");
     const userMenu = document.getElementById("user-menu");
-    const body = document.body;
-
+    
+    const search = document.getElementById("search");
+    const header = document.getElementById("header");
+    
     search.addEventListener('click', () => {
         header.classList.toggle('header') ;  
     });
 
-    if (userMenu.classList.contains("w-full")) {
+    buttonUserMenu.addEventListener("click", (e) => {
+        e.stopPropagation();
+        userMenu.classList.remove("hidden");
+        void userMenu.offsetWidth;
+        
+        userMenu.classList.remove("translate-y-full", "opacity-0", "scale-95");
+        userMenu.classList.add("translate-y-0", "opacity-100", "scale-100");
+    });
 
-        buttonUserMenu.addEventListener("click", (e) => {
-            e.stopPropagation();
-            userMenu.classList.remove("hidden");
-            void userMenu.offsetWidth;
+    document.addEventListener("click", (e) => {
+        if (menuOpen && !userMenu.contains(e.target)) {
+            userMenu.classList.remove("opacity-100", "translate-y-0", "scale-100");
+            userMenu.classList.add("opacity-0", "translate-y-full", "scale-95");
             
-            userMenu.classList.remove("translate-y-full");
-            userMenu.classList.add("translate-y-0");
-            userMenu.classList.remove("opacity-0");
-            userMenu.classList.add("opacity-100");
-        });
+            setTimeout(() => {
+                userMenu.classList.add("hidden");
+            }, 300);
 
-        document.addEventListener("click", (e) => {
-            if (!userMenu.contains(e.target) && !buttonUserMenu.contains(e.target)) {
-                userMenu.classList.remove("opacity-100");
-                userMenu.classList.add("opacity-0");
-                
-                userMenu.classList.remove("translate-y-0");
-                userMenu.classList.add("translate-y-full");
+            menuOpen = false;
+        }
+    });
 
-                setTimeout(() => {
-                    userMenu.classList.add("hidden")
-                }, 200);
-            }
-        });
-    }
-    
     document.getElementById('button-myaccount').addEventListener('click', () => {
         window.location.href = '#';
     });
