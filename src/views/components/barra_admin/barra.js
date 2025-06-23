@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
         adminTitle.style.opacity = "0";
 
         adminTitle.style.transform = "translateX(-20px)";
-
+-+
     }
  
     for (let i = 0; i < menutext.length; i++) {

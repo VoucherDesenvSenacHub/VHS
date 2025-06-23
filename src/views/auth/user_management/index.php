@@ -1,15 +1,14 @@
 <?php
-
 require "../../components/utils/inputComponent.php";
 require "../../components/gridUsuarios/gridUsuariosComponent.php";
 require "../../components/header/HeaderComponent.php";
 require "../../components/barra_admin/barra_admin.php";
  
-
+ 
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\GridUsuarios\GridUsuariosComponent;
 use function Src\Views\Components\header\HeaderComponent;
-use function src\views\components\header\Barra_Admin;
+use function src\views\components\barra_admin\Barra_admin;
  
 ?>
  
@@ -23,16 +22,16 @@ use function src\views\components\header\Barra_Admin;
     <script src="../../../styles/tailwindglobal.js"></script>
 </head>
 <body class="h- w-full bg-background">
-    <?php
-    HeaderComponent();
-   
-    ?>
+
+
+    <?= HeaderComponent() ?>
+
+
     <div class="flex">
-        <div >
-        <?php
-        Barra_Admin();
-       
-        ?>
+        <div class="max-xl:hidden">
+
+
+
         </div>
         <div class="p-7 w-full">
             <div>
@@ -57,3 +56,4 @@ use function src\views\components\header\Barra_Admin;
     </div>
 </body>
 </html>
+ 
