@@ -5,9 +5,6 @@ require_once "../components/cards/index.php";
 require_once "../components/studioSideMenu/studioSideMenuComponent.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/buttonComponent.php";
 
-
-
-
 use function src\views\components\Utils\ButtonComponent;
 use function Src\Views\Components\Cards\renderCards;
 use function Src\Views\Components\header\HeaderComponent;
@@ -130,28 +127,29 @@ $videos = [
         "account_type" => "verified",
         "views" => 500000,
         "created_at" => "2023-11-05 17:30:00"
-        ]
-    ];
-    
-    
-    ?>
+    ]
+];
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>user management</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script src="../../styles/tailwindglobal.js"></script>
-    </head>
-    <body class="w-full bg-[#0C0118]">
-        <?php echo HeaderComponent();?>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>user management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../../styles/tailwindglobal.js"></script>
+</head>
+
+<body class="w-full bg-[#0C0118]">
+    <?php echo HeaderComponent(); ?>
     <div class="flex">
         <div class="max-xl:hidden mr-4">
-            <?php  
-                echo StudioSideMenuComponent();
-                ?>
+            <?php
+            echo StudioSideMenuComponent();
+            ?>
         </div>
         <div class="p-7 ml-5 max-w-[1440px] w-full">
             <div>
@@ -159,11 +157,11 @@ $videos = [
                 <p class="text-subtitile font-semibold title-size text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
             </div>
             <div class="flex h-5 mt-5 gap-5">
-            <?php 
-                echo ButtonComponent("Videos", "studio", "", "170px", "40px"); 
+                <?php
+                echo ButtonComponent("Videos", "studio", "", "170px", "40px");
                 echo ButtonComponent("Fast", "studio", "", "170px", "40px");
-                echo ButtonComponent("Eventos", "studio", "", "170px", "40px"); 
-            ?>
+                echo ButtonComponent("Eventos", "studio", "", "170px", "40px");
+                ?>
             </div>
             <div class="mt-10 flex items-center gap-4 h-16 cavalo">
                 <button id="btn_filter" onclick="filter(event)">
@@ -183,13 +181,14 @@ $videos = [
             </div>
             <div class="colocaraqui mt-10 flex w-full gap-3 sm:gap-[2.15rem] flex-wrap  justify-start ">
                 <?php
-                        foreach($videos as $video){
-                            echo renderCards($cards , 'channel');
-                        }
-                        ?>
+                foreach ($videos as $video) {
+                    echo renderCards($cards, 'channel');
+                }
+                ?>
             </div>
         </div>
     </div>
 
 </body>
+
 </html>
