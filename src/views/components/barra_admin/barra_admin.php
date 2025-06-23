@@ -1,5 +1,5 @@
 <?php
-namespace src\views\components\header;
+namespace src\views\components\barra_admin;
 
 function Barra_Admin(){
         return '  
