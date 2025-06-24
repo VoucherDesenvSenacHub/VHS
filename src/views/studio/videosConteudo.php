@@ -37,6 +37,58 @@ $videos = [
         "likes" => "4.5",
         "views" => "540K"
     ],
+    [
+        "type_card" => "channel",
+        "title" => "Como montar cavalos brancos ",
+        "duration" => "7 min",
+        "username" => "CAVALO bRANCO",
+        "thumbnail_url" => "https://img.elo7.com.br/product/main/20706C1/painel-cavalo-branco-frete-gratis-cavalo-branco.jpg",
+        "avatar_url" => "https://senachub.ms.senac.br/hubinnovation/uploads/fotos/6706850e20f59.jpg",
+        "created_at" => "há 1 ano",
+        "url" => "#",
+        "comments" => "12",
+        "likes" => "4.5",
+        "views" => "540K"
+    ],
+    [
+        "type_card" => "channel",
+        "title" => "Como montar cavalos brancos ",
+        "duration" => "7 min",
+        "username" => "CAVALO bRANCO",
+        "thumbnail_url" => "https://img.elo7.com.br/product/main/20706C1/painel-cavalo-branco-frete-gratis-cavalo-branco.jpg",
+        "avatar_url" => "https://senachub.ms.senac.br/hubinnovation/uploads/fotos/6706850e20f59.jpg",
+        "created_at" => "há 1 ano",
+        "url" => "#",
+        "comments" => "12",
+        "likes" => "4.5",
+        "views" => "540K"
+    ],
+    [
+        "type_card" => "channel",
+        "title" => "Como montar cavalos brancos ",
+        "duration" => "7 min",
+        "username" => "CAVALO bRANCO",
+        "thumbnail_url" => "https://img.elo7.com.br/product/main/20706C1/painel-cavalo-branco-frete-gratis-cavalo-branco.jpg",
+        "avatar_url" => "https://senachub.ms.senac.br/hubinnovation/uploads/fotos/6706850e20f59.jpg",
+        "created_at" => "há 1 ano",
+        "url" => "#",
+        "comments" => "12",
+        "likes" => "4.5",
+        "views" => "540K"
+    ],
+    [
+        "type_card" => "channel",
+        "title" => "Como montar cavalos brancos ",
+        "duration" => "7 min",
+        "username" => "CAVALO bRANCO",
+        "thumbnail_url" => "https://img.elo7.com.br/product/main/20706C1/painel-cavalo-branco-frete-gratis-cavalo-branco.jpg",
+        "avatar_url" => "https://senachub.ms.senac.br/hubinnovation/uploads/fotos/6706850e20f59.jpg",
+        "created_at" => "há 1 ano",
+        "url" => "#",
+        "comments" => "12",
+        "likes" => "4.5",
+        "views" => "540K"
+    ],
 ];
 
 ?>
@@ -60,7 +112,7 @@ $videos = [
             echo StudioSideMenuComponent();
             ?>
         </div>
-        <div class="p-7 ml-5 max-w-[1440px] w-full">
+        <div class=" max-w-[1440px] mx-auto w-full">
             <div>
                 <p class="font-pop font-semibold text-title text-white">Gerenciamento de usuários</p>
                 <p class="text-subtitile font-semibold title-size text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
@@ -88,7 +140,7 @@ $videos = [
                     <p class="text-[13px] flex items-center text-gray-200">Mais antigos</p>
                 </div>
             </div>
-            <div class="colocaraqui mt-10 flex w-full gap-3 sm:gap-[2.15rem] flex-wrap  justify-start ">
+            <div class="colocaraqui mt-10 flex w-full gap-3 sm:gap-[3.33rem] flex-wrap  justify-start ">
                 <?php
                     echo renderCards($videos, 'channel');
                 ?>
