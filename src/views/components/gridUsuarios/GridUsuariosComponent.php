@@ -4,14 +4,14 @@ namespace src\views\components\gridUsuarios;
 function GridUsuariosComponent($usuarios = []) {
     if (empty($usuarios)) {
         $usuarios = [
-            ['id' => 1, 'username' => '@rafael_', 'description' => '4506022 - Ofba - 4678 - 9793 - 93ab0fe', 'profession' => 'Criador de conteúdo'],
-            ['id' => 2, 'username' => '@rafael_', 'description' => '4506022 - Ofba - 4678 - 9793 - 93ab0fe', 'profession' => 'Criador de conteúdo'],
-            ['id' => 3, 'username' => '@rafael_', 'description' => '4506022 - Ofba - 4678 - 9793 - 93ab0fe', 'profession' => 'Criador de conteúdo'],
-            ['id' => 4, 'username' => '@rafael_', 'description' => '4506022 - Ofba - 4678 - 9793 - 93ab0fe', 'profession' => 'Criador de conteúdo'],
-            ['id' => 5, 'username' => '@rafael_', 'description' => '4506022 - Ofba - 4678 - 9793 - 93ab0fe', 'profession' => 'Criador de conteúdo'],
-            ['id' => 6, 'username' => '@rafael_', 'description' => '4506022 - Ofba - 4678 - 9793 - 93ab0fe', 'profession' => 'Criador de conteúdo'],
-            ['id' => 7, 'username' => '@rafael_', 'description' => '4506022 - Ofba - 4678 - 9793 - 93ab0fe', 'profession' => 'Criador de conteúdo'],
-            ['id' => 8, 'username' => '@rafael_', 'description' => '4506022 - Ofba - 4678 - 9793 - 93ab0fe', 'profession' => 'Criador de conteúdo'],
+            ['id' => 1, 'username' => '@rafael_', 'description' => '4506022 - Ofba - 4678', 'profession' => 'Criador de conteúdo'],
+            ['id' => 2, 'username' => '@rafael_', 'description' => '4506022 - Ofba - 4678', 'profession' => 'Criador de conteúdo'],
+            ['id' => 3, 'username' => '@rafael_', 'description' => '4506022 - Ofba - 4678', 'profession' => 'Criador de conteúdo'],
+            ['id' => 4, 'username' => '@rafael_', 'description' => '4506022 - Ofba - 4678', 'profession' => 'Criador de conteúdo'],
+            ['id' => 5, 'username' => '@rafael_', 'description' => '4506022 - Ofba - 4678', 'profession' => 'Criador de conteúdo'],
+            ['id' => 6, 'username' => '@rafael_', 'description' => '4506022 - Ofba - 4678', 'profession' => 'Criador de conteúdo'],
+            ['id' => 7, 'username' => '@rafael_', 'description' => '4506022 - Ofba - 4678', 'profession' => 'Criador de conteúdo'],
+            ['id' => 8, 'username' => '@rafael_', 'description' => '4506022 - Ofba - 4678', 'profession' => 'Criador de conteúdo'],
         ];
     }
 

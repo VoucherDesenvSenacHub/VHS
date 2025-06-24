@@ -8,7 +8,7 @@ require "../../components/barra_admin/barra_admin.php";
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\GridUsuarios\GridUsuariosComponent;
 use function Src\Views\Components\header\HeaderComponent;
-use function src\views\components\barra_admin\Barra_admin;
+use function src\views\components\barra_admin\barra_admin;
  
 ?>
  
@@ -21,18 +21,20 @@ use function src\views\components\barra_admin\Barra_admin;
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../../../styles/tailwindglobal.js"></script>
 </head>
-<body class="h- w-full bg-background">
+<body class="w-full bg-background">
 
 
     <?= HeaderComponent() ?>
 
 
     <div class="flex">
-        <div class="max-xl:hidden">
 
-
+        <div >
+            
+            <?= barra_admin() ?>
 
         </div>
+        
         <div class="p-7 w-full">
             <div>
                 <p class="text-title font-pop font-semibold title-size text-white">Gerenciamento de usuários</p>
@@ -54,6 +56,7 @@ use function src\views\components\barra_admin\Barra_admin;
            
         </div>
     </div>
+    
 </body>
 </html>
  
