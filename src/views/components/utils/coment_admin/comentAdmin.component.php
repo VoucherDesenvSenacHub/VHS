@@ -47,7 +47,7 @@ function Comment(string $name, string $text, string $thumbnail_url, string $crea
 
                 
                 </div>
-                <div> <img class='h-20' src='$thumbnail_url' alt=''> </div>
+                <div> <img class='h-20 rounded-lg' src='$thumbnail_url' alt=''> </div>
         </div>
         "
     );

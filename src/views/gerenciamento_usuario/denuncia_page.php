@@ -4,9 +4,11 @@ require "../components/barra_admin/barra_admin.php";
 require "../components/utils/inputComponent.php";
 require "../components/utils/cardDenunciationComponent.php";
 require "../components/utils/coment_admin/comentAdmin.component.php";
+require_once "../components/utils/buttonComponent.php";
 
+use function Src\Views\Components\Utils\ButtonComponent;
 use function Src\Views\Components\header\HeaderComponent;
-use function src\views\components\header\Barra_Admin;
+use function src\views\components\barra_admin\Barra_Admin;
 use function Src\Views\Components\Utils\Comment;
 
 $commets_lista = [
@@ -48,19 +50,19 @@ $commets_lista = [
     </head>
     <body class="w-full bg-[#0C0118]">
     
-    <?php HeaderComponent();?>
+    <?php echo HeaderComponent();?>
     <div class="flex">
         <div class="max-xl:hidden mr-4">
-            <?php Barra_Admin(); ?>
+            <?php echo Barra_Admin(); ?>
         </div>
-        <div class="p-7 w-full">
+        <div class="max-w-[1500px] mx-auto w-full">
             <div>
                 <p class="font-pop font-semibold text-title text-white">Gerenciamento de usuários</p>
                 <p class="text-subtitile font-semibold title-size text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
             </div>
             <div class="flex h-5 mt-5 gap-5">
-                <a class="text-gray-500 bg-gray600 rounded-full w-28 h-8 flex items-center justify-center">Usuários</a>
-                <a class="text-white bg-gray600 rounded-full w-28 h-8 flex items-center justify-center">Denúncias</a>
+                <?php echo ButtonComponent("Usúarios", "studio", "", "170px", "40px"); ?>
+                <?php echo ButtonComponent("Eventos", "studio", "", "170px", "40px"); ?>
             </div>
             <div class="mt-10 flex items-center gap-4 h-16 cavalo">
                 <button id="btn_filter" onclick="filter(event)">
