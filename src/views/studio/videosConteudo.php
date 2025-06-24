@@ -1,0 +1,101 @@
+<?php
+require "../components/sidebar/barra_lateral.php";
+require "../components/header/headerComponent.php";
+require_once "../components/cards/index.php";
+require_once "../components/studioSideMenu/studioSideMenuComponent.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/buttonComponent.php";
+
+use function src\views\components\Utils\ButtonComponent;
+use function Src\Views\Components\Cards\renderCards;
+use function Src\Views\Components\header\HeaderComponent;
+use function src\views\components\studioSideMenu\StudioSideMenuComponent;
+
+$videos = [
+    [
+        "type_card" => "channel",
+        "title" => "Como aprender programação do zero e se tornar um excelente desenvolvedor full stack",
+        "duration" => "7 min",
+        "username" => "Rafael Germinari",
+        "thumbnail_url" => "https://marketplace.canva.com/EAEqfS4X0Xw/1/0/1600w/canva-most-attractive-youtube-thumbnail-wK95f3XNRaM.jpg",
+        "avatar_url" => "https://senachub.ms.senac.br/hubinnovation/uploads/fotos/6706850e20f59.jpg",
+        "created_at" => "há 1 ano",
+        "url" => "#",
+        "comments" => "12",
+        "likes" => "4.5",
+        "views" => "540K"
+    ],
+    [
+        "type_card" => "channel",
+        "title" => "Como montar cavalos brancos ",
+        "duration" => "7 min",
+        "username" => "CAVALO bRANCO",
+        "thumbnail_url" => "https://img.elo7.com.br/product/main/20706C1/painel-cavalo-branco-frete-gratis-cavalo-branco.jpg",
+        "avatar_url" => "https://senachub.ms.senac.br/hubinnovation/uploads/fotos/6706850e20f59.jpg",
+        "created_at" => "há 1 ano",
+        "url" => "#",
+        "comments" => "12",
+        "likes" => "4.5",
+        "views" => "540K"
+    ],
+];
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>user management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../../styles/tailwindglobal.js"></script>
+</head>
+
+<body class="w-full bg-[#0C0118]">
+    <?php echo HeaderComponent(); ?>
+    <div class="flex">
+        <div class="max-xl:hidden mr-4">
+            <?php
+            echo StudioSideMenuComponent();
+            ?>
+        </div>
+        <div class="p-7 ml-5 max-w-[1440px] w-full">
+            <div>
+                <p class="font-pop font-semibold text-title text-white">Gerenciamento de usuários</p>
+                <p class="text-subtitile font-semibold title-size text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
+            </div>
+            <div class="flex h-5 mt-5 gap-5">
+                <?php
+                echo ButtonComponent("Videos", "studio", "", "170px", "40px");
+                echo ButtonComponent("Fast", "studio", "", "170px", "40px");
+                echo ButtonComponent("Eventos", "studio", "", "170px", "40px");
+                ?>
+            </div>  
+            <div class="mt-10 flex items-center gap-4 h-16 cavalo">
+                <button id="btn_filter" onclick="filter(event)">
+                    <img class="size-7" src="/VHS/public/icons/filter-svgrepo-com.svg" alt="">
+                </button>
+                <input type="text" placeholder="Pesquisar" class="pl-2 rounded-lg bg-transparent text-white w-full h-12 border-[0.5px] border-gray-500">
+            </div>
+            <div id="filter" class="absolute left-[16.5rem] z-10 hidden flex flex-col bg-gray-900 rounded-lg p-2 max-w-32 border-[0.5px] border-gray-500">
+                <div class="flex">
+                    <img src="../../../public/icons/time-svgrepo-com.svg" alt="" class="size-6 rotate-[-110deg]">
+                    <p class="text-[13px] flex items-center text-gray-200">Mais recentes</p>
+                </div>
+                <div class="flex flex-row">
+                    <img src="../../../public/icons/time-svgrepo-com.svg" class="size-6" alt="">
+                    <p class="text-[13px] flex items-center text-gray-200">Mais antigos</p>
+                </div>
+            </div>
+            <div class="colocaraqui mt-10 flex w-full gap-3 sm:gap-[2.15rem] flex-wrap  justify-start ">
+                <?php
+                    echo renderCards($videos, 'channel');
+                ?>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
