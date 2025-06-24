@@ -9,7 +9,7 @@ tailwind.config = {
                 gray300: "#666",
                 gray600: "#1B1B1B"
             },
-
+            
             fontFamily: {
                 poppins: "'Poppins', sans-serif"
             },
