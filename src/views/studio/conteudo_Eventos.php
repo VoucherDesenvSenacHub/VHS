@@ -151,7 +151,7 @@ $videos = [
             echo StudioSideMenuComponent();
             ?>
         </div>
-        <div class="p-7 ml-5 max-w-[1440px] w-full">
+        <div class="mt-7  max-w-[1440px] mx-auto w-full">
             <div>
                 <p class="font-pop font-semibold text-title text-white">Gerenciamento de usuários</p>
                 <p class="text-subtitile font-semibold title-size text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
@@ -179,7 +179,7 @@ $videos = [
                     <p class="text-[13px] flex items-center text-gray-200">Mais antigos</p>
                 </div>
             </div>
-            <div class="colocaraqui mt-10 flex w-full gap-3 sm:gap-[2.15rem] flex-wrap  justify-start ">
+            <div class="colocaraqui mt-10 flex w-full gap-3 sm:gap-[3.3rem] flex-wrap  justify-start ">
                 <?php
                 foreach ($videos as $video) {
                     echo renderCards($cards, 'channel');
