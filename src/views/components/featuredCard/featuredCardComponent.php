@@ -14,12 +14,15 @@ namespace Views\Components\FeaturedCard;
  *               - 'avatar_url': string.
  *               - 'views': string.
  *               - 'created_at: int.
+ * @param isCategoryPage booleano opcional que indica se o card está sendo exibido em uma página de categoria.
  * 
  * @return string Retorna o HTML do card de vídeo.
  */
-function FeaturedCardComponent(array $video) {
+function FeaturedCardComponent(array $video, bool $isCategoryPage = false): string{
+    $height = $isCategoryPage ? 'h-[450px]' : 'h-[330px]';
+
     return <<<HTML
-        <div class="relative bg-gradient-to-r from-red-600/20 to-purple-600/20 rounded-3xl overflow-hidden shadow-lg cursor-pointer h-[300px] 2xl:h-[350px]">
+        <div class="relative bg-gradient-to-r from-red-600/20 to-purple-600/20 rounded-3xl overflow-hidden shadow-lg cursor-pointer $height">
             <img src="{$video['thumbnail_url']}" alt="{$video['title']}" class="absolute inset-0 w-full h-full object-cover">
             <div class="absolute inset-0 bg-black bg-opacity-50"></div>
             <div class="relative z-10 p-6 h-full flex flex-col justify-end">
