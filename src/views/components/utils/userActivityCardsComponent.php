@@ -28,7 +28,7 @@ function UserActivityCardsComponent(
                 <p class="text-sm text-gray-400">$label</p>
                 <p class="text-2xl font-bold">$formattedValue</p>
             </div>
-            <img src="../../public/images/trending.svg" alt="Seta para cima" class="w-3 h-3 mb-8 mr-1" />
+            <img src="/VHS/public/images/trending.svg" alt="Seta para cima" class="w-3 h-3 mb-8 mr-1" />
         </div>
     HTML;
 }
