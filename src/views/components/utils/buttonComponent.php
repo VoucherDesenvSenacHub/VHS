@@ -31,11 +31,12 @@
 
         return(
             "
+            <a href='$link'>
                 <button id='$id' class='$button_style'>
-                    $icon
-                    $text
-                    <a href='$link'></a>
+                $icon
+                $text
                 </button>
+            </a>
             "
         ); 
     }
