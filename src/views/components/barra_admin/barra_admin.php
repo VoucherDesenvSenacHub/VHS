@@ -3,8 +3,8 @@ namespace src\views\components\barra_admin;
 
 function Barra_Admin(){
         return '  
-            <aside class="sticky top-24 w-[9.25rem] ml-[1.87rem] h-screen transition-all duration-500 ease-in-out bg-gray-950/50 backdrop-blur-sm" id="sidebar">
-                <h2 id="categoria-title" class="menu-text pt-[1.18rem] ml-[0.31rem] text-gray-400 text-xs font-poppins">ADMINISTRAÇÃO</h2>
+            <aside class="sticky top-24 w-[9.25rem] ml-[1.87rem] transition-all duration-500 ease-in-out" id="sidebar">
+                <h2 class=" pt-[1.18rem] ml-[0.31rem] text-gray-400 text-xs font-poppins">ADMINISTRAÇÃO</h2>
                 <ul>
                     <li class="menu-item flex items-center text-gray-300 rounded-lg cursor-pointer mt-[1.5rem] transition-transform duration-200">
                         <a href="/VHS/utils/Inicio.php" class="flex items-center w-full p-2">
