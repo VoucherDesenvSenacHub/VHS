@@ -119,9 +119,9 @@ $videos = [
             </div>
             <div class="flex h-5 mt-5 gap-5">
                 <?php
-                echo ButtonComponent("Videos", "studio", "", "170px", "40px");
-                echo ButtonComponent("Fast", "studio", "", "170px", "40px");
-                echo ButtonComponent("Eventos", "studio", "", "170px", "40px");
+                echo ButtonComponent("Videos", "studio", "", "170px", "40px","",'');
+                echo ButtonComponent("Fast", "studio", "", "170px", "40px","","./fastConteudo.php");
+                echo ButtonComponent("Eventos", "studio", "", "170px", "40px","","./conteudo_Eventos.php");
                 ?>
             </div>  
             <div class="mt-10 flex items-center gap-4 h-16 cavalo">
@@ -140,7 +140,7 @@ $videos = [
                     <p class="text-[13px] flex items-center text-gray-200">Mais antigos</p>
                 </div>
             </div>
-            <div class="colocaraqui mt-10 flex w-full gap-3 sm:gap-[3.33rem] flex-wrap  justify-start ">
+            <div class="colocaraqui mt-10 flex w-full gap-3 sm:gap-[0.8rem] flex-wrap  justify-start ">
                 <?php
                     echo renderCards($videos, 'channel');
                 ?>
