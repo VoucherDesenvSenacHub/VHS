@@ -321,7 +321,7 @@ $styleVideos = [
             <?= SidebarComponent() ?>
         </div>
 
-        <main class="flex-1 px-4 sm:px-6 py-8 mx-auto">
+        <main class="flex-1 px-4 sm:px-6 py-4 mx-auto">
             <div class="max-w-[1500px] mx-auto">
                 
                 <section class="mb-12">

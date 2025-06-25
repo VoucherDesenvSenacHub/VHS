@@ -314,7 +314,7 @@ $styleVideos = [
             <?= SidebarComponent() ?>
         </div>
 
-        <main class="flex-1 px-4 sm:px-6 py-8 mx-auto">
+        <main class="flex-1 px-4 sm:px-6 py-4 mx-auto">
             <div class="max-w-[1500px] mx-auto">
                 <h2 class="text-2xl font-bold text-white mb-2"><span class="text-purple-400">#</span> <?= $categories[$category] ?></h2>
                 <p class="text-gray-400 text-sm mb-6">Confira os vídeos mais populares da nossa plataforma VHS da categoria <?= $categories[$category] ?></p>
