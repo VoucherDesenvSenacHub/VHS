@@ -126,7 +126,7 @@ $videos = [
             </div>  
             <div class="mt-10 flex items-center gap-4 h-16 cavalo">
                 <button id="btn_filter" onclick="filter(event)">
-                    <img class="size-7" src="/VHS/public/icons/filter-svgrepo-com.svg" alt="">
+                    <img class="size-7" src="/VHS/public/icons/filter.svg" alt="">
                 </button>
                 <input type="text" placeholder="Pesquisar" class="pl-2 rounded-lg bg-transparent text-white w-full h-12 border-[0.5px] border-gray-500">
             </div>
