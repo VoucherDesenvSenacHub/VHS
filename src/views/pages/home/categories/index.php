@@ -1,14 +1,23 @@
 <?php
-// Requires dos componentes necessários
-require "../../components/header/headerComponent.php";
-require "../../components/sidebar/barra_lateral.php";
-require "../../components/cards/index.php";
-require "../../components/featuredCard/featuredCardComponent.php";
+
+require "../../../components/header/headerComponent.php";
+require "../../../components/sidebar/barra_lateral.php";
+require "../../../components/cards/index.php";
+require "../../../components/featuredCard/featuredCardComponent.php";
 
 use function Src\Views\Components\Header\HeaderComponent;
 use function Src\Views\Components\Sidebar\SidebarComponent;
 use function Src\Views\Components\Cards\renderCards;
 use function Views\Components\FeaturedCard\FeaturedCardComponent;
+
+$category = isset($_GET['category']) ? $_GET['category'] : 'tecnologia';
+
+$categories = [
+    'tecnologia' => 'Tecnologia',
+    'saude' => 'Saúde',
+    'moda' => 'Moda',
+    'estetica' => 'Estética',
+];
 
 // Mock de dados para a página home
 $featuredVieo = [
@@ -20,22 +29,6 @@ $featuredVieo = [
     "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g",
     "views" => "1.1M",
     "created_at" => "há 2 dias",
-];
-
-$videoHTMX = [
-    "url" => "https://youtube.com/watch?v=htmx",
-    "type_card" => "video",
-    "description" => "RocketSeat",
-    "duration" => "16 min", 
-    "title" => "HTMX: HTML com Super Poderes | RocketSeat - Discover",
-    "username" => "Diego da RocketSeat",
-    "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
-    "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g",
-    "views" => "108 views",
-    "created_at" => "há 2 dias",
-    "maked_for" => "Online",
-    "likes" => 1500,
-    "comments" => 125
 ];
 
 $mostPopularVideos = [
@@ -323,51 +316,24 @@ $styleVideos = [
 
         <main class="flex-1 px-4 sm:px-6 py-4 mx-auto">
             <div class="max-w-[1500px] mx-auto">
+                <h2 class="text-2xl font-bold text-white mb-2"><span class="text-purple-400">#</span> <?= $categories[$category] ?></h2>
+                <p class="text-gray-400 text-sm mb-6">Confira os vídeos mais populares da nossa plataforma VHS da categoria <?= $categories[$category] ?></p>
+                
                 
                 <section class="mb-12">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 gap-6">
                         <div class="lg:col-span-1">
-                            <?= FeaturedCardComponent($featuredVieo) ?>
+                            <?= FeaturedCardComponent($featuredVieo, true)  ?>
                         </div>
-                        
-                        <div class="lg:col-span-1">
-                            <?= FeaturedCardComponent($videoHTMX) ?>
+                </section>
+                <section class="mb-12">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                            <?= renderCards($techVideos, 'video'); ?>
+                            <?= renderCards($techVideos, 'video'); ?>
+                            <?= renderCards($techVideos, 'video'); ?>
+                            <?= renderCards($techVideos, 'video'); ?>
                         </div>
-                    </div>
-                </section>
-
-                <section class="mb-12">
-                    <h2 class="text-2xl font-bold text-white mb-2"><span class="text-purple-400">#</span> Mais populares</h2>
-                    <p class="text-gray-400 text-sm mb-6">Confira os vídeos mais populares da nossa plataforma VHS</p>
-                    
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                        <?php renderCards($mostPopularVideos, 'video'); ?>
-                    </div>
-                </section>
-
-                <section class="mb-12">
-                    <h2 class="text-2xl font-bold text-white mb-6"><span class="text-purple-400">#</span> Tecnologia</h2>
-                    
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        <?php renderCards($techVideos, 'video'); ?>
-                    </div>
-                </section>
-
-                <section class="mb-12">
-                    <h2 class="text-2xl font-bold text-white mb-6"><span class="text-purple-400">#</span> Saúde</h2>
-                    
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        <?php renderCards($healthVideos, 'video'); ?>
-                    </div>
-                </section>
-
-                <section class="mb-12">
-                    <h2 class="text-2xl font-bold text-white mb-6"><span class="text-purple-400">#</span> Moda</h2>
-                    
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        <?php renderCards($styleVideos, 'video'); ?>
-                    </div>
-                </section>
+                    </section>
             </div>
         </main>
     </div>
