@@ -14,7 +14,7 @@
                         <h2 class='text-white text-xl'>Compartilhar</h2>
             
                         <button onclick='closeShared()' class='flex justify-center items-center w-7 text-purple-400 hover:text-purple-600'>
-                            <img src='../../../../public/icons/botaoFechar.svg' class='w-full h-full'>
+                            <img src='/VHS/public/icons/botaoFechar.svg' class='w-full h-full'>
                         </button>
                     </div>
 
@@ -25,7 +25,7 @@
                          onclick='copyIframe(this)'
                          data-iframe=\"" . htmlspecialchars($iframe, ENT_QUOTES) . "\"
                          class='flex items-center justify-center w-12 h-12 bg-white/5 rounded-xl overflow-hidden'>
-                            <img src='../../../../public/icons/shared/incorporar.svg'>
+                            <img src='/VHS/public/icons/shared/incorporar.svg'>
                         </button>
 
                         <a href='https://t.me/share/url?url=" . urlencode($url) . "&text=" . urlencode($title) . "'
@@ -33,7 +33,7 @@
                          target='_blank' 
                          title='Telegram'
                          class='flex items-center justify-center w-12 h-12 bg-white/5 rounded-xl overflow-hidden'>
-                            <img src='../../../../public/icons/shared/telegram.svg' class='w-full h-full'>
+                            <img src='/VHS/public/icons/shared/telegram.svg' class='w-full h-full'>
                         </a>
 
                         <a href='https://wa.me/?text=" . urlencode($title . ' ' . $url) . "'
@@ -41,7 +41,7 @@
                          target='_blank' 
                          title='WhatsApp' 
                          class='flex items-center justify-center w-12 h-12 bg-white/5 rounded-xl overflow-hidden'>
-                            <img src='../../../../public/icons/shared/whatsapp.svg' class='w-full h-full'>
+                            <img src='/VHS/public/icons/shared/whatsapp.svg' class='w-full h-full'>
                         </a>
 
                         <a href='https://www.facebook.com/sharer/sharer.php?u=" . urlencode($url) . "'
@@ -49,7 +49,7 @@
                          target='_blank' 
                          title='Facebook'
                          class='flex items-center justify-center w-12 h-12 bg-white/5 rounded-xl overflow-hidden'>
-                            <img src='../../../../public/icons/shared/facebook.svg' class='w-full h-full'>
+                            <img src='/VHS/public/icons/shared/facebook.svg' class='w-full h-full'>
                         </a>
 
                         
@@ -58,7 +58,7 @@
                          target='_blank'
                          title='X'
                          class='flex items-center justify-center w-12 h-12 bg-white/5 rounded-xl overflow-hidden'>
-                            <img src='../../../../public/icons/shared/twitter.svg' class='w-full h-full'>
+                            <img src='/VHS/public/icons/shared/twitter.svg' class='w-full h-full'>
                         </a>
                     </div>
 
