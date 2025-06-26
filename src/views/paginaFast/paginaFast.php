@@ -7,7 +7,10 @@ use function Src\Views\Components\header\HeaderComponent;
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
 
 use function src\Views\Components\Utils\ButtonComponent;
+
 use function src\Views\Components\Utils\Footer;
+
+use function src\Views\Components\CardFast;
 
 
 require "../components/utils/inputComponent.php";
@@ -19,12 +22,11 @@ require "../components/studioSideMenu/studioSideMenuComponent.php";
 require "../components/CardFastComponent/cardFast.php";
 
 require "../components/utils/buttonComponent.php";
+
 require "../components/utils/footer.php";
  
  
 
-
- 
 ?>
 
 <!DOCTYPE html>
@@ -48,10 +50,10 @@ require "../components/utils/footer.php";
                 <?= StudioSideMenuComponent() ?>
 
         </div>
+        
+        <div class="max-w-[1500px] mx-auto">
 
-            <div class="p-7">
-
-                    <div class="ml-14">
+                    <div class="">
                         <div>
                             <p class="text-title font-pop font-semibold title-size text-white">Conteúdo do canal</p>
                             <p class="text-subtitile font-semibold title-size text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
@@ -69,7 +71,7 @@ require "../components/utils/footer.php";
                         </div>
                     </div>
 
-                    <div class="flex items-center m-7">
+                    <div class="flex items-center mt-7 mb-7">
 
                             <img class="mt-3"  src="/VHS/public/icons/Filter.svg" alt="Filter">
                             
@@ -81,26 +83,83 @@ require "../components/utils/footer.php";
 
                     </div>
 
-                <div class="flex flex-wrap  gap-14  justify-center">
+                <div class="flex w-full  justify-center">
 
+                    <div class="max-w-7xl gap-[5.3rem] flex flex-wrap justify-center">
+                        <?php
                         
-                    <?= CardFast() ?>
+                        echo CardFast([
+                            'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                            'titulo' => 'espero vocês lá',
+                            'likes' => '50K',
+                            'views' => '540K'
+                            ]);
 
-                    <?= CardFast() ?>
+                        echo CardFast([
+                            'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                            'titulo' => 'espero vocês lá',
+                            'likes' => '50K',
+                            'views' => '540K'
+                            ]); 
 
-                    <?= CardFast() ?>
+                        echo CardFast([
+                            'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                            'titulo' => 'espero vocês lá',
+                            'likes' => '50K',
+                            'views' => '540K'
+                            ]);    
 
-                    <?= CardFast() ?>
+                        echo CardFast([
+                            'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                            'titulo' => 'espero vocês lá',
+                            'likes' => '50K',
+                            'views' => '540K'
+                            ]);   
 
-                    <?= CardFast() ?>
+                        echo CardFast([
+                            'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                            'titulo' => 'espero vocês lá',
+                            'likes' => '50K',
+                            'views' => '540K'
+                            ]);     
 
-                    <?= CardFast() ?>
+                        echo CardFast([
+                            'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                            'titulo' => 'espero vocês lá',
+                            'likes' => '50K',
+                            'views' => '540K'
+                            ]);       
 
-                    <?= CardFast() ?>
-
-                    <?= CardFast() ?>
-
-
+                        echo CardFast([
+                            'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                            'titulo' => 'espero vocês lá',
+                            'likes' => '50K',
+                            'views' => '540K'
+                            ]);       
+            
+                        echo CardFast([
+                            'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                            'titulo' => 'espero vocês lá',
+                            'likes' => '50K',
+                            'views' => '540K'
+                            ]);       
+            
+                        echo CardFast([
+                            'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                            'titulo' => 'espero vocês lá',
+                            'likes' => '50K',
+                            'views' => '540K'
+                            ]);       
+            
+                        echo CardFast([
+                            'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                            'titulo' => 'espero vocês lá',
+                            'likes' => '50K',
+                            'views' => '540K'
+                            ]);       
+            
+                        ?>
+                    </div> 
 
 
 
@@ -115,9 +174,7 @@ require "../components/utils/footer.php";
         <?= Footer()?>
 
     </div>
+    <script defer src='/VHS/src/views/components/CardFastComponent/cardFast.js'></script>
 
 </body>
 </html>
- 
-
- 
