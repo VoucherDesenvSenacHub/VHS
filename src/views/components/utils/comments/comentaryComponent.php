@@ -33,10 +33,10 @@ function Comment(string $name, string $text, string $created_at = null, string $
                 </div>
             </div>
 
-            <div class='w-5 h-5 ml-3 mt-2 cursor-pointer relative' id='opcoes'>
+            <div class='w-5 h-5 ml-3 mt-2 cursor-pointer relative opcoes'>
                 <img src='/VHS/public/icons/comments_studio/ellipsis-vertical.svg'>
                 <div class='w-24 h-16 bg-gray-800 rounded-[0.22rem] flex items-center justify-center border-[0.1rem] border-solid border-gray-600 
-                top-0 right-full mr-4 absolute hidden' id='menu'>
+                top-0 right-full mr-4 absolute hidden menu'>
                     <ul class='w-full flex flex-col gap-3'>  
                         <li class='hover:bg-gray-700 text-white font-semibold flex w-16 h-5 text-xs gap-2 items-center ml-1'>
                             <img src='/VHS/public/icons/comments_studio/trash.svg'>
@@ -50,7 +50,7 @@ function Comment(string $name, string $text, string $created_at = null, string $
                 </div>
             </div>
         </div>
-        <script src='/VHS/src/views/components/utils/comments_studio/script.js'></script>
+        <script src='/VHS/src/views/components/utils/comments/script.js'></script>
         "
     );
 }

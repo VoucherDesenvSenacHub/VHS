@@ -76,12 +76,12 @@ $cards = [
                 <p class="mt-2 text-sm text-gray-300 whitespace-pre-line"><?= $subtitle ?></p>
             </div>
             <div class="mt-5 flex">
-                <img class="w-6 h-6 mr-3" src="/VHS/public/icons/Share.svg" alt="ShareButton" onclick="openShared()" name="send">
+                <img class="w-6 h-6 mr-3 cursor-pointer" src="/VHS/public/icons/Share.svg" alt="ShareButton" onclick="openShared()" name="send">
                 <?= sharedComponent('https://www.youtube.com/watch?v=Qjk-cSW-jk4','Sla')?>
                 <?= StarRatingComponent() ?>
             </div>
         </div>
-  <!-- Parte do canal temporaria até ter o componente certo para trocar  -->
+  <!-- Parte do canal temporaria até ter o componente para trocar  -->
         <div class="flex items-center mt-10 gap-3">
           <img src="https://yt3.googleusercontent.com/ytc/AIdro_l9jtAcERHIts0q6LsUtmAGPzQ8p8FzKGAoYRJ1N3Wz3Hs0=s160-c-k-c0x00ffffff-no-rj" alt="Autor" class="w-[67px] h-[68px] rounded-xl">
           <div>
