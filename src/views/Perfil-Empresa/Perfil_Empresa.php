@@ -188,15 +188,15 @@ $videos = [
 
                     <table class="text-white text-sm border-separate border-spacing-4 md:border-spacing-6">
                         <tr>
-                            <td><img src="../../public/icons/Union.svg" alt=""></td>
+                            <td><img src="/VHS/public/icons/Union.svg" alt=""></td>
                             <td><a class="text-cyan-500 break-all" href="<?= $dados[0]['link1']?>"><?= $dados[0]['link1']?></a></td>
                         </tr>
                         <tr>
-                            <td><img src="../../public/icons/Vector1.svg" alt=""></td>
+                            <td><img src="/VHS/public/icons/Vector1.svg" alt=""></td>
                             <td><a class="text-cyan-500 break-all" href="<?= $dados[0]['link2']?>"><?= $dados[0]['link2']?></a></td>
                         </tr>
                         <tr>
-                            <td><img src="../../public/icons/World.svg" alt=""></td>
+                            <td><img src="/VHS/public/icons/World.svg" alt=""></td>
                             <td><a class="text-cyan-500 break-all" href="<?= $dados[0]['link3']?>"><?= $dados[0]['link3']?></a></td>
                         </tr>
                     </table>
