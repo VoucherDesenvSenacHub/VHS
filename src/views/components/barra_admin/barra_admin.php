@@ -29,4 +29,3 @@ function Barra_Admin(){
             <script src="/VHS/src/views/components/barra_admin/barra.js"></script>
         ';
     }
-?>
