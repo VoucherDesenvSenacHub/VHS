@@ -6,8 +6,9 @@ require "../components/header/headerComponent.php";
 require "../components/charts/chartComponent.php";
 require "../components/charts/donutChartComponent.php";
 require "../components/Notification_List/notificationListComponent.php";
+require "../components/utils/comments/comentaryComponent.php";
 
-
+use function src\views\components\utils\Comment;
 use function src\views\components\header\Barra_Admin;
 use function Src\Views\Components\Header\HeaderComponent;
 use function src\views\components\Utils\UserActivityCardsComponent;
@@ -23,18 +24,17 @@ $seriesDataDonut = [3320, 260, 285, 105];
 $labelsDonut = ['Tecnologia', 'Moda', 'Estatística', 'Saúde'];
 
 $notificationItems = [
-    'Freelancer bonus a usar até Circa, motivo: incompreensível.',
-    'Freelancer bonus a usar até Circa, motivo: incompreensível.',
-    'Freelancer bonus a usar até Circa, motivo: incompreensível.',
-    'Freelancer bonus a usar até Circa, motivo: incompreensível.',
-    'Freelancer bonus a usar até Circa, motivo: incompreensível.'
+    'Freitasdev baniu o usuário Crilo, motivo: incompetência.',
+    'Freitasdev baniu o usuário Crilo, motivo: incompetência.',
+    'Freitasdev baniu o usuário Crilo, motivo: incompetência.',
+    'Freitasdev baniu o usuário Crilo, motivo: incompetência.',
+    'Freitasdev baniu o usuário Crilo, motivo: incompetência.'
 ];
-
-
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,46 +42,72 @@ $notificationItems = [
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.44.0/dist/apexcharts.css">
 </head>
-<body class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center text-white">
-    <!-- Header -->
-    <div>
-        <?= HeaderComponent() ?>
-    </div>
 
-    <div class="flex flex-row mt-4">
-        <div>
+<body
+    class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center text-white">
+
+    <!-- Header superior -->
+    <?= HeaderComponent() ?>
+
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="min-w-[220px] position-fixed">
             <?= Barra_Admin() ?>
         </div>
 
-        <div class="flex-1 p-4">
-            <?php
-            renderPostComponent("");
-            ?>
+        <!-- Conteúdo principal -->
+        <div class="flex-1 px-4 py-6">
+            <!-- Componente de perfil -->
+            <?= renderPostComponent("") ?>
 
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
-                <div><?= UserActivityCardsComponent("Usuários", 11000) ?></div>
-                <div><?= UserActivityCardsComponent("QTD.Vídeos", 90) ?></div>
-                <div><?= UserActivityCardsComponent("Parceiros", 2) ?></div>
-                <div><?= UserActivityCardsComponent("Canais", 12) ?></div>
-            </div>
+            <div class = "flex flex-row gap-8">
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <?php
-                echo renderChartComponent($seriesDataLine, $categoriesLine, 'Semana', 'Usuários');
-                ?>
-                <?php
-                echo renderDonutChartComponent($seriesDataDonut, $labelsDonut, 'Categorias', 'Tecnologia');
-                ?>
-            </div>
+                <div class="grid grid-col-2 h-48 gap-8">
+                    
+                    <div class="flex flex-row gap-4 mb-2">                    
+                        
+                            <?= UserActivityCardsComponent("Usuários", 11000) ?>
+                        
+                        
+                            <?= UserActivityCardsComponent("Qtd. Vídeos", 90) ?>
+                        
+                        
+                            <?= UserActivityCardsComponent("Parceiros", 2) ?>
+                        
+                        
+                            <?= UserActivityCardsComponent("Canais", 12) ?>
+                    </div> 
+                    <div class="">
+                        <?= renderChartComponent($seriesDataLine, $categoriesLine, 'Semana', 'Usuários') ?>
+                    </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <?php
-                    echo renderNotificationListComponent($notificationItems);
-                    ?>
+                    <div class="bg-[#1a1a1a] rounded-xl shadow-md min-h-[310px] !-gap-2">
+                        <?= 
+                         Comment("nome","texto"),
+                         Comment("nome","texto"),
+                         Comment("nome","texto")
+                         ?>
+                    </div>
+                </div>
+                <!-- Gráfico Donut junto aos cards -->
+                <div class = "grid grid-row-1 gap-4">
+                        <div class="bg-[#1a1a1a] rounded-xl shadow-md p-4 min-h-[400px] flex items-center justify-center mb-4">
+                            <?= renderDonutChartComponent($seriesDataDonut, $labelsDonut, 'Categorias', 'Tecnologia') ?>
+                        </div>
+    
+                        <div class="w-max bg-[#1a1a1a] rounded-xl shadow-md">
+                            <?= renderNotificationListComponent($notificationItems) ?>
+                        </div>
+                        
                 </div>
             </div>
-        </div>
+            </div>
+
+            
+
+            
     </div>
+
 </body>
+
 </html>
