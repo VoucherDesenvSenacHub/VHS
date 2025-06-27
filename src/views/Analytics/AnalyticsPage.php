@@ -9,7 +9,7 @@ require "../components/Notification_List/notificationListComponent.php";
 require "../components/utils/comments/comentaryComponent.php";
 
 use function src\views\components\utils\Comment;
-use function src\views\components\header\Barra_Admin;
+use function src\views\components\barra_admin\Barra_Admin;
 use function Src\Views\Components\Header\HeaderComponent;
 use function src\views\components\Utils\UserActivityCardsComponent;
 use function Src\Views\Components\Perfil_Analytics\renderPostComponent;
