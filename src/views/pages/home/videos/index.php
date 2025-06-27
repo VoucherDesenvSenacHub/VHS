@@ -30,7 +30,6 @@ $cards = [
         "created_at" => "há 2 dias",
         "url" => "#"
     ],
-    // ... outros cards se desejar
 ];
 
 ?>
@@ -82,19 +81,20 @@ $cards = [
                 <?= StarRatingComponent() ?>
             </div>
         </div>
-
-        <div class="flex items-center mt-4 gap-3">
-          <img src="https://yt3.ggpht.com/ytc/AOPolaQ0yOTXXYPxkYbbUMyxiUxIU1tGeB1Wv6lF2Hzl=s68-c-k-c0x00ffffff-no-rj" alt="Autor" class="w-10 h-10 rounded-full">
+  <!-- Parte do canal temporaria até ter o componente certo para trocar  -->
+        <div class="flex items-center mt-10 gap-3">
+          <img src="https://yt3.googleusercontent.com/ytc/AIdro_l9jtAcERHIts0q6LsUtmAGPzQ8p8FzKGAoYRJ1N3Wz3Hs0=s160-c-k-c0x00ffffff-no-rj" alt="Autor" class="w-[67px] h-[68px] rounded-xl">
           <div>
             <p class="text-sm font-bold">Fabio Akita</p>
             <p class="text-xs text-gray-400">260 mil seguidores</p>
+            <button class="bg-gray-900 text-gray-300 font-bold py-1 px-2 rounded-full hover:bg-gray-800 text-[10px] mt-1">#Tecnologia</button>
           </div>
         </div>
       </div>
-
+  <!-- Parte do canal temporaria até ter o componente certo para trocar  -->
       <div class="flex flex-col lg:flex-row gap-6 mt-8">
 
-        <div class="w-full lg:flex-[2] p-4 rounded-lg">
+        <div class="w-full lg:flex-[2] rounded-lg">
           <h3 class="text-lg font-semibold mb-4">Recomendados</h3>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <?php for ($i = 0; $i < 6; $i++) {
