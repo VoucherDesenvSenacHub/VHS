@@ -8,7 +8,7 @@ function CardFast(array $data): string {
     $views = htmlspecialchars($data['views'] ?? '0');
 
     return "
-        <div class='w-64 h-[30rem] relative flex items-center justify-center current_fast rounded-2xl'>
+        <div class='cursor-pointer w-72 h-[32rem] relative flex items-center justify-center current_fast rounded-2xl'>
             <img src='{$thumbnail}' class='object-cover h-full absolute rounded-2xl' alt='Imagem do card'>
 
             <div class='block w-full bottom-12 absolute px-1'>

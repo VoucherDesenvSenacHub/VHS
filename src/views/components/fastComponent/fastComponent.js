@@ -5,6 +5,7 @@
         const play =document.querySelector('.current_fast > .play')
  
         like.onclick = (e) => {
+    
             console.log('teste')
             e.stopPropagation(e);
             const pathSvg = like.querySelector("path")
