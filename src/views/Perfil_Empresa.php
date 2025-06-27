@@ -9,7 +9,7 @@ require "../../src/views/components/cards/channelCard.php";
 use function Src\Views\Components\Utils\ButtonComponent;
 use function Src\Views\Components\sidebar\SidebarComponent;
 use function src\views\components\header\HeaderComponent;
-use function src\views\components\utils\footerComponent;
+use function Src\Views\Components\utils\Footer;
 use function Src\Views\Components\Cards\createVideoCard;
 use function Src\Views\Components\Cards\createChannelCard;
 

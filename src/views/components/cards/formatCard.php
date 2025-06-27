@@ -15,13 +15,8 @@
         "created_at" => "2024-03-10 15:00:00" 
         ]
     ];
-
 ?>
-
-<!-- # -->
-
 <?php
-
     function formatDateEvent($date) {
         $data = new DateTime($date);
         $data_formatada = $data->format("d/m/Y H:i");

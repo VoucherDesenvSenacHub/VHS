@@ -2,7 +2,7 @@
     
     namespace Src\Views\Components\Utils;
 
-    function ButtonComponent(string $text, string $variant ,string $icon = null, string $width = "380px", string $height = "50px", $id=null) {
+    function ButtonComponent(string $text, string $variant ,string $icon = null, string $width = "380px", string $height = "50px", $id=null, string $link = null) {
         
         $icon = $icon ? "<img src='$icon' class='w-4 h-4'>" : "";
 
@@ -16,6 +16,13 @@
             case 'icon':
                 $button_style = $button_style . "bg-white hover:bg-gray-300 transition-colors";
                 break;
+            
+            case 'studio':
+
+                $button_style = "flex justify-center items-center w-[$width] h-[$height] gap-2 rounded-full cursor-pointer ";
+
+                $button_style = $button_style . "bg-[#202024] transition-colors hover:bg-[#2a2a2e] text-white rounded-full";
+                break;
 
             default:
                 $button_style = $button_style . "bg-purple-700 transition-colors hover:bg-purple-800 text-white";
@@ -24,10 +31,12 @@
 
         return(
             "
+            <a href='$link'>
                 <button id='$id' class='$button_style'>
-                    $icon
-                    $text
+                $icon
+                $text
                 </button>
+            </a>
             "
         ); 
     }
