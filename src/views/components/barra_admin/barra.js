@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const divider = document.querySelector(".divider");
     const divides = document.querySelector(".divides");
     const toggleButton = document.getElementById("barrinha");
-    const categoriaTitle = document.getElementById("categoria-title");
     const sidebar = document.getElementById("sidebar");
     let isExpanded = true;
    
@@ -25,7 +24,6 @@ document.addEventListener("DOMContentLoaded", function () {
         divides.style.width = isExpanded ? "8.06rem" : "2.5rem";
         divides.style.transition = "width 500ms ease-in-out";
 
-        categoriaTitle.style.display = isExpanded ? "block" : "none";
 
         const seta = document.querySelector("#seta");
         const path = seta.querySelector("path");
