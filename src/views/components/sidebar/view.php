@@ -3,8 +3,8 @@
     require_once __DIR__ . "/../header/headerComponent.php";
     use function Src\Views\Components\Header\HeaderComponent;
     
-    require_once __DIR__ . "/../sidebar/barra_lateral.php";
-    use function Src\Views\Components\Sidebar\SidebarComponent;
+    // require_once __DIR__ . "/../sidebar/barra_lateral.php";
+    // use function Src\Views\Components\Sidebar\SidebarComponent;
 
     require_once __DIR__ . "/../sidebar/index.php";
     use function Src\Views\Components\Sidebar\CreateSidebear;
@@ -21,6 +21,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    
     <link rel="stylesheet" href="/VHS/src/styles/global.css">
     <script type="module" src="/VHS/src/styles/tailwindglobal.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
