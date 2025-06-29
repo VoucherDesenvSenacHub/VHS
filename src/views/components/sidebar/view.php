@@ -15,12 +15,12 @@
 ?>
  
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
  
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>View Sidebar</title>
     
     <link rel="stylesheet" href="/VHS/src/styles/global.css">
     <script type="module" src="/VHS/src/styles/tailwindglobal.js"></script>

@@ -1,82 +1,105 @@
 <?php
 
+    /*
+        require_once __DIR__ . "/index.php";
+        use function Src\Views\Components\Sidebar\CreateSidebar;
+
+        <?= HeaderComponent(); ?>
+        <?= CreateSidebar(); ?>
+    */
+
     namespace Src\Views\Components\Sidebar;
 
-    function CreateSidebear() {
+    function CreateSidebear(
+
+        $titleMenu = "MENU",
+        $iconHome = "/VHS/public/icons/home.svg", $titleHome = "Início",
+        $iconFast = "/VHS/public/icons/fast.svg", $titleFast = "Fast",
+        $iconEvents = "/VHS/public/icons/radio.svg", $titleEvents = "Eventos",
+        $iconHistory = "/VHS/public/icons/youtube.svg", $titleHistory = "Histórico",
+
+        $titleCategory = "CATEGORIA",
+        $iconTech = "/VHS/public/icons/cpu.svg", $titleTech = "Tecnologia",
+        $iconHealth = "/VHS/public/icons/saude.svg", $titleHealth = "Saúde",
+        $iconFashion = "/VHS/public/icons/moda.svg", $titleFashion = "Moda",
+        $iconAesthetic = "/VHS/public/icons/estetica.svg", $titleAesthetic = "Estética"
+        
+    ) {
+
         return "
-            <aside class='sidebar hidden opacity-0 sm:opacity-100 -translate-x-full sm:translate-x-0 bg-black px-4 sm:flex flex-col items-center sticky w-[4rem] sm:w-auto h-screen top-[4.5rem] left-0 select-none transition-all duration-300 z-10'>
+            <aside class='sidebar hidden opacity-0 sm:opacity-100 -translate-x-full sm:translate-x-0 px-4 sm:flex flex-col items-center sticky w-[4rem] sm:w-auto h-screen top-[4.5rem] left-0 select-none transition-all duration-300 z-10'>
             
                 <div class='flex flex-col gap-6'>
                     <div class='flex flex-col gap-6 justify-center'>
-                        <h2 class='text-white text-caption'>MENU</h2>
+                        <h2 class='hidden 2xl:flex text-white text-caption'>$titleMenu</h2>
 
                         <button class='flex flex-row gap-4 items-center'>
-                            <div class='bg-white/5 p-[0.5rem] rounded-2xl'>
-                                <img src='/VHS/public/icons/home.svg' class='min-w-[25px]'>
+                            <div class='bg-white/5 p-[0.5rem] rounded-xl'>
+                                <img src='$iconHome' class='w-[20px] min-w-[20px] max-w-[30px]'>
                             </div>
                             
-                            <h2 class='hidden sm:flex text-secondary text-paragraph'>Início</h2>
+                            <h2 class='hidden sm:flex text-secondary/50 text-paragraph'>$titleHome</h2>
                         </button>
                         
                         <button class='flex flex-row gap-4 items-center'>
-                            <div class='bg-white/5 p-[0.5rem] rounded-2xl'>
-                                <img src='/VHS/public/icons/fast.svg' class='min-w-[25px]'>
+                            <div class='bg-white/5 p-[0.5rem] rounded-xl'>
+                                <img src='$iconFast' class='w-[20px] min-w-[20px] max-w-[30px]'>
                             </div>
                             
-                            <h2 class='hidden sm:flex text-secondary text-paragraph'>Fast</h2>
+                            <h2 class='hidden sm:flex text-secondary/50 text-paragraph'>$titleFast</h2>
                         </button>
 
                         <button class='flex flex-row gap-4 items-center'>
-                            <div class='bg-white/5 p-[0.5rem] rounded-2xl'>
-                                <img src='/VHS/public/icons/radio.svg' class='min-w-[25px]'>
+                            <div class='bg-white/5 p-[0.5rem] rounded-xl'>
+                                <img src='$iconEvents' class='w-[20px] min-w-[20px] max-w-[30px]'>
                             </div>
                             
-                            <h2 class='hidden sm:flex text-secondary text-paragraph'>Eventos</h2>
+                            <h2 class='hidden sm:flex text-secondary/50 text-paragraph'>$titleEvents</h2>
                         </button>
 
                         <button class='flex flex-row gap-4 items-center'>
-                            <div class='bg-white/5 p-[0.5rem] rounded-2xl'>
-                                <img src='/VHS/public/icons/youtube.svg' class='min-w-[25px]'>
+                            <div class='bg-white/5 p-[0.5rem] rounded-xl'>
+                                <img src='$iconHistory' class='w-[20px] min-w-[20px] max-w-[30px]'>
                             </div>
                             
-                            <h2 class='hidden sm:flex text-secondary text-paragraph'>Histórico</h2>
+                            <h2 class='hidden sm:flex text-secondary/50 text-paragraph'>$titleHistory</h2>
                         </button>
                     </div>
 
-                    <hr class='divider w-full border-gray600 transition-all duration-300 ease-in-out'>
-                    <h2 class='text-white text-caption'>CATEGORIA</h2>
+                    <hr class='divider w-full border-secondary/5 transition-all duration-300 ease-in-out'>
+                    <h2 class='hidden 2xl:flex text-white text-caption'>$titleCategory</h2>
 
                     <div class='flex flex-col gap-6 justify-center'>
                         <button class='flex flex-row gap-4 items-center'>
-                            <div class='bg-white/5 p-[0.5rem] rounded-2xl'>
-                                <img src='/VHS/public/icons/cpu.svg' class='min-w-[25px]'>
+                            <div class='bg-white/5 p-[0.5rem] rounded-xl'>
+                                <img src='$iconTech' class='w-[20px] min-w-[20px] max-w-[30px]'>
                             </div>
                             
-                            <h2 class='hidden sm:flex text-secondary text-paragraph'>Tecnologia</h2>
+                            <h2 class='hidden sm:flex text-secondary/50 text-paragraph'>$titleTech</h2>
                         </button>
 
                         <button class='flex flex-row gap-4 items-center'>
-                            <div class='bg-white/5 p-[0.5rem] rounded-2xl'>
-                                <img src='/VHS/public/icons/saude.svg' class='min-w-[25px]'>
+                            <div class='bg-white/5 p-[0.5rem] rounded-xl'>
+                                <img src='$iconHealth' class='w-[20px] min-w-[20px] max-w-[30px]'>
                             </div>
                             
-                            <h2 class='hidden sm:flex text-secondary text-paragraph'>Saúde</h2>
+                            <h2 class='hidden sm:flex text-secondary/50 text-paragraph'>$titleHealth</h2>
                         </button>
 
                         <button class='flex flex-row gap-4 items-center'>
-                            <div class='bg-white/5 p-[0.5rem] rounded-2xl'>
-                                <img src='/VHS/public/icons/moda.svg' class='min-w-[25px]'>
+                            <div class='bg-white/5 p-[0.5rem] rounded-xl hover:bg-white/10 transition-all duration-200 fade-in'>
+                                <img src='$iconFashion' class='w-[20px] min-w-[20px] max-w-[30px]'>
                             </div>
                             
-                            <h2 class='hidden sm:flex text-secondary text-paragraph'>Moda</h2>
+                            <h2 class='hidden sm:flex text-secondary/50 text-paragraph'>$titleFashion</h2>
                         </button>
 
                         <button class='flex flex-row gap-4 items-center'>
-                            <div class='bg-white/5 p-[0.5rem] rounded-2xl'>
-                                <img src='/VHS/public/icons/estetica.svg' class='min-w-[25px]'>
+                            <div class='bg-white/5 p-[0.5rem] rounded-xl hover:bg-white/10 transition-all duration-200 fade-in'>
+                                <img src='$iconAesthetic' class='w-[20px] min-w-[20px] max-w-[30px]'>
                             </div>
                             
-                            <h2 class='hidden sm:flex text-secondary text-paragraph'>Estética</h2>
+                            <h2 class='hidden sm:flex text-secondary/50 text-paragraph'>$titleAesthetic</h2>
                         </button>
                     </div>
                 </div>
@@ -87,4 +110,5 @@
         ";
     }
 
+    // Sidebar Component v2.0
 ?>

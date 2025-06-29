@@ -21,7 +21,7 @@
         string $email = "eu@freitasdev"
     ) {
         return "
-            <div id='user-menu' class='hidden fixed w-full sm:w-72 mx-auto flex flex-col h-auto sm:h-max bg-[#1b1b1b] rounded-tr-3xl rounded-tl-3xl sm:rounded-3xl overflow-hidden shadow-md shadow-black/50 transition-all duration-300 sm:duration-200 ease-out translate-y-full sm:translate-y-0 scale-95 bottom-0 sm:top-20 sm:right-5'>
+            <div id='user-menu' class='hidden fixed w-full sm:w-72 mx-auto flex flex-col h-auto sm:h-max bg-[#1b1b1b] rounded-tr-3xl rounded-tl-3xl sm:rounded-3xl overflow-hidden shadow-md shadow-black/50 transition-all duration-300 sm:duration-200 ease-out translate-y-full sm:translate-y-0 scale-95 bottom-0 sm:top-20 sm:right-5 z-30'>
                 <div class='flex gap-3 items-center w-full border-b border-gray300 p-4 hover:bg-white/5 transition-all duration-200'>
                     <div class='flex-shrink-0 w-12 h-12 3xl:w-14 3xl:h-14 rounded-full bg-white/10 overflow-hidden'>
                         <img class='select-none pointer-events-none w-full h-full object-cover' src='$avatar_url' onerror='this.style.display=\"none\"'>
