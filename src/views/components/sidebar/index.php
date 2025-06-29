@@ -35,7 +35,7 @@
 
                         <button class='flex flex-row gap-4 items-center'>
                             <div class='bg-white/5 p-[0.5rem] rounded-xl'>
-                                <img src='$iconHome' class='w-[20px] min-w-[20px] max-w-[30px]'>
+                                <img src='$iconHome' class='w-[20px] sm:w-[25px] 3xl:w-[30px] min-w-[20px] max-w-[30px]'>
                             </div>
                             
                             <h2 class='hidden sm:flex text-secondary/50 text-paragraph'>$titleHome</h2>
@@ -43,7 +43,7 @@
                         
                         <button class='flex flex-row gap-4 items-center'>
                             <div class='bg-white/5 p-[0.5rem] rounded-xl'>
-                                <img src='$iconFast' class='w-[20px] min-w-[20px] max-w-[30px]'>
+                                <img src='$iconFast' class='w-[20px] sm:w-[25px] 3xl:w-[30px] min-w-[20px] max-w-[30px]'>
                             </div>
                             
                             <h2 class='hidden sm:flex text-secondary/50 text-paragraph'>$titleFast</h2>
@@ -51,7 +51,7 @@
 
                         <button class='flex flex-row gap-4 items-center'>
                             <div class='bg-white/5 p-[0.5rem] rounded-xl'>
-                                <img src='$iconEvents' class='w-[20px] min-w-[20px] max-w-[30px]'>
+                                <img src='$iconEvents' class='w-[20px] sm:w-[25px] 3xl:w-[30px] min-w-[20px] max-w-[30px]''>
                             </div>
                             
                             <h2 class='hidden sm:flex text-secondary/50 text-paragraph'>$titleEvents</h2>
@@ -59,7 +59,7 @@
 
                         <button class='flex flex-row gap-4 items-center'>
                             <div class='bg-white/5 p-[0.5rem] rounded-xl'>
-                                <img src='$iconHistory' class='w-[20px] min-w-[20px] max-w-[30px]'>
+                                <img src='$iconHistory' class='w-[20px] sm:w-[25px] 3xl:w-[30px] min-w-[20px] max-w-[30px]'>
                             </div>
                             
                             <h2 class='hidden sm:flex text-secondary/50 text-paragraph'>$titleHistory</h2>
@@ -72,7 +72,7 @@
                     <div class='flex flex-col gap-6 justify-center'>
                         <button class='flex flex-row gap-4 items-center'>
                             <div class='bg-white/5 p-[0.5rem] rounded-xl'>
-                                <img src='$iconTech' class='w-[20px] min-w-[20px] max-w-[30px]'>
+                                <img src='$iconTech' class='w-[20px] sm:w-[25px] 3xl:w-[30px] min-w-[20px] max-w-[30px]'>
                             </div>
                             
                             <h2 class='hidden sm:flex text-secondary/50 text-paragraph'>$titleTech</h2>
@@ -80,7 +80,7 @@
 
                         <button class='flex flex-row gap-4 items-center'>
                             <div class='bg-white/5 p-[0.5rem] rounded-xl'>
-                                <img src='$iconHealth' class='w-[20px] min-w-[20px] max-w-[30px]'>
+                                <img src='$iconHealth' class='w-[20px] sm:w-[25px] 3xl:w-[30px] min-w-[20px] max-w-[30px]'>
                             </div>
                             
                             <h2 class='hidden sm:flex text-secondary/50 text-paragraph'>$titleHealth</h2>
@@ -88,7 +88,7 @@
 
                         <button class='flex flex-row gap-4 items-center'>
                             <div class='bg-white/5 p-[0.5rem] rounded-xl hover:bg-white/10 transition-all duration-200 fade-in'>
-                                <img src='$iconFashion' class='w-[20px] min-w-[20px] max-w-[30px]'>
+                                <img src='$iconFashion' class='w-[20px] sm:w-[25px] 3xl:w-[30px] min-w-[20px] max-w-[30px]'>
                             </div>
                             
                             <h2 class='hidden sm:flex text-secondary/50 text-paragraph'>$titleFashion</h2>
@@ -96,7 +96,7 @@
 
                         <button class='flex flex-row gap-4 items-center'>
                             <div class='bg-white/5 p-[0.5rem] rounded-xl hover:bg-white/10 transition-all duration-200 fade-in'>
-                                <img src='$iconAesthetic' class='w-[20px] min-w-[20px] max-w-[30px]'>
+                                <img src='$iconAesthetic' class='w-[20px] sm:w-[25px] 3xl:w-[30px] min-w-[20px] max-w-[30px]'>
                             </div>
                             
                             <h2 class='hidden sm:flex text-secondary/50 text-paragraph'>$titleAesthetic</h2>
