@@ -4,8 +4,11 @@
  
  require "./components/fastComponent/fastComponent.php";
 
-use function src\views\components\FastComponent\FastComponent;
-use function src\views\components\header\HeaderComponent;
+ 
+ use function src\views\components\FastComponent\FastComponent;
+ use function src\views\components\header\HeaderComponent;
+ 
+
  
  
 ?>
