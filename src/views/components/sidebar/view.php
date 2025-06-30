@@ -3,8 +3,8 @@
     require_once __DIR__ . "/../header/headerComponent.php";
     use function Src\Views\Components\Header\HeaderComponent;
     
-    // require_once __DIR__ . "/../sidebar/barra_lateral.php";
-    // use function Src\Views\Components\Sidebar\SidebarComponent;
+    require_once __DIR__ . "/../sidebar/barra_lateral.php";
+    use function Src\Views\Components\Sidebar\SidebarComponent;
 
     require_once __DIR__ . "/../sidebar/index.php";
     use function Src\Views\Components\Sidebar\CreateSidebear;
@@ -31,7 +31,7 @@
     <?= HeaderComponent(); ?>
     
     <div class="flex">
-        <?= CreateSidebear(); ?>
+        <?= SidebarComponent(); ?>
         
         <div class="flex w-full h-full justify-start">
             <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 gap-4 flex-wrap pb-20">
