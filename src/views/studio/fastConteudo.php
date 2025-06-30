@@ -63,7 +63,9 @@ require "../components/utils/footer.php";
                 <button id="btn_filter" onclick="filter(event)">
                     <img class="size-7" src="/VHS/public/icons/filter.svg" alt="">
                 </button>
-                <input type="text" placeholder="Pesquisar" class="pl-2 rounded-lg bg-transparent text-white w-full h-12 border-[0.5px] border-gray-500">
+                <div class="w-full">
+                    <?=InputComponent("text","Pesquisar");?>
+                </div>
             </div>
             <div id="filter" class="absolute left-[16.5rem] z-10 hidden flex flex-col bg-gray-900 rounded-lg p-2 max-w-32 border-[0.5px] border-gray-500">
                 <div class="flex">
@@ -129,7 +131,7 @@ require "../components/utils/footer.php";
         <?= Footer()?>
 
     </div>
-    <script defer src='/VHS/src/views/components/CardFastComponent/cardFast.js'></script>
+
 
 </body>
 </html>

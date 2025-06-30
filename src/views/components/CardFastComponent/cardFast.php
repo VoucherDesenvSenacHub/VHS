@@ -49,6 +49,7 @@ function CardFast(array $data): string {
                 </div>
             </div>
         </div>
+        <script defer src='/VHS/src/views/components/CardFastComponent/cardFast.js'></script>
 
         
     ";
