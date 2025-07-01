@@ -47,7 +47,7 @@ require "../components/utils/footer.php";
             echo StudioSideMenuComponent();
             ?>
         </div>
-        <div class=" max-w-[1440px] mx-auto w-full">
+        <div class=" max-w-[1500px] mx-auto w-full">
             <div>
                 <p class="font-pop font-semibold text-title text-white">Conteúdo do canal</p>
                 <p class="text-subtitile font-semibold title-size text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
@@ -64,7 +64,7 @@ require "../components/utils/footer.php";
                     <img class="size-7" src="/VHS/public/icons/filter.svg" alt="">
                 </button>
                 <div class="w-full">
-                    <?=InputComponent("text","Pesquisar");?>
+                     <input type="text" placeholder="Pesquisar" class="pl-2 rounded-lg bg-transparent text-white w-full max-w-[1280px] h-12 border-[0.5px] border-gray-500">
                 </div>
             </div>
             <div id="filter" class="absolute left-[16.5rem] z-10 hidden flex flex-col bg-gray-900 rounded-lg p-2 max-w-32 border-[0.5px] border-gray-500">
