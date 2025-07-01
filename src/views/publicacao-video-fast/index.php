@@ -1,11 +1,23 @@
 <?php
 require "../components/utils/buttonComponent.php";
+require "../components/utils/Title_and_buttons.php";
 require "../components/utils/inputComponent.php";
 require "../components/header/headerComponent.php";
+require "../components/studioSideMenu/studioSideMenuComponent.php";
 
 use function Src\Views\Components\Utils\ButtonComponent;
+use function src\views\components\utils\Title_and_buttons;
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\views\components\header\HeaderComponent;
+use function src\views\components\studioSideMenu\StudioSideMenuComponent;
+
+
+$botoes =[
+    ['texto' => 'Video', 'link' => '../../publicacao-video-longo/index.php'],
+    ['texto' => 'Fast', 'link' => '../../publicacao-fast/index.php'],
+    ['texto' => 'Eventos', 'link' => 'link 3']
+];
+
 ?>
 
 <!DOCTYPE html>
@@ -25,9 +37,17 @@ use function Src\views\components\header\HeaderComponent;
         <?= HeaderComponent() ?>
     </div>
 
+    <div class="">
+            <?= StudioSideMenuComponent() ?>
+    </div>
+
+    <div class="flex flex-col gap-4 w-1/2 ml-60">
+        <?= Title_and_buttons ("Criar Conteúdo", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,", $botoes) ?>
+    </div>
+
     <div class="flex flex-col gap-4 w-1/2 ml-60">
         <div class="text-white flex flex-col gap-2">
-            <h1 class="text-title">Título do Fast</h1>
+            <h1 class="text-2xl font-bold text-white mb-2">Título do Fast</h1>
             <p class="text-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
         </div>
 
@@ -36,11 +56,11 @@ use function Src\views\components\header\HeaderComponent;
         </div>
 
         <div class="text-white flex flex-col gap-2">
-            <h1 class="text-title">Upload do Vídeo</h1>
+            <h1 class="text-2xl font-bold text-white mb-2">Upload do Vídeo</h1>
             <p class="text-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
         </div>
 
-        <div class="bg-background w-[950px] h-[400px] border-2 rounded-xl border-solid flex items-center justify-center relative overflow-hidden">
+        <div class="bg-background w-full h-64 md:h-96 border-2 rounded-xl border-solid flex items-center justify-center relative overflow-hidden">
            
             <video id="videoPreview" class="hidden w-full h-full object-cover rounded-lg absolute" controls></video>
 
@@ -58,9 +78,9 @@ use function Src\views\components\header\HeaderComponent;
             </div>
         </div>
 
-        <div class="flex justify-center items-end gap-10">
-            <?= ButtonComponent(text: "Cancelar", variant: "outline", id: "cancel-button") ?>
-            <?= ButtonComponent(text: "Publicar", variant: "default", id: "publish-button") ?>
+        <div class="flex flex-col md:flex-row justify-center items-center md:items-end gap-4 mt-10">
+                <?= ButtonComponent("Cancelar", "outline", null, "380px", "50px", null, "#") ?>
+                <?= ButtonComponent("Publicar", "default", null, "380px", "50px", null, "#") ?>
         </div>
     </div>
 
