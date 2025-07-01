@@ -10,7 +10,7 @@
 
     namespace Src\Views\Components\Sidebar;
 
-    function CreateSidebear(
+    function CreateSidebar(
         
         $titleMenu = "MENU",
         $iconHome = "/VHS/public/icons/home.svg", $titleHome = "Início",
@@ -27,18 +27,18 @@
     ) {
 
         return "
-            <aside class='sidebar hidden opacity-0 sm:opacity-100 -translate-x-full sm:translate-x-0 px-4 sm:flex flex-col items-center w-[4rem] sm:w-auto h-screen top-[4.5rem] left-0 select-none transition-all duration-300 z-10'>
+            <aside class='sidebar hidden opacity-0 sm:opacity-100 -translate-x-full sm:translate-x-0 px-4 sm:flex sticky flex-col items-center w-[4.5rem] sm:w-auto h-full top-[4.5rem] left-0 select-none transition-all duration-300 z-10'>
             
                 <div class='flex flex-col gap-6'>
                     <div class='flex flex-col gap-6 justify-center'>
-                        <h2 class='hidden 2xl:flex text-white text-caption'>$titleMenu</h2>
+                        <h2 class='hidden menu-titles text-white text-caption'>$titleMenu</h2>
 
                         <button class='flex flex-row gap-4 items-center'>
                             <div class='bg-white/5 p-[0.5rem] rounded-xl'>
                                 <img src='$iconHome' class='w-[20px] sm:w-[25px] 3xl:w-[30px] min-w-[20px] max-w-[30px]'>
                             </div>
                             
-                            <h2 class='menu-titles hidden text-secondary/50 text-paragraph'>$titleHome</h2>
+                            <h2 class='menu-titles hidden text-secondary/50 text-paragraph transition-opacity duration-300 ease-in-out'>$titleHome</h2>
                         </button>
                         
                         <button class='flex flex-row gap-4 items-center'>
@@ -46,7 +46,7 @@
                                 <img src='$iconFast' class='w-[20px] sm:w-[25px] 3xl:w-[30px] min-w-[20px] max-w-[30px]'>
                             </div>
                             
-                            <h2 class='menu-titles hidden text-secondary/50 text-paragraph'>$titleFast</h2>
+                            <h2 class='menu-titles hidden text-secondary/50 text-paragraph transition-opacity duration-300 ease-in-out'>$titleFast</h2>
                         </button>
 
                         <button class='flex flex-row gap-4 items-center'>
@@ -54,7 +54,7 @@
                                 <img src='$iconEvents' class='w-[20px] sm:w-[25px] 3xl:w-[30px] min-w-[20px] max-w-[30px]''>
                             </div>
                             
-                            <h2 class=' menu-titleshidden text-secondary/50 text-paragraph'>$titleEvents</h2>
+                            <h2 class='menu-titles hidden text-secondary/50 text-paragraph transition-opacity duration-300 ease-in-out'>$titleEvents</h2>
                         </button>
 
                         <button class='flex flex-row gap-4 items-center'>
@@ -62,12 +62,12 @@
                                 <img src='$iconHistory' class='w-[20px] sm:w-[25px] 3xl:w-[30px] min-w-[20px] max-w-[30px]'>
                             </div>
                             
-                            <h2 class='menu-titles hidden text-secondary/50 text-paragraph'>$titleHistory</h2>
+                            <h2 class='menu-titles hidden text-secondary/50 text-paragraph transition-opacity duration-300 ease-in-out'>$titleHistory</h2>
                         </button>
                     </div>
 
                     <hr class='divider w-full border-secondary/10 transition-all duration-300 ease-in-out'>
-                    <h2 class='hidden 2xl:flex text-white text-caption'>$titleCategory</h2>
+                    <h2 class='menu-titles hidden text-white text-caption'>$titleCategory</h2>
 
                     <div class='flex flex-col gap-6 justify-center'>
                         <button class='flex flex-row gap-4 items-center'>
@@ -75,7 +75,7 @@
                                 <img src='$iconTech' class='w-[20px] sm:w-[25px] 3xl:w-[30px] min-w-[20px] max-w-[30px]'>
                             </div>
                             
-                            <h2 class='menu-titles hidden text-secondary/50 text-paragraph'>$titleTech</h2>
+                            <h2 class='menu-titles hidden text-secondary/50 text-paragraph transition-opacity duration-300 ease-in-out'>$titleTech</h2>
                         </button>
 
                         <button class='flex flex-row gap-4 items-center'>
@@ -83,7 +83,7 @@
                                 <img src='$iconHealth' class='w-[20px] sm:w-[25px] 3xl:w-[30px] min-w-[20px] max-w-[30px]'>
                             </div>
                             
-                            <h2 class='menu-titles hidden text-secondary/50 text-paragraph'>$titleHealth</h2>
+                            <h2 class='menu-titles hidden text-secondary/50 text-paragraph transition-opacity duration-300 ease-in-out'>$titleHealth</h2>
                         </button>
 
                         <button class='flex flex-row gap-4 items-center'>
@@ -91,7 +91,7 @@
                                 <img src='$iconFashion' class='w-[20px] sm:w-[25px] 3xl:w-[30px] min-w-[20px] max-w-[30px]'>
                             </div>
                             
-                            <h2 class='menu-titles hidden text-secondary/50 text-paragraph'>$titleFashion</h2>
+                            <h2 class='menu-titles hidden text-secondary/50 text-paragraph transition-opacity duration-300 ease-in-out'>$titleFashion</h2>
                         </button>
 
                         <button class='flex flex-row gap-4 items-center'>
@@ -99,7 +99,7 @@
                                 <img src='$iconAesthetic' class='w-[20px] sm:w-[25px] 3xl:w-[30px] min-w-[20px] max-w-[30px]'>
                             </div>
                             
-                            <h2 class='menu-titles hidden text-secondary/50 text-paragraph'>$titleAesthetic</h2>
+                            <h2 class='menu-titles hidden text-secondary/50 text-paragraph transition-opacity duration-300 ease-in-out'>$titleAesthetic</h2>
                         </button>
                     </div>
                 </div>
