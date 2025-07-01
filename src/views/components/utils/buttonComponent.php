@@ -2,7 +2,7 @@
     
     namespace Src\Views\Components\Utils;
 
-    function ButtonComponent(string $text, string $variant ,string $icon = null, string $width = "380px", string $height = "50px", $id=null, string $link) {
+    function ButtonComponent(string $text, string $variant ,string $icon = null, string $width = "380px", string $height = "50px", $id=null, string $link = null) {
         
         $icon = $icon ? "<img src='$icon' class='w-4 h-4'>" : "";
 
