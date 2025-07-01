@@ -8,11 +8,11 @@ function renderPostComponent($userImagePath, $username = "Freitasdev"." 👋", $
     $localImagePath = file_exists($userImagePath) ? $userImagePath : "/VHS/public/images/Avatar.svg";
 ?>
     <div class="text-white p-4 flex items-center w-max">
-        <img src="<?php echo htmlspecialchars($localImagePath, ENT_QUOTES, 'UTF-8'); ?>" alt="Foto do usuário" class="w-10 h-10 rounded-full">
+        <img src="<?php echo htmlspecialchars($localImagePath, ENT_QUOTES, 'UTF-8'); ?>" alt="Foto do usuário" class="w-14 h-14 rounded-full">
         <div class="ml-4">
-            <span class="text-lg"><?php echo htmlspecialchars($horaPadrao, ENT_QUOTES, 'UTF-8'); ?>, <?php echo htmlspecialchars($username, ENT_QUOTES, 'UTF-8'); ?></span>
+            <span class="text-2xl font-bold"><?php echo htmlspecialchars($horaPadrao, ENT_QUOTES, 'UTF-8'); ?>, <?php echo htmlspecialchars($username, ENT_QUOTES, 'UTF-8'); ?></span>
             <br>
-            <span class="text-sm text-gray-400"><?php echo htmlspecialchars(ucfirst($diaSemana), ENT_QUOTES, 'UTF-8'); ?>, <?php echo htmlspecialchars($data, ENT_QUOTES, 'UTF-8'); ?></span>
+            <span class="text-md text-gray-400"><?php echo htmlspecialchars(ucfirst($diaSemana), ENT_QUOTES, 'UTF-8'); ?>, <?php echo htmlspecialchars($data, ENT_QUOTES, 'UTF-8'); ?></span>
         </div>
     </div>
 <?php
