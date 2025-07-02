@@ -112,7 +112,7 @@ $videos = [
             echo StudioSideMenuComponent();
             ?>
         </div>
-        <div class=" max-w-[1440px] mx-auto">
+        <div class=" max-w-[1500px] mx-auto">
             <div>
                 <p class="font-pop font-semibold text-title text-white">Gerenciamento de usuários</p>
                 <p class="text-subtitile font-semibold title-size text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
