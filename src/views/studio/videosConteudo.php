@@ -33,9 +33,9 @@ $videos = [
         "avatar_url" => "https://senachub.ms.senac.br/hubinnovation/uploads/fotos/6706850e20f59.jpg",
         "created_at" => "há 1 ano",
         "url" => "#",
-        "comments" => "12",
+        "comments" => "2000",
         "likes" => "4.5",
-        "views" => "540K"
+        "views" => "9990k"
     ],
     [
         "type_card" => "channel",
@@ -112,7 +112,7 @@ $videos = [
             echo StudioSideMenuComponent();
             ?>
         </div>
-        <div class=" max-w-[1440px] mx-auto w-full">
+        <div class=" max-w-[1500px] mx-auto">
             <div>
                 <p class="font-pop font-semibold text-title text-white">Gerenciamento de usuários</p>
                 <p class="text-subtitile font-semibold title-size text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
@@ -140,7 +140,7 @@ $videos = [
                     <p class="text-[13px] flex items-center text-gray-200">Mais antigos</p>
                 </div>
             </div>
-            <div class="colocaraqui mt-10 flex w-full gap-3 sm:gap-[0.8rem] flex-wrap  justify-start ">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-5">
                 <?php
                     echo renderCards($videos, 'channel');
                 ?>
