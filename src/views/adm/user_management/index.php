@@ -4,12 +4,15 @@ require "../../components/gridUsuarios/gridUsuariosComponent.php";
 require "../../components/header/HeaderComponent.php";
 require "../../components/barra_admin/barra_admin.php";
 require "../../components/filter/filter.php";
+require "../../components/utils/buttonComponent.php";
 
 use function Src\Views\Components\GridUsuarios\GridUsuariosComponent;
 use function Src\Views\Components\header\HeaderComponent;
 use function src\views\components\barra_admin\barra_admin;
 use function src\views\components\utils\InputComponent;
 use function src\views\components\filter\Filter;
+use function Src\Views\Components\Utils\ButtonComponent;
+
 ?>
 
 <!DOCTYPE html>
@@ -36,9 +39,9 @@ use function src\views\components\filter\Filter;
                 <p class="text-subtitile font-semibold title-size text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
             </div>
             <div class="flex h-5 mt-5 gap-5">
-                <p class="rounded-full w-30 p-3 bg-gray600 flex justify-center items-center text-white w-24">Usuários</p>
-                <p class="rounded-full w-30 p-3 bg-gray600 flex justify-center items-center text-white w-24">Denúncias</p>
-            </div>
+                <?php echo ButtonComponent("Usúarios", "studio", "", "170px", "40px"); ?>
+                <?php echo ButtonComponent("Denúncias", "studio", "", "170px", "40px"); ?>
+            </div>>
             
                 
                 <div class="w-full">
