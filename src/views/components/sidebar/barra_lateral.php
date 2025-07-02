@@ -6,6 +6,7 @@
         return '  
             <aside class="w-[9.25rem] ml-[1.87rem] h-screen transition-all duration-500 ease-in-out backdrop-blur-sm" id="sidebar">
                 <h2 class="pt-[1.18rem] ml-[0.31rem] text-gray-400 text-xs font-poppins">HOME</h2>
+
                 <ul>
                     <li class="menu-item flex items-center text-gray-300 rounded-lg cursor-pointer mt-[1.5rem] transition-transform duration-200">
                         <a href="/VHS/utils/Inicio.php" class="flex items-center w-full p-2">
@@ -45,7 +46,6 @@
                 </ul>
         
                 <hr class="divider w-[8.06rem] mt-[1.81rem] border-gray-800 transition-all duration-300 ease-in-out">
-        
                 <h2 id="categoria-title" class="menu-text pt-[1.18rem] ml-[0.31rem] text-gray-400 text-sm font-poppins">CATEGORIA</h2>
         
                 <ul>
@@ -85,9 +85,11 @@
                         </a>
                     </li>
                 </ul>
+                
                 <hr class="divides w-[8.06rem] mt-[1.81rem] border-gray-800 transition-all duration-300 ease-in-out">
             </aside>
-            <script src="/VHS/src/views/components/sidebar/script.js"></script>
+
+            <script src="./barra_lateral.js"></script>
         ';
     }
 ?>
