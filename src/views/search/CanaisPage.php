@@ -113,8 +113,7 @@ $botoes = [
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body
-    class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center text-white">
+<body class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center text-white">
     <div>
         <?= HeaderComponent() ?>
     </div>

@@ -1,4 +1,7 @@
 <?php
+
+namespace src\views\components\utils\comentaryDashboard;
+
 function cardComment(string $photoPerfil, string $title, string $time, string $description){
 
     return " <div class='flex gap-3 '>
