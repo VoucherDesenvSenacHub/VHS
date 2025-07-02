@@ -2,7 +2,7 @@
 
 namespace Src\Views\Components\Utils;
 
-function Comment_Studio(string $name, string $text, string $created_at = null, string $userImg = null)
+function CommentStudioComponent(string $name, string $text,  string | null $created_at = null, string | null $userImg = null, string | null $thumbnailURL = null, string | null $videoId = null)
 {
     $userImg = $userImg
         ? "<img src='" . htmlspecialchars($userImg, ENT_QUOTES, 'UTF-8') . "' alt='Imagem de perfil' class='w-full h-full rounded-full mt-1'>"
@@ -12,10 +12,14 @@ function Comment_Studio(string $name, string $text, string $created_at = null, s
 
     $text = htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
 
+    $thumbnailURL = htmlspecialchars($thumbnailURL ?? '', ENT_QUOTES, 'UTF-8');
+
+    $videoId = htmlspecialchars($videoId ?? '', ENT_QUOTES, 'UTF-8');
+
     $created_at = $created_at ? "<p class='text-xs text-gray-300 font-semibold ml-1'>" . htmlspecialchars($created_at, ENT_QUOTES, 'UTF-8') . "</p>" : "";
 
-    return (
-        "
+    return 
+        <<<HTML
         <div class='w-full flex gap-4 py-2'>
             <div class='w-14 h-14 rounded-full mt-1 shrink-0'>
                 $userImg
@@ -37,7 +41,7 @@ function Comment_Studio(string $name, string $text, string $created_at = null, s
                             <img src='/VHS/public/icons/comments/dialog.svg'>
                         </li>
                         <li>
-                            <img src='/VHS/public/icons/comments/Trash.svg'>
+                            <img src='/VHS/public/icons/comments/trash.svg'>
                         </li>
                         <li>
                             <img src='/VHS/public/icons/comments/favorite-comment.svg'>
@@ -48,7 +52,10 @@ function Comment_Studio(string $name, string $text, string $created_at = null, s
                     </ul>    
                 </div>
             </div>
+
+            <a href="/VHS/pages/home/video.php?id=$videoId">
+                <img src="$thumbnailURL" alt="Thumbnail de video" class="w-40 h-full rounded-xl"/>
+            </a>
         </div>
-        "
-    );
+    HTML;
 }
