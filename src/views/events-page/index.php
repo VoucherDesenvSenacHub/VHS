@@ -289,29 +289,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VHS - Home</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+
     <link rel="stylesheet" href="/VHS/src/styles/global.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <script type="module" src="/VHS/src/styles/tailwindglobal.js"></script>
-    <style>
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-    </style>
 </head>
 
-<body class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center text-white">
-    <div>
-        <?= HeaderComponent(); ?>
-    </div>
+<body class="w-full min-h-screen bg-background">
+    <?= HeaderComponent(); ?>
 
     <div class="flex flex-col md:flex-row w-full">
-        <div class="hidden md:block">
-            <?= CreateSidebar(); ?>
-        </div>
+        <?= CreateSidebar(); ?>
 
         <main class="flex-1 px-4 sm:px-6 py-4 mx-auto">
             <div class="max-w-[1500px] mx-auto">
