@@ -39,15 +39,24 @@ use function src\views\components\filter\Filter;
                 <p class="rounded-full w-30 p-3 bg-gray600 flex justify-center items-center text-white w-24">Usuários</p>
                 <p class="rounded-full w-30 p-3 bg-gray600 flex justify-center items-center text-white w-24">Denúncias</p>
             </div>
-            <div class="mt-5 flex gap-4">
-                <div class="mt-5 ml-4 relative z-20">
-                    <?= Filter() ?>
-                </div>
+            
+                
                 <div class="w-full">
-                    <?= InputComponent(placeholder: "Pesquisar", type: "text") ?>
+
+                    <div class="flex gap-4 mt-10 mb-5">
+                        <div class="mt-5 ml-4 relative z-20">
+                            <?= Filter() ?>
+                        </div>
+                        <div class="w-full ">
+                            
+                            <?= InputComponent(placeholder: "Pesquisar", type: "text") ?>
+
+                        </div>
+                    </div>
+                    
                     <?= GridUsuariosComponent(); ?>
                 </div>
-            </div>
+            
         </div>
     </div>
 

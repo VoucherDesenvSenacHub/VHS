@@ -15,7 +15,7 @@ function Filter() {
                 <li
                     class="hover:bg-gray-700 text-white font-semibold flex w-32 h-5 text-base gap-2 items-center ml-1 cursor-pointer"
                 >
-                    <img src="/VHS/public/icons/clock.svg" class="w-5" />
+                    <img src="/VHS/public/icons/clock.svg" class="w-5 h-5" />
                     <p class="text-white">Mais recentes</p>
                 </li>
                 <li
