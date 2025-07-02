@@ -203,6 +203,7 @@ $videos = [
         <div class="block">
             <?= SidebarComponent() ?>
         </div>
+        
         <div class="w-full mr-8">
             <div class="flex-1 p-4 ml-8">
                 <h1 class="text-xl sm:text-2xl font-bold">Histórico</h1>
@@ -217,12 +218,14 @@ $videos = [
                         stroke="#C4C4C4" stroke-width="1.5" />
                 </svg>
                 <input type="text" placeholder="Pesquisar"
-                    class="w-[100%] p-2 rounded-lg bg-gray-800/20 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 md:p-3 md:text-lg">
+                    class="w-[1440px] p-2 rounded-lg bg-gray-800/20 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 md:p-3 md:text-lg">
             </div>
+
+
             <div class="ml-[57px]">
                 <p class="text-gray-300 text-xl text-bold">#01/01/2000</p>
             </div>
-            <div class="flex flex-wrap gap-16 ml-24 mt-8">
+            <div class="flex flex-wrap gap-16 ml-12 mt-8">
                 <?php foreach ($videos as $video): ?>
                     <?= createVideoCard($video) ?>
 
