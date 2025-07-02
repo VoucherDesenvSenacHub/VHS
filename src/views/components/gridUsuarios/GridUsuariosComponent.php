@@ -7,11 +7,11 @@ function GridUsuariosComponent($usuarios = []) {
             ['id' => 1, 'username' => '@rafael_', 'description' => '4506022 - Ofba - 4678', 'profession' => 'Criador de conteúdo'],
             ['id' => 2, 'username' => '@rafael_', 'description' => '4506022 - Ofba - 4678', 'profession' => 'Criador de conteúdo'],
             ['id' => 3, 'username' => '@rafael_', 'description' => '4506022 - Ofba - 4678', 'profession' => 'Criador de conteúdo'],
-            ['id' => 4, 'username' => '@rafael_', 'description' => '4506022 - Ofba - 4678', 'profession' => 'Criador de conteúdo'],
+            ['id' => 4, 'username' => '@rafael_', 'description' => '4506022 - Ofba - 4678', 'profession' => 'Usuário'],
             ['id' => 5, 'username' => '@rafael_', 'description' => '4506022 - Ofba - 4678', 'profession' => 'Criador de conteúdo'],
             ['id' => 6, 'username' => '@rafael_', 'description' => '4506022 - Ofba - 4678', 'profession' => 'Criador de conteúdo'],
-            ['id' => 7, 'username' => '@rafael_', 'description' => '4506022 - Ofba - 4678', 'profession' => 'Criador de conteúdo'],
-            ['id' => 8, 'username' => '@rafael_', 'description' => '4506022 - Ofba - 4678', 'profession' => 'Criador de conteúdo'],
+            ['id' => 7, 'username' => '@rafael_', 'description' => '4506022 - Ofba - 4678', 'profession' => 'Usuário'],
+            ['id' => 8, 'username' => '@rafael_', 'description' => '4506022 - Ofba - 4678', 'profession' => 'Admin'],
         ];
     }
 
