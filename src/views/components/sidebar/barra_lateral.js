@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     toggleButton.addEventListener("click", () => {
         isExpanded = !isExpanded;
-        
         sidebar.style.transition = "width 0.3s ease-in-out, margin-left 0.3s ease-in-out, margin-right 0.3s ease-in-out";
         sidebar.style.width = isExpanded ? "9.25rem" : "3.5rem";
         sidebar.style.marginLeft = isExpanded ? "1.5rem" : "0.5rem";

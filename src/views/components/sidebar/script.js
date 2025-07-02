@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     barrinha.addEventListener("click", () => {
         if (!isDesktop) {
             const isHidden = sidebar.classList.contains("hidden");
-
+            
             if (isHidden) {
                 sidebar.classList.remove("hidden");
                 void sidebar.offsetHeight;

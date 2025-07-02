@@ -17,7 +17,7 @@
         $iconFast = "/VHS/public/icons/fast.svg", $titleFast = "Fast",
         $iconEvents = "/VHS/public/icons/radio.svg", $titleEvents = "Eventos",
         $iconHistory = "/VHS/public/icons/youtube.svg", $titleHistory = "Histórico",
-
+        
         $titleCategory = "CATEGORIAS",
         $iconTech = "/VHS/public/icons/cpu.svg", $titleTech = "Tecnologia",
         $iconHealth = "/VHS/public/icons/saude.svg", $titleHealth = "Saúde",
