@@ -13,13 +13,13 @@ function Filter() {
         >
             <ul class="w-full flex flex-col gap-3">
                 <li
-                    class="hover:bg-gray-700 text-white font-semibold flex w-32 h-5 text-base gap-2 items-center ml-1 cursor-pointer"
+                    class=" text-white font-semibold flex w-32 h-5 text-base gap-2 items-center ml-1 cursor-pointer"
                 >
                     <img src="/VHS/public/icons/clock.svg" class="w-5 h-5" />
                     <p class="text-white">Mais recentes</p>
                 </li>
                 <li
-                    class="hover:bg-gray-700 text-white font-semibold flex w-32 h-5 text-base gap-2 items-center ml-1 cursor-pointer"
+                    class=" text-white font-semibold flex w-32 h-5 text-base gap-2 items-center ml-1 cursor-pointer"
                 >
                     <img src="/VHS/public/icons/clock2.svg" class="w-5" />
                     <p class="ml-1">Mais antigos</p>
