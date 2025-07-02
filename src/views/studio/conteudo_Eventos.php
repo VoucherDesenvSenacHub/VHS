@@ -158,9 +158,9 @@ $videos = [
             </div>
             <div class="flex h-5 mt-5 gap-5">
                 <?php
-                echo ButtonComponent("Videos", "studio", "", "170px", "40px","","./videosConteudo.php");
-                echo ButtonComponent("Fast", "studio", "", "170px", "40px","","./fastConteudo.php");
-                echo ButtonComponent("Eventos", "studio", "", "170px", "40px","","");
+                echo ButtonComponent("Videos", "studio", "", 170, 40,"","./videosConteudo.php");
+                echo ButtonComponent("Fast", "studio", "", 170, 40,"","./fastConteudo.php");
+                echo ButtonComponent("Eventos", "studio", "", 170, 40,"","");
                 ?>
             </div>
             <div class="mt-10 flex items-center gap-4 h-16 cavalo">
