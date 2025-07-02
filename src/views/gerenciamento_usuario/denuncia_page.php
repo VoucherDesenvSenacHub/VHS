@@ -62,7 +62,7 @@ $commets_lista = [
             </div>
             <div class="flex h-5 mt-5 gap-5">
                 <?php echo ButtonComponent("Usúarios", "studio", "", "170px", "40px"); ?>
-                <?php echo ButtonComponent("Eventos", "studio", "", "170px", "40px"); ?>
+                <?php echo ButtonComponent("Denúncias", "studio", "", "170px", "40px"); ?>
             </div>
             <div class="mt-10 flex items-center gap-4 h-16 cavalo">
                 <button id="btn_filter" onclick="filter(event)">
