@@ -1,12 +1,14 @@
 <?php
 
-    require "../components/sidebar/index.php";
-    require "../components/header/headerComponent.php";
-    require "../components/cards/index.php";
-    require "../components/featuredCard/featuredEventComponent.php";
+    require_once __DIR__ . "/../components/header/headerComponent.php";
+    require_once __DIR__ . "/../components/sidebar/index.php";
+    require_once __DIR__ . "/../components/sidebar/barra_lateral.php"; // Barra antiga
+    require_once __DIR__ . "/../components/featuredCard/featuredEventComponent.php";
+    require_once __DIR__ . "/../components/cards/index.php";
 
-    use function Src\Views\Components\Sidebar\CreateSidebar;
     use function Src\Views\Components\Header\HeaderComponent;
+    use function Src\Views\Components\Sidebar\CreateSidebar;
+    use function Src\Views\Components\Sidebar\SidebarComponent; // Barra Antiga
     use function Src\Views\Components\Cards\renderCards;
     use function Views\Components\FeaturedCard\FeaturedEventCard;
 
@@ -305,12 +307,12 @@
 
 <body class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center text-white">
     <div>
-        <?= HeaderComponent() ?>
+        <?= HeaderComponent(); ?>
     </div>
 
     <div class="flex flex-col md:flex-row w-full">
         <div class="hidden md:block">
-            <?= CreateSidebar() ?>
+            <?= CreateSidebar(); ?>
         </div>
 
         <main class="flex-1 px-4 sm:px-6 py-4 mx-auto">
