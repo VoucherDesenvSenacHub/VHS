@@ -6,12 +6,11 @@
     require_once __DIR__ . "/../sidebar/barra_lateral.php";
     use function Src\Views\Components\Sidebar\SidebarComponent;
 
-    require_once __DIR__ . "/../sidebar/index.php";
-    use function Src\Views\Components\Sidebar\CreateSidebear;
-
     require_once __DIR__ . "/../cards/index.php";
     use function Src\Views\Components\Cards\renderCards;
-use function Src\Views\Components\Sidebar\CreateSidebar;
+
+    require_once __DIR__ . "/../sidebar/index.php";
+    use function Src\Views\Components\Sidebar\CreateSidebar;
 
 ?>
  
