@@ -109,7 +109,7 @@
 
             </aside>
 
-            <script src='./script.js'></script>
+            <script src='/VHS/src/views/components/sidebar/script.js'></script>
         HTML;
     }
 
