@@ -2,13 +2,11 @@
 
     require_once __DIR__ . "/../components/header/headerComponent.php";
     require_once __DIR__ . "/../components/sidebar/index.php";
-    require_once __DIR__ . "/../components/sidebar/barra_lateral.php"; // Barra antiga
     require_once __DIR__ . "/../components/featuredCard/featuredEventComponent.php";
     require_once __DIR__ . "/../components/cards/index.php";
 
     use function Src\Views\Components\Header\HeaderComponent;
     use function Src\Views\Components\Sidebar\CreateSidebar;
-    use function Src\Views\Components\Sidebar\SidebarComponent; // Barra Antiga
     use function Src\Views\Components\Cards\renderCards;
     use function Views\Components\FeaturedCard\FeaturedEventCard;
 
