@@ -22,9 +22,9 @@
     $featuredVieo = [
         'image_url' => 'https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png',
         'title' => 'Usando IA para processamento de geoinformação em Python, com GIS AXIS',
-        'instructor' => 'Paulo Silveira',
-        'event' => 'Evento',
-        'date' => '2025-08-09',
+        'instructor' => 'Ministrado por Paulo Silveira',
+        'event_type' => 'Pago | Presencial',
+        'date' => '09-08 18:15',
     ];
 
     $techVideos = [
@@ -147,7 +147,7 @@
                         <p class="text-gray-400 text-sm mb-6">Confira os vídeo mais populares da nossa plataforma VHS</p>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                            <?= renderCards($techVideos, 'event'); ?>
+                        <?= renderCards($techVideos, 'event'); ?>   
                         </div>
                     </section>
             </div>
