@@ -11,6 +11,7 @@ function initSidebar() {
 
             sidebar.style.width = isExpanded ? "11rem" : "3.5rem";
             sidebar.style.marginLeft = isExpanded ? "1.87rem" : "0.5rem";
+            sidebar.style.marginRight = isExpanded ? "0.0rem" : "3.87rem";
 
             texts.forEach(text => {
                 text.style.display = isExpanded ? "block" : "none";

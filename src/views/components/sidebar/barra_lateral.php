@@ -79,7 +79,7 @@
                     <li class="flex items-center text-gray-300 rounded-lg cursor-pointer mt-[2rem]">
                         <a href="/VHS/utils/Estética.php" class="flex items-center w-full p-2">
                             <div class="icon estetica-icon w-[2rem] h-[2rem] flex items-center justify-center bg-white/5 rounded-[12px] ml-[0.31rem]">
-                                <img src="/VHS/public/icons/estetica.svg" alt="Estética">
+                                <img src="/VHS/public/icons/Estetica.svg" alt="Estética">
                             </div>
                             <h2 class="menu-text ml-[1rem] text-gray-400 text-sm font-semibold transition-all duration-500 ease-in-out">Estética</h2>
                         </a>
@@ -87,7 +87,7 @@
                 </ul>
                 <hr class="divides w-[8.06rem] mt-[1.81rem] border-gray-800 transition-all duration-300 ease-in-out">
             </aside>
-            <script src="script.js"></script>
+            <script src="/VHS/src/views/components/sidebar/script.js"></script>
         ';
     }
 ?>
