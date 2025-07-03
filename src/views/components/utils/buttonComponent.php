@@ -34,7 +34,7 @@
 
     
         $buttonStyle = 
-        "flex justify-center items-center w-[$width] h-[$height] gap-2 rounded-md cursor-pointer" 
+        "flex justify-center items-center w-[$width] h-[$height] gap-2 rounded-md cursor-pointer " 
         . ($isActive ? "text-white " : "text-[#D9D9D9] ");
 
 
