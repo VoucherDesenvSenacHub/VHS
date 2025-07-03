@@ -4,7 +4,7 @@ namespace src\views\components\filter;
 function Filter() {
     return '
         <button id="filtro" class="focus:outline-none">
-            <img src="/VHS/public/icons/Filter.svg" alt="Filtro">
+            <img class="size-7" src="/VHS/public/icons/Filter.svg" alt="Filtro">
         </button>
 
         <div
