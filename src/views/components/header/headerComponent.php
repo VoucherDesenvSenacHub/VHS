@@ -14,7 +14,7 @@
 
         return "
             <header id='header' class='bg-gradient-to-b from-black/75 to-black/0 flex items-center justify-between p-5 sticky top-0 select-none z-20'>  
-                <div class='flex items-center gap-4'>
+                <div class='flex items-center gap-6'>
                     $BarComponent
                     <img src='/VHS/public/logos/Logo.svg' alt='Logo' class='h-8'>
                 </div>
