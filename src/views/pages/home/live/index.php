@@ -58,10 +58,10 @@ $cards = [
 
     <main class="flex-1 p-4">
 
-      <div class="w-full">
+     <div class="max-w-[1500px] mx-auto w-full">
         <div class="rounded-lg">
           <iframe
-            class="w-[1550px] h-[400px] md:h-[573px] rounded-lg"
+            class="w-[1500px] h-[400px] md:h-[573px] rounded-lg"
             src="<?= $link ?>"
             title="YouTube video player"
             frameborder="0"
@@ -81,7 +81,7 @@ $cards = [
                   <?= sharedComponent('https://www.youtube.com/watch?v=Qjk-cSW-jk4','Sla')?>
                   <?= StarRatingComponent() ?>
               </div>
-              <p class="mt-2 ml-32 text-xs text-red-500 whitespace-pre-line">AO VIVO</p>
+              <p class="mt-2 ml-[7.7rem] text-xs text-red-500 whitespace-pre-line">AO VIVO</p>
             </div>
         </div>
         <div class="flex items-center mt-10 gap-3">
@@ -93,7 +93,7 @@ $cards = [
           </div>
         </div>
       </div>
-      <div class="flex flex-col lg:flex-row gap-6 mt-8">
+      <div class="flex flex-col lg:flex-row gap-6 mt-8 max-w-[1500px] mx-auto w-full">
 
         <div class="w-full lg:flex-[2] rounded-lg">
           <div class="flex flex-col">
