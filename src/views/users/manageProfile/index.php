@@ -12,6 +12,7 @@ use function Src\views\Components\sidebar\SidebarComponent;
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,12 +20,13 @@ use function Src\views\Components\sidebar\SidebarComponent;
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../../../styles/tailwindglobal.js"></script>
 </head>
+
 <body class="bg-background flex">
     <div class="fixed w-screen">
         <?= HeaderComponent() ?>
     </div>
     <div class="flex mt-20">
-        <?= SidebarComponent() ?> 
+        <?= SidebarComponent() ?>
     </div>
     <div class="flex ml-24 mt-14 w-full">
         <div class="flex flex-col gap-4 p-6 flex-grow">
@@ -47,27 +49,27 @@ use function Src\views\Components\sidebar\SidebarComponent;
                         label: "Nome de Usuário",
                         icon: "../../../../public/icons/userRound.svg",
                         iconPosition: "right-3"
-                        ) ?>
+                    ) ?>
                     <?= InputComponent(
                         placeholder: "Usuário123@gmail.com",
                         type: "email",
                         label: "E-mail",
                         icon: "../../../../public/icons/mail.svg",
                         iconPosition: "right-3"
-                        ) ?>
+                    ) ?>
                     <?= InputComponent(
                         placeholder: "Senha123",
                         type: "password",
                         label: "Senha",
                         icon: "../../../../public/icons/lock.svg",
                         iconPosition: "right-3"
-                        ) ?>
+                    ) ?>
                     <?= InputComponent(
                         placeholder: "Inovações de Tecnologias",
                         type: "text",
                         label: "Categorias de Interesse",
                         iconPosition: "right-3"
-                        ) ?>
+                    ) ?>
                 </div>
                 <div class="flex items-center w-full gap-4">
                     <?= ButtonComponent("Cancelar", "outline") ?>
@@ -77,6 +79,7 @@ use function Src\views\Components\sidebar\SidebarComponent;
         </div>
     </div>
 </body>
+
 </html>
 <script>
     document.getElementById('uploadButton').addEventListener('click', function() {
