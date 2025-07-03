@@ -151,16 +151,16 @@ $videos = [
             echo StudioSideMenuComponent();
             ?>
         </div>
-        <div class="mt-7  max-w-[1440px] mx-auto w-full">
+        <div class="max-w-[1500px] mx-auto ">
             <div>
                 <p class="font-pop font-semibold text-title text-white">Gerenciamento de usuários</p>
                 <p class="text-subtitile font-semibold title-size text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
             </div>
             <div class="flex h-5 mt-5 gap-5">
                 <?php
-                echo ButtonComponent("Videos", "studio", "", "170px", "40px","","./videosConteudo.php");
-                echo ButtonComponent("Fast", "studio", "", "170px", "40px","","./fastConteudo.php");
-                echo ButtonComponent("Eventos", "studio", "", "170px", "40px","","");
+                echo ButtonComponent("Videos", "studio", "", 170, 40,"","./videosConteudo.php");
+                echo ButtonComponent("Fast", "studio", "", 170, 40,"","./fastConteudo.php");
+                echo ButtonComponent("Eventos", "studio", "", 170, 40,"","");
                 ?>
             </div>
             <div class="mt-10 flex items-center gap-4 h-16 cavalo">
@@ -179,7 +179,7 @@ $videos = [
                     <p class="text-[13px] flex items-center text-gray-200">Mais antigos</p>
                 </div>
             </div>
-            <div class="colocaraqui mt-10 flex w-full gap-3 sm:gap-[0.8rem] flex-wrap  justify-start ">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-5">
                 <?php
                 foreach ($videos as $video) {
                     echo renderCards($cards, 'channel');
