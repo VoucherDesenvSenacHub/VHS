@@ -166,7 +166,7 @@ $videos = [
 
                         <!-- Imagem de perfil sobreposta -->
                             <div class="flex flex-row">
-                                <div class="w-24 h-24 sm:w-36 sm:h-36 rounded-2xl border-1 border-white/20 overflow-hidden -mt-20 md:-mt-16 ml-4 sm:ml-6 z-10 relative">
+                                <div class="w-24 h-24 sm:w-36 sm:h-36 rounded-3xl border-1 border-white/20 overflow-hidden -mt-20 md:-mt-16 ml-4 sm:ml-6 z-10 relative">
                                     <img src="../../../public/logos/BillGates.webp" class=" object-cover h-full" alt="Perfil">
                                 </div>
                                 <div class="flex flex-col md:flex-row items-start sm:items-center mt-4 sm:mt-6 ml-4 sm:ml-6 gap-4 ">
