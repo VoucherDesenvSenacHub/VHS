@@ -3,7 +3,9 @@ require "../components/header/headerComponent.php";
 require "../components/sidebar/barra_lateral.php";
 require "../components/cards/index.php";
 require "../components/utils/inputComponent.php";
+require "../components/filter/filter.php";
 
+use function src\views\components\filter\Filter;
 use function src\views\components\utils\InputComponent;
 use function Src\Views\Components\Cards\renderCards;
 use function src\views\components\Sidebar\SidebarComponent;
@@ -210,15 +212,23 @@ $videos = [
                 <p class="text-gray-400 mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
             </div>
 
-            <div class=" flex-row items-center ml-12">
-                <?= InputComponent(type: 'text',placeholder:'Pesquisar.')?>
+            <div class="flex gap-4 mb-5">
+                <div class="mt-5 ml-4 relative z-20">
+                    <?= Filter() ?>
+                </div>
+                <div class="w-full ">
+
+                    <?= InputComponent(placeholder: "Pesquisar", type: "text") ?>
+
+                </div>
             </div>
+
             <div class="ml-[57px]">
-                <p class="text-gray-300 text-xl text-bold">#01/01/2000</p>
+                <p class="text-gray-300 text-xl text-bold">#01/01/2025</p>
             </div>
             <div class="flex flex-wrap gap-16 ml-12 mt-8">
                 <?php foreach ($videos as $video): ?>
-                    <?= renderCards($cards,'video')?>
+                    <?= renderCards($cards, 'video') ?>
 
                 <?php endforeach; ?>
             </div>
