@@ -2,12 +2,17 @@
 require __DIR__ . '/../../components/utils/buttonComponent.php';
 require __DIR__ . '/../../components/utils/inputComponent.php';
 require __DIR__ . '/../../components/header/headerComponent.php';
-require __DIR__ . '/../../components/barra_lateral/barra_lateral.php';
+require __DIR__ . '/../../components/sidebar/barra_lateral.php';
+require __DIR__ . '/../../components/Shared/shared.php';
 
 use function Src\Views\Components\Utils\ButtonComponent;
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\Header\HeaderComponent;
 use function Src\views\Components\sidebar\SidebarComponent;
+use function Src\Views\Components\SharedcopyNotify;
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +36,7 @@ use function Src\views\Components\sidebar\SidebarComponent;
             <p class="font-sans font-semibold text-3xl text-gray-200 mb-2">Gerenciar Perfil</p>
             <div class="w-[550px] flex flex-col gap-8">
                 <div class="flex items-center justify-between gap-2 w-full">
-                    <div class="w-36 h-36 relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
+                    <div class="w-36 h-36 relative flex  shrink-0 overflow-hidden rounded-full">
                         <img id="profileImage" src="../../../../public/images/foto-sem-perfil.jpg" alt="Imagem de Perfil" class="object-cover w-full h-full">
                     </div>
                     <div class="flex space-x-3 w-96">
@@ -69,9 +74,13 @@ use function Src\views\Components\sidebar\SidebarComponent;
                         iconPosition: "right-3"
                         ) ?>
                 </div>
-                <div class="flex items-center w-full gap-4">
-                    <?= ButtonComponent("Cancelar", "outline") ?>
-                    <?= ButtonComponent("Salvar Alterações", "default") ?>
+                <div class="flex items-center justify-between w-full ">
+                    <?= ButtonComponent("Cancelar", "outline", null, 240, 50,); ?>
+                    
+                    <button onclick="showNotification('Sucesso!', 'As alterações foram salvas.')" class="bg-purple-700 hover:bg-purple-800 text-white w-[250px] h-[55px] rounded-md">
+                        Salvar Alterações
+                    </button>
+
                 </div>
             </div>
         </div>
@@ -98,4 +107,33 @@ use function Src\views\Components\sidebar\SidebarComponent;
         document.getElementById('profileImage').src = '../../../../public/images/foto-sem-perfil.jpg';
         document.getElementById('imageUpload').value = '';
     });
+</script>
+
+<script>
+
+function showNotification(title, subtitle) {
+        const existing = document.getElementById('copy-notification');
+        if (existing) existing.remove();
+
+        document.body.insertAdjacentHTML('beforeend', `<?= copyNotify(); ?>`);
+        const notification = document.getElementById('copy-notification');
+
+        notification.querySelector('.title').textContent = title;
+        notification.querySelector('.subtitle').textContent = subtitle;
+
+        notification.classList.remove('hidden');
+
+        requestAnimationFrame(() => {
+            notification.classList.remove('opacity-0', 'translate-y-5');
+            notification.classList.add('opacity-100', 'translate-y-0');
+        });
+
+        setTimeout(() => {
+            notification.classList.remove('opacity-100', 'translate-y-0');
+            notification.classList.add('opacity-0', 'translate-y-5');
+
+            setTimeout(() => notification.remove(), 300);
+        }, 2000);
+    }
+
 </script>
