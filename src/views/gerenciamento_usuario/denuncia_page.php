@@ -61,8 +61,8 @@ $commets_lista = [
                 <p class="text-subtitile font-semibold title-size text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
             </div>
             <div class="flex h-5 mt-5 gap-5">
-                <?php echo ButtonComponent("Usúarios", "studio", "", "170px", "40px"); ?>
-                <?php echo ButtonComponent("Denúncias", "studio", "", "170px", "40px"); ?>
+                <?php echo ButtonComponent("Usúarios", "studio", "", 10.675, 2.5); ?>
+                <?php echo ButtonComponent("Denúncias", "studio", "", 10.675, 2.5); ?>
             </div>
             <div class="mt-10 flex items-center gap-4 h-16 cavalo">
                 <button id="btn_filter" onclick="filter(event)">

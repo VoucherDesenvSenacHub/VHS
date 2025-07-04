@@ -54,9 +54,9 @@ require "../components/utils/footer.php";
             </div>
             <div class="flex h-5 mt-5 gap-5">
                 <?php
-                echo ButtonComponent("Videos", "studio", "", "170px", "40px","",'./videosConteudo.php');
-                echo ButtonComponent("Fast", "studio", "", "170px", "40px","","");
-                echo ButtonComponent("Eventos", "studio", "", "170px", "40px","","./conteudo_Eventos.php");
+                echo ButtonComponent("Videos", "studio", "", "10.675", "2.5","",'./videosConteudo.php');
+                echo ButtonComponent("Fast", "studio", "", "10.675", "2.5","","");
+                echo ButtonComponent("Eventos", "studio", "", "10.675", "2.5","","./conteudo_Eventos.php");
                 ?>
             </div>  
             <div class="mt-10 flex items-center gap-4 h-16 cavalo">

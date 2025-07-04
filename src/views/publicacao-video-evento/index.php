@@ -51,9 +51,9 @@ $conteudos = []
                 <h1 class='text-title font-bold'>Criar conteúdo</h1>
                 <h1 class='text-paragraph text-gray-400'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</h1>
                 <div class="mt-2 flex gap-2">
-                    <?php echo ButtonComponent("Vídeo", "studio", "", "170px", "40px","","./#"); ?>
-                    <?php echo ButtonComponent("Fast", "studio", "", "170px", "40px","","../publicao-video-fast/index.php"); ?>
-                    <?php echo ButtonComponent("Eventos", "studio", "", "170px", "40px","","#"); ?>
+                    <?php echo ButtonComponent("Vídeo", "studio", "", 10.675, 2.5,"","./#"); ?>
+                    <?php echo ButtonComponent("Fast", "studio", "", 10.675, 2.5,"","../publicao-video-fast/index.php"); ?>
+                    <?php echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5,"","#"); ?>
                 </div>
 
                 <div id="URL">
@@ -111,8 +111,8 @@ $conteudos = []
         </div>
         
         <div class="flex flex-col sm:flex-row justify-center items-end gap-10 my-6">
-            <?= ButtonComponent(text: "Cancelar", variant: "outline", id: "cancel-button", width:"440px") ?>
-            <?= ButtonComponent(text: "Salvar Alterações", variant: "default", id: "publish-button", width:"440px") ?>
+            <?= ButtonComponent(text: "Cancelar", variant: "outline", id: "cancel-button", width:27.5) ?>
+            <?= ButtonComponent(text: "Salvar Alterações", variant: "default", id: "publish-button", width:27.5) ?>
         </div>
         
     </div>
