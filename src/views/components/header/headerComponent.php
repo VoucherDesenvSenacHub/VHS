@@ -13,22 +13,22 @@
         echo UserMenu();
 
         return "
-            <header id='header' class='bg-gradient-to-b from-black/75 to-black/0 flex items-center justify-between p-5 sticky top-0 select-none z-20'>  
-                <div class='flex items-center gap-4'>
+            <header id='header' class='bg-gradient-to-b from-black/75 to-black/0 w-full h-auto flex items-center justify-between p-6 sticky top-0 z-20'>  
+                <div class='flex items-center gap-6'>
                     $BarComponent
-                    <img src='/VHS/public/logos/Logo.svg' alt='Logo' class='h-8'>
+                    <img src='/VHS/public/logos/logo.svg' class='w-auto h-8 pointer-events-none select-none'>
                 </div>
 
                 <div class='flex items-center gap-4'>
-                    <button id='search' class='p-1 rounded-lg'>
-                        <img src='/VHS/public/icons/lupa.svg' alt=''>
+                    <button id='search' class='p-2 rounded-full transition-all duration-200 hover:bg-white/10'>
+                        <img src='/VHS/public/icons/lupa.svg' class='h-4 pointer-events-none'>
                     </button>
 
-                    <div>
-                        <img src='/VHS/public/icons/Rectangle.svg' alt=''>
-                    </div>
+                    <img src='/VHS/public/icons/rectangle.svg'>
                     
-                    <img id='open-user-menu' src='/VHS/public/images/avatar.svg' class='cursor-pointer h-8 w-8 rounded-full'>
+                    <button id='open-user-menu' class='overflow-hidden rounded-full'>
+                        <img src='/VHS/public/images/avatar.svg' class='h-8 w-8 pointer-events-none'>
+                    </button>
                 </div>
             </header>
 
