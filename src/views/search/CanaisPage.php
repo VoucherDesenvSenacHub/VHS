@@ -94,7 +94,7 @@ $videos = [
 
 $botoes = [
     ['texto' => 'Vídeos', 'link' => './VideosPage.php'],
-    ['texto' => 'Fast', 'link' => './FeastPage.php'],
+    ['texto' => 'Fast', 'link' => './FastPage.php'],
     ['texto' => 'Eventos', 'link' => './EventosPage.php'],
     ['texto' => 'Canais', 'link' => './CanaisPage.php']
 ];
