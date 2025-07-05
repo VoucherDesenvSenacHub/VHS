@@ -11,7 +11,7 @@
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M25.0007 6V6C25.0007 6.55228 24.553 7 24.0007 7H3.99978C3.44767 7 3.00073 6.55211 3.00073 6V6V6C3.00073 5.44827 3.44707 5 3.9988 5H24.0007C24.553 5 25.0007 5.44772 25.0007 6V6Z" fill="white"/>
                     
                     <path
-                     id="seta" class="transition-transform duration-300 origin-center"
+                     id="seta" class="transition-transform duration-200 origin-center"
                      d="M1.02937 18.7924C0.509357 18.3921 0.509358 17.6079 1.02937 17.2076L2.89001 15.7753C3.54758 15.2691 4.5 15.7378 4.5 16.5677V19.4323C4.5 20.2622 3.54757 20.7309 2.89001 20.2247L1.02937 18.7924Z"
                      fill="white"
                     />
