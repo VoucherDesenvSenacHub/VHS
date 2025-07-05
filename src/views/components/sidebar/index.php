@@ -10,22 +10,6 @@
 
     namespace Src\Views\Components\Sidebar;
 
-    $pages = isset($_GET['page']) ? $_GET['page'] : 'inicio';
-
-    $menu = [
-        'inicio' => 'Inicio',
-        'fast' => 'Fast',
-        'eventos' => 'Eventos',
-        'historico' => 'Histórico',
-    ];
-
-    $categories = [
-        'tecnologia' => 'Tecnologia',
-        'saude' => 'Saúde',
-        'moda' => 'Moda',
-        'estetica' => 'Estética',
-    ];
-
     function CreateSidebar(
         
         $titleMenu = "MENU",
