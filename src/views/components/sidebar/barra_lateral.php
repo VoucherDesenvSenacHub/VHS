@@ -45,7 +45,6 @@
                 </ul>
         
                 <hr class="divider w-[8.06rem] mt-[1.81rem] border-gray-800 transition-all duration-300 ease-in-out">
-        
                 <h2 id="categoria-title" class="menu-text pt-[1.18rem] ml-[0.31rem] text-gray-400 text-sm font-poppins">CATEGORIA</h2>
         
                 <ul>
@@ -85,9 +84,11 @@
                         </a>
                     </li>
                 </ul>
+                
                 <hr class="divides w-[8.06rem] mt-[1.81rem] border-gray-800 transition-all duration-300 ease-in-out">
             </aside>
-            <script src="/VHS/src/views/components/sidebar/script.js"></script>
+
+            <script src="./barra_lateral.js"></script>
         ';
     }
 ?>
