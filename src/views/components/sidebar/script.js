@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-
+    
     const barrinha = document.getElementById("barrinha");
     const sidebar = document.querySelector(".sidebar");
     const menuTitles = document.querySelectorAll(".menu-titles");
