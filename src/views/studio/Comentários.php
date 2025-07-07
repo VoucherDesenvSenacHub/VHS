@@ -8,8 +8,11 @@ use function src\views\components\header\HeaderComponent;
 require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/buttonComponent.php";
 use function src\views\components\Utils\ButtonComponent;
 
-require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/comments_studio/comentary_studio_Component.php";
-use function src\views\components\Utils\Comment_Studio;
+// require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/comments_studio/comentary_studio_Component.php";
+// use function src\views\components\Utils\Comment_Studio;
+
+require_once "../components/utils/comments_studio/commentStudioComponent.php";
+use function src\views\components\Utils\CommentStudioComponent; 
 
 require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/footer.php";
 use function src\views\components\Utils\Footer;
@@ -22,7 +25,7 @@ use function src\views\components\Utils\Footer;
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Comentários do Vídeo</title>
-  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Syne:wght@500..800&display=swap" rel="stylesheet" />
 </head>
 <body class="bg-gradient-to-b from-[#20002c] via-black to-[#20002c] min-h-screen text-white font-[Poppins]">
@@ -33,13 +36,15 @@ use function src\views\components\Utils\Footer;
     <?php echo StudioSideMenuComponent(); ?>
 
     <div class="flex-1 px-10 py-6">
-      <h1 class="text-2xl font-semibold mb-2">Comentários do vídeo</h1>
-      <p class="text-sm text-gray-300 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
+      <div class="flex flex-col gap-2 mb-5">
+        <h1 class="text-2xl font-semibold ">Comentários do vídeo</h1>
+        <p class="text-sm text-gray-300 ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
+      </div>
 
-      <div class="flex gap-3 mb-6">
-        <?php echo ButtonComponent("Edição", "studio", "", "170px", "40px"); ?>
-        <?php echo ButtonComponent("Comentários", "studio", "", "170px", "40px"); ?>
-        <?php echo ButtonComponent("Analytics", "studio", "", "170px", "40px"); ?>
+      <div class="flex gap-5 mb-6">
+        <?php echo ButtonComponent("Edição", "studio", "", 170, 40,"","../edicao-de-video"); ?>
+        <?php echo ButtonComponent("Comentários", "studio", "", 170, 40,"","",true); ?>
+        <?php echo ButtonComponent("Analytics", "studio", "", 170, 40,"","../Analytics (Studio)/Analytics_studio.php"); ?>
       </div>
 
       <div class="mb-6 flex gap-3">
@@ -48,16 +53,18 @@ use function src\views\components\Utils\Footer;
       </div>
 
       <div class="w-full flex flex-col gap-4">
-        <?php
+      <?php
         for ($i = 0; $i < 8; $i++) {
-          echo Comment_Studio(
+          echo CommentStudioComponent(
             "Celestino",
             "Muito emocionante! Eu sei! Não teria coragem de entrar nessas casas como você kkk Tudo sobre o Next.js 15, nova arquitetura de pasta!",
             "há 5 dias",
-            null
+            null,
+            "https://i.ibb.co/v6xs3ZB6/CUUJVx-Nyw4c-HD-5.jpg"
           );
         }
         ?>
+        
       </div>
     </div>
 
