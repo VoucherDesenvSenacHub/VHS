@@ -6,6 +6,7 @@ require "../../../components/featuredCard/featuredCardComponent.php";
 require "../../../components/utils/buttonComponent.php";
 require "../../../components/cards/index.php";
 require "../../../components/channel/channelComponent.php";
+require "../../../components/CardFastComponent/cardFast.php";
 
 use function Src\Views\Components\Cards\createChannelCard;
 use function Src\Views\Components\Cards\renderCards;
@@ -13,6 +14,7 @@ use function Src\Views\Components\Channel\channelComponent;
 use function Src\Views\Components\Header\HeaderComponent;
 use function Src\Views\Components\Sidebar\SidebarComponent;
 use function Src\Views\Components\Utils\ButtonComponent;
+use function src\Views\Components\CardFast;
 
 
 $term = isset($_GET['term']) ? htmlspecialchars($_GET['term']) : '';
@@ -333,10 +335,10 @@ $render = [
                 <h2 class="text-2xl font-bold text-white mb-2"><span class="text-purple-400">#</span> Resultados para "<?= $term ?>"</h2>
                 <p class="text-gray-400 text-sm mb-6">Confira os resultado para "<?= $term ?>" com a categoria desejada</p>
                 <div class="flex flex-wrap gap-4 mb-6">
-                    <?= ButtonComponent("Vídeos", "studio", "","170px", "40px", 1, "?term=$term&filter=videos") ?>
-                    <?= ButtonComponent("Fast", "studio", "","170px", "40px", 1, "?term=$term&filter=fast") ?>
-                    <?= ButtonComponent("Eventos", "studio", "","170px", "40px", 1, "?term=$term&filter=events") ?>
-                    <?= ButtonComponent("Canais", "studio", "","170px", "40px", 1, "?term=$term&filter=channels") ?>
+                    <?= ButtonComponent("Vídeos", "studio", "",170, 40, 1, "?term=$term&filter=videos") ?>
+                    <?= ButtonComponent("Fast", "studio", "",170, 40, 1, "?term=$term&filter=fast") ?>
+                    <?= ButtonComponent("Eventos", "studio", "",170, 40, 1, "?term=$term&filter=events") ?>
+                    <?= ButtonComponent("Canais", "studio", "",170, 40, 1, "?term=$term&filter=channels") ?>
                 </div>
             </div>
             <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 <?= $filter === 'channels' ? '!grid-cols-1' : ''?>">
@@ -379,6 +381,55 @@ $render = [
                     "category" => "#Tecnologia",
                     "followers" => 5000
                     ]);
+                } else if ($filter === "fast") {
+                        echo CardFast([
+                                'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                                'titulo' => 'espero vocês lá',
+                                'likes' => '50K',
+                                'views' => '540K'
+                                ]);       
+                        echo CardFast([
+                                'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                                'titulo' => 'espero vocês lá',
+                                'likes' => '50K',
+                                'views' => '540K'
+                                ]);       
+                        echo CardFast([
+                                'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                                'titulo' => 'espero vocês lá',
+                                'likes' => '50K',
+                                'views' => '540K'
+                                ]);       
+                        echo CardFast([
+                                'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                                'titulo' => 'espero vocês lá',
+                                'likes' => '50K',
+                                'views' => '540K'
+                                ]);       
+                        echo CardFast([
+                                'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                                'titulo' => 'espero vocês lá',
+                                'likes' => '50K',
+                                'views' => '540K'
+                                ]);       
+                        echo CardFast([
+                                'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                                'titulo' => 'espero vocês lá',
+                                'likes' => '50K',
+                                'views' => '540K'
+                                ]);       
+                        echo CardFast([
+                                'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                                'titulo' => 'espero vocês lá',
+                                'likes' => '50K',
+                                'views' => '540K'
+                                ]);       
+                        echo CardFast([
+                                'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                                'titulo' => 'espero vocês lá',
+                                'likes' => '50K',
+                                'views' => '540K'
+                                ]);       
                 } else {
                     echo renderCards($render[$filter]["data"], $render[$filter]["type_card"]);
                 }
