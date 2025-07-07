@@ -6,13 +6,14 @@ require "../../../components/featuredCard/featuredCardComponent.php";
 require "../../../components/utils/buttonComponent.php";
 require "../../../components/cards/index.php";
 require "../../../components/channel/channelComponent.php";
+require "../../../components/CardFastComponent/cardFast.php";
 
-use function Src\Views\Components\Cards\createChannelCard;
 use function Src\Views\Components\Cards\renderCards;
 use function Src\Views\Components\Channel\channelComponent;
 use function Src\Views\Components\Header\HeaderComponent;
 use function Src\Views\Components\Sidebar\SidebarComponent;
 use function Src\Views\Components\Utils\ButtonComponent;
+use function src\Views\Components\CardFast;
 
 
 $term = isset($_GET['term']) ? htmlspecialchars($_GET['term']) : '';
@@ -379,6 +380,55 @@ $render = [
                     "category" => "#Tecnologia",
                     "followers" => 5000
                     ]);
+                } else if ($filter === "fast") {
+                        echo CardFast([
+                                'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                                'titulo' => 'espero vocês lá',
+                                'likes' => '50K',
+                                'views' => '540K'
+                                ]);       
+                        echo CardFast([
+                                'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                                'titulo' => 'espero vocês lá',
+                                'likes' => '50K',
+                                'views' => '540K'
+                                ]);       
+                        echo CardFast([
+                                'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                                'titulo' => 'espero vocês lá',
+                                'likes' => '50K',
+                                'views' => '540K'
+                                ]);       
+                        echo CardFast([
+                                'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                                'titulo' => 'espero vocês lá',
+                                'likes' => '50K',
+                                'views' => '540K'
+                                ]);       
+                        echo CardFast([
+                                'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                                'titulo' => 'espero vocês lá',
+                                'likes' => '50K',
+                                'views' => '540K'
+                                ]);       
+                        echo CardFast([
+                                'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                                'titulo' => 'espero vocês lá',
+                                'likes' => '50K',
+                                'views' => '540K'
+                                ]);       
+                        echo CardFast([
+                                'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                                'titulo' => 'espero vocês lá',
+                                'likes' => '50K',
+                                'views' => '540K'
+                                ]);       
+                        echo CardFast([
+                                'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                                'titulo' => 'espero vocês lá',
+                                'likes' => '50K',
+                                'views' => '540K'
+                                ]);       
                 } else {
                     echo renderCards($render[$filter]["data"], $render[$filter]["type_card"]);
                 }
