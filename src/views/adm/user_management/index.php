@@ -39,8 +39,8 @@ use function Src\Views\Components\Utils\ButtonComponent;
                 <p class="text-subtitile font-semibold title-size text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
             </div>
             <div class="flex mt-5 gap-5">
-                <?php echo ButtonComponent("Usúarios", "studio", "", 170, 40,"","",true); ?>
-                <?php echo ButtonComponent("Denúncias", "studio", "", 170, 40,"","../../gerenciamento_usuario/denuncia_page.php"); ?>
+                <?php echo ButtonComponent("Usúarios", "studio", "", 10.675, 2.5,"","",true); ?>
+                <?php echo ButtonComponent("Denúncias", "studio", "", 10.675, 2.5,"","../../gerenciamento_usuario/denuncia_page.php"); ?>
             </div>
             
                 
