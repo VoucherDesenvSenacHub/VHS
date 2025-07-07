@@ -1,11 +1,11 @@
 <?php
-require "../components/header/headerComponent.php";
-require "../components/barra_admin/barra_admin.php";
-require "../components/utils/inputComponent.php";
-require "../components/utils/cardDenunciationComponent.php";
-require "../components/utils/coment_admin/comentAdmin.component.php";
-require_once "../components/utils/buttonComponent.php";
-require_once "../components/filter/filter.php";
+require "../../components/header/headerComponent.php";
+require "../../components/barra_admin/barra_admin.php";
+require "../../components/utils/inputComponent.php";
+require "../../components/utils/cardDenunciationComponent.php";
+require "../../components/utils/coment_admin/comentAdmin.component.php";
+require_once "../../components/utils/buttonComponent.php";
+require_once "../../components/filter/filter.php";
 
 use function Src\Views\components\filter\Filter;
 use function Src\Views\Components\Utils\ButtonComponent;
@@ -64,8 +64,8 @@ $commets_lista = [
                 <p class="text-subtitile font-semibold title-size text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
             </div>
             <div class="flex mt-5 gap-5">
-                <?php echo ButtonComponent("Usúarios", "studio", "", 170, 40,"","../adm/user_management/index.php"); ?>
-                <?php echo ButtonComponent("Denúncias", "studio", "", 170, 40,"","",true); ?>
+                <?php echo ButtonComponent("Usúarios", "studio", "", 10.675, 2.5,"","../adm/user_management/index.php"); ?>
+                <?php echo ButtonComponent("Denúncias", "studio", "", 10.675, 2.5,"","",true); ?>
             </div>
             <div class="mt-5 mb-5 flex items-center gap-4 ">
             <div class="relative z-20">

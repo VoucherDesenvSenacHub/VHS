@@ -3,7 +3,7 @@ namespace src\views\components\studioSideMenu;
 
 function StudioSideMenuComponent(){
     return '  
-    <aside class="w-44 ml-[1.87rem] transition-all duration-500 ease-in-out top-20 sticky z-10 h-full" id="sidebar">
+    <aside class="w-44 ml-[1.87rem] transition-all duration-500 ease-in-out top-20 z-10 h-full" id="sidebar">
             <h2 class="w-[11rem] pt-[1.18rem] ml-[0.5rem] text-gray-400 text-xs font-poppins">VHS STUDIO</h2>
             <ul>
                 <li class="menu-item flex items-center text-gray-300 rounded-lg cursor-pointer mt-[1.5rem] transition-transform duration-200">
