@@ -38,9 +38,9 @@ use function src\views\components\Utils\Footer;
         <p class="text-sm text-gray-300 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
     <!-- 
       <div class="flex gap-3 mb-6">
-        <?php echo ButtonComponent("Edição", "studio", "", "170px", "40px"); ?>
-        <?php echo ButtonComponent("Comentários", "studio", "", "170px", "40px"); ?>
-        <?php echo ButtonComponent("Analytics", "studio", "", "170px", "40px"); ?>
+        <?php echo ButtonComponent("Edição", "studio", "", 10.675, 2.5); ?>
+        <?php echo ButtonComponent("Comentários", "studio", "", 10.675, 2.5); ?>
+        <?php echo ButtonComponent("Analytics", "studio", "", 10.675, 2.5); ?>
       </div> -->
 
       <div class="mb-6 flex gap-3">

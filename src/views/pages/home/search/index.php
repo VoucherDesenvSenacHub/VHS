@@ -334,10 +334,10 @@ $render = [
                 <h2 class="text-2xl font-bold text-white mb-2"><span class="text-purple-400">#</span> Resultados para "<?= $term ?>"</h2>
                 <p class="text-gray-400 text-sm mb-6">Confira os resultado para "<?= $term ?>" com a categoria desejada</p>
                 <div class="flex flex-wrap gap-4 mb-6">
-                    <?= ButtonComponent("Vídeos", "studio", "",170, 40, 1, "?term=$term&filter=videos") ?>
-                    <?= ButtonComponent("Fast", "studio", "",170, 40, 1, "?term=$term&filter=fast") ?>
-                    <?= ButtonComponent("Eventos", "studio", "",170, 40, 1, "?term=$term&filter=events") ?>
-                    <?= ButtonComponent("Canais", "studio", "",170, 40, 1, "?term=$term&filter=channels") ?>
+                    <?= ButtonComponent("Vídeos", "studio", "",10.675, 2.5, 1, "?term=$term&filter=videos") ?>
+                    <?= ButtonComponent("Fast", "studio", "",10.675, 2.5, 1, "?term=$term&filter=fast") ?>
+                    <?= ButtonComponent("Eventos", "studio", "",10.675, 2.5, 1, "?term=$term&filter=events") ?>
+                    <?= ButtonComponent("Canais", "studio", "",10.675, 2.5, 1, "?term=$term&filter=channels") ?>
                 </div>
             </div>
             <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 <?= $filter === 'channels' ? '!grid-cols-1' : ''?>">
