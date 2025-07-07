@@ -17,7 +17,7 @@ function GridUsuariosComponent($usuarios = []) {
 
     echo '
     <script src="https://cdn.tailwindcss.com"></script>
-    <div id="grid-usuarios" class="w-full bg-[#0C0118] rounded-lg p-4">
+    <div id="grid-usuarios" class="w-full bg-[#0C0118] rounded-lg ">
     ';
 
     foreach ($usuarios as $usuario) {
