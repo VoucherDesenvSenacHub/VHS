@@ -4,7 +4,6 @@ require "../components/utils/inputComponent.php";
 require "../components/utils/textareaComponent.php";
 require "../components/header/headerComponent.php";
 require "../components/studioSideMenu/studioSideMenuComponent.php";
-require "../components/utils/Title_and_buttons.php";
 require "../components/utils/footer.php";
 
 use function Src\Views\Components\Utils\ButtonComponent;
@@ -12,14 +11,8 @@ use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\Utils\TextareaComponent;
 use function Src\views\components\header\HeaderComponent;
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
-use function src\views\components\utils\Title_and_buttons;
 use function src\views\components\utils\Footer;
 
-$botoes = [
-    ['texto' => 'Edição', 'link' => ''],
-    ['texto' => 'Comentários', 'link' => '../components/teste.php'],
-    ['texto' => 'Analytics', 'link' => '']
-];
 
 $conteudos = []
 ?>
@@ -40,7 +33,7 @@ $conteudos = []
     <div>
         <?= HeaderComponent() ?>
     </div>
-    <div class="flex flex-row w-full ">
+    <div class="flex flex-row w-full m-10">
 
         <div class="">
             <?= StudioSideMenuComponent() ?>
@@ -48,7 +41,19 @@ $conteudos = []
         
         <div class="flex flex-col gap-4 w-1/2">
             <div class="text-white flex flex-col gap-2">
-                <?= Title_and_buttons("Editar vídeo","lore ipsum",$botoes)?>
+
+                <div>
+                    <p class="font-pop font-semibold text-title text-white">Editar vídeo</p>
+                    <p class="text-subtitile font-semibold title-size text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
+                </div>
+            
+                <div class="flex flex-row gap-5 mt-5 mb-14">
+                    <?php
+                        echo ButtonComponent("Edição", "studio", "", 170, 40,"",'');
+                        echo ButtonComponent("Comentários", "studio", "", 170, 40,"","/VHS/src/views/Studio/Comentários.php");
+                        echo ButtonComponent("Analytics", "studio", "", 170, 40,"","./../Analytics (Studio)/Analytics_studio.php");
+                        ?>
+                </div>
                 
                 <div class="bg-background w-full h-full md:h-[400px] border-2 rounded-xl border-solid flex items-center justify-center relative overflow-hidden -mt-8 flex-wrap">
                     
