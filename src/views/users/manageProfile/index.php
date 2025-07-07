@@ -9,14 +9,12 @@ use function Src\Views\Components\Utils\ButtonComponent;
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\Header\HeaderComponent;
 use function Src\views\Components\sidebar\SidebarComponent;
-use function Src\Views\Components\SharedcopyNotify;
-
-
 
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,12 +22,13 @@ use function Src\Views\Components\SharedcopyNotify;
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../../../styles/tailwindglobal.js"></script>
 </head>
+
 <body class="bg-background flex">
     <div class="fixed w-screen">
         <?= HeaderComponent() ?>
     </div>
     <div class="flex mt-20">
-        <?= SidebarComponent() ?> 
+        <?= SidebarComponent() ?>
     </div>
     <div class="flex ml-24 mt-14 w-full">
         <div class="flex flex-col gap-4 p-6 flex-grow">
@@ -37,7 +36,7 @@ use function Src\Views\Components\SharedcopyNotify;
             <div class="w-[550px] flex flex-col gap-8">
                 <div class="flex items-center justify-between gap-2 w-full">
                     <div class="w-36 h-36 relative flex  shrink-0 overflow-hidden rounded-full">
-                        <img id="profileImage" src="../../../../public/images/foto-sem-perfil.jpg" alt="Imagem de Perfil" class="object-cover w-full h-full">
+                        <img id="profileImage" src="/VHS/public/images/foto-sem-perfil.jpg" alt="Imagem de Perfil" class="object-cover w-full h-full">
                     </div>
                     <div class="flex space-x-3 w-96">
                         <button id="uploadButton" class="bg-purple-700 transition-colors hover:bg-purple-800 text-white rounded flex justify-center items-center w-full h-[50px] gap-2 rounded-md cursor-pointer ">Carregar foto</button>
@@ -50,33 +49,33 @@ use function Src\Views\Components\SharedcopyNotify;
                         placeholder: "@UsuárioSenac12333",
                         type: "text",
                         label: "Nome de Usuário",
-                        icon: "../../../../public/icons/userRound.svg",
+                        icon: "/VHS/public/icons/userRound.svg",
                         iconPosition: "right-3"
-                        ) ?>
+                    ) ?>
                     <?= InputComponent(
                         placeholder: "Usuário123@gmail.com",
                         type: "email",
                         label: "E-mail",
-                        icon: "../../../../public/icons/mail.svg",
+                        icon: "/VHS/public/icons/mail.svg",
                         iconPosition: "right-3"
-                        ) ?>
+                    ) ?>
                     <?= InputComponent(
                         placeholder: "Senha123",
                         type: "password",
                         label: "Senha",
-                        icon: "../../../../public/icons/lock.svg",
+                        icon: "/VHS/public/icons/lock.svg",
                         iconPosition: "right-3"
-                        ) ?>
+                    ) ?>
                     <?= InputComponent(
                         placeholder: "Inovações de Tecnologias",
                         type: "text",
                         label: "Categorias de Interesse",
                         iconPosition: "right-3"
-                        ) ?>
+                    ) ?>
                 </div>
                 <div class="flex items-center justify-between w-full ">
                     <?= ButtonComponent("Cancelar", "outline", null, 240, 50,); ?>
-                    
+
                     <button onclick="showNotification('Sucesso!', 'As alterações foram salvas.')" class="bg-purple-700 hover:bg-purple-800 text-white w-[250px] h-[55px] rounded-md">
                         Salvar Alterações
                     </button>
@@ -86,6 +85,7 @@ use function Src\Views\Components\SharedcopyNotify;
         </div>
     </div>
 </body>
+
 </html>
 <script>
     document.getElementById('uploadButton').addEventListener('click', function() {
@@ -104,14 +104,13 @@ use function Src\Views\Components\SharedcopyNotify;
     });
 
     document.getElementById('deleteButton').addEventListener('click', function() {
-        document.getElementById('profileImage').src = '../../../../public/images/foto-sem-perfil.jpg';
+        document.getElementById('profileImage').src = '/VHS/public/images/foto-sem-perfil.jpg';
         document.getElementById('imageUpload').value = '';
     });
 </script>
 
 <script>
-
-function showNotification(title, subtitle) {
+    function showNotification(title, subtitle) {
         const existing = document.getElementById('copy-notification');
         if (existing) existing.remove();
 
@@ -135,5 +134,4 @@ function showNotification(title, subtitle) {
             setTimeout(() => notification.remove(), 300);
         }, 2000);
     }
-
 </script>
