@@ -5,11 +5,14 @@ require "../components/utils/inputComponent.php";
 require "../components/utils/cardDenunciationComponent.php";
 require "../components/utils/coment_admin/comentAdmin.component.php";
 require_once "../components/utils/buttonComponent.php";
+require_once "../components/filter/filter.php";
 
+use function Src\Views\components\filter\Filter;
 use function Src\Views\Components\Utils\ButtonComponent;
 use function Src\Views\Components\header\HeaderComponent;
 use function src\views\components\barra_admin\Barra_Admin;
 use function Src\Views\Components\Utils\Comment;
+use function Src\Views\Components\Utils\InputComponent;
 
 $commets_lista = [
     [   
@@ -52,7 +55,7 @@ $commets_lista = [
     
     <?php echo HeaderComponent();?>
     <div class="flex">
-        <div class="max-xl:hidden mr-4">
+        <div class="max-xl:hidden ">
             <?php echo Barra_Admin(); ?>
         </div>
         <div class="max-w-[1500px] mx-auto w-full">
@@ -60,15 +63,17 @@ $commets_lista = [
                 <p class="font-pop font-semibold text-title text-white">Gerenciamento de usuários</p>
                 <p class="text-subtitile font-semibold title-size text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
             </div>
-            <div class="flex h-5 mt-5 gap-5">
-                <?php echo ButtonComponent("Usúarios", "studio", "", "170px", "40px"); ?>
-                <?php echo ButtonComponent("Denúncias", "studio", "", "170px", "40px"); ?>
+            <div class="flex mt-5 gap-5">
+                <?php echo ButtonComponent("Usúarios", "studio", "", 170, 40,"","../adm/user_management/index.php"); ?>
+                <?php echo ButtonComponent("Denúncias", "studio", "", 170, 40,"","",true); ?>
             </div>
-            <div class="mt-10 flex items-center gap-4 h-16 cavalo">
-                <button id="btn_filter" onclick="filter(event)">
-                    <img class="size-7" src="../../../public/icons/filter-svgrepo-com.svg" alt="">
-                </button>
-                <input type="text" placeholder="Pesquisar" class="pl-2 rounded-lg bg-transparent text-white w-full h-12 border-[0.5px] border-gray-500">
+            <div class="mt-5 mb-5 flex items-center gap-4 ">
+            <div class="relative z-20">
+                <?= Filter() ?> 
+            </div>
+                <div class="w-full">
+                    <?= InputComponent(placeholder: "Pesquisar", type: "text") ?>
+                </div>
             </div>
             <div id="filter" class="absolute left-[16.5rem] z-10 hidden flex flex-col bg-gray-900 rounded-lg p-2 max-w-32 border-[0.5px] border-gray-500">
                 <div class="flex">
@@ -80,7 +85,7 @@ $commets_lista = [
                     <p class="text-[13px] flex items-center text-gray-200">Mais antigos</p>
                 </div>
             </div>
-            <div class="colocaraqui mt-10 flex flex-col gap-4">
+            <div class="colocaraqui  flex flex-col gap-4">
             
                 <?php
                 foreach($commets_lista as $commet) {
