@@ -3,40 +3,40 @@
     namespace Src\Views\Components\Utils;
 
     function BarComponent() {
-        return '
+        return "
+            <button class='barrinha' id='barrinha'>
+                <svg width='28' height='25' viewBox='0 0 28 25' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                    <path fill-rule='evenodd' clip-rule='evenodd' d='M25.0007 12V12C25.0007 12.5523 24.553 13 24.0007 13H3.99978C3.44767 13 3.00073 12.5521 3.00073 12V12V12C3.00073 11.4483 3.44707 11 3.9988 11H24.0007C24.553 11 25.0007 11.4477 25.0007 12V12Z' fill='white'/>
+                    <path fill-rule='evenodd' clip-rule='evenodd' d='M25.0007 18V18C25.0007 18.5523 24.553 19 24.0007 19H3.99978C3.44767 19 3.00073 18.5521 3.00073 18V18V18C3.00073 17.4483 3.44707 17 3.9988 17H24.0007C24.553 17 25.0007 17.4477 25.0007 18V18Z' fill='white'/>
+                    <path fill-rule='evenodd' clip-rule='evenodd' d='M25.0007 6V6C25.0007 6.55228 24.553 7 24.0007 7H3.99978C3.44767 7 3.00073 6.55211 3.00073 6V6V6C3.00073 5.44827 3.44707 5 3.9988 5H24.0007C24.553 5 25.0007 5.44772 25.0007 6V6Z' fill='white'/>
+                    
+                    <path
+                     id='seta'
+                     class='transition-transform duration-500'
+                     d='M1.02937 18.7924C0.509357 18.3921 0.509358 17.6079 1.02937 17.2076L2.89001 15.7753C3.54758 15.2691 4.5 15.7378 4.5 16.5677V19.4323C4.5 20.2622 3.54757 20.7309 2.89001 20.2247L1.02937 18.7924Z'
+                     fill='white'
+                     style='transform-origin: center; transform-box: fill-box;'
+                    />
+                </svg>
+            </button>
+
             <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    let deslocamentoDireita = 1;
-                    let deslocamentoEsquerda = -1;
+                document.addEventListener('DOMContentLoaded', () => {
                     let indoParaDireita = true;
-                    const seta = document.getElementById("seta");
-                    const path = seta.querySelector("path");
-        
-                    document.querySelector(".barrinha").addEventListener("click", function() {
-        
-                        let movimento = indoParaDireita ? deslocamentoDireita : deslocamentoEsquerda;
-                        seta.style.transform = `translateX(${movimento}px)`;
-        
+                    const seta = document.getElementById('seta');
+
+                    document.querySelector('.barrinha').addEventListener('click', () => {
                         if (indoParaDireita) {
-                            path.setAttribute("d", "M24.8995 16.2329C25.6972 16.6324 25.6972 17.7708 24.8995 18.1703L23.1524 19.0451C22.432 19.4059 21.584 18.8821 21.584 18.0765L21.584 16.3267C21.584 15.5211 22.432 14.9974 23.1524 15.3581L24.8995 16.2329Z");
+                            seta.style.transform = 'translateX(22px) rotate(180deg)';
                         } else {
-                            path.setAttribute("d", "M3.1005 16.2329C2.3028 16.6324 2.3028 17.7708 3.1005 18.1703L4.8476 19.0451C5.568 19.4059 6.416 18.8821 6.416 18.0765L6.416 16.3267C6.416 15.5211 5.568 14.9974 4.8476 15.3581L3.1005 16.2329Z");
+                            seta.style.transform = 'translateX(0) rotate(0deg)';
                         }
-        
+
                         indoParaDireita = !indoParaDireita;
                     });
                 });
             </script>
-
-            <svg width="28" height="25" viewBox="0 0 28 25" class="cursor-pointer barrinha" id="barrinha">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M24.2077 7.08312C24.2077 7.50224 23.8159 7.84201 23.3327 7.84201H4.66602C4.18277 7.84201 3.79102 7.50224 3.79102 7.08312C3.79102 6.66399 4.18277 6.32422 4.66602 6.32422H23.3327C23.8159 6.32422 24.2077 6.66399 24.2077 7.08312Z" fill="white"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M24.2077 12.1424C24.2077 12.5616 23.8159 12.9013 23.3327 12.9013H4.66602C4.18277 12.9013 3.79102 12.5616 3.79102 12.1424C3.79102 11.7233 4.18277 11.3835 4.66602 11.3835H23.3327C23.8159 11.3835 24.2077 11.7233 24.2077 12.1424Z" fill="white"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M24.2077 17.2018C24.2077 17.6209 23.8159 17.9607 23.3327 17.9607H4.66602C4.18277 17.9607 3.79102 17.6209 3.79102 17.2018C3.79102 16.7827 4.18277 16.4429 4.66602 16.4429H23.3327C23.8159 16.4429 24.2077 16.7827 24.2077 17.2018Z" fill="white"/>
-                <g id="seta" class="transition-transform duration-300">
-                    <path d="M24.8995 16.2329C25.6972 16.6324 25.6972 17.7708 24.8995 18.1703L23.1524 19.0451C22.432 19.4059 21.584 18.8821 21.584 18.0765L21.584 16.3267C21.584 15.5211 22.432 14.9974 23.1524 15.3581L24.8995 16.2329Z" fill="white" class="arrow"/>
-                </g>
-            </svg>
-        ';
+        ";
     }
 
 ?>
