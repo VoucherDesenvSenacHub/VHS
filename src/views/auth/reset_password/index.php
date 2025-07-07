@@ -31,7 +31,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
                 </div>
                 <div class="flex flex-col gap-4 w-full xl:w-96">
                     <?= InputComponent(placeholder: "Insira seu e-mail", type: "email", label: "E-mail", icon: "../../../../public/icons/Vector.svg", iconPosition: "w-6 h-6 right-3") ?>
-                    <?= ButtonComponent(text: "Enviar e-mail", variant: "default") ?>
+                    <?= ButtonComponent("Enviar e-mail", "default", null, 380, 50, null, "/VHS/src/views/auth/new_password/index.php", true) ?>
                 </div>
             </div>
         </div>
