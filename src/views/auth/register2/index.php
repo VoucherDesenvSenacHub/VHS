@@ -34,7 +34,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
                     <?= InputComponent(placeholder: "Confirme sua senha", type: "password", label: "Confirmar senha", icon: "../../../../public/icons/eyeOff.svg", iconPosition: "right-3") ?>
                     <div class="mt-3">
                         <a href="../email_verification/index.php">
-                            <?= ButtonComponent("Continuar", "default") ?>
+                            <?= ButtonComponent("Continuar", "default", null, 380, 50, null, "/VHS/src/views/auth/interests/index.php", true) ?>
                         </a>
                     </div>
                 </div>

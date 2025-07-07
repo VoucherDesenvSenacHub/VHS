@@ -42,7 +42,8 @@
             "outline" => $buttonStyle . "outline outline-1 outline-purple-500",
             "icon" => $buttonStyle . "bg-white hover:bg-gray-300 transition-colors",
             "studio" => $buttonStyle . "bg-[#202024] transition-colors hover:bg-[#2a2a2e] !rounded-full",
-            "default" => "$buttonStyle bg-purple-700 transition-colors hover:bg-purple-800"
+            "default" => "$buttonStyle bg-purple-700 transition-colors hover:bg-purple-800",
+            "google" => $buttonStyle . "bg-white text-black rounded-md",
         ];
 
         $buttonStyle = $typesButtonsStyle[$variant] ?? $typesButtonsStyle["default"];
