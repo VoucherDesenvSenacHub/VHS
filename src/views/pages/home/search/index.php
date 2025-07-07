@@ -8,7 +8,6 @@ require "../../../components/cards/index.php";
 require "../../../components/channel/channelComponent.php";
 require "../../../components/CardFastComponent/cardFast.php";
 
-use function Src\Views\Components\Cards\createChannelCard;
 use function Src\Views\Components\Cards\renderCards;
 use function Src\Views\Components\Channel\channelComponent;
 use function Src\Views\Components\Header\HeaderComponent;
