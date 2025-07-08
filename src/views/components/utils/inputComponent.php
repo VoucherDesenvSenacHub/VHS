@@ -51,7 +51,7 @@
 
         return (
             "
-            <div class='flex flex-col gap-3'>
+            <div class='flex flex-col gap-2'>
                 <div class='flex flex-col w-full gap-1'> 
                     $label
                     $description
