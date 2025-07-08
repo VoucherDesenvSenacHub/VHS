@@ -49,9 +49,9 @@ $commets_lista = [
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>user management</title>
         <script src="https://cdn.tailwindcss.com"></script>
-        <script src="../../styles/tailwindglobal.js"></script>
+        <script src="/VHS/src/styles/tailwindglobal.js"></script>
     </head>
-    <body class="w-full bg-[#0C0118]">
+    <body class="w-full bg-[#0C0118] text-white">
     
     <?php echo HeaderComponent();?>
     <div class="flex">
@@ -60,11 +60,11 @@ $commets_lista = [
         </div>
         <div class="max-w-[1500px] mx-auto w-full">
             <div>
-                <p class="font-pop font-semibold text-title text-white">Gerenciamento de usuários</p>
+                <p class="text-title font-pop font-semibold title-size text-white">Gerenciamento de usuários</p>
                 <p class="text-subtitile font-semibold title-size text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
             </div>
             <div class="flex mt-5 gap-5">
-                <?php echo ButtonComponent("Usúarios", "studio", "", 10.675, 2.5,"","../adm/user_management/index.php"); ?>
+                <?php echo ButtonComponent("Usúarios", "studio", "", 10.675, 2.5,"","../user_management/index.php"); ?>
                 <?php echo ButtonComponent("Denúncias", "studio", "", 10.675, 2.5,"","",true); ?>
             </div>
             <div class="mt-5 mb-5 flex items-center gap-4 ">
@@ -77,11 +77,11 @@ $commets_lista = [
             </div>
             <div id="filter" class="absolute left-[16.5rem] z-10 hidden flex flex-col bg-gray-900 rounded-lg p-2 max-w-32 border-[0.5px] border-gray-500">
                 <div class="flex">
-                    <img src="../../../public/icons/time-svgrepo-com.svg" alt="" class="size-6 rotate-[-110deg]">
+                    <img src="/VHS/public/icons/time-svgrepo-com.svg" alt="" class="size-6 rotate-[-110deg]">
                     <p class="text-[13px] flex items-center text-gray-200">Mais recentes</p>
                 </div>
                 <div class="flex flex-row">
-                    <img src="../../../public/icons/time-svgrepo-com.svg" class="size-6" alt="">
+                    <img src="/VHS/public/icons/time-svgrepo-com.svg" class="size-6" alt="">
                     <p class="text-[13px] flex items-center text-gray-200">Mais antigos</p>
                 </div>
             </div>

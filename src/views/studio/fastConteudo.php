@@ -38,7 +38,7 @@ require "../components/utils/footer.php";
     <script src="../../styles/tailwindglobal.js"></script>
     <title>Fast Content</title>
 </head>
-<body class=" w-full bg-background">
+<body class=" w-full bg-background text-white">
 
 <?php echo HeaderComponent(); ?>
     <div class="flex">
