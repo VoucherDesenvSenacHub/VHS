@@ -7,7 +7,7 @@ tailwind.config = {
                 secondary: "#C4C4C4",
                 gray200: "#C4C4C4",
                 gray300: "#666",
-                gray600: "#1B1B1B"
+                gray600: "#1B1B1B",
             },
             
             fontFamily: {
@@ -19,7 +19,7 @@ tailwind.config = {
                 subtitle: "1.5rem",
                 paragraph: "1rem",
                 caption: "0.875rem"
-            }
-        }
+            },
+        },
     }
 } 

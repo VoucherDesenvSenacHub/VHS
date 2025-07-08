@@ -23,7 +23,7 @@ function SidebarComponent() {
             [
                 "icon" => "/VHS/public/icons/youtube.svg",
                 "text" => "Histórico",
-                "link" => "/VHS/utils/Histórico"
+                "link" => "/VHS/src/views/pages/home/history"
             ]
         ],
         "categories" => [

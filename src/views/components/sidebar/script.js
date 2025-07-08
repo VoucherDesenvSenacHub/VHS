@@ -38,7 +38,7 @@ function checkRoute() {
     icons[0].classList.toggle("active", url.includes("/home") && urlSplit.at(-1) === "/" || urlSplit.at(-1) === "");
     icons[1].classList.toggle("active", url.includes("/home/fast"));
     icons[2].classList.toggle("active", url.includes("/home/events"));
-    icons[3].classList.toggle("active", url.includes("/user/history"));   
+    icons[3].classList.toggle("active", url.includes("/home/history"));   
     icons[4].classList.toggle("active", url.includes("category=tecnologia"));
     icons[5].classList.toggle("active", url.includes("category=saude"));
     icons[6].classList.toggle("active", url.includes("category=moda"));

@@ -1,18 +1,14 @@
 <?php
- 
 require_once __DIR__ . '/../../../components/header/headerComponent.php';
 require "../../../components/fastComponent/fastComponent.php";
 require "../../../components/sidebar/SidebarComponent.php";
 
- 
 use function src\views\components\FastComponent\FastComponent;
 use function src\views\components\header\HeaderComponent;
 use function Src\Views\Components\Sidebar\SidebarComponent;
 
- 
- 
 ?>
- 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

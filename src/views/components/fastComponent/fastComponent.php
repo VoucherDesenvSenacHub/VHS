@@ -20,7 +20,7 @@ function FastComponent(array $data): string {
 
     return <<<HTML
         <div class='w-full min-h-full relative flex items-center justify-center current-fast'>
-            <video src='{$video}' class='object-cover h-full absolute -z-10 rounded-xl' autoplay loop></video>
+            <video src='{$video}' class='object-cover h-full absolute -z-10 rounded-xl' loop></video>
             <img src='/VHS/public/icons/fastIcon/setinha.svg' alt='' class=' absolute left-[0.5rem] top-[1rem]'/>
             <img src='/VHS/public/icons/fastIcon/Play.svg' alt='' class='size-16 play'/>
             <div class='flex items-center flex-col absolute right-4 bottom-32 gap-2'>

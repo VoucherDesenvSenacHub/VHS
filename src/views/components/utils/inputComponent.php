@@ -13,23 +13,28 @@
         string $background = null, 
         string $iconPosition = null,
         string $width = null,
-        string $height = null
+        string $height = null,
+        string $className = "",
+        string $onClickIcon = ""
         ){
         
         $type = htmlspecialchars($type, ENT_QUOTES, 'UTF-8');
         
         $placeholder = htmlspecialchars($placeholder, ENT_QUOTES, 'UTF-8');
-        
-        $icon = $icon ? "<img src='" . htmlspecialchars($icon, ENT_QUOTES, 'UTF-8') . "' class='absolute $iconPosition w-5 h-5 fill-blue-500'>" : "";
 
-        $margin = "";
+        $orientationIcon = "";
+        $padding = "";
 
         if (strpos($iconPosition, "left") !== false) {
-            $margin = "pl-10";
+            $padding = "pl-10";
+            $orientationIcon = "left-2.5";
         }
         elseif (strpos($iconPosition, "right") !== false) {
-            $margin = "pr-10";
+            $padding = "pr-10";
+            $orientationIcon = "right-2.5";
         }
+        
+        $icon = $icon ? "<img onclick='$onClickIcon' src='" . htmlspecialchars($icon, ENT_QUOTES, 'UTF-8') . "' class='absolute $iconPosition w-5 h-5 fill-blue-500 $orientationIcon'>" : "";
 
         $label_size = $label_size ? "text-$label_size" : "text-md";
         
@@ -40,11 +45,11 @@
         $description = $description ? "<p class='$description_size text-gray-200'>" . htmlspecialchars($description, ENT_QUOTES, 'UTF-8') . "</p>" : ""; 
 
         $classes = [
-            "!px-3 py-1.5 outline outline-1 outline-[#666666] rounded-md placeholder-[#666666] text-zinc-200",
+            "px-3 py-1.5 outline outline-1 outline-[#666666] rounded-md placeholder-[#666666] text-zinc-200",
             $width = $width ? "w-$width" : "w-full",
             $height = $height ? "h-$height" : "h-[45px]",
             $background ? "bg-$background" : "bg-transparent",
-            $margin
+            $padding
         ];
 
         $input_style = implode(" ", array_filter($classes));
@@ -57,8 +62,8 @@
                     $description
                 </div>
                 <div class='relative flex justify-center items-center'> 
-                    <input type='$type' placeholder='$placeholder' class='$input_style'onfocus='this.placeholder=\"\"' onblur='this.placeholder=\"$placeholder\"'>
                     $icon
+                    <input type='$type' placeholder='$placeholder' class='$input_style $className'>
                 </div>
             </div>
             "
