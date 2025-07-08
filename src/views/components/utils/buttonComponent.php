@@ -38,7 +38,7 @@
         . ($isActive ? "text-white " : "text-[#D9D9D9] ");
 
         $buttonStyleOutlineDefault = 
-        "flex justify-center items-center w-full h-[$height] gap-2 rounded-md cursor-pointer md:w-[$width] " 
+        "flex justify-center items-center w-full h-[$height] gap-2 rounded-md cursor-pointer" 
         . ($isActive ? "text-white " : "text-[#D9D9D9] ");
 
 
@@ -54,7 +54,7 @@
 
         return
             <<<HTML
-                <a href='$link'>
+                <a href='$link' class="w-full">
                     <button id='$id' class='$buttonStyle'>
                     $icon
                     $text

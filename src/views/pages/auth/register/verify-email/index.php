@@ -1,8 +1,6 @@
 <?php
-namespace Src\Views\Components\Utils;
-
-require "../../components/utils/buttonComponent.php";
-require "../../components/utils/inputComponent.php";
+require "../../../../components/utils/inputComponent.php";
+require "../../../../components/utils/buttonComponent.php";
 
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\Utils\ButtonComponent;
@@ -13,10 +11,11 @@ use function Src\Views\Components\Utils\ButtonComponent;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VHS - Quase lá!</title>
+    <title>Email Verification</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/VHS/src/styles/tailwindglobal.js"></script>
     <link rel="stylesheet" href="/VHS/src/styles/global.css">
+    <script src="/VHS/src/views/pages/auth/register/verify-email/script.js" defer></script>
 </head>
 <body>
     <div class="flex min-h-screen text-white xl:justify-start justify-center max-w-[1920px] mx-auto">
@@ -27,17 +26,12 @@ use function Src\Views\Components\Utils\ButtonComponent;
             <div class="flex flex-col gap-4">
                 <div class="flex items-center flex-col gap-2">
                     <img src="/VHS/public/logos/Logo.svg" alt="">
-                    <p class="font-semibold text-3xl text-white">Quase lá!</p>
-                    <p class="text-gray-200">Informe sua senha para criar sua conta!</p>
+                    <h2 class="text-3xl font-semibold text-white max-xl:text-2xl">Quase lá</h2>
+                    <p class="text-secondary text-center description">Por favor verifique sua caixa de e-mail</p>
                 </div>
-                <div class="flex flex-col gap-4 w-full xl:w-96">
-                    <?= InputComponent(placeholder: "Insira sua senha", type: "password", label: "Senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "right-3") ?>
-                    <?= InputComponent(placeholder: "Confirme sua senha", type: "password", label: "Confirmar senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "right-3") ?>
-                    <div class="mt-3">
-                        <a href="../email_verification/index.php">
-                            <?= ButtonComponent("Continuar", "default") ?>
-                        </a>
-                    </div>
+                <div class="flex flex-col items-center w-full">
+                    <img src="/VHS/public/images/catGif.gif" alt="" class="rounded-lg w-full max-w-md">
+                    <?= ButtonComponent(text: "Já verifiquei", variant: "default", link: "#verified", className: " verify-email-button mt-4") ?>
                 </div>
             </div>
         </div>

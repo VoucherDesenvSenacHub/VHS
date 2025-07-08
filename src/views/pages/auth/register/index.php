@@ -1,9 +1,9 @@
 <?php
 namespace Src\Views\Components\Utils;
 
-require "../../components/utils/buttonComponent.php";
-require "../../components/utils/inputComponent.php";
-require "../../components/checkbox/checkboxComponent.php";
+require "../../../components/utils/buttonComponent.php";
+require "../../../components/utils/inputComponent.php";
+require "../../../components/checkbox/checkboxComponent.php";
 
 use function App\Views\Components\CheckboxComponent;
 use function Src\Views\Components\Utils\InputComponent;
@@ -29,7 +29,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
             <div class="flex flex-col gap-4">
                 <div class="flex items-center flex-col gap-2">
                     <img src="/VHS/public/logos/Logo.svg" alt="">
-                    <p class="text-4xl font-semibold title-size text-white max-xl:text-3xl">Criar sua conta</p>
+                    <h2 class="text-3xl font-semibold title-size text-white max-xl:text-2xl">Criar sua conta</h2>
                     <p class="text-secondary">Informe seus dados para criar sua conta</p>
                 </div>
                 <div class="flex flex-col gap-4 w-full xl:w-96">
@@ -38,12 +38,12 @@ use function Src\Views\Components\Utils\ButtonComponent;
                     <?= InputComponent(placeholder: "Sua senha", type: "password", label: "Senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "right-3") ?>
                     <?= CheckboxComponent("Lembrar de mim")?>
                     <div>
-                        <?= ButtonComponent("Criar Conta", "default", link: "./register2") ?>
+                        <?= ButtonComponent("Criar Conta", "default", link: "./register/categories") ?>
                     </div>
                     <div class="flex items-center text-white cursor-default">
-                        <div class="flex-grow border-t border-gray300"></div>
+                        <div class="flex-grow border-t border-gray-300"></div>
                         <span class="px-3 text-sm font-semibold">OU</span>
-                        <div class="flex-grow border-t border-gray300"></div>
+                        <div class="flex-grow border-t border-gray-300"></div>
                     </div>
                     <div class="text-black">
                         <?= ButtonComponent("Criar conta pelo Google", "icon", "/VHS/public/images/LogoGoogle.svg") ?>

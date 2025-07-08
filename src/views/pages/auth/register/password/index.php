@@ -1,8 +1,8 @@
 <?php
 namespace Src\Views\Components\Utils;
 
-require "../../components/utils/buttonComponent.php";
-require "../../components/utils/inputComponent.php";
+require "../../../../components/utils/buttonComponent.php";
+require "../../../../components/utils/inputComponent.php";
 
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\Utils\ButtonComponent;
@@ -16,7 +16,6 @@ use function Src\Views\Components\Utils\ButtonComponent;
     <title>VHS - Quase lá!</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/VHS/src/styles/tailwindglobal.js"></script>
-    <script src="/VHS/src/views/auth/categories/script.js" defer></script>
     <link rel="stylesheet" href="/VHS/src/styles/global.css">
 </head>
 <body>
@@ -28,17 +27,13 @@ use function Src\Views\Components\Utils\ButtonComponent;
             <div class="flex flex-col gap-4">
                 <div class="flex items-center flex-col gap-2">
                     <img src="/VHS/public/logos/Logo.svg" alt="">
-                    <p class="font-semibold text-3xl text-white text-center max-xl:text-2xl">Selecione seus interesses</p>
-                    <p class="text-gray-200 text-center">Receba sugestão de vídeos relacionados.</p>
+                    <h2 class="font-semibold text-3xl text-white max-xl:text-2xl">Quase lá!</h2>
+                    <p class="text-gray-200">Informe sua senha para criar sua conta!</p>
                 </div>
                 <div class="flex flex-col gap-4 w-full xl:w-96">
-                    <?= ButtonComponent("Estética", "outline", className: " text-white font-semibold transition-all category", link:"#") ?>
-                    <?= ButtonComponent("Saúde", "outline", className: " text-white font-semibold transition-all category", link:"#") ?>
-                    <?= ButtonComponent("Tecnologia", "outline", className: " text-white font-semibold transition-all category", link:"#") ?>
-                    <?= ButtonComponent("Moda", "outline", className: " text-white font-semibold transition-all category", link:"#") ?>
-                    <div class="mt-3">
-                        <?= ButtonComponent("Continuar", "default") ?>
-                    </div>
+                    <?= InputComponent(placeholder: "Insira sua senha", type: "password", label: "Senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "right-3") ?>
+                    <?= InputComponent(placeholder: "Confirme sua senha", type: "password", label: "Confirmar senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "right-3") ?>
+                    <?= ButtonComponent("Continuar", "default", link:"./verify-email", className: " mt-4") ?>
                 </div>
             </div>
         </div>

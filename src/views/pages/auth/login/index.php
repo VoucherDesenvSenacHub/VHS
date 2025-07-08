@@ -1,7 +1,7 @@
 <?php
-require "../../components/utils/inputComponent.php";
-require "../../components/utils/buttonComponent.php";
-require "../../components/checkbox/checkboxComponent.php";
+require "../../../components/utils/inputComponent.php";
+require "../../../components/utils/buttonComponent.php";
+require "../../../components/checkbox/checkboxComponent.php";
 
 
 use function App\Views\Components\CheckboxComponent;
@@ -28,27 +28,28 @@ use function Src\Views\Components\Utils\ButtonComponent;
       <div class="flex flex-col gap-4">
         <div class="flex items-center flex-col gap-2">
           <img src="/VHS/public/logos/Logo.svg" alt="">
-          <p class="text-4xl font-pop font-semibold title-size text-white max-xl:text-3xl">Entrar na sua conta</p>
-          <p class="font-pop paragraph-size text-gray-200">Informe seus dados para entrar sua conta</p>
+          <p class="text-3xl font-semibold text-white max-xl:text-2xl">Entrar na sua conta</p>
+          <p class="text-secondary">Informe seus dados para entrar sua conta</p>
         </div>
         <div class="flex flex-col gap-4 w-full xl:w-96">
           <?= InputComponent(placeholder: "Insira seu e-mail", type: "email", label: "Email", icon: "/VHS/public/icons/Vector.svg", iconPosition: "w-6 h-6 right-3") ?>
           <?= InputComponent(placeholder: "Insira sua senha", type: "password", label: "Senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "w-6 h-6 right-3") ?>
-        <?= CheckboxComponent("Lembrar de mim") ?>
-          <?= ButtonComponent("Acessar plataforma", "default") ?>
-          </div>
-          <div class="flex items-center text-white cursor-default">
-            <div class="flex-grow border-t border-gray300"></div>
-            <span class="px-3 text-sm font-semibold">OU</span>
-            <div class="flex-grow border-t border-gray300"></div>
-          </div>
-          <div class="text-black">
-            <?= ButtonComponent("Entrar pelo Google", "icon", "/VHS/public/images/LogoGoogle.svg") ?>
-          </div>
-          <div class="flex gap-0.5 items-center justify-center">
-            <p class="font-pop paragraph-size text-secondary cursor-default">Ainda não tem uma conta?</p>
-            <a class="font-pop paragraph-size text-primary underline" href="./register">Cadastrar</a>
-          </div>
+          <a class="text-secondary underline" href="./new-password">Esqueceu sua senha? </a>
+          <?= CheckboxComponent("Lembrar de mim") ?>
+          <?= ButtonComponent("Acessar plataforma", "default", link:"../home") ?>
+        </div>
+        <div class="flex items-center text-white cursor-default">
+          <div class="flex-grow border-t border-gray300"></div>
+          <span class="px-3 text-sm font-semibold">OU</span>
+          <div class="flex-grow border-t border-gray300"></div>
+        </div>
+        <div class="text-black">
+          <?= ButtonComponent("Entrar pelo Google", "icon", "/VHS/public/images/LogoGoogle.svg") ?>
+        </div>
+        <div class="flex gap-0.5 items-center justify-center">
+          <p class="text-secondary cursor-default">Ainda não tem uma conta?</p>
+          <a class="text-primary underline" href="./register">Cadastrar</a>
+        </div>
         </div>
       </div>
     </div>

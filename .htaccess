@@ -1,0 +1,17 @@
+Options -Indexes
+
+<FilesMatch "\.env$">
+    Deny from all
+</FilesMatch>
+
+RewriteEngine on
+
+# SQL injection
+RewriteCond %{QUERY_STRING} (\%27)|(\')|(\-\-)|(\%23)|(#)|(;)|((\b)(UNION|SELECT|INSERT|UPDATE|DELETE|DROP|WHERE|FROM|HAVING|OR|AND)(\b)) [NC,OR]
+
+# XSS (básico)
+RewriteCond %{QUERY_STRING} (<|>|%3C|%3E|script|alert|onerror|onload|svg|iframe|document\.cookie) [NC]
+
+RewriteRule .* - [F]
+
+RewriteRule ^(.+)$ ./src/views/pages/ [NC]
