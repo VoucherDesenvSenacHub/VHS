@@ -179,7 +179,7 @@ $videos = [
                                 </div>
                             </div>
                         <div class="self-end">
-                            <?= ButtonComponent('Seguir', 'outline', null, "160px", "35px") ?>
+                            <?= ButtonComponent('Seguir', 'outline', null, 10, 2.18) ?>
                         </div>
                     </div>
                 </div>
