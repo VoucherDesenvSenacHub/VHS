@@ -30,7 +30,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
                 <div class="flex flex-col items-center w-96 max-w-96 xl:max-w-none">
                 <img src="../../../../public/images/catGif.gif" alt="" class="rounded-lg ">
                 <div class="mt-4">
-                    <?= ButtonComponent(text: "Já verifiquei", variant: "default") ?>
+                    <?= ButtonComponent("Já verifiquei", "default", null, 380, 50, null, "/VHS/src/views/pages/home/index.php", true) ?>
                 </div>
             </div>
 

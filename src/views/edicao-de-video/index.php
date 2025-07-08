@@ -33,14 +33,15 @@ $conteudos = []
     <title>Upload de Vídeo</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../../styles/tailwindglobal.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Syne:wght@500..800&display=swap" rel="stylesheet" />
 </head>
 
-<body class=" bg-gradient-to-b from-[#20002c] via-black to-[#20002c] min-h-screen text-white ">
+<body class="bg-gradient-to-b from-[#20002c] via-black to-[#20002c] min-h-screen text-white font-[Poppins]">
 
     <div>
         <?= HeaderComponent() ?>
     </div>
-    <div class="flex flex-row w-full ">
+    <div class="flex">
 
         <div>
             <?= StudioSideMenuComponent() ?>
@@ -48,13 +49,13 @@ $conteudos = []
 
         <div class="flex flex-col gap-4 px-10 py-6">
             <div class="flex flex-col gap-2 mb-1">
-                <h1 class="text-2xl font-bold ">Editar vídeo</h1>
+                <h1 class="text-2xl font-semibold ">Editar vídeo</h1>
                 <p class="text-sm text-gray-300 ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
             </div>
-            <div class="flex mb-10 gap-5 text-lg">
-                <?= ButtonComponent("Edição", "studio", "", 170, 40, "", "",true) ?>
-                <?= ButtonComponent("Comentários", "studio", "", 170, 40, "", "../studio/Comentários.php") ?>
-                <?= ButtonComponent("Analytics", "studio", "", 170, 40, "", "../Analytics (Studio)/Analytics_studio.php", true) ?>
+            <div class="flex mb-10 gap-5">
+                <?= ButtonComponent("Edição", "studio", "", 10.675, 2.5, "", "",true) ?>
+                <?= ButtonComponent("Comentários", "studio", "", 10.675, 2.5, "", "../studio/Comentários.php") ?>
+                <?= ButtonComponent("Analytics", "studio", "", 10.675, 2.5, "", "../Analytics (Studio)/Analytics_studio.php", true) ?>
             </div>
             <div class="bg-background w-full h-full md:h-[400px] border-2 rounded-xl border-solid flex items-center justify-center relative overflow-hidden -mt-8 flex-wrap">
 

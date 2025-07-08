@@ -47,9 +47,9 @@ $botoes = [
                 <p class="text-sm text-gray-300 ">lorem ipsun</p>
             </div>
             <div class="flex mb-5 gap-5">
-                <?= ButtonComponent("Edição","studio","",170,40,"","../edicao-de-video/index.php") ?>
-                <?= ButtonComponent("Comentários","studio","",170,40,"","../studio/Comentários.php") ?>
-                <?= ButtonComponent("Analytics","studio","",170,40,"","",true) ?>
+                <?= ButtonComponent("Edição","studio","",10.675, 2.5,"","../edicao-de-video/index.php") ?>
+                <?= ButtonComponent("Comentários","studio","",10.675, 2.5,"","../studio/Comentários.php") ?>
+                <?= ButtonComponent("Analytics","studio","",10.675, 2.5,"","",true) ?>
             </div>
             <div class="flex flex-row gap-8 mt-4">
 

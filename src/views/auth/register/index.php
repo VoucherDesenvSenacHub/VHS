@@ -44,7 +44,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
                     </div>
                     <div>
                         <a href="../register2/index.php">
-                            <?= ButtonComponent("Criar Conta", "default") ?>
+                            <?= ButtonComponent("Criar Conta", "default", null, 380, 50, null, "/VHS/src/views/auth/register2/index.php", true) ?>
                         </a>
                     </div>
                     <div class="flex items-center text-white cursor-default">
@@ -52,8 +52,8 @@ use function Src\Views\Components\Utils\ButtonComponent;
                         <span class="px-3 text-sm font-semibold">OU</span>
                         <div class="flex-grow border-t border-gray300"></div>
                     </div>
-                    <div class="text-black">
-                        <?= ButtonComponent("Criar Conta pelo Google", "icon", "../../../../public/images/LogoGoogle.svg") ?>
+                    <div>
+                        <?= ButtonComponent("Criar Conta pelo Google", "google", "../../../../public/images/LogoGoogle.svg") ?>
                     </div>
                     <div class="flex gap-0.5 items-center justify-center">
                         <p class="font-pop paragraph-size text-secondary cursor-default">Já possui uma conta?</p>

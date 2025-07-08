@@ -31,7 +31,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
                     <?= InputComponent(placeholder: "Insira sua senha nova", type: "password", label: "Senha", icon: "../../../../public/icons/eyeOff.svg", iconPosition: "w-6 h-6 right-3") ?>
                     <?= InputComponent(placeholder: "Confirme nova senha", type: "password", label: "Confirme sua senha", icon: "../../../../public/icons/eyeOff.svg", iconPosition: "w-6 h-6 right-3") ?>
                     <div class="mt-2">
-                        <?= ButtonComponent("Acessar plataforma", "default") ?>
+                        <?= ButtonComponent("Acessar plataforma", "default", null, 380, 50, null, "/VHS/src/views/auth/login/index.php", true) ?>
                     </div>
                 </div>
             </div>

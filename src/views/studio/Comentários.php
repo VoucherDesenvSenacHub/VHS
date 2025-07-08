@@ -8,10 +8,7 @@ use function src\views\components\header\HeaderComponent;
 require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/buttonComponent.php";
 use function src\views\components\Utils\ButtonComponent;
 
-// require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/comments_studio/comentary_studio_Component.php";
-// use function src\views\components\Utils\Comment_Studio;
-
-require_once "../components/utils/comments_studio/commentStudioComponent.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/comments_studio/commentStudioComponent.php";
 use function src\views\components\Utils\CommentStudioComponent; 
 
 require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/footer.php";
@@ -42,9 +39,9 @@ use function src\views\components\Utils\Footer;
       </div>
 
       <div class="flex gap-5 mb-6">
-        <?php echo ButtonComponent("Edição", "studio", "", 170, 40,"","../edicao-de-video"); ?>
-        <?php echo ButtonComponent("Comentários", "studio", "", 170, 40,"","",true); ?>
-        <?php echo ButtonComponent("Analytics", "studio", "", 170, 40,"","../Analytics (Studio)/Analytics_studio.php"); ?>
+        <?php echo ButtonComponent("Edição", "studio", "", 10.675, 2.5,"","../edicao-de-video"); ?>
+        <?php echo ButtonComponent("Comentários", "studio", "", 10.675, 2.5,"","",true); ?>
+        <?php echo ButtonComponent("Analytics", "studio", "", 10.675, 2.5,"","../Analytics (Studio)/Analytics_studio.php"); ?>
       </div>
 
       <div class="mb-6 flex gap-3">
