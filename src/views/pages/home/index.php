@@ -311,7 +311,7 @@ $styleVideos = [
         }
     </style>
 </head>
-<body class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center text-white">
+<body>
     <div>
         <?= HeaderComponent() ?>
     </div>

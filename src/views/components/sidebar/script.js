@@ -31,15 +31,18 @@ const url = window.location.href;
 
 url.includes("minimized") ? toggleSidebar(false) : null;
 
+
 function checkRoute() {
-    icons[0].classList.toggle("active", url.includes("home") && !url.includes("categories"));
-    icons[1].classList.toggle("active", url.includes("fast"));
-    icons[2].classList.toggle("active", url.includes("events"));
-    icons[3].classList.toggle("active", url.includes("history"));   
-    icons[4].classList.toggle("active", url.includes("tecnologia"));
-    icons[5].classList.toggle("active", url.includes("saude"));
-    icons[6].classList.toggle("active", url.includes("moda"));
-    icons[7].classList.toggle("active", url.includes("estetica"));
+    const urlSplit = url.split("/home");
+
+    icons[0].classList.toggle("active", url.includes("/home") && urlSplit.at(-1) === "/" || urlSplit.at(-1) === "");
+    icons[1].classList.toggle("active", url.includes("/home/fast"));
+    icons[2].classList.toggle("active", url.includes("/home/events"));
+    icons[3].classList.toggle("active", url.includes("/user/history"));   
+    icons[4].classList.toggle("active", url.includes("category=tecnologia"));
+    icons[5].classList.toggle("active", url.includes("category=saude"));
+    icons[6].classList.toggle("active", url.includes("category=moda"));
+    icons[7].classList.toggle("active", url.includes("category=estetica"));
 }
 
 checkRoute();
@@ -53,10 +56,11 @@ function toggleSidebar(state) {
         if (isExpanded) {
             text.style.opacity = "1";
             text.style.transform = "translateX(0)";
-        } else {
-            text.style.opacity = "0";
-            text.style.transform = "translateX(-10px)";
+            return;
         }
+        text.style.opacity = "0";
+        text.style.transform = "translateX(-10px)";
+       
     });
 
     separators.forEach(separator => {

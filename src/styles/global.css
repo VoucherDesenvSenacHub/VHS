@@ -9,6 +9,9 @@ body {
     padding: 0;
     box-sizing: border-box;
     background: linear-gradient(to top, #000, #20002c);
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
 }
 
 a.active {
@@ -17,4 +20,23 @@ a.active {
 
 a.active > img {
     filter: invert(99%) sepia(100%) saturate(0%) hue-rotate(173deg) brightness(110%) contrast(101%);    
+}
+
+@keyframes smooth {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes hidden_smooth {
+    to { opacity: 0; }
+}
+
+.play { 
+    animation: smooth 0.15s 
+    ease-in; 
+}
+
+.play.paused {
+    animation: hidden_smooth 0.15s ease-in;
+    animation-fill-mode: forwards;
 }

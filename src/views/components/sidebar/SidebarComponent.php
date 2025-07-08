@@ -13,7 +13,7 @@ function SidebarComponent() {
             [
                 "icon" => "/VHS/public/icons/Fast.svg",
                 "text" => "Fast",
-                "link" => "/VHS/utils/Fast"
+                "link" => "/VHS/src/views/pages/home/fast"
             ],
             [
                 "icon" => "/VHS/public/icons/radio.svg",
