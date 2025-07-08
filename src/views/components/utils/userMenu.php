@@ -44,8 +44,8 @@
                             <p class='select-none truncate hidden sm:flex sm:text-caption 3xl:text-paragraph text-gray300'>Gerencie dados e preferências</p>
                         </div>
                     </a>
-            
-                    <a href='' id='button-vhs-studio' class='flex p-1 sm:p-2 items-center gap-2 hover:bg-white/5 focus:bg-white/10 transition-all duration-200 cursor-pointer'>
+                    
+                    <a href='/VHS/src/views/users/' id='button-vhs-studio' class='flex p-1 sm:p-2 items-center gap-2 hover:bg-white/5 focus:bg-white/10 transition-all duration-200 cursor-pointer'>
                         <div class='flex-shrink-0 w-12 h-12 3xl:w-14 3xl:h-14 p-3 flex justify-center items-center'>
                             <img class='select-none pointer-events-none w-full h-full' src='/VHS/public/icons/studio.svg' onerror='this.style.display=\"none\"'>
                         </div>
