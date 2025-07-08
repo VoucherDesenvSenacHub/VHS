@@ -1,7 +1,6 @@
 <?php
 require "../components/header/headerComponent.php";
 require "../components/studioSideMenu/studioSideMenuComponent.php";
-require "../components/utils/Title_and_buttons.php";
 require "../components/utils/userActivityCardsComponent.php";
 require "../components/charts/chartComponent.php";
 require_once "../components/utils/buttonComponent.php";
@@ -9,7 +8,6 @@ require_once "../components/utils/buttonComponent.php";
 use function src\views\Components\Utils\ButtonComponent;
 use function src\views\components\Charts\renderChartComponent;
 use function src\views\components\utils\UserActivityCardsComponent;
-use function src\views\components\Utils\Title_and_buttons;
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
 use function src\views\components\Header\HeaderComponent;
 
@@ -52,7 +50,6 @@ $botoes = [
                 <?= ButtonComponent("Edição","studio","",170,40,"","../edicao-de-video/index.php") ?>
                 <?= ButtonComponent("Comentários","studio","",170,40,"","../studio/Comentários.php") ?>
                 <?= ButtonComponent("Analytics","studio","",170,40,"","",true) ?>
-                <!-- <?= Title_and_buttons("Estatisticas do Vídeo", "loren", $botoes) ?> -->
             </div>
             <div class="flex flex-row gap-8 mt-4">
 
