@@ -1,7 +1,7 @@
 <?php
 // Requires dos componentes necessários
 require "../../components/header/headerComponent.php";
-require "../../components/sidebar/barra_lateral.php";
+require "../../components/sidebar/SidebarComponent.php";
 require "../../components/cards/index.php";
 require "../../components/featuredCard/featuredCardComponent.php";
 
@@ -341,7 +341,7 @@ $styleVideos = [
                     <p class="text-gray-400 text-sm mb-6">Confira os vídeos mais populares da nossa plataforma VHS</p>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                        <?php renderCards($mostPopularVideos, 'video'); ?>
+                        <?= renderCards($mostPopularVideos, 'video'); ?>
                     </div>
                 </section>
 
@@ -349,7 +349,7 @@ $styleVideos = [
                     <h2 class="text-2xl font-bold text-white mb-6"><span class="text-purple-400">#</span> Tecnologia</h2>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        <?php renderCards($techVideos, 'video'); ?>
+                        <?= renderCards($techVideos, 'video'); ?>
                     </div>
                 </section>
 
@@ -357,7 +357,7 @@ $styleVideos = [
                     <h2 class="text-2xl font-bold text-white mb-6"><span class="text-purple-400">#</span> Saúde</h2>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        <?php renderCards($healthVideos, 'video'); ?>
+                        <?= renderCards($healthVideos, 'video'); ?>
                     </div>
                 </section>
 
@@ -365,7 +365,7 @@ $styleVideos = [
                     <h2 class="text-2xl font-bold text-white mb-6"><span class="text-purple-400">#</span> Moda</h2>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        <?php renderCards($styleVideos, 'video'); ?>
+                        <?= renderCards($styleVideos, 'video'); ?>
                     </div>
                 </section>
             </div>

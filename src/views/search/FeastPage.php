@@ -1,7 +1,7 @@
 <?php
 require "../components/utils/Title_and_buttons.php";
 require "../components/header/headerComponent.php";
-require "../components/sidebar/barra_lateral.php";
+require "../components/sidebar/SidebarComponent.php";
 
 use function src\views\components\sidebar\SidebarComponent;
 use function src\views\components\header\HeaderComponent;

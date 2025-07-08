@@ -10,3 +10,11 @@ body {
     box-sizing: border-box;
     background: linear-gradient(to top, #000, #20002c);
 }
+
+a.active {
+    background-color: #7b08d3;
+}
+
+a.active > img {
+    filter: invert(99%) sepia(100%) saturate(0%) hue-rotate(173deg) brightness(110%) contrast(101%);    
+}

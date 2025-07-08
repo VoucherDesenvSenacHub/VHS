@@ -1,5 +1,5 @@
 <?php
-require "../components/sidebar/barra_lateral.php";
+require "../components/sidebar/SidebarComponent.php";
 require "../components/header/headerComponent.php";
 require_once "../components/cards/index.php";
 require_once "../components/studioSideMenu/studioSideMenuComponent.php";

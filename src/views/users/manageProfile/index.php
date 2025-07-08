@@ -2,7 +2,7 @@
 require __DIR__ . '/../../components/utils/buttonComponent.php';
 require __DIR__ . '/../../components/utils/inputComponent.php';
 require __DIR__ . '/../../components/header/headerComponent.php';
-require __DIR__ . '/../../components/barra_lateral/barra_lateral.php';
+require __DIR__ . '/../../components/barra_lateral/SidebarComponent.php';
 
 use function Src\Views\Components\Utils\ButtonComponent;
 use function Src\Views\Components\Utils\InputComponent;

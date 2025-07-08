@@ -3,7 +3,7 @@
     require_once __DIR__ . "/../components/header/headerComponent.php";
     use function Src\Views\Components\header\HeaderComponent;
 
-    require_once __DIR__ . "/../components/sidebar/barra_lateral.php";
+    require_once __DIR__ . "/../components/sidebar/SidebarComponent.php";
     use function Src\Views\Components\sidebar\SidebarComponent;
 
     require_once __DIR__ . "/../components/cards/index.php";

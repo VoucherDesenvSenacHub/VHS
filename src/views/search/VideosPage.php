@@ -1,7 +1,7 @@
 <?php
 require "../components/utils/Title_and_buttons.php";
 require "../components/header/headerComponent.php";
-require "../components/sidebar/barra_lateral.php";
+require "../components/sidebar/SidebarComponent.php";
 require "../components/cards/videoCard.php";
 
 use function Src\Views\Components\Cards\createVideoCard;
