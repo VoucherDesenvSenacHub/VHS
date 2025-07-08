@@ -95,8 +95,8 @@ $conteudos = []
         </div>
         
         <div class="flex justify-center items-end gap-10 my-6">
-            <?= ButtonComponent("Salvar Alterações", "default", null, 480) ?>
-            <?= ButtonComponent(text: "Cancelar", variant: "outline", id: "cancel-button", width:480) ?>
+            <?= ButtonComponent("Salvar Alterações", "default", null, 30) ?>
+            <?= ButtonComponent(text: "Cancelar", variant: "outline", id: "cancel-button", width:30) ?>
         </div>
     </div>
 </div>

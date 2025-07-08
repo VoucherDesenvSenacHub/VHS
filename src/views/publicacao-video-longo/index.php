@@ -51,20 +51,15 @@ $conteudos = []
                 <h1 class='text-title font-bold'>Criar conteúdo</h1>
                 <h1 class='text-paragraph text-gray-400'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</h1>
                 <div class="mt-2 flex gap-2">
-                    <?php echo ButtonComponent("Vídeo", "studio", "", 10.675, 2.5, "", "../publicacao-video-longo/index.php"); ?>
+                    <?php echo ButtonComponent("Vídeo", "studio", "", 10.675, 2.5, "", "./#"); ?>
                     <?php echo ButtonComponent("Fast", "studio", "", 10.675, 2.5, "", "../publicacao-video-fast/index.php"); ?>
-                    <?php echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5, "", "#"); ?>
+                    <?php echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5, "", "../publicacao-video-evento/index.php"); ?>
                 </div>
 
                 <div id="URL">
                     <h1 class="text-subtitle text-white font-semibold mt-4">URL</h1>
                     <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
                     <?= InputComponent(type: "text", placeholder: "https://youtube.com") ?>
-                </div>
-                <div id="date-event">
-                    <h1 class="text-subtitle text-white font-semibold mt-4">Data do evento</h1>
-                    <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-                    <?= InputComponent(type: "text", placeholder: "23/04/2025 ás 15h30") ?>
                 </div>
 
                 <div id="thumb">
