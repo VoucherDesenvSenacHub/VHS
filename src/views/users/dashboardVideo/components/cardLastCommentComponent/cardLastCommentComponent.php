@@ -4,7 +4,7 @@ function CardLatestCommentComponent(array $videos)
     $totalComments = array_sum(array_column($videos, 'commentNumber'));
 
     $html = "
-        <div class='bg-[#1B1B1B] p-6 w-full max-w-lg min-h-[24rem] max-h-[90vh] rounded-xl border border-gray-700 space-y-2 top-0 right-0'>
+        <div class='bg-[#1B1B1B] p-6 w-full max-w-lg min-h-[32rem] min-w-[24rem] max-h-[90vh] rounded-xl border border-gray-700 space-y-2'>
             <div class='flex items-center justify-between w-full'>
                 <text class='font-sans text-2xl font-bold text-white cursor-default'>Últimos Comentários</text>
                 <a href='#' class='text-sm font-medium text-zinc-400 hover:text-white transition-all duration-300 bg-zinc-700/50 rounded-full px-2 py-[3px]'>$totalComments comentários</a>
