@@ -33,7 +33,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
                 <div class="flex flex-col gap-4 w-full xl:w-96">
                     <?= InputComponent(placeholder: "Insira sua senha", type: "password", label: "Senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "right-3") ?>
                     <?= InputComponent(placeholder: "Confirme sua senha", type: "password", label: "Confirmar senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "right-3") ?>
-                    <?= ButtonComponent("Continuar", "default", link:"./verify-email", className: " mt-4") ?>
+                    <?= ButtonComponent("Continuar", "default", link:"/VHS/src/views/pages/auth/register/verify-email", className: " mt-4") ?>
                 </div>
             </div>
         </div>

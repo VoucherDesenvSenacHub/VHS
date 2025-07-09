@@ -36,7 +36,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
                     <?= ButtonComponent("Saúde", "outline", className: " text-white font-semibold transition-all category", link:"#") ?>
                     <?= ButtonComponent("Tecnologia", "outline", className: " text-white font-semibold transition-all category", link:"#") ?>
                     <?= ButtonComponent("Moda", "outline", className: " text-white font-semibold transition-all category", link:"#") ?>
-                    <?= ButtonComponent("Continuar", "default", link: "./password", className: " mt-4") ?>
+                    <?= ButtonComponent("Continuar", "default", link: "/VHS/src/views/pages/auth/register/password", className: " mt-4") ?>
                 </div>
             </div>
         </div>

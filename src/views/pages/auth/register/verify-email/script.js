@@ -5,7 +5,7 @@ const verifyEmail = () => {
     const intervalId = setInterval(() => {
         description.innerText = `Seu e-mail foi verificado, você será redirecionado em ${count}...`
         if (--count === 0) {
-            location.href = "../../home"
+            location.href = "/VHS/src/views/pages/home"
             clearInterval(intervalId);
         } 
     }, 1000);

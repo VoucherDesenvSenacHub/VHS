@@ -11,8 +11,8 @@ if ($step === "1") {
     $render = InputComponent(placeholder: "Seu e-mail", type: "email");
 } else {
     $render = 
-    InputComponent(placeholder: "Insira sua senha nova", type: "password", label: "Senha", icon: "../../../../public/icons/eyeOff.svg", iconPosition: "w-6 h-6 right-3") .
-    InputComponent(placeholder: "Confirme nova senha", type: "password", label: "Confirme sua senha", icon: "../../../../public/icons/eyeOff.svg", iconPosition: "w-6 h-6 right-3");
+    InputComponent(placeholder: "Insira sua senha nova", type: "password", label: "Senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "w-6 h-6 right-3") .
+    InputComponent(placeholder: "Confirme nova senha", type: "password", label: "Confirme sua senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "w-6 h-6 right-3");
 }
 
 ?>
@@ -43,7 +43,7 @@ if ($step === "1") {
                 </div>
                 <div class="flex flex-col gap-4 w-full xl:w-96">
                     <?= $render ?>
-                    <?= ButtonComponent($step == 1 ? "Enviar e-mail" : "Redefinir", "default", className: " mt-4", link: $step == "1" ? "?step=2" : "../home"); ?>
+                    <?= ButtonComponent($step == 1 ? "Enviar e-mail" : "Redefinir", "default", className: " mt-4", link: $step == "1" ? "?step=2" : "/VHS/src/views/pages/home"); ?>
                 </div>
             </div>
         </div>

@@ -45,22 +45,22 @@ function GridUsuariosComponent($usuarios = []) {
 
             <div class="bg-[#1B1B1B] text-white rounded-lg flex flex-col p-4 w-48 absolute hidden top-14 right-0 border-2 border-gray-600 z-10" data-user-id="' . $usuario['id'] . '" data-card="user_menu">
                 <button type="button" class="flex flex-row items-center space-x-2 mb-2 rounded px-2 py-1" data-action="request_role_change" data-role="Usuário" data-user-id="' . $usuario['id'] . '">
-                    <img src="../../../../public/icons/User.svg" class="w-6 h-6 text-gray-400" alt="Usuário">
+                    <img src="/VHS/public/icons/User.svg" class="w-6 h-6 text-gray-400" alt="Usuário">
                     <span class="font-semibold">Usuário</span>
                 </button>
                 <button type="button" class="flex flex-row items-center space-x-2 mb-2 rounded px-2 py-1" data-action="request_role_change" data-role="Criador" data-user-id="' . $usuario['id'] . '">
-                    <img src="../../../../public/icons/play.svg" class="w-6 h-6 text-gray-400" alt="Criador">
+                    <img src="/VHS/public/icons/play.svg" class="w-6 h-6 text-gray-400" alt="Criador">
                     <span class="font-semibold">Criador</span>
                 </button>
                 <button type="button" class="flex flex-row items-center space-x-2 rounded px-2 py-1" data-action="request_role_change" data-role="Admin" data-user-id="' . $usuario['id'] . '">
-                    <img src="../../../../public/icons/crown.svg" class="w-6 h-6 text-gray-400" alt="Admin">
+                    <img src="/VHS/public/icons/crown.svg" class="w-6 h-6 text-gray-400" alt="Admin">
                     <span class="font-semibold">Admin</span>
                 </button>
             </div>
 
             <div class="bg-[#1B1B1B] text-white rounded-lg flex items-center p-4 w-26 h-10 absolute hidden top-14 right-0 mt-2 border-2 border-gray-600 z-20" data-user-id="' . $usuario['id'] . '" data-card="banir">
                 <div class="flex items-center cursor-pointer" data-action="request_delete_confirmation" data-user-id="' . $usuario['id'] . '">
-                    <img src="../../../../public/icons/Shield_Warning.svg" class="w-6 h-6 text-gray-400 mr-4" alt="Shield Warning">
+                    <img src="/VHS/public/icons/Shield_Warning.svg" class="w-6 h-6 text-gray-400 mr-4" alt="Shield Warning">
                     <span class="font-semibold">Banir</span>
                 </div>
             </div>
@@ -153,7 +153,7 @@ function GridUsuariosComponent($usuarios = []) {
                 <div id="copy-notification" class="overflow-hidden fixed flex bottom-0 right-0 mb-4 mr-4 min-w-20 min-h-10 bg-[#202024] rounded-xl items-center p-4 gap-4 border-b-4 border-[#660BAD] translate-y-5 opacity-0 transition-all duration-300">
                     <div class="w-12 h-12 bg-[#373450] rounded-full flex items-center justify-center p-2" style="box-shadow: 0 0 75px 0 #660BAD;">
                         <svg width="100%" height="100%" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <img src="../../../../public/icons/warning.svg" alt="">
+                            <img src="/VHS/public/icons/warning.svg" alt="">
                         </svg>
                     </div>
                     <div class="flex flex-col text-white">

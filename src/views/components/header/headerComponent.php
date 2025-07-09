@@ -22,9 +22,11 @@
                 </div>
 
                 <div class='flex items-center gap-4'>
-                    <button id='search' class='p-2 rounded-full transition-all duration-200 hover:bg-white/10'>
-                        <img src='/VHS/public/icons/lupa.svg' class='h-4 pointer-events-none'>
-                    </button>
+                    <a href="/VHS/src/views/pages/home/search">
+                        <button id='search' class='p-2 rounded-full transition-all duration-200 hover:bg-white/10'>
+                            <img src='/VHS/public/icons/lupa.svg' class='h-4 pointer-events-none'>
+                        </button>
+                    </a>
 
                     <img src='/VHS/public/icons/Rectangle.svg'>
                     
