@@ -34,7 +34,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
                     <?= ButtonComponent(text: "Saúde", variant: "outline") ?>
                     <?= ButtonComponent(text: "Tecnologia", variant: "outline") ?>
                     <?= ButtonComponent(text: "Moda", variant: "outline") ?>
-                    <?= ButtonComponent(text: "Continuar", variant: "default") ?>
+                    <?= ButtonComponent("Continuar", "default", null, 380, 50, null, "/VHS/src/views/auth/email_verification/index.php", true) ?>
                 </div>
             </div>
         </div>

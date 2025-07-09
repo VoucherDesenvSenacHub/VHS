@@ -143,7 +143,7 @@ $videos = [
     <script src="../../styles/tailwindglobal.js"></script>
 </head>
 
-<body class="w-full bg-[#0C0118]">
+<body class="w-full bg-[#0C0118] text-white">
     <?php echo HeaderComponent(); ?>
     <div class="flex">
         <div class="max-xl:hidden mr-4">
@@ -151,16 +151,16 @@ $videos = [
             echo StudioSideMenuComponent();
             ?>
         </div>
-        <div class="max-w-[1500px] mx-auto ">
+        <div class="max-w-[1500px] mx-auto w-full">
             <div>
                 <p class="font-pop font-semibold text-title text-white">Gerenciamento de usuários</p>
                 <p class="text-subtitile font-semibold title-size text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
             </div>
             <div class="flex h-5 mt-5 gap-5">
                 <?php
-                echo ButtonComponent("Videos", "studio", "", 170, 40,"","./videosConteudo.php");
-                echo ButtonComponent("Fast", "studio", "", 170, 40,"","./fastConteudo.php");
-                echo ButtonComponent("Eventos", "studio", "", 170, 40,"","");
+                echo ButtonComponent("Videos", "studio", "", 10.675, 2.5,"","./videosConteudo.php");
+                echo ButtonComponent("Fast", "studio", "", 10.675, 2.5,"","./fastConteudo.php");
+                echo ButtonComponent("Eventos", "studio", "",10.675, 2.5,"","");
                 ?>
             </div>
             <div class="mt-10 flex items-center gap-4 h-16 cavalo">

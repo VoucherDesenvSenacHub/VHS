@@ -30,6 +30,10 @@ use function Src\Views\Components\Utils\ButtonComponent;
         <div class="flex flex-col gap-4 w-full xl:w-96">
           <?= InputComponent(placeholder: "Insira seu e-mail", type: "email", label: "Email", icon: "../../../../public/icons/Vector.svg", iconPosition: "w-6 h-6 right-3") ?>
           <?= InputComponent(placeholder: "Insira sua senha", type: "password", label: "Senha", icon: "../../../../public/icons/eyeOff.svg", iconPosition: "w-6 h-6 right-3") ?>
+          <div class="flex gap-2">
+            <p class="font-pop paragraph-size text-gray-400">Esqueceu a senha?</p>
+            <a href="/VHS/src/views/auth/reset_password/index.php" class="font-pop paragraph-size text-purple-500 underline">Redefinir</a>
+          </div>
           <div class="flex items-center space-x-2 cursor-pointer">
             <input type="checkbox" id="checkbox" class="hidden">
             <div id="customCheckbox" class="w-5 h-5 flex items-center justify-center bg-background rounded-md border border-gray300 transition-all">
@@ -40,19 +44,19 @@ use function Src\Views\Components\Utils\ButtonComponent;
             <span class="cursor-default text-white text-xs font-medium">Lembrar de mim</span>
           </div>
           <div>
-            <?= ButtonComponent("Acessar plataforma", "default") ?>
+            <?= ButtonComponent("Acessar plataforma", "default", null, 380, 50, null, "/VHS/src/views/pages/home/index.php", true) ?>
           </div>
           <div class="flex items-center text-white cursor-default">
             <div class="flex-grow border-t border-gray300"></div>
             <span class="px-3 text-sm font-semibold">OU</span>
             <div class="flex-grow border-t border-gray300"></div>
           </div>
-          <div class="text-black">
-            <?= ButtonComponent("Entrar pelo Google", "icon", "../../../../public/images/LogoGoogle.svg") ?>
+          <div>
+            <?= ButtonComponent("Entrar pelo Google", "google", "../../../../public/images/LogoGoogle.svg", 380, 50, true) ?>
           </div>
           <div class="flex gap-0.5 items-center justify-center">
             <p class="font-pop paragraph-size text-gray-200 cursor-default">Ainda não tem uma conta?</p>
-            <a class="font-pop paragraph-size text-primary underline" href="../register/index.php">Cadastrar</a>
+            <a class="font-pop paragraph-size text-purple-500 underline" href="../register/index.php">Cadastrar</a>
           </div>
         </div>
       </div>
