@@ -56,12 +56,12 @@ $cards = [
       <?= SidebarComponent() ?>
     </aside>
 
-    <main class="flex-1 p-4">
+    <main class="flex-1 p-4 max-w-[1500px] m-auto">
 
       <div class="w-full">
         <div class="rounded-lg">
           <iframe
-            class="w-[1550px] h-[400px] md:h-[573px] rounded-lg"
+            class="w-full md:h-[40rem] rounded-lg"
             src="<?= $link ?>"
             title="YouTube video player"
             frameborder="0"
@@ -71,7 +71,7 @@ $cards = [
           ></iframe>
         </div>
         <div class="flex gap-[23rem]">
-            <div class="w-[1000px]">
+            <div class="">
                 <h2 class="mt-4 text-xl font-semibold"><?= $title ?></h2>
                 <p class="mt-2 text-sm text-gray-300 whitespace-pre-line"><?= $subtitle ?></p>
             </div>
@@ -103,7 +103,7 @@ $cards = [
           </div>
         </div>
 
-        <div class="w-full lg:flex-1 bg-[#1B1B1B] p-4 rounded-lg">
+        <div class="w-full lg:flex-1 bg-[#1B1B1B] p-4 rounded-lg mt-10">
           <h3 class="text-lg font-semibold mb-4">11 Comentários</h3>
           <?php for ($i = 0; $i < 11; $i++) {
             echo Comment('João da Silva', 'Comentário de exemplo para layout.', 'Há 5 Dias', 'https://img.freepik.com/vetores-gratis/circulo-azul-com-usuario-branco_78370-4707.jpg?semt=ais_items_boosted&w=740');

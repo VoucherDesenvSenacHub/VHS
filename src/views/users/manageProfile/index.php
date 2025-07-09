@@ -2,12 +2,12 @@
 require __DIR__ . '/../../components/utils/buttonComponent.php';
 require __DIR__ . '/../../components/utils/inputComponent.php';
 require __DIR__ . '/../../components/header/headerComponent.php';
-<<<<<<< HEAD
+
 require __DIR__ . '/../../components/barra_lateral/SidebarComponent.php';
-=======
+
 require __DIR__ . '/../../components/sidebar/barra_lateral.php';
 require __DIR__ . '/../../components/Shared/shared.php';
->>>>>>> origin/feat/Events-Page
+
 
 use function Src\Views\Components\Utils\ButtonComponent;
 use function Src\Views\Components\Utils\InputComponent;
@@ -118,7 +118,7 @@ use function Src\views\Components\sidebar\SidebarComponent;
         const existing = document.getElementById('copy-notification');
         if (existing) existing.remove();
 
-        document.body.insertAdjacentHTML('beforeend', `<?= copyNotify(); ?>`);
+;
         const notification = document.getElementById('copy-notification');
 
         notification.querySelector('.title').textContent = title;

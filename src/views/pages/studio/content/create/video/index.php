@@ -52,9 +52,9 @@ $conteudos = []
                 <h1 class='text-title font-bold'>Criar conteúdo</h1>
                 <h1 class='text-paragraph text-gray-400'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</h1>
                 <div class="mt-2 flex gap-2 w-96">
-                    <?php echo ButtonComponent("Vídeo", "studio", "", 10.675, 2.5, "", "./#"); ?>
-                    <?php echo ButtonComponent("Fast", "studio", "", 10.675, 2.5, "", "../publicacao-video-fast/index.php"); ?>
-                    <?php echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5, "", "../publicacao-video-evento/index.php"); ?>
+                    <?php echo ButtonComponent("Vídeo", "studio", "", 10.675, 2.5, "", "/VHS/src/views/pages/studio/content/create/video"); ?>
+                    <?php echo ButtonComponent("Fast", "studio", "", 10.675, 2.5, "", "/VHS/src/views/pages/studio/content/create/fast"); ?>
+                    <?php echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5, "", "/VHS/src/views/pages/studio/content/create/event"); ?>
                 </div>
 
                 <div id="URL">

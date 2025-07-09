@@ -18,9 +18,9 @@ function renderDonutChartComponent($seriesData, $labels, $title = 'Categorias', 
             <div class='relative w-full md:w-3/5 mx-auto h-[200px] mt-6'>
                 <div id='$chartId' class='w-full absolute z-0 ml-7'></div>
 
-                <div class='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[30%] text-center z-10 pointer-events-none w-full'>
-                    <div class='text-white text-3xl font-semibold'>$mostPopular</div>
-                    <div class='text-gray-400 text-lg mt-1'>A categoria mais popular</div>
+                <div class='absolute top-16 left-20'>
+                    <div class='text-white text-2xl font-semibold '>$mostPopular</div>
+                    <div class='text-gray-400 mt-1 relative right-5 text-sm'>A categoria mais popular</div>
                 </div>
             </div>
 
@@ -38,7 +38,7 @@ function renderDonutChartComponent($seriesData, $labels, $title = 'Categorias', 
         var options = {
             chart: {
                 type: 'donut',
-                height: 300,
+                height: 600,
                 background: 'transparent',
                 toolbar: { show: false }
             },

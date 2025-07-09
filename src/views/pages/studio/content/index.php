@@ -124,7 +124,7 @@ $videos = [
                 <?php
                     echo ButtonComponent("Videos", "studio", "", 10.675, 2.5,"",'/VHS/src/views/pages/studio/content');
                     echo ButtonComponent("Fast", "studio", "", 10.675, 2.5,"","/VHS/src/views/pages/studio/content/fast.php");
-                    echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5,"","./conteudo_Eventos.php");
+                    echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5,"","/VHS/src/views/pages/studio/content");
                 ?>
             </div>  
 

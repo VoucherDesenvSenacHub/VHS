@@ -15,8 +15,8 @@ function renderNotificationListComponent($items, $title = 'Ações') {
 
     // Construir a string do componente
     $html = <<<HTML
-    <div class="container p-2">
-        <div class="rounded-xl shadow-lg p-10 w-max">
+    <div class="container ">
+        <div class="rounded-xl p-10 w-max border border-white/20">
             <h2 class="text-white text-xl font-semibold mb-4">$title</h2>
             <ul class="list-none space-y-2">
                 $listItems

@@ -33,9 +33,9 @@ use function Src\Views\Components\Utils\ButtonComponent;
                     <p class="text-secondary">Informe seus dados para criar sua conta</p>
                 </div>
                 <div class="flex flex-col gap-4 w-full xl:w-96">
-                    <?= InputComponent(placeholder: "Seu usuário", type: "text", label: "Usuário", icon: "/VHS/public/icons/userRound.svg", iconPosition: "right-3") ?>
-                    <?= InputComponent(placeholder: "Seu melhor e-mail", type: "email", label: "Email", icon: "/VHS/public/icons/mail.svg", iconPosition: "right-3") ?>
-                    <?= InputComponent(placeholder: "Sua senha", type: "password", label: "Senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "right-3") ?>
+                    <?= InputComponent(placeholder: "Insira seu Usuário", type: "text", label: "Usuário", icon: "../../../../public/icons/userRound.svg", iconPosition: "right-3") ?>
+                    <?= InputComponent(placeholder: "Insira seu E-mail", type: "email", label: "Email", icon: "../../../../public/icons/mail.svg", iconPosition: "right-3") ?>
+                    <?= InputComponent(placeholder: "Insira sua data de nascimento", type: "date", label: "Data de nascimento") ?>
                     <?= CheckboxComponent("Lembrar de mim")?>
                     <div>
                         <?= ButtonComponent("Criar Conta", "default", link: "./register/categories") ?>
