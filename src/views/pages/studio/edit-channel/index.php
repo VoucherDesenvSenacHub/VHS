@@ -25,7 +25,7 @@ use function src\views\components\Utils\Footer;
   <div class="flex">
     <?php echo StudioSideMenuComponent(); ?>
 
-    <main class="flex flex-col p-8 md:p-12 ml-14 w-4/8">
+    <main class="flex flex-col max-w-[1500px] mx-auto">
       <h1 class="text-2xl font-semibold mb-0.5rem">Customizar canal</h1>
       <p class="text-sm text-gray-300 mb-8">Altere o nome, banner, foto de perfil, descrição do seu canal</p>
 
@@ -62,7 +62,7 @@ use function src\views\components\Utils\Footer;
         <p class="text-sm text-gray-400 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         <form action="upload.php" method="POST" enctype="multipart/form-data">
           <label for="imagemUpload" class="relative group cursor-pointer inline-block w-full">
-            <img src="https://i.imgur.com/UvnbC0y.png" alt="Banner do canal" class="h-50 w-full rounded-md border border-gray-700" />
+            <img src="" class="h-50 w-full rounded-md border border-gray-700" />
             <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
               <img src="/VHS/public/icons/Download.svg" alt="Download">
             </div>
@@ -94,7 +94,7 @@ use function src\views\components\Utils\Footer;
         <input id="tags" type="text" class="w-full bg-transparent border border-gray-600 text-sm px-4 py-2 rounded-md placeholder-gray-500" placeholder="#Tecnologia">
       </section>
 
-      <div class="flex gap-5 flex-col lg:flex-row">
+      <div class="flex gap-5 flex-col lg:flex-row self-end">
         <button class="px-4 sm:px-6 md:px-8 lg:px-[10.5rem] py-3 border border-gray-500 text-xs sm:text-sm rounded-md hover:bg-gray-700 transition">
           Cancelar
         </button>

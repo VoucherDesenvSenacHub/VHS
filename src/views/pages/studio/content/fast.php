@@ -1,14 +1,18 @@
 <?php
-require "../components/sidebar/SidebarComponent.php";
-require "../components/header/headerComponent.php";
-require_once "../components/cards/index.php";
-require_once "../components/studioSideMenu/studioSideMenuComponent.php";
+require "../../../components/sidebar/SidebarComponent.php";
+require "../../../components/header/headerComponent.php";
+require_once "../../../components/cards/index.php";
+require_once "../../../components/utils/inputComponent.php";
+require_once "../../../components/studioSideMenu/studioSideMenuComponent.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/buttonComponent.php";
+require_once "../../../components/CardFastComponent/cardFast.php";
 
+use function Src\Views\Components\CardFast;
 use function src\views\components\Utils\ButtonComponent;
 use function Src\Views\Components\Cards\renderCards;
 use function Src\Views\Components\header\HeaderComponent;
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
+use function Src\Views\Components\Utils\InputComponent;
 
 $videos = [
     [
@@ -99,9 +103,10 @@ $videos = [
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>user management</title>
+    <title>VHS Studio - Conteúdo do canal</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="../../styles/tailwindglobal.js"></script>
+    <script src="/VHS/src/styles/tailwindglobal.js"></script>
+    <link rel="stylesheet" href="/VHS/src/styles/global.css">
 </head>
 
 <body class="w-full bg-[#0C0118]">
@@ -112,37 +117,69 @@ $videos = [
             echo StudioSideMenuComponent();
             ?>
         </div>
-        <div class=" max-w-[1500px] mx-auto">
+        <div class="max-w-[1500px] w-full mx-auto">
             <div>
-                <p class="font-pop font-semibold text-title text-white">Gerenciamento de usuários</p>
-                <p class="text-subtitile font-semibold title-size text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
+                <h1 class="font-semibold text-title text-white">Conteúdo do canal</h1>
+                <p class="text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
             </div>
-            <div class="flex h-5 mt-5 gap-5">
+            <div class="flex gap-4 w-96 my-4">
                 <?php
-                echo ButtonComponent("Videos", "studio", "", "170px", "40px","",'');
-                echo ButtonComponent("Fast", "studio", "", "170px", "40px","","./fastConteudo.php");
-                echo ButtonComponent("Eventos", "studio", "", "170px", "40px","","./conteudo_Eventos.php");
+                    echo ButtonComponent("Videos", "studio", "", 10.675, 2.5,"",'/VHS/src/views/pages/studio/content');
+                    echo ButtonComponent("Fast", "studio", "", 10.675, 2.5,"","/VHS/src/views/pages/studio/content/fast.php");
+                    echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5,"","./conteudo_Eventos.php");
                 ?>
             </div>  
-            <div class="mt-10 flex items-center gap-4 h-16 cavalo">
-                <button id="btn_filter" onclick="filter(event)">
-                    <img class="size-7" src="/VHS/public/icons/filter.svg" alt="">
-                </button>
-                <input type="text" placeholder="Pesquisar" class="pl-2 rounded-lg bg-transparent text-white w-full h-12 border-[0.5px] border-gray-500">
-            </div>
+
+            <?= InputComponent("text", "Pesquisar", icon: "/VHS/public/icons/Filter.svg", iconPosition: "left", onClickIcon: "showFilterMenu()") ?>
+
             <div id="filter" class="absolute left-[16.5rem] z-10 hidden flex flex-col bg-gray-900 rounded-lg p-2 max-w-32 border-[0.5px] border-gray-500">
                 <div class="flex">
-                    <img src="../../../public/icons/time-svgrepo-com.svg" alt="" class="size-6 rotate-[-110deg]">
+                    <img src="/VHS/public/icons/time-svgrepo-com.svg" alt="" class="size-6 rotate-[-110deg]">
                     <p class="text-[13px] flex items-center text-gray-200">Mais recentes</p>
                 </div>
                 <div class="flex flex-row">
-                    <img src="../../../public/icons/time-svgrepo-com.svg" class="size-6" alt="">
+                    <img src="/VHS/public/icons/time-svgrepo-com.svg" class="size-6" alt="">
                     <p class="text-[13px] flex items-center text-gray-200">Mais antigos</p>
                 </div>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-5">
                 <?php
-                    echo renderCards($videos, 'channel');
+                    echo CardFast([
+                        'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                        'titulo' => 'espero vocês lá',
+                        'likes' => '50K',
+                        'views' => '540K'
+                    ]);     
+                    echo CardFast([
+                        'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                        'titulo' => 'espero vocês lá',
+                        'likes' => '50K',
+                        'views' => '540K'
+                    ]);     
+                    echo CardFast([
+                        'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                        'titulo' => 'espero vocês lá',
+                        'likes' => '50K',
+                        'views' => '540K'
+                    ]);      
+                    echo CardFast([
+                    'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                    'titulo' => 'espero vocês lá',
+                    'likes' => '50K',
+                    'views' => '540K'
+                    ]);      
+                    echo CardFast([
+                    'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                    'titulo' => 'espero vocês lá',
+                    'likes' => '50K',
+                    'views' => '540K'
+                    ]);      
+                    echo CardFast([
+                    'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                    'titulo' => 'espero vocês lá',
+                    'likes' => '50K',
+                    'views' => '540K'
+                    ]);       
                 ?>
             </div>
         </div>

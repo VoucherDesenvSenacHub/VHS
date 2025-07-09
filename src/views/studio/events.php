@@ -1,14 +1,16 @@
 <?php
-require "../components/sidebar/SidebarComponent.php";
-require "../components/header/headerComponent.php";
-require_once "../components/cards/index.php";
-require_once "../components/studioSideMenu/studioSideMenuComponent.php";
+require "../../../components/sidebar/SidebarComponent.php";
+require "../../../components/header/headerComponent.php";
+require_once "../../../components/cards/index.php";
+require_once "../../../components/studioSideMenu/studioSideMenuComponent.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/buttonComponent.php";
 
 use function src\views\components\Utils\ButtonComponent;
 use function Src\Views\Components\Cards\renderCards;
 use function Src\Views\Components\header\HeaderComponent;
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
+
+// TODO: REFATORAR ESSA PAGINA
 
 $videos = [
     [
@@ -158,9 +160,9 @@ $videos = [
             </div>
             <div class="flex h-5 mt-5 gap-5">
                 <?php
-                echo ButtonComponent("Videos", "studio", "", 170, 40,"","./videosConteudo.php");
-                echo ButtonComponent("Fast", "studio", "", 170, 40,"","./fastConteudo.php");
-                echo ButtonComponent("Eventos", "studio", "", 170, 40,"","");
+                echo ButtonComponent("Videos", "studio", "", 10.675, 2.5,"","./videosConteudo.php");
+                echo ButtonComponent("Fast", "studio", "", 10.675, 2.5,"","./fastConteudo.php");
+                echo ButtonComponent("Eventos", "studio", "",10.675, 2.5,"","");
                 ?>
             </div>
             <div class="mt-10 flex items-center gap-4 h-16 cavalo">

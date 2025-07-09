@@ -14,6 +14,8 @@
      * @param string|null $icon - URL do ícone a ser exibido no botão (opcional).
      * @param float $width - Largura do botão em rem (padrão: 23.875).
      * @param float $height - Altura do botão em rem (padrão: 3.75).
+     * @param float $width - Largura do botão em rem (padrão: 23.875).
+     * @param float $height - Altura do botão em rem (padrão: 3.75).
      * @param string|null $id - ID do botão (opcional).
      * @param string|null $link - URL para onde o botão deve redirecionar (opcional).
      * @param bool $isActive - Indica se o botão está ativo (padrão: false).
@@ -46,7 +48,8 @@
             "outline" => $buttonStyleOutlineDefault . "outline outline-1 outline-purple-500",
             "icon" => $buttonStyle . "bg-white hover:bg-gray-300 transition-colors",
             "studio" => $buttonStyle . "bg-[#202024] transition-colors hover:bg-[#2a2a2e] !rounded-full",
-            "default" => "$buttonStyleOutlineDefault bg-purple-700 transition-colors hover:bg-purple-800"
+            "default" => "$buttonStyleOutlineDefault bg-purple-700 transition-colors hover:bg-purple-800",
+            "google" => $buttonStyle . "bg-white text-black rounded-md",
         ];
 
         $buttonStyle = $typesButtonsStyle[$variant] ?? $typesButtonsStyle["default"];

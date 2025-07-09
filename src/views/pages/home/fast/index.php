@@ -27,7 +27,7 @@ use function Src\Views\Components\Sidebar\SidebarComponent;
             <?= SidebarComponent() ?>
         </div>
 
-        <section class="flex flex-col justify-center max-w-[1500px] mx-auto w-1/4" style="height: calc(100vh - 10rem);">
+        <section class="flex flex-col justify-center max-w-[1500px] mx-auto w-1/4 min-w-[33rem]" style="height: calc(100vh - 10rem);">
             <?= FastComponent(
                 ['video_url' => '/VHS/src/views/components/fastComponent/video_test.mp4',
                     'titulo' => 'JOGANDO EURO TRUCK SIMULATOR 2! MUITO TOP!','user' =>'Bolsonaro','userimg' => 'https://agenciainfra.com/blog/wp-content/uploads/2021/09/bolsonaro-foto-fabio-rodrigues-pozzebom-agencia-brasil.jpg']) ?>

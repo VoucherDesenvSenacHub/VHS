@@ -26,7 +26,7 @@ function UserActivityCardsComponent(
         <div class="text-white rounded-xl p-4 flex justify-between items-center w-48 border border-gray-600" style="background-color: #1B1B1B">
             <div>
                 <p class="text-sm text-gray-400">$label</p>
-                <p class="text-2xl font-bold">$formattedValue</p>
+                <p class="text-2xl font-semibold">$formattedValue</p>
             </div>
             <img src="/VHS/public/images/trending.svg" alt="Seta para cima" class="w-3 h-3 mb-8 mr-1" />
         </div>

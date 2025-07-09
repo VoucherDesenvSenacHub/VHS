@@ -1,5 +1,5 @@
 <?php
-// Requires dos componentes necessários
+
 require "../../../components/header/headerComponent.php";
 require "../../../components/sidebar/SidebarComponent.php";
 require "../../../components/cards/index.php";

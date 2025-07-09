@@ -18,7 +18,7 @@ function SidebarComponent() {
             [
                 "icon" => "/VHS/public/icons/radio.svg",
                 "text" => "Eventos",
-                "link" => "/VHS/utils/Eventos"
+                "link" => "/VHS/src/views/pages/home/events"
             ],
             [
                 "icon" => "/VHS/public/icons/youtube.svg",
