@@ -42,7 +42,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
                 <p class="text-title font-pop font-semibold title-size text-white">Gerenciamento de usuários</p>
                 <p class="text-subtitile font-semibold title-size text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
             </div>
-            <div class="flex mt-5 gap-2 w-64 mb-4">
+            <div class="flex mt-5 gap-2 w-96 mb-4">
                 <?php echo ButtonComponent("Usúarios", "studio", "", 10.675, 2.5,"","/VHS/src/views/pages/admin/users"); ?>
                 <?php echo ButtonComponent("Denúncias", "studio", "", 10.675, 2.5,"","/VHS/src/views/pages/admin/comments",true); ?>
             </div>

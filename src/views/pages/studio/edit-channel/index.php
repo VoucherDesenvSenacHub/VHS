@@ -15,10 +15,11 @@ use function src\views\components\Utils\Footer;
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Customizar Canal</title>
+  <link rel="stylesheet" href="/VHS/src/styles/global.css">
   <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Syne:wght@500..800&display=swap" rel="stylesheet" />
 </head>
-<body class="bg-gradient-to-b from-[#20002c] via-black to-[#20002c] min-h-screen text-white font-[Poppins]">
+<body class="text-white">
 
   <?php echo HeaderComponent(); ?>
 
@@ -58,7 +59,7 @@ use function src\views\components\Utils\Footer;
 
 
       <section class="mb-10">
-        <h2 class="text-lg font-medium mb-0.5rem">Banner do canal</h2>
+        <h2 class="text-xl font-medium mb-0.5rem">Banner do canal</h2>
         <p class="text-sm text-gray-400 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         <form action="upload.php" method="POST" enctype="multipart/form-data">
           <label for="imagemUpload" class="relative group cursor-pointer inline-block w-full">

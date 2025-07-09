@@ -7,7 +7,7 @@ function StudioSideMenuComponent(){
             <h2 class="w-[11rem] pt-[1.18rem] ml-[0.5rem] text-gray-400 text-xs font-poppins">VHS STUDIO</h2>
             <ul>
                 <li class="menu-item flex items-center text-gray-300 rounded-lg cursor-pointer mt-[1.5rem] transition-transform duration-200">
-                    <a href="/VHS/src/views/studio/Analytics.php" class="flex items-center w-full p-2">
+                    <a href="/VHS/src/views/pages/studio/" class="flex items-center w-full p-2">
                         <div class="analytics-icon icon w-[2rem] h-[2rem] flex items-center justify-center rounded-[12px] ml-[0.31rem] ">
                             <img src="/VHS/public/icons/sidebar_studio/Analytics.svg" alt="Analytics">
                         </div>
@@ -16,7 +16,7 @@ function StudioSideMenuComponent(){
                 </li>
     
                 <li class="flex items-center text-gray-300 rounded-lg cursor-pointer mt-[2rem]">
-                    <a href="/VHS/src/views/studio/Conteúdo.php" class="flex items-center w-full p-2">
+                    <a href="/VHS/src/views/pages/studio/content" class="flex items-center w-full p-2">
                         <div class="conteudo-icon icon w-[2rem] h-[2rem] flex items-center justify-center rounded-[12px] ml-[0.31rem]">
                             <img src="/VHS/public/icons/sidebar_studio/Conteúdo.svg" alt="Conteúdo">
                         </div>
@@ -25,7 +25,7 @@ function StudioSideMenuComponent(){
                 </li>
     
                 <li class="flex items-center text-gray-300 rounded-lg cursor-pointer mt-[2rem]">
-                    <a href="/VHS/src/views/studio/Customizar.php" class="flex items-center w-full p-2">
+                    <a href="/VHS/src/views/pages/studio/edit-channel" class="flex items-center w-full p-2">
                         <div class="customizar-icon icon w-[2rem] h-[2rem] flex items-center justify-center rounded-[12px] ml-[0.31rem]">
                             <img src="/VHS/public/icons/sidebar_studio/Customizar.svg" alt="Customizar" class="w-[3rem] h-[3rem]">
                         </div>
@@ -34,7 +34,7 @@ function StudioSideMenuComponent(){
                 </li>
 
                 <li class="flex items-center text-gray-300 rounded-lg cursor-pointer mt-[2rem]">
-                    <a href="/VHS/src/views/studio/Comentários.php" class="flex items-center w-full p-2">
+                    <a href="/VHS/src/views/pages/studio/comments" class="flex items-center w-full p-2">
                     <div class="comentarios-icon icon w-[2rem] h-[2rem] flex items-center justify-center rounded-[12px] ml-[0.31rem]">
                         <img src="/VHS/public/icons/sidebar_studio/Comentários.svg" alt="Comentários" class="w-[3rem] h-[3rem]">
                     </div>
@@ -43,7 +43,7 @@ function StudioSideMenuComponent(){
                 </li>
     
                 <li class="flex items-center text-gray-300 rounded-lg cursor-pointer mt-[2rem]">
-                    <a href="/VHS/src/views/studio/Criar.php" class="flex items-center w-full p-2">
+                    <a href="/VHS/src/views/pages/studio/content/create/video" class="flex items-center w-full p-2">
                         <div class="criar-icon icon w-[2rem] h-[2rem] flex items-center justify-center rounded-[12px] ml-[0.31rem]">
                             <img src="/VHS/public/icons/sidebar_studio/Criar.svg" alt="Criar">
                         </div>

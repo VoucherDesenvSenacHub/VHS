@@ -67,8 +67,8 @@ $commets_lista = [
                 <h1 class="font-pop font-semibold text-title text-white">Gerenciamento de usuários</h1>
                 <p class="text-subtitile font-semibold title-size text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
             </div>
-            <div class="flex mt-5 gap-2 w-64 mb-4">
-             <?php echo ButtonComponent("Usúarios", "studio", "", 10.675, 2.5,"","/VHS/src/views/pages/admin/users"); ?>
+            <div class="flex mt-5 gap-2 w-96 mb-4">
+                <?php echo ButtonComponent("Usúarios", "studio", "", 10.675, 2.5,"","/VHS/src/views/pages/admin/users"); ?>
                 <?php echo ButtonComponent("Denúncias", "studio", "", 10.675, 2.5,"","/VHS/src/views/pages/admin/comments",true); ?>
             </div>
             <?= InputComponent("text", "Pesquisar", icon: "/VHS/public/icons/Filter.svg", iconPosition: "left", onClickIcon: "showFilterMenu()", className: "w-full !bg-[#15141A] text-white px-4 py-2 rounded-md border border-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-600") ?>

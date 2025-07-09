@@ -12,7 +12,7 @@ use function Views\Components\FeaturedCard\FeaturedCardComponent;
 
 // Mock de dados para a página home
 $featuredVieo = [
-    "url" => "https://youtube.com/watch?v=destaque",
+    "url" => "/VHS/src/views/pages/home/video",
     "duration" => "7 min",
     "title" => "Configurando Docker Compose, Postgres, com Testes de Carga - Parte Final da Rinha de Backend",
     "username" => "Fábio Akita",
@@ -23,7 +23,7 @@ $featuredVieo = [
 ];
 
 $videoHTMX = [
-    "url" => "https://youtube.com/watch?v=htmx",
+    "url" => "/VHS/src/views/pages/home/video",
     "type_card" => "video",
     "description" => "RocketSeat",
     "duration" => "16 min", 
@@ -40,7 +40,7 @@ $videoHTMX = [
 
 $mostPopularVideos = [
     [
-        "url" => "https://youtube.com/watch?v=nextjs1",
+        "url" => "/VHS/src/views/pages/home/video",
         "type_card" => "video",
         "description" => "Rafael Germano",
         "duration" => "7 min",

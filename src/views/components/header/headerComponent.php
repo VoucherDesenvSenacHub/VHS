@@ -16,7 +16,9 @@
             <header id='header' class='bg-gradient-to-b from-black/75 to-black/0 w-full h-auto flex items-center justify-between p-6 sticky top-0 z-20'>  
                 <div class='flex items-center gap-6'>
                     $BarComponent
-                    <img src='/VHS/public/logos/Logo.svg' class='w-auto h-8 pointer-events-none select-none'>
+                    <a href="/VHS/src/views/pages/home">
+                        <img src='/VHS/public/logos/Logo.svg' class='w-auto h-8 pointer-events-none select-none'>
+                    </a>
                 </div>
 
                 <div class='flex items-center gap-4'>
