@@ -14,7 +14,6 @@ use function src\views\components\Charts\renderChartComponent;
 use function src\views\components\utils\UserActivityCardsComponent;
 use function Src\Views\Components\Perfil_Analytics\renderPostComponent;
 
-
 $videos = [
     [
         'title' => 'Vídeo 1',
@@ -109,22 +108,25 @@ $comentarios = [
         'amountLike' => '8',
         'amountResponses' => '13',
     ],
-
-
 ];
-
 
 $seriesDataLine = [10, 15, 25, 20, 18, 12, 15];
 $categoriesLine = ['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB', 'DOM'];
-
-
 $botoes = [
-    ['texto' => 'Edição', 'link' => './VideosPage.php'],
-    ['texto' => 'Comentarios', 'link' => './FeastPage.php'],
-    ['texto' => 'Analytics', 'link' => './EventosPage.php']
+    [
+        'texto' => 'Edição',
+        'link' => './VideosPage.php'
+    ],
+    [
+        'texto' => 'Comentarios',
+        'link' => './FeastPage.php'
+    ],
+    [
+        'texto' => 'Analytics',
+        'link' => './EventosPage.php'
+    ],
 ];
 ?>
-
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -139,9 +141,7 @@ $botoes = [
     <script src="../../../styles/global.css"></script>
 </head>
 
-<body
-    class="w-full h-full m-0 bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat text-white">
-
+<body class="w-full h-full m-0 bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat text-white">
     <div class="fixed w-full">
         <?= HeaderComponent() ?>
     </div>
@@ -152,25 +152,22 @@ $botoes = [
         <div class="flex-1 md:flex-col justify-center py-6 mt-20">
             <?= renderPostComponent("") ?>
             <div class="flex justify-between flex-row gap-6 mt-4">
-
                 <div class="grid grid-col-2 items-center gap-6 min-w-[115vh]">
-
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 ">
                         <?= UserActivityCardsComponent("Inscritos", 60700, '/VHS/public/icons/users.svg') ?>
                         <?= UserActivityCardsComponent("Seus Vídeos", 60700, '/VHS/public/icons/video.svg') ?>
                         <?= UserActivityCardsComponent("Parceiros", 60700, '/VHS/public/icons/handshake.svg') ?>
                         <?= UserActivityCardsComponent("Canais", 60700, '/VHS/public/icons/Radioo.svg') ?>
                     </div>
-                    <div class="">
+                    <div>
                         <?= renderChartComponent($seriesDataLine, $categoriesLine, 'Semana', 'Usuários') ?>
                     </div>
-                    <div class="">
+                    <div>
                         <?=
                         CardLatestVideosComponent($videos);
                         ?>
                     </div>
                 </div>
-
                 <div class="w-1/2 flex justify-center rounded-xl">
                     <?=
                     CardLatestCommentComponent($comentarios);
@@ -179,57 +176,6 @@ $botoes = [
             </div>
         </div>
     </div>
-
 </body>
 
 </html>
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="../../../styles/tailwindglobal.js"></script>
-</head>
-
-<body class=" w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center text-white">
-    <div>
-        <?= HeaderComponent() ?>
-    </div>
-
-    <div class="flex flex-col md:flex-row w-full gap-6 justify-start">
-        <div class="hidden md:block">
-            <?= StudioSideMenuComponent() ?>
-        </div>
-        <div class="flex gap-6 flex-1 justify-between">
-            <div class="grid grid-col-2 gap-6 flex-1">
-                <div class="flex flex-row gap-4 mb-2">
-                    <?= UserActivityCardsComponent("Usuários", 60700) ?>
-                    <?= UserActivityCardsComponent("Qtd. Vídeos", 60700) ?>
-                    <?= UserActivityCardsComponent("Parceiros", 60700) ?>
-                    <?= UserActivityCardsComponent("Canais", 60700) ?>
-                </div>
-                <div class="">
-                    <?= renderChartComponent($seriesDataLine, $categoriesLine, 'Semana', 'Usuários') ?>
-                </div>
-                <div class="">
-                    <?=
-                    CardLatestVideosComponent($videos);
-                    ?>
-                </div>
-            </div>
-            <div class="flex-1 justify-center px-6">
-                <?=
-                CardLatestCommentComponent($comentarios);
-                ?>
-            </div>
-
-
-        </div>
-    </div>
-</body>
-
-</html> -->

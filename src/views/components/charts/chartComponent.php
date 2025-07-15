@@ -16,7 +16,7 @@ function renderChartComponent($seriesData, $categories, $title = 'Semana', $yAxi
 
     // Construir a string do componente
     $html = "
-    <div class='container mx-auto p-4 bg-[#1B1B1B] rounded-2xl'>
+    <div class='container p-4 bg-[#1B1B1B] rounded-2xl'>
         <div id='$chartId' class='bg-[#1B1B1B] rounded-2xl shadow-lg'></div>
     </div>
     <script src='https://cdn.jsdelivr.net/npm/apexcharts'></script>
