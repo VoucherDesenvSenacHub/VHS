@@ -26,7 +26,7 @@ function UserActivityCardsComponent(
     $formattedValue = htmlspecialchars($formattedValue);
 
     echo <<<HTML
-        <div class="text-white rounded-lg p-5 flex flex-col gap-2 border border-gray-700" style="background-color: #1B1B1B">
+        <div class="text-white h-28 rounded-lg p-4 flex flex-col justify-center gap-4 border border-gray-700 transition-transform duration-700 hover:scale-105 hover:-translate-y-1 cursor-pointer hover:shadow-lg" style="background-color: #1B1B1B">
             <div class='flex justify-between items-center'>
                 <div class='flex items-center gap-2' >
                     <img src="$icon" alt="">

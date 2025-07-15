@@ -135,25 +135,27 @@ $botoes = [
     <title>Analytics - Administração</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.44.0/dist/apexcharts.css">
+    <script src="../../../styles/tailwindglobal.js"></script>
+    <script src="../../../styles/global.css"></script>
 </head>
 
 <body
-    class="w-full min-h-screen m-0 bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center text-white">
-    <div>
+    class="w-full h-full m-0 bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat text-white">
+
+    <div class="fixed w-full">
         <?= HeaderComponent() ?>
     </div>
-
-    <div class="flex flex-col md:flex-row w-full">
-        <div class="hidden md:block">
+    <div class="flex w-full">
+        <div class="hidden md:block mt-20">
             <?= StudioSideMenuComponent() ?>
         </div>
-        <div class="flex-1 px-4 py-6">
+        <div class="flex-1 md:flex-col justify-center py-6 mt-20">
             <?= renderPostComponent("") ?>
             <div class="flex justify-between flex-row gap-6 mt-4">
 
                 <div class="grid grid-col-2 items-center gap-6 min-w-[115vh]">
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 ">
                         <?= UserActivityCardsComponent("Inscritos", 60700, '/VHS/public/icons/users.svg') ?>
                         <?= UserActivityCardsComponent("Seus Vídeos", 60700, '/VHS/public/icons/video.svg') ?>
                         <?= UserActivityCardsComponent("Parceiros", 60700, '/VHS/public/icons/handshake.svg') ?>
