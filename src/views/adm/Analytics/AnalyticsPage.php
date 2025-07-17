@@ -5,7 +5,7 @@ require "../../components/barra_admin/barra_admin.php";
 require "../../components/header/headerComponent.php";
 require "../../components/charts/chartComponent.php";
 require "../../components/charts/donutChartComponent.php";
-require "../../components/Notification_List/notificationListComponent.php";
+require "./components/cardActivityHistoryComponent/cardActivityHistoryComponent.php";
 require "../../components/utils/comentaryDashboard/cardComment.component.php";
 
 use function src\views\components\utils\comentaryDashboard\cardComment;
@@ -15,7 +15,7 @@ use function src\views\components\Utils\UserActivityCardsComponent;
 use function Src\Views\Components\Perfil_Analytics\renderPostComponent;
 use function Src\Views\Components\Charts\renderChartComponent;
 use function Src\Views\Components\Charts\renderDonutChartComponent;
-use function Src\Views\Components\renderNotificationListComponent;
+use function Src\Views\Components\cardActivityHistoryComponent;
 
 $seriesDataLine = [10, 15, 25, 20, 18, 12, 15];
 $categoriesLine = ['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB', 'DOM'];
@@ -23,12 +23,47 @@ $categoriesLine = ['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB', 'DOM'];
 $seriesDataDonut = [3320, 260, 285, 105];
 $labelsDonut = ['Tecnologia', 'Moda', 'Estatística', 'Saúde'];
 
-$notificationItems = [
-    'Freitasdev baniu o usuário Crilo, motivo: incompetência.',
-    'Freitasdev baniu o usuário Crilo, motivo: incompetência.',
-    'Freitasdev baniu o usuário Crilo, motivo: incompetência.',
-    'Freitasdev baniu o usuário Crilo, motivo: incompetência.',
-    'Freitasdev baniu o usuário Crilo, motivo: incompetência.'
+$atividades = [
+    [
+        'data' => '10 de janeiro de 2025',
+        'time' => '08:00',
+        'usuario1' => 'João',
+        'description' => 'alterou o status de',
+        'usuario2' => 'Maria',
+        'causa' => 'atraso'
+    ],
+    [
+        'data' => '10 de janeiro de 2025',
+        'time' => '11:23',
+        'usuario1' => 'João',
+        'description' => 'alterou o status de',
+        'usuario2' => 'Maria',
+        'causa' => 'atraso'
+    ],
+    [
+        'data' => '11 de janeiro de 2025',
+        'time' => '19:05',
+        'usuario1' => 'João',
+        'description' => 'alterou o status de',
+        'usuario2' => 'Maria',
+        'causa' => 'atraso'
+    ],
+    [
+        'data' => '11 de janeiro de 2025',
+        'time' => '19:05',
+        'usuario1' => 'João',
+        'description' => 'alterou o status de',
+        'usuario2' => 'Maria',
+        'causa' => 'atraso'
+    ],
+    [
+        'data' => '11 de janeiro de 2025',
+        'time' => '19:05',
+        'usuario1' => 'João',
+        'description' => 'alterou o status de',
+        'usuario2' => 'Maria',
+        'causa' => 'atraso'
+    ],
 ];
 ?>
 
@@ -41,19 +76,15 @@ $notificationItems = [
     <title>Analytics - Administração</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.44.0/dist/apexcharts.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Syne:wght@500..800&display=swap" rel="stylesheet" />
 </head>
 
-<body class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center text-white">
-    <!-- Header superior -->
+<body class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center text-white font-[Poppins]">
     <?= HeaderComponent() ?>
-
     <div class="flex">
-        <!-- Sidebar -->
         <div class="min-w-[220px] position-fixed">
             <?= Barra_Admin() ?>
         </div>
-
-        <!-- Conteúdo principal -->
         <div class="flex-1 px-4 py-6">
             <!-- Componente de perfil -->
             <?= renderPostComponent("") ?>
@@ -95,7 +126,7 @@ $notificationItems = [
                     </div>
 
                     <div class="w-max bg-[#1a1a1a] rounded-xl shadow-md">
-                        <?= renderNotificationListComponent($notificationItems) ?>
+                        <?= cardActivityHistoryComponent($atividades) ?>
                     </div>
 
                 </div>
