@@ -49,7 +49,7 @@ $botoes = [
         <div class="hidden md:block mt-20">
             <?= StudioSideMenuComponent() ?>
         </div>
-        <div class="flex-1 sm: md:flex-col sm:p-6 justify-center py-6 mt-20 mr-6">
+        <div class="flex-1 sm:p-6 justify-center py-6 mt-20 mr-6">
             <div class="flex flex-col">
                 <div class="flex flex-col gap-2 mb-5">
                     <h1 class="text-2xl font-semibold">Estatísticas do Vídeo</h1>
@@ -61,7 +61,7 @@ $botoes = [
                     <?= ButtonComponent("Analytics", "studio", "", 10.675, 2.5, "", "", true) ?>
                 </div>
             </div>
-            <div class="flex sm:justify-center  flex-wrap md:flex-auto justify-between gap-4 mt-4">
+            <div class="flex justify-between gap-4 mt-4">
                 <div class="grid grid-col-2 items-center gap-6 sm:w-96  min-w-[118vh]">
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
                         <?= UserActivityCardsComponent("Visualizações", 60700, '/VHS/public/icons/eyePurple.svg') ?>
@@ -76,7 +76,7 @@ $botoes = [
                         <?= renderChartComponent($seriesDataLine, $categoriesLine, 'Semana', 'Usuários') ?>
                     </div>
                 </div>
-                <div class="bg-[#1B1B1B] rounded-xl w-full sm:m-0 mx-auto max-w-lg max-h-[32rem]">
+                <div class="bg-[#1B1B1B] flex flex-col rounded-xl w-full sm:m-0 mx-auto max-w-lg max-h-[32rem] h-auto">
                     <div class="w-full h-64 rounded-t-lg overflow-hidden video-image-container">
                         <img src="https://pbs.twimg.com/media/Df_Uj8QX4AMwcFM.jpg:large" alt="" class="rounded-t-lg ease-in w-full h-full object-cover">
                     </div>
