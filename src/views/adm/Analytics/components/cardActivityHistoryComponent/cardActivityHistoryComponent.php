@@ -16,7 +16,7 @@ function cardActivityHistoryComponent($atividades)
     $html .= "<div class='flex justify-start w-full'>";
     $html .= "<text class='text-2xl font-bold text-white cursor-default'>Histórico de Atividades</text>";
     $html .= "</div>";
-    $html .= "<div class='flex flex-col gap-4 max-h-[32vh] overflow-y-auto custom-scroll'>";
+    $html .= "<div class='flex flex-col gap-4 max-h-[36vh] overflow-y-auto custom-scroll'>";
     foreach ($atividadesPorData as $data => $atividadesDoDia) {
         $html .= "<div class='space-y-2'>";
         $html .= "<text class='text-sm font-semibold text-gray-300'>{$data}</text>";

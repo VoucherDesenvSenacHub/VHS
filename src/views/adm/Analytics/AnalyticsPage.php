@@ -4,7 +4,7 @@ require "../../components/utils/userActivityCardsComponent.php";
 require "../../components/barra_admin/barra_admin.php";
 require "../../components/header/headerComponent.php";
 require "../../components/charts/chartComponent.php";
-require "../../components/charts/donutChartComponent.php";
+require "./components/chartsCategoryComponent/chartsCategoryComponent.php";
 require "./components/cardActivityHistoryComponent/cardActivityHistoryComponent.php";
 require "../../components/utils/comentaryDashboard/cardComment.component.php";
 
@@ -14,7 +14,7 @@ use function Src\Views\Components\Header\HeaderComponent;
 use function src\views\components\Utils\UserActivityCardsComponent;
 use function Src\Views\Components\Perfil_Analytics\renderPostComponent;
 use function Src\Views\Components\Charts\renderChartComponent;
-use function Src\Views\Components\Charts\renderDonutChartComponent;
+use function src\views\components\chartsCategoryComponent;
 use function Src\Views\Components\cardActivityHistoryComponent;
 
 $seriesDataLine = [10, 15, 25, 20, 18, 12, 15];
@@ -64,6 +64,22 @@ $atividades = [
         'usuario2' => 'Maria',
         'causa' => 'atraso'
     ],
+    [
+        'data' => '19 de julho de 2025',
+        'time' => '19:05',
+        'usuario1' => 'João',
+        'description' => 'alterou o status de',
+        'usuario2' => 'Maria',
+        'causa' => 'atraso'
+    ],
+    [
+        'data' => '13 de julho de 2025',
+        'time' => '19:05',
+        'usuario1' => 'João',
+        'description' => 'alterou o status de',
+        'usuario2' => 'Maria',
+        'causa' => 'atraso'
+    ],
 ];
 ?>
 
@@ -89,22 +105,15 @@ $atividades = [
             <!-- Componente de perfil -->
             <?= renderPostComponent("") ?>
 
-            <div class="flex flex-row gap-8 mt-4">
+            <div class="flex items-start justify-between flex-row mt-4 gap-6">
 
-                <div class="grid grid-col-2 h-48 gap-8">
+                <div class="grid grid-col-2 items-center gap-6 max-w-[115vh] w-full">
 
-                    <div class="flex flex-row gap-4 mb-2">
-
-                        <?= UserActivityCardsComponent("Usuários", 11000) ?>
-
-
-                        <?= UserActivityCardsComponent("Qtd. Vídeos", 90) ?>
-
-
-                        <?= UserActivityCardsComponent("Parceiros", 2) ?>
-
-
-                        <?= UserActivityCardsComponent("Canais", 12) ?>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 ">
+                        <?= UserActivityCardsComponent("Usuários", 11000, '/VHS/public/icons/users.svg') ?>
+                        <?= UserActivityCardsComponent("Qtd. Vídeos", 90, '/VHS/public/icons/video.svg') ?>
+                        <?= UserActivityCardsComponent("Parceiros", 2, '/VHS/public/icons/handshake.svg') ?>
+                        <?= UserActivityCardsComponent("Canais", 12, '/VHS/public/icons/Radioo.svg') ?>
                     </div>
                     <div class="">
                         <?= renderChartComponent($seriesDataLine, $categoriesLine, 'Semana', 'Usuários') ?>
@@ -119,16 +128,13 @@ $atividades = [
                         ?>
                     </div>
                 </div>
-                <!-- Gráfico Donut junto aos cards -->
-                <div class="grid grid-row-1 gap-28">
-                    <div class="mb-4">
-                        <?= renderDonutChartComponent($seriesDataDonut, $labelsDonut, 'Categorias', 'Tecnologia') ?>
+                <div class="grid grid-row-1 gap-6 mx-auto">
+                    <div>
+                        <?= chartsCategoryComponent($seriesDataDonut, $labelsDonut, 'Categorias', 'Tecnologia') ?>
                     </div>
-
                     <div class="w-max bg-[#1a1a1a] rounded-xl shadow-md">
                         <?= cardActivityHistoryComponent($atividades) ?>
                     </div>
-
                 </div>
             </div>
         </div>
