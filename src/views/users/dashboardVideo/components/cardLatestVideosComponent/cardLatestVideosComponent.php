@@ -3,7 +3,7 @@
 function CardLatestVideosComponent(array $videos)
 {
     $html = "
-        <div class='bg-[#1B1B1B] p-6 w-full rounded-xl border border-gray-700 space-y-2'>
+        <div class='bg-[#1B1B1B] p-6 w-full rounded-xl border border-gray-700 space-y-4'>
             <style>
                 .custom-scroll::-webkit-scrollbar {
                     display: none; /* Hide scrollbar for Chrome, Safari, and newer Edge */

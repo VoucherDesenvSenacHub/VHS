@@ -139,17 +139,18 @@ $botoes = [
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.44.0/dist/apexcharts.css">
     <script src="../../../styles/tailwindglobal.js"></script>
     <script src="../../../styles/global.css"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Syne:wght@500..800&display=swap" rel="stylesheet" />
 </head>
 
-<body class="w-full h-full m-0 bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat text-white">
+<body class="w-full h-full m-0 bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat text-white font-[Poppins]">
     <div class="fixed w-full">
         <?= HeaderComponent() ?>
     </div>
     <div class="flex w-full">
-        <div class="hidden md:block mt-20">
+        <div class="hidden md:block mt-20 min-w-[220px]">
             <?= StudioSideMenuComponent() ?>
         </div>
-        <div class="flex-1 md:flex-col justify-center py-6 mt-20">
+        <div class="flex-1 md:flex-col justify-center p-6 mt-20">
             <?= renderPostComponent("") ?>
             <div class="flex justify-between flex-row gap-6 mt-4">
                 <div class="grid grid-col-2 items-center gap-6 min-w-[115vh]">
@@ -168,7 +169,7 @@ $botoes = [
                         ?>
                     </div>
                 </div>
-                <div class="w-1/2 flex justify-center rounded-xl">
+                <div class="w-1/2 flex mx-8">
                     <?=
                     CardLatestCommentComponent($comentarios);
                     ?>

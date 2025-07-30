@@ -19,7 +19,7 @@ function cardActivityHistoryComponent($atividades)
     $html .= "<div class='flex flex-col gap-4 max-h-[36vh] overflow-y-auto custom-scroll'>";
     foreach ($atividadesPorData as $data => $atividadesDoDia) {
         $html .= "<div class='space-y-2'>";
-        $html .= "<text class='text-sm font-semibold text-gray-300'>{$data}</text>";
+        $html .= "<text class='text-sm font-semibold text-gray-400'>{$data}</text>";
         $html .= "<div class='flex flex-col gap-2'>";
         foreach ($atividadesDoDia as $atividade) {
             $html .= "<div class='flex justify-start items-center gap-2 w-full'>";

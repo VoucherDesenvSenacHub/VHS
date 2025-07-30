@@ -41,12 +41,12 @@ $botoes = [
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Syne:wght@500..800&display=swap" rel="stylesheet" />
 </head>
 
-<body class="w-full min-h-screen bg-gradient-to-b from-[#20002c] via-black to-[#20002c] min-h-screen text-white font-[Poppins]">
+<body class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] min-h-screen text-white font-[Poppins]">
     <div class="fixed w-full">
         <?= HeaderComponent() ?>
     </div>
     <div class="flex w-full">
-        <div class="hidden md:block mt-20">
+        <div class="hidden md:block mt-20 min-w-[220px]">
             <?= StudioSideMenuComponent() ?>
         </div>
         <div class="flex-1 sm:p-6 justify-center py-6 mt-20 mr-6">

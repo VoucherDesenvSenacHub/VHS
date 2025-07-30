@@ -6,9 +6,8 @@ require "../../components/header/headerComponent.php";
 require "../../components/charts/chartComponent.php";
 require "./components/chartsCategoryComponent/chartsCategoryComponent.php";
 require "./components/cardActivityHistoryComponent/cardActivityHistoryComponent.php";
-require "../../components/utils/comentaryDashboard/cardComment.component.php";
+require "./components/cardLatestReportComponent/cardLatestReportComponent.php";
 
-use function src\views\components\utils\comentaryDashboard\cardComment;
 use function src\views\components\barra_admin\Barra_Admin;
 use function Src\Views\Components\Header\HeaderComponent;
 use function src\views\components\Utils\UserActivityCardsComponent;
@@ -16,6 +15,7 @@ use function Src\Views\Components\Perfil_Analytics\renderPostComponent;
 use function Src\Views\Components\Charts\renderChartComponent;
 use function src\views\components\chartsCategoryComponent;
 use function Src\Views\Components\cardActivityHistoryComponent;
+use function Src\Views\Components\cardLatestReportComponent;
 
 $seriesDataLine = [10, 15, 25, 20, 18, 12, 15];
 $categoriesLine = ['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB', 'DOM'];
@@ -81,6 +81,67 @@ $atividades = [
         'causa' => 'atraso'
     ],
 ];
+
+$comentarios = [
+    [
+        'name' => 'Richard Stallman',
+        'description' => 'Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!',
+        'profile' => 'https://github.com/shadcn.png',
+        'commentNumber' => '4',
+        'amountDay' => '4',
+        'amountLike' => '8',
+        'amountResponses' => '13',
+    ],
+    [
+        'name' => 'Richard Stallman',
+        'description' => 'Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!',
+        'profile' => 'https://github.com/shadcn.png',
+        'commentNumber' => '4',
+        'amountDay' => '4',
+        'amountLike' => '8',
+        'amountResponses' => '13',
+    ],
+    [
+        'name' => 'Richard Stallman',
+        'description' => 'Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!',
+        'profile' => 'https://github.com/shadcn.png',
+        'commentNumber' => '4',
+        'amountDay' => '4',
+        'amountLike' => '8',
+        'amountResponses' => '13',
+    ],
+    [
+        'name' => 'Richard Stallman',
+        'description' => 'Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!',
+        'profile' => 'https://github.com/shadcn.png',
+        'commentNumber' => '4',
+        'amountDay' => '4',
+        'amountLike' => '8',
+        'amountResponses' => '13',
+    ],
+    [
+        'name' => 'Richard Stallman',
+        'description' => 'Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!',
+        'profile' => 'https://github.com/shadcn.png',
+        'commentNumber' => '4',
+        'amountDay' => '4',
+        'amountLike' => '8',
+        'amountResponses' => '13',
+    ],
+    [
+        'name' => 'Richard Stallman',
+        'description' => 'Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!',
+        'profile' => 'https://github.com/shadcn.png',
+        'commentNumber' => '4',
+        'amountDay' => '4',
+        'amountLike' => '8',
+        'amountResponses' => '13',
+    ],
+];
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -101,38 +162,29 @@ $atividades = [
         <div class="min-w-[220px] position-fixed">
             <?= Barra_Admin() ?>
         </div>
-        <div class="flex-1 px-4 py-6">
-            <!-- Componente de perfil -->
+        <div class="flex-1 p-6">
             <?= renderPostComponent("") ?>
-
             <div class="flex items-start justify-between flex-row mt-4 gap-6">
-
                 <div class="grid grid-col-2 items-center gap-6 max-w-[115vh] w-full">
-
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 ">
                         <?= UserActivityCardsComponent("Usuários", 11000, '/VHS/public/icons/users.svg') ?>
                         <?= UserActivityCardsComponent("Qtd. Vídeos", 90, '/VHS/public/icons/video.svg') ?>
                         <?= UserActivityCardsComponent("Parceiros", 2, '/VHS/public/icons/handshake.svg') ?>
                         <?= UserActivityCardsComponent("Canais", 12, '/VHS/public/icons/Radioo.svg') ?>
                     </div>
-                    <div class="">
+                    
+                    <div>
                         <?= renderChartComponent($seriesDataLine, $categoriesLine, 'Semana', 'Usuários') ?>
                     </div>
-
-                    <div class="flex flex-col bg-[#1a1a1a] rounded-xl shadow-md min-h-[310px] gap-4 p-7">
-                        <h1 class=" text-xl mb-2">Últimas denúncias</h1>
-                        <?=
-                        cardComment(photoPerfil: "https://png.pngtree.com/png-vector/20220617/ourmid/pngtree-dachshund-dog-animal-care-image-little-vector-png-image_37262910.jpg", title: "nome", time: "5 dias", description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit."),
-                        cardComment(photoPerfil: "https://png.pngtree.com/png-vector/20220617/ourmid/pngtree-dachshund-dog-animal-care-image-little-vector-png-image_37262910.jpg", title: "nome", time: "5 dias", description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit."),
-                        cardComment(photoPerfil: "https://png.pngtree.com/png-vector/20220617/ourmid/pngtree-dachshund-dog-animal-care-image-little-vector-png-image_37262910.jpg", title: "nome", time: "5 dias", description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit.")
-                        ?>
+                    <div>
+                        <?= cardLatestReportComponent($comentarios); ?>
                     </div>
                 </div>
-                <div class="grid grid-row-1 gap-6 mx-auto">
-                    <div>
+                <div class="grid grid-cols-1 gap-6 mx-auto w-full max-w-full lg:max-w-[52vh]">
+                    <div class="w-full">
                         <?= chartsCategoryComponent($seriesDataDonut, $labelsDonut, 'Categorias', 'Tecnologia') ?>
                     </div>
-                    <div class="w-max bg-[#1a1a1a] rounded-xl shadow-md">
+                    <div class="w-full">
                         <?= cardActivityHistoryComponent($atividades) ?>
                     </div>
                 </div>

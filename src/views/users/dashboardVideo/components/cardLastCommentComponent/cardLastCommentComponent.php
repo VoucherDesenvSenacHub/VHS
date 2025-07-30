@@ -24,7 +24,7 @@ function CardLatestCommentComponent(array $videos)
                 <div class='flex gap-4 justify-start hover:bg-zinc-800/50 p-2 transition-all duration-300 rounded-lg'>
                     <div class='flex flex-col justify-between'>
                         <div class='flex flex-col gap-1'>
-                            <div class='flex gap-2 h-24'>
+                            <div class='flex gap-2 h-20 items-center'>
                                 <div class='flex justify-start gap-1'>
                                     <div class='w-14 h-full rounded-full overflow-hidden'>
                                         <img class='w-full h-14 rounded-full object-cover transition duration-700' src='$profile' alt='$name'>

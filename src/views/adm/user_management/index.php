@@ -40,7 +40,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
             </div>
             <div class="flex mt-5 gap-5">
                 <?php echo ButtonComponent("Usúarios", "studio", "", 10.675, 2.5,"","",true); ?>
-                <?php echo ButtonComponent("Denúncias", "studio", "", 10.675, 2.5,"","../gerenciamento_usuario/denuncia_page.php"); ?>
+                <?php echo ButtonComponent("Denúncias", "studio", "", 10.675, 2.5,"","../gerenciamento_usuario/index.php"); ?>
             </div>
             
                 
