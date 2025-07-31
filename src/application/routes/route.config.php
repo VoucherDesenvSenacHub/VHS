@@ -5,22 +5,14 @@ namespace Src\Application\Routes;
 class Router {
     private $routes = [];
 
-    public function post(string $path, $controller, $middleware = null) {
-        $this->routes["POST"][$path] = function() use ($controller, $middleware)  {
-            if($middleware !== null) {
-                (new $middleware())->execute();
-            }
-
-            (new $controller())->index();
+    public function post(string $path, $controller) {
+        $this->routes["POST"][$path] = function() use ($controller)  {
+            (new $controller())->handle();
         };
     }
-    public function get(string $path, $controller, $middleware = null) {
-        $this->routes["GET"][$path] = function() use ($controller, $middleware)  {
-            if($middleware !== null) {
-                (new $middleware())->execute();
-            }
-
-            (new $controller())->index();
+    public function get(string $path, $controller) {
+        $this->routes["GET"][$path] = function() use ($controller)  {
+            (new $controller())->handle();
         };
     }
 
@@ -34,5 +26,6 @@ class Router {
 
         http_response_code(404);
         echo 'Not Found';
+        // TODO: Envie para uma página de erro 404
     }
 }
