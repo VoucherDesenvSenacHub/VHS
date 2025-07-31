@@ -1,39 +1,25 @@
-<?php
+<?php 
 
-    namespace Src\Views\Components\Header;
+    namespace src\views\components\header;
+    function HeaderComponent(){
 
-    require_once __DIR__ . '/../utils/barComponent.php';
-    use function Src\Views\Components\Utils\BarComponent;
-
-    require_once __DIR__ . '/../utils/userMenu.php';
-    use function Src\Views\Components\Utils\UserMenu;
-
-    function HeaderComponent() {
-        $BarComponent = BarComponent();
-        echo UserMenu();
-
-        return "
-            <header id='header' class='bg-gradient-to-b from-[#000000] to-[#20002c] w-full h-18 flex items-center justify-between p-6 sticky top-0 z-20'>  
-                <div class='flex items-center gap-6'>
-                    $BarComponent
-                    <img src='/VHS/public/logos/logo.svg' class='w-auto h-8 pointer-events-none select-none'>
-                </div>
-
-                <div class='flex items-center gap-4'>
-                    <button id='search' class='p-2 rounded-full transition-all duration-200 hover:bg-white/10'>
-                        <img src='/VHS/public/icons/lupa.svg' class='h-4 pointer-events-none'>
-                    </button>
-
-                    <img src='/VHS/public/icons/rectangle.svg'>
-                    
-                    <button id='open-user-menu' class='overflow-hidden rounded-full'>
-                        <img src='/VHS/public/images/avatar.svg' class='h-8 w-8 pointer-events-none'>
-                    </button>
-                </div>
-            </header>
-
-            <script src='/VHS/src/views/components/header/headerScript.js'></script>
-        ";
+        echo '
+        <header id="header" class="flex items-center justify-between p-5 shadow-md">
+        <div class="flex items-center gap-4">
+          <button id="menu" class="p-2 rounded-lg">
+              <img src="../../../public/icons/header/Menu.svg" alt="">
+          </button>
+          <img src="../../../public/logos/Logo.svg" alt="Logo" class="h-8">
+        </div>
+      
+        <div class="flex items-center gap-4">
+          <button id="search" class="p-1 rounded-lg">
+              <img src="../../../public/icons/lupa.svg" alt="" class="">
+          </button>
+          <div><img src="../../../public/icons/Rectangle.svg" alt=""></div>
+          <img src="../../../public/images/Avatar.svg" alt="Foto de perfil" class="h-8 w-8 rounded-full p-41">
+        </div>
+      </header>
+      <script src="./header/headerScript.js"></script>
+        ';
     }
-
-?>
