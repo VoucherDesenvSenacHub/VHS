@@ -44,7 +44,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
             <span class="cursor-default text-white text-xs font-medium">Lembrar de mim</span>
           </div>
           <div>
-            <?= ButtonComponent("Acessar plataforma", "default", null, 380, 50, null, "/VHS/src/views/pages/home/index.php", true) ?>
+            <?= ButtonComponent("Acessar plataforma", "default", null, 23.75, 3.125, null, "/VHS/src/views/pages/home/index.php", true) ?>
           </div>
           <div class="flex items-center text-white cursor-default">
             <div class="flex-grow border-t border-gray300"></div>
@@ -52,7 +52,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
             <div class="flex-grow border-t border-gray300"></div>
           </div>
           <div>
-            <?= ButtonComponent("Entrar pelo Google", "google", "../../../../public/images/LogoGoogle.svg", 380, 50, true) ?>
+            <?= ButtonComponent("Entrar pelo Google", "google", "../../../../public/images/LogoGoogle.svg", 23.75, 3.125, true) ?>
           </div>
           <div class="flex gap-0.5 items-center justify-center">
             <p class="font-pop paragraph-size text-gray-200 cursor-default">Ainda não tem uma conta?</p>

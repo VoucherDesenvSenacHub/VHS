@@ -14,7 +14,7 @@ class UserModel extends Model {
 
         $id = uniqid();
 
-        $stmt = $this->database->query($sql, [
+        $stmt = $this->database->exec($sql, [
             ":id" => $id,
             ":name" => $name,
             ":email" => $email,
@@ -22,6 +22,13 @@ class UserModel extends Model {
             ":username" => $username,
             ":date_birthday" => $date_birthday
         ]);
+
+        return $stmt;
+    }
+
+    public function findUserByEmail(string $email) {
+        $sql = "SELECT * FROM users WHERE email = :email";
+        $stmt = $this->database->query($sql, [":email" => $email]);
 
         return $stmt;
     }
