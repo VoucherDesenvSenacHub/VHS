@@ -30,8 +30,15 @@ class Database {
         return $this->database;
     }
 
-    public function query(string $sql, array $params = []): bool {
+    public function exec(string $sql, array $params = []): bool {
         $stmt = $this->database->prepare($sql);
         return $stmt->execute($params);
+    }
+
+    public function query(string $sql, array $params = []) {
+        $stmt = $this->database->prepare($sql);
+        $stmt->execute($params);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
