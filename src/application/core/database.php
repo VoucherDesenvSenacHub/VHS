@@ -1,12 +1,16 @@
 <?php
 
+namespace Src\Application\Core;
+use PDO;
+use PDOStatement;
+
 class Database {
     private string $driver;
     private string $host;
     private string $database_name;
     private string $user;
     private string $password;
-    private PDO $connection;
+    private PDO $database;
     
 
     public function __construct() {
@@ -19,10 +23,15 @@ class Database {
 
         $dsn = "{$this->driver}:host={$this->host};dbname={$this->database_name}";
 
-        $this->connection = new PDO($dsn, $this->user, $this->password);
+        $this->database = new PDO($dsn, $this->user, $this->password);
     }
 
-    public function getConnection(): PDO {
-        return $this->connection;
+    public function getDatabase(): PDO {
+        return $this->database;
+    }
+
+    public function query(string $sql, array $params = []): bool {
+        $stmt = $this->database->prepare($sql);
+        return $stmt->execute($params);
     }
 }
