@@ -1,5 +1,5 @@
 <?php
-
+namespace Src\Application\Utils\Redirect;
 /**
  * Summary of redirect
  * @param string $route Caminho da rota de redirecionamento

@@ -31,26 +31,29 @@ use function Src\Views\Components\Utils\ButtonComponent;
           <p class="text-3xl font-semibold text-white max-xl:text-2xl">Entrar na sua conta</p>
           <p class="text-secondary">Informe seus dados para entrar sua conta</p>
         </div>
-        <div class="flex flex-col gap-4 w-full xl:w-96">
-          <?= InputComponent(placeholder: "Insira seu e-mail", type: "email", label: "Email", icon: "/VHS/public/icons/Vector.svg", iconPosition: "w-6 h-6 right-3") ?>
-          <?= InputComponent(placeholder: "Insira sua senha", type: "password", label: "Senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "w-6 h-6 right-3") ?>
-          <a class="text-secondary underline" href="/VHS/src/views/pages/auth/new-password">Esqueceu sua senha? </a>
-          <?= CheckboxComponent("Lembrar de mim") ?>
-          <?= ButtonComponent("Acessar plataforma", "default", link:"/VHS/src/views/pages/home") ?>
-        </div>
-        <div class="flex items-center text-white cursor-default">
-          <div class="flex-grow border-t border-gray300"></div>
-          <span class="px-3 text-sm font-semibold">OU</span>
-          <div class="flex-grow border-t border-gray300"></div>
-        </div>
-        <div class="text-black">
-          <?= ButtonComponent("Entrar pelo Google", "icon", "/VHS/public/images/LogoGoogle.svg", link: "/VHS/src/views/pages/home") ?>
-        </div>
-        <div class="flex gap-0.5 items-center justify-center">
-          <p class="text-secondary cursor-default">Ainda não tem uma conta?</p>
-          <a class="text-primary underline" href="/VHS/src/views/pages/auth/register">Cadastrar</a>
-        </div>
-        </div>
+        <form action="/VHS/src/application/routes/route.php/api/v1/auth/signin" method="POST">
+          <div class="flex flex-col gap-4 w-full xl:w-96">
+              <?= InputComponent(placeholder: "Insira seu e-mail", name: "email", type: "email", label: "Email", icon: "/VHS/public/icons/Vector.svg", iconPosition: "w-6 h-6 right-3") ?>
+                <?= InputComponent(placeholder: "Insira sua senha", name: "password", type: "password", label: "Senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "w-6 h-6 right-3") ?>
+                <a class="text-secondary underline" href="/VHS/src/views/pages/auth/new-password">Esqueceu sua senha? </a>
+                <?= CheckboxComponent("Lembrar de mim", id: "keep_logged_in") ?>
+                <?= ButtonComponent("Acessar plataforma", "default") ?>
+                <input type="hidden" name="token_recaptcha" value="teste">
+              </div>
+              <div class="flex items-center text-white cursor-default">
+                <div class="flex-grow border-t border-gray300"></div>
+                <span class="px-3 text-sm font-semibold">OU</span>
+                <div class="flex-grow border-t border-gray300"></div>
+              </div>
+          </form>
+              <div class="text-black">
+                <?= ButtonComponent("Entrar pelo Google", "icon", "/VHS/public/images/LogoGoogle.svg", link: "/VHS/src/views/pages/home") ?>
+              </div>
+              <div class="flex gap-0.5 items-center justify-center">
+                <p class="text-secondary cursor-default">Ainda não tem uma conta?</p>
+                <a class="text-primary underline" href="/VHS/src/views/pages/auth/register">Cadastrar</a>
+              </div>
+            </div>
       </div>
     </div>
   </div>
