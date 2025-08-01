@@ -1,8 +1,10 @@
 <?php
+
 namespace src\views\components\barra_admin;
 
-function Barra_Admin(){
-        return '  
+function Barra_Admin()
+{
+    return '  
             <aside class="sticky top-24 w-[9.25rem] ml-[1.87rem] transition-all duration-500 ease-in-out" id="sidebar">
                 <h2 class=" pt-[1.18rem] ml-[0.31rem] text-gray-400 text-xs font-poppins">ADMINISTRAÇÃO</h2>
                 <ul>
@@ -24,11 +26,38 @@ function Barra_Admin(){
                         </a>
                     </li>
                 </ul>
-        
+            </aside>
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    const menuItems = document.querySelectorAll("#sidebar ul li a");
 
-            <script src="/VHS/src/views/components/barra_admin/barra.js"></script>
+                    // Função para definir o item ativo
+                    function setActiveItem(href) {
+                        menuItems.forEach(item => {
+                            const button = item.querySelector("button");
+                            button.classList.remove("bg-[#660BAD]");
+                            if (item.getAttribute("href") === href) {
+                                button.classList.add("bg-[#660BAD]");
+                            }
+                        });
+                        localStorage.setItem("activeItem", href);
+                    }
+
+                    // Verificar o estado salvo no localStorage
+                    const activeItem = localStorage.getItem("activeItem");
+                    if (activeItem) {
+                        setActiveItem(activeItem);
+                    }
+
+                    // Adicionar eventos de clique
+                    menuItems.forEach(item => {
+                        item.addEventListener("click", function(event) {
+                            const href = item.getAttribute("href");
+                            setActiveItem(href);
+                        });
+                    });
+                });
+            </script>
         ';
-    }
+}
 ?>
-
-            <script src="/VHS/src/views/components/barra_admin/barra.js"></script>

@@ -1,22 +1,17 @@
 <?php
+
 namespace Src\Views\Components\Charts;
 
-function renderChartComponent($seriesData, $categories, $title = 'Semana', $yAxisTitle = 'Usuários') {
-    // Validação básica dos dados
+function renderChartComponent($seriesData, $categories, $title = 'Semana', $yAxisTitle = 'Usuários')
+{
     if (empty($seriesData) || empty($categories)) {
         return '<p class="text-red-500">Erro: Dados ou categorias não fornecidos.</p>';
     }
-
-    // Converter arrays para strings JSON-like para JavaScript
     $seriesDataJson = implode(',', $seriesData);
     $categoriesJson = "'" . implode("','", $categories) . "'";
-
-    // Gerar um ID único para o gráfico
     $chartId = 'chart-' . uniqid();
-
-    // Construir a string do componente
     $html = "
-    <div class='container mx-auto p-4 bg-[#1B1B1B] rounded-2xl'>
+    <div class='container p-4 bg-[#1B1B1B] rounded-2xl'>
         <div id='$chartId' class='bg-[#1B1B1B] rounded-2xl shadow-lg'></div>
     </div>
     <script src='https://cdn.jsdelivr.net/npm/apexcharts'></script>

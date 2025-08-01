@@ -78,7 +78,7 @@ use function Src\views\Components\sidebar\SidebarComponent;
                     ) ?>
                 </div>
                 <div class="flex items-center justify-between w-full ">
-                    <?= ButtonComponent("Cancelar", "outline", null, 240, 50,); ?>
+                    <?= ButtonComponent("Cancelar", "outline", null, 15, 3.125); ?>
 
                     <button onclick="showNotification('Sucesso!', 'As alterações foram salvas.')" class="bg-purple-700 hover:bg-purple-800 text-white w-[250px] h-[55px] rounded-md">
                         Salvar Alterações

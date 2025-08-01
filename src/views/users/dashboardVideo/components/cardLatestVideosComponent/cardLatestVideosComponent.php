@@ -1,46 +1,9 @@
 <?php
-// EXEMPLO DE USO DO COMPONENTE
 
-// require __DIR__ . '/../../components/cardLatestVideosComponent/cardLatestVideosComponent.php';
-
-// $videos = [
-//     [
-//         'title' => 'Vídeo 1',
-//         'amountPreview' => '100',
-//         'url' => 'https://exemplo.com/video1'
-//     ],
-//     [
-//         'title' => 'Vídeo 2',
-//         'amountPreview' => '200',
-//         'url' => 'https://exemplo.com/video2'
-//     ],
-//     [
-//         'title' => 'Vídeo 3',
-//         'amountPreview' => '300',
-//         'url' => 'https://exemplo.com/video3'
-//     ],
-//     [
-//         'title' => 'Vídeo 3',
-//         'amountPreview' => '300',
-//         'url' => 'https://exemplo.com/video3'
-//     ],
-//     [
-//         'title' => 'Vídeo 3',
-//         'amountPreview' => '300',
-//         'url' => 'https://exemplo.com/video3'
-//     ],
-//     [
-//         'title' => 'Vídeo 3',
-//         'amountPreview' => '300',
-//         'url' => 'https://exemplo.com/video3'
-//     ],
-// ];
-
-// echo CardLatestVideosComponent($videos);
-
-function CardLatestVideosComponent(array $videos) {
+function CardLatestVideosComponent(array $videos)
+{
     $html = "
-        <div class='bg-[#1B1B1B] p-6 w-1/2 rounded-xl border border-gray-700 space-y-2'>
+        <div class='bg-[#1B1B1B] p-6 w-full rounded-xl border border-gray-700 space-y-4'>
             <style>
                 .custom-scroll::-webkit-scrollbar {
                     display: none; /* Hide scrollbar for Chrome, Safari, and newer Edge */
@@ -60,7 +23,7 @@ function CardLatestVideosComponent(array $videos) {
                 <text class='font-sans text-2xl font-bold text-white cursor-default'>Últimos Vídeos</text>
                 <a href='#' class='text-sm font-medium text-zinc-400 hover:text-white transition-all duration-300'>Ver todos</a>
             </div>
-            <div class='h-96 overflow-y-auto custom-scroll'>
+            <div class='h-64 overflow-y-auto custom-scroll'>
     ";
     foreach ($videos as $video) {
         $title = htmlspecialchars($video['title']);
@@ -100,4 +63,3 @@ function CardLatestVideosComponent(array $videos) {
     ";
     return $html;
 }
-?>

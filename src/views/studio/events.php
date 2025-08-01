@@ -145,7 +145,7 @@ $videos = [
     <script src="../../styles/tailwindglobal.js"></script>
 </head>
 
-<body class="w-full bg-[#0C0118]">
+<body class="w-full bg-[#0C0118] text-white">
     <?php echo HeaderComponent(); ?>
     <div class="flex">
         <div class="max-xl:hidden mr-4">
@@ -153,7 +153,7 @@ $videos = [
             echo StudioSideMenuComponent();
             ?>
         </div>
-        <div class="max-w-[1500px] mx-auto ">
+        <div class="max-w-[1500px] mx-auto w-full">
             <div>
                 <p class="font-pop font-semibold text-title text-white">Gerenciamento de usuários</p>
                 <p class="text-subtitile font-semibold title-size text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>

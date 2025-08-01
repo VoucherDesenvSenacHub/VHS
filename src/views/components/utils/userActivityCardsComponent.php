@@ -1,7 +1,9 @@
 <?php
+
 namespace Src\Views\Components\Utils;
 
-function formatViews($viewsCont) {
+function formatViews($viewsCont)
+{
     if (!is_numeric($viewsCont)) {
         return '0';
     }
@@ -16,6 +18,7 @@ function formatViews($viewsCont) {
 function UserActivityCardsComponent(
     $label = 'Visualizações',
     $value = 0,
+    $icon = null
 ) {
     $formattedValue = is_numeric($value) ? formatViews($value) : $value;
 
@@ -28,8 +31,8 @@ function UserActivityCardsComponent(
                 <p class="text-sm text-gray-400">$label</p>
                 <p class="text-2xl font-semibold">$formattedValue</p>
             </div>
-            <img src="/VHS/public/images/trending.svg" alt="Seta para cima" class="w-3 h-3 mb-8 mr-1" />
+
+            <p class="text-2xl font-bold text-white">$formattedValue</p>
         </div>
     HTML;
 }
-?>
