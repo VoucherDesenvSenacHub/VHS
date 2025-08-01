@@ -32,7 +32,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
                 <div class="flex flex-col gap-4 w-full xl:w-96">
                     <?= InputComponent(placeholder: "Insira seu Usuário", type: "text", label: "Usuário", icon: "../../../../public/icons/userRound.svg", iconPosition: "right-3") ?>
                     <?= InputComponent(placeholder: "Insira seu E-mail", type: "email", label: "Email", icon: "../../../../public/icons/mail.svg", iconPosition: "right-3") ?>
-                    <?= InputComponent(placeholder: "Insira sua senha", type: "password", label: "Senha", icon: "../../../../public/icons/eyeOff.svg", iconPosition: "right-3") ?>
+                    <?= InputComponent(placeholder: "Insira sua data de nascimento", type: "password", label: "Data de nascimento", icon: "../../../../public/icons/eyeOff.svg", iconPosition: "right-3") ?>
                     <div class="flex items-center space-x-2 cursor-pointer">
                         <input type="checkbox" id="checkbox" class="hidden">
                         <div id="customCheckbox" class="w-5 h-5 flex items-center justify-center bg-background rounded-md border border-gray600 transition-all">
