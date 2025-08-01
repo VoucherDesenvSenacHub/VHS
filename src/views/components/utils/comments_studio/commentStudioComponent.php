@@ -2,10 +2,10 @@
 
 namespace Src\Views\Components\Utils;
 
-function CommentStudioComponent(string $name, string $text,  string | null $created_at = null, string | null $userImg = null, string | null $thumbnailURL = null, string | null $videoId = null)
+function CommentStudioComponent(string $name, string $text,  string | null $created_at = null, string | null $userImg = null, string | null $thumbnailURL = null, string | null $videoId = null, $isVideoComments = false)
 {
     $userImg = $userImg
-        ? "<img src='" . htmlspecialchars($userImg, ENT_QUOTES, 'UTF-8') . "' alt='Imagem de perfil' class='w-full h-full rounded-full mt-1'>"
+        ? "<img src='" . htmlspecialchars($userImg, ENT_QUOTES, 'UTF-8') . "' alt='Imagem de perfil' class='w-full h-full rounded-full mt-1 object-cover'>"
         : "<img src='https://png.pngtree.com/png-vector/20220617/ourmid/pngtree-dachshund-dog-animal-care-image-little-vector-png-image_37262910.jpg' alt='Imagem padrão de perfil' class='w-full h-full rounded-full mt-1'>";
 
     $name = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
@@ -17,6 +17,17 @@ function CommentStudioComponent(string $name, string $text,  string | null $crea
     $videoId = htmlspecialchars($videoId ?? '', ENT_QUOTES, 'UTF-8');
 
     $created_at = $created_at ? "<p class='text-xs text-gray-300 font-semibold ml-1'>" . htmlspecialchars($created_at, ENT_QUOTES, 'UTF-8') . "</p>" : "";
+
+    $thubnailHTML = "";
+
+
+    if (!$isVideoComments) {
+        $thubnailHTML .= <<<HTML
+            <a href="/VHS/pages/home/video.php?id=$videoId">
+                <img src="$thumbnailURL" alt="Thumbnail de video" class="w-40 h-full rounded-xl"/>
+            </a>
+        HTML;
+    }   
 
     return 
         <<<HTML
@@ -53,9 +64,8 @@ function CommentStudioComponent(string $name, string $text,  string | null $crea
                 </div>
             </div>
 
-            <a href="/VHS/pages/home/video.php?id=$videoId">
-                <img src="$thumbnailURL" alt="Thumbnail de video" class="w-40 h-full rounded-xl"/>
-            </a>
+            
+            $thubnailHTML
         </div>
     HTML;
 }

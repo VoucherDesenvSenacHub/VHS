@@ -1,7 +1,7 @@
 <?php
 // Requires dos componentes necessários
 require "../../components/header/headerComponent.php";
-require "../../components/sidebar/barra_lateral.php";
+require "../../components/sidebar/SidebarComponent.php";
 require "../../components/cards/index.php";
 require "../../components/featuredCard/featuredCardComponent.php";
 
@@ -12,7 +12,7 @@ use function Views\Components\FeaturedCard\FeaturedCardComponent;
 
 // Mock de dados para a página home
 $featuredVieo = [
-    "url" => "https://youtube.com/watch?v=destaque",
+    "url" => "/VHS/src/views/pages/home/video",
     "duration" => "7 min",
     "title" => "Configurando Docker Compose, Postgres, com Testes de Carga - Parte Final da Rinha de Backend",
     "username" => "Fábio Akita",
@@ -23,7 +23,7 @@ $featuredVieo = [
 ];
 
 $videoHTMX = [
-    "url" => "https://youtube.com/watch?v=htmx",
+    "url" => "/VHS/src/views/pages/home/video",
     "type_card" => "video",
     "description" => "RocketSeat",
     "duration" => "16 min", 
@@ -40,7 +40,7 @@ $videoHTMX = [
 
 $mostPopularVideos = [
     [
-        "url" => "https://youtube.com/watch?v=nextjs1",
+        "url" => "/VHS/src/views/pages/home/video",
         "type_card" => "video",
         "description" => "Rafael Germano",
         "duration" => "7 min",
@@ -311,7 +311,7 @@ $styleVideos = [
         }
     </style>
 </head>
-<body class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center text-white">
+<body>
     <div>
         <?= HeaderComponent() ?>
     </div>
@@ -341,7 +341,7 @@ $styleVideos = [
                     <p class="text-gray-400 text-sm mb-6">Confira os vídeos mais populares da nossa plataforma VHS</p>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                        <?php renderCards($mostPopularVideos, 'video'); ?>
+                        <?= renderCards($mostPopularVideos, 'video'); ?>
                     </div>
                 </section>
 
@@ -349,7 +349,7 @@ $styleVideos = [
                     <h2 class="text-2xl font-bold text-white mb-6"><span class="text-purple-400">#</span> Tecnologia</h2>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        <?php renderCards($techVideos, 'video'); ?>
+                        <?= renderCards($techVideos, 'video'); ?>
                     </div>
                 </section>
 
@@ -357,7 +357,7 @@ $styleVideos = [
                     <h2 class="text-2xl font-bold text-white mb-6"><span class="text-purple-400">#</span> Saúde</h2>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        <?php renderCards($healthVideos, 'video'); ?>
+                        <?= renderCards($healthVideos, 'video'); ?>
                     </div>
                 </section>
 
@@ -365,7 +365,7 @@ $styleVideos = [
                     <h2 class="text-2xl font-bold text-white mb-6"><span class="text-purple-400">#</span> Moda</h2>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        <?php renderCards($styleVideos, 'video'); ?>
+                        <?= renderCards($styleVideos, 'video'); ?>
                     </div>
                 </section>
             </div>

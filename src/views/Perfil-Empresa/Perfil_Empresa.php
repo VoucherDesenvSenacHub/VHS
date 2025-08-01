@@ -2,7 +2,7 @@
 require "../components/utils/buttonComponent.php";
 require "../components/header/headerComponent.php";
 require "../components/utils/footer.php";
-require "../components/sidebar/barra_lateral.php";
+require "../components/sidebar/SidebarComponent.php";
 require "../components/cards/videoCard.php";
 require "../components/cards/channelCard.php";
 require "../components/cards/index.php";

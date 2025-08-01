@@ -11,9 +11,11 @@ use function src\views\components\Utils\ButtonComponent;
 
 require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/comments_studio/commentStudioComponent.php";
 use function Src\Views\Components\Utils\CommentStudioComponent;
+require_once "../../../components/utils/inputComponent.php";
 
 require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/footer.php";
 use function src\views\components\Utils\Footer;
+use function Src\Views\Components\Utils\InputComponent;
 
 ?>
 
@@ -23,10 +25,11 @@ use function src\views\components\Utils\Footer;
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VHS Studio - Últimos comentários do vídeo</title>
+  <link rel="stylesheet" href="/VHS/src/styles/global.css">
   <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Syne:wght@500..800&display=swap" rel="stylesheet" />
 </head>
-<body class="bg-gradient-to-b from-[#20002c] via-black to-[#20002c] min-h-screen text-white font-[Poppins]">
+<body>
 
   <?php echo HeaderComponent(); ?>
 
@@ -34,7 +37,7 @@ use function src\views\components\Utils\Footer;
     <?php echo StudioSideMenuComponent(); ?>
 
     <div class="flex-1 px-10 py-6">
-        <h1 class="text-2xl font-semibold mb-2">Últimos comentários do vídeo</h1>
+        <h1 class="text-2xl font-semibold mb-2 text-white">Últimos comentários do vídeo</h1>
         <p class="text-sm text-gray-300 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
     <!-- 
       <div class="flex gap-3 mb-6">
@@ -43,10 +46,7 @@ use function src\views\components\Utils\Footer;
         <?php echo ButtonComponent("Analytics", "studio", "", 10.675, 2.5); ?>
       </div> -->
 
-      <div class="mb-6 flex gap-3">
-        <img class="w-8 h-8 pt-2" src="/VHS/public/icons/Filter.svg" alt="">
-        <input type="text" placeholder="Pesquisar" class="w-full bg-[#15141A] text-white px-4 py-2 rounded-md border border-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-600">
-      </div>
+      <?= InputComponent("text", "Pesquisar", icon: "/VHS/public/icons/Filter.svg", iconPosition: "left", onClickIcon: "showFilterMenu()", className: "w-full !bg-[#15141A] text-white px-4 py-2 rounded-md border border-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-600") ?>
 
       <div class="w-full flex flex-col gap-4">
         <?php

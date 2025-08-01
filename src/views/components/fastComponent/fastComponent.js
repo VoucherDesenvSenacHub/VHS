@@ -1,37 +1,18 @@
+const fast = document.querySelector(".current-fast");
+const like = fast.querySelector("#heart");
+const likes = fast.querySelector(".likes")
 
-        const like = document.getElementById("coracao")
-        const div = document.querySelector(".current_fast")
-        const video =document.querySelector('.current_fast > video')
-        const play =document.querySelector('.current_fast > .play')
- 
-        like.onclick = (e) => {
-    
-            console.log('teste')
-            e.stopPropagation(e);
-            const pathSvg = like.querySelector("path")
- 
-            if(pathSvg.getAttribute('fill') === "red") {
-                return pathSvg.setAttribute('fill', "white")
-            }
- 
-            pathSvg.setAttribute('fill', 'red')
- 
-           
-        }
- 
-        const pauseFunction = (e) => {
-           
-            if(e.key && e.key !== " ") return;
- 
-            if(video.paused) {
-                video.play()
-                play.classList.add('paused')
-                return
-            }
- 
-            video.pause()
-            play.classList.remove('paused')
-        }
- 
-        div.onclick = pauseFunction
-        document.body.addEventListener('keypress', pauseFunction)
+fast.addEventListener("click", () => {
+    const video = fast.querySelector("video");
+    const play = fast.querySelector(".play")
+    video.paused ? video.play() : video.pause();
+    play.classList.toggle("paused");
+})
+
+like.addEventListener("click", (e) => {
+    e.stopImmediatePropagation();
+    const heart = like.querySelector("path");
+    const isLiked = heart.style.fill === "red";
+    heart.style.fill = isLiked ? "white" : "red";
+    likes.innerText = isLiked ? Number(likes.innerText) - 1 : Number(likes.innerText) + 1;
+})
