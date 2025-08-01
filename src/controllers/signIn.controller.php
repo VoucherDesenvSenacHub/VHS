@@ -36,18 +36,9 @@ class SignInController extends Controller {
 
             $user = $this->userModel->findUserByEmail($_POST["email"]);
 
-            $user = json_encode($user);
+            $password = password_verify($_POST["password"], $user[0]["password"]);
 
-            echo $user['password'];
-
-            $password = password_verify($_POST["password"], $user["password"]);
-
-            if($password){
-                return true;
-            }
-            else{
-                return false;
-            }
+            return !!$password;
 
         } catch (NestedValidationException $exception) {
             echo $exception->getFullMessage();
