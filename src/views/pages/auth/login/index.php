@@ -1,4 +1,12 @@
 <?php
+$errors = isset($_SESSION['redirect_data']['errors']) ? $_SESSION['redirect_data']['errors'] : '';
+
+unset($_SESSION['redirect_data']);
+
+if (isset($_COOKIE['token'])){
+  header('Location: /VHS/src/views/pages/home/index.php', $_SESSION['redirect_data']['user']);
+}
+
 require "../../../components/utils/inputComponent.php";
 require "../../../components/utils/buttonComponent.php";
 require "../../../components/checkbox/checkboxComponent.php";
@@ -53,6 +61,13 @@ use function Src\Views\Components\Utils\ButtonComponent;
                 <p class="text-secondary cursor-default">Ainda não tem uma conta?</p>
                 <a class="text-primary underline" href="/VHS/src/views/pages/auth/register">Cadastrar</a>
               </div>
+              <p class="text-red-500">
+                  <?php
+                    if (!empty($errors)){
+                      foreach ($errors as $error) { echo $error . "<br>"; }
+                    }
+                   ?>
+              </p>
             </div>
       </div>
     </div>

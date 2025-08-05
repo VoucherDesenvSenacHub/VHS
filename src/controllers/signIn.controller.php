@@ -23,19 +23,18 @@ class SignInController extends Controller {
 
             $_POST["keep_logged_in"] = isset($_POST["keep_logged_in"]) ? "on" : "off";
 
-            $schema =
-            v::key(
+            $schema = v::key(
                 'email',
-                v::email(),
+                v::email()->setName('email')->setTemplate('O email deve ser um endereço de email válido')
             )->key(
                 'password',
-                v::stringType()->length(8, 16)
+                v::stringType()->length(8, 16)->setName('password')->setTemplate(template: 'A senha deve ter entre 8 e 16 caracteres')
             )->key(
                 'keep_logged_in',
-                v::stringType()
+                v::stringType()->setName('keep_logged_in')->setTemplate('A opção "Lembrar de mim" deve ser uma string')
             )->key(
                 'token_recaptcha',
-                v::stringType()
+                v::stringType()->setName('token_recaptcha')->setTemplate('O token do reCAPTCHA deve ser uma string')
             );
             
             $schema->assert($_POST);
@@ -45,15 +44,23 @@ class SignInController extends Controller {
             $password = password_verify($_POST["password"], $user[0]["password"]);
 
             if ($password && $_POST["keep_logged_in"] == "on") {
-                return redirect("/VHS/src/views/pages/home/index.php", $user[0]);
+                setcookie("token", $user[0]["id"], time() + (86400 * 30), "/", );
+                return redirect("/VHS/src/views/pages/home/index.php", ['user' => $user[0]]);
+            }
+            elseif ($password && $_POST["keep_logged_in"] == "off") {
+                return redirect("/VHS/src/views/pages/home/index.php", ['user' => $user[0]]);
             }
             else
             {
-                return redirect("/VHS/src/views/pages/auth/login/index.php", ['Acesso negado!']);
+                return redirect("/VHS/src/views/pages/auth/login/index.php?error=1", ['errors' => ["Email ou senha incorretos"]]);
             }
 
         } catch (NestedValidationException $exception) {
-            echo $exception->getFullMessage();
+            $messages = [];
+            foreach ($exception->getMessages() as $message) {
+                $messages[] = $message;
+            }
+            return redirect("/VHS/src/views/pages/auth/login/index.php?error=1", ['errors' => $messages]);
         }
         
     }
