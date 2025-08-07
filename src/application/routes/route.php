@@ -15,6 +15,8 @@ $router = new Router();
 
 $router->post('/api/v1/auth/signup', SignUpController::class);
 
+$router->post('/api/v1/auth/signup', SignUpController::class);
+
 $router->run();
 
 
