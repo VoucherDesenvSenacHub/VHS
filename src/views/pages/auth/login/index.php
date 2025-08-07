@@ -1,6 +1,19 @@
 <?php
 $errors = isset($_SESSION['redirect_data']['errors']) ? $_SESSION['redirect_data']['errors'] : '';
 
+if (!empty($errors) && is_array($errors)) {
+    foreach ($errors as $error) {
+        if (str_contains(strtolower($error), 'email') && !str_contains(strtolower($error), 'senha')) {
+            $emailError = $error;
+        } elseif (str_contains(strtolower($error), 'senha') && !str_contains(strtolower($error), 'email')) {
+            $passwordError = $error;
+        }
+        else {
+            $genericError = $error;
+        }
+    }
+}
+
 unset($_SESSION['redirect_data']);
 
 if (isset($_COOKIE['token'])){
@@ -41,8 +54,11 @@ use function Src\Views\Components\Utils\ButtonComponent;
         </div>
         <form action="/VHS/src/application/routes/route.php/api/v1/auth/signin" method="POST">
           <div class="flex flex-col gap-4 w-full xl:w-96">
-              <?= InputComponent(placeholder: "Insira seu e-mail", name: "email", type: "email", label: "Email", icon: "/VHS/public/icons/Vector.svg", iconPosition: "w-6 h-6 right-3") ?>
+                <?= InputComponent(placeholder: "Insira seu e-mail", name: "email", type: "email", label: "Email", icon: "/VHS/public/icons/Vector.svg", iconPosition: "w-6 h-6 right-3") ?>
+                  <?= !empty($emailError) ? "<p id='emailError' class='text-red-500'>$emailError</p>" : '' ?>
                 <?= InputComponent(placeholder: "Insira sua senha", name: "password", type: "password", label: "Senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "w-6 h-6 right-3") ?>
+                  <?= !empty($passwordError) ? "<p id='passwordError' class='text-red-500'>$passwordError</p>" : '' ?>
+                  <?= !empty($genericError) ? "<p id='genericError' class='text-red-500'>$genericError</p>" : '' ?>
                 <a class="text-secondary underline" href="/VHS/src/views/pages/auth/new-password">Esqueceu sua senha? </a>
                 <?= CheckboxComponent("Lembrar de mim", id: "keep_logged_in") ?>
                 <?= ButtonComponent("Acessar plataforma", "default") ?>
@@ -61,16 +77,20 @@ use function Src\Views\Components\Utils\ButtonComponent;
                 <p class="text-secondary cursor-default">Ainda não tem uma conta?</p>
                 <a class="text-primary underline" href="/VHS/src/views/pages/auth/register">Cadastrar</a>
               </div>
-              <p class="text-red-500">
-                  <?php
-                    if (!empty($errors)){
-                      foreach ($errors as $error) { echo $error . "<br>"; }
-                    }
-                   ?>
-              </p>
             </div>
       </div>
     </div>
   </div>
 </body>
+<script>
+  setTimeout(() => {
+    const emailError = document.getElementById('emailError');
+    const passwordError = document.getElementById('passwordError');
+    const genericError = document.getElementById('genericError');
+
+    if (emailError) emailError.style.display = 'none';
+    if (passwordError) passwordError.style.display = 'none';
+    if (genericError) genericError.style.display = 'none';
+  }, 3000);
+</script>
 </html>
