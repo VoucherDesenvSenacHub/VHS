@@ -14,7 +14,7 @@ class UserModel extends Model {
 
         $id = uniqid();
 
-        $stmt = $this->database->query($sql, [
+        $stmt = $this->database->exec($sql, [
             ":id" => $id,
             ":name" => $name,
             ":email" => $email,
