@@ -5,7 +5,6 @@ namespace Src\Application\Controllers;
 use Respect\Validation\Exceptions\NestedValidationException;
 use Src\Application\Core\Controller;
 use Src\Infra\Models\UserModel;
-use Src\Application\Utils\Redirect;
 
 use Respect\Validation\Validator as v;
 
@@ -13,11 +12,14 @@ require_once __DIR__ . '/../application/core/controller.php';
 require_once __DIR__ . '/../application/utils/redirect.php';
 
 use function Src\Application\Utils\Redirect\redirect;
+require_once __DIR__ . '/../application/utils/verifyRecaptcha.php';
+use function Src\Application\Utils\verifyRecaptcha;
 
 class SignInController extends Controller {
     public UserModel $userModel;
 
     public function index() {
+        $token = $_POST['g-recaptcha-response'] ?? '';
         try {
             $this->userModel = $this->model("user");
 
@@ -33,8 +35,8 @@ class SignInController extends Controller {
                 'keep_logged_in',
                 v::stringType()->setName('keep_logged_in')->setTemplate('A opção "Lembrar de mim" deve ser uma string')
             )->key(
-                'token_recaptcha',
-                v::stringType()->setName('token_recaptcha')->setTemplate('O token do reCAPTCHA deve ser uma string')
+                'g-recaptcha-response',
+                v::stringType()->setName('g-recaptcha-response')->setTemplate('O token do reCAPTCHA deve ser uma string')
             );
             
             $schema->assert($_POST);
@@ -42,6 +44,12 @@ class SignInController extends Controller {
             $user = $this->userModel->findUserByEmail($_POST["email"]);
 
             $password = password_verify($_POST["password"], $user[0]["password"]);
+
+            if (!verifyRecaptcha($token)) {
+                return redirect("/VHS/src/views/pages/auth/login/index.php?error=1", [
+                    'errors' => ['Falha na verificação do reCAPTCHA. Tente novamente.']
+                ]);
+            }
 
             if ($password && $_POST["keep_logged_in"] == "on") {
                 setcookie("token", $user[0]["id"], time() + (86400 * 30), "/", );

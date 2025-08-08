@@ -61,8 +61,18 @@ use function Src\Views\Components\Utils\ButtonComponent;
                   <?= !empty($genericError) ? "<p id='genericError' class='text-red-500'>$genericError</p>" : '' ?>
                 <a class="text-secondary underline" href="/VHS/src/views/pages/auth/new-password">Esqueceu sua senha? </a>
                 <?= CheckboxComponent("Lembrar de mim", id: "keep_logged_in") ?>
-                <?= ButtonComponent("Acessar plataforma", "default") ?>
-                <input type="hidden" name="token_recaptcha" value="teste">
+                <?= ButtonComponent(
+                                    "Acessar plataforma",
+                                    "login",
+                                    icon: null,
+                                    attributes: [
+                                    'data-sitekey' => '6LcOMJ8rAAAAAM3rDQWYT4JsHMqlLcxqUifhDcII',
+                                    'data-callback' => 'onSubmit',
+                                    'data-action' => 'submit',
+                                    'onClick' => '() => grecaptcha.execute()'
+                                  ]
+                                ) ?>
+
               </div>
               <div class="flex items-center text-white cursor-default">
                 <div class="flex-grow border-t border-gray300"></div>
@@ -92,5 +102,10 @@ use function Src\Views\Components\Utils\ButtonComponent;
     if (passwordError) passwordError.style.display = 'none';
     if (genericError) genericError.style.display = 'none';
   }, 3000);
+
+  function onSubmit(token) {
+    document.querySelector("form").submit();
+  }
 </script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </html>
