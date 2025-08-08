@@ -14,4 +14,16 @@ class CategoryModel extends Model {
 
         return $category[0];
     }
+
+    public function addCategoryInUser(string $categoryId, string $userId) {
+        $sql = "INSERT INTO users_category VALUE (:id, :category_id, :user_id)";
+
+        $id = uniqid(more_entropy: true);
+
+        return $this->database->exec($sql, [
+            ":id" => $id,
+            ":category_id" => $categoryId,
+            ":user_id" => $userId
+        ]);   
+    }
 }

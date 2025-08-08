@@ -1,11 +1,50 @@
 <?php
 namespace Src\Views\Components\Utils;
-
+session_start();
 require "../../../../components/utils/buttonComponent.php";
 require "../../../../components/utils/inputComponent.php";
 
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\Utils\ButtonComponent;
+use Respect\Validation\Validator as v;
+use \Respect\Validation\Exceptions\NestedValidationException;
+require_once __DIR__ . '/../../../../../../vendor/autoload.php';
+require_once __DIR__ . '/../../../../../application/utils/redirect.php';
+
+$errors = [];
+
+$schema = 
+v::key(
+    'username',
+    v::stringType()->length(3, 60)
+)->key(
+    "email",
+    v::email()
+)->key(
+    "date_birthday",
+    v::stringType()->date()
+);
+
+$passwordSchema = 
+v::key(
+    "password",
+    v::stringType()->length(8, 16)
+)->key(
+    "confirm_password",
+    v::stringType()->length(8, 16),
+);
+
+if(!$schema->validate($_SESSION["redirect_data"])) redirect("../../register"); 
+
+if($passwordSchema->validate($_POST)) {
+    if($_POST["password"] !== $_POST["confirm_password"]) {
+        $errors["password"] = "As senhas devem ser iguais!";
+        $errors["confirm_password"] = "As senhas devem ser iguais!";
+    }
+} else {
+    $errors["password"] = "Preencha todos os campos!";
+    $errors["confirm_password"] = "Preencha todos os campos!";
+}
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +62,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
         <div class="flex justify-center mr-24 xl:mr-24 max-xl:hidden">
             <img src="/VHS/public/images/Cassete.svg" alt="" class="relative right-14 mr-28 w-6/16">
         </div>
-        <div class="relative xl:min-w-1/2 xl:mx-20 flex items-center justify-center w-full max-w-md xl:max-w-none xl:w-auto px-4 xl:px-0">
+        <form method="post" class="relative xl:min-w-1/2 xl:mx-20 flex items-center justify-center w-full max-w-md xl:max-w-none xl:w-auto px-4 xl:px-0">
             <div class="flex flex-col gap-4">
                 <div class="flex items-center flex-col gap-2">
                     <img src="/VHS/public/logos/Logo.svg" alt="">
@@ -31,12 +70,12 @@ use function Src\Views\Components\Utils\ButtonComponent;
                     <p class="text-gray-200">Informe sua senha para criar sua conta!</p>
                 </div>
                 <div class="flex flex-col gap-4 w-full xl:w-96">
-                    <?= InputComponent(placeholder: "Insira sua senha", type: "password", label: "Senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "right-3") ?>
-                    <?= InputComponent(placeholder: "Confirme sua senha", type: "password", label: "Confirmar senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "right-3") ?>
+                    <?= InputComponent(name: "password", placeholder: "Insira sua senha", type: "password", label: "Senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "right-3", error: isset($errors["password"]), errorDescription: isset($errors["password"]) ? $errors["password"] : "") ?>
+                    <?= InputComponent(name: "confirm_password", placeholder: "Confirme sua senha", type: "password", label: "Confirmar senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "right-3", error: isset($errors["confirm_password"]), errorDescription: isset($errors["confirm_password"]) ? $errors["confirm_password"] : "") ?>
                     <?= ButtonComponent("Continuar", "default", link:"/VHS/src/views/pages/auth/register/verify-email", className: " mt-4") ?>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </body>
 </html>

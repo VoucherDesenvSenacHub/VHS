@@ -24,6 +24,7 @@ class SignUpController extends Controller {
             $this->userModel = $this->model("user");
             $this->categoryModel = $this->model("category");
             
+            $_POST["keep_logged_in"] = $_POST["keep_logged_in"] ? "on" : "off";
 
             $schema = 
             v::key(
@@ -50,19 +51,30 @@ class SignUpController extends Controller {
             );
             
             $schema->assert($_POST);
+            
+            // $isValidRecaptcha = verifyRecaptcha($_POST["token_recaptcha"]);
 
+            // if($isValidRecaptcha) return throw new Error("- invalid reCAPTCHA");
+
+            $isUserExists = $this->userModel->getUserByEmail($_POST["email"]);
+
+            if(!empty($isUserExists)) {
+                throw new Error("- Email already exists");
+            }
+
+            $isUserExists = $this->userModel->getUserByUsername($_POST["username"]);
+
+            if(!empty($isUserExists)) {
+                throw new Error("- Username already exists");
+            }
+            
             $_POST["password"] = password_hash($_POST["password"], PASSWORD_BCRYPT, [
                 "cost" => 14
             ]);
 
-            $isValidRecaptcha = verifyRecaptcha($_POST["token_recaptcha"]);
-
-            if($isValidRecaptcha) return throw new Error("- invalid reCAPTCHA");
-
-            $categories = explode(",", $_POST["categories"]);
+            $categories = array_unique(explode(",", $_POST["categories"]));
 
             if (count($categories) == 0) return throw new Error("- Categories is not provide");
-
 
             $indexCategory = 0;
 
@@ -73,12 +85,23 @@ class SignUpController extends Controller {
                     return throw new Error("- Category not exists");
                 }
 
-                $category[$indexCategory] = $categoryByName;
+                $categories[$indexCategory] = $categoryByName;
                 $indexCategory++;
             }
 
+            $token = uniqid(more_entropy: true) . uniqid(more_entropy: true);
 
-            return $this->userModel->create($_POST["name"], $_POST["email"], $_POST["password"], $_POST["username"], $_POST["date_birthday"]);
+            $userId = $this->userModel->create($_POST["name"], $_POST["email"], $_POST["password"], $_POST["username"], $_POST["date_birthday"], $token);
+            
+            foreach($categories as $category) {
+                $this->categoryModel->addCategoryInUser($category["id"], $userId);    
+            }
+
+            if($_POST["keep_logged_in"] == "off") return 1;
+
+            setcookie("token", $token, 3600 * 24 * 7, httponly: true, secure: true);
+
+            return 1;
         } catch (NestedValidationException | Error  $exception) {
             if($exception instanceof Error) {
                 echo $exception->getMessage();
