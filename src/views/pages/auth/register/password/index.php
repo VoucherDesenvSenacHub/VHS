@@ -41,6 +41,8 @@ if($passwordSchema->validate($_POST)) {
         $errors["password"] = "As senhas devem ser iguais!";
         $errors["confirm_password"] = "As senhas devem ser iguais!";
     }
+
+    redirect("../verify-email");
 } else {
     $errors["password"] = "Preencha todos os campos!";
     $errors["confirm_password"] = "Preencha todos os campos!";
