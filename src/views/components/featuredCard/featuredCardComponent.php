@@ -22,6 +22,7 @@ function FeaturedCardComponent(array $video, bool $isCategoryPage = false): stri
     $height = $isCategoryPage ? 'h-[450px]' : 'h-[330px]';
 
     return <<<HTML
+    <a href="{$video['url']}" class="block no-underline text-inherit">
         <div class="relative bg-gradient-to-r from-red-600/20 to-purple-600/20 rounded-3xl overflow-hidden shadow-lg cursor-pointer $height">
             <img src="{$video['thumbnail_url']}" alt="{$video['title']}" class="absolute inset-0 w-full h-full object-cover">
             <div class="absolute inset-0 bg-black bg-opacity-50"></div>
@@ -39,5 +40,6 @@ function FeaturedCardComponent(array $video, bool $isCategoryPage = false): stri
                 <h2 class="text-white text-lg 2xl:text-xl font-bold leading-tight line-clamp-2">{$video['title']}</h2>
             </div>
         </div>
+    </a>
     HTML;
 }

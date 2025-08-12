@@ -7,10 +7,6 @@
  
  use function src\views\components\FastComponent\FastComponent;
  use function src\views\components\header\HeaderComponent;
- 
-
- 
- 
 ?>
  
 <!DOCTYPE html>

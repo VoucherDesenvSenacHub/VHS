@@ -37,7 +37,7 @@ function Comment(string $name, string $text, string $thumbnail_url, string $crea
                             <img src='/VHS/public/icons/comments/dialog.svg'>
                         </li>
                         <li>
-                            <img src='/VHS/public/icons/comments/Trash.svg'>
+                            <img src='/VHS/public/icons/comments/trash.svg'>
                         </li>
                         <li>
                             <img src='/VHS/public/icons/comments/user-block.svg'>

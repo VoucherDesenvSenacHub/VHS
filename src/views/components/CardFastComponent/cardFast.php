@@ -8,13 +8,13 @@ function CardFast(array $data): string {
     $views = htmlspecialchars($data['views'] ?? '0');
 
     return "
-        <div class='cursor-pointer w-72 h-[32rem] relative flex items-center justify-center current_fast rounded-2xl'>
-            <img src='{$thumbnail}' class='object-cover h-full absolute rounded-2xl' alt='Imagem do card'>
+        <div class='cursor-pointer h-[35rem] relative flex items-center justify-center current_fast rounded-2xl'>
+            <img src='{$thumbnail}' class='w-full object-cover h-full absolute rounded-2xl' alt='Imagem do card'>
 
             <div class='block w-full bottom-12 absolute px-1'>
                 <h2 class='text-white ml-3.5'>{$titulo}</h2>
 
-                <div class='mt-2 w-full flex justify-around absolute'>
+                <div class='mt-2 w-full flex gap-4 px-4 absolute'>
                     <div class='flex items-center gap-2.5'>
                         <img src='/VHS/public/icons/fastIcon/Vector.svg' alt='coração'>
                         <p class='text-sm text-white'>{$likes}</p>
@@ -26,7 +26,7 @@ function CardFast(array $data): string {
                     </div>
 
                     
-                    <button class='menu-btn'>
+                    <button class='menu-btn absolute right-6'>
                         <img src='/VHS/public/icons/fastIcon/3botao.svg' alt='menu de opções'>
                     </button>
 

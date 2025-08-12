@@ -42,6 +42,7 @@
         public string $description;
         public string $likes;
         public string $comments;
+        public string $event_date;
 
         public function __construct(array $card) {
             $this->thumbnail_url = htmlspecialchars($card['thumbnail_url']);
@@ -57,6 +58,7 @@
             $this->description = htmlspecialchars($card['description'] ?? 'Online');
             $this->likes = htmlspecialchars($card['likes'] ?? 0);
             $this->comments = htmlspecialchars($card['comments'] ?? 0);
+            $this->event_date = htmlspecialchars($card['event_date']);
         }
 
         public static function Renderer(array $item) {
@@ -143,7 +145,7 @@
                             {$this->title}
                         </h3>
 
-                        <p class='text-gray-400 text-caption 2xl:text-paragraph'>{$this->views} views • {$this->created_at}</p>
+                        <p class='text-gray-400 text-caption 2xl:text-paragraph'>{$this->views} views • {$this->event_date}</p>
                     </div>
                 </a>
             ";
@@ -162,7 +164,7 @@
 
                     <!-- Informações do vídeo -->
 
-                    <div class='p-4 text-white flex flex-col justify-between h-[50%]'>
+                    <div class='p-4 text-white flex flex-col justify-between flex gap-1'>
                         <p class='text-gray-400 text-caption 2xl:text-paragraph'>{$this->created_at}</p>
 
                         <h3 class='text-paragraph 2xl:text-subtitle leading-tight break-words overflow-hidden line-clamp-3' style='
@@ -173,24 +175,24 @@
                             {$this->title}
                         </h3>
                         
-                        <div class='flex justify-between'>
+                        <div class='flex justify-between mt-4'>
                             <div class='flex gap-2 items-center'>
                                 <div>
-                                    <img src='Zuias/VHS/public/icons/cards/comments.svg' class='w-full h-full'>
+                                    <img src='/VHS/public/icons/comments-card.svg' class='w-full h-full'>
                                 </div>
                                 <p class='text-gray-400 text-caption 2xl:text-paragraph'>{$this->comments}</p>
                             </div>
 
                             <div class='flex gap-2 items-center'>
                                 <div>
-                                    <img src='/VHS/public/icons/cards/stars.svg' class='w-full h-full'>
+                                    <img src='/VHS/public/icons/star-card.svg' class='w-full h-full'>
                                 </div>
                                 <p class='text-gray-400 text-caption 2xl:text-paragraph'>{$this->likes}</p>
                             </div>
 
                             <div class='flex gap-2 items-center'>
                                 <div>
-                                    <img src='/VHS/public/icons/cards/views.svg' class='w-full h-full'>
+                                    <img src='/VHS/public/icons/views-card.svg' class='w-full h-full'>
                                 </div>
                                 <p class='text-gray-400 text-caption 2xl:text-paragraph'>{$this->views}</p>
                             </div>

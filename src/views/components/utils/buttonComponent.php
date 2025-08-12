@@ -14,6 +14,8 @@
      * @param string|null $icon - URL do ícone a ser exibido no botão (opcional).
      * @param float $width - Largura do botão em rem (padrão: 23.875).
      * @param float $height - Altura do botão em rem (padrão: 3.75).
+     * @param float $width - Largura do botão em rem (padrão: 23.875).
+     * @param float $height - Altura do botão em rem (padrão: 3.75).
      * @param string|null $id - ID do botão (opcional).
      * @param string|null $link - URL para onde o botão deve redirecionar (opcional).
      * @param bool $isActive - Indica se o botão está ativo (padrão: false).
@@ -34,11 +36,11 @@
 
     
         $buttonStyle = 
-        "flex justify-center items-center w-[$width] h-[$height] gap-2 rounded-md cursor-pointer" 
+        "flex justify-center items-center w-[$width] h-[$height] gap-2 rounded-md cursor-pointer " 
         . ($isActive ? "text-white " : "text-[#D9D9D9] ");
 
         $buttonStyleOutlineDefault = 
-        "flex justify-center items-center w-full h-[$height] gap-2 rounded-md cursor-pointer md:w-[$width] " 
+        "flex justify-center items-center w-full h-[$height] gap-2 rounded-md cursor-pointer " 
         . ($isActive ? "text-white " : "text-[#D9D9D9] ");
 
 
@@ -55,8 +57,8 @@
 
         return
             <<<HTML
-                <a href='$link'>
-                    <button id='$id' class='$buttonStyle'>
+                <a href='$link' class="w-full">
+                    <button id='$id' class='$buttonStyle !w-full'>
                     $icon
                     $text
                     </button>

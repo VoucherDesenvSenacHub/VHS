@@ -17,7 +17,7 @@ function GridUsuariosComponent($usuarios = []) {
 
     echo '
     <script src="https://cdn.tailwindcss.com"></script>
-    <div id="grid-usuarios" class="w-full bg-[#0C0118] rounded-lg ">
+    <div id="grid-usuarios" class="w-full rounded-lg ">
     ';
 
     foreach ($usuarios as $usuario) {
@@ -153,7 +153,7 @@ function GridUsuariosComponent($usuarios = []) {
                 <div id="copy-notification" class="overflow-hidden fixed flex bottom-0 right-0 mb-4 mr-4 min-w-20 min-h-10 bg-[#202024] rounded-xl items-center p-4 gap-4 border-b-4 border-[#660BAD] translate-y-5 opacity-0 transition-all duration-300">
                     <div class="w-12 h-12 bg-[#373450] rounded-full flex items-center justify-center p-2" style="box-shadow: 0 0 75px 0 #660BAD;">
                         <svg width="100%" height="100%" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <img src="../../../../public/icons/warning.svg" alt="">
+                            <img src="/VHS/public/icons/warning.svg" alt="">
                         </svg>
                     </div>
                     <div class="flex flex-col text-white">
