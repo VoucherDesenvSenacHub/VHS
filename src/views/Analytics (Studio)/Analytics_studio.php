@@ -56,9 +56,9 @@ $botoes = [
                     <p class="text-sm text-gray-300">Acompanhe o desempenho do seu conteúdo com métricas detalhadas e insights em tempo real!</p>
                 </div>
                 <div class="flex mb-5 gap-5">
+                    <?= ButtonComponent("Analytics", "studio", "", 10.675, 2.5, "", "", true) ?>
                     <?= ButtonComponent("Edição", "studio", "", 10.675, 2.5, "", "../edicao-de-video/index.php") ?>
                     <?= ButtonComponent("Comentários", "studio", "", 10.675, 2.5, "", "../studio/Comentários.php") ?>
-                    <?= ButtonComponent("Analytics", "studio", "", 10.675, 2.5, "", "", true) ?>
                 </div>
             </div>
             <div class="flex justify-between gap-4 mt-4">
