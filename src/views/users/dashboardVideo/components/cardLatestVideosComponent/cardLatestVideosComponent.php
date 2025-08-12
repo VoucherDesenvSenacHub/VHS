@@ -3,7 +3,7 @@
 function CardLatestVideosComponent(array $videos)
 {
     $html = "
-        <div class='bg-[#1B1B1B] p-6 w-full rounded-xl border border-gray-700 space-y-4'>
+        <div class='bg-[#1B1B1B] p-6 w-full rounded-xl border border-gray-700'>
             <style>
                 .custom-scroll::-webkit-scrollbar {
                     display: none; /* Hide scrollbar for Chrome, Safari, and newer Edge */
@@ -19,11 +19,11 @@ function CardLatestVideosComponent(array $videos)
                     transform: scale(1.1);
                 }
             </style>
-            <div class='flex items-center justify-between w-full'>
-                <text class='font-sans text-2xl font-bold text-white cursor-default'>Últimos Vídeos</text>
+            <div class='flex items-center justify-between w-full mb-2'>
+                <span class='font-sans text-2xl font-bold text-white cursor-default'>Últimos Vídeos</span>
                 <a href='#' class='text-sm font-medium text-zinc-400 hover:text-white transition-all duration-300'>Ver todos</a>
             </div>
-            <div class='h-64 overflow-y-auto custom-scroll'>
+            <div class='h-60 overflow-y-auto custom-scroll'>
     ";
     foreach ($videos as $video) {
         $title = htmlspecialchars($video['title']);
