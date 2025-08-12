@@ -13,7 +13,7 @@ class CommentModel extends Model {
         $sql = "INSERT INTO comments (id, content, user_id, video_id) 
                 VALUES (:id, :content, :user_id, :video_id)";
 
-        $id = uniqid(); // mesmo estilo do UserModel
+        $id = uniqid();
 
         $stmt = $this->database->query($sql, [
             ":id" => $id,
@@ -25,19 +25,19 @@ class CommentModel extends Model {
         return $stmt;
     }
 
-    public function getByVideoId(string $video_id): array {
-        $sql = "SELECT 
-                    c.id, c.content, c.created_at,
-                    u.name, u.username, u.avatar_url 
-                FROM comments c
-                JOIN users u ON c.user_id = u.id
-                WHERE c.video_id = :video_id
-                ORDER BY c.created_at DESC";
+    // public function getByVideoId(string $video_id): array {
+    //     $sql = "SELECT 
+    //                 c.id, c.content, c.created_at,
+    //                 u.name, u.username, u.avatar_url 
+    //             FROM comments c
+    //             JOIN users u ON c.user_id = u.id
+    //             WHERE c.video_id = :video_id
+    //             ORDER BY c.created_at DESC";
 
-        $stmt = $this->database->query($sql, [
-            ":video_id" => $video_id
-        ]);
+    //     $stmt = $this->database->query($sql, [
+    //         ":video_id" => $video_id
+    //     ]);
 
-        return $stmt->fetchAll();
-    }
+    //     return $stmt->fetchAll();
+    // }
 }

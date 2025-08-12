@@ -1,63 +1,93 @@
 <?php
-namespace Src\Views\Components\Utils;
+    namespace Src\Views\Components\Utils;
 
-function TextareaComponent(
-    string $type = "text", 
-    string $placeholder, 
-    string $icon = null, 
-    string $label = null, 
-    string $label_size = null,
-    string $description = null, 
-    string $description_size = null,
-    string $background = null, 
-    string $iconPosition = null,
-    string $width = null,
-    string $height = null,
-    bool $multiline = false
-) {
-    $type = htmlspecialchars($type, ENT_QUOTES, 'UTF-8');
-    $placeholder = htmlspecialchars($placeholder, ENT_QUOTES, 'UTF-8');
-    $icon = $icon ? "<img src='" . htmlspecialchars($icon, ENT_QUOTES, 'UTF-8') . "' class='absolute $iconPosition w-5 h-5 fill-blue-500'>" : "";
-    
-    $margin = "";
-    if (strpos($iconPosition, "left") !== false) {
-        $margin = "pl-10";
-    } elseif (strpos($iconPosition, "right") !== false) {
-        $margin = "pr-10";
+    function TextareaComponent(
+        string $type = "text", 
+        string $placeholder, 
+        string $icon = null, 
+        string $label = null, 
+        string $label_size = null,
+        string $description = null, 
+        string $description_size = null,
+        string $background = null, 
+        string $iconPosition = null,
+        string $width = null,
+        string $height = null,
+        bool $multiline = false,
+        string $name = null
+    ) {
+        $type = htmlspecialchars($type, ENT_QUOTES, 'UTF-8');
+        $placeholder = htmlspecialchars($placeholder, ENT_QUOTES, 'UTF-8');
+        $icon = $icon ? "<img src='" . htmlspecialchars($icon, ENT_QUOTES, 'UTF-8') . "' class='absolute $iconPosition w-5 h-5 fill-blue-500'>" : "";
+        $nameAttr = $name ? "name='" . htmlspecialchars($name, ENT_QUOTES, 'UTF-8') . "'" : "";
+        
+        $margin = "";
+        if (strpos($iconPosition, "left") !== false) {
+            $margin = "pl-10";
+        } elseif (strpos($iconPosition, "right") !== false) {
+            $margin = "pr-10";
+        }
+
+        $label_size = $label_size ? "text-$label_size" : "text-md";
+        $label = $label ? "<label class='$label_size font-medium text-white'>" . htmlspecialchars($label, ENT_QUOTES, 'UTF-8') . "</label>" : "";
+        
+        $description_size = $description_size ? "text-$description_size" : "text-sm";
+        $description = $description ? "<p class='$description_size text-gray-200'>" . htmlspecialchars($description, ENT_QUOTES, 'UTF-8') . "</p>" : ""; 
+
+        $classes = [
+            "!px-3 py-1.5 outline outline-1 outline-[#666666] rounded-md placeholder-[#666666] text-zinc-200",
+            $width ? "w-$width" : "w-full",
+            $background ? "bg-$background" : "bg-transparent",
+            $margin
+        ];
+
+        if ($multiline) {
+            $classes[] = "resize-none overflow-hidden"; 
+            $classes[] = $height ? "min-h-[$height" . "px]" : "min-h-[45px]";
+        } else {
+            $classes[] = $height ? "h-$height" : "h-[45px]";
+        }
+
+        $input_style = implode(" ", array_filter($classes));
+
+        $inputElement = $multiline
+            ? "<textarea 
+                    $nameAttr
+                    placeholder='$placeholder' 
+                    rows='1' 
+                    class='$input_style' 
+                    oninput='autoResizeTextarea(this)' 
+                    onfocus='this.placeholder=\"\"' 
+                    onblur='this.placeholder=\"$placeholder\"'
+                ></textarea>"
+            : "<input 
+                    $nameAttr
+                    type='$type' 
+                    placeholder='$placeholder' 
+                    class='$input_style' 
+                    onfocus='this.placeholder=\"\"' 
+                    onblur='this.placeholder=\"$placeholder\"'
+                >";
+
+        return "
+        <div class='flex flex-col gap-3'>
+            <div class='flex flex-col w-full gap-1'> 
+                $label
+                $description
+            </div>
+            <div class='relative flex justify-center items-center w-full'> 
+                $inputElement
+                $icon
+            </div>
+        </div>
+        <script>
+            function autoResizeTextarea(el) {
+            height = el.scrollHeight
+            el.style.height = 'auto';
+            el.style.height = el.scrollHeight + 'px';
+            
+            }   
+        </script>
+
+        ";
     }
-
-    $label_size = $label_size ? "text-$label_size" : "text-md";
-    $label = $label ? "<label class='$label_size font-medium text-white'>" . htmlspecialchars($label, ENT_QUOTES, 'UTF-8') . "</label>" : "";
-    
-    $description_size = $description_size ? "text-$description_size" : "text-sm";
-    $description = $description ? "<p class='$description_size text-gray-200'>" . htmlspecialchars($description, ENT_QUOTES, 'UTF-8') . "</p>" : ""; 
-
-    $classes = [
-        "!px-3 py-1.5 outline outline-1 outline-[#666666] rounded-md placeholder-[#666666] text-zinc-200",
-        $width ? "w-$width" : "w-full",
-        $height ? "h-$height" : "h-[45px]",
-        $background ? "bg-$background" : "bg-transparent",
-        $margin,
-        $multiline ? "resize-y" : ""
-    ];
-
-    $input_style = implode(" ", array_filter($classes));
-
-    
-    $inputElement = $multiline
-        ? "<textarea placeholder='$placeholder' class='$input_style' onfocus='this.placeholder=\"\"' onblur='this.placeholder=\"$placeholder\"'></textarea>"
-        : "<input type='$type' placeholder='$placeholder' class='$input_style' onfocus='this.placeholder=\"\"' onblur='this.placeholder=\"$placeholder\"'>";
-
-    return "
-    <div class='flex flex-col gap-3'>
-        <div class='flex flex-col w-full gap-1'> 
-            $label
-            $description
-        </div>
-        <div class='relative flex justify-center items-center'> 
-            $inputElement
-            $icon
-        </div>
-    </div>
-    ";
-}

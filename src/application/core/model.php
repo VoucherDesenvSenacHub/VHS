@@ -2,7 +2,7 @@
 
 namespace Src\Application\Core;
 
-require_once __DIR__ . "./database.php";
+require_once __DIR__ . "/database.php";
 use Src\Application\Core\Database;
 
 abstract class Model {

@@ -18,16 +18,20 @@
      * @param float $height - Altura do botão em rem (padrão: 3.75).
      * @param string|null $id - ID do botão (opcional).
      * @param string|null $link - URL para onde o botão deve redirecionar (opcional).
+     * @param string|null $type - Tipo do botão.
+     * @param string|null $onclick - Atribuição de evento.
      * @param bool $isActive - Indica se o botão está ativo (padrão: false).
      * @return string - HTML do botão estilizado. 
     **/
-    function ButtonComponent(string $text, string $variant, string | null $icon = null, float $width = 23.875, float $height = 3.125, $id=null, string | null $link = null, bool $isActive = false, string $className = "") {
+    function ButtonComponent(string $text, string $variant, string | null $icon = null, float $width = 23.875, float $height = 3.125, $id=null, string | null $link = null, string | null $type = null, string | null $onclick = null, bool $isActive = false, string $className = "") {
         
         $text = purifyProperty($text);
         $variant = purifyProperty($variant);
         $icon = purifyProperty($icon);
         $id = purifyProperty($id);
         $link = purifyProperty($link);
+        $type = purifyProperty($type);
+        $onclick = purifyProperty($onclick);
         $className = purifyProperty($className);
 
         $icon = $icon ? "<img src='$icon' class='w-4 h-4'>" : "";
@@ -58,7 +62,7 @@
         return
             <<<HTML
                 <a href='$link' class="w-full">
-                    <button id='$id' class='$buttonStyle !w-full'>
+                    <button id='$id' class='$buttonStyle !w-full' type='$type' onclick='$onclick' >
                     $icon
                     $text
                     </button>
