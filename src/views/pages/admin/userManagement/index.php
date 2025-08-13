@@ -1,10 +1,10 @@
 <?php
-require "../../components/utils/inputComponent.php";
-require "./components/userDataTableComponent/userDataTableComponent.php";
-require "../../components/header/HeaderComponent.php";
-require "../../components/barra_admin/barra_admin.php";
-require "../../components/filter/filter.php";
-require "../../components/utils/buttonComponent.php";
+require "../../../components/utils/inputComponent.php";
+require "./components/userDataTableComponent.php";
+require "../../../components/header/HeaderComponent.php";
+require "../../../components/barra_admin/barra_admin.php";
+require "../../../components/filter/filter.php";
+require "../../../components/utils/buttonComponent.php";
 
 use function Src\Views\Components\userDataTableComponent\userDataTableComponent;
 use function Src\Views\Components\header\HeaderComponent;
@@ -105,9 +105,9 @@ $users = [
                     <text class='text-3xl font-bold text-white cursor-default'>Gerenciamento de Usuários</text>
                 </div>
                 <div class="flex flex-col gap-2">
-                    <div class="flex gap-4">
-                        <?php echo ButtonComponent("Usuários", "studio", "", 10.675, 2.5, "", "../userManagement/index.php"); ?>
-                        <?php echo ButtonComponent("Denúncias", "studio", "", 10.675, 2.5, "", "../complaintManagement/index.php"); ?>
+                    <div class="flex gap-2 w-full">
+                        <?php echo ButtonComponent("Usuários", "studio", "", 13, 2.5, "", "../userManagement/index.php"); ?>
+                        <?php echo ButtonComponent("Denúncias", "studio", "", 13, 2.5, "", "../complaintManagement/index.php"); ?>
                     </div>
                     <div class="flex items-center justify-center gap-4">
                         <div class="h-full pt-6">

@@ -57,8 +57,8 @@
 
         return
             <<<HTML
-                <a href='$link' class="w-full">
-                    <button id='$id' class='$buttonStyle !w-full'>
+                <a href='$link'>
+                    <button id='$id' class='$buttonStyle'>
                     $icon
                     $text
                     </button>

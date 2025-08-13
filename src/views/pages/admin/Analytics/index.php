@@ -1,9 +1,9 @@
 <?php
-require "../../components/Perfil_Analytics/Perfil_Analytics.php";
-require "../../components/utils/userActivityCardsComponent.php";
-require "../../components/barra_admin/barra_admin.php";
-require "../../components/header/headerComponent.php";
-require "../../components/charts/chartComponent.php";
+require "../../../components/Perfil_Analytics/Perfil_Analytics.php";
+require "../../../components/utils/userActivityCardsComponent.php";
+require "../../../components/barra_admin/barra_admin.php";
+require "../../../components/header/headerComponent.php";
+require "../../../components/charts/chartComponent.php";
 require "./components/chartsCategoryComponent/chartsCategoryComponent.php";
 require "./components/cardActivityHistoryComponent/cardActivityHistoryComponent.php";
 require "./components/cardLatestReportComponent/cardLatestReportComponent.php";
@@ -16,6 +16,7 @@ use function Src\Views\Components\Charts\renderChartComponent;
 use function src\views\components\chartsCategoryComponent;
 use function Src\Views\Components\cardActivityHistoryComponent;
 use function Src\Views\Components\cardLatestReportComponent;
+
 
 $seriesDataLine = [10, 15, 25, 20, 18, 12, 15];
 $categoriesLine = ['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB', 'DOM'];
@@ -139,9 +140,6 @@ $comentarios = [
     ],
 ];
 
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -172,7 +170,6 @@ $comentarios = [
                         <?= UserActivityCardsComponent("Parceiros", 2, '/VHS/public/icons/handshake.svg') ?>
                         <?= UserActivityCardsComponent("Canais", 12, '/VHS/public/icons/Radioo.svg') ?>
                     </div>
-                    
                     <div>
                         <?= renderChartComponent($seriesDataLine, $categoriesLine, 'Semana', 'Usuários') ?>
                     </div>
@@ -191,7 +188,6 @@ $comentarios = [
             </div>
         </div>
     </div>
-
 </body>
 
 </html>
