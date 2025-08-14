@@ -3,22 +3,27 @@
 namespace Src\Views\Components\Utils;
 session_start();
 
-require "../../../components/utils/buttonComponent.php";
-require "../../../components/utils/inputComponent.php";
-require "../../../components/checkbox/checkboxComponent.php";
+require __DIR__ . "/../../../components/utils/buttonComponent.php";
+require __DIR__ . "/../../../components/utils/inputComponent.php";
+require __DIR__ . "/../../../components/checkbox/checkboxComponent.php";
 require_once __DIR__ . '/../../../../../vendor/autoload.php';
 require_once __DIR__ . '/../../../../application/utils/redirect.php';
+require_once __DIR__ . '/../../../../application/middlewares/RedirectUserLoggedMiddleware.php';
 
 use function App\Views\Components\CheckboxComponent;
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\Utils\ButtonComponent;
 use Respect\Validation\Validator as v;
 use \Respect\Validation\Exceptions\NestedValidationException;
+use Src\Application\Middlewares\RedirectUserLoggedMiddleware;
 
 $errors = [];
 
-$schema = 
+$schema =
 v::key(
+    'name',
+    v::stringType()->length(3, 150)
+)->key( 
     'username',
     v::stringType()->length(3, 60)
 )->key(
@@ -31,10 +36,13 @@ v::key(
 
 try {
     $schema->assert($_POST);
-    redirect("./password", $_POST);
+    redirect("./signup/password", $_POST);
 } catch (NestedValidationException $th) {
     if($_SERVER["REQUEST_METHOD"] === "POST") {
         $errorsDescription = [
+            "name" => [
+                "1" => "Preencha o campo de usuário!"
+            ],
             "username" => [
                 1 => "Preencha o campo de usuário!",
                 2 => "O nome de usuário já existe!"
@@ -54,7 +62,6 @@ try {
         }
     }
 }
-
 
 ?>
 
@@ -81,9 +88,48 @@ try {
                     <p class="text-secondary">Informe seus dados para criar sua conta</p>
                 </div>
                 <form class="flex flex-col gap-4 w-full xl:w-96" method="POST">
-                    <?= InputComponent(placeholder: "Insira seu Usuário", type: "text", label: "Usuário", icon: "/VHS/public/icons/userRound.svg", iconPosition: "right-3", name: "username", error: isset($errors["username"]), errorDescription: isset($errors["username"]) ? $errors["username"] : "") ?>
-                    <?= InputComponent(placeholder: "Insira seu E-mail", type: "email", label: "Email", icon: "/VHS/public/icons/mail.svg", iconPosition: "right-3", name: "email", error: isset($errors["email"]), errorDescription: isset($errors["email"]) ? $errors["email"] : "") ?>
-                    <?= InputComponent(placeholder: "Insira sua data de nascimento", type: "date", label: "Data de nascimento", name: "date_birthday", error: isset($errors["date_birthday"]), errorDescription: isset($errors["date_birthday"]) ? $errors["date_birthday"] : "") ?>
+                    <?= InputComponent(
+                        placeholder: "Insira seu Nome", 
+                        type: "text", 
+                        label: "Nome", 
+                        icon: "/VHS/public/icons/userRound.svg", 
+                        iconPosition: "right-3", 
+                        name: "name", 
+                        error: isset($errors["name"]),  
+                        errorDescription: isset($errors["name"]) ? $errors["name"] : "", 
+                        value: isset($_POST["name"]) ? $_POST["name"] : "") 
+                    ?>
+                    <?= InputComponent(
+                        placeholder: "Insira seu Usuário", 
+                        type: "text", 
+                        label: "Usuário", 
+                        icon: "/VHS/public/icons/userRound.svg", 
+                        iconPosition: "right-3", 
+                        name: "username", 
+                        error: isset($errors["username"]), 
+                        errorDescription: isset($errors["username"]) ? $errors["username"] : "", 
+                        value: isset($_POST["username"]) ? $_POST["username"] : "") 
+                    ?>
+                    <?= InputComponent(
+                        placeholder: "Insira seu E-mail", 
+                        type: "email", 
+                        label: "Email", 
+                        icon: "/VHS/public/icons/mail.svg", 
+                        iconPosition: "right-3", 
+                        name: "email", 
+                        error: isset($errors["email"]), 
+                        errorDescription: isset($errors["email"]) ? $errors["email"] : "", 
+                        value: isset($_POST["email"]) ? $_POST["email"] : "") 
+                    ?>
+                    <?= InputComponent(
+                        placeholder: "Insira sua data de nascimento", 
+                        type: "date", 
+                        label: "Data de nascimento", 
+                        name: "date_birthday", 
+                        error: isset($errors["date_birthday"]), 
+                        errorDescription: isset($errors["date_birthday"]) ? $errors["date_birthday"] : "", 
+                        value: isset($_POST["date_birthday"]) ? $_POST["date_birthday"] : "") 
+                    ?>
                     <?= CheckboxComponent("Lembrar de mim")?>
                     <div>
                         <?= ButtonComponent("Criar Conta", "default") ?>

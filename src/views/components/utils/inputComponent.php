@@ -19,6 +19,8 @@
         string $onClickIcon = "",
         bool $error = false,
         string $errorDescription = "",
+        string $value = "",
+        array $attributes = []
         ){
         
         $type = htmlspecialchars($type, ENT_QUOTES, 'UTF-8');
@@ -57,6 +59,12 @@
         ];
 
         $input_style = implode(" ", array_filter($classes));
+        
+        $attributesInString = "";
+        
+        foreach($attributes as $key => $attribute) {
+            $attributesInString .= " $key='$attribute'";
+        }
 
         $errorElement = $error ? 
         <<<HTML
@@ -75,7 +83,7 @@
                 </div>
                 <div class='relative flex justify-center items-center'> 
                     $icon
-                    <input type='$type' name='$name' placeholder='$placeholder' class='$input_style $className'>
+                    <input type='$type' name='$name' placeholder='$placeholder' class='$input_style $className' value="$value" $attributesInString>
                 </div>
                 $errorElement
             </div>

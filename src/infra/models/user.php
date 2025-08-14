@@ -1,12 +1,11 @@
 <?php
 
-namespace Src\Infra\Models;
+namespace Src\Infra\Model;
 
 require_once __DIR__ . '/../../application/core/database.php';
 require_once __DIR__ . '/../../application/core/model.php';
 
 use Src\Application\Core\Model;
-
 
 class UserModel extends Model {
     public function create(string $name, string $email, string $password, string $username, string $date_birthday, string $token): string {
@@ -37,5 +36,11 @@ class UserModel extends Model {
         $sql = "SELECT * FROM users WHERE username = :username";
 
         return $this->database->query($sql, [":username" => $username]);
+    }
+
+    public function getUserByToken(string $token) {
+        $sql = "SELECT * FROM users WHERE token = :token";
+
+        return $this->database->query($sql, [":token" => $token]);
     }
 }
