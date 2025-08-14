@@ -3,10 +3,7 @@
 namespace Src\Application\Utils;
 
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
-
-require __DIR__ . "/../../../vendor/autoload.php";
 
 class EmailTransporter {
     private PHPMailer $mail;
@@ -14,7 +11,7 @@ class EmailTransporter {
     public function __construct() {
         $this->mail = new PHPMailer(true);
 
-        $this->mail->SMTPDebug = SMTP::DEBUG_SERVER;
+        $this->mail->SMTPDebug = SMTP::DEBUG_OFF;
         $this->mail->isSMTP();
         $this->mail->Host = $_ENV["SMTP_HOST"];
         $this->mail->SMTPAuth = true;

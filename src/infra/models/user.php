@@ -26,6 +26,12 @@ class UserModel extends Model {
         return $id;
     }
 
+    public function getUserById(string $id) {
+        $sql = "SELECT * FROM users WHERE id = :id";
+
+        return $this->database->query($sql, [":id" => $id]);
+    }
+
     public function getUserByEmail(string $email) {
         $sql = "SELECT * FROM users WHERE email = :email";
 
@@ -43,4 +49,18 @@ class UserModel extends Model {
 
         return $this->database->query($sql, [":token" => $token]);
     }
+
+    public function verifyEmail(string $id) {
+        $sql = "UPDATE users SET verified_email = 1 WHERE id = :id";
+
+        $this->database->exec($sql, [":id" => $id]);
+    }
+
+    public function markEmailAsSent(string $id) {
+        $sql = "UPDATE users SET email_already_sent = 1 WHERE id = :id";
+
+        $this->database->exec($sql, [":id" => $id]);
+    }
+
+    
 }

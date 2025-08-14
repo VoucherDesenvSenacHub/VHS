@@ -18,12 +18,10 @@ require_once __DIR__ . '/../application/utils/verifyRecaptcha.php';
 
 class SignUpController extends Controller {
     private UserModel $userModel;
-    private CategoryModel $categoryModel;
 
     public function index() {
         try {
             $this->userModel = $this->model("user");
-            $this->categoryModel = $this->model("category");
             
             $_POST["keep_logged_in"] = isset($_POST["keep_logged_in"]) ? "on" : "off";
 

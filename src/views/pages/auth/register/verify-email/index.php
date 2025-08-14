@@ -4,6 +4,15 @@ require __DIR__ . "/../../../../components/utils/buttonComponent.php";
 
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\Utils\ButtonComponent;
+
+if(isset($_SESSION["page_data"]["user"])) {
+    $user = $_SESSION["page_data"]["user"];
+
+    if($user["verified_email"]) {
+        redirect("/VHS/src/application/routes/route.php/home");
+        exit();
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -29,10 +38,10 @@ use function Src\Views\Components\Utils\ButtonComponent;
                     <h2 class="text-3xl font-semibold text-white max-xl:text-2xl">Quase lá</h2>
                     <p class="text-secondary text-center description">Por favor verifique sua caixa de e-mail</p>
                 </div>
-                <div class="flex flex-col items-center w-full">
+                <form class="flex flex-col items-center w-full">
                     <img src="/VHS/public/images/catGif.gif" alt="" class="rounded-lg w-full max-w-md">
                     <?= ButtonComponent(text: "Já verifiquei", variant: "default", link: "#verified", className: " verify-email-button mt-4") ?>
-                </div>
+                </form>
             </div>
         </div>
     </div>
