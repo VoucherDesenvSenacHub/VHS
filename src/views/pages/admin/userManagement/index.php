@@ -105,9 +105,9 @@ $users = [
                     <text class='text-3xl font-bold text-white cursor-default'>Gerenciamento de Usuários</text>
                 </div>
                 <div class="flex flex-col gap-2">
-                    <div class="flex gap-2 w-full">
+                    <div class="flex gap-2 w-96">
                         <?php echo ButtonComponent("Usuários", "studio", "", 13, 2.5, "", "../userManagement/index.php"); ?>
-                        <?php echo ButtonComponent("Denúncias", "studio", "", 13, 2.5, "", "../complaintManagement/index.php"); ?>
+                        <?php echo ButtonComponent("Denúncias", "studio", "", 23, 2.5, "", "../complaintManagement/index.php"); ?>
                     </div>
                     <div class="flex items-center justify-center gap-4">
                         <div class="h-full pt-6">
