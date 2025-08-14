@@ -17,11 +17,11 @@ function Barra_Admin()
                         </a>
                     </li>
         
-                    <li class="flex items-center text-gray-300 rounded-lg cursor-pointer mt-[2rem]">
-                        <a href="/VHS/src/views/pages/admin/users" class="flex items-center w-full p-2">
-                            <div class="icon Usuarios-icon w-[2rem] h-[2rem] flex items-center justify-center bg-white/5 rounded-[12px] ml-[0.31rem]">
-                                <img src="/VHS/public/icons/sidebar_admin/group.svg" alt="Usuarios">
-                            </div>
+                    <li class="flex items-center text-gray-300 rounded-lg cursor-pointer farming-[2rem]">
+                        <a href="/VHS/src/views/adm/userManagement/index.php" class="flex items-center w-full p-2">
+                            <button id="usuarios-btn" class="icon Usuarios-icon p-2 flex items-center justify-center bg-white/5 rounded-lg ml-[0.31rem]">
+                                <img class="w-6 h-6" src="/VHS/public/icons/sidebar_admin/users.svg" alt="Usuarios">
+                            </button>
                             <h2 class="menu-text ml-[1rem] text-gray-400 text-sm font-semibold transition-all duration-500 ease-in-out">Usuários</h2>
                         </a>
                     </li>

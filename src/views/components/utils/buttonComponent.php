@@ -21,7 +21,7 @@
      * @param bool $isActive - Indica se o botão está ativo (padrão: false).
      * @return string - HTML do botão estilizado. 
     **/
-    function ButtonComponent(string $text, string $variant, string | null $icon = null, float $width = 23.875, float $height = 3.125, $id=null, string | null $link = null, bool $isActive = false, string $className = "", array $attributes = []) {
+    function ButtonComponent(string $text, string $variant, string | null $icon = null, float $width = 23.875, float $height = 3.125, $id=null, string | null $link = null, bool $isActive = false, string $className = "", array $attributes = [], string $type = "") {
         
         $text = purifyProperty($text);
         $variant = purifyProperty($variant);
@@ -56,20 +56,23 @@
         $buttonStyle = $typesButtonsStyle[$variant] ?? $typesButtonsStyle["default"];
         $buttonStyle .= $className;
 
-        $attributesString = "";
-        foreach ($attributes as $key => $value) {
-            $key = htmlspecialchars($key, ENT_QUOTES, 'UTF-8');
-            $value = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
-            $attributesString .= "$key='$value' ";
+        $attributesInString = "";
+
+        foreach($attributes as $key => $attribute) {
+            $attributesInString .= " $key='$attribute'";
         }
+
+        $linkTag = $link ? "<a href='$link' class='w-full'>" : "";
+        $linkTagEnd = $link ? "</a>" : "";
 
         return
             <<<HTML
-                <a href='$link' class="w-full">
-                <button id='$id' class='$buttonStyle !w-full' $attributesString>
+                $linkTag
+                    <button id='$id' class='$buttonStyle !w-full' $attributesInString type="$type">
                     $icon
                     $text
                     </button>
                 </a>
+                $linkTagEnd
             HTML;
     }

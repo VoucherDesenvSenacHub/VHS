@@ -1,6 +1,6 @@
 <?php
-require "../../../../components/utils/inputComponent.php";
-require "../../../../components/utils/buttonComponent.php";
+require __DIR__ . "/../../../../components/utils/inputComponent.php";
+require __DIR__ . "/../../../../components/utils/buttonComponent.php";
 
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\Utils\ButtonComponent;

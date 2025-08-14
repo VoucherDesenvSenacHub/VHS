@@ -152,7 +152,7 @@ $botoes = [
         </div>
         <div class="flex-1 md:flex-col justify-center p-6 mt-20">
             <?= renderPostComponent("") ?>
-            <div class="flex justify-between flex-row gap-6 mt-4">
+            <div class="flex flex-row gap-6 mt-4">
                 <div class="grid grid-col-2 items-center gap-6 min-w-[115vh]">
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 ">
                         <?= UserActivityCardsComponent("Inscritos", 60700, '/VHS/public/icons/users.svg') ?>
@@ -169,7 +169,7 @@ $botoes = [
                         ?>
                     </div>
                 </div>
-                <div class="w-1/2 flex mx-8">
+                <div class="min-w-[24rem] w-full flex justify-center">
                     <?=
                     CardLatestCommentComponent($comentarios);
                     ?>

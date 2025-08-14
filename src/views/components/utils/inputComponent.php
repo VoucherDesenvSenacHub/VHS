@@ -5,7 +5,7 @@
     function InputComponent(
         string $type, 
         string $placeholder, 
-        string $name,
+        string $name = "",
         string $icon = null, 
         string $label = null, 
         string $label_size = null,
@@ -16,7 +16,11 @@
         string $width = null,
         string $height = null,
         string $className = "",
-        string $onClickIcon = ""
+        string $onClickIcon = "",
+        bool $error = false,
+        string $errorDescription = "",
+        string $value = "",
+        array $attributes = []
         ){
         
         $type = htmlspecialchars($type, ENT_QUOTES, 'UTF-8');
@@ -52,13 +56,28 @@
             $width = $width ? "w-$width" : "w-full",
             $height = $height ? "h-$height" : "h-[45px]",
             $background ? "bg-$background" : "bg-transparent",
-            $padding
+            $padding,
+            $error ? "outline-red-500" : "",
         ];
 
         $input_style = implode(" ", array_filter($classes));
+        
+        $attributesInString = "";
+        
+        foreach($attributes as $key => $attribute) {
+            $attributesInString .= " $key='$attribute'";
+        }
 
-        return (
-            "
+        $errorElement = $error ? 
+        <<<HTML
+            <p class="text-red-500 font-medium">
+                $errorDescription
+            </p>
+        HTML 
+        : "";
+
+        return 
+        <<<HTML
             <div class='flex flex-col gap-2'>
                 <div class='flex flex-col w-full gap-1'> 
                     $label
@@ -66,10 +85,10 @@
                 </div>
                 <div class='relative flex justify-center items-center'> 
                     $icon
-                    <input name='$name' type='$type' placeholder='$placeholder' class='$input_style $className'>
+                    <input type='$type' placeholder='$placeholder' class='$input_style $className'>
                 </div>
+                $errorElement
             </div>
-            "
-        );
+        HTML;
     }
 
