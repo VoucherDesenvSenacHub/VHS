@@ -15,6 +15,8 @@ function verifyRecaptcha(string $token) {
         curl_close($ch);
         
         $response = json_decode($response);
+
+        var_dump($response);
     
         return $response->success;
     } catch (\Throwable $th) {

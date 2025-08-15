@@ -8,7 +8,6 @@ use Src\Application\Core\Controller;
 
 use Respect\Validation\Validator as v;
 use Src\Infra\Model\UserModel;
-use Src\Infra\Models\CategorieModel;
 use Src\Infra\Models\CategoryModel;
 
 use function Src\Application\Utils\verifyRecaptcha;

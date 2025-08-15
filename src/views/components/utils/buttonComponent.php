@@ -44,6 +44,14 @@ function ButtonComponent(string $text, string $variant, string | null $icon = nu
         "flex justify-center items-center w-full h-[$height] gap-2 rounded-md cursor-pointer "
         . ($isActive ? "text-white " : "text-[#D9D9D9] ");
 
+        $typesButtonsStyle = [
+            "outline" => $buttonStyleOutlineDefault . "outline outline-1 outline-purple-500",
+            "icon" => $buttonStyle . "bg-white hover:bg-gray-300 transition-colors",
+            "studio" => $buttonStyle . "bg-[#202024] transition-colors hover:bg-[#2a2a2e] !rounded-full",
+            "default" => "$buttonStyleOutlineDefault bg-purple-700 transition-colors hover:bg-purple-800",
+            "login" => "$buttonStyleOutlineDefault bg-purple-700 transition-colors hover:bg-purple-800 g-recaptcha",
+            "google" => $buttonStyle . "bg-white text-black rounded-md",
+        ];
 
     $typesButtonsStyle = [
         "outline" => $buttonStyleOutlineDefault . "outline outline-1 outline-purple-500",

@@ -7,7 +7,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
 
 $step = $_GET["step"] ?? 1;
 
-if ($step === "1") {
+if ($step === 1) {
     $render = InputComponent(placeholder: "Seu e-mail", type: "email");
 } else {
     $render = 

@@ -13,9 +13,9 @@ class UserModel extends Model {
 
         $id = uniqid(more_entropy: true);
 
-        $this->database->exec($sql, [
+        $stmt = $this->database->exec($sql, [
             ":id" => $id,
-            ":name" => $name,
+            ":name" => $name,   
             ":email" => $email,
             ":password" => $password,
             ":username" => $username,
@@ -42,5 +42,17 @@ class UserModel extends Model {
         $sql = "SELECT * FROM users WHERE token = :token";
 
         return $this->database->query($sql, [":token" => $token]);
+    }
+
+    public function findUserByEmail(string $email) {
+        $sql = "SELECT * FROM users WHERE email = :email";
+        $stmt = $this->database->query($sql, [":email" => $email]);
+
+        return $stmt;
+    }
+
+    public function updateUserToken(string $id, string $token) {
+        $sql = "UPDATE users SET token = :token WHERE id = :id";
+        return $this->database->exec($sql, [":token" => $token, ":id" => $id]);
     }
 }

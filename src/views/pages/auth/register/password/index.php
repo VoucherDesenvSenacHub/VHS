@@ -6,6 +6,7 @@ require __DIR__ . "/../../../../components/utils/inputComponent.php";
 
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\Utils\ButtonComponent;
+use function Src\Application\Utils\Redirect\redirect;
 use Respect\Validation\Validator as v;
 
 require_once __DIR__ . '/../../../../../../vendor/autoload.php';
@@ -109,8 +110,10 @@ if($passwordSchema->validate($_POST)) {
                 <div class="flex flex-col gap-4 w-full xl:w-96">
                     <?= InputComponent(name: "password", placeholder: "Insira sua senha", type: "password", label: "Senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "right-3", error: isset($errors["password"]), errorDescription: isset($errors["password"]) ? $errors["password"] : "") ?>
                     <?= InputComponent(name: "confirm_password", placeholder: "Confirme sua senha", type: "password", label: "Confirmar senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "right-3", error: isset($errors["confirm_password"]), errorDescription: isset($errors["confirm_password"]) ? $errors["confirm_password"] : "") ?>
-                    <?= ButtonComponent("Continuar", "default", className: " mt-4", type: "button") ?>
-                    <button class="g-recaptcha" data-sitekey="6LeZE6MrAAAAAFW6zL9HUPU8eJ616uwPWu92db9a" data-callback="onSubmit"></button>
+                      <?= ButtonComponent("Continuar", "default", className: " g-recaptcha btn-submit mt-4", type: "button", attributes: [
+                        "data-sitekey" => "6LeZE6MrAAAAAFW6zL9HUPU8eJ616uwPWu92db9a",
+                        "data-callback" => "onSubmit",
+                    ]) ?>
                     <?= InputComponent(name: "token_recaptcha", placeholder: "", type: "", attributes: ["hidden" => "true"])?>
                 </div>
             </div>
