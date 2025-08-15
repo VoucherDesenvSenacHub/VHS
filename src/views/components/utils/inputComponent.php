@@ -15,7 +15,8 @@
         string $width = null,
         string $height = null,
         string $className = "",
-        string $onClickIcon = ""
+        string $onClickIcon = "",
+        string $name = ""
         ){
         
         $type = htmlspecialchars($type, ENT_QUOTES, 'UTF-8');
@@ -63,7 +64,7 @@
                 </div>
                 <div class='relative flex justify-center items-center'> 
                     $icon
-                    <input type='$type' placeholder='$placeholder' class='$input_style $className'>
+                    <input type='$type' placeholder='$placeholder' class='$input_style $className' name='$name'>
                 </div>
             </div>
             "

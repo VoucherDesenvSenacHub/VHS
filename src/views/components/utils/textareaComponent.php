@@ -13,7 +13,8 @@ function TextareaComponent(
     string $iconPosition = null,
     string $width = null,
     string $height = null,
-    bool $multiline = false
+    bool $multiline = false,
+    string $name = ""
 ) {
     $type = htmlspecialchars($type, ENT_QUOTES, 'UTF-8');
     $placeholder = htmlspecialchars($placeholder, ENT_QUOTES, 'UTF-8');
@@ -45,8 +46,8 @@ function TextareaComponent(
 
     
     $inputElement = $multiline
-        ? "<textarea placeholder='$placeholder' class='$input_style' onfocus='this.placeholder=\"\"' onblur='this.placeholder=\"$placeholder\"'></textarea>"
-        : "<input type='$type' placeholder='$placeholder' class='$input_style' onfocus='this.placeholder=\"\"' onblur='this.placeholder=\"$placeholder\"'>";
+        ? "<textarea placeholder='$placeholder' class='$input_style' onfocus='this.placeholder=\"\"' onblur='this.placeholder=\"$placeholder\"' name='$name'></textarea>"
+        : "<input type='$type' placeholder='$placeholder' class='$input_style' onfocus='this.placeholder=\"\"' onblur='this.placeholder=\"$placeholder\"' name='$name'>";
 
     return "
     <div class='flex flex-col gap-3'>
