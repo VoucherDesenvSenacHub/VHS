@@ -13,6 +13,7 @@ use Src\Application\Controllers\SignUpController;
 use Src\Application\Controllers\SignUpViewController;
 use Src\Application\Controllers\CreatePasswordController;
 use Src\Application\Controllers\VerifyEmailController;
+use Src\Application\Controllers\CategoriesViewController;
 use Src\Application\Middlewares\RedirectUserLoggedMiddleware;
 use Src\Application\Routes\Router;
 
@@ -26,7 +27,8 @@ $router->post('/api/v1/auth/signup', SignUpController::class);
 // Páginas (Views)
 $router->all("/auth/signup", SignUpViewController::class, RedirectUserLoggedMiddleware::class);
 $router->all("/auth/signup/password", CreatePasswordController::class, RedirectUserLoggedMiddleware::class);
+$router->all("/pages/admin/categories", CategoriesViewController::class);
 
-$router->all("/auth/signup/verify-email", VerifyEmailController::class);
+// $router->all("/auth/signup/verify-email", VerifyEmailController::class);
 
 $router->run();
