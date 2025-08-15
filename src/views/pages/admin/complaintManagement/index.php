@@ -1,11 +1,11 @@
 <?php
-require "../../components/header/headerComponent.php";
-require "../../components/barra_admin/barra_admin.php";
-require "../../components/utils/inputComponent.php";
-require "../../components/utils/cardDenunciationComponent.php";
-require "../../components/utils/coment_admin/comentAdmin.component.php";
-require_once "../../components/utils/buttonComponent.php";
-require_once "../../components/filter/filter.php";
+require "../../../components/header/headerComponent.php";
+require "../../../components/barra_admin/barra_admin.php";
+require "../../../components/utils/inputComponent.php";
+require "../../../components/utils/cardDenunciationComponent.php";
+require "../../../components/utils/coment_admin/comentAdmin.component.php";
+require_once "../../../components/utils/buttonComponent.php";
+require_once "../../../components/filter/filter.php";
 
 use function Src\Views\components\filter\Filter;
 use function Src\Views\Components\Utils\ButtonComponent;
@@ -69,9 +69,9 @@ $commets_lista = [
                     <text class='text-3xl font-bold text-white cursor-default'>Gerenciamento de Usuários</text>
                 </div>
                 <div class="flex flex-col gap-2">
-                    <div class="flex gap-4">
-                        <?php echo ButtonComponent("Usuários", "studio", "", 10.675, 2.5, "", "../userManagement/index.php"); ?>
-                        <?php echo ButtonComponent("Denúncias", "studio", "", 10.675, 2.5, "", "../complaintManagement/index.php"); ?>
+                    <div class="flex gap-2 w-96">
+                        <?php echo ButtonComponent("Usuários", "studio", "", 13, 2.5, "", "../userManagement/index.php"); ?>
+                        <?php echo ButtonComponent("Denúncias", "studio", "", 13, 2.5, "", "../complaintManagement/index.php"); ?>
                     </div>
                     <div class="flex items-center justify-center gap-4">
                         <div class="h-full pt-6">
