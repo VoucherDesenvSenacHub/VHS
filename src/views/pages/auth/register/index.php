@@ -16,6 +16,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
 use Respect\Validation\Validator as v;
 use \Respect\Validation\Exceptions\NestedValidationException;
 use Src\Application\Middlewares\RedirectUserLoggedMiddleware;
+use function Src\Application\Utils\Redirect\redirect;
 
 $errors = [];
 

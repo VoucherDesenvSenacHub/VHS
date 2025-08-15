@@ -1,18 +1,19 @@
 <?php
 
+
+
 namespace Src\Application\Controllers;
 
 use Respect\Validation\Exceptions\NestedValidationException;
 use Src\Application\Core\Controller;
-use Src\Infra\Models\UserModel;
-
+use Src\Infra\Model\UserModel;
 use Respect\Validation\Validator as v;
 
 require_once __DIR__ . '/../application/core/controller.php';
 require_once __DIR__ . '/../application/utils/redirect.php';
+require_once __DIR__ . '/../application/utils/verifyRecaptcha.php';
 
 use function Src\Application\Utils\Redirect\redirect;
-require_once __DIR__ . '/../application/utils/verifyRecaptcha.php';
 use function Src\Application\Utils\verifyRecaptcha;
 
 class SignInController extends Controller {
@@ -52,10 +53,15 @@ class SignInController extends Controller {
             }
 
             if ($password && $_POST["keep_logged_in"] == "on") {
-                setcookie("token", $user[0]["id"], time() + (86400 * 30), "/", );
+                $token = uniqid(more_entropy: true) . uniqid(more_entropy: true);
+                $this->userModel->updateUserToken($user[0]["id"], $token);
+                setcookie("token", $token, time() + 3600 * 24 * 7, path: "/", httponly: true, secure: true);
                 return redirect("/VHS/src/views/pages/home/index.php", ['user' => $user[0]]);
             }
             elseif ($password && $_POST["keep_logged_in"] == "off") {
+                $token = uniqid(more_entropy: true) . uniqid(more_entropy: true);
+                $this->userModel->updateUserToken($user[0]["id"], $token);
+                $_SESSION['token'] = $token;
                 return redirect("/VHS/src/views/pages/home/index.php", ['user' => $user[0]]);
             }
             else

@@ -5,7 +5,7 @@
     function InputComponent(
         string $type, 
         string $placeholder, 
-        string $name = "",
+        string $name = '',
         string $icon = null, 
         string $label = null, 
         string $label_size = null,
@@ -85,7 +85,7 @@
                 </div>
                 <div class='relative flex justify-center items-center'> 
                     $icon
-                    <input type='$type' placeholder='$placeholder' class='$input_style $className'>
+                    <input name='$name' type='$type' placeholder='$placeholder' class='$input_style $className'>
                 </div>
                 $errorElement
             </div>

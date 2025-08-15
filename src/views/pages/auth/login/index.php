@@ -16,18 +16,19 @@ if (!empty($errors) && is_array($errors)) {
 
 unset($_SESSION['redirect_data']);
 
-if (isset($_COOKIE['token'])){
-  header('Location: /VHS/src/views/pages/home/index.php', $_SESSION['redirect_data']['user']);
-}
-
 require "../../../components/utils/inputComponent.php";
 require "../../../components/utils/buttonComponent.php";
 require "../../../components/checkbox/checkboxComponent.php";
-
+require_once "../../../../application/utils/redirect.php";
+require_once '../../../../application/middlewares/RedirectUserLoggedMiddleware.php';
 
 use function App\Views\Components\CheckboxComponent;
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\Utils\ButtonComponent;
+use Src\Application\Middlewares\RedirectUserLoggedMiddleware;
+
+$middleware = new RedirectUserLoggedMiddleware();
+$middleware->execute();
 ?>
 
 <!DOCTYPE html>
@@ -66,7 +67,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
                                     "login",
                                     icon: null,
                                     attributes: [
-                                    'data-sitekey' => '6LcOMJ8rAAAAAM3rDQWYT4JsHMqlLcxqUifhDcII',
+                                    'data-sitekey' => '6LeZE6MrAAAAAFW6zL9HUPU8eJ616uwPWu92db9a',
                                     'data-callback' => 'onSubmit',
                                     'data-action' => 'submit',
                                     'onClick' => '() => grecaptcha.execute()'
