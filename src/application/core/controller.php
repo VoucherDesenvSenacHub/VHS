@@ -12,7 +12,7 @@ abstract class Controller {
      */
     public function model(string $model) {
         require_once __DIR__ . "/../../../src/infra/models/{$model}.php";
-        $class = "Src\\Infra\\Model\\{$model}Model";
+        $class = "Src\\Infra\\Models\\{$model}Model";
         return new $class();
     }
     
