@@ -1,6 +1,5 @@
 <?php
 namespace Src\Views\Components\Utils;
-session_start();
 require __DIR__ . "/../../../../components/utils/buttonComponent.php";
 require __DIR__ . "/../../../../components/utils/inputComponent.php";
 
@@ -98,7 +97,6 @@ if($passwordSchema->validate($_POST)) {
     <script src="/VHS/src/styles/tailwindglobal.js"></script>
     <link rel="stylesheet" href="/VHS/src/styles/global.css">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <!-- <script src="/VHS/src/views/pages/auth/register/password/script.js" defer></script> -->
 </head>
 <body>
     <div class="flex min-h-screen text-white xl:justify-start justify-center max-w-[1920px] mx-auto">

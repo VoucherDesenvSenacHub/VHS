@@ -1,21 +1,18 @@
 <?php
 
 namespace Src\Views\Components\Utils;
-session_start();
 
 require __DIR__ . "/../../../components/utils/buttonComponent.php";
 require __DIR__ . "/../../../components/utils/inputComponent.php";
 require __DIR__ . "/../../../components/checkbox/checkboxComponent.php";
 require_once __DIR__ . '/../../../../../vendor/autoload.php';
 require_once __DIR__ . '/../../../../application/utils/redirect.php';
-require_once __DIR__ . '/../../../../application/middlewares/RedirectUserLoggedMiddleware.php';
 
 use function App\Views\Components\CheckboxComponent;
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\Utils\ButtonComponent;
 use Respect\Validation\Validator as v;
 use \Respect\Validation\Exceptions\NestedValidationException;
-use Src\Application\Middlewares\RedirectUserLoggedMiddleware;
 use function Src\Application\Utils\Redirect\redirect;
 
 $errors = [];

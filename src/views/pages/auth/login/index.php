@@ -34,6 +34,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VHS - Login</title>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="/VHS/src/styles/tailwindglobal.js"></script>
   <link rel="stylesheet" href="/VHS/src/styles/global.css">
@@ -57,17 +58,12 @@ use function Src\Views\Components\Utils\ButtonComponent;
                 <?= !empty($genericError) ? "<p id='genericError' class='text-red-500'>Ocorreu um erro interno. Tente novamente mais tarde!</p>" : '' ?>
                 <a class="text-secondary underline" href="/VHS/src/views/pages/auth/new-password">Esqueceu sua senha? </a>
                 <?= CheckboxComponent("Lembrar de mim", id: "keep_logged_in") ?>
-                <?= ButtonComponent(
-                    "Acessar plataforma",
-                    "login",
-                    icon: null,
-                    attributes: [
-                    'data-sitekey' => '6LeZE6MrAAAAAFW6zL9HUPU8eJ616uwPWu92db9a',
-                    'data-callback' => 'onSubmit',
-                    'data-action' => 'submit',
-                    'onClick' => '() => grecaptcha.execute()'
-                  ]
-              ) ?>
+                <?= ButtonComponent("Acessar Plataforma", "default", className: " g-recaptcha btn-submit mt-4", type: "button", attributes: [
+                        "data-sitekey" => "6LeZE6MrAAAAAFW6zL9HUPU8eJ616uwPWu92db9a",
+                        "data-callback" => "onSubmit",
+                        "data-action" => 'submit',
+                        "onClick" => '() => grecaptcha.execute()'
+                    ]) ?>
 
               </div>
               <div class="flex items-center text-white cursor-default">
@@ -89,19 +85,8 @@ use function Src\Views\Components\Utils\ButtonComponent;
   </div>
 </body>
 <script>
-  setTimeout(() => {
-    const emailError = document.getElementById('emailError');
-    const passwordError = document.getElementById('passwordError');
-    const genericError = document.getElementById('genericError');
-
-    if (emailError) emailError.style.display = 'none';
-    if (passwordError) passwordError.style.display = 'none';
-    if (genericError) genericError.style.display = 'none';
-  }, 3000);
-
   function onSubmit(token) {
     document.querySelector("form").submit();
   }
 </script>
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </html>

@@ -16,18 +16,15 @@ require_once __DIR__ . "/../../application/utils/redirect.php";
 
 use function Src\Application\Utils\Redirect\redirect;
 
-class RedirectUserLoggedMiddleware {
+class RedirectUserNotLoggedMiddleware {
     public function execute() {
-        if(isset($_COOKIE["token"])) {
-            $token = $_COOKIE["token"];
-            
+        if(!isset($_COOKIE["token"])) {
+            return redirect("../../../application/routes/route.php/auth/signin");
+        }
+        else{
             $userModel = new UserModel();
-            $user = $userModel->getUserByToken($token);
-
-            if(!empty($user)) {
-                $_SESSION["user"] = $user[0];
-                return redirect("../../../routes/route.php/home");
-            }
+            $user = $userModel->getUserByToken($_COOKIE["token"]);
+            $_SESSION["user"] = $user[0];
         }
     }
 }

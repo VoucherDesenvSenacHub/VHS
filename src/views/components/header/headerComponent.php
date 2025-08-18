@@ -1,5 +1,4 @@
 <?php
-
     namespace Src\Views\Components\Header;
 
     require_once __DIR__ . '/../utils/barComponent.php';
@@ -9,8 +8,11 @@
     use function Src\Views\Components\Utils\UserMenu;
 
     function HeaderComponent() {
+        $user = $_SESSION["user"] ?? null;
+        $user_avatar = htmlspecialchars(!empty($user['avatar_url']) ? $user['avatar_url'] : '/VHS/public/icons/user.svg', ENT_QUOTES, 'UTF-8');
+
         $BarComponent = BarComponent();
-        echo UserMenu();
+        echo UserMenu($user_avatar, $user['username'] ?? null, $user['email'] ?? null);
 
         return <<<HTML
             <header id='header' class='bg-gradient-to-b from-[#000000] to-[#20002c] w-full h-18 flex items-center justify-between p-6 sticky top-0 z-20'>  
@@ -31,8 +33,7 @@
                     <img src='/VHS/public/icons/Rectangle.svg'>
                     
                     <button id='open-user-menu' class='overflow-hidden rounded-full'>
-                        <!-- URL do avatar do usuario --->
-                        <img src='/VHS/public/images/Avatar.svg' class='h-8 w-8 pointer-events-none'>
+                        <img src="$user_avatar" class='h-8 w-8 pointer-events-none'>
                     </button>
                 </div>
             </header>
