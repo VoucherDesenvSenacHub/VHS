@@ -1,12 +1,31 @@
 <?php
-require "../../../components/utils/inputComponent.php";
-require "../../../components/utils/buttonComponent.php";
-require "../../../components/checkbox/checkboxComponent.php";
+$errors = $_SESSION['redirect_data']['errors'] ?? [];
+$fields = $_SESSION['redirect_data']['fields'] ?? [];
 
+if (!empty($errors) && is_array($errors)) {
+    foreach ($errors as $error) {
+        if (str_contains(strtolower($error), 'email') && !str_contains(strtolower($error), 'senha')) {
+            $emailError = $error;
+        } elseif (str_contains(strtolower($error), 'senha') && !str_contains(strtolower($error), 'email')) {
+            $passwordError = $error;
+        }
+        else {
+            $genericError = $error;
+        }
+    }
+}
+
+unset($_SESSION['redirect_data']);
+
+require_once __DIR__ . "/../../../components/utils/inputComponent.php";
+require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
+require_once __DIR__ . "/../../../components/checkbox/checkboxComponent.php";
+require_once __DIR__ . "/../../../../application/utils/redirect.php";
 
 use function App\Views\Components\CheckboxComponent;
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\Utils\ButtonComponent;
+
 ?>
 
 <!DOCTYPE html>
@@ -31,28 +50,58 @@ use function Src\Views\Components\Utils\ButtonComponent;
           <p class="text-3xl font-semibold text-white max-xl:text-2xl">Entrar na sua conta</p>
           <p class="text-secondary">Informe seus dados para entrar sua conta</p>
         </div>
-        <div class="flex flex-col gap-4 w-full xl:w-96">
-          <?= InputComponent(placeholder: "Insira seu e-mail", type: "email", label: "Email", icon: "/VHS/public/icons/Vector.svg", iconPosition: "w-6 h-6 right-3") ?>
-          <?= InputComponent(placeholder: "Insira sua senha", type: "password", label: "Senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "w-6 h-6 right-3") ?>
-          <a class="text-secondary underline" href="/VHS/src/views/pages/auth/new-password">Esqueceu sua senha? </a>
-          <?= CheckboxComponent("Lembrar de mim") ?>
-          <?= ButtonComponent("Acessar plataforma", "default", link:"/VHS/src/views/pages/home") ?>
-        </div>
-        <div class="flex items-center text-white cursor-default">
-          <div class="flex-grow border-t border-gray300"></div>
-          <span class="px-3 text-sm font-semibold">OU</span>
-          <div class="flex-grow border-t border-gray300"></div>
-        </div>
-        <div class="text-black">
-          <?= ButtonComponent("Entrar pelo Google", "icon", "/VHS/public/images/LogoGoogle.svg", link: "/VHS/src/views/pages/home") ?>
-        </div>
-        <div class="flex gap-0.5 items-center justify-center">
-          <p class="text-secondary cursor-default">Ainda não tem uma conta?</p>
-          <a class="text-primary underline" href="/VHS/src/views/pages/auth/register">Cadastrar</a>
-        </div>
-        </div>
+        <form action="/VHS/src/application/routes/route.php/api/v1/auth/signin" method="POST">
+          <div class="flex flex-col gap-4 w-full xl:w-96">
+                <?= InputComponent(placeholder: "Insira seu e-mail", name: "email", type: "email", label: "Email", icon: "/VHS/public/icons/Vector.svg", iconPosition: "w-6 h-6 right-3", value: $fields["email"] ?? "", error: !empty($emailError), errorDescription: !empty($emailError) ? $emailError : "") ?>
+                <?= InputComponent(placeholder: "Insira sua senha", name: "password", type: "password", label: "Senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "w-6 h-6 right-3", value: $fields["password"] ?? "", error: !empty($passwordError), errorDescription: !empty($passwordError) ? $passwordError : "") ?>
+                <?= !empty($genericError) ? "<p id='genericError' class='text-red-500'>Ocorreu um erro interno. Tente novamente mais tarde!</p>" : '' ?>
+                <a class="text-secondary underline" href="/VHS/src/views/pages/auth/new-password">Esqueceu sua senha? </a>
+                <?= CheckboxComponent("Lembrar de mim", id: "keep_logged_in") ?>
+                <?= ButtonComponent(
+                    "Acessar plataforma",
+                    "login",
+                    icon: null,
+                    attributes: [
+                    'data-sitekey' => '6LeZE6MrAAAAAFW6zL9HUPU8eJ616uwPWu92db9a',
+                    'data-callback' => 'onSubmit',
+                    'data-action' => 'submit',
+                    'onClick' => '() => grecaptcha.execute()'
+                  ]
+              ) ?>
+
+              </div>
+              <div class="flex items-center text-white cursor-default">
+                <div class="flex-grow border-t border-gray300"></div>
+                <span class="px-3 text-sm font-semibold">OU</span>
+                <div class="flex-grow border-t border-gray300"></div>
+              </div>
+          </form>
+              <div class="text-black">
+                <?= ButtonComponent("Entrar pelo Google", "icon", "/VHS/public/images/LogoGoogle.svg", link: "/VHS/src/views/pages/home") ?>
+              </div>
+              <div class="flex gap-0.5 items-center justify-center">
+                <p class="text-secondary cursor-default">Ainda não tem uma conta?</p>
+                <a class="text-primary underline" href="/VHS/src/views/pages/auth/register">Cadastrar</a>
+              </div>
+            </div>
       </div>
     </div>
   </div>
 </body>
+<script>
+  setTimeout(() => {
+    const emailError = document.getElementById('emailError');
+    const passwordError = document.getElementById('passwordError');
+    const genericError = document.getElementById('genericError');
+
+    if (emailError) emailError.style.display = 'none';
+    if (passwordError) passwordError.style.display = 'none';
+    if (genericError) genericError.style.display = 'none';
+  }, 3000);
+
+  function onSubmit(token) {
+    document.querySelector("form").submit();
+  }
+</script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </html>

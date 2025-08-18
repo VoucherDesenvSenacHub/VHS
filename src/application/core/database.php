@@ -17,7 +17,7 @@ class Database {
 
         $this->driver = $_ENV['DB_DRIVER'] ?? 'mysql';
         $this->host = $_ENV['DB_HOST'] ?? 'localhost';
-        $this->database_name = $_ENV['DB_DATABASE'] ?? 'vhs_dev_db';
+        $this->database_name = $_ENV['DB_DATABASE'] ?? 'vhs_dev';
         $this->user = $_ENV['DB_USER'] ?? 'root';
         $this->password = $_ENV['DB_PASSWORD'] ?? '';
 
@@ -38,7 +38,6 @@ class Database {
     public function query(string $sql, array $params = []) {
         $stmt = $this->database->prepare($sql);
         $stmt->execute($params);
-
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

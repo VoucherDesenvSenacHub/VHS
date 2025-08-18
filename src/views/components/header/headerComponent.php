@@ -13,7 +13,7 @@
         echo UserMenu();
 
         return <<<HTML
-            <header id='header' class='bg-gradient-to-b from-black/75 to-black/0 w-full h-auto flex items-center justify-between p-6 sticky top-0 z-20'>  
+            <header id='header' class='bg-gradient-to-b from-[#000000] to-[#20002c] w-full h-18 flex items-center justify-between p-6 sticky top-0 z-20'>  
                 <div class='flex items-center gap-6'>
                     $BarComponent
                     <a href="/VHS/src/views/pages/home">

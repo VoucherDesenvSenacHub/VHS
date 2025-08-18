@@ -58,7 +58,7 @@
             $this->description = htmlspecialchars($card['description'] ?? 'Online');
             $this->likes = htmlspecialchars($card['likes'] ?? 0);
             $this->comments = htmlspecialchars($card['comments'] ?? 0);
-            $this->event_date = htmlspecialchars($card['event_date' ?? '']);
+            $this->event_date = htmlspecialchars($card['event_date'] ?? '');
         }
 
         public static function Renderer(array $item) {
