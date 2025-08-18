@@ -17,12 +17,10 @@ require_once __DIR__ . '/../application/utils/verifyRecaptcha.php';
 
 class SignUpController extends Controller {
     private UserModel $userModel;
-    private CategoryModel $categoryModel;
 
     public function index() {
         try {
             $this->userModel = $this->model("user");
-            $this->categoryModel = $this->model("category");
             
             $_POST["keep_logged_in"] = isset($_POST["keep_logged_in"]) ? "on" : "off";
 
@@ -43,13 +41,14 @@ class SignUpController extends Controller {
                 "username", 
                 v::stringType()->length(3, 60)
             )->key(
-                "token_recaptcha",
+                "g-recaptcha-response",
                 v::stringType()
             );
+
             
             $schema->assert($_POST);
             
-            $isValidRecaptcha = verifyRecaptcha($_POST["token_recaptcha"]);
+            $isValidRecaptcha = verifyRecaptcha($_POST["g-recaptcha-response"]);
 
             if(!$isValidRecaptcha) return throw new Error("- invalid reCAPTCHA");
 
@@ -74,7 +73,6 @@ class SignUpController extends Controller {
             $this->userModel->create($_POST["name"], $_POST["email"], $_POST["password"], $_POST["username"], $_POST["date_birthday"], $token);
 
             echo $token;
-            return;
         } catch (NestedValidationException | Error  $exception) {
             if($exception instanceof Error) {
                 echo $exception->getMessage();

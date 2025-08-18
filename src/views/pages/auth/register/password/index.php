@@ -38,7 +38,7 @@ v::key(
 );
 
 if(!$schema->validate($_SESSION["redirect_data"])) redirect("../../register"); 
-
+// TODO: TIRAR VALIDACAO IR PARA BACK-END
 if($passwordSchema->validate($_POST)) {
     
     if($_POST["password"] !== $_POST["confirm_password"]) {
@@ -48,6 +48,8 @@ if($passwordSchema->validate($_POST)) {
     }
     
     if(!$error) {
+        print_r($_POST["g-recaptcha-response"]);
+
         foreach($_SESSION["redirect_data"] as $key => $v) {
             $_POST[$key] = $v;
         }
@@ -68,6 +70,9 @@ if($passwordSchema->validate($_POST)) {
         $context = stream_context_create($options);
 
         $response = file_get_contents($url, false, $context);
+        print("\n");
+        print_r($response);
+
 
         if($response != 1 && strlen($response) == 46) {
             setcookie("token", $response, time() + 3600 * 24 * 7, path: "/", httponly: true, secure: true);
@@ -93,7 +98,7 @@ if($passwordSchema->validate($_POST)) {
     <script src="/VHS/src/styles/tailwindglobal.js"></script>
     <link rel="stylesheet" href="/VHS/src/styles/global.css">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script src="/VHS/src/views/pages/auth/register/password/script.js" defer></script>
+    <!-- <script src="/VHS/src/views/pages/auth/register/password/script.js" defer></script> -->
 </head>
 <body>
     <div class="flex min-h-screen text-white xl:justify-start justify-center max-w-[1920px] mx-auto">
@@ -113,11 +118,17 @@ if($passwordSchema->validate($_POST)) {
                       <?= ButtonComponent("Continuar", "default", className: " g-recaptcha btn-submit mt-4", type: "button", attributes: [
                         "data-sitekey" => "6LeZE6MrAAAAAFW6zL9HUPU8eJ616uwPWu92db9a",
                         "data-callback" => "onSubmit",
+                        "data-action" => 'submit',
+                        "onClick" => '() => grecaptcha.execute()'
                     ]) ?>
-                    <?= InputComponent(name: "token_recaptcha", placeholder: "", type: "", attributes: ["hidden" => "true"])?>
                 </div>
             </div>
         </form>
     </div>
+    <script>
+        function onSubmit(token) {
+            document.querySelector("form").submit();
+        }
+    </script>
 </body>
 </html>

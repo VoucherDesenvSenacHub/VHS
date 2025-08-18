@@ -39,9 +39,15 @@ class Router {
         $method = $_SERVER['REQUEST_METHOD'];
         $path = $_SERVER['PATH_INFO'] ?? '/';
 
+
+        if($method === 'GET') {
+            $pathWithoutGetArgs = explode('?', $path);
+            return $this->routes['GET'][$pathWithoutGetArgs[0]]();
+        }
+
         if (isset($this->routes[$method][$path])) {
             return $this->routes[$method][$path]();
-        } 
+        }
 
         http_response_code(404);
         echo 'Not Found';

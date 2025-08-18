@@ -21,6 +21,7 @@ class SignInController extends Controller {
 
     public function index() {
         $token = $_POST['g-recaptcha-response'] ?? '';
+
         try {
             $this->userModel = $this->model("user");
 
@@ -47,7 +48,7 @@ class SignInController extends Controller {
             $password = password_verify($_POST["password"], $user[0]["password"]);
 
             if (!verifyRecaptcha($token)) {
-                return redirect("/VHS/src/views/pages/auth/login/index.php?error=1", [
+                return redirect("../../../auth/signin?error=1", [
                     'errors' => ['Falha na verificação do reCAPTCHA. Tente novamente.']
                 ]);
             }
@@ -56,17 +57,17 @@ class SignInController extends Controller {
                 $token = uniqid(more_entropy: true) . uniqid(more_entropy: true);
                 $this->userModel->updateUserToken($user[0]["id"], $token);
                 setcookie("token", $token, time() + 3600 * 24 * 7, path: "/", httponly: true, secure: true);
-                return redirect("/VHS/src/views/pages/home/index.php", ['user' => $user[0]]);
+                return redirect("../../../auth/signin?error=1", ['user' => $user[0]]);
             }
             elseif ($password && $_POST["keep_logged_in"] == "off") {
                 $token = uniqid(more_entropy: true) . uniqid(more_entropy: true);
                 $this->userModel->updateUserToken($user[0]["id"], $token);
                 $_SESSION['token'] = $token;
-                return redirect("/VHS/src/views/pages/home/index.php", ['user' => $user[0]]);
+                return redirect("../../../auth/signin?error=1", ['user' => $user[0]]);
             }
             else
             {
-                return redirect("/VHS/src/views/pages/auth/login/index.php?error=1", ['errors' => ["Email ou senha incorretos"]]);
+                return redirect("../../../auth/signin?error=1", ['errors' => ["Email ou senha incorretos"]]);
             }
 
         } catch (NestedValidationException $exception) {
@@ -74,7 +75,7 @@ class SignInController extends Controller {
             foreach ($exception->getMessages() as $message) {
                 $messages[] = $message;
             }
-            return redirect("/VHS/src/views/pages/auth/login/index.php?error=1", ['errors' => $messages]);
+            return redirect("../../../auth/signin?error=1", ['errors' => $messages, "fields" => $_POST]);
         }
         
     }

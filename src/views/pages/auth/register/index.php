@@ -19,7 +19,7 @@ use Src\Application\Middlewares\RedirectUserLoggedMiddleware;
 use function Src\Application\Utils\Redirect\redirect;
 
 $errors = [];
-
+// TODO: TIRAR VALIDACAO NA VIEW, deixar no API e api redirecionar com os dados enviados para o password/index.php
 $schema =
 v::key(
     'name',
