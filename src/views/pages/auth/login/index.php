@@ -9,12 +9,15 @@ if (!empty($errors) && is_array($errors)) {
         } elseif (str_contains(strtolower($error), 'senha') && !str_contains(strtolower($error), 'email')) {
             $passwordError = $error;
         }
+        elseif (str_contains(strtolower($error), 'email') && str_contains(strtolower($error), 'senha')) {
+          $emailPasswordError = $error;
+        }
         else {
             $genericError = $error;
         }
     }
 }
-
+unset($_SESSION['token']);
 unset($_SESSION['redirect_data']);
 
 require_once __DIR__ . "/../../../components/utils/inputComponent.php";
@@ -56,6 +59,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
                 <?= InputComponent(placeholder: "Insira seu e-mail", name: "email", type: "email", label: "Email", icon: "/VHS/public/icons/Vector.svg", iconPosition: "w-6 h-6 right-3", value: $fields["email"] ?? "", error: !empty($emailError), errorDescription: !empty($emailError) ? $emailError : "") ?>
                 <?= InputComponent(placeholder: "Insira sua senha", name: "password", type: "password", label: "Senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "w-6 h-6 right-3", value: $fields["password"] ?? "", error: !empty($passwordError), errorDescription: !empty($passwordError) ? $passwordError : "") ?>
                 <?= !empty($genericError) ? "<p id='genericError' class='text-red-500'>Ocorreu um erro interno. Tente novamente mais tarde!</p>" : '' ?>
+                <?= !empty($emailPasswordError) ? "<p id='genericError' class='text-red-500'>Email ou senha incorretos</p>" : '' ?>
                 <a class="text-secondary underline" href="/VHS/src/views/pages/auth/new-password">Esqueceu sua senha? </a>
                 <?= CheckboxComponent("Lembrar de mim", id: "keep_logged_in") ?>
                 <?= ButtonComponent("Acessar Plataforma", "default", className: " g-recaptcha btn-submit mt-4", type: "button", attributes: [

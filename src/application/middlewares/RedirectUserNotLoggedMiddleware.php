@@ -18,12 +18,13 @@ use function Src\Application\Utils\Redirect\redirect;
 
 class RedirectUserNotLoggedMiddleware {
     public function execute() {
-        if(!isset($_COOKIE["token"])) {
+        if(!isset($_COOKIE["token"]) && !isset($_SESSION["token"])) {
             return redirect("../../../application/routes/route.php/auth/signin");
         }
         else{
+            $token = $_COOKIE["token"] ?? $_SESSION["token"];
             $userModel = new UserModel();
-            $user = $userModel->getUserByToken($_COOKIE["token"]);
+            $user = $userModel->getUserByToken($token);
             $_SESSION["user"] = $user[0];
         }
     }
