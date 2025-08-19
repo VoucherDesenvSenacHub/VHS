@@ -1,7 +1,9 @@
 <?php
 
 namespace Src\Application\Controllers;
+require_once __DIR__ . '/../application/utils/redirect.php';
 
+use function Src\Application\Utils\Redirect\redirect;
 use Respect\Validation\Exceptions\NestedValidationException;
 use Src\Application\Core\Controller;
 use Src\Infra\Models\CommentModel;
@@ -16,7 +18,7 @@ class CommentController extends Controller {
         try {
             $this->commentModel = $this->model("Comment");
 
-            // Validação dos dados recebidos
+            
             $schema = 
             v::key('content', v::stringType()->length(1, null))
              ->key('user_id', v::stringType()->length(1, 23))
@@ -24,15 +26,18 @@ class CommentController extends Controller {
 
             $schema->assert($_POST);
 
-            // Inserção no banco
-            $this->commentModel->create(
+           
+            $comment  = $this->commentModel->create(
                 $_POST['content'],
                 $_POST['user_id'],
                 $_POST['video_id']
             );
 
-            // Retornar algo para o front (JSON por exemplo)
-            echo json_encode(["status" => "success"]);
+            if ($comment){
+                return redirect("/VHS/src/views/pages/home/video/index.php");
+            }
+
+            // echo json_encode(["status" => "success"]);
         } catch (NestedValidationException $exception) {
             http_response_code(400);
             echo json_encode([

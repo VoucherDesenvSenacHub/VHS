@@ -15,7 +15,7 @@ class CommentModel extends Model {
 
         $id = uniqid();
 
-        $stmt = $this->database->query($sql, [
+        $stmt = $this->database->exec($sql, [
             ":id" => $id,
             ":content" => $content,
             ":user_id" => $user_id,
@@ -24,20 +24,16 @@ class CommentModel extends Model {
 
         return $stmt;
     }
+    public function getCommentsByVideoId(int $video_id) {
+        $sql = "SELECT c.content, c.created_at, u.name, u.avatar_url
+                FROM comments c
+                JOIN users u ON c.user_id = u.id
+                WHERE c.video_id = :video_id
+                ORDER BY c.created_at DESC";
 
-    // public function getByVideoId(string $video_id): array {
-    //     $sql = "SELECT 
-    //                 c.id, c.content, c.created_at,
-    //                 u.name, u.username, u.avatar_url 
-    //             FROM comments c
-    //             JOIN users u ON c.user_id = u.id
-    //             WHERE c.video_id = :video_id
-    //             ORDER BY c.created_at DESC";
+        $stmt =  $this->database->query($sql, ['video_id' => $video_id]);
 
-    //     $stmt = $this->database->query($sql, [
-    //         ":video_id" => $video_id
-    //     ]);
-
-    //     return $stmt->fetchAll();
-    // }
+        return $stmt;
+    }
+    
 }
