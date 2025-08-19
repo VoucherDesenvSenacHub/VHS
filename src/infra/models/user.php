@@ -26,32 +26,32 @@ class UserModel extends Model {
         return $id;
     }
 
-    public function getUserByEmail(string $email) {
+    public function getUserByEmail(string $email): array {
         $sql = "SELECT * FROM users WHERE email = :email";
 
         return $this->database->query($sql, [":email" => $email]);
     }
 
-    public function getUserByUsername(string $username) {
+    public function getUserByUsername(string $username): array {
         $sql = "SELECT * FROM users WHERE username = :username";
 
         return $this->database->query($sql, [":username" => $username]);
     }
 
-    public function getUserByToken(string $token) {
+    public function getUserByToken(string $token): array {
         $sql = "SELECT * FROM users WHERE token = :token";
 
         return $this->database->query($sql, [":token" => $token]);
     }
 
-    public function findUserByEmail(string $email) {
+    public function findUserByEmail(string $email): array {
         $sql = "SELECT * FROM users WHERE email = :email";
         $stmt = $this->database->query($sql, [":email" => $email]);
 
         return $stmt;
     }
 
-    public function updateUserToken(string $id, string $token) {
+    public function updateUserToken(string $id, string $token): bool {
         $sql = "UPDATE users SET token = :token WHERE id = :id";
         return $this->database->exec($sql, [":token" => $token, ":id" => $id]);
     }

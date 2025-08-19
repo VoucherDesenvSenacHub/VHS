@@ -38,15 +38,10 @@ class Router {
     public function run() {
         $method = $_SERVER['REQUEST_METHOD'];
         $path = $_SERVER['PATH_INFO'] ?? '/';
-
-
-        if($method === 'GET') {
-            $pathWithoutGetArgs = explode('?', $path);
-            return $this->routes['GET'][$pathWithoutGetArgs[0]]();
-        }
-
-        if (isset($this->routes[$method][$path])) {
-            return $this->routes[$method][$path]();
+        $pathWithoutGetArgs = explode('?', $path);
+        
+        if (isset($this->routes[$method][$pathWithoutGetArgs[0]])) {
+            return $this->routes[$method][$pathWithoutGetArgs[0]]();
         }
 
         http_response_code(404);
