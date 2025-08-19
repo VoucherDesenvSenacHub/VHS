@@ -8,80 +8,71 @@ use Src\Application\Core\Controller;
 
 use Respect\Validation\Validator as v;
 use Src\Infra\Model\UserModel;
-use Src\Infra\Models\CategoryModel;
 
-use function Src\Application\Utils\verifyRecaptcha;
+use function Src\Application\Utils\Redirect\redirect;
 
 require_once __DIR__ . '/../application/core/controller.php';
 require_once __DIR__ . '/../application/utils/verifyRecaptcha.php';
 
 class SignUpController extends Controller {
     private UserModel $userModel;
-    private CategoryModel $categoryModel;
 
     public function index() {
         try {
             $this->userModel = $this->model("user");
-            $this->categoryModel = $this->model("category");
             
             $_POST["keep_logged_in"] = isset($_POST["keep_logged_in"]) ? "on" : "off";
 
             $schema = 
             v::key(
                 'name',
-                v::stringType()->length(3, 150)
+                v::stringType()->length(3, 150)->setTemplate("Nome inválido!")
+            )->key(
+                'username',
+                v::stringType()->length(3, 60)->setTemplate("Nome de usuário inválido!")
             )->key(
                 'email',
-                v::email(),
-            )->key(
-                'password',
-                v::stringType()->length(8, 16)
+                v::email()->setTemplate("Email inválido!"),
             )->key(
                 'date_birthday',
-                v::stringType()->date()
-            )->key(
-                "username", 
-                v::stringType()->length(3, 60)
-            )->key(
-                "token_recaptcha",
-                v::stringType()
+                v::stringType()->date()->setTemplate("Data de nascimento inválida!"),
             );
-            
+
             $schema->assert($_POST);
+
+            $user = $this->userModel->getUserByUsername($_POST["username"]);
             
-            $isValidRecaptcha = verifyRecaptcha($_POST["token_recaptcha"]);
+            $errors = [];
 
-            if(!$isValidRecaptcha) return throw new Error("- invalid reCAPTCHA");
-
-            $isUserExists = $this->userModel->getUserByEmail($_POST["email"]);
-
-            if(!empty($isUserExists)) {
-                throw new Error("- Email already exists");
-            }
-
-            $isUserExists = $this->userModel->getUserByUsername($_POST["username"]);
-
-            if(!empty($isUserExists)) {
-                throw new Error("- Username already exists");
+            if(!empty($user)) {
+                $errors["username"] = "Nome de usuário já cadastrado!";
             }
             
-            $_POST["password"] = password_hash($_POST["password"], PASSWORD_BCRYPT, [
-                "cost" => 14
+            $user = $this->userModel->getUserByEmail(strtolower($_POST["email"]));
+
+            if(!empty($user)) {
+                $errors["email"] = "Email já cadastrado!";
+            }
+
+            if(count($errors) > 0) {
+                throw new Error(serialize($errors));
+            }
+
+            redirect("http://localhost/VHS/src/application/routes/route.php/auth/signup/password", [
+                "fields" => $_POST
             ]);
-
-            $token = uniqid(more_entropy: true) . uniqid(more_entropy: true);
-
-            $this->userModel->create($_POST["name"], $_POST["email"], $_POST["password"], $_POST["username"], $_POST["date_birthday"], $token);
-
-            echo $token;
-            return;
         } catch (NestedValidationException | Error  $exception) {
             if($exception instanceof Error) {
-                echo $exception->getMessage();
-            } else {
-                echo $exception->getFullMessage();
+                return redirect("http://localhost/VHS/src/application/routes/route.php/auth/signup", [
+                    "errors" => unserialize($exception->getMessage()),
+                    "fields" => $_POST
+                ]);
             }
 
+            redirect("http://localhost/VHS/src/application/routes/route.php/auth/signup", [
+                "errors" => $exception->getMessages(),
+                "fields" => $_POST
+            ]);
         }
         
     }

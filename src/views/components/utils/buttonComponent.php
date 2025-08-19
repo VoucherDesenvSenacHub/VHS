@@ -76,11 +76,11 @@ function ButtonComponent(string $text, string $variant, string | null $icon = nu
     return
         <<<HTML
             <a href='$link' class="w-full">
-                <button id='$id' class='$buttonStyle !w-full'>
+                <button id='$id' class='$buttonStyle !w-full' $attributesInString>
                     $icon
                     $text
                 </button>
             </a>
-            $linkTagEnd
+            <!-- $linkTagEnd -->
         HTML;
 }

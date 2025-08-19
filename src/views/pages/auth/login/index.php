@@ -1,5 +1,6 @@
 <?php
-$errors = isset($_SESSION['redirect_data']['errors']) ? $_SESSION['redirect_data']['errors'] : '';
+$errors = $_SESSION['redirect_data']['errors'] ?? [];
+$fields = $_SESSION['redirect_data']['fields'] ?? [];
 
 if (!empty($errors) && is_array($errors)) {
     foreach ($errors as $error) {
@@ -16,19 +17,15 @@ if (!empty($errors) && is_array($errors)) {
 
 unset($_SESSION['redirect_data']);
 
-require "../../../components/utils/inputComponent.php";
-require "../../../components/utils/buttonComponent.php";
-require "../../../components/checkbox/checkboxComponent.php";
-require_once "../../../../application/utils/redirect.php";
-require_once '../../../../application/middlewares/RedirectUserLoggedMiddleware.php';
+require_once __DIR__ . "/../../../components/utils/inputComponent.php";
+require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
+require_once __DIR__ . "/../../../components/checkbox/checkboxComponent.php";
+require_once __DIR__ . "/../../../../application/utils/redirect.php";
 
 use function App\Views\Components\CheckboxComponent;
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\Utils\ButtonComponent;
-use Src\Application\Middlewares\RedirectUserLoggedMiddleware;
 
-$middleware = new RedirectUserLoggedMiddleware();
-$middleware->execute();
 ?>
 
 <!DOCTYPE html>
@@ -55,24 +52,22 @@ $middleware->execute();
         </div>
         <form action="/VHS/src/application/routes/route.php/api/v1/auth/signin" method="POST">
           <div class="flex flex-col gap-4 w-full xl:w-96">
-                <?= InputComponent(placeholder: "Insira seu e-mail", name: "email", type: "email", label: "Email", icon: "/VHS/public/icons/Vector.svg", iconPosition: "w-6 h-6 right-3") ?>
-                  <?= !empty($emailError) ? "<p id='emailError' class='text-red-500'>$emailError</p>" : '' ?>
-                <?= InputComponent(placeholder: "Insira sua senha", name: "password", type: "password", label: "Senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "w-6 h-6 right-3") ?>
-                  <?= !empty($passwordError) ? "<p id='passwordError' class='text-red-500'>$passwordError</p>" : '' ?>
-                  <?= !empty($genericError) ? "<p id='genericError' class='text-red-500'>$genericError</p>" : '' ?>
+                <?= InputComponent(placeholder: "Insira seu e-mail", name: "email", type: "email", label: "Email", icon: "/VHS/public/icons/Vector.svg", iconPosition: "w-6 h-6 right-3", value: $fields["email"] ?? "", error: !empty($emailError), errorDescription: !empty($emailError) ? $emailError : "") ?>
+                <?= InputComponent(placeholder: "Insira sua senha", name: "password", type: "password", label: "Senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "w-6 h-6 right-3", value: $fields["password"] ?? "", error: !empty($passwordError), errorDescription: !empty($passwordError) ? $passwordError : "") ?>
+                <?= !empty($genericError) ? "<p id='genericError' class='text-red-500'>Ocorreu um erro interno. Tente novamente mais tarde!</p>" : '' ?>
                 <a class="text-secondary underline" href="/VHS/src/views/pages/auth/new-password">Esqueceu sua senha? </a>
                 <?= CheckboxComponent("Lembrar de mim", id: "keep_logged_in") ?>
                 <?= ButtonComponent(
-                                    "Acessar plataforma",
-                                    "login",
-                                    icon: null,
-                                    attributes: [
-                                    'data-sitekey' => '6LeZE6MrAAAAAFW6zL9HUPU8eJ616uwPWu92db9a',
-                                    'data-callback' => 'onSubmit',
-                                    'data-action' => 'submit',
-                                    'onClick' => '() => grecaptcha.execute()'
-                                  ]
-                                ) ?>
+                    "Acessar plataforma",
+                    "login",
+                    icon: null,
+                    attributes: [
+                    'data-sitekey' => '6LeZE6MrAAAAAFW6zL9HUPU8eJ616uwPWu92db9a',
+                    'data-callback' => 'onSubmit',
+                    'data-action' => 'submit',
+                    'onClick' => '() => grecaptcha.execute()'
+                  ]
+              ) ?>
 
               </div>
               <div class="flex items-center text-white cursor-default">
