@@ -10,8 +10,6 @@ use function Src\Views\Components\Sidebar\SidebarComponent;
 use function Src\Views\Components\Cards\renderCards;
 use function Views\Components\FeaturedCard\FeaturedCardComponent;
 
-print_r($_SESSION["page_data"]["id"]);
-
 // Mock de dados para a página home
 $featuredVieo = [
     "url" => "/VHS/src/views/pages/home/video",
