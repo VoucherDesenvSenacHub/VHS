@@ -19,6 +19,8 @@ use Src\Application\Controllers\HomeController;
 #use Src\Application\Controllers\VerifyEmailController;
 use Src\Application\Middlewares\RedirectUserLoggedMiddleware;
 use Src\Application\Controllers\SignInController;
+use Src\Application\Controllers\VideoController;
+use Src\Application\Controllers\VideoViewController;
 use Src\Application\Routes\Router;
 use Src\Controllers\SignInViewController;
 
@@ -29,11 +31,14 @@ $router = new Router();
 
 $router->post('/api/v1/auth/signup', SignUpController::class);
 $router->post('/api/v1/auth/signin', SignInController::class);
+$router->post('/api/v1/studio/create/video', VideoController::class);
 
 $router->get('/home', HomeController::class);
 $router->get('/auth/signin', SignInViewController::class, RedirectUserLoggedMiddleware::class);
+$router->get('/create/video', VideoViewController::class);
 
 $router->all("/auth/signup", SignUpViewController::class, RedirectUserLoggedMiddleware::class);
 $router->all("/auth/signup/password", CreatePasswordController::class, RedirectUserLoggedMiddleware::class);
+
 
 $router->run();
