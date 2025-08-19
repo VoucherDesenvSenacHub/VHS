@@ -1,69 +1,17 @@
 <?php
 
 namespace Src\Views\Components\Utils;
-session_start();
 
 require __DIR__ . "/../../../components/utils/buttonComponent.php";
 require __DIR__ . "/../../../components/utils/inputComponent.php";
 require __DIR__ . "/../../../components/checkbox/checkboxComponent.php";
-require_once __DIR__ . '/../../../../../vendor/autoload.php';
-require_once __DIR__ . '/../../../../application/utils/redirect.php';
-require_once __DIR__ . '/../../../../application/middlewares/RedirectUserLoggedMiddleware.php';
 
 use function App\Views\Components\CheckboxComponent;
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\Utils\ButtonComponent;
-use Respect\Validation\Validator as v;
-use \Respect\Validation\Exceptions\NestedValidationException;
-use Src\Application\Middlewares\RedirectUserLoggedMiddleware;
-use function Src\Application\Utils\Redirect\redirect;
 
-$errors = [];
-// TODO: TIRAR VALIDACAO NA VIEW, deixar no API e api redirecionar com os dados enviados para o password/index.php
-$schema =
-v::key(
-    'name',
-    v::stringType()->length(3, 150)
-)->key( 
-    'username',
-    v::stringType()->length(3, 60)
-)->key(
-    "email",
-    v::email()
-)->key(
-    "date_birthday",
-    v::stringType()->date()
-);
-
-try {
-    $schema->assert($_POST);
-    redirect("./signup/password", $_POST);
-} catch (NestedValidationException $th) {
-    if($_SERVER["REQUEST_METHOD"] === "POST") {
-        $errorsDescription = [
-            "name" => [
-                "1" => "Preencha o campo de usuário!"
-            ],
-            "username" => [
-                1 => "Preencha o campo de usuário!",
-                2 => "O nome de usuário já existe!"
-            ],
-            "email" => [
-                1 => "Preencha o campo de senha!",
-                2 => "O email já existe!",
-            ],
-            "date_birthday" => [
-                1 => "Preencha uma data válida!"
-            ]
-        ];
-
-        $errors = $th->getMessages();
-        foreach($errors as $error => $errorDescription) {
-            $errors[$error] = $errorsDescription[$error][1];
-        }
-    }
-}
-
+$errors = $_SESSION["redirect_data"]["errors"] ?? [];
+$fields = $_SESSION["redirect_data"]["fields"] ?? [];
 ?>
 
 <!DOCTYPE html>
@@ -88,7 +36,7 @@ try {
                     <h2 class="text-3xl font-semibold title-size text-white max-xl:text-2xl">Criar sua conta</h2>
                     <p class="text-secondary">Informe seus dados para criar sua conta</p>
                 </div>
-                <form class="flex flex-col gap-4 w-full xl:w-96" method="POST">
+                <form class="flex flex-col gap-4 w-full xl:w-96" method="POST" action="/VHS/src/application/routes/route.php/api/v1/auth/signup">
                     <?= InputComponent(
                         placeholder: "Insira seu Nome", 
                         type: "text", 
@@ -98,7 +46,7 @@ try {
                         name: "name", 
                         error: isset($errors["name"]),  
                         errorDescription: isset($errors["name"]) ? $errors["name"] : "", 
-                        value: isset($_POST["name"]) ? $_POST["name"] : "") 
+                        value: isset($fields["name"]) ? $fields["name"] : "") 
                     ?>
                     <?= InputComponent(
                         placeholder: "Insira seu Usuário", 
@@ -109,7 +57,7 @@ try {
                         name: "username", 
                         error: isset($errors["username"]), 
                         errorDescription: isset($errors["username"]) ? $errors["username"] : "", 
-                        value: isset($_POST["username"]) ? $_POST["username"] : "") 
+                        value: isset($fields["username"]) ? $fields["username"] : "") 
                     ?>
                     <?= InputComponent(
                         placeholder: "Insira seu E-mail", 
@@ -120,7 +68,7 @@ try {
                         name: "email", 
                         error: isset($errors["email"]), 
                         errorDescription: isset($errors["email"]) ? $errors["email"] : "", 
-                        value: isset($_POST["email"]) ? $_POST["email"] : "") 
+                        value: isset($fields["email"]) ? $fields["email"] : "") 
                     ?>
                     <?= InputComponent(
                         placeholder: "Insira sua data de nascimento", 
