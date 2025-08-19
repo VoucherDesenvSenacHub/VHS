@@ -28,7 +28,7 @@ $router->post('/api/v1/auth/signup', SignUpController::class);
 
 $router->all("/auth/signup", SignUpViewController::class, RedirectUserLoggedMiddleware::class);
 $router->all("/auth/signup/password", CreatePasswordController::class, RedirectUserLoggedMiddleware::class);
-$router->all("/pages/admin/categories", CategoriesViewController::class);
+$router->all("/api/v1/pages/admin/categories", CategoriesViewController::class);
 
 // $router->all("/auth/signup/verify-email", VerifyEmailController::class);
 

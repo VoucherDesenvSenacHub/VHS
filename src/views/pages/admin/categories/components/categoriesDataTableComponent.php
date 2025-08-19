@@ -29,7 +29,7 @@ function categoriesDataTableComponent($categories, $page = 1, $perPage = 7)
                     <tr class="border-b border-gray-700 bg-gray-800/80">
                         <th class="px-6 py-4 text-left text-sm font-semibold text-slate-300">Nome</th>
                         <th class="px-6 py-4 text-left text-sm font-semibold text-slate-300">Data de Criação</th>
-                        <th class="px-6 py-4 text-center text-sm font-semibold text-white bg-[#660BAD]/50 border-l border-[#660BAD]/30">Ações</th>
+                        <th class="px-6 py-4 text-center text-sm font-semibold text-white bg-[#660BAD] border-l border-[#660BAD]/30">Ações</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-700">';
@@ -79,7 +79,7 @@ function categoriesDataTableComponent($categories, $page = 1, $perPage = 7)
         // Modal de edição
         echo '
         <div id="' . $overlayId . '" class="absolute h-screen w-screen button-0 inset-0 bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 hidden"></div>
-        <div id="' . $modalId . '" class="absolute inset-0 z-20 opacity-0 transition-opacity duration-400 hidden flex items-center justify-center">
+        <form method="POST" id="' . $modalId . '" class="absolute inset-0 z-20 opacity-0 transition-opacity duration-400 hidden flex items-center justify-center">
             <div class="min-w-[400px] flex flex-col gap-4 p-8 px-10 bg-gray-900 text-gray-50 border border-gray-700 p-4 rounded-lg transform -translate-y-12 transition-transform duration-300">
                 <div class="flex justify-center items-center">
                     <h2 class="text-2xl font-bold text-white cursor-default">Editar Categoria</h2>
@@ -89,19 +89,19 @@ function categoriesDataTableComponent($categories, $page = 1, $perPage = 7)
                         <div class="flex w-full justify-start">
                             <label for="name-' . $category['id'] . '" class="text-right text-gray-300">Nome</label>
                         </div>
-                        <input id="name-' . $category['id'] . '" class="col-span-3 bg-gray-800 border border-gray-700 text-gray-50 p-2 rounded" value="' . htmlspecialchars($category['name']) . '" />
+                        <input name="nameCategory" id="name-' . $category['id'] . '" class="col-span-3 bg-gray-800 border border-gray-700 text-gray-50 p-2 rounded" value="' . htmlspecialchars($category['name']) . '" />
                     </div>
                 </div>
                 <div class="mt-4 flex justify-between gap-2">
-                    <button id="' . $closeModalId . '" class="outline outline-1 px-4 py-2 outline-purple-500 rounded-md hover:bg-gray-800 w-[200px] h-[50px]">Cancelar</button>
-                    <button onclick="showNotification(\'Sucesso!\', \'Categoria editada com sucesso.\'); closeModal' . $category['id'] . '();" class="bg-purple-600 hover:bg-purple-700 text-gray-50 px-4 py-2 rounded-md w-[200px] h-[50px]">Salvar</button>
+                    <button id="' . $closeModalId . '" class="outline outline-1 px-4 py-2 outline-[#660BAD] rounded-md transition-colors hover:bg-gray-800 w-[200px] h-[50px]">Cancelar</button>
+                    <button type="submit" onclick="showNotification(\'Sucesso!\', \'Categoria editada com sucesso.\'); closeModal' . $category['id'] . '();" class="bg-[#660BAD] transition-colors hover:bg-purple-700 text-gray-50 px-4 py-2 rounded-md w-[200px] h-[50px]">Salvar</button>
                 </div>
             </div>
-        </div>';
+        </form>';
 
         echo '
         <div id="' . $deleteOverlayId . '" class="absolute h-screen w-screen inset-0 bg-black bg-opacity-50 z-10 opacity-0 transition-opacity duration-300 hidden"></div>
-        <div id="' . $deleteModalId . '" class="absolute inset-0 z-20 opacity-0 transition-opacity duration-300 hidden flex items-center justify-center">
+        <form id="' . $deleteModalId . '" class="absolute inset-0 z-20 opacity-0 transition-opacity duration-300 hidden flex items-center justify-center">
             <div class="min-w-[300px] flex flex-col gap-4 p-8 px-10 bg-gray-900 text-gray-50 border border-gray-700 p-4 rounded-lg transform -translate-y-12 transition-transform duration-300">
                 <div class="flex justify-center items-center">
                     <h2 class="text-2xl font-bold text-white cursor-default">Confirmar Exclusão</h2>
@@ -110,11 +110,11 @@ function categoriesDataTableComponent($categories, $page = 1, $perPage = 7)
                     <p class="text-gray-300 text-center">Tem certeza que deseja excluir a categoria <br><strong>' . htmlspecialchars($category['name']) . '</strong>?</p>
                 </div>
                 <div class="mt-4 flex justify-between gap-2">
-                    <button id="' . $closeDeleteModalId . '" class="outline outline-1 px-4 py-2 outline-purple-500 rounded-md hover:bg-gray-800 w-full h-[50px]">Cancelar</button>
-                    <button onclick="showNotification(\'Sucesso!\', \'Categoria excluída com sucesso.\'); window[\'closeDeleteModal' . $category['id'] . '\']();" class="bg-purple-600 hover:bg-purple-700 text-gray-50 px-4 py-2 rounded-md w-full h-[50px]">Excluir</button>
+                    <button id="' . $closeDeleteModalId . '" class="outline outline-1 px-4 py-2 outline-[#660BAD] rounded-md hover:bg-gray-800 w-full transition-colors h-[50px]">Cancelar</button>
+                    <button onclick="showNotification(\'Sucesso!\', \'Categoria excluída com sucesso.\'); window[\'closeDeleteModal' . $category['id'] . '\']();" class="bg-[#660BAD] transition-colors hover:bg-purple-700 text-gray-50 px-4 py-2 rounded-md w-full h-[50px]">Excluir</button>
                 </div>
             </div>
-        </div>';
+        </form>';
     }
 
     if ($totalCategories > 7) {

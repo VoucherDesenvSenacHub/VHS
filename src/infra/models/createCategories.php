@@ -16,4 +16,12 @@ class CreateCategoriesModel extends Model {
 
         return $category[0];
     }
+    public function createCategories(string $name): string {
+        $sql = "INSERT INTO categories (id, name) VALUES (:id, :name)";
+        $id = uniqid(more_entropy: true);
+        return $stmt = $this->database->exec($sql, [
+            ":id" => $id,
+            ":name" => $name,
+        ]);
+    }
 }
