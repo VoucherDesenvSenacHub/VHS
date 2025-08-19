@@ -3,9 +3,10 @@
 namespace Src\Application\Controllers;
 
 require_once __DIR__ . '/../application/core/controller.php';
+require_once __DIR__ . '/../application/utils/uploadArchives.php';
 
 use Src\Application\Core\Controller;
-use Src\Infra\Models\VideoModel;
+use Src\Infra\Model\VideoModel;
 use Respect\Validation\Exceptions\NestedValidationException;
 use Respect\Validation\Validator as v;
 
@@ -20,26 +21,21 @@ class VideoController extends Controller{
         try {
             $this->videoModel = $this->model("video");
 
-            // 1. Upload da imagem
-            $imgPath = UploadArchives('thumbnail'); // retorna "/uploads/xxxx.png"
+            $imgPath = UploadArchives('thumbnail');
 
-            // 2. Junta POST com o thumbnail_url
             $data = array_merge($_POST, [
                 "thumbnail_url" => $imgPath
             ]);
 
-            // 3. Validação
             $schema = v::key('url', v::stringType())
                 ->key('title', v::stringType())
                 ->key('description', v::stringType())
                 // ->key('author_id', v::stringType())
                 ->key('category_id', v::stringType())
-                // ->key('type', v::stringType())       
                 ->key('thumbnail_url', v::stringType());
 
             $schema->assert($data);
 
-            // 4. Criação no banco
             $this->videoModel->create(
                 $data["url"],
                 $data["title"],

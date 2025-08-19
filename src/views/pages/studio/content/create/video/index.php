@@ -124,7 +124,7 @@ $categorias = [
                         </div>
                     </div>
                     <div id="Public">
-                        <h1 class="text-3xl text-white font-semibold mt-4">Categorias</h1>
+                        <h1 class="text-3xl text-white font-semibold mt-4">Categoria</h1>
                         <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
                         <select name="category_id" class="px-3 py-1.5 outline outline-1 outline-[#666666] rounded-md placeholder-[#666666] text-zinc-200 w-full h-[45px] bg-transparent">
                             <?php foreach ($categorias as $categoria): ?>

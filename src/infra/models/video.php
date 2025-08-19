@@ -1,10 +1,9 @@
 <?php
 
-namespace Src\Infra\Models;
+namespace Src\Infra\Model;
 
-require __DIR__ . "../application/core/model.php";
+require_once __DIR__ . "/../../application/core/model.php";
 require_once __DIR__ . '/../../application/core/database.php';
-
 
 use Src\Application\Core\Model;
 
