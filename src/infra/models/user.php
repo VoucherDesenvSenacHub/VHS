@@ -26,6 +26,12 @@ class UserModel extends Model {
         return $id;
     }
 
+    public function getUserById(string $id): array {
+        $sql = "SELECT * FROM users WHERE id = :id";
+
+        return $this->database->query($sql, [":id" => $id]);
+    }
+
     public function getUserByEmail(string $email): array {
         $sql = "SELECT * FROM users WHERE email = :email";
 
@@ -54,5 +60,15 @@ class UserModel extends Model {
     public function updateUserToken(string $id, string $token): bool {
         $sql = "UPDATE users SET token = :token WHERE id = :id";
         return $this->database->exec($sql, [":token" => $token, ":id" => $id]);
+    }
+
+    public function updateSentEmailStatus(string $id, bool $status): bool {
+        $sql = "UPDATE users SET email_already_sent = :status  WHERE id = :id";
+        return $this->database->exec($sql, [":id" => $id, ":status" => $status]);
+    }
+
+    public function verifyEmail(string $id): bool {
+        $sql = "UPDATE users SET verified_email = true WHERE id = :id";
+        return $this->database->exec($sql, [":id" => $id]);
     }
 }
