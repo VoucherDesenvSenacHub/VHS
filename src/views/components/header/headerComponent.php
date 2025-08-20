@@ -24,11 +24,21 @@
                 </div>
 
                 <div class='flex items-center gap-4'>
-                    <a href="/VHS/src/views/pages/home/search">
+                    <div class='flex flex-warp relative'>
                         <button id='search' class='p-2 rounded-full transition-all duration-200 hover:bg-white/10'>
                             <img src='/VHS/public/icons/lupa.svg' class='h-4 pointer-events-none'>
                         </button>
-                    </a>
+                        <div id='search-bar' class='absolute hidden right-14 bg-black/90 rounded-lg w-64 shadow-lg transform translate-x-full opacity-0 transition-all duration-300 ease-in-out'>
+                            <form action="/VHS/src/views/pages/home/search?term=&filter=video" method="GET">
+                                <input 
+                                    type='text' 
+                                    name='q' 
+                                    placeholder='Search...' 
+                                    class='w-full bg-white/10 text-white placeholder-white/50 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all duration-200'
+                                >
+                            </form>
+                        </div>
+                    </div>
 
                     <img src='/VHS/public/icons/Rectangle.svg'>
                     
