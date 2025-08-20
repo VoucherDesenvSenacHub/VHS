@@ -19,8 +19,10 @@ use Src\Application\Controllers\SignUpController;
 use Src\Application\Controllers\SignUpViewController;
 use Src\Application\Controllers\CreatePasswordController;
 use Src\Application\Controllers\HomeController;
+use Src\Application\Controllers\VerifyEmailController;
 use Src\Application\Middlewares\RedirectUserLoggedMiddleware;
 use Src\Application\Controllers\SignInController;
+use Src\Application\Controllers\VerifyEmailViewController;
 use Src\Application\Middlewares\RedirectUserNotLoggedMiddleware;
 use Src\Application\Routes\Router;
 use Src\Controllers\SignInViewController;
@@ -37,12 +39,14 @@ $router->post("/api/v1/signup/password", CreateUserController::class, RedirectUs
 $router->post('/api/v1/auth/signup', SignUpController::class);
 
 
+$router->get('/home', HomeController::class);
+
 #views routes
 $router->get('/home', HomeController::class, RedirectUserNotLoggedMiddleware::class);
 
 $router->get('/auth/signin', SignInViewController::class, RedirectUserLoggedMiddleware::class);
-
 $router->get("/auth/signup", SignUpViewController::class, RedirectUserLoggedMiddleware::class);
 $router->get("/auth/signup/password", CreatePasswordController::class, RedirectUserLoggedMiddleware::class);
-
+$router->get("/auth/signup/verify-email", VerifyEmailViewController::class);
+$router->get("/api/v1/auth/signup/verify-email", VerifyEmailController::class);
 $router->run();
