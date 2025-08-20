@@ -26,22 +26,6 @@ class VideoModel extends Model {
     }
 
 
-    // public function GetAllVideos($filter){
-    //     switch ($filter) {
-    //         case 'videos':
-    //             $result = $this->getVideoByTitle();
-    //             return $result;
-    //             break;
-    //         case "fast":
-    //             $result = $this->getFastByTitle();
-    //             return $result;
-    //             break;
-    //         default:
-    //             # code...
-    //             break;
-    //     }
-    // }
-
 
 }
 

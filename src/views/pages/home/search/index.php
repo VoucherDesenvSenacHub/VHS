@@ -1,8 +1,10 @@
 <?php
 
-$videos = $_SESSION["page_data"]["videos"] ?? [];
 
-$fast = $_SESSION["page_data"]["fast"] ?? [];
+$dados = $_SESSION["page_data"]["dados"] ?? [];
+// $videos = $_SESSION["page_data"]["videos"] ?? [];
+
+// $fast = $_SESSION["page_data"]["fast"] ?? [];
 
 require_once __DIR__ . "/../../../components/header/headerComponent.php";
 require_once __DIR__ . "/../../../components/sidebar/SidebarComponent.php";
@@ -23,12 +25,12 @@ use src\Application\Controllers\SearchVideoController;
 
 
 $term = isset($_GET['term']) ? htmlspecialchars($_GET['term']) : '';
-$filter = isset($_GET['filter']) ? htmlspecialchars($_GET['filter']) : 'videos';
-$query = isset($_GET['q']) ? htmlspecialchars($_GET['q']) : '';
+$filter = isset($_GET['filter']) ? htmlspecialchars($_GET['filter']) : 'video';
+$query = isset($_GET['query']) ? htmlspecialchars($_GET['query']) : '';
 
 
-$SearchVideoController = new SearchVideoController();
-$SearchVideoController->index();
+// $SearchVideoController = new SearchVideoController();
+// $SearchVideoController->index();
 
 
 $mostPopularVideos = [
@@ -50,60 +52,62 @@ $mostPopularVideos = [
 
 ];
 
-$techVideos = [];
+// $techVideos = [];
 
-$techVideos = array_map(function ($item) {
-    return [
-        "url" => $item["url"],
-        "type_card" => strtolower($item["type"]),
-        "description" => $item["description"], 
-        "duration" => $item["duration"],
-        "title" => $item["title"],
-        "username" => 'Ronan',
-        "thumbnail_url" => $item["thumbnail_url"],
-        "avatar_url" => 'sdjssajkldsj',
-        "views" => $item["views"],
-        "created_at" => $item["created_at"],
-        "maked_for" => 'Onlien', 
-        "likes" => 45,
-        "comments" => 45
-    ];
-}, $videos);
+// $techVideos = array_map(function ($item) {
+//     return [
+//         "url" => $item["url"],
+//         "type_card" => strtolower($item["type"]),
+//         "description" => $item["description"], 
+//         "duration" => $item["duration"],
+//         "title" => $item["title"],
+//         "username" => 'Ronan',
+//         "thumbnail_url" => $item["thumbnail_url"],
+//         "avatar_url" => 'sdjssajkldsj',
+//         "views" => $item["views"],
+//         "created_at" => $item["created_at"],
+//         "maked_for" => 'Onlien', 
+//         "likes" => 45,
+//         "comments" => 45
+//     ];
+// }, $videos);
 
-$techFasts = [];
+// $techFasts = [];
 
-$techFasts = array_map(function ($item) {
-    return [
-        "url" => $item["url"],
-        "type_card" => strtolower($item["type"]),
-        "description" => $item["description"], 
-        "duration" => $item["duration"],
-        "title" => $item["title"],
-        "username" => 'Ronan',
-        "thumbnail_url" => $item["thumbnail_url"],
-        "avatar_url" => 'sdjssajkldsj',
-        "views" => $item["views"],
-        "created_at" => $item["created_at"],
-        "maked_for" => 'Onlien', 
-        "likes" => 45,
-        "comments" => 45
-    ];
-}, $fast);
+// $techFasts = array_map(function ($item) {
+//     return [
+//         "url" => $item["url"],
+//         "type_card" => strtolower($item["type"]),
+//         "description" => $item["description"], 
+//         "duration" => $item["duration"],
+//         "title" => $item["title"],
+//         "username" => 'Ronan',
+//         "thumbnail_url" => $item["thumbnail_url"],
+//         "avatar_url" => 'sdjssajkldsj',
+//         "views" => $item["views"],
+//         "created_at" => $item["created_at"],
+//         "maked_for" => 'Onlien', 
+//         "likes" => 45,
+//         "comments" => 45
+//     ];
+// }, $fast);
+
+var_dump($dados);
 
 
 
-$render = [
-    "videos" => [
-        "title" => "Vídeos",
-        "data" => $techVideos,
-        "type_card" => "video"
-    ],
-    "events" => [
-        "title" => "Eventos",
-        "data" => $mostPopularVideos,
-        "type_card" => "event"
-    ]
-];
+// $render = [
+//     "videos" => [
+//         "title" => "Vídeos",
+//         "data" => $techVideos,
+//         "type_card" => "video"
+//     ],
+//     "events" => [
+//         "title" => "Eventos",
+//         "data" => $mostPopularVideos,
+//         "type_card" => "event"
+//     ]
+// ];
 
 
 ?>
@@ -139,61 +143,17 @@ $render = [
 
         <main class="flex-1 px-4 sm:px-6 py-4 max-w-[1500px] mx-auto">
             <div>
-                <h2 class="text-2xl font-bold text-white mb-2"><span class="text-purple-400">#</span> Resultados para "<?= $term ?>"</h2>
-                <p class="text-gray-400 text-sm mb-6">Confira os resultado para "<?= $term ?>" com a categoria desejada</p>
+                <h2 class="text-2xl font-bold text-white mb-2"><span class="text-purple-400">#</span> Resultados para "<?= $query ?>"</h2>
+                <p class="text-gray-400 text-sm mb-6">Confira os resultado para "<?= $query ?>" com a categoria desejada</p>
                 <div class="flex gap-2 w-[900px] mb-6">
-                    <?= ButtonComponent("Vídeos", "studio", "",10.675, 2.5, 1, "?term=$term&filter=videos&q=$query") ?>
-                    <?= ButtonComponent("Fast", "studio", "",10.675, 2.5, 1, "?term=$term&filter=fast&q=$query") ?>
+                    <?= ButtonComponent("Vídeos", "studio", "",10.675, 2.5, 1, "?term=$term&filter=video&query=$query") ?>
+                    <?= ButtonComponent("Fast", "studio", "",10.675, 2.5, 1, "?term=$term&filter=fast&query=$query") ?>
                     <?= ButtonComponent("Eventos", "studio", "",10.675, 2.5, 1, "?term=$term&filter=events&q=$query") ?>
                     <?= ButtonComponent("Canais", "studio", "",10.675, 2.5, 1, "?term=$term&filter=channels&q=$query") ?>
                 </div>
             </div>
             <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 <?= $filter === 'channels' ? '!grid-cols-1' : ''?>">
-                <?php 
-
-                if($filter === "channels") {
-                    echo ChannelComponent([
-                    "name" => "Fabio akita",
-                    "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgrByKyCU1H5DtDK2lYIPKafulJ4TzK4SNpg&s",
-                    "category" => "#Tecnologia",
-                    "followers" => 5000
-                    ]);
-                    echo ChannelComponent([
-                    "name" => "Fabio akita",
-                    "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgrByKyCU1H5DtDK2lYIPKafulJ4TzK4SNpg&s",
-                    "category" => "#Tecnologia",
-                    "followers" => 5000
-                    ]);
-                    echo ChannelComponent([
-                    "name" => "Fabio akita",
-                    "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgrByKyCU1H5DtDK2lYIPKafulJ4TzK4SNpg&s",
-                    "category" => "#Tecnologia",
-                    "followers" => 5000
-                    ]);
-                    echo ChannelComponent([
-                    "name" => "Fabio akita",
-                    "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgrByKyCU1H5DtDK2lYIPKafulJ4TzK4SNpg&s",
-                    "category" => "#Tecnologia",
-                    "followers" => 5000
-                    ]);
-                    echo ChannelComponent([
-                    "name" => "Fabio akita",
-                    "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgrByKyCU1H5DtDK2lYIPKafulJ4TzK4SNpg&s",
-                    "category" => "#Tecnologia",
-                    "followers" => 5000
-                    ]);
-                    echo ChannelComponent([
-                    "name" => "Fabio akita",
-                    "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgrByKyCU1H5DtDK2lYIPKafulJ4TzK4SNpg&s",
-                    "category" => "#Tecnologia",
-                    "followers" => 5000
-                    ]);
-                } else if ($filter === "fast") {
-                    echo renderCards($techFasts, 'fast');       
-                } else {
-                    echo renderCards($techVideos, 'video');
-                }
-                ?>
+                <?php echo renderCards($dados, $filter); ?>
             </section>
         </main>
 
