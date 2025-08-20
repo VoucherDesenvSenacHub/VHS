@@ -20,7 +20,7 @@ class SignInController extends Controller {
     public UserModel $userModel;
 
     public function index() {
-        $token = $_POST['g-recaptcha-response'] ?? '';
+        $recaptcha = $_POST['g-recaptcha-response'] ?? '';
 
         try {
             $this->userModel = $this->model("user");
@@ -32,7 +32,7 @@ class SignInController extends Controller {
                 v::email()->setName('email')->setTemplate('O email deve ser um endereço de email válido')
             )->key(
                 'password',
-                v::stringType()->length(8, 16)->setName('password')->setTemplate(template: 'A senha deve ter entre 8 e 16 caracteres')
+                v::stringType()->length(8, 16)->setName('password')->setTemplate( 'A senha deve ter entre 8 e 16 caracteres')
             )->key(
                 'keep_logged_in',
                 v::stringType()->setName('keep_logged_in')->setTemplate('A opção "Lembrar de mim" deve ser uma string')
@@ -47,7 +47,7 @@ class SignInController extends Controller {
 
             $password = password_verify($_POST["password"], $user[0]["password"]);
 
-            if (!verifyRecaptcha($token)) {
+            if (!verifyRecaptcha($recaptcha)) {
                 return redirect("../../../auth/signin?error=1", [
                     'errors' => ['Falha na verificação do reCAPTCHA. Tente novamente.']
                 ]);
@@ -57,13 +57,13 @@ class SignInController extends Controller {
                 $token = uniqid(more_entropy: true) . uniqid(more_entropy: true);
                 $this->userModel->updateUserToken($user[0]["id"], $token);
                 setcookie("token", $token, time() + 3600 * 24 * 7, path: "/", httponly: true, secure: true);
-                return redirect("../../../auth/signin?error=1", ['user' => $user[0]]);
+                redirect("../../../home");
             }
             elseif ($password && $_POST["keep_logged_in"] == "off") {
                 $token = uniqid(more_entropy: true) . uniqid(more_entropy: true);
                 $this->userModel->updateUserToken($user[0]["id"], $token);
-                $_SESSION['token'] = $token;
-                return redirect("../../../auth/signin?error=1", ['user' => $user[0]]);
+                $_SESSION["token"] = $token;
+                redirect("../../../home");
             }
             else
             {
