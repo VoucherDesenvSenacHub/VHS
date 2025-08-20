@@ -25,7 +25,7 @@ class CommentModel extends Model {
         return $stmt;
     }
     public function getCommentsByVideoId(int $video_id) {
-        $sql = "SELECT c.content, c.created_at, u.name, u.avatar_url
+        $sql = "SELECT c.content, c.created_at, u.name, u.avatar_url, c.user_id, c.id
                 FROM comments c
                 JOIN users u ON c.user_id = u.id
                 WHERE c.video_id = :video_id
@@ -35,5 +35,16 @@ class CommentModel extends Model {
 
         return $stmt;
     }
+
+    public function delete(int $id, int $user_id): bool {
+        $sql = "DELETE FROM comments 
+                WHERE id = :id 
+                AND user_id = :user_id";
+
+        $stmt = $this->database->exec($sql,[":id" => $id,":user_id" => $user_id]);
+
+        return $stmt;
+    }
+    
     
 }

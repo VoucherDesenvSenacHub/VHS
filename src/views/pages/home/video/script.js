@@ -30,12 +30,27 @@ function resetTextareaHeight(form) {
 });
 
 document.addEventListener('click', (event) => {
-    if (event.target.closest('.opcoes')) {
-        const button = event.target.closest('.opcoes');
+    const button = event.target.closest('.opcoes');
+
+    if (button) {
         const menu = button.querySelector('.menu');
+
         if (menu) {
+            
+            document.querySelectorAll('.menu').forEach(m => {
+                if (m !== menu) {
+                    m.style.display = 'none';
+                }
+            });
+
+            
             menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
         }
+    } else {
+        
+        document.querySelectorAll('.menu').forEach(m => {
+            m.style.display = 'none';
+        });
     }
 });
 

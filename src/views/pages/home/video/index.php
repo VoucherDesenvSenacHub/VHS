@@ -7,7 +7,7 @@
   use Src\Infra\Models\CommentModel;
   
   $userModel = new UserModel();
-  $user_id = $userModel->findUserByEmail('jaofelipes22@gmail.com')[0]['id'];
+  $user = $userModel->findUserByEmail('jaofelipes22@gmail.com')[0]['id'];
   $video_id = 2;
   
   $commentModel = new CommentModel();
@@ -126,8 +126,7 @@
               <div class="bg-blue size-16  rounded-full mt-3 mr-4 #1B1B1Bshrink-0">
                 <img src="https://img.freepik.com/vetores-gratis/circulo-azul-com-usuario-branco_78370-4707.jpg?semt=ais_items_boosted&w=740" alt="" class=" rounded-full mt-1 object-cover">  
               </div>
-              <form onsubmit="" onreset="resetTextareaHeight(this)" class="flex flex-col w-full mt-2" action="/VHS/src/application/routes/route.php/api/v1/home/video/" method="POST">
-      
+              <form onreset="resetTextareaHeight(this)" class="flex flex-col w-full mt-2" action="/VHS/src/application/routes/route.php/api/v1/home/video/" method="POST">
       <!-- Campo de texto -->
                 <?= TextareaComponent(
                   placeholder: "Adicionar comentário...",
@@ -160,7 +159,11 @@
                       $comment['name'],
                       $comment['content'],
                       date('d/m/Y H:i', strtotime($comment['created_at'])),
-                      $comment['avatar_url']
+                      $comment['avatar_url'],
+                      $comment['user_id'],   
+                      $user,
+                      $comment['id']
+                      
                   );
               }
           } else {
