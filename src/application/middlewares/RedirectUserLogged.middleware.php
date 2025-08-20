@@ -15,6 +15,8 @@ use function Src\Application\Utils\Redirect\redirect;
 
 class RedirectUserLoggedMiddleware {
     public function execute() {
+        unset($_SESSION["token"]);
+
         if(isset($_COOKIE["token"])) {
             $token = $_COOKIE["token"];
             

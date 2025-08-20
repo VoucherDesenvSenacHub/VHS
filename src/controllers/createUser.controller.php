@@ -49,6 +49,9 @@ class CreateUserController extends Controller {
             )->key(
                 "g-recaptcha-response",
                 v::stringType()
+            )->key(
+                'keep_logged_in',
+                v::stringType()->setName('keep_logged_in')->setTemplate('A opção "Lembrar de mim" deve ser uma string')
             );
 
             

@@ -17,7 +17,6 @@ if (!empty($errors) && is_array($errors)) {
         }
     }
 }
-unset($_SESSION['token']);
 unset($_SESSION['redirect_data']);
 
 require_once __DIR__ . "/../../../components/utils/inputComponent.php";
@@ -81,7 +80,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
               </div>
               <div class="flex gap-0.5 items-center justify-center">
                 <p class="text-secondary cursor-default">Ainda não tem uma conta?</p>
-                <a class="text-primary underline" href="/VHS/src/views/pages/auth/register">Cadastrar</a>
+                <a class="text-primary underline" href="/VHS/src/application/routes/route.php/auth/signup">Cadastrar</a>
               </div>
             </div>
       </div>
