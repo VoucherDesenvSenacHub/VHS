@@ -79,7 +79,7 @@ $fields = $_SESSION["redirect_data"]["fields"] ?? [];
                         errorDescription: isset($errors["date_birthday"]) ? $errors["date_birthday"] : "", 
                         value: isset($_POST["date_birthday"]) ? $_POST["date_birthday"] : "") 
                     ?>
-                    <?= CheckboxComponent("Lembrar de mim")?>
+                    <?= CheckboxComponent("Lembrar de mim", id: "keep_logged_in")?>
                     <div>
                         <?= ButtonComponent("Criar Conta", "default") ?>
                     </div>
