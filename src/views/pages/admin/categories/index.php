@@ -1,9 +1,9 @@
 <?php
-require "../../../components/utils/inputComponent.php";
-require "./components/categoriesDataTableComponent.php";
-require "../../../components/header/HeaderComponent.php";
-require "../../../components/barra_admin/barra_admin.php";
-require "../../../components/utils/buttonComponent.php";
+require_once __DIR__ . "/../../../components/utils/inputComponent.php";
+require_once __DIR__ . "/./components/categoriesDataTableComponent.php";
+require_once __DIR__ . "/../../../components/header/HeaderComponent.php";
+require_once __DIR__ . "/../../../components/barra_admin/barra_admin.php";
+require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
 
 use function Src\Views\Components\categoriesDataTableComponent\categoriesDataTableComponent;
 use function Src\Views\Components\header\HeaderComponent;
@@ -39,6 +39,8 @@ $users = [
     ],
 ];
 
+// print_r($_SESSION["page_data"]);
+
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +56,6 @@ $users = [
 </head>
 
 <body class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center text-white font-[Poppins]">
-    <?= HeaderComponent() ?>
     <div class="flex">
         <div class="min-w-[220px] position-fixed">
             <?= barra_admin() ?>
@@ -80,23 +81,25 @@ $users = [
     </div>
 
     <div id="modalOverlay" class="fixed inset-0 bg-black bg-opacity-50 hidden transition-opacity duration-300"></div>
-    <form method="POST" id="categoryModal" class="fixed inset-0 flex items-center justify-center hidden">
+    <div id="categoryModal" class="fixed inset-0 flex items-center justify-center hidden">
         <div class="min-w-[400px] flex flex-col gap-4 p-8 px-10 bg-gray-900 text-gray-50 border border-gray-700 p-4 rounded-lg transform -translate-y-12 transition-transform duration-300">
             <div class="flex justify-center items-center">
                 <h2 class="text-2xl font-bold text-white cursor-default">Criar Categoria</h2>
             </div>
-            <div class="flex flex-col w-full">
-                <div class="flex w-full justify-start">
-                    <label for="categoryName" class="text-right text-gray-300">Nome</label>
+            <form method="POST" action="/VHS/src/application/routes/route.php/api/v1/admin/categories">
+                <div class="flex flex-col w-full">
+                    <div class="flex w-full justify-start">
+                        <label for="categoryName" class="text-right text-gray-300">Nome</label>
+                    </div>
+                    <input name="nameCategory" id="categoryName" type="text" class="col-span-3 bg-gray-800 border border-gray-700 text-gray-50 p-2 rounded" placeholder="Digite o nome" />
                 </div>
-                <input id="categoryName" type="text" class="col-span-3 bg-gray-800 border border-gray-700 text-gray-50 p-2 rounded" placeholder="Digite o nome" />
-            </div>
-            <div class="mt-4 flex justify-between gap-2">
-                <button id="closeModalBtn" type="button" class="outline outline-1 px-4 py-2 outline-[#660BAD] rounded-md transition-colors hover:bg-gray-800 w-[200px] h-[50px]">Cancelar</button>
-                <button id="saveCategoryBtn" type="button" class="bg-[#660BAD] hover:bg-purple-700 text-gray-50 transition-colors px-4 py-2 rounded-md w-[200px] h-[50px]">Salvar</button>
-            </div>
+                <div class="mt-4 flex justify-between gap-2">
+                    <button id="closeModalBtn" type="button" class="outline outline-1 px-4 py-2 outline-[#660BAD] rounded-md transition-colors hover:bg-gray-800 w-[200px] h-[50px]">Cancelar</button>
+                    <button id="saveCategoryBtn" type="submit" class="bg-[#660BAD] hover:bg-purple-700 text-gray-50 transition-colors px-4 py-2 rounded-md w-[200px] h-[50px]">Salvar</button>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 
     <script>
         const openModalBtn = document.getElementById('openModalBtn');

@@ -1,13 +1,15 @@
 <?php
 
-namespace Src\Infra\Models;
+namespace Src\Infra\Model;
 
 use Src\Application\Core\Model;
 
 require_once __DIR__ . '/../../application/core/model.php';
 
-class CategoryModel extends Model {
-    public function findByName(string $name){
+class CategoryModel extends Model
+{
+    public function findByName(string $name)
+    {
         $category = $this->database->query("SELECT * FROM categories WHERE name = :name", [
             ":name" => $name
         ]);
@@ -15,7 +17,8 @@ class CategoryModel extends Model {
         return $category[0];
     }
 
-    public function addCategoryInUser(string $categoryId, string $userId) {
+    public function addCategoryInUser(string $categoryId, string $userId)
+    {
         $sql = "INSERT INTO users_category VALUE (:id, :category_id, :user_id)";
 
         $id = uniqid(more_entropy: true);
@@ -24,6 +27,19 @@ class CategoryModel extends Model {
             ":id" => $id,
             ":category_id" => $categoryId,
             ":user_id" => $userId
-        ]);   
+        ]);
+    }
+
+    public function listCategories()
+    {
+        $category = $this->database->query("SELECT * FROM categories");
+
+        return $category;
+    }
+    public function createCategories(string $name): bool
+    {
+        $sql = "INSERT INTO categories (id, name) VALUES (:id, :name)";
+        $id = uniqid(more_entropy: true);
+        return  $this->database->exec($sql, [":id" => $id, ":name" => $name]);
     }
 }

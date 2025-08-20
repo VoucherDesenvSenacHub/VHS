@@ -10,6 +10,10 @@ class CategoriesViewController extends Controller
 {
     public function index()
     {
-        $this->view("/pages/admin/categories/index");
+        $model = $this->model("category");
+
+        $listaCategories = $model->listCategories();
+        // print_r($listaCategories);
+        $this->view("/admin/categories/index", ["lista" => $listaCategories]);
     }
 }
