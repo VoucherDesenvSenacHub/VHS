@@ -9,7 +9,7 @@ use Src\Application\Core\Model;
 
 class VideoModel extends Model{
 
-    public function create(string $url, string $title, string $description = '', string $category_id, string $thumbnail_url) {
+    public function create(string $url, string $title, string $description = '', string $category_id, string $author_id ,string $thumbnail_url) {
         
         $sql = "INSERT INTO videos(id, url, title, description, author_id, category_id, type ,thumbnail_url) VALUES(:id, :url, :title, :description, :author_id, :category_id, :type ,:thumbnail_url)";
         
@@ -20,7 +20,7 @@ class VideoModel extends Model{
             ":url" => $url,
             ":title" => $title,
             ":description" => $description,
-            ":author_id" => "usr_001",
+            ":author_id" => $author_id,
             ":category_id" => $category_id,
             ":type" => "VIDEO",
             ":thumbnail_url" => $thumbnail_url

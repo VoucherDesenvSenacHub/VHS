@@ -23,14 +23,17 @@ class VideoController extends Controller{
 
             $imgPath = UploadArchives('thumbnail');
 
+            $author_id = $_SESSION["user"]["id"];
+
             $data = array_merge($_POST, [
-                "thumbnail_url" => $imgPath
+                "thumbnail_url" => $imgPath,
+                "author_id" => $author_id
             ]);
 
             $schema = v::key('url', v::stringType())
                 ->key('title', v::stringType())
                 ->key('description', v::stringType())
-                // ->key('author_id', v::stringType())
+                ->key('author_id', v::stringType())
                 ->key('category_id', v::stringType())
                 ->key('thumbnail_url', v::stringType());
 
@@ -41,6 +44,7 @@ class VideoController extends Controller{
                 $data["title"],
                 $data["description"],
                 $data["category_id"],
+                $data["author_id"],
                 $data["thumbnail_url"]
             );
 
