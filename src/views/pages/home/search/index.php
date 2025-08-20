@@ -96,6 +96,7 @@ var_dump($dados);
 
 
 
+
 // $render = [
 //     "videos" => [
 //         "title" => "Vídeos",
@@ -148,12 +149,22 @@ var_dump($dados);
                 <div class="flex gap-2 w-[900px] mb-6">
                     <?= ButtonComponent("Vídeos", "studio", "",10.675, 2.5, 1, "?term=$term&filter=video&query=$query") ?>
                     <?= ButtonComponent("Fast", "studio", "",10.675, 2.5, 1, "?term=$term&filter=fast&query=$query") ?>
-                    <?= ButtonComponent("Eventos", "studio", "",10.675, 2.5, 1, "?term=$term&filter=events&q=$query") ?>
+                    <?= ButtonComponent("Eventos", "studio", "",10.675, 2.5, 1, "?term=$term&filter=events&query=$query") ?>
                     <?= ButtonComponent("Canais", "studio", "",10.675, 2.5, 1, "?term=$term&filter=channels&q=$query") ?>
                 </div>
             </div>
             <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 <?= $filter === 'channels' ? '!grid-cols-1' : ''?>">
-                <?php echo renderCards($dados, $filter); ?>
+
+                <?php
+                 if($filter!='channels' || $filter!='events' )
+                {echo renderCards($dados, $filter); }
+                else {
+
+                }
+
+                
+                
+                ?>
             </section>
         </main>
 

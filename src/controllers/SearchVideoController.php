@@ -51,7 +51,6 @@ class SearchVideoController extends Controller
                         "duration" => $item["duration"],
                         "title" => $item["title"],
                         "thumbnail_url" => $item["thumbnail_url"],
-                        "avatar_url" => 'sdjssajkldsj',
                         "views" => $item["views"],
                         "created_at" => $item["created_at"]
                     ];
