@@ -14,13 +14,23 @@ class UserModel extends Model {
 
         $id = uniqid();
 
-        $stmt = $this->database->query($sql, [
+        $stmt = $this->database->exec($sql, [
             ":id" => $id,
             ":name" => $name,
             ":email" => $email,
             ":password" => $password,
             ":username" => $username,
             ":date_birthday" => $date_birthday
+        ]);
+
+        return $stmt;
+    }
+    public function resetpassword(string $email, string $newPassword): bool {
+        $sql = "UPDATE users SET password = :password WHERE email = :email";
+
+        $stmt = $this->database->exec($sql, [
+            ":password" => $newPassword,
+            ":email" => $email
         ]);
 
         return $stmt;
