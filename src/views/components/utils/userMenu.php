@@ -92,6 +92,5 @@ HTML;
 }
 
 function LogoutButton() {
-   
 }
 ?>

@@ -1,7 +1,7 @@
   <?php 
-  session_start();
+ 
   require "../../../../infra/models/user.php";
-  use Src\Infra\Models\UserModel;
+  use Src\Infra\Model\UserModel;
   
   require "../../../../infra/models/comment.php";
   use Src\Infra\Models\CommentModel;
