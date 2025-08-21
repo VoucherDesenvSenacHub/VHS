@@ -1,4 +1,3 @@
-document.addEventListener("DOMContentLoaded", (e) => {
 
     const body = document.body;
     const buttonUserMenu = document.getElementById("open-user-menu");
@@ -47,4 +46,30 @@ document.addEventListener("DOMContentLoaded", (e) => {
         window.location.href = '#';
     });
 
-});
+    const searchButton = document.getElementById('search');
+    const searchBar = document.getElementById('search-bar');
+
+    searchButton.addEventListener('click', () => {
+        if (searchBar.classList.contains('hidden')) {
+            searchBar.classList.remove('hidden');
+            setTimeout(() => {
+                searchBar.classList.remove('translate-x-full', 'opacity-0');
+                searchBar.classList.add('translate-x-0', 'opacity-100');
+                searchBar.querySelector('input').focus();
+            }, 10);
+        } else {
+            searchBar.classList.add('translate-x-full', 'opacity-0');
+            setTimeout(() => {
+                searchBar.classList.add('hidden');
+            }, 300);
+        }
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!searchButton.contains(event.target) && !searchBar.contains(event.target)) {
+            searchBar.classList.add('translate-x-full', 'opacity-0');
+            setTimeout(() => {
+                searchBar.classList.add('hidden');
+            }, 300);
+        }
+    });

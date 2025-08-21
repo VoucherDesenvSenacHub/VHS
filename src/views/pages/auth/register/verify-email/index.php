@@ -1,6 +1,6 @@
 <?php
-require "../../../../components/utils/inputComponent.php";
-require "../../../../components/utils/buttonComponent.php";
+require __DIR__ . "/../../../../components/utils/inputComponent.php";
+require __DIR__ . "/../../../../components/utils/buttonComponent.php";
 
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\Utils\ButtonComponent;
@@ -31,7 +31,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
                 </div>
                 <div class="flex flex-col items-center w-full">
                     <img src="/VHS/public/images/catGif.gif" alt="" class="rounded-lg w-full max-w-md">
-                    <?= ButtonComponent(text: "Já verifiquei", variant: "default", link: "#verified", className: " verify-email-button mt-4") ?>
+                    <?= ButtonComponent(text: "Já verifiquei", variant: "default", link: "?verified=1", className: " verify-email-button mt-4") ?>
                 </div>
             </div>
         </div>
