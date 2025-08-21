@@ -11,8 +11,8 @@ abstract class Controller {
      * @return object
      */
     public function model(string $model) {
-        require __DIR__ . "/../../../src/infra/models/{$model}.php";
-        $class = "Src\\Infra\\Models\\{$model}Model";
+        require_once __DIR__ . "/../../../src/infra/models/{$model}.php";
+        $class = "Src\\Infra\\Model\\{$model}Model";
         return new $class();
     }
     
