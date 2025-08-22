@@ -94,22 +94,22 @@ class CreateUserController extends Controller {
 
             if($_POST["keep_logged_in"] === "on") {
                 setcookie("token", $token, time() + 86400 * 30, "/");
-                return redirect("http://localhost/VHS/src/application/routes/route.php/home");
+                return redirect("/VHS/home");
             }
 
             $_SESSION["token"] = $token;
 
-            return redirect("http://localhost/VHS/src/application/routes/route.php/home");
+            return redirect("/VHS/home");
         } catch (NestedValidationException | Error  $exception) {
 
             if($exception instanceof Error) {
-                return redirect("http://localhost/VHS/src/application/routes/route.php/auth/signup", [
+                return redirect("/VHS/auth/signup", [
                     "errors" => unserialize($exception->getMessage()),
                     "fields" => $_POST
                 ]);
             } 
 
-            redirect("http://localhost/VHS/src/application/routes/route.php/auth/signup", [
+            redirect("/VHS/auth/signup", [
                 "errors" => $exception->getMessages(),
                 "fields" => $_POST
             ]);

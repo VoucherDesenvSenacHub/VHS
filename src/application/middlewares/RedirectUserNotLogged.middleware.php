@@ -19,7 +19,7 @@ use function Src\Application\Utils\Redirect\redirect;
 class RedirectUserNotLoggedMiddleware {
     public function execute() {
         if(!isset($_COOKIE["token"]) && !isset($_SESSION["token"])) {
-            return redirect("../../../application/routes/route.php/auth/signin");
+            return redirect("/VHS/auth/signin");
         }
         else{
             $token = $_COOKIE["token"] ?? $_SESSION["token"];

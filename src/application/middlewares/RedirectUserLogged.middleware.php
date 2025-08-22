@@ -25,7 +25,7 @@ class RedirectUserLoggedMiddleware {
 
             if(!empty($user)) {
                 $_SESSION["user"] = $user[0];
-                return redirect("../../../routes/route.php/home");
+                return redirect("/VHS/home");
             }
         }
     }
