@@ -27,6 +27,7 @@ $router = new Router();
 
 #api routes
 $router->post('/api/v1/auth/signin', SignInController::class);
+
 $router->post('/api/v1/admin/categories', CategoriesController::class);
 
 $router->post("/api/v1/signup/password", CreateUserController::class, RedirectUserLoggedMiddleware::class);
@@ -39,11 +40,13 @@ $router->get('/home', HomeController::class);
 $router->get('/home', HomeController::class, RedirectUserNotLoggedMiddleware::class);
 
 $router->get('/auth/signin', SignInViewController::class, RedirectUserLoggedMiddleware::class);
+
 $router->get("/auth/signup", SignUpViewController::class, RedirectUserLoggedMiddleware::class);
 $router->get("/auth/signup/password", CreatePasswordController::class, RedirectUserLoggedMiddleware::class);
 $router->get("/auth/signup/verify-email", VerifyEmailViewController::class);
 $router->get("/api/v1/auth/signup/verify-email", VerifyEmailController::class);
-$router->get("/admin/categories", CategoriesViewController::class, RedirectUserLoggedMiddleware::class);
+
+$router->get("/admin/categories", CategoriesViewController::class);
 
 
 $router->run();

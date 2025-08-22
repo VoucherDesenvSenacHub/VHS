@@ -47,7 +47,7 @@ function categoriesDataTableComponent($categories, $page = 1, $perPage = 7)
                 <div class="font-semibold text-white">' . htmlspecialchars($category['name']) . '</div>
             </td>
             <td class="px-6 py-4">
-                <div class="text-sm text-slate-300">' . htmlspecialchars($category['created_at']) . '</div>
+                <div class="text-sm text-slate-300">' . htmlspecialchars($category['criado_em']) . '</div>
             </td>
             <td class="px-6 py-4 bg-[#660BAD]/5 border-l border-[#660BAD]/20">
                 <div class="flex items-center justify-center gap-2">

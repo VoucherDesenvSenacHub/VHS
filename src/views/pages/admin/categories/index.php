@@ -9,38 +9,8 @@ use function Src\Views\Components\categoriesDataTableComponent\categoriesDataTab
 use function Src\Views\Components\header\HeaderComponent;
 use function src\views\components\barra_admin\barra_admin;
 use function src\views\components\utils\InputComponent;
-use function Src\Views\Components\Utils\ButtonComponent;
 
-$users = [
-    [
-        'id' => '1',
-        'name' => 'Tecnologia',
-        'created_at' => '14/01/2024',
-    ],
-    [
-        'id' => '2',
-        'name' => 'Saúde',
-        'created_at' => '14/01/2024',
-    ],
-    [
-        'id' => '3',
-        'name' => 'Moda',
-        'created_at' => '14/01/2024',
-    ],
-    [
-        'id' => '4',
-        'name' => 'Estética',
-        'created_at' => '14/01/2024',
-    ],
-    [
-        'id' => '5',
-        'name' => 'Jogos',
-        'created_at' => '14/01/2024',
-    ],
-];
-
-// print_r($_SESSION["page_data"]);
-
+$categoryData = $_SESSION["page_data"]["lista"] ?? [];
 ?>
 
 <!DOCTYPE html>
@@ -56,6 +26,7 @@ $users = [
 </head>
 
 <body class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center text-white font-[Poppins]">
+    <?= HeaderComponent() ?>
     <div class="flex">
         <div class="min-w-[220px] position-fixed">
             <?= barra_admin() ?>
@@ -75,7 +46,7 @@ $users = [
                 </div>
             </div>
             <div class="w-full">
-                <?= categoriesDataTableComponent($users); ?>
+                <?= categoriesDataTableComponent($categoryData); ?>
             </div>
         </div>
     </div>
