@@ -44,7 +44,6 @@ class VideoModel extends Model{
         return $this->database->query($sql, ['query' => '%' . $query . '%']);
     }
 
-
     // public function GetAllVideos($filter){
     //     switch ($filter) {
     //         case 'videos':

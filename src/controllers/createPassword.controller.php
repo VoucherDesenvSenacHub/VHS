@@ -28,7 +28,7 @@ class CreatePasswordController extends Controller {
         );
 
         if(!$schema->validate($_SESSION["redirect_data"]["fields"]) || !empty($_SESSION["redirect_data"]["errors"])) {
-            return redirect("http://localhost/VHS/src/application/routes/route.php/auth/signup");
+            return redirect("/VHS/auth/signup");
         }
 
         $this->view("/auth/register/password/index");

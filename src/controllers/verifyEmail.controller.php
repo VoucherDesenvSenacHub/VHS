@@ -16,7 +16,7 @@ class VerifyEmailController extends Controller {
         $this->userModel = new UserModel();
 
         if(!isset($_GET["id"])) {
-            return redirect("http://localhost/VHS/src/application/routes/route.php/auth/signup");
+            return redirect("/VHS/auth/signup");
         }
 
         $id = base64_decode($_GET["id"]);
@@ -24,17 +24,17 @@ class VerifyEmailController extends Controller {
         $user = $this->userModel->getUserById($id);
 
         if(!$user) {
-            return redirect("http://localhost/VHS/src/application/routes/route.php/auth/signup");
+            return redirect("/VHS/auth/signup");
         }
 
         if($user[0]["verified_email"]) {
-            return redirect("http://localhost/VHS/src/application/routes/route.php/home");
+            return redirect("/VHS/home");
         }
 
         $this->userModel->verifyEmail(
             $user[0]["id"]
         );
 
-        return redirect("http://localhost/VHS/src/application/routes/route.php/home");
+        return redirect("/VHS/home");
     }
 }

@@ -80,7 +80,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
               </div>
               <div class="flex gap-0.5 items-center justify-center">
                 <p class="text-secondary cursor-default">Ainda não tem uma conta?</p>
-                <a class="text-primary underline" href="/VHS/src/application/routes/route.php/auth/signup">Cadastrar</a>
+                <a class="text-primary underline" href="/VHS/auth/signup">Cadastrar</a>
               </div>
             </div>
       </div>
