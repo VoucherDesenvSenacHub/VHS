@@ -48,7 +48,7 @@ class SignInController extends Controller {
             $password = password_verify($_POST["password"], $user[0]["password"]);
 
             if (!verifyRecaptcha($recaptcha)) {
-                return redirect("../../../auth/signin?error=1", [
+                return redirect("/VHS/auth/signin?error=1", [
                     'errors' => ['Falha na verificação do reCAPTCHA. Tente novamente.']
                 ]);
             }
@@ -57,17 +57,17 @@ class SignInController extends Controller {
                 $token = uniqid(more_entropy: true) . uniqid(more_entropy: true);
                 $this->userModel->updateUserToken($user[0]["id"], $token);
                 setcookie("token", $token, time() + 3600 * 24 * 7, path: "/", httponly: true, secure: true);
-                redirect("../../../home");
+                redirect("/VHS/home");
             }
             elseif ($password && $_POST["keep_logged_in"] == "off") {
                 $token = uniqid(more_entropy: true) . uniqid(more_entropy: true);
                 $this->userModel->updateUserToken($user[0]["id"], $token);
                 $_SESSION["token"] = $token;
-                redirect("../../../home");
+                redirect("/VHS/home");
             }
             else
             {
-                return redirect("../../../auth/signin?error=1", ['errors' => ["Email ou senha incorretos"]]);
+                return redirect("/VHS/auth/signin?error=1", ['errors' => ["Email ou senha incorretos"]]);
             }
 
         } catch (NestedValidationException $exception) {
@@ -75,7 +75,7 @@ class SignInController extends Controller {
             foreach ($exception->getMessages() as $message) {
                 $messages[] = $message;
             }
-            return redirect("../../../auth/signin?error=1", ['errors' => $messages, "fields" => $_POST]);
+            return redirect("/VHS/auth/signin?error=1", ['errors' => $messages, "fields" => $_POST]);
         }
         
     }

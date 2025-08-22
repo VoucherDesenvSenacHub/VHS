@@ -93,7 +93,7 @@ $fields = $_SESSION["redirect_data"]["fields"] ?? [];
                     </div>
                     <div class="flex gap-0.5 items-center justify-center">
                         <p class="text-secondary cursor-default">Já possui uma conta?</p>
-                        <a class="text-primary underline" href="/VHS/src/views/pages/auth/login">Entrar</a>
+                        <a class="text-primary underline" href="/VHS/auth/signin">Entrar</a>
                     </div>
                 </form>
             </div>
