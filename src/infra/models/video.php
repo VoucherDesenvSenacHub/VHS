@@ -24,7 +24,7 @@ class VideoModel extends Model {
 
         return $this->database->query($sql, ['query' => '%' . $query . '%']);
     }
-
+  
     public function getPopularVideos(int $offset = 0, int $limit = 7): array {
         $sql = "SELECT videos.id, url, title, description, duration, target_audience, views, type, thumbnail_url, videos.created_at, videos.update_at, username, avatar_url FROM videos INNER JOIN users ON videos.author_id = users.id WHERE type = 'VIDEO' ORDER BY views DESC LIMIT $offset, $limit";
 
@@ -36,7 +36,6 @@ class VideoModel extends Model {
 
         return $this->database->query($sql, [":category_id" => $categoryId]);
     }
-
     // public function GetAllVideos($filter){
     //     switch ($filter) {
     //         case 'videos':

@@ -20,13 +20,13 @@ class VerifyEmailViewController extends Controller {
         $emailTransporter = new EmailTransporter();
         
         if(!($_COOKIE["token"] || $_SESSION["token"])) {
-            return redirect("http://localhost/VHS/src/application/routes/route.php/auth/signup");
+            return redirect("/VHS/auth/signup");
         }
         
         $user = ($this->userModel->getUserByToken($_COOKIE["token"] ?? $_SESSION["token"]))[0];
 
         if(isset($_GET["verified"]) && $user["verified_email"]) {
-            return redirect("http://localhost/VHS/src/application/routes/route.php/home");
+            return redirect("/VHS/home");
         }
 
         if($user["email_already_sent"]) {
@@ -39,7 +39,7 @@ class VerifyEmailViewController extends Controller {
         $emailHTML = fopen($file_path, "r");
         $emailHTML = fread($emailHTML, filesize($file_path));
         $emailHTML = str_replace("[Nome do Usuário]", $user["name"], $emailHTML);
-        $emailHTML = str_replace("[Link de Verificação]", "http://localhost/VHS/src/application/routes/route.php/api/v1/auth/signup/verify-email?id=" . base64_encode($user["id"]), $emailHTML);
+        $emailHTML = str_replace("[Link de Verificação]", "/VHS/api/v1/auth/signup/verify-email?id=" . base64_encode($user["id"]), $emailHTML);
 
         $emailTransporter->sendEmail($user["email"], $user["name"], "Bem-vindo ao nosso sistema", $emailHTML);
 
