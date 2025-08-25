@@ -5,6 +5,7 @@ require_once __DIR__ . '/../../vendor/routes.autoload.php';
 require_once __DIR__ . '/../../../vendor/autoload.php';
 
 use Dotenv\Dotenv;
+use Src\Application\Controllers\CategoriesViewController;
 use Src\Application\Controllers\CreateUserController;
 use Src\Application\Controllers\SignUpController;
 use Src\Application\Controllers\SignUpViewController;
@@ -35,6 +36,7 @@ $router->post('/api/v1/studio/create/video', VideoController::class);
 #views routes
 $router->get('/home', HomeController::class);
 $router->get('/home', HomeController::class, RedirectUserNotLoggedMiddleware::class);
+$router->get('/home/categories', CategoriesViewController::class, RedirectUserNotLoggedMiddleware::class);
 
 $router->get('/auth/signin', SignInViewController::class, RedirectUserLoggedMiddleware::class);
 $router->get('/create/video', VideoViewController::class);
@@ -43,4 +45,6 @@ $router->get("/auth/signup/password", CreatePasswordController::class, RedirectU
 
 $router->get("/auth/signup/verify-email", VerifyEmailViewController::class);
 $router->get("/api/v1/auth/signup/verify-email", VerifyEmailController::class);
+
+
 $router->run();
