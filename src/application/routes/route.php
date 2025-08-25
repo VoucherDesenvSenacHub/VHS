@@ -27,16 +27,14 @@ $router = new Router();
 
 #api routes
 $router->post('/api/v1/auth/signin', SignInController::class);
-
 $router->post("/api/v1/signup/password", CreateUserController::class, RedirectUserLoggedMiddleware::class);
 $router->post('/api/v1/auth/signup', SignUpController::class);
+$router->post('/api/v1/studio/create/video', VideoController::class);
 
-
-$router->get('/home', HomeController::class);
 
 #views routes
+$router->get('/home', HomeController::class);
 $router->get('/home', HomeController::class, RedirectUserNotLoggedMiddleware::class);
-$router->post('/api/v1/studio/create/video', VideoController::class);
 
 $router->get('/auth/signin', SignInViewController::class, RedirectUserLoggedMiddleware::class);
 $router->get('/create/video', VideoViewController::class);

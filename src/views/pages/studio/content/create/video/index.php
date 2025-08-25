@@ -14,13 +14,16 @@ use function Src\Views\Components\Utils\Footer;
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\Utils\TextareaComponent;
 
+if(isset($_GET["sucess"])){
+    
+}
+
+
 $botoes = [
     ['texto' => 'Edição', 'link' => ''],
     ['texto' => 'Comentários', 'link' => '../components/teste.php'],
     ['texto' => 'Analytics', 'link' => '']
 ];
-
-$conteudos = [];
 
 $categorias = [
     [

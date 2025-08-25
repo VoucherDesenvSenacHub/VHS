@@ -10,6 +10,7 @@ use Src\Infra\Model\VideoModel;
 use Respect\Validation\Exceptions\NestedValidationException;
 use Respect\Validation\Validator as v;
 
+use function Src\Application\Utils\Redirect\redirect;
 use function Src\Application\Utils\UploadArchives;
 
 class VideoController extends Controller{
@@ -48,7 +49,7 @@ class VideoController extends Controller{
                 $data["thumbnail_url"]
             );
 
-            echo "Vídeo criado com sucesso!";
+            redirect("/VHS/create/video?sucess");
         } catch (NestedValidationException $exception) {
             echo $exception->getFullMessage();
         }
