@@ -37,6 +37,11 @@ class UserModel extends Model {
 
         return $this->database->query($sql, [":username" => $username]);
     }
+    public function getCreatorByUsername(string $query): array{
+        $sql = "SELECT * FROM users WHERE role ='CREATOR' and (username LIKE :query)";
+
+        return $this->database->query($sql, ['query' => '%' . $query . '%']);
+    }
 
     public function getUserByToken(string $token) {
         $sql = "SELECT * FROM users WHERE token = :token";

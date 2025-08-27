@@ -12,12 +12,14 @@ require_once __DIR__ . '/../../application/middlewares/RedirectUserLoggedMiddlew
 require_once __DIR__ . '/../../controllers/signIn.view.controller.php';
 require_once __DIR__ . '/../../controllers/SearchVideoController.php';
 
+
 use Dotenv\Dotenv;
 use Src\Application\Controllers\SignUpController;
 use Src\Application\Controllers\SignUpViewController;
 use Src\Application\Controllers\CreatePasswordController;
 use Src\Application\Controllers\HomeController;
 use Src\Application\Controllers\SearchVideoController;
+
 #use Src\Application\Controllers\VerifyEmailController;
 use Src\Application\Middlewares\RedirectUserLoggedMiddleware;
 use Src\Application\Controllers\SignInController;
@@ -39,5 +41,6 @@ $router->all("/auth/signup", SignUpViewController::class, RedirectUserLoggedMidd
 $router->all("/auth/signup/password", CreatePasswordController::class, RedirectUserLoggedMiddleware::class);
 
 $router->get("/home/search/video", SearchVideoController::class);
+
 
 $router->run();

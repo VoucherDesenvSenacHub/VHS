@@ -1,6 +1,7 @@
 <?php
 
 
+
 $dados = $_SESSION["page_data"]["dados"] ?? [];
 // $videos = $_SESSION["page_data"]["videos"] ?? [];
 
@@ -15,6 +16,7 @@ require_once __DIR__ . "/../../../components/channel/channelComponent.php";
 // require_once __DIR__ . "/../../../components/CardFastComponent/cardFast.php";
 require_once __DIR__ . "/../../../../controllers/SearchVideoController.php";
 
+
 use function Src\Views\Components\Cards\renderCards;
 use function Src\Views\Components\Channel\channelComponent;
 use function Src\Views\Components\Header\HeaderComponent;
@@ -24,91 +26,11 @@ use function src\Views\Components\CardFast;
 use src\Application\Controllers\SearchVideoController;
 
 
+
+
 $term = isset($_GET['term']) ? htmlspecialchars($_GET['term']) : '';
 $filter = isset($_GET['filter']) ? htmlspecialchars($_GET['filter']) : 'video';
 $query = isset($_GET['query']) ? htmlspecialchars($_GET['query']) : '';
-
-
-// $SearchVideoController = new SearchVideoController();
-// $SearchVideoController->index();
-
-
-$mostPopularVideos = [
-    [
-        "url" => "https://youtube.com/watch?v=nextjs1",
-        "type_card" => "event",
-        "description" => "Rafael Germano",
-        "duration" => "7 min",
-        "title" => "Tudo sobre o Next.js 15, nova arquitetura de pasta",
-        "username" => "Rafael Germano",
-        "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
-        "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g",
-        "views" => "5.5k views",
-        "created_at" => "há 7 dias",
-        "maked_for" => "Online",
-        "likes" => 890,
-        "comments" => 67
-    ],
-
-];
-
-// $techVideos = [];
-
-// $techVideos = array_map(function ($item) {
-//     return [
-//         "url" => $item["url"],
-//         "type_card" => strtolower($item["type"]),
-//         "description" => $item["description"], 
-//         "duration" => $item["duration"],
-//         "title" => $item["title"],
-//         "username" => 'Ronan',
-//         "thumbnail_url" => $item["thumbnail_url"],
-//         "avatar_url" => 'sdjssajkldsj',
-//         "views" => $item["views"],
-//         "created_at" => $item["created_at"],
-//         "maked_for" => 'Onlien', 
-//         "likes" => 45,
-//         "comments" => 45
-//     ];
-// }, $videos);
-
-// $techFasts = [];
-
-// $techFasts = array_map(function ($item) {
-//     return [
-//         "url" => $item["url"],
-//         "type_card" => strtolower($item["type"]),
-//         "description" => $item["description"], 
-//         "duration" => $item["duration"],
-//         "title" => $item["title"],
-//         "username" => 'Ronan',
-//         "thumbnail_url" => $item["thumbnail_url"],
-//         "avatar_url" => 'sdjssajkldsj',
-//         "views" => $item["views"],
-//         "created_at" => $item["created_at"],
-//         "maked_for" => 'Onlien', 
-//         "likes" => 45,
-//         "comments" => 45
-//     ];
-// }, $fast);
-
-var_dump($dados);
-
-
-
-
-// $render = [
-//     "videos" => [
-//         "title" => "Vídeos",
-//         "data" => $techVideos,
-//         "type_card" => "video"
-//     ],
-//     "events" => [
-//         "title" => "Eventos",
-//         "data" => $mostPopularVideos,
-//         "type_card" => "event"
-//     ]
-// ];
 
 
 ?>
@@ -149,22 +71,24 @@ var_dump($dados);
                 <div class="flex gap-2 w-[900px] mb-6">
                     <?= ButtonComponent("Vídeos", "studio", "",10.675, 2.5, 1, "?term=$term&filter=video&query=$query") ?>
                     <?= ButtonComponent("Fast", "studio", "",10.675, 2.5, 1, "?term=$term&filter=fast&query=$query") ?>
-                    <?= ButtonComponent("Eventos", "studio", "",10.675, 2.5, 1, "?term=$term&filter=events&query=$query") ?>
-                    <?= ButtonComponent("Canais", "studio", "",10.675, 2.5, 1, "?term=$term&filter=channels&q=$query") ?>
+                    <?= ButtonComponent("Eventos", "studio", "",10.675, 2.5, 1, "?term=$term&filter=event&query=$query") ?>
+                    <?= ButtonComponent("Canais", "studio", "",10.675, 2.5, 1, "?term=$term&filter=channels&query=$query") ?>
                 </div>
             </div>
             <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 <?= $filter === 'channels' ? '!grid-cols-1' : ''?>">
 
                 <?php
-                 if($filter!='channels' || $filter!='events' )
-                {echo renderCards($dados, $filter); }
-                else {
+                if ($filter != "channels") {
+                    echo renderCards($dados, $filter); 
 
+                } 
+                else if ($filter == "channels") {
+                    foreach ($dados as $channel) {
+                        echo ChannelComponent($channel);
+                    }
                 }
-
-                
-                
                 ?>
+        
             </section>
         </main>
 
