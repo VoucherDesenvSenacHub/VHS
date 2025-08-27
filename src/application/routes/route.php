@@ -5,9 +5,9 @@ require_once __DIR__ . '/../../vendor/routes.autoload.php';
 require_once __DIR__ . '/../../../vendor/autoload.php';
 
 use Dotenv\Dotenv;
+use Src\Application\Controllers\CategoriesViewController;
 use Src\Application\Controllers\CategoriesController;
 use Src\Application\Controllers\CreateUserController;
-use Src\Application\Controllers\CategoriesViewController;
 use Src\Application\Controllers\SignUpController;
 use Src\Application\Controllers\SignUpViewController;
 use Src\Application\Controllers\CreatePasswordController;
@@ -38,13 +38,17 @@ $router->get('/home', HomeController::class);
 
 #views routes
 $router->get('/home', HomeController::class, RedirectUserNotLoggedMiddleware::class);
+$router->get('/home/categories', CategoriesViewController::class, RedirectUserNotLoggedMiddleware::class);
 
 $router->get('/auth/signin', SignInViewController::class, RedirectUserLoggedMiddleware::class);
 
 $router->get("/auth/signup", SignUpViewController::class, RedirectUserLoggedMiddleware::class);
 $router->get("/auth/signup/password", CreatePasswordController::class, RedirectUserLoggedMiddleware::class);
+
 $router->get("/auth/signup/verify-email", VerifyEmailViewController::class);
 $router->get("/api/v1/auth/signup/verify-email", VerifyEmailController::class);
+
+
 
 $router->get("/admin/categories", CategoriesViewController::class);
 
