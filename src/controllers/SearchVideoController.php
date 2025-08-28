@@ -4,7 +4,7 @@ namespace Src\Application\Controllers;
 
 use Respect\Validation\Exceptions\NestedValidationException;
 use Src\Application\Core\Controller;
-use Src\Infra\Models\VideoModel;
+use Src\Infra\Model\VideoModel;
 
 use Respect\Validation\Validator as v;
 

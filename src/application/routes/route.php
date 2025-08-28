@@ -14,6 +14,7 @@ use Src\Application\Controllers\VerifyEmailController;
 use Src\Application\Middlewares\RedirectUserLoggedMiddleware;
 use Src\Application\Controllers\SignInController;
 use Src\Application\Controllers\VerifyEmailViewController;
+use Src\Application\Controllers\CreateFastVideoController;
 use Src\Application\Middlewares\RedirectUserNotLoggedMiddleware;
 use Src\Application\Routes\Router;
 use Src\Controllers\SignInViewController;
@@ -31,6 +32,8 @@ $router->post('/api/v1/auth/signup', SignUpController::class);
 
 
 $router->get('/home', HomeController::class);
+
+$router->post('/api/v1/fast-video', CreateFastVideoController::class);
 
 #views routes
 $router->get('/home', HomeController::class, RedirectUserNotLoggedMiddleware::class);

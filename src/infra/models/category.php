@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Infra\Models;
+namespace Src\Infra\Model;
 
 use Src\Application\Core\Model;
 
