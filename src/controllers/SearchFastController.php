@@ -4,26 +4,26 @@ namespace Src\Application\Controllers;
 
 use Respect\Validation\Exceptions\NestedValidationException;
 use Src\Application\Core\Controller;
-use Src\Infra\Model\VideoModel;
+use Src\Infra\Model\FastModel;
 
 use Respect\Validation\Validator as v;
 
 require_once __DIR__ . '/../application/core/controller.php';
 
 class SearchFastController extends Controller {
-    public VideoModel $VideoModel;
+    public FastModel $FastModel;
 
 
     public function index() {
         try {
 
-            $this->VideoModel = $this->model("fast");
+            $this->FastModel = $this->model("fast");
 
             $schema = v::key('q', v::stringType()->length(1, 255));
             
             
             if($schema->validate($_GET)) {
-                $results = $this->VideoModel->getFastByTitle($_GET["q"]);
+                $results = $this->FastModel->getFastByTitle($_GET["q"]);
                 $this->view("home/search/index", ["fast" => $results]);
                 return;
             }
