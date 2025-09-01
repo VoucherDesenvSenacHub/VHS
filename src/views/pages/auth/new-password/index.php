@@ -43,7 +43,7 @@ if ($step === 1) {
                 </div>
                 <div class="flex flex-col gap-4 w-full xl:w-96">
                     <?= $render ?>
-                    <?= ButtonComponent($step == 1 ? "Enviar e-mail" : "Redefinir", "default", className: " mt-4", link: $step == "1" ? "?step=2" : "/VHS/src/views/pages/home"); ?>
+                    <?= ButtonComponent($step == 1 ? "Enviar e-mail" : "Redefinir", "default", className: " mt-4", link: $step == "1" ? "?step=2" : "/VHS/home"); ?>
                 </div>
             </div>
         </div>

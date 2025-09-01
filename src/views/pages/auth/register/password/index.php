@@ -27,7 +27,7 @@ $fields = $_SESSION["redirect_data"]["fields"] ?? [];
         <div class="flex justify-center mr-24 xl:mr-24 max-xl:hidden">
             <img src="/VHS/public/images/Cassete.svg" alt="" class="relative right-14 mr-28 w-6/16">
         </div>
-        <form method="post" action="http://localhost/VHS/src/application/routes/route.php/api/v1/signup/password" class="relative xl:min-w-1/2 xl:mx-20 flex items-center justify-center w-full max-w-md xl:max-w-none xl:w-auto px-4 xl:px-0">
+        <form method="post" action="/VHS/api/v1/signup/password" class="relative xl:min-w-1/2 xl:mx-20 flex items-center justify-center w-full max-w-md xl:max-w-none xl:w-auto px-4 xl:px-0">
             <div class="flex flex-col gap-4">
                 <div class="flex items-center flex-col gap-2">
                     <img src="/VHS/public/logos/Logo.svg" alt="">

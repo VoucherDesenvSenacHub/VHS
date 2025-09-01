@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Infra\Models;
+namespace Src\Infra\Model;
 
 use Src\Application\Core\Model;
 
@@ -12,7 +12,7 @@ class CategoryModel extends Model {
             ":name" => $name
         ]);
 
-        return $category[0];
+        return $category[0] ?? [];
     }
 
     public function addCategoryInUser(string $categoryId, string $userId) {
@@ -25,5 +25,11 @@ class CategoryModel extends Model {
             ":category_id" => $categoryId,
             ":user_id" => $userId
         ]);   
+    }
+
+    public function getAllCategories(): array {
+        $sql = "SELECT * FROM categories ORDER BY name DESC";
+
+        return $this->database->query($sql);
     }
 }
