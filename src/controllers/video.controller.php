@@ -49,7 +49,9 @@ class VideoController extends Controller{
                 $data["thumbnail_url"]
             );
 
-            redirect("/VHS/create/video?sucess");
+            redirect("/VHS/create/video",[
+                "sucess" => true
+            ]);
         } catch (NestedValidationException $exception) {
             echo $exception->getFullMessage();
         }

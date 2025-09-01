@@ -6,44 +6,26 @@ require_once __DIR__ . '/../../../../../components/utils/buttonComponent.php';
 require_once __DIR__ . '/../../../../../components/utils/footer.php';
 require_once __DIR__ . '/../../../../../components/utils/inputComponent.php';
 require_once __DIR__ . '/../../../../../components/utils/textareaComponent.php';
+require_once __DIR__ . '/../../../../../components/modal/modal.component.php';
 
 use function Src\Views\Components\Header\HeaderComponent;
+use function Src\Views\Components\Modal\ModalComponent;
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
 use function Src\Views\Components\Utils\ButtonComponent;
 use function Src\Views\Components\Utils\Footer;
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\Utils\TextareaComponent;
 
-if(isset($_GET["sucess"])){
-    
-}
 
+if (!isset($_SESSION["redirect_data"])) {
+    echo ModalComponent("Teste", "teste");
+}
 
 $botoes = [
     ['texto' => 'Edição', 'link' => ''],
     ['texto' => 'Comentários', 'link' => '../components/teste.php'],
     ['texto' => 'Analytics', 'link' => '']
 ];
-
-$categorias = [
-    [
-        'id' => 1,
-        'name' => 'Tecnologia'
-    ],
-    [
-        'id' => 2,
-        'name' => 'Estética'
-    ],
-    [
-        'id' => 3,
-        'name' => 'Saúde'
-    ],
-    [
-        'id' => 4,
-        'name' => 'Moda'
-    ]
-];
-
 
 ?>
 
@@ -91,19 +73,28 @@ $categorias = [
                     <div id="thumb">
                         <h1 class="text-subtitle text-white font-semibold mt-4">Thumbnail</h1>
                         <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-                        <div class="mt-2 bg-background w-full h-full md:h-[400px] border-2 rounded-xl border-solid flex items-center justify-center relative overflow-hidden -mt-8 flex-wrap">
+                        <div class="mt-2 bg-background w-full h-full md:h-[500px] border-2 rounded-xl border-solid flex items-center justify-center relative overflow-hidden -mt-8 flex-wrap">
                             <div id="uploadArea" class="flex flex-col items-center justify-center w-full h-full">
-                                <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                        <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                <label for="dropzone-file"
+                                    class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+
+                                    <div id="preview" class="hidden w-full h-full">
+                                        <img id="thumbnailPreview" class="object-cover w-full h-full rounded-lg" alt="Preview" />
+                                    </div>
+
+                                    <div id="uploadText" class="flex flex-col items-center justify-center pt-5 pb-6">
+                                        <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="none" viewBox="0 0 20 16">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                                         </svg>
                                         <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> ou arraste e solte</p>
                                         <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, JPEG</p>
                                     </div>
-                                    <input id="dropzone-file" type="file" class="hidden" accept="png, jpg, jpeg" name="thumbnail" />
+
+                                    <input id="dropzone-file" type="file" class="hidden" accept="image/png, image/jpg, image/jpeg" name="thumbnail" />
                                 </label>
                             </div>
+
                         </div>
                     </div>
                     <div id="Title">
@@ -149,7 +140,32 @@ $categorias = [
 
     <footer class=""> <?= Footer() ?> </footer>
 
-    <script src="./script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const fileInput = document.getElementById('dropzone-file');
+
+            if (fileInput) {
+                fileInput.addEventListener('change', function(event) {
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+
+                        reader.onload = function(e) {
+                            const previewImg = document.getElementById('thumbnailPreview');
+                            const previewDiv = document.getElementById('preview');
+                            const uploadText = document.getElementById('uploadText');
+
+                            previewImg.src = e.target.result;
+                            previewDiv.classList.remove('hidden'); // mostra preview
+                            uploadText.classList.add('hidden'); // esconde texto
+                        };
+
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+        });
+    </script>
 
 </body>
 
