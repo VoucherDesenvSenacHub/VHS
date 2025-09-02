@@ -2,6 +2,8 @@
 
 namespace Src\Application\Utils;
 
+use function Src\Application\Utils\Redirect\redirect;
+
 function UploadArchives(string $file_name){
     
     if ($_SERVER["REQUEST_METHOD"] !== "POST") {
@@ -14,9 +16,14 @@ function UploadArchives(string $file_name){
 
     $file = $_FILES[$file_name];
 
+    if ($file["error"] === UPLOAD_ERR_NO_FILE) {
+        throw new \Exception("Nenhum arquivo enviado. Por favor, selecione uma thumbnail.");
+    }
+    
     if ($file["error"] !== UPLOAD_ERR_OK) {
         throw new \Exception("Erro no upload: " . $file["error"]);
     }
+
 
     $origin_name = $file["name"];
     $type        = $file["type"];

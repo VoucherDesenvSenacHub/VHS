@@ -14,12 +14,14 @@ function TextareaComponent(
     string $width = null,
     string $height = null,
     bool $multiline = false,
-    string $name = ""
+    string $name = "",
+    string $required = null
 ) {
     $type = htmlspecialchars($type, ENT_QUOTES, 'UTF-8');
     $placeholder = htmlspecialchars($placeholder, ENT_QUOTES, 'UTF-8');
     $icon = $icon ? "<img src='" . htmlspecialchars($icon, ENT_QUOTES, 'UTF-8') . "' class='absolute $iconPosition w-5 h-5 fill-blue-500'>" : "";
-    
+    $required = $required ? "required" : "";
+
     $margin = "";
     if (strpos($iconPosition, "left") !== false) {
         $margin = "pl-10";
@@ -46,8 +48,8 @@ function TextareaComponent(
 
     
     $inputElement = $multiline
-        ? "<textarea placeholder='$placeholder' class='$input_style' onfocus='this.placeholder=\"\"' onblur='this.placeholder=\"$placeholder\"' name='$name'></textarea>"
-        : "<input type='$type' placeholder='$placeholder' class='$input_style' onfocus='this.placeholder=\"\"' onblur='this.placeholder=\"$placeholder\"' name='$name'>";
+        ? "<textarea placeholder='$placeholder' class='$input_style' onfocus='this.placeholder=\"\"' onblur='this.placeholder=\"$placeholder\"' name='$name' $required></textarea>"
+        : "<input type='$type' placeholder='$placeholder' class='$input_style' onfocus='this.placeholder=\"\"' onblur='this.placeholder=\"$placeholder\"' name='$name' $required>";
 
     return "
     <div class='flex flex-col gap-3'>

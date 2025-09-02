@@ -8,8 +8,8 @@ require_once __DIR__ . '/../../../../../components/utils/inputComponent.php';
 require_once __DIR__ . '/../../../../../components/utils/textareaComponent.php';
 require_once __DIR__ . '/../../../../../components/modal/modal.component.php';
 
-use function Src\Views\Components\Header\HeaderComponent;
 use function Src\Views\Components\Modal\ModalComponent;
+use function Src\Views\Components\Header\HeaderComponent;
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
 use function Src\Views\Components\Utils\ButtonComponent;
 use function Src\Views\Components\Utils\Footer;
@@ -17,8 +17,13 @@ use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\Utils\TextareaComponent;
 
 
-if (!isset($_SESSION["redirect_data"])) {
-    echo ModalComponent("Teste", "teste");
+$categorias = $_SESSION["page_data"]["categorias"] ?? [];
+
+$modal = $_SESSION["redirect_data"]["success"] ?? false;
+
+if($modal){
+    unset($_SESSION["redirect_data"]);  
+    echo ModalComponent("Criado com sucesso!", "Deseja continuar criando vídeos?");
 }
 
 $botoes = [
@@ -41,18 +46,17 @@ $botoes = [
     <link rel="stylesheet" href="/VHS/src/styles/global.css">
 </head>
 
-<body class="">
-
+<body> 
     <div>
         <?= HeaderComponent() ?>
     </div>
     <div class="flex flex-row w-full">
-
+        
         <div>
             <?= StudioSideMenuComponent() ?>
         </div>
-
-        <div class="flex flex-col gap-4 max-w-[1500px] mx-auto w-full">
+        
+        <div class=" relative flex flex-col gap-4 max-w-[1500px] mx-auto w-full">
             <div class="text-white flex flex-col gap-2">
                 <h1 class='text-title font-bold'>Criar conteúdo</h1>
                 <h1 class='text-paragraph text-gray-400'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</h1>
@@ -62,12 +66,11 @@ $botoes = [
                     <?php echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5, "", "/VHS/src/views/pages/studio/content/create/event"); ?>
                 </div>
 
-
                 <form action="/VHS/src/application/routes/route.php/api/v1/studio/create/video" enctype="multipart/form-data" method="post">
                     <div id="URL">
                         <h1 class="text-subtitle text-white font-semibold mt-4">URL</h1>
                         <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-                        <?= InputComponent(type: "text", placeholder: "https://youtube.com", name: "url") ?>
+                        <?= InputComponent(type: "text", placeholder: "https://youtube.com", name: "url", required: true) ?>
                     </div>
 
                     <div id="thumb">
@@ -100,7 +103,7 @@ $botoes = [
                     <div id="Title">
                         <h1 class="text-3xl text-white font-semibold mt-4">Título</h1>
                         <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-                        <?= InputComponent(type: "text", placeholder: "Tudo sobre o Next.js 15, nova arquitetura de pasta", name: "title") ?>
+                        <?= InputComponent(type: "text", placeholder: "Tudo sobre o Next.js 15, nova arquitetura de pasta", name: "title", required: true) ?>
                     </div>
                     <div id="Description">
                         <h1 class="text-3xl text-white font-semibold mt-4">Descrição</h1>
@@ -113,11 +116,18 @@ $botoes = [
                                 placeholder: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.  😍😍😍",
                                 height: "96",
                                 multiline: true,
-                                name: "description"
+                                name: "description",
+                                required: true
                             ) ?>
                         </div>
                     </div>
                     <div id="Public">
+                        <h1 class="text-3xl text-white font-semibold mt-4">Público</h1>
+                        <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
+                        <?= InputComponent(type: "text", placeholder: "Tudo sobre o Next.js 15, nova arquitetura de pasta", name: "title", required: true) ?>
+                    </div>
+                    
+                    <div id="Category">
                         <h1 class="text-3xl text-white font-semibold mt-4">Categoria</h1>
                         <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
                         <select name="category_id" class="px-3 py-1.5 outline outline-1 outline-[#666666] rounded-md placeholder-[#666666] text-zinc-200 w-full h-[45px] bg-transparent">

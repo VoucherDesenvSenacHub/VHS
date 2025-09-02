@@ -19,8 +19,9 @@
         string $onClickIcon = "",
         bool $error = false,
         string $errorDescription = "",
-        string $value = "",
-        array $attributes = []
+        string $value = '',
+        array $attributes = [],
+        string $required = null
         ){
         
         $type = htmlspecialchars($type, ENT_QUOTES, 'UTF-8');
@@ -28,6 +29,8 @@
         $placeholder = htmlspecialchars($placeholder, ENT_QUOTES, 'UTF-8');
 
         $name = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
+
+        $required = $required ? "required" : "";
 
         $orientationIcon = "";
         $padding = "";
@@ -85,7 +88,7 @@
                 </div>
                 <div class='relative flex justify-center items-center'> 
                     $icon
-                    <input name='$name' type='$type' placeholder='$placeholder' class='$input_style $className' value='$value'>
+                    <input name='$name' type='$type' placeholder='$placeholder' class='$input_style $className' value='$value' $required>
                 </div>
                 $errorElement
             </div>

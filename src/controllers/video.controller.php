@@ -8,6 +8,7 @@ require_once __DIR__ . '/../application/utils/uploadArchives.php';
 use Src\Application\Core\Controller;
 use Src\Infra\Model\VideoModel;
 use Respect\Validation\Exceptions\NestedValidationException;
+use Respect\Validation\Rules\NotEmpty;
 use Respect\Validation\Validator as v;
 
 use function Src\Application\Utils\Redirect\redirect;
@@ -31,12 +32,12 @@ class VideoController extends Controller{
                 "author_id" => $author_id
             ]);
 
-            $schema = v::key('url', v::stringType())
-                ->key('title', v::stringType())
-                ->key('description', v::stringType())
-                ->key('author_id', v::stringType())
-                ->key('category_id', v::stringType())
-                ->key('thumbnail_url', v::stringType());
+            $schema = v::key('url', v::stringType())->notEmpty()
+                ->key('title', v::stringType())->notEmpty()
+                ->key('description', v::stringType())->notEmpty()
+                ->key('author_id', v::stringType())->notEmpty()
+                ->key('category_id', v::stringType())->notEmpty()
+                ->key('thumbnail_url', v::stringType())->notEmpty();
 
             $schema->assert($data);
 
@@ -50,7 +51,7 @@ class VideoController extends Controller{
             );
 
             redirect("/VHS/create/video",[
-                "sucess" => true
+                "success" => true
             ]);
         } catch (NestedValidationException $exception) {
             echo $exception->getFullMessage();
