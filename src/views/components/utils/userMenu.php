@@ -47,7 +47,7 @@ function UserMenu(
             </button>
         </a>
 
-        <a href='/VHS/src/views/pages/studio' class='w-full'>
+        <a href='/VHS/studio' class='w-full'>
             <button id='button-vhs-studio' class='w-full flex p-1 sm:p-2 items-center gap-2 hover:bg-white/5 focus:bg-white/10 transition-all duration-200'>
                 <div class='flex-shrink-0 w-12 h-12 3xl:w-14 3xl:h-14 p-3 flex justify-center items-center'>
                     <img class='select-none pointer-events-none w-full h-full' src='/VHS/public/icons/Studio.svg' onerror='this.style.display="none"'>

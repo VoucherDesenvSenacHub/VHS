@@ -10,17 +10,18 @@ use Src\Application\Core\Model;
 
 class FastModel extends Model {
 
-    public function createFastVideo(string $id, string $title,  string $author_id, string $category_id, string $duration, int $views) {
+    public function createFastVideo(string $id, string $title,  string $author_id, string $duration, int $views, string $thumbnail_url, string $url): bool {
         
-        $sql = "INSERT INTO videos (id, title, author_id, category_id, duration,  views) VALUES (:id, :title, :author_id, :category_id, :duration, :views)";
+        $sql = "INSERT INTO fasts (id, title, author_id, duration,  views, thumbnail_url, url) VALUES (:id, :title, :author_id, :duration, :views, :thumbnail_url, :url)";
 
         return $this->database->exec($sql, [
             ":id" => $id,
             ":title" => $title,
             ":author_id" => $author_id,
-            ":category_id" => $category_id,
             ":duration" => $duration,
             ":views" => $views,
+            ":thumbnail_url" => $thumbnail_url,
+            ":url" => $url
         ]);
     }
 

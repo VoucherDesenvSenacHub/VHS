@@ -18,6 +18,7 @@ use Src\Application\Controllers\CreateFastVideoController;
 use Src\Application\Middlewares\RedirectUserNotLoggedMiddleware;
 use Src\Application\Controllers\StudioController;
 use Src\Application\Controllers\StudioFastViewController;
+use Src\Application\Controllers\StudioVideoViewController;
 use Src\Application\Routes\Router;
 use Src\Controllers\SignInViewController;
 
@@ -48,5 +49,6 @@ $router->get("/auth/signup/verify-email", VerifyEmailViewController::class);
 $router->get("/api/v1/auth/signup/verify-email", VerifyEmailController::class);
 
 $router->get('/studio', StudioController::class, RedirectUserNotLoggedMiddleware::class);
+$router->get('/studio/create/video', StudioVideoViewController::class, RedirectUserNotLoggedMiddleware::class);
 $router->get('/studio/create/fast', StudioFastViewController::class, RedirectUserNotLoggedMiddleware::class);
 $router->run();

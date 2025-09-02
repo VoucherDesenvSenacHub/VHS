@@ -25,6 +25,9 @@ class RedirectUserNotLoggedMiddleware {
             $token = $_COOKIE["token"] ?? $_SESSION["token"];
             $userModel = new UserModel();
             $user = $userModel->getUserByToken($token);
+            if (empty($user)) {
+                return redirect("/VHS/auth/signin");
+            }
             $_SESSION["user"] = $user[0];
         }
     }

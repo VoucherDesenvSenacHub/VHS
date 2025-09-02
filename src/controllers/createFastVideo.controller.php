@@ -6,6 +6,7 @@ use Respect\Validation\Exceptions\NestedValidationException;
 use Src\Application\Core\Controller;
 use Src\Infra\Model\FastModel;
 use Respect\Validation\Validator as v;
+use getID3;
 
 require_once __DIR__ . '/../application/core/controller.php';
 require_once __DIR__ . '/../application/utils/redirect.php';
@@ -16,30 +17,65 @@ class CreateFastVideoController extends Controller {
     public FastModel $FastModel;
     public function index() {
         try{
-            $this->FastModel = $this->model("video");
+            $this->FastModel = $this->model("fast");
+
+            if (!isset($_FILES['video']) || $_FILES['video']['error'] !== UPLOAD_ERR_OK) {
+                throw new \Exception('Nenhum vídeo foi enviado ou houve um erro no upload.');
+            }
+
+            $uploadDir = __DIR__ . '/../../public/videos/';
+            $thumbnailDir = __DIR__ . '/../../public/thumbnails/';
+
+
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
+            
+            if(!is_dir($thumbnailDir)){
+                mkdir($thumbnailDir, 0777, true);
+            }
+
+            $videoFileName = $_POST['title'] . date('Y-m-d_H-i-s');
+            $videoPath = $uploadDir . $videoFileName . '.mp4';
+            $thumbnailPath = $thumbnailDir . $videoFileName . '.png';
+
+            if (!move_uploaded_file($_FILES['video']['tmp_name'], $videoPath)) {
+                throw new \Exception('Erro ao salvar o vídeo.');
+            }
+
+            if (!isset($_POST['thumbnail']) || empty($_POST['thumbnail'])) {
+                throw new \Exception('Thumbnail não fornecido.');
+            }
+
+            $thumbnailData = $_POST['thumbnail'];
+            $thumbnailData = preg_replace('#^data:image/\w+;base64,#i', '', $thumbnailData);
+            $thumbnailData = base64_decode($thumbnailData);
+
+            if ($thumbnailData === false || !file_put_contents($thumbnailPath, $thumbnailData)) {
+                throw new \Exception('Erro ao salvar o thumbnail.');
+            }
+
+            $getID3 = new getID3();
+            $videoInfo = $getID3->analyze($videoPath);
+            $duration = isset($videoInfo['playtime_seconds']) ? (int)$videoInfo['playtime_seconds'] : 0;
+
+            $id = uniqid() . uniqid();
 
             $schema = v::key(
                 'title',v::stringType()->length(3, 64)->setTemplate( 'O titulo tem que ter entre 3 a 32 caracteres')
-            )->key(
-                'author_id', v::stringType()->length(23, 23)->setTemplate('tem que ser um id de usuário')
-            )->key(
-                'category_id', v::stringType()->length(23, 23)->setTemplate('tem que ser um id de categoria')
-            )->key(
-              'duration', v::StringVal()->setTemplate('duração é obrigatoria')
-            )->key(
-                'views', v::intVal()->setTemplate('tem que ser um numero')
             );
             
             $schema->assert($_POST);
 
             $id = uniqid().uniqid();
 
-            $this->FastModel->createFastVideo($id,  $_POST["title"], $_POST["author_id"], $_POST["category_id"], $_POST["duration"],  $_POST["views"]);
+            $this->FastModel->createFastVideo($id,  $_POST["title"], $_SESSION["user"]["id"], $duration,  0, $videoFileName, $videoFileName);
             
+            redirect("/VHS/studio/create/fast?success=1", ['success' => 'Vídeo criado com sucesso!']);
         }
         catch (NestedValidationException $e) {
             $errors = $e->getMessages();
-            print_r($errors);
+            redirect("/VHS/studio/create/fast?errors=1", ['errors' => $errors]);
         }
     }
 }
