@@ -6,7 +6,9 @@ require_once __DIR__ . '/../../../vendor/autoload.php';
 
 use Dotenv\Dotenv;
 use Src\Application\Controllers\CategoriesViewController;
-use Src\Application\Controllers\CategoriesController;
+use Src\Application\Controllers\AdminCategoriesViewController;
+use Src\Application\Controllers\CreateCategoriesController;
+use Src\Application\Controllers\UpdateCategoriesController;
 use Src\Application\Controllers\CreateUserController;
 use Src\Application\Controllers\SignUpController;
 use Src\Application\Controllers\SignUpViewController;
@@ -28,7 +30,8 @@ $router = new Router();
 #api routes
 $router->post('/api/v1/auth/signin', SignInController::class);
 
-$router->post('/api/v1/admin/categories', CategoriesController::class);
+$router->post('/api/v1/admin/categories', CreateCategoriesController::class);
+$router->post('/api/v1/admin/categories/{id}', UpdateCategoriesController::class);
 
 $router->post("/api/v1/signup/password", CreateUserController::class, RedirectUserLoggedMiddleware::class);
 $router->post('/api/v1/auth/signup', SignUpController::class);
@@ -50,7 +53,7 @@ $router->get("/api/v1/auth/signup/verify-email", VerifyEmailController::class);
 
 
 
-$router->get("/admin/categories", CategoriesViewController::class);
+$router->get("/admin/categories", AdminCategoriesViewController::class);
 
 
 $router->run();

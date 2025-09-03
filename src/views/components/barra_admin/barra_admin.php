@@ -27,7 +27,7 @@ function Barra_Admin()
                     </li>
 
                     <li class="flex items-center text-gray-300 rounded-lg cursor-pointer farming-[2rem]">
-                        <a href="/VHS/src/views/pages/admin/categories/index.php" class="flex items-center w-full gap-2 p-2">
+                        <a href="/VHS/admin/categories" class="flex items-center w-full gap-2 p-2">
                             <button id="categorias-btn" class="icon Usuarios-icon p-2 flex items-center justify-center bg-white/5 rounded-lg ml-[0.31rem]">
                                 <img class="w-6 h-6" src="/VHS/public/icons/sidebar_admin/layout-grid.svg" alt="Categorias">
                             </button>

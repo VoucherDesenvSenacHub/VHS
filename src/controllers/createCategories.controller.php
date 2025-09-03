@@ -12,7 +12,7 @@ use function Src\Application\Utils\Redirect\redirect;
 require_once __DIR__ . '/../application/core/controller.php';
 require_once __DIR__ . '/../application/utils/verifyRecaptcha.php';
 
-class CategoriesController extends Controller
+class CreateCategoriesController extends Controller
 {
     public CategoryModel $CategoryModel;
 
