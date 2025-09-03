@@ -2,6 +2,7 @@
 
 namespace Src\Application\Controllers;
 
+use Exception;
 use Respect\Validation\Exceptions\NestedValidationException;
 use Src\Application\Core\Controller;
 use Src\Infra\Model\FastModel;
@@ -17,15 +18,14 @@ class CreateFastVideoController extends Controller {
     public FastModel $FastModel;
     public function index() {
         try{
-            $this->FastModel = $this->model("fast");
-
-            if (!isset($_FILES['video']) || $_FILES['video']['error'] !== UPLOAD_ERR_OK) {
-                throw new \Exception('Nenhum vídeo foi enviado ou houve um erro no upload.');
-            }
-
             $uploadDir = __DIR__ . '/../../public/videos/';
             $thumbnailDir = __DIR__ . '/../../public/thumbnails/';
 
+            $this->FastModel = $this->model("fast");
+
+            if (!isset($_FILES['video']) || $_FILES['video']['error'] !== UPLOAD_ERR_OK) {
+                throw new Exception('Nenhum vídeo foi enviado ou houve um erro no upload.');
+            }
 
             if (!is_dir($uploadDir)) {
                 mkdir($uploadDir, 0777, true);
@@ -40,11 +40,11 @@ class CreateFastVideoController extends Controller {
             $thumbnailPath = $thumbnailDir . $videoFileName . '.png';
 
             if (!move_uploaded_file($_FILES['video']['tmp_name'], $videoPath)) {
-                throw new \Exception('Erro ao salvar o vídeo.');
+                throw new Exception('Erro ao salvar o vídeo.');
             }
 
             if (!isset($_POST['thumbnail']) || empty($_POST['thumbnail'])) {
-                throw new \Exception('Thumbnail não fornecido.');
+                throw new Exception('Thumbnail não fornecido.');
             }
 
             $thumbnailData = $_POST['thumbnail'];
@@ -52,7 +52,7 @@ class CreateFastVideoController extends Controller {
             $thumbnailData = base64_decode($thumbnailData);
 
             if ($thumbnailData === false || !file_put_contents($thumbnailPath, $thumbnailData)) {
-                throw new \Exception('Erro ao salvar o thumbnail.');
+                throw new Exception('Erro ao salvar o thumbnail.');
             }
 
             $getID3 = new getID3();
@@ -73,9 +73,16 @@ class CreateFastVideoController extends Controller {
             
             redirect("/VHS/studio/create/fast?success=1", ['success' => 'Vídeo criado com sucesso!']);
         }
-        catch (NestedValidationException $e) {
-            $errors = $e->getMessages();
-            redirect("/VHS/studio/create/fast?errors=1", ['errors' => $errors]);
+        catch (NestedValidationException | Exception $exception) {
+
+            if($exception instanceof NestedValidationException) {
+                foreach ($exception->getMessages() as $message) {
+                    $messages[] = $message;
+                }
+                return redirect("/VHS/studio/create/fast?error=1", ['errors' => $messages[0], 'fields' => $_POST['title']]);
+            }
+            
+            return redirect("/VHS/studio/create/fast?error=1", ['errors' => $exception->getMessage(), 'fields' => $_POST['title']]);
         }
     }
 }

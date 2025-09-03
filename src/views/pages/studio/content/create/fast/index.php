@@ -3,13 +3,30 @@ require_once __DIR__ . "/../../../../../components/utils/buttonComponent.php";
 require_once __DIR__ . "/../../../../../components/utils/inputComponent.php";
 require_once __DIR__ . "/../../../../../components/header/headerComponent.php";
 require_once __DIR__ . "/../../../../../components/studioSideMenu/studioSideMenuComponent.php";
+require_once __DIR__ . "/../../../../../../application/utils/sweetalert.php";
 
 use function Src\Views\Components\Utils\ButtonComponent;
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\views\components\header\HeaderComponent;
 use function Src\views\components\studioSideMenu\StudioSideMenuComponent;
+use function Src\Application\Utils\showSweetAlert;
 
-print_r($_SESSION['redirect_data']);
+$success = $_SESSION['redirect_data']['success'] ?? null;
+$errors = $_SESSION['redirect_data']['errors'] ?? null;
+$fields = $_SESSION['redirect_data']['fields'] ?? null;
+
+if (!empty($errors)) {
+        if (str_contains(strtolower($errors), 'titulo')) {
+            $titleError = $errors;
+        }
+        if (str_contains(strtolower($errors), 'vídeo')) {
+            $videoError = $errors;
+        }
+        else {
+            $genericError = $errors;
+        }
+}
+unset($_SESSION['redirect_data']);
 ?>
 
 <!DOCTYPE html>
@@ -48,16 +65,15 @@ print_r($_SESSION['redirect_data']);
                         <div id="URL">
                             <h1 class="text-subtitle text-white font-semibold mt-4">Título do Fast</h1>
                             <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-                            <?= InputComponent(type: "text", placeholder: "https://youtube.com", name: "title") ?>
+                            <?= InputComponent(type: "text", placeholder: "https://youtube.com", name: "title", value: $fields ?? "", error: !empty($titleError), errorDescription: !empty($titleError) ? $titleError : "") ?>
                         </div>
 
                         <div id="thumb">
                             <h1 class="text-subtitle text-white font-semibold mt-4">Upload de vídeo</h1>
                             <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
                         </div>
-                        <div class="flex mb-[3rem]">
-                            <div class="bg-background w-full h-[600px] border-2 rounded-xl border-solid flex items-center justify-center relative overflow-hidden md:w-[300px] md:h-[600px] border-[#666666]">
-
+                        <div class="flex flex-col mb-[3rem]">
+                            <div class="bg-background w-full h-[600px] border-2 rounded-xl border-solid flex items-center justify-center relative overflow-hidden md:w-[300px] md:h-[600px] <?= isset($vídeoError) ? "border-red-500" : "border-[#666666]" ?>">
                                 <video id="videoPreview" class="hidden w-full h-full object-cover rounded-lg absolute" controls></video>
 
                                 <div id="uploadArea" class="flex flex-col items-center justify-center w-full h-full">
@@ -71,6 +87,11 @@ print_r($_SESSION['redirect_data']);
                                     </label>
                                 </div>
                             </div>
+                            <?php
+                            if (isset($videoError)) {
+                                echo '<div class="text-red-500 text-sm mt-2">' . $videoError . '</div>';
+                            }
+                        ?>
                         </div>
                         <input type="hidden" name="thumbnail" id="thumbnailData">
                         <div class="flex flex-col gap-[1rem] w-full md:flex-row md:gap-[5.3rem] mb-[5rem]">
@@ -80,13 +101,16 @@ print_r($_SESSION['redirect_data']);
                 </form>
             </div>
         </div>
+        <div>
+             <?php echo isset($success) ? showSweetAlert('Conteúdo criado com sucesso!', $success) : ''; ?>
+        </div>
         <script>
             const videoInput = document.getElementById('dropzone-file');
             const videoPreview = document.getElementById('videoPreview');
             const uploadArea = document.getElementById('uploadArea');
             const thumbnailData = document.getElementById('thumbnailData');
             const form = document.getElementById('uploadForm');
-            const canvas = document.createElement('canvas'); // Canvas dinâmico
+            const canvas = document.createElement('canvas');
 
             videoInput.addEventListener('change', () => {
                 const file = videoInput.files[0];
@@ -105,13 +129,6 @@ print_r($_SESSION['redirect_data']);
                 canvas.height = videoPreview.videoHeight;
                 ctx.drawImage(videoPreview, 0, 0, canvas.width, canvas.height);
                 thumbnailData.value = canvas.toDataURL('image/jpeg', 1.0);
-            });
-
-            form.addEventListener('submit', (e) => {
-                if (!thumbnailData.value) {
-                    e.preventDefault();
-                    alert('Aguarde a geração do thumbnail antes de enviar.');
-                }
             });
 
             uploadArea.addEventListener('dragover', (e) => {
