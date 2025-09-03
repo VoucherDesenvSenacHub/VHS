@@ -1,16 +1,19 @@
 <?php
-print_r($_SESSION["page_data"]);
-
 // Requires dos componentes necessários
 require_once __DIR__ . "/../../components/header/headerComponent.php";
 require_once __DIR__ . "/../../components/sidebar/SidebarComponent.php";
 require_once __DIR__ . "/../../components/cards/index.php";
 require_once __DIR__ . "/../../components/featuredCard/featuredCardComponent.php";
+require_once __DIR__ . "/../../components/utils/sweetalert.php";
 
 use function Src\Views\Components\Header\HeaderComponent;
 use function Src\Views\Components\Sidebar\SidebarComponent;
 use function Src\Views\Components\Cards\renderCards;
 use function Views\Components\FeaturedCard\FeaturedCardComponent;
+use function Src\Application\Utils\showSweetAlert;
+
+$errors = $_SESSION['redirect_data']['errors'] ?? null;
+unset($_SESSION['redirect_data']);
 
 // Mock de dados para a página home
 $featuredVieo = [
@@ -373,5 +376,6 @@ $styleVideos = [
             </div>
         </main>
     </div>
+    <?php echo isset($errors) ? showSweetAlert('Sem Permissão!', $errors, 'error') : ''; ?>
 </body>
 </html>

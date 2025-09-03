@@ -1,7 +1,16 @@
 <?php
 namespace Src\Application\Utils;
 
-function showSweetAlert($title, $message) {
+function showSweetAlert($title, $message, $type) {
+    // Valida o tipo para garantir que seja 'success' ou 'error'
+    $icon = ($type === 'error') ? 'error' : 'success';
+    
+    // Define cores diferentes para sucesso e erro
+    $iconColor = ($type === 'success') ? '#28a745' : '#dc3545'; // Verde para sucesso, vermelho para erro
+    $borderGradient = ($type === 'success') 
+        ? 'linear-gradient(to right, #28a745, #20c997)' // Gradiente verde para sucesso
+        : 'linear-gradient(to right, #dc3545, #c82333)'; // Gradiente vermelho para erro
+
     // CDN do SweetAlert2
     $cdn = '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
 
@@ -11,7 +20,7 @@ function showSweetAlert($title, $message) {
         document.addEventListener('DOMContentLoaded', function() {
             Swal.fire({
                 toast: true,
-                icon: 'success', // Ícone será sempre o mesmo estilo
+                icon: '$icon', // Ícone dinâmico: 'success' (✓) ou 'error' (x)
                 title: '$title',
                 text: '$message',
                 position: 'bottom-end', // canto inferior direito
@@ -36,7 +45,7 @@ function showSweetAlert($title, $message) {
             box-shadow: 0 4px 10px rgba(0,0,0,0.4) !important;
             font-family: 'Inter', sans-serif !important;
             border-bottom: 3px solid;
-            border-image: linear-gradient(to right, #6A5AE0, #9D4DFF) 1 !important;
+            border-image: $borderGradient 1 !important;
         }
         .swal-title {
             font-size: 16px !important;
@@ -50,7 +59,7 @@ function showSweetAlert($title, $message) {
         }
         .swal-icon {
             border-radius: 50% !important;
-            background: #6A5AE0 !important;
+            background: $iconColor !important;
             color: #fff !important;
         }
     </style>";

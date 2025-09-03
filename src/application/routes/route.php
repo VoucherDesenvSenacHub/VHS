@@ -21,6 +21,7 @@ use Src\Application\Controllers\StudioFastViewController;
 use Src\Application\Controllers\StudioVideoViewController;
 use Src\Application\Routes\Router;
 use Src\Controllers\SignInViewController;
+use Src\Application\Middlewares\RedirectUserNotCreatorMiddleware;
 
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../../..");
 $dotenv->load();
@@ -33,10 +34,7 @@ $router->post('/api/v1/auth/signin', SignInController::class);
 $router->post("/api/v1/signup/password", CreateUserController::class, RedirectUserLoggedMiddleware::class);
 $router->post('/api/v1/auth/signup', SignUpController::class);
 
-
-$router->get('/home', HomeController::class);
-
-$router->post('/api/v1/fast-video', CreateFastVideoController::class);
+$router->post('/api/v1/fast-video', CreateFastVideoController::class, RedirectUserNotCreatorMiddleware::class);
 
 #views routes
 $router->get('/home', HomeController::class, RedirectUserNotLoggedMiddleware::class);
@@ -48,7 +46,7 @@ $router->get("/auth/signup/password", CreatePasswordController::class, RedirectU
 $router->get("/auth/signup/verify-email", VerifyEmailViewController::class);
 $router->get("/api/v1/auth/signup/verify-email", VerifyEmailController::class);
 
-$router->get('/studio', StudioController::class, RedirectUserNotLoggedMiddleware::class);
-$router->get('/studio/create/video', StudioVideoViewController::class, RedirectUserNotLoggedMiddleware::class);
-$router->get('/studio/create/fast', StudioFastViewController::class, RedirectUserNotLoggedMiddleware::class);
+$router->get('/studio', StudioController::class, RedirectUserNotCreatorMiddleware::class);
+$router->get('/studio/create/video', StudioVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
+$router->get('/studio/create/fast', StudioFastViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->run();

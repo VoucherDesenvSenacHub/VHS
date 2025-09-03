@@ -3,7 +3,7 @@ require_once __DIR__ . "/../../../../../components/utils/buttonComponent.php";
 require_once __DIR__ . "/../../../../../components/utils/inputComponent.php";
 require_once __DIR__ . "/../../../../../components/header/headerComponent.php";
 require_once __DIR__ . "/../../../../../components/studioSideMenu/studioSideMenuComponent.php";
-require_once __DIR__ . "/../../../../../../application/utils/sweetalert.php";
+require_once __DIR__ . "/../../../../../components/utils/sweetalert.php";
 
 use function Src\Views\Components\Utils\ButtonComponent;
 use function Src\Views\Components\Utils\InputComponent;
@@ -102,7 +102,7 @@ unset($_SESSION['redirect_data']);
             </div>
         </div>
         <div>
-             <?php echo isset($success) ? showSweetAlert('Conteúdo criado com sucesso!', $success) : ''; ?>
+             <?php echo isset($success) ? showSweetAlert('Conteúdo criado com sucesso!', $success, 'success') : ''; ?>
         </div>
         <script>
             const videoInput = document.getElementById('dropzone-file');
