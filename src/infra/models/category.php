@@ -26,4 +26,35 @@ class CategoryModel extends Model {
             ":user_id" => $userId
         ]);   
     }
+
+    public function removeCategoryInUser(string $categoryId, string $userId) {
+        $sql = "DELETE FROM users_category WHERE category_id = :category_id AND user_id = :user_id";
+
+        return $this->database->exec($sql, [
+            ":category_id" => $categoryId,
+            ":user_id" => $userId
+        ]);
+    }   
+
+    public function removeAllCategoriesFromUser(string $userId) {
+        $sql = "DELETE FROM users_category WHERE user_id = :user_id";
+
+        return $this->database->exec($sql, [
+            ":user_id" => $userId
+        ]);
+    }
+
+    public function getAllCategoriesByUserId(string $userId) {
+        $sql = "SELECT categories.* FROM categories INNER JOIN users_category ON categories.id = users_category.category_id WHERE users_category.user_id = :user_id";
+
+        return $this->database->query($sql, [
+            ":user_id" => $userId
+        ]);
+    }
+
+    public function getAllCategories(): array {
+        $sql = "SELECT * FROM categories ORDER BY name DESC";
+
+        return $this->database->query($sql);
+    }
 }
