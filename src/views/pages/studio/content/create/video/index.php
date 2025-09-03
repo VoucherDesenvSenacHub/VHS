@@ -61,9 +61,9 @@ $botoes = [
                 <h1 class='text-title font-bold'>Criar conteúdo</h1>
                 <h1 class='text-paragraph text-gray-400'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</h1>
                 <div class="mt-2 flex gap-2 w-96">
-                    <?php echo ButtonComponent("Vídeo", "studio", "", 10.675, 2.5, "", "/VHS/src/views/pages/studio/content/create/video"); ?>
-                    <?php echo ButtonComponent("Fast", "studio", "", 10.675, 2.5, "", "/VHS/src/views/pages/studio/content/create/fast"); ?>
-                    <?php echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5, "", "/VHS/src/views/pages/studio/content/create/event"); ?>
+                    <?php echo ButtonComponent("Vídeo", "studio", "", 10.675, 2.5, "", "/create/video"); ?>
+                    <?php echo ButtonComponent("Fast", "studio", "", 10.675, 2.5, "", "/create/fast"); ?>
+                    <?php echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5, "", "/create/event"); ?>
                 </div>
 
                 <form action="/VHS/src/application/routes/route.php/api/v1/studio/create/video" enctype="multipart/form-data" method="post">
@@ -94,7 +94,7 @@ $botoes = [
                                         <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, JPEG</p>
                                     </div>
 
-                                    <input id="dropzone-file" type="file" class="hidden" accept="image/png, image/jpg, image/jpeg" name="thumbnail" />
+                                    <input id="dropzone-file" type="file" class="hidden" accept="image/png, image/jpg, image/jpeg" name="thumbnail" required/>
                                 </label>
                             </div>
 
@@ -140,7 +140,7 @@ $botoes = [
                     </div>
 
                     <div class="flex flex-col sm:flex-row justify-center items-end gap-10 my-6">
-                        <?= ButtonComponent(text: "Cancelar", variant: "outline", id: "cancel-button", width: 27.5) ?>
+                        <?= ButtonComponent(text: "Cancelar", variant: "outline", id: "cancel-button", width: 27.5, link: "/home") ?>
                         <?= ButtonComponent(text: "Salvar Alterações", variant: "default", id: "publish-button", width: 27.5) ?>
                     </div>
                 </form>

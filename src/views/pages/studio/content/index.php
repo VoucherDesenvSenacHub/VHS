@@ -1,10 +1,13 @@
 <?php
-require "../../../components/sidebar/SidebarComponent.php";
-require "../../../components/header/headerComponent.php";
-require_once "../../../components/cards/index.php";
-require_once "../../../components/utils/inputComponent.php";
-require_once "../../../components/studioSideMenu/studioSideMenuComponent.php";
-require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/buttonComponent.php";
+
+use Src\Infra\Model\VideoModel;
+
+require_once __DIR__ . "/../../../components/sidebar/SidebarComponent.php";
+require_once __DIR__ . "/../../../components/header/headerComponent.php";
+require_once __DIR__ . "/../../../components/cards/index.php";
+require_once __DIR__ . "/../../../components/utils/inputComponent.php";
+require_once __DIR__ . "/../../../components/studioSideMenu/studioSideMenuComponent.php";
+require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
 
 use function src\views\components\Utils\ButtonComponent;
 use function Src\Views\Components\Cards\renderCards;
@@ -12,86 +15,7 @@ use function Src\Views\Components\header\HeaderComponent;
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
 use function Src\Views\Components\Utils\InputComponent;
 
-$videos = [
-    [
-        "type_card" => "channel",
-        "title" => "Como aprender programação do zero e se tornar um excelente desenvolvedor full stack",
-        "duration" => "7 min",
-        "username" => "Rafael Germinari",
-        "thumbnail_url" => "https://marketplace.canva.com/EAEqfS4X0Xw/1/0/1600w/canva-most-attractive-youtube-thumbnail-wK95f3XNRaM.jpg",
-        "avatar_url" => "https://senachub.ms.senac.br/hubinnovation/uploads/fotos/6706850e20f59.jpg",
-        "created_at" => "há 1 ano",
-        "url" => "#",
-        "comments" => "12",
-        "likes" => "4.5",
-        "views" => "540K"
-    ],
-    [
-        "type_card" => "channel",
-        "title" => "Como montar cavalos brancos ",
-        "duration" => "7 min",
-        "username" => "CAVALO bRANCO",
-        "thumbnail_url" => "https://img.elo7.com.br/product/main/20706C1/painel-cavalo-branco-frete-gratis-cavalo-branco.jpg",
-        "avatar_url" => "https://senachub.ms.senac.br/hubinnovation/uploads/fotos/6706850e20f59.jpg",
-        "created_at" => "há 1 ano",
-        "url" => "#",
-        "comments" => "2000",
-        "likes" => "4.5",
-        "views" => "9990k"
-    ],
-    [
-        "type_card" => "channel",
-        "title" => "Como montar cavalos brancos ",
-        "duration" => "7 min",
-        "username" => "CAVALO bRANCO",
-        "thumbnail_url" => "https://img.elo7.com.br/product/main/20706C1/painel-cavalo-branco-frete-gratis-cavalo-branco.jpg",
-        "avatar_url" => "https://senachub.ms.senac.br/hubinnovation/uploads/fotos/6706850e20f59.jpg",
-        "created_at" => "há 1 ano",
-        "url" => "#",
-        "comments" => "12",
-        "likes" => "4.5",
-        "views" => "540K"
-    ],
-    [
-        "type_card" => "channel",
-        "title" => "Como montar cavalos brancos ",
-        "duration" => "7 min",
-        "username" => "CAVALO bRANCO",
-        "thumbnail_url" => "https://img.elo7.com.br/product/main/20706C1/painel-cavalo-branco-frete-gratis-cavalo-branco.jpg",
-        "avatar_url" => "https://senachub.ms.senac.br/hubinnovation/uploads/fotos/6706850e20f59.jpg",
-        "created_at" => "há 1 ano",
-        "url" => "#",
-        "comments" => "12",
-        "likes" => "4.5",
-        "views" => "540K"
-    ],
-    [
-        "type_card" => "channel",
-        "title" => "Como montar cavalos brancos ",
-        "duration" => "7 min",
-        "username" => "CAVALO bRANCO",
-        "thumbnail_url" => "https://img.elo7.com.br/product/main/20706C1/painel-cavalo-branco-frete-gratis-cavalo-branco.jpg",
-        "avatar_url" => "https://senachub.ms.senac.br/hubinnovation/uploads/fotos/6706850e20f59.jpg",
-        "created_at" => "há 1 ano",
-        "url" => "#",
-        "comments" => "12",
-        "likes" => "4.5",
-        "views" => "540K"
-    ],
-    [
-        "type_card" => "channel",
-        "title" => "Como montar cavalos brancos ",
-        "duration" => "7 min",
-        "username" => "CAVALO bRANCO",
-        "thumbnail_url" => "https://img.elo7.com.br/product/main/20706C1/painel-cavalo-branco-frete-gratis-cavalo-branco.jpg",
-        "avatar_url" => "https://senachub.ms.senac.br/hubinnovation/uploads/fotos/6706850e20f59.jpg",
-        "created_at" => "há 1 ano",
-        "url" => "#",
-        "comments" => "12",
-        "likes" => "4.5",
-        "views" => "540K"
-    ],
-];
+$videos = $_SESSION["page_data"]["videos"];
 
 ?>
 
@@ -142,7 +66,7 @@ $videos = [
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-5">
                 <?php
-                    echo renderCards($videos, 'channel');
+                    echo renderCards($videos, 'VIDEO');
                 ?>
             </div>
         </div>

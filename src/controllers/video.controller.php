@@ -57,4 +57,19 @@ class VideoController extends Controller{
             echo $exception->getFullMessage();
         }
     }
+
+
+    public function GetAllVideos(){
+        try {
+            
+            $this->videoModel = $this->model("video");
+
+            $this->videoModel->getVideos();
+
+            
+
+        } catch (\Throwable $exception) {
+           
+        }
+    }
 }

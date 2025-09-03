@@ -83,5 +83,11 @@ class VideoModel extends Model
 
         return $this->database->query($sql);
     }
+
+    public function getVideos(){
+        $sql = "SELECT * FROM videos WHERE type = 'VIDEO'";
+
+        return $this->database->query($sql);
+    }
     
 }

@@ -6,6 +6,7 @@ require_once __DIR__ . '/../../../vendor/autoload.php';
 
 use Dotenv\Dotenv;
 use Src\Application\Controllers\CategoriesViewController;
+use Src\Application\Controllers\ContentVideoViewController;
 use Src\Application\Controllers\CreateUserController;
 use Src\Application\Controllers\SignUpController;
 use Src\Application\Controllers\SignUpViewController;
@@ -38,8 +39,10 @@ $router->get('/home', HomeController::class);
 $router->get('/home', HomeController::class, RedirectUserNotLoggedMiddleware::class);
 $router->get('/home/categories', CategoriesViewController::class, RedirectUserNotLoggedMiddleware::class);
 
-$router->get('/auth/signin', SignInViewController::class, RedirectUserLoggedMiddleware::class);
 $router->get('/create/video', VideoViewController::class);
+$router->get('/content/video', ContentVideoViewController::class);
+
+$router->get('/auth/signin', SignInViewController::class, RedirectUserLoggedMiddleware::class);
 $router->get("/auth/signup", SignUpViewController::class, RedirectUserLoggedMiddleware::class);
 $router->get("/auth/signup/password", CreatePasswordController::class, RedirectUserLoggedMiddleware::class);
 
