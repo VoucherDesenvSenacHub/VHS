@@ -17,6 +17,7 @@ $user = $_SESSION["page_data"]["user"] ?? [];
 $categories = $_SESSION["page_data"]["categories"] ?? [];
 $errors = $_SESSION["redirect_data"]["errors"] ?? [];
 # print_r($user["categories"]);
+$avatar_url = !empty($user['avatar_url']) ? $user['avatar_url'] : 'default.png';
 ?>
 
 <!DOCTYPE html>
@@ -67,7 +68,7 @@ class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-re
         <!-- <h2 class="text-xl font-semibold">Informações do perfil</h2> -->
         <div class="flex items-center gap-4 w-full">
             <div class="w-36 h-36 relative flex  shrink-0 overflow-hidden rounded-full">
-                <img id="profileImage" src=<?="/VHS/public/uploads/avatars/" . $user['avatar_url']?> alt="Imagem de Perfil" class="object-cover w-full h-full">
+                <img id="profileImage" src="/VHS/public/uploads/avatars/<?=$avatar_url?>" alt="Imagem de Perfil" class="object-cover w-full h-full">
             </div>
             <div class="flex space-x-3 w-96">
                 <button id="uploadButton" class="bg-purple-700 transition-colors hover:bg-purple-800 text-white rounded flex justify-center items-center w-full h-[40px] gap-2 rounded-md cursor-pointer " type="button">Carregar foto</button>

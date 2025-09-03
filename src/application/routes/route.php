@@ -43,6 +43,6 @@ $router->get("/auth/signup", SignUpViewController::class, RedirectUserLoggedMidd
 $router->get("/auth/signup/password", CreatePasswordController::class, RedirectUserLoggedMiddleware::class);
 $router->get("/auth/signup/verify-email", VerifyEmailViewController::class);
 $router->get("/api/v1/auth/signup/verify-email", VerifyEmailController::class);
-
+$router->get("/user/settings", UserSettingsViewController::class, RedirectUserNotLoggedMiddleware::class);
 
 $router->run();
