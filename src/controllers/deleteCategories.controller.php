@@ -8,7 +8,7 @@ use Src\Application\Core\Controller;
 use Src\Infra\Model\CategoryModel;
 use function Src\Application\Utils\Redirect\redirect;
 
-class UpdateCategoriesController extends Controller
+class DeleteCategoriesController extends Controller
 {
     protected CategoryModel $categoryModel;
 
@@ -24,18 +24,14 @@ class UpdateCategoriesController extends Controller
             if (empty($existingCategory)) {
                 throw new Error("Categoria não encontrada.");
             }
-            if (!isset($_POST['updateCategory']) || empty(trim($_POST['updateCategory']))) {
-                throw new Error("O nome da categoria é obrigatório.");
-            }
-            $updated = $this->categoryModel->updateCategories(
+            $delete = $this->categoryModel->deleteCategories(
                 $idCategory,
-                trim($_POST['updateCategory'])
             );
-            if ($updated) {
-                echo "Categoria atualizada com sucesso!";
+            if ($delete) {
+                echo "Categoria deletada com sucesso!";
                 return redirect('/VHS/admin/categories');
             } else {
-                throw new Error("Falha ao atualizar a categoria.");
+                throw new Error("Falha ao deletar a categoria.");
             }
         } catch (NestedValidationException | Error $exception) {
             return $this->jsonResponse([

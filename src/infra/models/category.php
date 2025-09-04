@@ -56,4 +56,11 @@ class CategoryModel extends Model
             ":id" => $id
         ]);
     }
+    public function deleteCategories(string $id): bool
+    {
+        $sql = "DELETE FROM categories WHERE id = :id";
+        return $this->database->exec($sql, [
+            ":id" => $id
+        ]);
+    }
 }

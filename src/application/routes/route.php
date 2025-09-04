@@ -9,6 +9,7 @@ use Src\Application\Controllers\CategoriesViewController;
 use Src\Application\Controllers\AdminCategoriesViewController;
 use Src\Application\Controllers\CreateCategoriesController;
 use Src\Application\Controllers\UpdateCategoriesController;
+use Src\Application\Controllers\DeleteCategoriesController;
 use Src\Application\Controllers\CreateUserController;
 use Src\Application\Controllers\SignUpController;
 use Src\Application\Controllers\SignUpViewController;
@@ -32,6 +33,7 @@ $router->post('/api/v1/auth/signin', SignInController::class);
 
 $router->post('/api/v1/admin/categories', CreateCategoriesController::class);
 $router->post('/api/v1/admin/categories/update', UpdateCategoriesController::class);
+$router->post('/api/v1/admin/categories/delete', DeleteCategoriesController::class);
 
 $router->post("/api/v1/signup/password", CreateUserController::class, RedirectUserLoggedMiddleware::class);
 $router->post('/api/v1/auth/signup', SignUpController::class);
