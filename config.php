@@ -5,9 +5,24 @@ $dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 session_start();
 
-if(isset($_GET["logout"]) && $_GET["logout"] == 1) {
-    setcookie("token", "", -1, "/");
+if (isset($_GET["logout"])) {
+    setcookie("token", "", time() - 3600, "/");
     unset($_COOKIE["token"]);
-    unset($_SESSION["user"]);
+    $_SESSION = [];
+    if (ini_get("session.use_cookies")) {
+        $params = session_get_cookie_params();
+        setcookie(
+            session_name(),
+            '',
+            time() - 3600,
+            $params["path"],
+            $params["domain"],
+            $params["secure"],
+            $params["httponly"]
+        );
+    }
+    session_destroy();
+    header("Location: /VHS/home");
+    exit;
 }
 ?>

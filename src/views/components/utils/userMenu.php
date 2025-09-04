@@ -46,7 +46,7 @@ function UserMenu(
                 </div>
             </button>
         </a>
-
+        
         <a href='/VHS/studio' class='w-full'>
             <button id='button-vhs-studio' class='w-full flex p-1 sm:p-2 items-center gap-2 hover:bg-white/5 focus:bg-white/10 transition-all duration-200'>
                 <div class='flex-shrink-0 w-12 h-12 3xl:w-14 3xl:h-14 p-3 flex justify-center items-center'>
@@ -74,14 +74,11 @@ function UserMenu(
         </a>
     </div>
 
-    <a href='/VHS/src/views/pages/auth/login'>
-        <button id='button-logout' class='w-full flex p-1 sm:p-2 items-center gap
-
--2 hover:bg-white/5 focus:bg-white/10 transition-all duration-200'>
+    <a href='?logout'>
+        <button id='button-logout' class='w-full flex p-1 sm:p-2 items-center gap-2 hover:bg-white/5 focus:bg-white/10 transition-all duration-200'>
             <div class='flex-shrink-0 w-12 h-12 3xl:w-14 3xl:h-14 p-3 flex justify-center items-center'>
                 <img class='select-none pointer-events-none w-full h-full' src='/VHS/public/icons/Logout.svg' onerror='this.style.display="none" onclick=''>
             </div>
-            
             <div class='flex flex-col pr-4 overflow-hidden'>
                 <h2 class='select-none truncate 3xl:text-paragraph 3xl:text-subtitle text-[#bc3636]'>Sair da conta</h2>
             </div>
@@ -90,8 +87,3 @@ function UserMenu(
 </div>
 HTML;
 }
-
-function LogoutButton() {
-   
-}
-?>

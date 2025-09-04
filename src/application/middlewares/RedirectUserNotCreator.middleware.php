@@ -15,7 +15,7 @@ use function Src\Application\Utils\Redirect\redirect;
 
 class RedirectUserNotCreatorMiddleware {
     public function execute() {
-        if($_SESSION["user"]["role"] != "CREATOR" or $_SESSION["user"]["role"] != "ADMIN") {
+        if($_SESSION["user"]["role"] == "USER") {
             return redirect($_SERVER['HTTP_REFERER'] ?? "/VHS/home", ["errors" => "Você não tem permissão para executar essa ação."]);
         }
     }
