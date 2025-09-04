@@ -7,6 +7,8 @@ require_once __DIR__ . '/../../../vendor/autoload.php';
 use Dotenv\Dotenv;
 use Src\Application\Controllers\CategoriesViewController;
 use Src\Application\Controllers\CreateUserController;
+use Src\Application\Controllers\CommentController;
+use Src\Application\Controllers\DeleteCommentController;
 use Src\Application\Controllers\SignUpController;
 use Src\Application\Controllers\SignUpViewController;
 use Src\Application\Controllers\CreatePasswordController;
@@ -29,6 +31,10 @@ $router->post('/api/v1/auth/signin', SignInController::class);
 
 $router->post("/api/v1/signup/password", CreateUserController::class, RedirectUserLoggedMiddleware::class);
 $router->post('/api/v1/auth/signup', SignUpController::class);
+
+$router->post('/api/v1/home/video/', Commentcontroller::class);
+
+$router->post('/api/v1/home/video/delete', DeleteCommentcontroller::class);
 
 
 $router->get('/home', HomeController::class);

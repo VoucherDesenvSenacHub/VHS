@@ -7,8 +7,8 @@ function Comment(
     string $text,
     string $created_at = null,
     string $userImg = null,
-    int $commentUserId = null,  
-    int $loggedUserId = null,
+    string $commentUserId = null,  
+    string $loggedUserId = null,
     string $commentid
 ) {
     $userImg = $userImg
@@ -72,6 +72,6 @@ function Comment(
             </div>
             $menu
         </div>
-        <script src='/VHS/src/views/components/utils/comments/script.js'></script>
+       
     ";
 }

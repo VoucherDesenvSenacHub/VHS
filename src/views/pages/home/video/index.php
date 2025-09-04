@@ -6,8 +6,15 @@
  use Src\Infra\Models\CommentModel;
  
  $userModel = new UserModel();
- $user = $userModel->findUserByEmail('jaofelipes22@gmail.com')[0]['id'];
  $video_id = 2;
+ 
+ 
+ if (isset($_SESSION['user'])) {
+   $user_id = $_SESSION['user']['id'];
+  } else {
+    $user_id = null;
+  }
+
  
  $commentModel = new CommentModel();
  $comments = $commentModel->getCommentsByVideoId($video_id);
@@ -160,7 +167,7 @@
                      date('d/m/Y H:i', strtotime($comment['created_at'])),
                      $comment['avatar_url'],
                      $comment['user_id'],   
-                     $user,
+                     $user_id,
                      $comment['id']
                      
                  );
