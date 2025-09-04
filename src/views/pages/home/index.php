@@ -9,7 +9,7 @@ require_once __DIR__ . "/../../components/utils/sweetalert.php";
 
 use function Src\Views\Components\Header\HeaderComponent;
 use function Src\Views\Components\Sidebar\SidebarComponent;
-use function Src\Views\Components\Cards\renderCards;
+use function Src\Views\Components\Cards\viewCards;
 use function Views\Components\FeaturedCard\FeaturedCardComponent;
 
 echo "<style>
@@ -89,7 +89,7 @@ $categories = $_SESSION["page_data"]["categories"] ?? [];
                     <p class="text-gray-400 text-sm mb-6">Confira os vídeos mais populares da nossa plataforma VHS</p>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                        <?= renderCards($mostPopularVideos, 'video'); ?>
+                        <?= viewCards($mostPopularVideos, 'video'); ?>
                     </div>
                 </section>
 
@@ -98,7 +98,7 @@ $categories = $_SESSION["page_data"]["categories"] ?? [];
                         <h2 class="text-2xl font-bold text-white mb-6"><span class="text-purple-400">#</span> <?= $category['name'] ?? "" ?></h2>
                         
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                            <?= renderCards($category["videos"], 'video'); ?>
+                            <?= viewCards($category["videos"], 'video'); ?>
                         </div>
                     </section>
                 <?php endforeach; ?>
