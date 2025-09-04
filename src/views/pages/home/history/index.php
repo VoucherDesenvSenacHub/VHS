@@ -1,5 +1,7 @@
 <?php
 
+$history = $_SESSION["page_data"]["history"] ?? [];
+
 require "../../../components/header/headerComponent.php";
 require "../../../components/sidebar/SidebarComponent.php";
 require "../../../components/cards/index.php";
@@ -43,6 +45,7 @@ $videoHTMX = [
     "likes" => 1500,
     "comments" => 125
 ];
+var_dump($history);
 
 $mostPopularVideos = [
     [

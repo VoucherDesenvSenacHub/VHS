@@ -16,6 +16,12 @@ class VideoModel extends Model {
         return $this->database->query($sql, ['query' => '%' . $query . '%']);
     }
 
+    public function getVideoById(string $id): array {
+        $sql = "SELECT * FROM videos WHERE  id = :query";
+
+        return $this->database->query($sql, ['id' => '%' . $id . '%']);
+    }
+
 
     public function getFastByTitle(string $query): array {
 
