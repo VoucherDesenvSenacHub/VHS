@@ -31,7 +31,7 @@ $router = new Router();
 $router->post('/api/v1/auth/signin', SignInController::class);
 
 $router->post('/api/v1/admin/categories', CreateCategoriesController::class);
-$router->post('/api/v1/admin/categories/{id}', UpdateCategoriesController::class);
+$router->post('/api/v1/admin/categories/update', UpdateCategoriesController::class);
 
 $router->post("/api/v1/signup/password", CreateUserController::class, RedirectUserLoggedMiddleware::class);
 $router->post('/api/v1/auth/signup', SignUpController::class);

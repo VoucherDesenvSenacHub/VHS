@@ -25,7 +25,7 @@ class CreateCategoriesController extends Controller
             $create = $this->CategoryModel->createCategories($_POST["nameCategory"]);
             if ($create) {
                 echo "Categoria criada com sucesso!";
-                return redirect("http://localhost/VHS/src/application/routes/route.php/admin/categories");
+                return redirect("/VHS/admin/categories");
             } else {
                 throw new Error("- Erro ao criar categoria");
             }

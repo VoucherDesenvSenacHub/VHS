@@ -90,8 +90,7 @@ function categoriesDataTableComponent(array $categories, int $page = 1, int $per
                 <div class="flex justify-center items-center">
                     <h2 class="text-2xl font-bold text-white cursor-default">Editar Categoria</h2>
                 </div>
-                <form method="POST" action="/VHS/src/application/routes/route.php/api/v1/admin?update=<?php echo htmlspecialchars($category['id'], ENT_QUOTES, 'UTF-8'); ?>" class="edit-category-form">
-                    <!-- <input type="hidden" name="update" value="<?php echo htmlspecialchars($category['id'], ENT_QUOTES, 'UTF-8'); ?>"> -->
+                <form method="POST" action="/VHS/src/application/routes/route.php/api/v1/admin/categories/update" class="edit-category-form">
                     <div class="flex flex-col gap-4 w-full">
                         <div class="flex flex-col w-full justify-start">
                             <div class="flex w-full justify-start">
@@ -102,11 +101,15 @@ function categoriesDataTableComponent(array $categories, int $page = 1, int $per
                                 class="col-span-3 bg-gray-800 border border-gray-700 text-gray-50 p-2 rounded"
                                 value="<?php echo htmlspecialchars($category['name'], ENT_QUOTES, 'UTF-8'); ?>"
                                 required />
+                            <input
+                                type="hidden"
+                                name="categoryId"
+                                value="<?php echo htmlspecialchars($category['id'], ENT_QUOTES, 'UTF-8'); ?>" />
                         </div>
-                    </div>
-                    <div class="mt-4 flex justify-between gap-2">
-                        <button type="button" id="<?php echo $closeModalId; ?>" class="outline outline-1 px-4 py-2 outline-[#660BAD] rounded-md transition-colors hover:bg-gray-800 w-[200px] h-[50px]">Cancelar</button>
-                        <button type="submit" class="bg-[#660BAD] transition-colors hover:bg-purple-700 text-gray-50 px-4 py-2 rounded-md w-[200px] h-[50px]">Salvar</button>
+                        <div class="mt-4 flex justify-between gap-2">
+                            <button type="button" id="<?php echo $closeModalId; ?>" class="outline outline-1 px-4 py-2 outline-[#660BAD] rounded-md transition-colors hover:bg-gray-800 w-[200px] h-[50px]">Cancelar</button>
+                            <button type="submit" class="bg-[#660BAD] transition-colors hover:bg-purple-700 text-gray-50 px-4 py-2 rounded-md w-[200px] h-[50px]">Salvar</button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -261,29 +264,54 @@ function categoriesDataTableComponent(array $categories, int $page = 1, int $per
         });
 
         // Manipula envio do formulário via AJAX
-        document.querySelectorAll(".edit-category-form").forEach(form => {
-            form.addEventListener("submit", async (event) => {
-                event.preventDefault();
-                const formData = new FormData(form);
-                const actionUrl = form.getAttribute("action");
+        // Inicializa modais de edição dinamicamente
+        document.querySelectorAll("[id^=openModal-]").forEach(button => {
+            const categoryId = button.dataset.categoryId;
+            const modal = document.getElementById(`modal-${categoryId}`);
+            const overlay = document.getElementById(`overlay-${categoryId}`);
+            const closeModalButton = document.getElementById(`closeModal-${categoryId}`);
+            const modalContent = modal.querySelector("div");
 
-                try {
-                    const response = await fetch(actionUrl, {
-                        method: "POST",
-                        body: formData
-                    });
-                    const result = await response.json();
+            button.addEventListener("click", () => {
+                // ✅ Atualiza a URL para /admin/categories/{id}
+                const baseUrl = window.location.origin + window.location.pathname;
+                window.history.pushState({}, '', `${baseUrl}/${categoryId}`);
 
-                    if (result.success) {
-                        showNotification("Sucesso", result.message);
-                        setTimeout(() => {
-                            window.location.href = result.redirect;
-                        }, 2000);
-                    } else {
-                        showNotification("Erro", result.message);
-                    }
-                } catch (error) {
-                    showNotification("Erro", "Ocorreu um erro ao processar a solicitação.");
+                modal.classList.remove("hidden");
+                overlay.classList.remove("hidden");
+                modal.classList.add("opacity-100");
+                overlay.classList.add("opacity-100");
+                modalContent.classList.remove("-translate-y-12");
+                document.body.classList.add("overflow-hidden");
+                modalContent.focus();
+            });
+
+            window[`closeModal${categoryId}`] = () => {
+                const baseUrl = window.location.origin + window.location.pathname.split('/').slice(0, -1).join('/');
+                window.history.pushState({}, '', baseUrl);
+
+                modal.classList.remove("opacity-100");
+                overlay.classList.remove("opacity-100");
+                modalContent.classList.add("-translate-y-12");
+                setTimeout(() => {
+                    modal.classList.add("hidden");
+                    overlay.classList.add("hidden");
+                    document.body.classList.remove("overflow-hidden");
+                    button.focus();
+                }, 300);
+            };
+
+            closeModalButton.addEventListener("click", window[`closeModal${categoryId}`]);
+
+            modal.addEventListener("click", (event) => {
+                if (event.target === modal || event.target === overlay) {
+                    window[`closeModal${categoryId}`]();
+                }
+            });
+
+            document.addEventListener("keydown", (event) => {
+                if (event.key === "Escape" && !modal.classList.contains("hidden")) {
+                    window[`closeModal${categoryId}`]();
                 }
             });
         });

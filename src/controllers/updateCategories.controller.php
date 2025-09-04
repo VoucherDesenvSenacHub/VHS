@@ -16,25 +16,35 @@ class UpdateCategoriesController extends Controller
     {
         try {
             $this->categoryModel = $this->model("category");
-            $idCategory = $_GET["update"];
-            if ($idCategory) {
-                $existingCategory = $this->categoryModel->findById($idCategory);
-                if (empty($existingCategory)) {
-                    throw new Error("Categoria não encontrada.");
-                }
-                $updated = $this->categoryModel->updateCategories(
-                    $idCategory,
-                    trim($_POST['updateCategory'])
-                );
-                if ($updated) {
-                    return $this->jsonResponse([
-                        'success' => true,
-                        'message' => 'Categoria atualizada com sucesso.',
-                        redirect('/VHS/src/application/routes/route.php/admin/categories')
-                    ], 200);
-                } else {
-                    throw new Error("Falha ao atualizar a categoria.");
-                }
+            $idCategory = $_POST['categoryId'] ?? null;
+
+            // Validar se o ID da categoria foi fornecido
+            if (!$idCategory) {
+                throw new Error("ID da categoria não fornecido.");
+            }
+
+            // Verificar se a categoria existe
+            $existingCategory = $this->categoryModel->findById($idCategory);
+            if (empty($existingCategory)) {
+                throw new Error("Categoria não encontrada.");
+            }
+
+            // Validar se o campo updateCategory existe e não está vazio
+            if (!isset($_POST['updateCategory']) || empty(trim($_POST['updateCategory']))) {
+                throw new Error("O nome da categoria é obrigatório.");
+            }
+
+            // Atualizar a categoria
+            $updated = $this->categoryModel->updateCategories(
+                $idCategory,
+                trim($_POST['updateCategory'])
+            );
+
+            if ($updated) {
+                echo "Categoria atualizada com sucesso!";
+                return redirect('/VHS/admin/categories');
+            } else {
+                throw new Error("Falha ao atualizar a categoria.");
             }
         } catch (NestedValidationException | Error $exception) {
             return $this->jsonResponse([
