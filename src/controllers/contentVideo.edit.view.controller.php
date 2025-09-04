@@ -8,17 +8,22 @@ use Src\Infra\Model\VideoModel;
 require_once __DIR__ . '/../application/core/controller.php';
 require_once __DIR__ . '/../infra/models/video.php';
 
-class ContentVideoViewController extends Controller
+class ContentVideoEditViewController extends Controller
 {
     public VideoModel $videoModel;
 
     public function index()
     {
         $this->videoModel = new VideoModel();
-        $videos = $this->videoModel->getAllVideos();
 
-        $this->view("/studio/content/index", [
-            "videos" => $videos
+        $id =  $_GET["id"] ?? null;
+
+        $video_id = $this->videoModel->getVideoByID($id);
+        $categorias = $this->videoModel->getAllCategories();
+
+        $this->view("/studio/content/video/index", [
+            "video_id" => $video_id,
+            "categorias" => $categorias
         ]);
     }
 }

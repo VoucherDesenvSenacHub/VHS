@@ -1,18 +1,17 @@
 <?php
-require "../../../../components/utils/buttonComponent.php";
-require "../../../../components/utils/inputComponent.php";
-require "../../../../components/utils/textareaComponent.php";
-require "../../../../components/header/headerComponent.php";
-require "../../../../components/studioSideMenu/studioSideMenuComponent.php";
-require "../../../../components/utils/Title_and_buttons.php";
-require "../../../../components/utils/footer.php";
+require_once __DIR__ . "/../../../../components/utils/buttonComponent.php";
+require_once __DIR__ . "/../../../../components/utils/inputComponent.php";
+require_once __DIR__ . "/../../../../components/utils/textareaComponent.php";
+require_once __DIR__ . "/../../../../components/header/headerComponent.php";
+require_once __DIR__ . "/../../../../components/studioSideMenu/studioSideMenuComponent.php";
+require_once __DIR__ . "/../../../../components/utils/Title_and_buttons.php";
+require_once __DIR__ . "/../../../../components/utils/footer.php";
 
 use function Src\Views\Components\Utils\ButtonComponent;
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\Utils\TextareaComponent;
 use function Src\views\components\header\HeaderComponent;
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
-use function src\views\components\utils\Title_and_buttons;
 use function src\views\components\utils\Footer;
 
 $botoes = [
@@ -20,6 +19,9 @@ $botoes = [
     ['texto' => 'Comentários', 'link' => '../components/teste.php'],
     ['texto' => 'Analytics', 'link' => '']
 ];
+
+$video_id = $_SESSION["page_data"]["video_id"] ?? [];
+$categorias = $_SESSION["page_data"]["categorias"] ?? [];
 
 $conteudos = []
 ?>
@@ -46,7 +48,7 @@ $conteudos = []
         <div class="">
             <?= StudioSideMenuComponent() ?>
         </div>
-        
+
         <div class="flex flex-col gap-4 max-w-[1500px] w-full mx-auto">
             <div class="text-white flex flex-col gap-2">
                 <div>
@@ -55,62 +57,91 @@ $conteudos = []
                 </div>
                 <div class="flex gap-4 w-96 mb-12 mt-4">
                     <?php
-                        echo ButtonComponent("Edição", "studio", "", 10.675, 2.5,"",'/VHS/src/views/pages/studio/content/video');
-                        echo ButtonComponent("Comentários", "studio", "", 10.675, 2.5,"","/VHS/src/views/pages/studio/content/video/comments.php");
-                        echo ButtonComponent("Analytics", "studio", "", 10.675, 2.5,"","/VHS/src/views/pages/studio/content/video/analytics.php");
+                    echo ButtonComponent("Edição", "studio", "", 10.675, 2.5, "", '/VHS/src/views/pages/studio/content/video');
+                    echo ButtonComponent("Comentários", "studio", "", 10.675, 2.5, "", "/VHS/src/views/pages/studio/content/video/comments.php");
+                    echo ButtonComponent("Analytics", "studio", "", 10.675, 2.5, "", "/VHS/src/views/pages/studio/content/video/analytics.php");
                     ?>
-                </div>  
-                
-                <div class="w-full h-full md:h-[400px] border-2 rounded-xl border-solid flex items-center justify-center relative overflow-hidden -mt-8 flex-wrap">
-                    
-                    <video id="videoPreview" class="hidden w-full h-full object-cover rounded-lg absolute" controls></video>
-                    
-                    <div id="uploadArea" class="flex flex-col items-center justify-center w-full h-full">
-                        <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-                                </svg>
-                                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> ou arraste e solte</p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">MP4, WebM, Ogg (MAX. 50MB)</p>
+                </div>
+
+                <form action="" enctype="multipart/form-data" method="post">
+                    <div class="w-full h-full md:h-[400px] border-2 rounded-xl border-solid flex items-center justify-center relative overflow-hidden -mt-8 flex-wrap">
+                        <div id="uploadArea" class="flex flex-col items-center justify-center w-full h-full">
+                            <label for="dropzone-file"
+                                class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+
+                                <div id="preview" class="w-full h-full <?= !empty($video["thumbnail_url"]) ? '' : 'hidden' ?>">
+                                    <img id="thumbnailPreview" src="<?= $video["thumbnail_url"] ?>" class="object-cover w-full h-full rounded-lg" alt="Preview" />
+                                </div>
+
+                                <div id="uploadText" class="flex flex-col items-center justify-center pt-5 pb-6">
+                                    <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="none" viewBox="0 0 20 16">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                    </svg>
+                                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> ou arraste e solte</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, JPEG</p>
+                                </div>
+
+                                <input id="dropzone-file" type="file" class="hidden" accept="image/png, image/jpg, image/jpeg" name="thumbnail" value="<?= $video["thumbnail_url"] ?>" required />
+                            </label>
+                        </div>
                     </div>
-                    <input id="dropzone-file" type="file" class="hidden" accept="video/mp4,video/webm,video/ogg" />
-                </label>
+                    <?php foreach ($video_id as $video): ?>
+                        <div id="Title">
+                            <h1 class="text-3xl text-white font-semibold mt-4">Título</h1>
+                            <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
+                            <?= InputComponent(type: "text", placeholder: "Tudo sobre o Next.js 15, nova arquitetura de pasta", value: $video["title"]) ?>
+                        </div>
+                        <div id="Description">
+                            <h1 class="text-3xl text-white font-semibold mt-4">Descrição</h1>
+                            <p class="text-paragraph text-gray-400 p-0 mb-2">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl.
+                            </p>
+                            <div class="">
+                                <?= TextareaComponent(
+                                    type: "text",
+                                    placeholder: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.  😍😍😍",
+                                    height: "96",
+                                    multiline: true,
+                                    value: $video["description"]
+                                ) ?>
+                            </div>
+                        </div>
+                        <div id="Public">
+                            <h1 class="text-3xl text-white font-semibold mt-4">Público</h1>
+                            <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
+                            <?= InputComponent(type: "text", placeholder: "Estudante de Nível Técnico de tecnologia, Entusiasta em foguetes") ?>
+                        </div>
+
+                        <div id="Category">
+                            <h1 class="text-3xl text-white font-semibold mt-4">Categoria</h1>
+                            <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
+                            <select name="category_id" class="px-3 py-1.5 outline outline-1 outline-[#666666] rounded-md placeholder-[#666666] text-zinc-200 w-full h-[45px] bg-transparent">
+                                <?php foreach ($categorias as $categoria): ?>
+                                    <option value="<?= $categoria['id'] ?>"
+                                        class="text-black"
+                                        <?= ($video["category_id"] == $categoria['id']) ? "selected" : "" ?>>
+                                        <?= htmlspecialchars($categoria['name']) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
+
+                        <div class="flex justify-center items-end gap-10 my-6">
+                            <?= ButtonComponent("Salvar Alterações", "default", null, 30) ?>
+                            <?= ButtonComponent(text: "Cancelar", variant: "outline", id: "cancel-button", width: 30) ?>
+                        </div>
+                    <?php endforeach; ?>
+                </form>
             </div>
-        </div>
-        <div id="Title">
-            <h1 class="text-3xl text-white font-semibold mt-4">Título</h1>
-            <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-            <?= InputComponent(type: "text", placeholder: "Tudo sobre o Next.js 15, nova arquitetura de pasta") ?>
-        </div>
-        <div id="Description">
-            <h1 class="text-3xl text-white font-semibold mt-4">Descrição</h1>
-            <p class="text-paragraph text-gray-400 p-0 mb-2">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl.
-            </p>
-            <div class="">
-                <?= TextareaComponent(type: "text", 
-            placeholder: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.  😍😍😍", height:"96", multiline: true
-            ) ?>    
-            </div>
-        </div>
-        <div id="Public">
-            <h1 class="text-3xl text-white font-semibold mt-4">Público</h1>
-            <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-            <?= InputComponent(type: "text", placeholder: "Estudante de Nível Técnico de tecnologia, Entusiasta em foguetes") ?>
-        </div>
-        
-        <div class="flex justify-center items-end gap-10 my-6">
-            <?= ButtonComponent("Salvar Alterações", "default", null, 30) ?>
-            <?= ButtonComponent(text: "Cancelar", variant: "outline", id: "cancel-button", width:30) ?>
         </div>
     </div>
-</div>
-</div>
 
-<footer class=""> <?= Footer()?> </footer>
+    <footer class=""> <?= Footer() ?> </footer>
 
-<script src="./videofast.js"></script>
+    <script src="./videofast.js"></script>
 
 </body>
+
 </html>

@@ -38,7 +38,7 @@ class Cards {
 
     private static function Video(array $card): string {
         $url        = purifyProperty($card['url']);
-        $thumbnail  = purifyProperty($card['thumbnail']);
+        $thumbnail_url  = purifyProperty($card['thumbnail_url']);
         $username   = purifyProperty($card['username']);
         $avatar_url = purifyProperty($card['avatar_url']);
         $title      = purifyProperty($card['title']);
@@ -49,7 +49,7 @@ class Cards {
         return <<<HTML
             <a href='$url' class='card flex flex-col cursor-pointer relative max-w-[340px] h-[340px] bg-gray600 rounded-3xl overflow-hidden shadow-lg transition-all duration-300'>
                 <div class='relative w-full h-[50%]'>
-                    <img src='$thumbnail' class='w-full h-full object-cover'>
+                    <img src='$thumbnail_url' class='w-full h-full object-cover'>
 
                     <div class='absolute top-3 right-3 bg-black/75 px-2 py-1 rounded-md'>
                         <p class='text-white text-caption 2xl:text-paragraph'>$duration</p>
@@ -90,7 +90,7 @@ class Cards {
 
     private static function Event(array $card): string {
         $url         = purifyProperty($card['url']);
-        $thumbnail   = purifyProperty($card['thumbnail']);
+        $thumbnail_url   = purifyProperty($card['thumbnail_url']);
         $description = purifyProperty($card['description']);
         $username    = purifyProperty($card['username']);
         $title       = purifyProperty($card['title']);
@@ -100,7 +100,7 @@ class Cards {
         return <<<HTML
             <a href='$url' class='card flex flex-col cursor-pointer max-w-[340px] h-[340px] bg-[#1B1B1B] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
                 <div class='relative w-full h-[50%]'>
-                    <img src='$thumbnail' class='w-full h-full object-cover'>
+                    <img src='$thumbnail_url' class='w-full h-full object-cover'>
 
                     <div class='absolute top-3 right-3 bg-black bg-opacity-70 text-white text-caption 2xl:text-paragraph px-4 py-1 rounded-md'>
                         🔥  
@@ -128,19 +128,20 @@ class Cards {
     }
 
     private static function MyChannel(array $card): string {
+        $id       = purifyProperty($card['id']);
         $url        = purifyProperty($card['url']);
-        $thumbnail  = purifyProperty($card['thumbnail']);
+        $thumbnail_url  = purifyProperty($card['thumbnail_url']);
         $title      = purifyProperty($card['title']);
-        $comments   = purifyNumbers($card['comments']);
-        $likes      = purifyNumbers($card['likes']);
-        $views      = purifyNumbers($card['views']);
+        // $comments   = purifyNumbers($card['comments']);
+        // $likes      = purifyNumbers($card['likes']);
+        $views      = purifyNumbers($card['views']) ?? null;
         $created_at = purifyCreatedAt($card['created_at']);
         $duration   = purifyDuration($card['duration']);
 
         return <<<HTML
-            <a href='$url' class='card flex flex-col cursor-pointer max-w-[340px] h-[340px] bg-[#1B1B1B] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
+            <a href='/VHS/content/video/edit?id=$id' class='card flex flex-col cursor-pointer max-w-[340px] h-[340px] bg-[#1B1B1B] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
                 <div class='relative w-full h-[50%]'>
-                    <img src='$thumbnail' class='w-full h-full object-cover'>
+                    <img src='$thumbnail_url' class='w-full h-full object-cover'>
                     
                     <div class='absolute top-3 right-3 bg-black bg-opacity-70 text-white text-caption px-2 py-1 rounded-md'>
                         <p class='text-white text-caption 2xl:text-paragraph'>$duration</p>
@@ -167,7 +168,7 @@ class Cards {
                                 <img src='/VHS/public/icons/comments-card.svg' class='w-full h-full'>
                             </div>
 
-                            <p class='text-gray-400 text-caption 2xl:text-paragraph'>$comments</p>
+                            <p class='text-gray-400 text-caption 2xl:text-paragraph'></p>
                         </div>
 
                         <div class='flex gap-2 items-center'>
@@ -175,7 +176,7 @@ class Cards {
                                 <img src='/VHS/public/icons/star-card.svg' class='w-full h-full'>
                             </div>
 
-                            <p class='text-gray-400 text-caption 2xl:text-paragraph'>$likes</p>
+                            <p class='text-gray-400 text-caption 2xl:text-paragraph'></p>
                         </div>
 
                         <div class='flex gap-2 items-center'>
@@ -193,7 +194,7 @@ class Cards {
 
     private static function Channels(array $card): string {
         $url       = purifyProperty($card['url']);
-        $thumbnail = purifyProperty($card['thumbnail']);
+        $thumbnail_url = purifyProperty($card['thumbnail_url']);
         $username  = purifyProperty($card['username']);
         $title     = purifyProperty($card['title']);
         $duration  = purifyDuration($card['duration']);
@@ -203,7 +204,7 @@ class Cards {
         return <<<HTML
             <a href='$url' class='card flex flex-col cursor-pointer max-w-[340px] h-[340px] bg-[#1B1B1B] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
                 <div class='relative w-full h-[50%]'>
-                    <img src='$thumbnail' class='w-full h-full object-cover'>
+                    <img src='$thumbnail_url' class='w-full h-full object-cover'>
 
                     <div class='absolute top-3 right-3 bg-black bg-opacity-70 px-2 py-1 rounded-md'>
                         <p class='text-white text-caption 2xl:text-paragraph'>$duration</p>
@@ -232,14 +233,14 @@ class Cards {
 
     private static function Fast(array $card): string {
         $url       = purifyProperty($card['url']);
-        $thumbnail = purifyProperty($card['thumbnail']);
+        $thumbnail_url = purifyProperty($card['thumbnail_url']);
         $title     = purifyProperty($card['title']);
         $likes     = purifyNumbers($card['likes']);
         $views     = purifyNumbers($card['views']);
 
         return <<<HTML
             <a href='$url' class='current_fast cursor-pointer flex-shrink-0 w-[340px] h-[35rem] relative flex items-center justify-center rounded-3xl overflow-hidden'>
-                <img src='$thumbnail' class='w-full object-cover h-full absolute'>
+                <img src='$thumbnail_url' class='w-full object-cover h-full absolute'>
 
                 <div class='block w-full bottom-12 absolute px-1'>
                     <h2 class='text-white ml-3.5'>$title</h2>

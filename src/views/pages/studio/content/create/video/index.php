@@ -61,9 +61,9 @@ $botoes = [
                 <h1 class='text-title font-bold'>Criar conteúdo</h1>
                 <h1 class='text-paragraph text-gray-400'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</h1>
                 <div class="mt-2 flex gap-2 w-96">
-                    <?php echo ButtonComponent("Vídeo", "studio", "", 10.675, 2.5, "", "/create/video"); ?>
-                    <?php echo ButtonComponent("Fast", "studio", "", 10.675, 2.5, "", "/create/fast"); ?>
-                    <?php echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5, "", "/create/event"); ?>
+                    <?php echo ButtonComponent("Vídeo", "studio", "", 10.675, 2.5, "", "/VHS/create/video"); ?>
+                    <?php echo ButtonComponent("Fast", "studio", "", 10.675, 2.5, "", "/VHS/create/fast"); ?>
+                    <?php echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5, "", "/VHS/create/event"); ?>
                 </div>
 
                 <form action="/VHS/src/application/routes/route.php/api/v1/studio/create/video" enctype="multipart/form-data" method="post">

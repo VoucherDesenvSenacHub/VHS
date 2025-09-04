@@ -41,8 +41,6 @@ class VideoModel extends Model
 
     public function getFastByTitle(string $query): array
     {
-
-
         $sql = "SELECT * FROM videos WHERE type ='FAST' and (title LIKE :query)";
 
         return $this->database->query($sql, ['query' => '%' . $query . '%']);
@@ -77,17 +75,22 @@ class VideoModel extends Model
     //     }
     // }
 
-    public function getCategories()
+    public function getAllCategories()
     {
         $sql = "SELECT * FROM categories";
 
         return $this->database->query($sql);
     }
 
-    public function getVideos(){
+    public function getAllVideos(){
         $sql = "SELECT * FROM videos WHERE type = 'VIDEO'";
 
         return $this->database->query($sql);
     }
-    
+
+    public function getVideoByID($id){
+        $sql = "SELECT * FROM videos WHERE id = :id";
+
+        return $this->database->query($sql, [":id" => $id]);
+    }
 }

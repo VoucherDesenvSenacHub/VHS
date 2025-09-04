@@ -1,7 +1,5 @@
 <?php
 
-use Src\Infra\Model\VideoModel;
-
 require_once __DIR__ . "/../../../components/sidebar/SidebarComponent.php";
 require_once __DIR__ . "/../../../components/header/headerComponent.php";
 require_once __DIR__ . "/../../../components/cards/index.php";
@@ -10,7 +8,7 @@ require_once __DIR__ . "/../../../components/studioSideMenu/studioSideMenuCompon
 require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
 
 use function src\views\components\Utils\ButtonComponent;
-use function Src\Views\Components\Cards\renderCards;
+use function Src\Views\Components\Cards\viewCards;
 use function Src\Views\Components\header\HeaderComponent;
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
 use function Src\Views\Components\Utils\InputComponent;
@@ -46,9 +44,9 @@ $videos = $_SESSION["page_data"]["videos"];
             </div>
             <div class="flex gap-4 w-96 my-4">
                 <?php
-                    echo ButtonComponent("Videos", "studio", "", 10.675, 2.5,"",'/VHS/src/views/pages/studio/content');
-                    echo ButtonComponent("Fast", "studio", "", 10.675, 2.5,"","/VHS/src/views/pages/studio/content/fast.php");
-                    echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5,"","/VHS/src/views/pages/studio/content");
+                    echo ButtonComponent("Videos", "studio", "", 10.675, 2.5,"",'/content/video');
+                    echo ButtonComponent("Fast", "studio", "", 10.675, 2.5,"","content/fast");
+                    echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5,"","content/event");
                 ?>
             </div>  
 
@@ -66,7 +64,7 @@ $videos = $_SESSION["page_data"]["videos"];
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-5">
                 <?php
-                    echo renderCards($videos, 'VIDEO');
+                    echo viewCards($videos, 'mychannel');
                 ?>
             </div>
         </div>

@@ -10,6 +10,7 @@ use Src\Infra\Model\VideoModel;
 use Respect\Validation\Exceptions\NestedValidationException;
 use Respect\Validation\Rules\NotEmpty;
 use Respect\Validation\Validator as v;
+use Src\Application\Core\Model;
 
 use function Src\Application\Utils\Redirect\redirect;
 use function Src\Application\Utils\UploadArchives;
@@ -59,17 +60,30 @@ class VideoController extends Controller{
     }
 
 
-    public function GetAllVideos(){
-        try {
+    // public function GetAllVideos(){
+    //     try {
             
-            $this->videoModel = $this->model("video");
+    //         $this->videoModel = $this->model("video");
 
-            $this->videoModel->getVideos();
+    //         $this->videoModel->getAllVideos();
 
-            
 
-        } catch (\Throwable $exception) {
+
+    //     } catch (\Throwable $exception) {
            
-        }
-    }
+    //     }
+    // }
+
+    // public function GetVideoByID(){
+    //     try {
+            
+    //         $this->videoModel = $this->model("video");
+
+    //         $this->videoModel->getVideoByID();
+
+
+    //     } catch (\Throwable $th) {
+    //         //throw $th;
+    //     }
+    // }
 }
