@@ -33,7 +33,6 @@ $mostPopularVideos = array_map(function ($video) {
     return $video + ['type_card' => 'video'];
 }, $_SESSION["page_data"]["popular_videos"] ?? []);
 $categories = $_SESSION["page_data"]["categories"] ?? [];
-
 // TODO: Refatorar renderCards
 
 ?>
@@ -89,7 +88,7 @@ $categories = $_SESSION["page_data"]["categories"] ?? [];
                     <p class="text-gray-400 text-sm mb-6">Confira os vídeos mais populares da nossa plataforma VHS</p>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                        <?= viewCards($mostPopularVideos, 'video'); ?>
+                        <?= viewCards($mostPopularVideos, 'videos'); ?>
                     </div>
                 </section>
 
@@ -98,7 +97,7 @@ $categories = $_SESSION["page_data"]["categories"] ?? [];
                         <h2 class="text-2xl font-bold text-white mb-6"><span class="text-purple-400">#</span> <?= $category['name'] ?? "" ?></h2>
                         
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                            <?= viewCards($category["videos"], 'video'); ?>
+                            <?= viewCards($category["videos"], 'videos'); ?>
                         </div>
                     </section>
                 <?php endforeach; ?>

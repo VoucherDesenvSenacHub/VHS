@@ -11,7 +11,7 @@ use function Src\Views\Components\Utils\UserMenu;
 function HeaderComponent() {
 
     $user = $_SESSION["user"] ?? null;
-    $user_avatar = !empty($user['avatar_url']) ? "/VHS/public/uploads/avatars/" . $user['avatar_url'] : '/VHS/public/icons/user.svg';
+    $user_avatar = !empty($user['avatar_url']) ? "/VHS/public/uploads/avatars/" . $user['avatar_url'] : '/VHS/public/uploads/avatars/default.png';
 
     $BarComponent = BarComponent();
     $UserMenu = UserMenu($user_avatar, $user['name'] ?? 'Você', $user['email'] ?? null);
@@ -44,7 +44,7 @@ function HeaderComponent() {
                 <img src='/VHS/public/icons/Rectangle.svg'>
                 
                 <button id='open-user-menu' class='overflow-hidden rounded-full'>
-                    <img src="$avatar_url" class='h-8 w-8 pointer-events-none'>
+                    <img src="$user_avatar" class='h-8 w-8 pointer-events-none'>
                 </button>
             </div>
         </header>
