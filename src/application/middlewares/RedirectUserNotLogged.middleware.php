@@ -30,5 +30,8 @@ class RedirectUserNotLoggedMiddleware {
             }
             $_SESSION["user"] = $user[0];
         }
+        
+        $_SESSION["user"] = $user[0];
+        
     }
 }
