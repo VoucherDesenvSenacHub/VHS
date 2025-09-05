@@ -109,7 +109,7 @@ class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-re
                 errorDescription: $errors["email"] ?? null,
             ) ?>
             <?= InputComponent(
-                placeholder: "Senha123",
+                placeholder: "Sua senha atual",
                 name: "password",
                 type: "password",
                 label: "Senha",
@@ -117,7 +117,7 @@ class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-re
                 iconPosition: "left-1",
             ) ?>
             <?= InputComponent(
-                placeholder: "Senha123",
+                placeholder: "Sua nova senha",
                 name: "new_password",
                 type: "password",
                 label: "Nova senha",

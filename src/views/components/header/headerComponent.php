@@ -10,7 +10,7 @@
     function HeaderComponent() {
         $user = $_SESSION["user"] ?? null;
         $user_avatar = !empty($user['avatar_url']) ? "/VHS/public/uploads/avatars/" . $user['avatar_url'] : '/VHS/public/icons/user.svg';
-
+        
         $BarComponent = BarComponent();
         echo UserMenu($user_avatar, $user['username'] ?? null, $user['email'] ?? null);
 

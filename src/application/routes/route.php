@@ -6,6 +6,7 @@ require_once __DIR__ . '/../../../vendor/autoload.php';
 
 use Dotenv\Dotenv;
 use Src\Application\Controllers\CreateUserController;
+use Src\Application\Controllers\OiController;
 use Src\Application\Controllers\SignUpController;
 use Src\Application\Controllers\SignUpViewController;
 use Src\Application\Controllers\CreatePasswordController;
