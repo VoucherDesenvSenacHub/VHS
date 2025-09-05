@@ -12,7 +12,7 @@ class CategoryModel extends Model {
             ":name" => $name
         ]);
 
-        return $category[0];
+        return $category[0] ?? [];
     }
 
     public function addCategoryInUser(string $categoryId, string $userId) {

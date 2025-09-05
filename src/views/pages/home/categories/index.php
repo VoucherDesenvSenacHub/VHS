@@ -1,288 +1,17 @@
 <?php
 
-require "../../../components/header/headerComponent.php";
-require "../../../components/sidebar/SidebarComponent.php";
-require "../../../components/cards/index.php";
-require "../../../components/featuredCard/featuredCardComponent.php";
+require __DIR__ . "/../../../components/header/headerComponent.php";
+require __DIR__ . "/../../../components/sidebar/SidebarComponent.php";
+require __DIR__ . "/../../../components/cards/index.php";
+require __DIR__ . "/../../../components/featuredCard/featuredCardComponent.php";
 
 use function Src\Views\Components\Header\HeaderComponent;
 use function Src\Views\Components\Sidebar\SidebarComponent;
 use function Src\Views\Components\Cards\renderCards;
 use function Views\Components\FeaturedCard\FeaturedCardComponent;
 
-$category = isset($_GET['category']) ? $_GET['category'] : 'tecnologia';
-
-$categories = [
-    'tecnologia' => 'Tecnologia',
-    'saude' => 'Saúde',
-    'moda' => 'Moda',
-    'estetica' => 'Estética',
-];
-
-// Mock de dados para a página home
-$featuredVieo = [
-    "url" => "https://youtube.com/watch?v=destaque",
-    "duration" => "7 min",
-    "title" => "Configurando Docker Compose, Postgres, com Testes de Carga - Parte Final da Rinha de Backend",
-    "username" => "Fábio Akita",
-    "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
-    "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g",
-    "views" => "1.1M",
-    "created_at" => "há 2 dias",
-];
-
-$mostPopularVideos = [
-    [
-        "url" => "https://youtube.com/watch?v=nextjs1",
-        "type_card" => "video",
-        "description" => "Rafael Germano",
-        "duration" => "7 min",
-        "title" => "Tudo sobre o Next.js 15, nova arquitetura de pasta",
-        "username" => "Rafael Germano",
-        "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
-        "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g",
-        "views" => "5.5k views",
-        "created_at" => "há 7 dias",
-        "maked_for" => "Online",
-        "likes" => 890,
-        "comments" => 67
-    ],
-    [
-        "url" => "https://youtube.com/watch?v=nextjs2", 
-        "type_card" => "video",
-        "description" => "Rafael Germano",
-        "duration" => "7 min",
-        "title" => "Tudo sobre o Next.js 15, nova arquitetura de pasta",
-        "username" => "Rafael Germano", 
-        "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
-        "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g",
-        "views" => "5.5k views",
-        "created_at" => "há 7 dias",
-        "maked_for" => "Online",
-        "likes" => 890,
-        "comments" => 67
-    ],
-    [
-        "url" => "https://youtube.com/watch?v=nextjs3",
-        "type_card" => "video", 
-        "description" => "Rafael Germano",
-        "duration" => "7 min",
-        "title" => "Tudo sobre o Next.js 15, nova arquitetura de pasta",
-        "username" => "Rafael Germano",
-        "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
-        "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g",
-        "views" => "5.5k views", 
-        "created_at" => "há 7 dias",
-        "maked_for" => "Online",
-        "likes" => 890,
-        "comments" => 67
-    ],
-    [
-        "url" => "https://youtube.com/watch?v=startups",
-        "type_card" => "video",
-        "description" => "Rafael Germano", 
-        "duration" => "7 min",
-        "title" => "10 Mitos sobre tech startups - Parte 1",
-        "username" => "Rafael Germano",
-        "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
-        "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g",
-        "views" => "10k views",
-        "created_at" => "há 5 dias",
-        "maked_for" => "Online", 
-        "likes" => 1200,
-        "comments" => 89
-    ]
-];
-
-$techVideos = [
-    [
-        "url" => "https://youtube.com/watch?v=neovim",
-        "type_card" => "video",
-        "description" => "Rafael Germano",
-        "duration" => "7 min", 
-        "title" => "Como configurar o NEOVIM para ser uma",
-        "username" => "Rafael Germano",
-        "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
-        "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g",
-        "views" => "8.5k views",
-        "created_at" => "há 3 semanas atrás",
-        "maked_for" => "Online",
-        "likes" => 750,
-        "comments" => 45
-    ],
-    [
-        "url" => "https://youtube.com/watch?v=startups2",
-        "type_card" => "video",
-        "description" => "Rafael Germano",
-        "duration" => "7 min",
-        "title" => "10 Mitos sobre tech startups - Parte 1",
-        "username" => "Rafael Germano", 
-        "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
-        "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g",
-        "views" => "8.5k views",
-        "created_at" => "há 3 semanas atrás",
-        "maked_for" => "Online",
-        "likes" => 750,
-        "comments" => 45
-    ],
-    [
-        "url" => "https://youtube.com/watch?v=nextjs4",
-        "type_card" => "video",
-        "description" => "Rafael Germano",
-        "duration" => "7 min",
-        "title" => "Tudo sobre o Next.js 15, nova arquitetura de pasta",
-        "username" => "Rafael Germano",
-        "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png", 
-        "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g",
-        "views" => "8.5k views",
-        "created_at" => "há 2 semanas atrás",
-        "maked_for" => "Online",
-        "likes" => 750,
-        "comments" => 45
-    ],
-    [
-        "url" => "https://youtube.com/watch?v=python2",
-        "type_card" => "video",
-        "description" => "Rafael Germano",
-        "duration" => "7 min",
-        "title" => "Aprenda PYTHON em 1 hora",
-        "username" => "Rafael Germano",
-        "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
-        "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g", 
-        "views" => "8.5k views",
-        "created_at" => "há 2 semanas atrás",
-        "maked_for" => "Online",
-        "likes" => 750,
-        "comments" => 45
-    ]
-];
-
-$healthVideos = [
-    [
-        "url" => "https://youtube.com/watch?v=saude1",
-        "type_card" => "video",
-        "description" => "Rafael Germano",
-        "duration" => "7 min",
-        "title" => "Tudo sobre o Next.js 15, nova arquitetura de pasta",
-        "username" => "Rafael Germano",
-        "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
-        "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g",
-        "views" => "8.5k views",
-        "created_at" => "há 3 semanas atrás",
-        "maked_for" => "Online",
-        "likes" => 750,
-        "comments" => 45
-    ],
-    [
-        "url" => "https://youtube.com/watch?v=primeiros-socorros",
-        "type_card" => "video",
-        "description" => "Rafael Germano",
-        "duration" => "7 min",
-        "title" => "Noções básicas em primeiros socorros",
-        "username" => "Rafael Germano",
-        "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
-        "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g",
-        "views" => "8.5k views",
-        "created_at" => "há 3 semanas atrás",
-        "maked_for" => "Online",
-        "likes" => 750,
-        "comments" => 45
-    ],
-    [
-        "url" => "https://youtube.com/watch?v=hospital",
-        "type_card" => "video",
-        "description" => "Rafael Germano",
-        "duration" => "7 min",
-        "title" => "Vingadores visitam hospital",
-        "username" => "Rafael Germano",
-        "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
-        "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g",
-        "views" => "8.5k views", 
-        "created_at" => "há 3 semanas atrás",
-        "maked_for" => "Online",
-        "likes" => 750,
-        "comments" => 45
-    ],
-    [
-        "url" => "https://youtube.com/watch?v=sus",
-        "type_card" => "video",
-        "description" => "Rafael Germano",
-        "duration" => "7 min",
-        "title" => "Sistema Único de Saúde - SUS",
-        "username" => "Rafael Germano",
-        "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
-        "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g",
-        "views" => "35k views",
-        "created_at" => "há 3 semanas atrás",
-        "maked_for" => "Online",
-        "likes" => 750,
-        "comments" => 45
-    ]
-];
-
-$styleVideos = [
-    [
-        "url" => "https://youtube.com/watch?v=moda1",
-        "type_card" => "video",
-        "description" => "Rafael Germano",
-        "duration" => "7 min",
-        "title" => "Tudo sobre o Next.js 15, nova arquitetura de pasta",
-        "username" => "Rafael Germano",
-        "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
-        "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g9",
-        "views" => "45k views",
-        "created_at" => "há 3 semanas atrás",
-        "maked_for" => "Online",
-        "likes" => 750,
-        "comments" => 45
-    ],
-    [
-        "url" => "https://youtube.com/watch?v=moda2",
-        "type_card" => "video",
-        "description" => "Rafael Germano",
-        "duration" => "7 min",
-        "title" => "Tudo sobre o Next.js 15, nova arquitetura de pasta",
-        "username" => "Rafael Germano",
-        "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
-        "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g0",
-        "views" => "55k views",
-        "created_at" => "há 3 semanas atrás",
-        "maked_for" => "Online",
-        "likes" => 750,
-        "comments" => 45
-    ],
-    [
-        "url" => "https://youtube.com/watch?v=moda3",
-        "type_card" => "video",
-        "description" => "Rafael Germano",
-        "duration" => "7 min",
-        "title" => "Tudo sobre o Next.js 15, nova arquitetura de pasta",
-        "username" => "Rafael Germano",
-        "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
-        "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g1",
-        "views" => "65k views",
-        "created_at" => "há 3 semanas atrás",
-        "maked_for" => "Online",
-        "likes" => 750,
-        "comments" => 45
-    ],
-    [
-        "url" => "https://youtube.com/watch?v=moda4",
-        "type_card" => "video",
-        "description" => "Rafael Germano",
-        "duration" => "7 min",
-        "title" => "Tudo sobre o Next.js 15, nova arquitetura de pasta",
-        "username" => "Rafael Germano",
-        "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
-        "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g2",
-        "views" => "75k views",
-        "created_at" => "há 3 semanas atrás",
-        "maked_for" => "Online",
-        "likes" => 750,
-        "comments" => 45
-    ]
-];
-
+$videos = $_SESSION["page_data"]["videos"] ?? [];
+$category = $_SESSION["page_data"]["category"] ?? "Não encontrado!";
 ?>
 
 <!DOCTYPE html>
@@ -316,24 +45,24 @@ $styleVideos = [
 
         <main class="flex-1 px-4 sm:px-6 py-4 mx-auto">
             <div class="max-w-[1500px] mx-auto">
-                <h2 class="text-2xl font-bold text-white mb-2"><span class="text-purple-400">#</span> <?= $categories[$category] ?></h2>
-                <p class="text-gray-400 text-sm mb-6">Confira os vídeos mais populares da nossa plataforma VHS da categoria <?= $categories[$category] ?></p>
+                <h2 class="text-2xl font-bold text-white mb-2"><span class="text-purple-400">#</span> <?= $category ?></h2>
+                <p class="text-gray-400 text-sm mb-6">Confira os vídeos mais populares da nossa plataforma VHS da categoria, <?= $category ?></p>
                 
                 
                 <section class="mb-12">
                     <div class="grid grid-cols-1 gap-6">
                         <div class="lg:col-span-1">
-                            <?= FeaturedCardComponent($featuredVieo, true)  ?>
+                            <?= !empty($videos) || !$category ? FeaturedCardComponent($videos[0], true) : "" ?>
                         </div>
                 </section>
                 <section class="mb-12">
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                            <?= renderCards($techVideos, 'video'); ?>
-                            <?= renderCards($techVideos, 'video'); ?>
-                            <?= renderCards($techVideos, 'video'); ?>
-                            <?= renderCards($techVideos, 'video'); ?>
-                        </div>
-                    </section>
+                            <?= renderCards(array_slice($videos, 1), 'video'); ?>
+                    </div>
+                </section>
+                <section>
+
+                </section>
             </div>
         </main>
     </div>

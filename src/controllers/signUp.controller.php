@@ -58,18 +58,18 @@ class SignUpController extends Controller {
                 throw new Error(serialize($errors));
             }
 
-            redirect("http://localhost/VHS/src/application/routes/route.php/auth/signup/password", [
+            redirect("/VHS/auth/signup/password", [
                 "fields" => $_POST
             ]);
         } catch (NestedValidationException | Error  $exception) {
             if($exception instanceof Error) {
-                return redirect("http://localhost/VHS/src/application/routes/route.php/auth/signup", [
+                return redirect("/VHS/auth/signup", [
                     "errors" => unserialize($exception->getMessage()),
                     "fields" => $_POST
                 ]);
             }
 
-            redirect("http://localhost/VHS/src/application/routes/route.php/auth/signup", [
+            redirect("/VHS/auth/signup", [
                 "errors" => $exception->getMessages(),
                 "fields" => $_POST
             ]);
