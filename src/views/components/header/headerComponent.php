@@ -3,15 +3,15 @@
 namespace Src\Views\Components\Header;
 
 require_once __DIR__ . '/../utils/barComponent.php';
-use function Src\Views\Components\Utils\BarComponent;
-
 require_once __DIR__ . '/../utils/userMenu.php';
+
+use function Src\Views\Components\Utils\BarComponent;
 use function Src\Views\Components\Utils\UserMenu;
 
 function HeaderComponent() {
 
     $user = $_SESSION["user"] ?? null;
-    $avatar_url = htmlspecialchars(!empty($user['avatar_url']) ? $user['avatar_url'] : '/VHS/public/icons/user.svg', ENT_QUOTES, 'UTF-8');
+    $user_avatar = !empty($user['avatar_url']) ? "/VHS/public/uploads/avatars/" . $user['avatar_url'] : '/VHS/public/icons/user.svg';
 
     $BarComponent = BarComponent();
     echo UserMenu($avatar_url, $user['name'] ?? 'Você', $user['email'] ?? null);
