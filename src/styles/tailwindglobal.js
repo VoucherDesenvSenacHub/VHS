@@ -19,7 +19,7 @@ tailwind.config = {
                 subtitle: "1.5rem",
                 paragraph: "1rem",
                 caption: "0.875rem"
-            },
-        },
+            }
+        }
     }
 } 
