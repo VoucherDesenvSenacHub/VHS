@@ -2,6 +2,12 @@
 
 * {
     font-family: "Poppins", sans-serif;
+    cursor: url('/VHS/public/cursors/cursor.cur'), auto !important;
+    cursor: url('/VHS/public/cursors/cursor.cur'), pointer !important;
+}
+
+input, textarea {
+    cursor: text !important;
 }
 
 body {
