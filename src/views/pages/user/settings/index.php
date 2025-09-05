@@ -16,7 +16,6 @@ use function Src\views\Components\sidebar\SidebarComponent;
 $user = $_SESSION["page_data"]["user"] ?? [];
 $categories = $_SESSION["page_data"]["categories"] ?? [];
 $errors = $_SESSION["redirect_data"]["errors"] ?? [];
-# print_r($user["categories"]);
 $avatar_url = !empty($user['avatar_url']) ? $user['avatar_url'] : 'default.png';
 ?>
 

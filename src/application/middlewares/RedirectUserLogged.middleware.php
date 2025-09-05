@@ -23,8 +23,6 @@ class RedirectUserLoggedMiddleware {
             $userModel = new UserModel();
             $user = $userModel->getUserByToken($token);
 
-            print_r($token);
-
             if(!empty($user)) {
                 $_SESSION["user"] = $user[0];
                 return redirect("../../../routes/route.php/home");

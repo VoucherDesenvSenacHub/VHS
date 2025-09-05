@@ -1,5 +1,4 @@
 <?php
-print_r($_SESSION["page_data"]);
 
 // Requires dos componentes necessários
 require_once __DIR__ . "/../../components/header/headerComponent.php";

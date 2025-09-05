@@ -25,7 +25,6 @@ class UpdateUserController extends Controller {
 
         if(isset($_POST["username"]) && $_POST["username"] !== $_SESSION["user"]["username"]) {
             $user = $this->userModel->getUserByUsername($_POST["username"]);
-            print_r($user);
             if($user) {
                 $errors["username"] = "Nome de usuário já existe";
             }
