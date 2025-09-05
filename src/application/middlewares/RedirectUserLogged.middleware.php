@@ -26,7 +26,7 @@ class RedirectUserLoggedMiddleware {
             if(!empty($user)) {
                 $_SESSION["user"] = $user[0];
                 return redirect("/VHS/home");
-            }
+            }   
         }
     }
 }

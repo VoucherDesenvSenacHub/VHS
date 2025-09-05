@@ -84,4 +84,10 @@ class UserModel extends Model {
         $sql = "UPDATE users SET verified_email = true WHERE id = :id";
         return $this->database->exec($sql, [":id" => $id]);
     }
+
+    public function getCategoryByUserId(string $id): array {
+        $sql = "SELECT * FROM users_category WHERE user_id = :id";
+    
+        return $this->database->query($sql, [":id" => $id]);    
+    }
 }

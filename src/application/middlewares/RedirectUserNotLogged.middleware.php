@@ -21,13 +21,14 @@ class RedirectUserNotLoggedMiddleware {
         if(!isset($_COOKIE["token"]) && !isset($_SESSION["token"])) {
             return redirect("/VHS/auth/signin");
         }
-
-        $token = $_COOKIE["token"] ?? $_SESSION["token"];
-        $userModel = new UserModel();
-        $user = $userModel->getUserByToken($token);
-
-        if(empty($user)) {
-            return redirect("/VHS/auth/signin");
+        else{
+            $token = $_COOKIE["token"] ?? $_SESSION["token"];
+            $userModel = new UserModel();
+            $user = $userModel->getUserByToken($token);
+            if (empty($user)) {
+                return redirect("/VHS/auth/signin");
+            }
+            $_SESSION["user"] = $user[0];
         }
         
         $_SESSION["user"] = $user[0];

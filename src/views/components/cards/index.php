@@ -38,13 +38,16 @@ class Cards {
 
     private static function Video(array $card): string {
         $url        = purifyProperty($card['url']);
-        $thumbnail  = purifyProperty($card['thumbnail']);
+        $thumbnail  = purifyProperty($card['thumbnail_url']);
         $username   = purifyProperty($card['username']);
-        $avatar_url = purifyProperty($card['avatar_url']);
+        $avatar = purifyProperty($card['avatar_url']);
         $title      = purifyProperty($card['title']);
         $views      = purifyNumbers($card['views']);
         $duration   = purifyDuration($card['duration']);
         $created_at = purifyCreatedAt($card['created_at']);
+
+        $avatar_url = !empty($avatar) ? "/VHS/public/uploads/avatars/" . $avatar : '/VHS/public/uploads/avatars/default.png';
+        
 
         return <<<HTML
             <a href='$url' class='card flex flex-col cursor-pointer relative max-w-[340px] h-[340px] bg-gray600 rounded-3xl overflow-hidden shadow-lg transition-all duration-300'>
