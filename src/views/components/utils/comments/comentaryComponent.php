@@ -25,29 +25,35 @@ function Comment(
     if (strlen($text) > 150) {
         $readMoreButton = "<button class='text-blue-400 text-xs mt-1 toggle-readmore self-start'>Ler mais</button>";
     }
-    $comm = $commentid;
+
+    // 🔹 Criar token único e salvar na sessão
+    $token = bin2hex(random_bytes(16));
+    $_SESSION['delete_tokens'][$token] = $commentid;
+
     $menu = "";
     if ($commentUserId === $loggedUserId) {
         $menu = "
         <div class='w-5 h-5 ml-3 mt-2 cursor-pointer relative opcoes self-start'>
             <img src='/VHS/public/icons/comments_studio/ellipsis-vertical.svg'>
-            <div class='w-24 h-16 bg-gray-900 rounded-[0.5rem] flex items-center justify-center border-[0.1rem] border-solid border-purple-600  
+            <div class='w-24 h-20 bg-gray-900 rounded-[0.5rem] flex items-center justify-center   
             top-0 right-full mr-2 absolute hidden menu'>
-                <ul class='w-full flex flex-col gap-3'>  
-                    <li class='hover:bg-gray-700 text-white font-semibold flex w-16 h-5 text-xs gap-2 items-center ml-1'>
-                        <form action='/VHS/src/application/routes/route.php/api/v1/home/video/delete' method='POST'>
-                            <input type='hidden' name='action' value='delete_comment'>
-                            <input type='hidden' name='comment_id' value='" . htmlspecialchars($comm) . "'>
+                <ul class='flex flex-col items-center'>  
+                    <li class='text-white font-semibold flex text-xs gap-1 w-24 h-10 rounded-[0.5rem] justify-center items-center hover:border-[0.1rem] hover:border-solid hover:border-purple-600'>
+                        <form class='mt-2' action='/VHS/src/application/routes/route.php/api/v1/home/video/delete' method='POST'>
+                            <input type='hidden' name='delete_token' value='$token'>
                             <button type='submit' class='flex items-center gap-2 text-xs text-red-500'>
                                 <img src='/VHS/public/icons/comments_studio/trash.svg'>
                                 Excluir
                             </button>
                         </form>
                     </li>
-                    <li class='hover:bg-gray-700 text-white font-semibold flex items-center w-16 h-5 text-xs gap-1 ml-1'>
-                        <img src='/VHS/public/icons/comments_studio/pencil.svg'>
-                        <p class='ml-1'>Editar</p>   
+                    <li class='text-white font-semibold flex text-xs gap-1 w-24 h-10 rounded-[0.5rem] justify-center items-center hover:border-[0.1rem] hover:border-solid hover:border-purple-600'>
+                        <button type='button' class='edit-comment flex items-center gap-2 text-xs text-blue-400' data-id='" . htmlspecialchars($commentid, ENT_QUOTES, 'UTF-8') . "'>
+                            <img src='/VHS/public/icons/comments_studio/pencil.svg'>
+                                Editar
+                        </button>
                     </li>
+
                 </ul>    
             </div>
         </div>";
@@ -66,12 +72,11 @@ function Comment(
                 </div>
     
                 <div class='flex flex-col text-sm font-medium text-gray-400 break-all whitespace-pre-line max-w-fit inline-block'>
-                    <p class='comment-text overflow-hidden max-h-16 transition-all duration-300'>$text</p>
+                    <p class='comment-text overflow-hidden max-h-16 transition-all duration-300' data-id='" . htmlspecialchars($commentid, ENT_QUOTES, 'UTF-8') . "'>$text</p>
                     $readMoreButton
                 </div>
             </div>
             $menu
         </div>
-       
     ";
 }

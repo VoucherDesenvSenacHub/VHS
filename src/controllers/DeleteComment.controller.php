@@ -18,20 +18,26 @@ class DeleteCommentController extends Controller {
         try {
             $this->commentModel = $this->model("Comment");
     
-            $schema = 
-            v::key('id', v::stringType()->length(1, 23))
-            ->key('user_id', v::stringType()->length(1, 23));
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $token = $_POST['delete_token'] ?? null;
+            
+                if (!$token || !isset($_SESSION['delete_tokens'][$token])) {
+                    echo json_encode(["status" => "error", "message" => "Token inválido"]);
+                    exit;
+                }
+            
+                $commentId = $_SESSION['delete_tokens'][$token];
+                unset($_SESSION['delete_tokens'][$token]);
+            
+                $commentModel = new CommentModel();
+                $success = $commentModel->delete($commentId);
+            
+                if($success){
+                    return redirect("/VHS/src/views/pages/home/video/index.php");
+                }
 
-            $schema->assert($_POST);
-    
-            $deleted = $this->commentModel->delete($_POST['id'], $_POST['id']);
-    
-            if ($deleted) {
-                echo json_encode(["status" => "success", "message" => "Comentário deletado"]);
-            } else {
-                http_response_code(403); // Forbidden
-                echo json_encode(["status" => "error", "message" => "Não autorizado a deletar este comentário"]);
             }
+            
         } catch (\Exception $e) {
             http_response_code(500);
             echo json_encode(["status" => "error", "message" => $e->getMessage()]);

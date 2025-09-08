@@ -20,17 +20,15 @@ class CommentController extends Controller {
 
             
             $schema = 
-            v::key('content', v::stringType()->length(1, null))
-             ->key('user_id', v::stringType()->length(1, 23))
-             ->key('video_id', v::stringType()->length(1, 23));
+            v::key('content', v::stringType()->length(1, null));
 
             $schema->assert($_POST);
 
            
             $comment  = $this->commentModel->create(
                 $_POST['content'],
-                $_POST['user_id'],
-                $_POST['video_id']
+                $_SESSION['user']['id'],
+                2
             );
 
             if ($comment){

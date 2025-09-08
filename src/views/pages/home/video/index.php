@@ -30,7 +30,7 @@
 
  use function Src\Views\Components\Header\HeaderComponent;
  use function Src\Views\Components\Sidebar\SidebarComponent;
- use function Src\Views\Components\Cards\renderCards;
+ use function Src\Views\Components\Cards\viewCards;
  use function Src\Views\Components\Utils\Comment;
  use function Src\Views\Components\starrating\StarRatingComponent;
  use function Src\Views\Components\Shared\sharedComponent;
@@ -122,7 +122,7 @@
            <h3 class="text-lg font-semibold mb-4">Recomendados</h3>
            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
              <?php for ($i = 0; $i < 6; $i++) {
-               renderCards($cards, 'video');
+               viewCards($cards, 'video');
              } ?>
            </div>
          </div>
@@ -141,11 +141,6 @@
                  height: "42",
                  name:"content",
                  ) ?>
-             
-
-                 
-               <input type="hidden" name="user_id" value="<?= htmlspecialchars($user_id) ?>">
-               <input type="hidden" name="video_id" value="<?= htmlspecialchars($video_id) ?>">
 
                <div class="w-2/3 self-end mt-2 flex gap-4 ">
                    <?= ButtonComponent('Cancelar', 'outline', null,1, 2.18, type:'reset') ?>

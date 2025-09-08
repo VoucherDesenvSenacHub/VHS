@@ -36,14 +36,25 @@ class CommentModel extends Model {
         return $stmt;
     }
 
-    public function delete(int $id, int $user_id): bool {
+    public function delete(string $id): bool {
         $sql = "DELETE FROM comments 
-                WHERE id = :id 
-                AND user_id = :user_id";
+                WHERE id = :id" 
+                ;
 
-        $stmt = $this->database->exec($sql,[":id" => $id,":user_id" => $user_id]);
+        $stmt = $this->database->exec($sql,[":id" => $id]);
 
         return $stmt;
+    }
+
+    public function edit(string $id, string $content): bool {
+        $sql = "UPDATE comments SET content = :content, update_at = NOW()
+            WHERE id = :id";
+    
+    $stmt = $this->database->exec($sql, [":id" => $id,
+        ":content" => $content
+    ]);
+    
+        return $stmt; 
     }
     
     

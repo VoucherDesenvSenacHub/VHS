@@ -9,6 +9,7 @@ use Src\Application\Controllers\CategoriesViewController;
 use Src\Application\Controllers\CreateUserController;
 use Src\Application\Controllers\CommentController;
 use Src\Application\Controllers\DeleteCommentController;
+use Src\Application\Controllers\EditCommentController;
 use Src\Application\Controllers\SignUpController;
 use Src\Application\Controllers\SignUpViewController;
 use Src\Application\Controllers\CreatePasswordController;
@@ -35,6 +36,9 @@ $router->post('/api/v1/auth/signup', SignUpController::class);
 $router->post('/api/v1/home/video/', Commentcontroller::class);
 
 $router->post('/api/v1/home/video/delete', DeleteCommentcontroller::class);
+
+$router->post('/api/v1/home/video/edit', EditCommentcontroller::class);
+
 
 
 $router->get('/home', HomeController::class);
