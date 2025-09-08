@@ -16,9 +16,8 @@ tailwind.config = {
 
             fontSize: {
                 title: "2rem",
-                subtitle: "1.5rem",
-                paragraph: "1rem",
-                caption: "0.875rem"
+                subtitle: "1.25rem",
+                paragraph: "1rem"
             }
         }
     }
