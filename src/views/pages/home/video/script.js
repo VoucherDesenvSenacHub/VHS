@@ -54,17 +54,6 @@ document.addEventListener('click', (event) => {
     }
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-    document.body.addEventListener("click", (event) => {
-        // Captura qualquer clique dentro do botão .edit-comment
-        const btn = event.target.closest(".edit-comment");
-        if (!btn) return;
-
-        // Teste: alerta e log
-        window.alert("Funfo");
-        console.log("Botão clicado, data-id:", btn.dataset.id);
-    });
-});
 
 
         // const commentId = editBtn.dataset.id;
