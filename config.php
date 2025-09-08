@@ -12,6 +12,7 @@ if (isset($_GET["logout"])) {
     setcookie("token", "", time() - 3600, "/");
     unset($_COOKIE["token"]);
     $_SESSION = [];
+
     if (ini_get("session.use_cookies")) {
         $params = session_get_cookie_params();
         setcookie(
@@ -24,8 +25,8 @@ if (isset($_GET["logout"])) {
             $params["httponly"]
         );
     }
+    
     session_destroy();
     header("Location: /VHS/home");
     exit;
 }
-?>
