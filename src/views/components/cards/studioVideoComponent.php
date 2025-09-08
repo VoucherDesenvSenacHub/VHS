@@ -1,8 +1,6 @@
 <?php
 namespace Src\Views\Components\Cards;
 
-require_once __DIR__ . "/formatCard.php";
-
 use function Src\Application\Utils\Purify\purifyProperty;
 use function Src\Views\Components\Utils\formatViews;
 

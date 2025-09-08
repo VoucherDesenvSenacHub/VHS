@@ -10,7 +10,7 @@ abstract class Controller {
      * @param string $model Nome do modelo, ex: (src/infra/models/{$model}.php)
      * @return object
      */
-    public function model(string $model) {
+public function model(string $model) {
         require_once __DIR__ . "/../../../src/infra/models/{$model}.php";
         $class = "Src\\Infra\\Models\\{$model}Model";
         return new $class();
@@ -36,4 +36,5 @@ abstract class Controller {
 
         http_response_code(404);
     }
+
 }

@@ -18,7 +18,7 @@ function UserMenu(string $avatar_url, string $name, null | string $email) {
             </div>
 
             <div class='flex flex-col border-b border-gray300'>
-                <a href='/VHS/src/views/pages/user/settings' class='w-full'>
+                <a href='/VHS/user/settings' class='w-full'>
                     <button id='button-myaccount' class='flex p-1 sm:p-2 items-center gap-2 hover:bg-white/5 focus:bg-white/10 transition-all duration-200'>
                         <div class='flex-shrink-0 w-12 h-12 3xl:w-14 3xl:h-14 p-3 flex justify-center items-center'>
                             <img class='select-none pointer-events-none w-full h-full' src='/VHS/public/icons/Settings.svg' onerror='this.style.display="none"'>
@@ -30,26 +30,26 @@ function UserMenu(string $avatar_url, string $name, null | string $email) {
                         </div>
                     </button>
                 </a>
+            
+            <a href='/VHS/studio' class='w-full'>
+                <button id='button-vhs-studio' class='w-full flex p-1 sm:p-2 items-center gap-2 hover:bg-white/5 focus:bg-white/10 transition-all duration-200'>
+                    <div class='flex-shrink-0 w-12 h-12 3xl:w-14 3xl:h-14 p-3 flex justify-center items-center'>
+                        <img class='select-none pointer-events-none w-full h-full' src='/VHS/public/icons/Studio.svg' onerror='this.style.display="none"'>
+                    </div>
+                    
+                    <div class='flex flex-col text-start pr-4 overflow-hidden'>
+                        <h2 class='select-none truncate text-paragraph 3xl:text-subtitle text-secondary'>VHS Studio</h2>
+                        <p class='select-none truncate hidden sm:flex sm:text-caption 3xl:text-paragraph text-gray300'>Gerencie o seu canal</p>
+                    </div>
+                </button>
+            </a>
 
-                <a href='/VHS/src/views/pages/studio' class='w-full'>
-                    <button id='button-vhs-studio' class='w-full flex p-1 sm:p-2 items-center gap-2 hover:bg-white/5 focus:bg-white/10 transition-all duration-200'>
-                        <div class='flex-shrink-0 w-12 h-12 3xl:w-14 3xl:h-14 p-3 flex justify-center items-center'>
-                            <img class='select-none pointer-events-none w-full h-full' src='/VHS/public/icons/Studio.svg' onerror='this.style.display="none"'>
-                        </div>
-                        
-                        <div class='flex flex-col text-start pr-4 overflow-hidden'>
-                            <h2 class='select-none truncate text-paragraph 3xl:text-subtitle text-secondary'>VHS Studio</h2>
-                            <p class='select-none truncate hidden sm:flex sm:text-caption 3xl:text-paragraph text-gray300'>Gerencie o seu canal</p>
-                        </div>
-                    </button>
-                </a>
-
-                <a href='/VHS/src/views/pages/admin'>
+            <a href='/VHS/src/views/pages/admin'>
                     <button id='button-dashboard' class='flex p-1 sm:p-2 items-center gap-2 hover:bg-white/5 focus:bg-white/10 transition-all duration-200'>
-                        <div class='flex-shrink-0 w-12 h-12 3xl:w-14 3xl:h-14 p-3 flex justify-center items-center'>
+                         <div class='flex-shrink-0 w-12 h-12 3xl:w-14 3xl:h-14 p-3 flex justify-center items-center'>
                             <img class='select-none pointer-events-none w-full h-full' src='/VHS/public/icons/dashboard.svg' onerror='this.style.display="none"'>
                         </div>
-                        
+                            
                         <div class='flex flex-col text-start pr-4 overflow-hidden'>
                             <h2 class='select-none truncate text-paragraph 3xl:text-subtitle text-secondary'>Dashboard</h2>
                             <p class='select-none truncate hidden sm:flex sm:text-caption 3xl:text-paragraph text-gray300'>Gerencie seu usuário e mais</p>
@@ -57,19 +57,17 @@ function UserMenu(string $avatar_url, string $name, null | string $email) {
                     </button>
                 </a>
             </div>
-
-            <a href='/VHS/src/views/pages/auth/login'>
+            <a href='?logout'>
                 <button id='button-logout' class='w-full flex p-1 sm:p-2 items-center gap-2 hover:bg-white/5 focus:bg-white/10 transition-all duration-200'>
                     <div class='flex-shrink-0 w-12 h-12 3xl:w-14 3xl:h-14 p-3 flex justify-center items-center'>
                         <img class='select-none pointer-events-none w-full h-full' src='/VHS/public/icons/Logout.svg' onerror='this.style.display="none"'>
                     </div>
-                    
-                    <div class='flex flex-col pr-4 overflow-hidden'>
-                        <h2 class='select-none truncate 3xl:text-paragraph 3xl:text-subtitle text-[#bc3636]'>Sair da conta</h2>
+                    <div class='flex flex-col text-start pr-4'>
+                        <h2 class='select-none truncate text-paragraph 3xl:text-subtitle text-[#bc3636]'>Sair da conta</h2>
                     </div>
                 </button>
             </a>
         </div>
     HTML;
-
 }
+?>
