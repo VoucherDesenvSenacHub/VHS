@@ -121,7 +121,7 @@ class Cards {
                         $title
                     </h3>
 
-                    <p class='text-[#B7B9D2] text-caption 2xl:text-paragraph'>$description • Estreia: $event_date</p>
+                    <p class='text-[#B7B9D2] text-caption 2xl:text-paragraph'>$description • Em $event_date</p>
                 </div>
             </a>
         HTML;
