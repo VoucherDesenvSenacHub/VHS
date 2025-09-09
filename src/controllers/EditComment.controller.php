@@ -1,13 +1,9 @@
 <?php
 
 namespace Src\Application\Controllers;
-require_once __DIR__ . '/../application/utils/redirect.php';
 
-use function Src\Application\Utils\Redirect\redirect;
-use Respect\Validation\Exceptions\NestedValidationException;
 use Src\Application\Core\Controller;
 use Src\Infra\Models\CommentModel;
-use Respect\Validation\Validator as v;
 
 require_once __DIR__ . '/../application/core/controller.php';
 
@@ -15,24 +11,33 @@ class EditCommentController extends Controller {
     public CommentModel $commentModel;
 
     public function index() {
-        $data = json_decode(file_get_contents("php://input"), true);
 
-        $commentId = $data["comment_id"] ?? null;
-        $content = $data["content"] ?? null;
-        $userId = $_SESSION["user_id"] ?? null;
+        try{ 
+            $this->commentModel = $this->model("Comment");
+            
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $commentId = $_POST['comment_id'] ?? null;
+            $content   = $_POST['content'] ?? null;
 
-        if (!$commentId || !$content || !$userId) {
-            echo json_encode(["status" => "error", "message" => "Dados inválidos"]);
-            return;
+            if (!$commentId || !$content) {
+                echo json_encode(["status" => "error", "message" => "Campos obrigatórios ausentes"]);
+                return;
+            }
+
+            $commentModel = new CommentModel();
+            $success = $commentModel->edit($commentId, $content);
+
+            if ($success) {
+                echo json_encode(["status" => "success", "message" => "Comentário atualizado"]);
+            } else {
+                echo json_encode(["status" => "error", "message" => "Falha ao atualizar"]);
+            }
         }
 
-        $commentModel = new CommentModel();
-        $updated = $commentModel->edit($commentId, $content);
+    } catch (\Exception $e) {
+        http_response_code(500);
+        echo json_encode(["status" => "error", "message" => $e->getMessage()]);
+    }
 
-        if ($updated) {
-            echo json_encode(["status" => "success"]);
-        } else {
-            echo json_encode(["status" => "error", "message" => "Falha ao atualizar"]);
-        }
     }
 }

@@ -25,7 +25,7 @@ class CommentModel extends Model {
         return $stmt;
     }
     public function getCommentsByVideoId(int $video_id) {
-        $sql = "SELECT c.content, c.created_at, u.name, u.avatar_url, c.user_id, c.id
+        $sql = "SELECT c.content, c.update_at, c.created_at, u.name, u.avatar_url, c.user_id, c.id
                 FROM comments c
                 JOIN users u ON c.user_id = u.id
                 WHERE c.video_id = :video_id

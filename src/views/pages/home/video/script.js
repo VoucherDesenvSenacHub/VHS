@@ -1,3 +1,4 @@
+
 function resetTextareaHeight(form) {
     const textareas = form.querySelectorAll("textarea");
     textareas.forEach(el => el.style.height = "42px");
@@ -26,6 +27,7 @@ function resetTextareaHeight(form) {
           textEl.classList.add("max-h-16");
           button.textContent = "Ler mais";
       }
+
   }
 });
 
@@ -55,59 +57,103 @@ document.addEventListener('click', (event) => {
 });
 
 
+document.addEventListener("click", (event) => {
+    const btn = event.target.closest(".edit-comment");
+    if (!btn) return;
 
-        // const commentId = editBtn.dataset.id;
-        // const container = editBtn.closest(".comment-container");
-        // const textEl = container.querySelector(".comment-text");
-        // const oldText = textEl.innerText;
+    const commentContainer = btn.closest(".comment-container");
+    const commentTextEl = commentContainer.querySelector(".comment-text");
+    let toggle = commentContainer.querySelector(".toggle-readmore");
 
-        // // Substitui pelo textarea
-        // const textarea = document.createElement("textarea");
-        // textarea.value = oldText;
-        // textarea.className = "w-full p-2 bg-gray-800 text-white rounded-md resize-none";
+    if (!commentTextEl) return;
 
-        // const saveBtn = document.createElement("button");
-        // saveBtn.innerText = "Salvar";
-        // saveBtn.className = "bg-blue-600 text-white px-2 py-1 rounded ml-2";
+    const oldText = commentTextEl.innerText;
+    const commentId = btn.dataset.id;
 
-        // const cancelBtn = document.createElement("button");
-        // cancelBtn.innerText = "Cancelar";
-        // cancelBtn.className = "bg-gray-600 text-white px-2 py-1 rounded ml-2";
+    if (toggle) toggle.classList.add("hidden");
 
-        // // Troca o conteúdo
-        // textEl.replaceWith(textarea);
-        // editBtn.replaceWith(saveBtn);
-        // saveBtn.insertAdjacentElement("afterend", cancelBtn);
+    const textarea = document.createElement("textarea");
+    textarea.value = oldText;
+    textarea.className =
+        "bg-transparent w-full text-white p-1 outline outline-1 outline-[#666666] rounded-md resize-none overflow-hidden min-h-[45px]";
 
-        // // Cancelar
-        // cancelBtn.addEventListener("click", () => {
-        //     textarea.replaceWith(textEl);
-        //     saveBtn.replaceWith(editBtn);
-        //     cancelBtn.remove();
-        // });
+    const autoResize = (el) => {
+        el.style.height = "auto";
+        el.style.height = el.scrollHeight + "px";
+    };
+    textarea.addEventListener("input", () => autoResize(textarea));
+    autoResize(textarea);
 
-        // // Salvar
-        // saveBtn.addEventListener("click", () => {
-        //     fetch("/VHS/src/application/routes/route.php/api/v1/home/video/edit", {
-        //         method: "POST",
-        //         headers: { "Content-Type": "application/json" },
-        //         body: JSON.stringify({
-        //             comment_id: commentId,
-        //             content: textarea.value,
-        //         })
-        //     })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         if (data.status === "success") {
-        //             textEl.innerText = textarea.value;
-        //             textarea.replaceWith(textEl);
-        //             saveBtn.replaceWith(editBtn);
-        //             cancelBtn.remove();
-        //         } else {
-        //             alert("Erro ao editar comentário!");
-        //         }
-        //     });
-        // });
-//     }
+    const div = document.createElement("div");
+    div.className = "mt-2 w-2/3 flex self-end gap-4";
 
-// });
+    const saveBtn = document.createElement("button");
+    saveBtn.innerText = "Salvar";
+    saveBtn.className =
+        "ml-2 gap-2 flex justify-center items-center h-[2.18rem] rounded-md cursor-pointer text-[#D9D9D9] bg-purple-700 transition-colors hover:bg-purple-800 !w-full";
+
+    const cancelBtn = document.createElement("button");
+    cancelBtn.innerText = "Cancelar";
+    cancelBtn.className =
+        "ml-2 gap-2 flex justify-center items-center h-[2.18rem] rounded-md cursor-pointer text-[#D9D9D9] outline outline-1 outline-purple-500 !w-full";
+
+    commentTextEl.replaceWith(textarea);
+    textarea.insertAdjacentElement("afterend", div);
+    div.appendChild(cancelBtn);
+    div.appendChild(saveBtn);
+
+    cancelBtn.addEventListener("click", () => {
+        textarea.replaceWith(commentTextEl);
+        div.remove();
+        if (toggle) toggle.classList.remove("hidden");
+    });
+
+    saveBtn.addEventListener("click", () => {
+        const newText = textarea.value;
+
+        console.log("Enviando para backend:", { commentId, newText });
+
+        fetch("/VHS/src/application/routes/route.php/api/v1/home/video/edit", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: `comment_id=${encodeURIComponent(commentId)}&content=${encodeURIComponent(newText)}`,
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log("Resposta do backend:", data);
+
+                if (data.status === "success") {
+                    const updatedTextEl = commentTextEl.cloneNode(true);
+                    updatedTextEl.innerText = newText;
+
+                    textarea.replaceWith(updatedTextEl);
+
+                    if (newText.length > 150) {
+                        if (!toggle) {
+                            toggle = document.createElement("button");
+                            toggle.className =
+                                "text-blue-400 text-xs mt-1 toggle-readmore self-start";
+                            toggle.innerText = "Ler mais";
+                            updatedTextEl.insertAdjacentElement("afterend", toggle);
+                        }
+                    } else if (toggle) {
+                        toggle.remove();
+                    }
+                    
+                } else {
+                    alert("Erro ao salvar comentário.");
+                    textarea.replaceWith(commentTextEl);
+                }
+
+                div.remove();
+            })
+            .catch((err) => {
+                console.error("Erro no fetch:", err);
+                textarea.replaceWith(commentTextEl);
+                div.remove();
+            });
+    });
+});
+
+
+

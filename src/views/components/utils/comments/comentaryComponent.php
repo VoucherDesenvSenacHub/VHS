@@ -6,6 +6,7 @@ function Comment(
     string $name,
     string $text,
     string $created_at = null,
+    string $update_at = null,
     string $userImg = null,
     string $commentUserId = null,  
     string $loggedUserId = null,
@@ -26,7 +27,10 @@ function Comment(
         $readMoreButton = "<button class='text-blue-400 text-xs mt-1 toggle-readmore self-start'>Ler mais</button>";
     }
 
-    // 🔹 Criar token único e salvar na sessão
+    if ($update_at != $created_at){
+        $edited = "<p class='mb-1 text-gray font-semibold text-xs opacity-25 self-end edit-validation'>(Editado)</p>";
+    }
+
     $token = bin2hex(random_bytes(16));
     $_SESSION['delete_tokens'][$token] = $commentid;
 
@@ -41,17 +45,17 @@ function Comment(
                     <li class='text-white font-semibold flex text-xs gap-1 w-24 h-10 rounded-[0.5rem] justify-center items-center hover:border-[0.1rem] hover:border-solid hover:border-purple-600'>
                         <form class='mt-2' action='/VHS/src/application/routes/route.php/api/v1/home/video/delete' method='POST'>
                             <input type='hidden' name='delete_token' value='$token'>
-                            <button type='submit' class='flex items-center gap-2 text-xs text-red-500'>
+                            <button type='submit' class='flex items-center gap-2 text-xs text-red-500 w-full h-full'>
                                 <img src='/VHS/public/icons/comments_studio/trash.svg'>
                                 Excluir
                             </button>
                         </form>
                     </li>
-                    <li class='text-white font-semibold flex text-xs gap-1 w-24 h-10 rounded-[0.5rem] justify-center items-center hover:border-[0.1rem] hover:border-solid hover:border-purple-600'>
-                        <button type='button' class='edit-comment flex items-center gap-2 text-xs text-blue-400' data-id='" . htmlspecialchars($commentid, ENT_QUOTES, 'UTF-8') . "'>
-                            <img src='/VHS/public/icons/comments_studio/pencil.svg'>
-                                Editar
-                        </button>
+                    <li class='edit-comment text-white font-semibold flex text-xs gap-1 w-24 h-10 rounded-[0.5rem] justify-center items-center hover:border-[0.1rem] hover:border-solid hover:border-purple-600'>
+                    <button type='button' class='edit-comment flex items-center gap-2 text-xs text-blue-400' data-id='" . htmlspecialchars($commentid, ENT_QUOTES, 'UTF-8') . "'>
+                        <img src='/VHS/public/icons/comments_studio/pencil.svg'>
+                        Editar
+                    </button>
                     </li>
 
                 </ul>    
@@ -69,10 +73,12 @@ function Comment(
                 <div class='flex items-baseline gap-2'>
                     <p class='text-lg text-white font-semibold'>$name</p> 
                     $created_at
+                    $edited
                 </div>
     
-                <div class='flex flex-col text-sm font-medium text-gray-400 break-all whitespace-pre-line max-w-fit inline-block'>
+                <div class='flex flex-col text-sm font-medium text-gray-400 break-all whitespace-pre-line inline-block'>
                     <p class='comment-text overflow-hidden max-h-16 transition-all duration-300' data-id='" . htmlspecialchars($commentid, ENT_QUOTES, 'UTF-8') . "'>$text</p>
+                    
                     $readMoreButton
                 </div>
             </div>

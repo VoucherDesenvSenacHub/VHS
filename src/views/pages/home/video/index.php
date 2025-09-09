@@ -160,10 +160,11 @@
                      $comment['name'],
                      $comment['content'],
                      date('d/m/Y H:i', strtotime($comment['created_at'])),
+                     date('d/m/Y H:i', strtotime($comment['update_at'])),
                      $comment['avatar_url'],
                      $comment['user_id'],   
                      $user_id,
-                     $comment['id']
+                     $comment['id'],
                      
                  );
              }
