@@ -1,12 +1,12 @@
 <?php
-require "../../components/header/headerComponent.php";
-require "../../components/studioSideMenu/studioSideMenuComponent.php";
-require "../../components/utils/Title_and_buttons.php";
-require "../../components/utils/userActivityCardsComponent.php";
-require "../../components/charts/chartComponent.php";
-require "../../components/utils/buttonComponent.php";
-require "../../components/utils/comments/comentaryComponent.php";
-require "../../components/cards/studioVideoComponent.php";
+require_once __DIR__ . '/../../components/Header/HeaderComponent.php';
+require_once __DIR__ . "/../../components/studioSideMenu/studioSideMenuComponent.php";
+require_once __DIR__ . "/../../components/utils/Title_and_buttons.php";
+require_once __DIR__ . "/../../components/utils/userActivityCardsComponent.php";
+require_once __DIR__ . "/../../components/charts/chartComponent.php";
+require_once __DIR__ . "/../../components/utils/buttonComponent.php";
+require_once __DIR__ . "/../../components/utils/comments/comentaryComponent.php";
+require_once __DIR__ . "/../../components/cards/studioVideoComponent.php";
 
 use function Src\Views\Components\Cards\StudioVideoComponent;
 use function src\views\components\Charts\renderChartComponent;

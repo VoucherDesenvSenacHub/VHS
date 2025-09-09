@@ -17,8 +17,8 @@
         string $height = null,
         string $className = "",
         string $onClickIcon = "",
-        bool $error = false,
-        string $errorDescription = "",
+        bool | null $error = false,
+        string | null $errorDescription = "",
         string $value = "",
         array $attributes = []
         ){

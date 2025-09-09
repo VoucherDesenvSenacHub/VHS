@@ -62,6 +62,19 @@ class UserModel extends Model {
         return $this->database->exec($sql, [":token" => $token, ":id" => $id]);
     }
 
+    public function updateUser(string $userId, string $name, string $email, string $username, ?string $password = null, ?string $avatar): bool {
+        $sql = "UPDATE users SET name = :name, email = :email, username = :username" . ($password ? ", password = :password" : "") . ", avatar_url = :avatar_url WHERE id = :id";    
+        
+        return $this->database->exec($sql, [
+            ":name" => $name,
+            ":email" => $email,
+            ":username" => $username,
+            ...( $password ? [":password" => $password] : [] ),
+            ":avatar_url" => $avatar ?? null,
+            ":id" => $userId
+        ]);
+    }
+
     public function updateSentEmailStatus(string $id, bool $status): bool {
         $sql = "UPDATE users SET email_already_sent = :status  WHERE id = :id";
         return $this->database->exec($sql, [":id" => $id, ":status" => $status]);
@@ -70,5 +83,11 @@ class UserModel extends Model {
     public function verifyEmail(string $id): bool {
         $sql = "UPDATE users SET verified_email = true WHERE id = :id";
         return $this->database->exec($sql, [":id" => $id]);
+    }
+
+    public function getCategoryByUserId(string $id): array {
+        $sql = "SELECT * FROM users_category WHERE user_id = :id";
+    
+        return $this->database->query($sql, [":id" => $id]);    
     }
 }
