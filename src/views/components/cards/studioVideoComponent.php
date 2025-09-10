@@ -1,8 +1,6 @@
 <?php
 namespace Src\Views\Components\Cards;
 
-require_once __DIR__ . "/formatCard.php";
-
 use function Src\Application\Utils\Purify\purifyProperty;
 use function Src\Views\Components\Utils\formatViews;
 
@@ -14,6 +12,7 @@ use function Src\Views\Components\Utils\formatViews;
  * @param int $views - Quantidade de visualizações do video.
  * @return string - HTML do card do video (studio).
 **/
+
 function StudioVideoComponent(string $id, string $title, string $thumbnail_url, int $views) {
     $id = purifyProperty($id);
     $title = purifyProperty($title);
@@ -26,14 +25,17 @@ function StudioVideoComponent(string $id, string $title, string $thumbnail_url, 
             <div>
                 <h2 class="font-medium text-white">$title</h2>
                 <p class="text-secondary">$views de visualizações</p>
+
                 <div class="flex gap-4 mt-1">
                     <a href="">
                         <img src="/VHS/public/icons/pencill.svg" alt="" class="size-5">
                     </a>
-                     <a href="">
+
+                    <a href="">
                         <img src="/VHS/public/icons/graph.svg" alt="" class="size-5">
                     </a>
-                     <a href="">
+
+                    <a href="">
                         <img src="/VHS/public/icons/comentariocomental.svg" alt="" class="size-6">
                     </a>
                 </div>

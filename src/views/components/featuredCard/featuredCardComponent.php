@@ -2,6 +2,12 @@
 
 namespace Views\Components\FeaturedCard;
 
+use function Src\Application\Utils\formatViews;
+use function Src\Application\Utils\formatDuration;
+
+require_once __DIR__ . '/../../../application/utils/formatViews.php';
+require_once __DIR__ . '/../../../application/utils/formatDuration.php';
+
 /**
  * Componente para exibir um card de vídeo em destaque.
  *
@@ -14,12 +20,16 @@ namespace Views\Components\FeaturedCard;
  *               - 'avatar_url': string.
  *               - 'views': string.
  *               - 'created_at: int.
- * @param isCategoryPage booleano opcional que indica se o card está sendo exibido em uma página de categoria.
+ * @param bool $isCategoryPage booleano opcional que indica se o card está sendo exibido em uma página de categoria.
  * 
  * @return string Retorna o HTML do card de vídeo.
  */
 function FeaturedCardComponent(array $video, bool $isCategoryPage = false): string{
     $height = $isCategoryPage ? 'h-[450px]' : 'h-[330px]';
+
+    $views = formatViews($video['views']);
+    $duration = formatDuration($video['duration']);
+    $avatar_url = !empty($video['avatar_url']) ? "/VHS/public/uploads/avatars/" . $video['avatar_url'] : '/VHS/public/uploads/avatars/default.png';
 
     return <<<HTML
     <a href="{$video['url']}" class="block no-underline text-inherit">
@@ -28,13 +38,13 @@ function FeaturedCardComponent(array $video, bool $isCategoryPage = false): stri
             <div class="absolute inset-0 bg-black bg-opacity-50"></div>
             <div class="relative z-10 p-6 h-full flex flex-col justify-end">
                 <div class="flex items-center gap-3 mb-3">
-                    <img src="{$video['avatar_url']}" alt="{$video['username']}" class="w-10 h-10 rounded-full object-cover">
+                    <img src="{$avatar_url}" alt="{$video['username']}" class="w-10 h-10 rounded-full object-cover">
                     <div>
                         <p class="text-white text-sm font-medium">{$video['username']}</p>
-                        <p class="text-gray-300 text-xs">{$video['views']} • {$video['created_at']}</p>
+                        <p class="text-gray-300 text-xs">{$views} • {$video['created_at']}</p>
                     </div>
                     <div class="ml-auto bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded-md">
-                        {$video['duration']}
+                        $duration
                     </div>
                 </div>
                 <h2 class="text-white text-lg 2xl:text-xl font-bold leading-tight line-clamp-2">{$video['title']}</h2>

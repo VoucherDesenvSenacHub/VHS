@@ -1,1 +1,12 @@
 php_value auto_prepend_file "C:\xampp\htdocs\VHS\config.php"
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteBase /VHS/
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    RewriteRule ^(.*)$ src/application/routes/route.php/$1 [L,QSA]
+</IfModule>
