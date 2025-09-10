@@ -49,6 +49,7 @@ function HeaderComponent() {
             </div>
         </header>
         $UserMenu
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src='/VHS/src/views/components/header/headerScript.js'></script>
     HTML;
 }
