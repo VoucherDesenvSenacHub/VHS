@@ -35,7 +35,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VHS - New - Password</title>
+  <title>VHS - Enviar E-mail</title>
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="/VHS/src/styles/tailwindglobal.js"></script>
@@ -51,15 +51,12 @@ use function Src\Views\Components\Utils\ButtonComponent;
         <div class="flex items-center flex-col gap-2">
           <img src="/VHS/public/logos/Logo.svg" alt="">
           <p class="text-3xl font-semibold text-white max-xl:text-2xl">Redefinir senha</p>
-          <p class="text-secondary">Insira uma nova senha</p>
+          <p class="text-secondary">Informe o e-mail da sua conta</p>
         </div>
         <form action="/VHS/src/application/routes/route.php/api/v1/auth/signin" method="POST">
           <div class="flex flex-col gap-4 w-full xl:w-96">
-                <?= InputComponent(placeholder: "Insira sua nova senha", name: "email", type: "password", label: "senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "w-6 h-6 right-3", value: $fields["email"] ?? "", error: !empty($emailError), errorDescription: !empty($emailError) ? $emailError : "") ?>
-                <?= InputComponent(placeholder: "Confirme sua senha", name: "password", type: "password", label: "Senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "w-6 h-6 right-3", value: $fields["password"] ?? "", error: !empty($passwordError), errorDescription: !empty($passwordError) ? $passwordError : "") ?>
-                <?= !empty($genericError) ? "<p id='genericError' class='text-red-500'>Ocorreu um erro interno. Tente novamente mais tarde!</p>" : '' ?>
-                <?= !empty($emailPasswordError) ? "<p id='genericError' class='text-red-500'>Email ou senha incorretos</p>" : '' ?>
-                <?= ButtonComponent("Confirmar", "default", className: " g-recaptcha btn-submit mt-4", type: "button", attributes: [
+                <?= InputComponent(placeholder: "Insira seu e-mail", name: "email", type: "email", label: "Email", icon: "/VHS/public/icons/Vector.svg", iconPosition: "w-6 h-6 right-3", value: $fields["email"] ?? "", error: !empty($emailError), errorDescription: !empty($emailError) ? $emailError : "") ?>
+                <?= ButtonComponent("Enviar e-mail", "default", className: " g-recaptcha btn-submit mt-4", type: "button", attributes: [
                         "data-sitekey" => "6LeZE6MrAAAAAFW6zL9HUPU8eJ616uwPWu92db9a",
                         "data-callback" => "onSubmit",
                         "data-action" => 'submit',

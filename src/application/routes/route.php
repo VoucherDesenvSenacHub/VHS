@@ -8,7 +8,7 @@ require_once __DIR__ . '/../../controllers/signIn.controller.php';
 require_once __DIR__ . '/../../controllers/signUpView.controller.php';
 require_once __DIR__ . '/../../controllers/createPassword.controller.php';
 require_once __DIR__ . '/../../controllers/home.controller.php';
-#require_once __DIR__ . '/../../controllers/verfiyEmail.controller.php';
+// require_once __DIR__ . '/../../controllers/verfiyEmail.controller.php';
 require_once __DIR__ . '/../../application/middlewares/RedirectUserLogged.middleware.php';
 require_once __DIR__ . '/../../application/middlewares/RedirectUserNotLogged.middleware.php';
 require_once __DIR__ . '/../../controllers/signIn.view.controller.php';
@@ -25,7 +25,7 @@ use Src\Application\Middlewares\RedirectUserLoggedMiddleware;
 use Src\Application\Controllers\SignInController;
 use Src\Application\Controllers\VerifyEmailViewController;
 use Src\Application\Middlewares\RedirectUserNotLoggedMiddleware;
-use Src\Application\Controllers\ResetpasswordController;
+use Src\Application\Controllers\ResetPasswordController;
 use Src\Application\Routes\Router;
 use Src\Controllers\SignInViewController;
 
@@ -34,23 +34,20 @@ $dotenv->load();
 
 $router = new Router();
 
-#api routes
+// api routes
 $router->post('/api/v1/auth/signin', SignInController::class);
-
 $router->post("/api/v1/signup/password", CreateUserController::class, RedirectUserLoggedMiddleware::class);
 $router->post('/api/v1/auth/signup', SignUpController::class);
-
-$router->post('/api/v1/auth/ResetPassword', ResetpasswordController::class);
-
+$router->post('/api/v1/auth/resetpassword', ResetPasswordController::class);
 
 $router->get('/home', HomeController::class);
 
-#views routes
+// views routes
 $router->get('/home', HomeController::class, RedirectUserNotLoggedMiddleware::class);
-
 $router->get('/auth/signin', SignInViewController::class, RedirectUserLoggedMiddleware::class);
 $router->get("/auth/signup", SignUpViewController::class, RedirectUserLoggedMiddleware::class);
 $router->get("/auth/signup/password", CreatePasswordController::class, RedirectUserLoggedMiddleware::class);
 $router->get("/auth/signup/verify-email", VerifyEmailViewController::class);
 $router->get("/api/v1/auth/signup/verify-email", VerifyEmailController::class);
+
 $router->run();
