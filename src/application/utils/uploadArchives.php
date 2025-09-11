@@ -2,7 +2,6 @@
 
 namespace Src\Application\Utils;
 
-use function Src\Application\Utils\Redirect\redirect;
 
 function UploadArchives(string $file_name){
     
@@ -40,7 +39,7 @@ function UploadArchives(string $file_name){
         throw new \Exception("Arquivo muito grande");
     }
 
-    $dir = __DIR__ . "/../../public/uploads/";
+    $dir = __DIR__ . "/../../../public/uploads/";
 
     if (!is_dir($dir)) {
         mkdir($dir, 0777, true);
@@ -53,5 +52,5 @@ function UploadArchives(string $file_name){
         throw new \Exception("Falha ao salvar o arquivo");
     }
 
-    return "/uploads/" . $safeName; 
+    return "/public/uploads/" . $safeName; 
 }

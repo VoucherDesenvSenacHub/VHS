@@ -19,6 +19,7 @@ use Src\Application\Controllers\SignInController;
 use Src\Application\Controllers\VideoController;
 use Src\Application\Controllers\VideoViewController;
 use Src\Application\Controllers\VerifyEmailViewController;
+use Src\Application\Controllers\VideoUpdateController;
 use Src\Application\Middlewares\RedirectUserNotLoggedMiddleware;
 use Src\Application\Routes\Router;
 use Src\Controllers\SignInViewController;
@@ -33,6 +34,7 @@ $router->post('/api/v1/auth/signin', SignInController::class);
 $router->post("/api/v1/signup/password", CreateUserController::class, RedirectUserLoggedMiddleware::class);
 $router->post('/api/v1/auth/signup', SignUpController::class);
 $router->post('/api/v1/studio/create/video', VideoController::class);
+$router->post('/api/v1/studio/content/video/edit', VideoUpdateController::class);
 
 
 #views routes

@@ -4,19 +4,19 @@ namespace Src\Views\Components\Utils;
 function TextareaComponent(
     string $type = "text", 
     string $placeholder, 
-    string $icon = null, 
-    string $label = null, 
-    string $label_size = null,
-    string $description = null, 
-    string $description_size = null,
-    string $background = null, 
-    string $iconPosition = null,
-    string $width = null,
-    string $height = null,
-    bool $multiline = false,
+    string | null $icon = null, 
+    string | null $label = null, 
+    string | null $label_size = null,
+    string | null $description = null, 
+    string | null $description_size = null,
+    string | null $background = null, 
+    string | null $iconPosition = null,
+    string | null $width = null,
+    string | null $height = null,
+    bool $multiline = true,
     string $name = "",
     string $value = '',
-    string $required = null
+    string | null $required = null
 ) {
     $type = htmlspecialchars($type, ENT_QUOTES, 'UTF-8');
     $placeholder = htmlspecialchars($placeholder, ENT_QUOTES, 'UTF-8');
@@ -49,7 +49,7 @@ function TextareaComponent(
 
     
     $inputElement = $multiline
-        ? "<textarea placeholder='$placeholder' class='$input_style' onfocus='this.placeholder=\"\"' onblur='this.placeholder=\"$placeholder\"' name='$name' value='$value' $required></textarea>"
+        ? "<textarea placeholder='$placeholder' class='$input_style' onfocus='this.placeholder=\"\"' onblur='this.placeholder=\"$placeholder\"' name='$name' $required>$value</textarea>"
         : "<input type='$type' placeholder='$placeholder' class='$input_style' onfocus='this.placeholder=\"\"' onblur='this.placeholder=\"$placeholder\"' name='$name' value='$value' $required>";
 
     return "

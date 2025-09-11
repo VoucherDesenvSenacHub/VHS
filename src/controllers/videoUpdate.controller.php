@@ -13,7 +13,7 @@ use Respect\Validation\Validator as v;
 use function Src\Application\Utils\Redirect\redirect;
 use function Src\Application\Utils\UploadArchives;
 
-class VideoController extends Controller{
+class VideoUpdateController extends Controller{
     
     public VideoModel $videoModel;
 
@@ -22,34 +22,29 @@ class VideoController extends Controller{
         try {
             $this->videoModel = $this->model("video");
 
-            $imgPath = UploadArchives('thumbnail');
-
+            $id = $_POST["id"];
+            
             $author_id = $_SESSION["user"]["id"];
 
-            $data = array_merge($_POST, [
-                "thumbnail_url" => $imgPath,
-                "author_id" => $author_id
-            ]);
+            $video = $this->videoModel->getVideoByID($id);
+            
 
-            $schema = v::key('url', v::stringType())->notEmpty()
-                ->key('title', v::stringType())->notEmpty()
+            $schema = v::key('title', v::stringType())->notEmpty()
                 ->key('description', v::stringType())->notEmpty()
-                ->key('author_id', v::stringType())->notEmpty()
                 ->key('category_id', v::stringType())->notEmpty()
                 ->key('thumbnail_url', v::stringType())->notEmpty();
 
-            $schema->assert($data);
+            $schema->assert($id);
 
-            $this->videoModel->create(
-                $data["url"],
-                $data["title"],
-                $data["description"],
-                $data["category_id"],
-                $data["author_id"],
-                $data["thumbnail_url"]
-            );
+            $this->videoModel->update(
+                $id,
+                $_POST["title"],
+                $_POST["description"],
+                $_POST["category_id"],
+                $_POST["thumbnail_url"]
+            ); 
 
-            redirect("/VHS/create/video",[
+            redirect("/VHS/content/video?id=$id",[
                 "success" => true
             ]);
         } catch (NestedValidationException $exception) {

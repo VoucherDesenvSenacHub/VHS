@@ -31,6 +31,21 @@ class VideoModel extends Model
         return $stmt;
     }
 
+    public function update(string $id,string $title, string $description, string $category_id, string $thumbnail_url){
+        
+        $sql = "UPDATE videos SET title = :tile, description = :description, category_id = :category_id, thumbnail_url = :thumbnail_url WHERE id = :id";
+
+        $stmt = $this->database->query($sql, [
+            ":id" => $id,
+            ":title" => $title,
+            ":description" => $description,
+            ":category_id" => $category_id,
+            ":thumbnail_url" => $thumbnail_url
+        ]);
+
+        return $stmt;
+    }
+
     public function getVideoByTitle(string $query): array
     {
         $sql = "SELECT * FROM videos WHERE type ='VIDEO' and (title LIKE :query)";

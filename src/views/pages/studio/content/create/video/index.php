@@ -121,11 +121,11 @@ $botoes = [
                             ) ?>
                         </div>
                     </div>
-                    <div id="Public">
+                    <!-- <div id="Public">
                         <h1 class="text-3xl text-white font-semibold mt-4">Público</h1>
                         <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
                         <?= InputComponent(type: "text", placeholder: "Tudo sobre o Next.js 15, nova arquitetura de pasta", name: "title", required: true) ?>
-                    </div>
+                    </div> -->
                     
                     <div id="Category">
                         <h1 class="text-3xl text-white font-semibold mt-4">Categoria</h1>

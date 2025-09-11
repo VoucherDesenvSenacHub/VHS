@@ -23,6 +23,13 @@ $botoes = [
 $video_id = $_SESSION["page_data"]["video_id"] ?? [];
 $categorias = $_SESSION["page_data"]["categorias"] ?? [];
 
+$thumbPath = '';
+if (!empty($video_id) && !empty($video_id[0]['thumbnail_url'])) {
+    $url = $video_id[0]['thumbnail_url'];
+    // se já tem /VHS no começo, usa direto; se não, concatena
+    $thumbPath = (strpos($url, '/VHS') === 0) ? $url : '/VHS' . $url;
+}
+
 $conteudos = []
 ?>
 
@@ -63,14 +70,15 @@ $conteudos = []
                     ?>
                 </div>
 
-                <form action="" enctype="multipart/form-data" method="post">
+                <form action="/VHS/src/application/routes/route.php/api/v1/studio/content/video/edit" enctype="multipart/form-data" method="post">
+                    <input type="hidden" name="id" value="<?= htmlspecialchars($video['id']) ?>">
                     <div class="w-full h-full md:h-[400px] border-2 rounded-xl border-solid flex items-center justify-center relative overflow-hidden -mt-8 flex-wrap">
                         <div id="uploadArea" class="flex flex-col items-center justify-center w-full h-full">
                             <label for="dropzone-file"
                                 class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
 
-                                <div id="preview" class="w-full h-full <?= !empty($video["thumbnail_url"]) ? '' : 'hidden' ?>">
-                                    <img id="thumbnailPreview" src="<?= $video["thumbnail_url"] ?>" class="object-cover w-full h-full rounded-lg" alt="Preview" />
+                                <div id="preview" class="w-full h-full">
+                                    <img id="thumbnailPreview" src="<?= htmlspecialchars($thumbPath) ?>" class="object-cover w-full h-full rounded-lg" alt="Preview" />
                                 </div>
 
                                 <div id="uploadText" class="flex flex-col items-center justify-center pt-5 pb-6">
@@ -82,7 +90,7 @@ $conteudos = []
                                     <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, JPEG</p>
                                 </div>
 
-                                <input id="dropzone-file" type="file" class="hidden" accept="image/png, image/jpg, image/jpeg" name="thumbnail" value="<?= $video["thumbnail_url"] ?>" required />
+                                <input id="dropzone-file" type="file" class="hidden" accept="image/png, image/jpg, image/jpeg" name="thumbnail" required />
                             </label>
                         </div>
                     </div>
@@ -102,16 +110,15 @@ $conteudos = []
                                     type: "text",
                                     placeholder: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.  😍😍😍",
                                     height: "96",
-                                    multiline: true,
                                     value: $video["description"]
                                 ) ?>
                             </div>
                         </div>
-                        <div id="Public">
+                        <!-- <div id="Public">
                             <h1 class="text-3xl text-white font-semibold mt-4">Público</h1>
                             <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
                             <?= InputComponent(type: "text", placeholder: "Estudante de Nível Técnico de tecnologia, Entusiasta em foguetes") ?>
-                        </div>
+                        </div> -->
 
                         <div id="Category">
                             <h1 class="text-3xl text-white font-semibold mt-4">Categoria</h1>
@@ -140,7 +147,59 @@ $conteudos = []
 
     <footer class=""> <?= Footer() ?> </footer>
 
-    <script src="./videofast.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputFile = document.getElementById('dropzone-file');
+            const previewImg = document.getElementById('thumbnailPreview');
+            const uploadText = document.getElementById('uploadText');
+
+            const showUploadText = () => {
+                if (uploadText) uploadText.style.display = 'flex';
+                if (previewImg) previewImg.style.display = 'none';
+            };
+            const showPreview = () => {
+                if (uploadText) uploadText.style.display = 'none';
+                if (previewImg) previewImg.style.display = 'block';
+            };
+
+            // testa a src inicial (pode ser vazia)
+            const initialSrc = previewImg?.getAttribute('src') || '';
+            if (initialSrc && initialSrc.trim() !== '') {
+                // testa se a imagem realmente carrega (evita mostrar uma img quebrada)
+                const tester = new Image();
+                tester.onload = () => showPreview();
+                tester.onerror = () => showUploadText();
+                tester.src = initialSrc;
+            } else {
+                showUploadText();
+            }
+
+            // Quando escolher novo arquivo
+            if (inputFile) {
+                inputFile.addEventListener('change', (e) => {
+                    const file = e.target.files && e.target.files[0];
+                    if (!file) {
+                        // se desmarcou/limpou
+                        const src = previewImg.getAttribute('src') || '';
+                        if (!src) showUploadText();
+                        return;
+                    }
+                    const reader = new FileReader();
+                    reader.onload = (ev) => {
+                        previewImg.src = ev.target.result;
+                        showPreview();
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+
+            // Se por algum motivo o <img> falhar depois
+            if (previewImg) {
+                previewImg.addEventListener('error', () => showUploadText());
+            }
+        });
+    </script>
+
 
 </body>
 
