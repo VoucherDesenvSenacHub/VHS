@@ -2,7 +2,7 @@
 
 // Requires dos componentes necessários
 require_once __DIR__ . "/../../components/header/headerComponent.php";
-require_once __DIR__ . "/../../components/sidebar/SidebarComponent.php";
+require_once __DIR__ . "/../../components/sidebar/index.php";
 require_once __DIR__ . "/../../components/cards/index.php";
 require_once __DIR__ . "/../../components/featuredCard/featuredCardComponent.php";
 require_once __DIR__ . "/../../components/utils/sweetalert.php";

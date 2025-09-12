@@ -12,7 +12,7 @@ function purifyProperty($property) {
     return htmlspecialchars(strip_tags($property), ENT_QUOTES, 'UTF-8');
 }
 
-function purifyNumbers($num): string {
+function purifyNumbers($num) {
     $num = (int) $num;
 
     if ($num >= 1000000000) {
@@ -26,7 +26,7 @@ function purifyNumbers($num): string {
     return (string) $num;
 }
 
-function purifyDuration($seconds): string {
+function purifyDuration($seconds) {
     if (!is_numeric($seconds)) {
         return '00:00';
     }
@@ -43,12 +43,12 @@ function purifyDuration($seconds): string {
     return sprintf('%02d:%02d', $m, $s);
 }
 
-function purifyCreatedAt(string $date): string {
+function purifyCreatedAt(string $date) {
     try {
         date_default_timezone_set('America/Campo_Grande');
         $dt = new DateTime($date);
-        $now = new DateTime();
 
+        $now = new DateTime();
         $diff = $now->diff($dt);
 
         if ($diff->y > 0) {
@@ -71,13 +71,13 @@ function purifyCreatedAt(string $date): string {
             return "há {$diff->i} minuto" . ($diff->i > 1 ? 's' : '');
         }
         
-        return "agora mesmo";
+        return "Agora";
     } catch (\Exception $e) {
         return purifyProperty($date);
     }
 }
 
-function purifyDateTime(string $date): string {
+function purifyDateTime(string $date) {
     try {
         $dt = new DateTime($date);
         return $dt->format('d/m \à\s H:i');
