@@ -4,7 +4,7 @@
     require_once __DIR__ . "/../../../components/sidebar/index.php";
     require_once __DIR__ . "/../../../components/featuredCard/featuredEventComponent.php";
     require_once __DIR__ . "/../../../components/cards/index.php";
-    
+
     use function Src\Views\Components\Sidebar\SidebarComponent;
     use function Src\Views\Components\Header\HeaderComponent;
     use function Src\Views\Components\Cards\viewCards;
@@ -27,16 +27,7 @@
         'event_date' => '12-09-2025 09:55:00',
     ];
 
-    $techVideos = [
-        [
-            "url" => "#",
-            "description" => "Gratuito",
-            "title" => "Tudo sobre o Next.js 15, nova arquitetura de pasta",
-            "name" => "Rafael Germano",
-            "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png", 
-            "event_date" => "2025-09-15 10:00"
-        ]
-    ];
+    $events = $_SESSION["page_data"] ?? [];
 
 ?>
 
@@ -61,7 +52,7 @@
     <div class="flex flex-col md:flex-row w-full">
         <?= SidebarComponent() ?>
 
-        <main class="flex-1 p-6 mx-auto">
+        <main class="flex-1 p-10 mx-auto">
             <div class="max-w-[1500px] mx-auto">
                 <div>
                     <h2 class="text-2xl font-bold text-white"><span class="text-purple-400">#</span> Acontecendo agora 🚀</h2>
@@ -83,7 +74,7 @@
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        <?= viewCards($techVideos, 'events'); ?>   
+                        <?= viewCards($events, "events"); ?>   
                     </div>
                 </section>
             </div>
