@@ -1,42 +1,39 @@
 <?php
 
-    namespace Src\Views\Components\Utils;
+namespace Src\Views\Components\Utils;
 
-    function BarComponent() {
-        return "
-            <button class='barrinha' id='barrinha'>
-                <svg width='28' height='25' viewBox='0 0 28 25' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                    <path fill-rule='evenodd' clip-rule='evenodd' d='M25.0007 12V12C25.0007 12.5523 24.553 13 24.0007 13H3.99978C3.44767 13 3.00073 12.5521 3.00073 12V12V12C3.00073 11.4483 3.44707 11 3.9988 11H24.0007C24.553 11 25.0007 11.4477 25.0007 12V12Z' fill='white'/>
-                    <path fill-rule='evenodd' clip-rule='evenodd' d='M25.0007 18V18C25.0007 18.5523 24.553 19 24.0007 19H3.99978C3.44767 19 3.00073 18.5521 3.00073 18V18V18C3.00073 17.4483 3.44707 17 3.9988 17H24.0007C24.553 17 25.0007 17.4477 25.0007 18V18Z' fill='white'/>
-                    <path fill-rule='evenodd' clip-rule='evenodd' d='M25.0007 6V6C25.0007 6.55228 24.553 7 24.0007 7H3.99978C3.44767 7 3.00073 6.55211 3.00073 6V6V6C3.00073 5.44827 3.44707 5 3.9988 5H24.0007C24.553 5 25.0007 5.44772 25.0007 6V6Z' fill='white'/>
-                    
-                    <path
-                     id='seta'
-                     class='transition-transform duration-500'
-                     d='M1.02937 18.7924C0.509357 18.3921 0.509358 17.6079 1.02937 17.2076L2.89001 15.7753C3.54758 15.2691 4.5 15.7378 4.5 16.5677V19.4323C4.5 20.2622 3.54757 20.7309 2.89001 20.2247L1.02937 18.7924Z'
-                     fill='white'
-                     style='transform-origin: center; transform-box: fill-box;'
-                    />
-                </svg>
-            </button>
+function BarComponent() {
+    return <<<HTML
+        <button id='barrinha' class='barrinha min-w-10 min-h-10 rounded-xl hover:bg-white/10 active:bg-transparent flex items-center justify-center transition-all duration-200'>
+            <svg width="28" height="25" viewBox="0 0 28 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M25.0009 12C25.0009 12.5523 24.5532 13 24.0009 13H4.00003C3.44792 13 3.00098 12.5521 3.00098 12C3.00098 11.4483 3.44732 11 3.99905 11H24.0009C24.5532 11 25.0009 11.4477 25.0009 12Z" fill="white"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M25.0009 18C25.0009 18.5523 24.5532 19 24.0009 19H4.00003C3.44792 19 3.00098 18.5521 3.00098 18C3.00098 17.4483 3.44732 17 3.99905 17H24.0009C24.5532 17 25.0009 17.4477 25.0009 18Z" fill="white"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M25.0009 6C25.0009 6.55228 24.5532 7 24.0009 7H4.00003C3.44792 7 3.00098 6.55211 3.00098 6C3.00098 5.44827 3.44732 5 3.99905 5H24.0009C24.5532 5 25.0009 5.44772 25.0009 6Z" fill="white"/>
 
-            <script>
-                document.addEventListener('DOMContentLoaded', () => {
-                    let indoParaDireita = true;
-                    const seta = document.getElementById('seta');
+                <path d="M26.5959 17.1862C27.1347 17.5973 27.1347 18.4027 26.5959 18.8138L24.6681 20.2849C23.9868 20.8048 23 20.3234 23 19.471V16.529C23 15.6766 23.9868 15.1952 24.6681 15.7151L26.5959 17.1862Z" fill="white"
+                    id='arrow'
+                    class='arrow transition-transform duration-500'
+                    style='transform-origin: center; transform-box: fill-box;'
+                />
+            </svg>
+        </button>
 
-                    document.querySelector('.barrinha').addEventListener('click', () => {
-                        if (indoParaDireita) {
-                            seta.style.transform = 'translateX(22px) rotate(180deg)';
-                        } else {
-                            seta.style.transform = 'translateX(0) rotate(0deg)';
-                        }
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                let goingLeft = true;
+                const arrow = document.getElementById('arrow');
+                const barrinha = document.querySelector('.barrinha');
 
-                        indoParaDireita = !indoParaDireita;
-                    });
+                barrinha.addEventListener('click', () => {
+                    if (goingLeft) {
+                        arrow.style.transform = 'translateX(-22px) rotate(-180deg)';
+                    } else {
+                        arrow.style.transform = 'translateX(0) rotate(0deg)';
+                    }
+
+                    goingLeft = !goingLeft;
                 });
-            </script>
-        ";
-    }
-
-?>
+            });
+        </script>
+    HTML;
+}

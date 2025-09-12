@@ -1,7 +1,7 @@
 <?php
 
 require __DIR__ . "/../../../components/header/headerComponent.php";
-require __DIR__ . "/../../../components/sidebar/SidebarComponent.php";
+require __DIR__ . "/../../../components/sidebar/index.php";
 require __DIR__ . "/../../../components/cards/index.php";
 require __DIR__ . "/../../../components/featuredCard/featuredCardComponent.php";
 

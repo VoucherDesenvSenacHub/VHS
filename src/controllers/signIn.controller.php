@@ -62,6 +62,11 @@ class SignInController extends Controller {
             elseif ($password && $_POST["keep_logged_in"] == "off") {
                 $token = uniqid(more_entropy: true) . uniqid(more_entropy: true);
                 $this->userModel->updateUserToken($user[0]["id"], $token);
+
+                if($_COOKIE["token"]) {
+                    setcookie("token", "", 1, "/");
+                }
+                
                 $_SESSION["token"] = $token;
                 redirect("/VHS/home");
             }

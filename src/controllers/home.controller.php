@@ -33,7 +33,7 @@ class HomeController extends Controller {
         
         $popularVideos = $this->videoModel->getPopularVideos();
         $featuredVideos = array_slice($popularVideos, 0, 3);
-        $popularVideos = array_slice($popularVideos, 3);
+        $popularVideos = array_slice($popularVideos, 2);
         
         $this->view('home/index', [
             "categories" => $categories,

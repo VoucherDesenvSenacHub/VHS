@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toast Example</title>
+  <!-- Toastify CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <style>
+    /* Remove o fundo padrão do Toastify */
+    .toastify {
+      background: none !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+    }
+
+    .custom-toast {
+      background: #111; /* fundo escuro */
+      color: white;
+      border-radius: 12px;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: "Inter", sans-serif;
+      box-shadow: 0px 0px 15px rgba(0,0,0,0.6);
+      border-bottom: 3px solid #00ff80; /* linha verde embaixo */
+    }
+    .custom-toast strong {
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .custom-toast span {
+      font-size: 14px;
+      color: #ccc;
+    }
+    .check-icon {
+      background: #00ff80;
+      color: #111;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+    .check-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke-width: 2.5;
+    }
+  </style>
+</head>
+<body>
+  <button onclick="showToast()">Show Toast</button>
+
+  <!-- Toastify JS -->
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  
+  <script>
+   lucide.createIcons();
+    function showToast() {
+      Toastify({
+        text: `
+          <div class="custom-toast">
+            <div class="check-icon">
+              <i data-lucide="check"></i>
+            </div>
+            <div>
+              <strong>Saved Successfully</strong><br>
+              <span>Your changes have been saved successfully</span>
+            </div>
+          </div>
+        `,
+        duration: 4000,
+        gravity: "bottom",
+        position: "right",
+        escapeMarkup: false,
+        close: false,
+        callback: () => {
+            lucide.createIcons();   
+        }
+      }).showToast();
+    }
+  </script>
+</body>
+</html>
