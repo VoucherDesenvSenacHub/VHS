@@ -1,10 +1,10 @@
 <?php
-require "../../../components/utils/inputComponent.php";
-require "./components/categoriesDataTableComponent.php";
-require "../../../components/header/HeaderComponent.php";
-require "../../../components/barra_admin/barra_admin.php";
-require "../../../components/filter/filter.php";
-require "../../../components/utils/buttonComponent.php";
+require_once __DIR__ . "/../../../components/utils/inputComponent.php";
+require_once __DIR__ . "/components/categoriesDataTableComponent.php";
+require_once __DIR__ . "/../../../components/header/HeaderComponent.php";
+require_once __DIR__ . "/../../../components/barra_admin/barra_admin.php";
+require_once __DIR__ . "/../../../components/filter/filter.php";
+require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
 
 use function Src\Views\Components\categoriesDataTableComponent\categoriesDataTableComponent;
 use function Src\Views\Components\header\HeaderComponent;

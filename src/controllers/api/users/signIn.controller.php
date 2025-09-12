@@ -9,9 +9,9 @@ use Src\Application\Core\Controller;
 use Src\Infra\Model\UserModel;
 use Respect\Validation\Validator as v;
 
-require_once __DIR__ . '/../application/core/controller.php';
-require_once __DIR__ . '/../application/utils/redirect.php';
-require_once __DIR__ . '/../application/utils/verifyRecaptcha.php';
+require_once __DIR__ . '/../../../application/core/controller.php';
+require_once __DIR__ . '/../../../application/utils/redirect.php';
+require_once __DIR__ . '/../../../application/utils/verifyRecaptcha.php';
 
 use function Src\Application\Utils\Redirect\redirect;
 use function Src\Application\Utils\verifyRecaptcha;

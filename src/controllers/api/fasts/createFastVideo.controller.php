@@ -9,8 +9,8 @@ use Src\Infra\Model\FastModel;
 use Respect\Validation\Validator as v;
 use getID3;
 
-require_once __DIR__ . '/../application/core/controller.php';
-require_once __DIR__ . '/../application/utils/redirect.php';
+require_once __DIR__ . '/../../../application/core/controller.php';
+require_once __DIR__ . '/../../../application/utils/redirect.php';
 
 use function Src\Application\Utils\Redirect\redirect;
 
@@ -18,8 +18,8 @@ class CreateFastVideoController extends Controller {
     public FastModel $FastModel;
     public function index() {
         try{
-            $uploadDir = __DIR__ . '/../../public/videos/';
-            $thumbnailDir = __DIR__ . '/../../public/thumbnails/';
+            $uploadDir = __DIR__ . '/../../../../public/videos/';
+            $thumbnailDir = __DIR__ . '/../../../../public/thumbnails/';
 
             $this->FastModel = $this->model("fast");
 

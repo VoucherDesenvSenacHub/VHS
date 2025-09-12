@@ -26,6 +26,11 @@ use Src\Application\Controllers\StudioVideoViewController;
 use Src\Application\Routes\Router;
 use Src\Controllers\SignInViewController;
 use Src\Application\Middlewares\RedirectUserNotCreatorMiddleware;
+use Src\Application\Middlewares\RedirectUserNotAdminMiddleware;
+use Src\Application\Controllers\AdminAnalyticsViewController;
+use Src\Application\Controllers\AdminCategoriesViewController;
+use Src\Application\Controllers\AdminComplaintManagementViewController;
+use Src\Application\Controllers\AdminUsersViewController;
 
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../../..");
 $dotenv->load();
@@ -53,9 +58,17 @@ $router->get("/auth/signup/password", CreatePasswordController::class, RedirectU
 $router->get("/auth/signup/verify-email", VerifyEmailViewController::class);
 $router->get("/api/v1/auth/signup/verify-email", VerifyEmailController::class);
 
-$router->get('/studio', StudioController::class, RedirectUserNotCreatorMiddleware::class);
-$router->get('/studio/create/video', StudioVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
-$router->get('/studio/create/fast', StudioFastViewController::class, RedirectUserNotCreatorMiddleware::class);
+$router->get("/studio", StudioController::class, RedirectUserNotCreatorMiddleware::class);
+$router->get("/studio/create/video", StudioVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
+$router->get("/studio/create/fast", StudioFastViewController::class, RedirectUserNotCreatorMiddleware::class);
+
 $router->get("/user/settings", UserSettingsViewController::class, RedirectUserNotLoggedMiddleware::class);
+
+$router->get("/admin/analytics", AdminAnalyticsViewController::class, RedirectUserNotAdminMiddleware::class);
+$router->get("/admin/categories", AdminCategoriesViewController::class, RedirectUserNotAdminMiddleware::class);
+$router->get("/admin/complaints", AdminComplaintManagementViewController::class, RedirectUserNotAdminMiddleware::class);
+$router->get("/admin/users", AdminUsersViewController::class, RedirectUserNotAdminMiddleware::class);
+
+
 
 $router->run();

@@ -1,12 +1,12 @@
 <?php
-require "../../../components/Perfil_Analytics/Perfil_Analytics.php";
-require "../../../components/utils/userActivityCardsComponent.php";
-require "../../../components/barra_admin/barra_admin.php";
-require "../../../components/header/headerComponent.php";
-require "../../../components/charts/chartComponent.php";
-require "./components/chartsCategoryComponent/chartsCategoryComponent.php";
-require "./components/cardActivityHistoryComponent/cardActivityHistoryComponent.php";
-require "./components/cardLatestReportComponent/cardLatestReportComponent.php";
+require_once __DIR__ . "/../../../components/Perfil_Analytics/Perfil_Analytics.php";
+require_once __DIR__ . "/../../../components/utils/userActivityCardsComponent.php";
+require_once __DIR__ . "/../../../components/barra_admin/barra_admin.php";
+require_once __DIR__ . "/../../../components/header/headerComponent.php";
+require_once __DIR__ . "/../../../components/charts/chartComponent.php";
+require_once __DIR__ . "/components/chartsCategoryComponent/chartsCategoryComponent.php";
+require_once __DIR__ . "/components/cardActivityHistoryComponent/cardActivityHistoryComponent.php";
+require_once __DIR__ . "/components/cardLatestReportComponent/cardLatestReportComponent.php";
 
 use function src\views\components\barra_admin\Barra_Admin;
 use function Src\Views\Components\Header\HeaderComponent;
@@ -139,7 +139,7 @@ $comentarios = [
         'amountResponses' => '13',
     ],
 ];
-
+$user = $_SESSION["user"] ?? null;
 ?>
 
 <!DOCTYPE html>
@@ -157,11 +157,9 @@ $comentarios = [
 <body class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center text-white font-[Poppins]">
     <?= HeaderComponent() ?>
     <div class="flex">
-        <div class="min-w-[220px] position-fixed">
             <?= Barra_Admin() ?>
-        </div>
         <div class="flex-1 p-6">
-            <?= renderPostComponent("") ?>
+            <?= renderPostComponent("/VHS/public/uploads/avatars/" . $user['avatar_url'] ?? '/VHS/public/uploads/avatars/default.png', $user['name']) ?>
             <div class="flex items-start justify-between flex-row mt-4 gap-6">
                 <div class="grid grid-col-2 items-center gap-6 max-w-[115vh] w-full">
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 ">

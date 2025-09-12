@@ -9,7 +9,7 @@ use Src\Infra\Model\UserModel;
 
 use function Src\Application\Utils\Redirect\redirect;
 
-require_once __DIR__ . '/../application/core/controller.php';
+require_once __DIR__ . '/../../../application/core/controller.php';
 
 class UpdateUserController extends Controller {
     private UserModel $userModel;
@@ -75,7 +75,7 @@ class UpdateUserController extends Controller {
         
         if(isset($_FILES["avatar"]) && $_FILES["avatar"]["tmp_name"]) {
             $fileName = time() . "_" . ($_SESSION["user"]["id"] ?? "default") . ".png";
-            $uploadFile = __DIR__ . "/../../public/uploads/avatars/" . $fileName;
+            $uploadFile = __DIR__ . "/../../../../public/uploads/avatars/" . $fileName;
             $avatarUrl = $fileName;
 
             if($_FILES["avatar"]["size"] > 2 * 1024 * 1024) {
@@ -90,7 +90,7 @@ class UpdateUserController extends Controller {
         }
 
         if(isset($_POST["delete_avatar"])) {
-            $uploadFile = __DIR__ . "/../../public/uploads/avatars/" . ($_SESSION["user"]["id"] ?? "default") . ".png";
+            $uploadFile = __DIR__ . "/../../../../public/uploads/avatars/" . ($_SESSION["user"]["id"] ?? "default") . ".png";
             if(file_exists($uploadFile)) {
                 unlink($uploadFile);
             }

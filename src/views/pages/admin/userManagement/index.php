@@ -1,10 +1,10 @@
 <?php
-require "../../../components/utils/inputComponent.php";
-require "./components/userDataTableComponent.php";
-require "../../../components/header/HeaderComponent.php";
-require "../../../components/barra_admin/barra_admin.php";
-require "../../../components/filter/filter.php";
-require "../../../components/utils/buttonComponent.php";
+require_once __DIR__ . "/../../../components/utils/inputComponent.php";
+require_once __DIR__ . "/components/userDataTableComponent.php";
+require_once __DIR__ . "/../../../components/header/HeaderComponent.php";
+require_once __DIR__ . "/../../../components/barra_admin/barra_admin.php";
+require_once __DIR__ ."/../../../components/filter/filter.php";
+require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
 
 use function Src\Views\Components\userDataTableComponent\userDataTableComponent;
 use function Src\Views\Components\header\HeaderComponent;
@@ -106,8 +106,8 @@ $users = [
                 </div>
                 <div class="flex flex-col gap-2">
                     <div class="flex gap-2 w-96">
-                        <?php echo ButtonComponent("Usuários", "studio", "", 13, 2.5, "", "../userManagement/index.php"); ?>
-                        <?php echo ButtonComponent("Denúncias", "studio", "", 23, 2.5, "", "../complaintManagement/index.php"); ?>
+                        <?php echo ButtonComponent("Usuários", "studio", "", 13, 2.5, "", "/VHS/admin/users"); ?>
+                        <?php echo ButtonComponent("Denúncias", "studio", "", 23, 2.5, "", "/VHS/admin/complaints"); ?>
                     </div>
                     <div class="flex items-center justify-center gap-4">
                         <div class="h-full pt-6">
