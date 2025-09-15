@@ -1,55 +1,50 @@
 <?php
-
 namespace Src\Views\Components\barra_admin;
 
 function barra_admin() {
     $menu = [
-        "admin" => [
+        "home" => [
             [
                 "icon" => "/VHS/public/icons/sidebar_admin/chart-column.svg",
                 "text" => "Analytics",
-                "link" => "/VHS/admin/analytics",
-                "id"   => "analytics-btn"
+                "link" => "/VHS/admin/analytics"
             ],
             [
                 "icon" => "/VHS/public/icons/sidebar_admin/users.svg",
                 "text" => "Usuários",
-                "link" => "/VHS/admin/users",
-                "id"   => "usuarios-btn"
+                "link" => "/VHS/admin/users"
             ],
             [
                 "icon" => "/VHS/public/icons/sidebar_admin/layout-grid.svg",
-                "text" => "Categorias",
-                "link" => "/VHS/admin/categories",
-                "id"   => "categorias-btn"
+                "text" => "Denuncias",
+                "link" => "/VHS/admin/complaints"
             ]
         ]
     ];
 
-    $htmlAdmin = "";
+    $htmlHome = "";
 
-    foreach ($menu["admin"] as $value) {
-        $htmlAdmin .= <<<HTML
-            <li class="flex items-center text-gray-300 rounded-lg cursor-pointer mt-4 transition-transform duration-200">
-                <a href="{$value['link']}" class="flex items-center w-full gap-2 p-2">
-                    <button id="{$value['id']}" class="icon p-2 flex items-center justify-center bg-white/5 rounded-lg ml-[0.31rem]">
-                        <img class="w-6 h-6" src="{$value['icon']}" alt="{$value['text']}">
-                    </button>
-                    <h2 class="menu-text text-gray-400 text-sm font-semibold transition-all duration-500 ease-in-out">{$value['text']}</h2>
+    foreach ($menu["home"] as $value) {
+        $htmlHome .= <<<HTML
+            <li class="flex items-center gap-4 py-2 rounded-lg transition-colors">
+                <a href="{$value['link']}" class="size-8 bg-[#241A2F] p-1.5 rounded-lg icon min-w-8">
+                    <img src="{$value['icon']}" alt="{$value['text']}" class="w-full h-full">
+                </a>
+                <a href="{$value['link']}" class="text-secondary
+                    hover:text-gray-300 transition-all menu-text">
+                    {$value['text']}
                 </a>
             </li>
         HTML;
     }
 
     return <<<HTML
-        <aside class="sticky top-24 w-[9.25rem] ml-[1.87rem] transition-all duration-500 ease-in-out" id="sidebar">
-            <h2 class="pt-[1.18rem] ml-[0.31rem] text-gray-400 text-xs font-poppins">ADMINISTRAÇÃO</h2>
-            <ul class="space-y-4">
-                $htmlAdmin
+        <aside class="ml-8 transition-all w-[10.3rem]">
+            <h3 class="mb-4 text-secondary text-sm mt-6 mb-2">ADMINISTRADOR</h3>
+            <ul class="flex flex-col gap-6">
+                $htmlHome
             </ul>
+            <script src="/VHS/src/views/components/barra_admin/script.js"></script>
         </aside>
-
-        <script src="/VHS/src/views/components/barra_admin/script.js"></script>
     HTML;
 }
-?>

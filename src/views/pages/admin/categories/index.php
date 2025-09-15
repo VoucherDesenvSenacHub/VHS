@@ -51,13 +51,13 @@ $users = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Gerenciamento de categorias</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/VHS/src/styles/global.css">
     <script src="/VHS/src/styles/tailwindglobal.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Syne:wght@500..800&display=swap" rel="stylesheet" />
 </head>
 
 <body class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center text-white font-[Poppins]">
     <?= HeaderComponent() ?>
-    <div class="flex">
+    <div class="flex gap-10">
         <div class="min-w-[220px] position-fixed">
             <?= barra_admin() ?>
         </div>

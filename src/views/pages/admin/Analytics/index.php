@@ -150,8 +150,8 @@ $user = $_SESSION["user"] ?? null;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Analytics - Administração</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/VHS/src/styles/global.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.44.0/dist/apexcharts.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Syne:wght@500..800&display=swap" rel="stylesheet" />
 </head>
 
 <body class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center text-white font-[Poppins]">

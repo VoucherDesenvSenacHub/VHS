@@ -5,18 +5,6 @@ const icons = document.querySelectorAll(".icon");
 const separators = document.querySelectorAll(".separator");
 
 let isExpanded = true;
-
-const sidebarItems = {
-    "Home": "home-icon",
-    "Fast": "fast-icon",
-    "Events": "eventos-icon",
-    "History": "historico-icon",
-    "Technology": "tecnologia-icon",
-    "Health": "saude-icon",
-    "Fashion": "moda-icon",
-    "Aesthetics": "estetica-icon"
-};
-
 sidebar.style.transition = "width 0.3s ease";
 sidebar.style.overflow = "hidden";
 

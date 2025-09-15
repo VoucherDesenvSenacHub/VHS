@@ -54,15 +54,13 @@ $commets_lista = [
     <title>user management</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/VHS/src/styles/tailwindglobal.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Syne:wght@500..800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/VHS/src/styles/global.css">
 </head>
 
 <body class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center text-white font-[Poppins]">
     <?php echo HeaderComponent(); ?>
-    <div class="flex">
-        <div class="min-w-[220px] position-fixed">
-            <?= barra_admin() ?>
-        </div>
+    <div class="flex gap-10">
+        <?= barra_admin() ?>
         <div class="p-6 pt-8 w-full flex flex-col gap-6">
             <div class="flex flex-col gap-4">
                 <div>

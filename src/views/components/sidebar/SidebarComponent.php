@@ -82,7 +82,7 @@ function SidebarComponent() {
     }
 
     return <<<HTML
-        <aside class="ml-8 transition-all">
+        <aside class="ml-8 transition-all w-[10.3rem]">
             <h3 class="mb-4 text-secondary text-sm mt-6 mb-2">HOME</h3>
             <ul class="flex flex-col gap-6">
                 $htmlHome
