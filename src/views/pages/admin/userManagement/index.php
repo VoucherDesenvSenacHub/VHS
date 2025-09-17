@@ -13,71 +13,7 @@ use function src\views\components\utils\InputComponent;
 use function src\views\components\filter\Filter;
 use function Src\Views\Components\Utils\ButtonComponent;
 
-$users = [
-    [
-        'name' => 'Bruna Gomes Louveira Miranda',
-        'username' => 'Rafael',
-        'id' => '456aea2d12345678',
-        'status' => 'Ativo',
-        'role' => 'Usuário',
-        'joined' => '14/01/2024',
-        'profile_picture' => 'https://github.com/shadcn.png',
-    ],
-    [
-        'name' => 'Rafael Costa',
-        'username' => 'Rafael_',
-        'id' => '789bcdf12345678',
-        'status' => 'Ativo',
-        'role' => 'Administrador',
-        'joined' => '19/02/2024',
-        'profile_picture' => 'https://github.com/shadcn.png',
-    ],
-    [
-        'name' => 'Rafael Silva',
-        'username' => 'Rafael',
-        'id' => '456aea2d12345678',
-        'status' => 'Suspenso',
-        'role' => 'Usuário',
-        'joined' => '14/01/2024',
-        'profile_picture' => 'https://github.com/shadcn.png',
-    ],
-    [
-        'name' => 'Rafael Costa',
-        'username' => 'Rafael_',
-        'id' => '789bcdf12345678',
-        'status' => 'Ativo',
-        'role' => 'Criador de conteúdo',
-        'joined' => '19/02/2024',
-        'profile_picture' => 'https://github.com/shadcn.png',
-    ],
-    [
-        'name' => 'Rafael Silva',
-        'username' => 'Rafael',
-        'id' => '456aea2d12345678',
-        'status' => 'Ativo',
-        'role' => 'Usuário',
-        'joined' => '14/01/2024',
-        'profile_picture' => 'https://github.com/shadcn.png',
-    ],
-    [
-        'name' => 'Rafael Costa',
-        'username' => 'Rafael_',
-        'id' => '789bcdf12345678',
-        'status' => 'Ativo',
-        'role' => 'Criador de conteúdo',
-        'joined' => '19/02/2024',
-        'profile_picture' => 'https://github.com/shadcn.png',
-    ],
-    [
-        'name' => 'Rafael Costa',
-        'username' => 'Rafael_',
-        'id' => '789bcdf12345678',
-        'status' => 'Ativo',
-        'role' => 'Criador de conteúdo',
-        'joined' => '19/02/2024',
-        'profile_picture' => 'https://github.com/shadcn.png',
-    ],
-];
+$users = $_SESSION["page_data"]["users"];
 
 ?>
 

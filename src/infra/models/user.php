@@ -90,4 +90,9 @@ class UserModel extends Model {
     
         return $this->database->query($sql, [":id" => $id]);    
     }
+
+    public function getUsers(int $offset = 0, int $limit = 7): array {
+        $sql = "SELECT * FROM users ORDER BY created_at ASC LIMIT $offset, $limit";
+        return $this->database->query($sql);
+    }
 }
