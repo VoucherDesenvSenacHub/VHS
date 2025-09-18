@@ -66,7 +66,7 @@ $botoes = [
                     <?php echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5, "", "/VHS/create/event"); ?>
                 </div>
 
-                <form action="/VHS/src/application/routes/route.php/api/v1/studio/create/video" enctype="multipart/form-data" method="post">
+                <form action="/VHS/api/v1/studio/create/video" enctype="multipart/form-data" method="post">
                     <div id="URL">
                         <h1 class="text-subtitle text-white font-semibold mt-4">URL</h1>
                         <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>

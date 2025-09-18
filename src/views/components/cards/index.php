@@ -45,7 +45,7 @@ class Cards {
         $avatar_url = purifyProperty($card['avatar_url']);
         $title      = purifyProperty($card['title']);
         $duration   = purifyDuration($card['duration']);
-        $createdat  = purifyCreatedAt($card['created_at']);
+        $created_at  = purifyCreatedAt($card['created_at']);
         
         return <<<HTML
             <a href='$url' class='card flex flex-col relative max-w-[310px] h-[310px] 2xl:max-w-[340px] 2xl:h-[340px] bg-gray600 rounded-3xl overflow-hidden shadow-lg transition-all duration-200 border-2 border-gray600 active:scale-[98%]'>
@@ -74,7 +74,7 @@ class Cards {
                     </h3>
 
                     <p class='text-[#808191] text-caption 2xl:text-paragraph'>
-                        $views views • $createdat
+                        $views views • $created_at
                     </p>
                 </div>
 
@@ -149,7 +149,7 @@ class Cards {
                 </div>
 
                 <div class='p-4 text-white flex flex-col justify-between flex gap-2 h-[50%]'>
-                    <p class='text-[#808191] text-paragraph'>$createdat</p>
+                    <p class='text-[#808191] text-paragraph'>$created_at</p>
 
                     <h3 class='text-subtitle leading-tight break-words overflow-hidden line-clamp-3'
                         style='
@@ -168,7 +168,7 @@ class Cards {
                                 <img src='/VHS/public/icons/comments-card.svg' class='w-full h-full'>
                             </div>
 
-                            <p class='text-[#808191] text-paragraph'>$comments</p>
+
                         </div>
 
                         <div class='flex gap-2 items-center'>
@@ -176,7 +176,6 @@ class Cards {
                                 <img src='/VHS/public/icons/star-card.svg' class='w-full h-full'>
                             </div>
 
-                            <p class='text-[#808191] text-paragraph'>$likes</p>
                         </div>
 
                         <div class='flex gap-2 items-center'>
@@ -199,7 +198,7 @@ class Cards {
         $title     = purifyProperty($card['title']);
         $duration  = purifyDuration($card['duration']);
         $views     = purifyNumbers($card['views']);
-        $createdat = purifyCreatedAt($card['created_at']);
+        $created_at = purifyCreatedAt($card['created_at']);
 
         return <<<HTML
             <a href='$url' class='card flex flex-col relative max-w-[310px] h-[310px] 2xl:max-w-[340px] 2xl:h-[340px] bg-gray600 rounded-3xl overflow-hidden shadow-lg transition-all duration-200 border-2 border-gray600 active:scale-[98%]'>
@@ -225,7 +224,7 @@ class Cards {
                         $title
                     </h3>
 
-                    <p class='text-[#808191] text-paragraph'>$views views • $createdat</p>
+                    <p class='text-[#808191] text-paragraph'>$views views • $created_at</p>
                 </div>
             </a>
         HTML;

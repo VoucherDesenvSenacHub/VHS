@@ -14,7 +14,7 @@ class ContentVideoEditViewController extends Controller
 
     public function index()
     {
-        $this->videoModel = new VideoModel();
+        $this->videoModel = $this->model("video");
 
         $id =  $_GET["id"] ?? null;
 

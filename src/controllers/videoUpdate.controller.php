@@ -13,8 +13,9 @@ use Respect\Validation\Validator as v;
 use function Src\Application\Utils\Redirect\redirect;
 use function Src\Application\Utils\UploadArchives;
 
-class VideoUpdateController extends Controller{
-    
+class VideoUpdateController extends Controller
+{
+
     public VideoModel $videoModel;
 
     public function index()
@@ -23,30 +24,48 @@ class VideoUpdateController extends Controller{
             $this->videoModel = $this->model("video");
 
             $id = $_POST["id"];
-            
-            $author_id = $_SESSION["user"]["id"];
 
             $video = $this->videoModel->getVideoByID($id);
-            
+            $author_id = $_SESSION["user"]["id"];
+
+            if ($video["author_id"] != $author_id) {
+                echo "redirect 1 - não é o autor<br>";
+                redirect("/VHS/content/video", [
+                    "success" => false
+                ]);
+                exit;
+            }
+
+            $imgPath = UploadArchives('thumbnail');
+            if ($imgPath === null) {
+                $imgPath = $_POST['old_thumbnail'] ?? $video["thumbnail_url"];
+            }
+
+            $data = array_merge($_POST, [
+                "thumbnail_url" => $imgPath,
+                "id" => $id
+            ]);
 
             $schema = v::key('title', v::stringType())->notEmpty()
                 ->key('description', v::stringType())->notEmpty()
                 ->key('category_id', v::stringType())->notEmpty()
-                ->key('thumbnail_url', v::stringType())->notEmpty();
+                ->key('thumbnail_url', v::optional(v::stringType()->notEmpty()));
 
-            $schema->assert($id);
+            $schema->assert($data);
 
             $this->videoModel->update(
-                $id,
-                $_POST["title"],
-                $_POST["description"],
-                $_POST["category_id"],
-                $_POST["thumbnail_url"]
-            ); 
+                $data["id"],
+                $data["title"],
+                $data["description"],
+                $data["category_id"],
+                $data["thumbnail_url"]
+            );
 
-            redirect("/VHS/content/video?id=$id",[
+            echo "redirect 2 - update feito<br>";
+            redirect("/VHS/content/video", [
                 "success" => true
             ]);
+            exit;
         } catch (NestedValidationException $exception) {
             echo $exception->getFullMessage();
         }

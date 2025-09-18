@@ -30,6 +30,14 @@ if (!empty($video_id) && !empty($video_id[0]['thumbnail_url'])) {
     $thumbPath = (strpos($url, '/VHS') === 0) ? $url : '/VHS' . $url;
 }
 
+$teste = $_SESSION["redirect_data"]["success"] ?? false;
+if ($teste) {
+    var_dump("deu bom");
+} else {
+    var_dump("deu ruim");
+}
+
+
 $conteudos = []
 ?>
 
@@ -70,8 +78,9 @@ $conteudos = []
                     ?>
                 </div>
 
-                <form action="/VHS/src/application/routes/route.php/api/v1/studio/content/video/edit" enctype="multipart/form-data" method="post">
-                    <input type="hidden" name="id" value="<?= htmlspecialchars($video['id']) ?>">
+                <form action="/VHS/api/v1/studio/content/video/edit" enctype="multipart/form-data" method="post">
+                    <input type="hidden" name="id" value="<?= htmlspecialchars($video_id[0]["id"]) ?>">
+                    <input type="hidden" name="old_thumbnail" value="<?= htmlspecialchars($video_id[0]["thumbnail_url"]) ?>">
                     <div class="w-full h-full md:h-[400px] border-2 rounded-xl border-solid flex items-center justify-center relative overflow-hidden -mt-8 flex-wrap">
                         <div id="uploadArea" class="flex flex-col items-center justify-center w-full h-full">
                             <label for="dropzone-file"
@@ -90,7 +99,7 @@ $conteudos = []
                                     <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, JPEG</p>
                                 </div>
 
-                                <input id="dropzone-file" type="file" class="hidden" accept="image/png, image/jpg, image/jpeg" name="thumbnail" required />
+                                <input id="dropzone-file" type="file" class="hidden" accept="image/png, image/jpg, image/jpeg" name="thumbnail" />
                             </label>
                         </div>
                     </div>
@@ -98,7 +107,7 @@ $conteudos = []
                         <div id="Title">
                             <h1 class="text-3xl text-white font-semibold mt-4">Título</h1>
                             <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-                            <?= InputComponent(type: "text", placeholder: "Tudo sobre o Next.js 15, nova arquitetura de pasta", value: $video["title"]) ?>
+                            <?= InputComponent(type: "text", placeholder: "Tudo sobre o Next.js 15, nova arquitetura de pasta", value: $video["title"], name: "title") ?>
                         </div>
                         <div id="Description">
                             <h1 class="text-3xl text-white font-semibold mt-4">Descrição</h1>
@@ -110,6 +119,7 @@ $conteudos = []
                                     type: "text",
                                     placeholder: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.  😍😍😍",
                                     height: "96",
+                                    name: "description",
                                     value: $video["description"]
                                 ) ?>
                             </div>
@@ -136,8 +146,8 @@ $conteudos = []
 
 
                         <div class="flex justify-center items-end gap-10 my-6">
-                            <?= ButtonComponent("Salvar Alterações", "default", null, 30) ?>
-                            <?= ButtonComponent(text: "Cancelar", variant: "outline", id: "cancel-button", width: 30) ?>
+                            <?= ButtonComponent(text: "Cancelar", variant: "outline", id: "cancel-button", width: 27.5, link: "/home") ?>
+                            <?= ButtonComponent(text: "Salvar Alterações", variant: "default", id: "publish-button", width: 27.5) ?>
                         </div>
                     <?php endforeach; ?>
                 </form>

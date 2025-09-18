@@ -2,27 +2,22 @@
 
 namespace Src\Application\Utils;
 
-
-function UploadArchives(string $file_name){
-    
+function UploadArchives(string $file_name)
+{
     if ($_SERVER["REQUEST_METHOD"] !== "POST") {
         throw new \Exception("Método inválido");
     }
 
-    if (!isset($_FILES[$file_name])) {
-        throw new \Exception("Arquivo não enviado");
+    // Se o campo não existir ou nenhum arquivo foi enviado
+    if (!isset($_FILES[$file_name]) || $_FILES[$file_name]["error"] === UPLOAD_ERR_NO_FILE) {
+        return null; // 👈 não lança exceção, só retorna nulo
     }
 
     $file = $_FILES[$file_name];
 
-    if ($file["error"] === UPLOAD_ERR_NO_FILE) {
-        throw new \Exception("Nenhum arquivo enviado. Por favor, selecione uma thumbnail.");
-    }
-    
     if ($file["error"] !== UPLOAD_ERR_OK) {
         throw new \Exception("Erro no upload: " . $file["error"]);
     }
-
 
     $origin_name = $file["name"];
     $type        = $file["type"];
@@ -52,5 +47,5 @@ function UploadArchives(string $file_name){
         throw new \Exception("Falha ao salvar o arquivo");
     }
 
-    return "/public/uploads/" . $safeName; 
+    return "/VHS/public/uploads/" . $safeName; 
 }
