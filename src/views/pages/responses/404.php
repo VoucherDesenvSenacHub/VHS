@@ -34,9 +34,9 @@
             <p>Verifique a URL ou volte para a página inicial.</p>
         </div>
 
-        <button class="text-xl border border-white/10 p-4 rounded-xl bg-white/10 hover:bg-primary transition-all duration-200">
-            <a href="/VHS/home">Ir para a página inicial</a>
-        </button>
+        <a href="/VHS/home" class="text-xl border border-white/10 p-4 rounded-xl bg-white/10 hover:bg-primary transition-all duration-200">
+            <button>Ir para a página inicial</button>
+        </a>
     </div>
 
 </body>
