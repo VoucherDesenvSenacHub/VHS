@@ -5,6 +5,7 @@ require_once __DIR__ . "/../../../components/header/HeaderComponent.php";
 require_once __DIR__ . "/../../../components/barra_admin/barra_admin.php";
 require_once __DIR__ ."/../../../components/filter/filter.php";
 require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
+require_once __DIR__ . "/../../../components/utils/sweetalert.php";
 
 use function Src\Views\Components\userDataTableComponent\userDataTableComponent;
 use function Src\Views\Components\header\HeaderComponent;
@@ -12,8 +13,13 @@ use function src\views\components\barra_admin\barra_admin;
 use function src\views\components\utils\InputComponent;
 use function src\views\components\filter\Filter;
 use function Src\Views\Components\Utils\ButtonComponent;
+use function Src\Application\Utils\showSweetAlert;
 
 $users = $_SESSION["page_data"]["users"];
+$success = $_SESSION["redirect_data"]["success"] ?? null;
+$errors = $_SESSION["redirect_data"]["errors"] ?? null;
+
+unset($_SESSION["redirect_data"]);
 
 ?>
 
@@ -56,6 +62,14 @@ $users = $_SESSION["page_data"]["users"];
             <div class="w-full">
                 <?= userDataTableComponent($users); ?>
             </div>
+            <?php
+                if(isset($errors)){
+                 echo showSweetAlert("Erro ao excluir ou editar usuário", $errors, "error");
+                }
+                if(isset($success)){
+                 echo showSweetAlert("Sucesso ao excluir ou editar usuário", $success, "success");
+                }
+            ?>
         </div>
     </div>
 </body>

@@ -32,6 +32,7 @@ use Src\Application\Controllers\AdminCategoriesViewController;
 use Src\Application\Controllers\AdminComplaintManagementViewController;
 use Src\Application\Controllers\AdminUsersViewController;
 use Src\Application\Controllers\DeleteUserController;
+use Src\Application\Controllers\UpdateUserAdminController;
 
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../../..");
 $dotenv->load();
@@ -48,6 +49,7 @@ $router->post("/api/v1/user/settings", UpdateUserController::class, RedirectUser
 $router->post('/api/v1/fast-video', CreateFastVideoController::class, RedirectUserNotCreatorMiddleware::class);
 
 $router->post('/api/v1/user/delete', DeleteUserController::class, RedirectUserNotAdminMiddleware::class);
+$router->post('/api/v1/user/update', UpdateUserAdminController::class, RedirectUserNotAdminMiddleware::class);
 
 # Views routes
 $router->get('/home', HomeController::class, RedirectUserNotLoggedMiddleware::class);

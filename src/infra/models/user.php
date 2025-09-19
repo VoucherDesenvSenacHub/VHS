@@ -100,4 +100,15 @@ class UserModel extends Model {
         $sql = "UPDATE users SET isDeleted = 1 WHERE id = :id";
         return $this->database->exec($sql, [":id" => $id]);
     }
+
+    public function updateUserAdmin(string $id, string $name, string $role, string $status): bool {
+        $sql = "UPDATE users SET name = :name, role = :role, status = :status WHERE id = :id";
+
+        return $this->database->exec($sql, [
+            ":id" => $id,
+            ":name" => $name,
+            ":role" => $role,
+            ":status" => $status,
+        ]);
+    }
 }

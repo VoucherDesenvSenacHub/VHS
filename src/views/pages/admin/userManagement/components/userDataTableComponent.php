@@ -15,6 +15,12 @@ function userDataTableComponent($users)
         $date = new DateTime($data_user);
         $date = $date->format('d/m/Y H:i:s');
 
+        $role = match ($user['role']) {
+            "ADMIN" => "Administrador",
+            "USER" => "Usuário",
+            "CREATOR" => "Criador"
+        };
+
         $profileHtml = $profilePicture
             ? "<img src=\"/VHS/public/uploads/avatars/{$profilePicture}\" alt=\"Foto de perfil\" class=\"h-full w-full object-cover\" />"
             : "<div class=\"bg-slate-700 text-slate-300 flex items-center justify-center h-full w-full\">{$initials}</div>";
@@ -47,7 +53,7 @@ function userDataTableComponent($users)
                 </td>
                 <td class="px-6 py-4">
                     <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-semibold bg-purple-600/20 text-purple-300 border border-purple-400/50">
-                        {$user['role']}
+                        {$role}
                     </span>
                 </td>
                 <td class="px-6 py-4">
@@ -55,7 +61,7 @@ function userDataTableComponent($users)
                 </td>
                 <td class="px-6 py-4 bg-[#660BAD]/5 border-l border-[#660BAD]/20">
                     <div class="flex items-center justify-center gap-2">
-                         <button data-id="{$user['id']}" data-name="{$user['name']}" data-username="{$user['username']}" data-role="{$user['role']}" class="open-edit h-8 w-8 flex items-center justify-center text-[#660BAD] hover:bg-[#660BAD] hover:text-white border border-[#660BAD]/40 rounded">
+                         <button data-id="{$user['id']}" data-name="{$user['name']}" data-role="{$user['role']}" data-status="{$user['status']}" class="open-edit h-8 w-8 flex items-center justify-center text-[#660BAD] hover:bg-[#660BAD] hover:text-white border border-[#660BAD]/40 rounded">
                             <img src="/VHS/public/icons/comments_studio/pencil.svg" alt="Excluir" class="h-4 w-4" />
                         </button>
                         <button data-id="{$user['id']}" data-name="{$user['name']}" class="open-delete h-8 w-8 flex items-center justify-center text-[#660BAD] hover:bg-[#660BAD] hover:text-white border border-[#660BAD]/40 rounded">
@@ -120,13 +126,6 @@ function userDataTableComponent($users)
                     </div>
 
                     <div>
-                        <label for="editUsername" class="block text-sm text-slate-300 mb-1">Username</label>
-                        <input type="text" name="username" id="editUsername" 
-                            class="w-full rounded-md border border-gray-600 bg-gray-800 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#660BAD]" 
-                            required>
-                    </div>
-
-                    <div>
                         <label for="editRole" class="block text-sm text-slate-300 mb-1">Perfil</label>
                         <select name="role" id="editRole" 
                                 class="w-full rounded-md border border-gray-600 bg-gray-800 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#660BAD]" 
@@ -134,6 +133,16 @@ function userDataTableComponent($users)
                             <option value="ADMIN">Admin</option>
                             <option value="USER">Usuário</option>
                             <option value="CREATOR">Criador</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="editStatus" class="block text-sm text-slate-300 mb-1">Status</label>
+                        <select name="status" id="editStatus" 
+                                class="w-full rounded-md border border-gray-600 bg-gray-800 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#660BAD]" 
+                                required>
+                            <option value=1>Ativo</option>
+                            <option value=0>Inativo</option>
                         </select>
                     </div>
 
@@ -178,20 +187,20 @@ function userDataTableComponent($users)
 
             const editUserId = document.getElementById("editUserId");
             const editName = document.getElementById("editName");
-            const editUsername = document.getElementById("editUsername");
             const editRole = document.getElementById("editRole");
+            const editStatus = document.getElementById("editStatus");
 
             document.querySelectorAll(".open-edit").forEach(btn => {
                 btn.addEventListener("click", () => {
                     const id = btn.getAttribute("data-id");
                     const name = btn.getAttribute("data-name");
-                    const username = btn.getAttribute("data-username");
                     const role = btn.getAttribute("data-role");
+                    const status = btn.getAttribute("data-status");
 
                     editUserId.value = id;
                     editName.value = name;
-                    editUsername.value = username;
                     editRole.value = role;
+                    editStatus.value = status;
 
                     editModal.classList.remove("hidden");
                 });
