@@ -1,16 +1,17 @@
 <?php
+
 namespace Src\Views\Components\Utils;
 
 function Footer() {
     return <<<HTML
-        <footer class="flex w-full h-48 justify-between items-center px-0">
-            <div class="w-44 h-12 ml-8">
-                <img src="/VHS/public/images/imagefooter_1.png" alt="Logo da empresa VHS" class="object-contain h-full">
+        <footer class="flex w-full min-h-40 justify-between items-center p-7 pb-0">
+            <div class="w-44 min-h-12">
+                <img src="/VHS/public/uploads/footers/image1.svg" class="object-contain h-full">
             </div>
-            <div class="w-28 h-28 mr-2">
-                <img src="/VHS/public/images/imagefooter_2.png" alt="Ícone secundário do footer" class="object-contain h-full">
+
+            <div class="w-28 min-h-28">
+                <img src="/VHS/public/uploads/footers/image2.svg" class="object-contain h-full">
             </div>
         </footer>
-HTML;
+    HTML;
 }
-?>
