@@ -73,6 +73,11 @@ function userDataTableComponent($users)
         HTML;
     }
 
+    $page = isset($_GET['page']) ? (int)$_GET['page'] : 0;
+    if ($page < 1) $page = 0;
+    $prevPage = $page > 1 ? $page - 1 : 0;
+    $nextPage = $page + 1;
+
     return <<<HTML
         <script src="https://cdn.tailwindcss.com"></script>
         <div class="overflow-hidden rounded-lg border border-gray-700 bg-[#1B1B1B] backdrop-blur-sm">
@@ -92,6 +97,12 @@ function userDataTableComponent($users)
                     </tbody>
                 </table>
             </div>
+        </div>
+
+        <div class="flex justify-between items-center mt-4">
+            <a href="?page={$prevPage}" class="px-4 py-2 rounded-md border border-gray-600 text-gray-300 hover:bg-gray-700">Anterior</a>
+            <span class="text-slate-400">Página {$nextPage}</span>
+            <a href="?page={$nextPage}" class="px-4 py-2 rounded-md border border-gray-600 text-gray-300 hover:bg-gray-700">Próximo</a>
         </div>
 
         <div id="deleteModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50">
