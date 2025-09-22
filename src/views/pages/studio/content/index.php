@@ -44,9 +44,9 @@ $videos = $_SESSION["page_data"]["videos"];
             </div>
             <div class="flex gap-4 w-96 my-4">
                 <?php
-                    echo ButtonComponent("Videos", "studio", "", 10.675, 2.5,"",'/content/video');
-                    echo ButtonComponent("Fast", "studio", "", 10.675, 2.5,"","content/fast");
-                    echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5,"","content/event");
+                    echo ButtonComponent("Videos", "studio", "", 10.675, 2.5,"",'/VHS/content/video');
+                    echo ButtonComponent("Fast", "studio", "", 10.675, 2.5,"","/VHS/content/fast");
+                    echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5,"","/VHS/content/event");
                 ?>
             </div>  
 

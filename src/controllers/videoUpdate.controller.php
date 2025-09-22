@@ -29,11 +29,10 @@ class VideoUpdateController extends Controller
             $author_id = $_SESSION["user"]["id"];
 
             if ($video["author_id"] != $author_id) {
-                echo "redirect 1 - não é o autor<br>";
-                redirect("/VHS/content/video", [
-                    "success" => false
-                ]);
-                exit;
+                 redirect("/VHS/content/video", [
+                     "success" => false
+                 ]);
+                 return;
             }
 
             $imgPath = UploadArchives('thumbnail');
@@ -61,11 +60,9 @@ class VideoUpdateController extends Controller
                 $data["thumbnail_url"]
             );
 
-            echo "redirect 2 - update feito<br>";
             redirect("/VHS/content/video", [
                 "success" => true
             ]);
-            exit;
         } catch (NestedValidationException $exception) {
             echo $exception->getFullMessage();
         }

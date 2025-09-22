@@ -34,7 +34,7 @@ function UploadArchives(string $file_name)
         throw new \Exception("Arquivo muito grande");
     }
 
-    $dir = __DIR__ . "/../../../public/uploads/";
+    $dir = __DIR__ . "/../../../public/uploads/thumbs/";
 
     if (!is_dir($dir)) {
         mkdir($dir, 0777, true);
@@ -47,5 +47,5 @@ function UploadArchives(string $file_name)
         throw new \Exception("Falha ao salvar o arquivo");
     }
 
-    return "/VHS/public/uploads/" . $safeName; 
+    return "/VHS/public/uploads/thumbs/" . $safeName; 
 }

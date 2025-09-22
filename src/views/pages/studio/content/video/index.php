@@ -20,23 +20,14 @@ $botoes = [
     ['texto' => 'Analytics', 'link' => '']
 ];
 
-$video_id = $_SESSION["page_data"]["video_id"] ?? [];
+$video = $_SESSION["page_data"]["video"] ?? [];
 $categorias = $_SESSION["page_data"]["categorias"] ?? [];
 
 $thumbPath = '';
-if (!empty($video_id) && !empty($video_id[0]['thumbnail_url'])) {
-    $url = $video_id[0]['thumbnail_url'];
-    // se já tem /VHS no começo, usa direto; se não, concatena
+if (!empty($video) && !empty($video['thumbnail_url'])) {
+    $url = $video['thumbnail_url'];
     $thumbPath = (strpos($url, '/VHS') === 0) ? $url : '/VHS' . $url;
 }
-
-$teste = $_SESSION["redirect_data"]["success"] ?? false;
-if ($teste) {
-    var_dump("deu bom");
-} else {
-    var_dump("deu ruim");
-}
-
 
 $conteudos = []
 ?>
@@ -72,15 +63,15 @@ $conteudos = []
                 </div>
                 <div class="flex gap-4 w-96 mb-12 mt-4">
                     <?php
-                    echo ButtonComponent("Edição", "studio", "", 10.675, 2.5, "", '/VHS/src/views/pages/studio/content/video');
+                    echo ButtonComponent("Edição", "studio", "", 10.675, 2.5, "", '#');
                     echo ButtonComponent("Comentários", "studio", "", 10.675, 2.5, "", "/VHS/src/views/pages/studio/content/video/comments.php");
                     echo ButtonComponent("Analytics", "studio", "", 10.675, 2.5, "", "/VHS/src/views/pages/studio/content/video/analytics.php");
                     ?>
                 </div>
 
                 <form action="/VHS/api/v1/studio/content/video/edit" enctype="multipart/form-data" method="post">
-                    <input type="hidden" name="id" value="<?= htmlspecialchars($video_id[0]["id"]) ?>">
-                    <input type="hidden" name="old_thumbnail" value="<?= htmlspecialchars($video_id[0]["thumbnail_url"]) ?>">
+                    <input type="hidden" name="id" value="<?= htmlspecialchars($video["id"]) ?>">
+                    <input type="hidden" name="old_thumbnail" value="<?= htmlspecialchars($video["thumbnail_url"]) ?>">
                     <div class="w-full h-full md:h-[400px] border-2 rounded-xl border-solid flex items-center justify-center relative overflow-hidden -mt-8 flex-wrap">
                         <div id="uploadArea" class="flex flex-col items-center justify-center w-full h-full">
                             <label for="dropzone-file"
@@ -103,53 +94,51 @@ $conteudos = []
                             </label>
                         </div>
                     </div>
-                    <?php foreach ($video_id as $video): ?>
-                        <div id="Title">
-                            <h1 class="text-3xl text-white font-semibold mt-4">Título</h1>
-                            <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-                            <?= InputComponent(type: "text", placeholder: "Tudo sobre o Next.js 15, nova arquitetura de pasta", value: $video["title"], name: "title") ?>
+                    <div id="Title">
+                        <h1 class="text-3xl text-white font-semibold mt-4">Título</h1>
+                        <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
+                        <?= InputComponent(type: "text", placeholder: "Tudo sobre o Next.js 15, nova arquitetura de pasta", value: $video["title"], name: "title") ?>
+                    </div>
+                    <div id="Description">
+                        <h1 class="text-3xl text-white font-semibold mt-4">Descrição</h1>
+                        <p class="text-paragraph text-gray-400 p-0 mb-2">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl.
+                        </p>
+                        <div class="">
+                            <?= TextareaComponent(
+                                type: "text",
+                                placeholder: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.  😍😍😍",
+                                height: "96",
+                                name: "description",
+                                value: $video["description"]
+                            ) ?>
                         </div>
-                        <div id="Description">
-                            <h1 class="text-3xl text-white font-semibold mt-4">Descrição</h1>
-                            <p class="text-paragraph text-gray-400 p-0 mb-2">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl.
-                            </p>
-                            <div class="">
-                                <?= TextareaComponent(
-                                    type: "text",
-                                    placeholder: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.  😍😍😍",
-                                    height: "96",
-                                    name: "description",
-                                    value: $video["description"]
-                                ) ?>
-                            </div>
-                        </div>
-                        <!-- <div id="Public">
+                    </div>
+                    <!-- <div id="Public">
                             <h1 class="text-3xl text-white font-semibold mt-4">Público</h1>
                             <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
                             <?= InputComponent(type: "text", placeholder: "Estudante de Nível Técnico de tecnologia, Entusiasta em foguetes") ?>
                         </div> -->
 
-                        <div id="Category">
-                            <h1 class="text-3xl text-white font-semibold mt-4">Categoria</h1>
-                            <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-                            <select name="category_id" class="px-3 py-1.5 outline outline-1 outline-[#666666] rounded-md placeholder-[#666666] text-zinc-200 w-full h-[45px] bg-transparent">
-                                <?php foreach ($categorias as $categoria): ?>
-                                    <option value="<?= $categoria['id'] ?>"
-                                        class="text-black"
-                                        <?= ($video["category_id"] == $categoria['id']) ? "selected" : "" ?>>
-                                        <?= htmlspecialchars($categoria['name']) ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
+                    <div id="Category">
+                        <h1 class="text-3xl text-white font-semibold mt-4">Categoria</h1>
+                        <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
+                        <select name="category_id" class="px-3 py-1.5 outline outline-1 outline-[#666666] rounded-md placeholder-[#666666] text-zinc-200 w-full h-[45px] bg-transparent">
+                            <?php foreach ($categorias as $categoria): ?>
+                                <option value="<?= $categoria['id'] ?>"
+                                    class="text-black"
+                                    <?= ($video["category_id"] == $categoria['id']) ? "selected" : "" ?>>
+                                    <?= htmlspecialchars($categoria['name']) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
 
 
-                        <div class="flex justify-center items-end gap-10 my-6">
-                            <?= ButtonComponent(text: "Cancelar", variant: "outline", id: "cancel-button", width: 27.5, link: "/home") ?>
-                            <?= ButtonComponent(text: "Salvar Alterações", variant: "default", id: "publish-button", width: 27.5) ?>
-                        </div>
-                    <?php endforeach; ?>
+                    <div class="flex justify-center items-end gap-10 my-6">
+                        <?= ButtonComponent(text: "Cancelar", variant: "outline", id: "cancel-button", width: 27.5, link: "/home") ?>
+                        <?= ButtonComponent(text: "Salvar Alterações", variant: "default", id: "publish-button", width: 27.5) ?>
+                    </div>
                 </form>
             </div>
         </div>

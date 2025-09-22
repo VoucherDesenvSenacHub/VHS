@@ -18,11 +18,11 @@ class ContentVideoEditViewController extends Controller
 
         $id =  $_GET["id"] ?? null;
 
-        $video_id = $this->videoModel->getVideoByID($id);
+        $video = $this->videoModel->getVideoByID($id);
         $categorias = $this->videoModel->getAllCategories();
 
         $this->view("/studio/content/video/index", [
-            "video_id" => $video_id,
+            "video" => $video,
             "categorias" => $categorias
         ]);
     }

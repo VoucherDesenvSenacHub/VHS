@@ -31,9 +31,9 @@ class VideoModel extends Model
         return $stmt;
     }
 
-    public function update(string $id,string $title, string $description, string $category_id, string $thumbnail_url){
+    public function update(string $id, string $title, string $description, string $category_id, string $thumbnail_url){
         
-        $sql = "UPDATE videos SET title = :tile, description = :description, category_id = :category_id, thumbnail_url = :thumbnail_url WHERE id = :id";
+        $sql = "UPDATE videos SET title = :title, description = :description, category_id = :category_id, thumbnail_url = :thumbnail_url WHERE id = :id";
 
         $stmt = $this->database->query($sql, [
             ":id" => $id,
@@ -106,6 +106,8 @@ class VideoModel extends Model
     public function getVideoByID($id){
         $sql = "SELECT * FROM videos WHERE id = :id";
 
-        return $this->database->query($sql, [":id" => $id]);
+        $stmt = $this->database->query($sql, [":id" => $id]);
+
+        return $stmt[0];
     }
 }
