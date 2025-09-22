@@ -2,8 +2,12 @@
 
 namespace Src\Application\Utils;
 
-function UploadArchives(string $file_name)
+function UploadImages(string $file_name, string $user ,bool $isAvatar = false)
 {
+
+    $user = str_replace(" ", "_", $user);
+    $user = mb_strtolower($user, "UTF-8");
+
     if ($_SERVER["REQUEST_METHOD"] !== "POST") {
         throw new \Exception("Método inválido");
     }
@@ -34,12 +38,16 @@ function UploadArchives(string $file_name)
         throw new \Exception("Arquivo muito grande");
     }
 
-    $dir = __DIR__ . "/../../../public/uploads/thumbs/";
+    $escolha = "thumbs";
+
+    $isAvatar = $isAvatar ? $escolha = "avatars" : $escolha;
+
+    $dir = __DIR__ . "/../../../public/uploads/$escolha/$user/";
 
     if (!is_dir($dir)) {
         mkdir($dir, 0777, true);
     }
-
+    
     $safeName = uniqid() . "-" . basename($origin_name);
     $path = $dir . $safeName;
 
@@ -47,5 +55,5 @@ function UploadArchives(string $file_name)
         throw new \Exception("Falha ao salvar o arquivo");
     }
 
-    return "/VHS/public/uploads/thumbs/" . $safeName; 
+    return "/VHS/public/uploads/$escolha/$user/" . $safeName;
 }

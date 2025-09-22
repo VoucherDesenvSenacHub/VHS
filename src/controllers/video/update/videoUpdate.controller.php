@@ -2,8 +2,8 @@
 
 namespace Src\Application\Controllers;
 
-require_once __DIR__ . '/../application/core/controller.php';
-require_once __DIR__ . '/../application/utils/uploadArchives.php';
+require_once __DIR__ . '/../../../application/core/controller.php';
+require_once __DIR__ . '/../../../application/utils/uploadArchives.php';
 
 use Src\Application\Core\Controller;
 use Src\Infra\Model\VideoModel;
@@ -11,7 +11,7 @@ use Respect\Validation\Exceptions\NestedValidationException;
 use Respect\Validation\Validator as v;
 
 use function Src\Application\Utils\Redirect\redirect;
-use function Src\Application\Utils\UploadArchives;
+use function Src\Application\Utils\UploadImages;
 
 class VideoUpdateController extends Controller
 {
@@ -26,16 +26,16 @@ class VideoUpdateController extends Controller
             $id = $_POST["id"];
 
             $video = $this->videoModel->getVideoByID($id);
-            $author_id = $_SESSION["user"]["id"];
+            $user = $_SESSION["user"];
 
-            if ($video["author_id"] != $author_id) {
+            if ($video["author_id"] != $user["id"]) {
                  redirect("/VHS/content/video", [
                      "success" => false
                  ]);
                  return;
             }
 
-            $imgPath = UploadArchives('thumbnail');
+            $imgPath = UploadImages('thumbnail', $user["name"]);
             if ($imgPath === null) {
                 $imgPath = $_POST['old_thumbnail'] ?? $video["thumbnail_url"];
             }
