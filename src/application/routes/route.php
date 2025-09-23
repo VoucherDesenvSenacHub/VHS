@@ -53,6 +53,6 @@ $router->get('/studio', StudioController::class, RedirectUserNotCreatorMiddlewar
 $router->get('/studio/create/video', StudioVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get('/studio/create/fast', StudioFastViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get("/user/settings", UserSettingsViewController::class, RedirectUserNotLoggedMiddleware::class);
-$router->get("/home/events", ViewEventsController::class);
+$router->get("/home/events", ViewEventsController::class, RedirectUserNotLoggedMiddleware::class);
 
 $router->run();
