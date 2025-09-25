@@ -19,7 +19,7 @@ function HeaderComponent() {
         <header id='header' class='bg-gradient-to-b from-[#14001B] to-[#14001B]/75 backdrop-blur-lg border-b border-secondary/10 w-full h-20 flex items-center justify-between px-6 sticky top-0 z-20'>  
             <div class='flex items-center gap-6'>
                 $BarComponent
-                <a href="/VHS/src/views/pages/home">
+                <a href="/VHS/home">
                     <img src='/VHS/public/logos/logo.svg' class='w-auto h-8 pointer-events-none select-none'>
                 </a>
             </div>
@@ -45,7 +45,7 @@ function HeaderComponent() {
                 <img src='/VHS/public/icons/rectangle.svg'>
                 
                 <button id='open-user-menu' class='overflow-hidden rounded-full'>
-                    <img src="$avatar_url" onerror='this.src="/VHS/public/uploads/avatars/default.png"' class='h-9 w-9 pointer-events-none'>
+                    <img src="/VHS/public/uploads/avatars/{$avatar_url}" onerror='this.src="/VHS/public/uploads/avatars/default.png"' class='h-9 w-9 pointer-events-none'>
                 </button>
             </div>
         </header>

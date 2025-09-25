@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Controllers;
+namespace Src\Application\Controllers;
 
 require_once __DIR__ . "/../../../application/core/controller.php";
 
