@@ -27,6 +27,13 @@ use Src\Application\Controllers\StudioVideoViewController;
 use Src\Application\Middlewares\RedirectUserNotCreatorMiddleware;
 use Src\Application\Controllers\SignInViewController;
 use Src\Application\Controllers\ViewEventsController;
+use Src\Application\Middlewares\RedirectUserNotAdminMiddleware;
+use Src\Application\Controllers\AdminAnalyticsViewController;
+use Src\Application\Controllers\AdminCategoriesViewController;
+use Src\Application\Controllers\AdminComplaintManagementViewController;
+use Src\Application\Controllers\AdminUsersViewController;
+use Src\Application\Controllers\DeleteUserController;
+use Src\Application\Controllers\UpdateUserAdminController;
 
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../../..");
 $dotenv->load();
@@ -40,6 +47,9 @@ $router->post('/api/v1/auth/signup', SignUpController::class);
 $router->post("/api/v1/user/settings", UpdateUserController::class, RedirectUserNotLoggedMiddleware::class);
 $router->post('/api/v1/fast-video', CreateFastVideoController::class, RedirectUserNotCreatorMiddleware::class);
 
+$router->post('/api/v1/user/delete', DeleteUserController::class, RedirectUserNotAdminMiddleware::class);
+$router->post('/api/v1/user/update', UpdateUserAdminController::class, RedirectUserNotAdminMiddleware::class);
+
 # Views Routes
 
 $router->get('/home', HomeController::class, RedirectUserNotLoggedMiddleware::class);
@@ -52,7 +62,19 @@ $router->get("/api/v1/auth/signup/verify-email", VerifyEmailController::class);
 $router->get('/studio', StudioController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get('/studio/create/video', StudioVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get('/studio/create/fast', StudioFastViewController::class, RedirectUserNotCreatorMiddleware::class);
+
+$router->get("/studio", StudioController::class, RedirectUserNotCreatorMiddleware::class);
+$router->get("/studio/create/video", StudioVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
+$router->get("/studio/create/fast", StudioFastViewController::class, RedirectUserNotCreatorMiddleware::class);
+
 $router->get("/user/settings", UserSettingsViewController::class, RedirectUserNotLoggedMiddleware::class);
 $router->get("/home/events", ViewEventsController::class, RedirectUserNotLoggedMiddleware::class);
+
+$router->get("/admin/analytics", AdminAnalyticsViewController::class, RedirectUserNotAdminMiddleware::class);
+$router->get("/admin/categories", AdminCategoriesViewController::class, RedirectUserNotAdminMiddleware::class);
+$router->get("/admin/complaints", AdminComplaintManagementViewController::class, RedirectUserNotAdminMiddleware::class);
+$router->get("/admin/users", AdminUsersViewController::class, RedirectUserNotAdminMiddleware::class);
+
+
 
 $router->run();

@@ -13,8 +13,8 @@ use Src\Infra\Models\CategoryModel;
 use function Src\Application\Utils\Redirect\redirect;
 use function Src\Application\Utils\verifyRecaptcha;
 
-require_once __DIR__ . '/../application/core/controller.php';
-require_once __DIR__ . '/../application/utils/verifyRecaptcha.php';
+require_once __DIR__ . '/../../../application/core/controller.php';
+require_once __DIR__ . '/../../../application/utils/verifyRecaptcha.php';
 
 class CreateUserController extends Controller {
     private UserModel $userModel;

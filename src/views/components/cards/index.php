@@ -41,7 +41,7 @@ class Cards {
         $url        = purifyProperty($card['url']);
         $views      = purifyNumbers($card['views']);
         $thumb_url  = purifyProperty($card['thumbnail_url']);
-        $name       = purifyProperty($card['name']);
+        $name       = purifyProperty($card['username']);
         $avatar_url = purifyProperty($card['avatar_url']);
         $title      = purifyProperty($card['title']);
         $duration   = purifyDuration($card['duration']);
@@ -81,7 +81,7 @@ class Cards {
                 <div class='absolute w-full h-full flex items-center justify-end p-5'>
                     <div class='relative w-20 h-20 2xl:w-20 2xl:h-20 flex items-center justify-center'>
                         <div class='absolute flex w-full h-full items-center justify-center rounded-full overflow-hidden bg-gray600 border-2 border-gray600'>
-                            <img src='$avatar_url' class='w-full h-full object-cover' onerror="this.src='/VHS/public/uploads/avatars/default.png'">
+                            <img src='/VHS/public/uploads/avatars/$avatar_url' class='w-full h-full object-cover' onerror="this.src='/VHS/public/uploads/avatars/default.png'">
                         </div>
                     </div>
                 </div>

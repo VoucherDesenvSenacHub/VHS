@@ -5,7 +5,7 @@ namespace Src\Application\Controllers;
 use Src\Application\Core\Controller;
 use Src\Infra\Model\UserModel;
 
-require_once __DIR__ . '/../application/core/controller.php';
+require_once __DIR__ . '/../../../application/core/controller.php';
 
 class StudioVideoViewController extends Controller {
 

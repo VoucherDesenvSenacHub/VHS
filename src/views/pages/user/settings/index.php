@@ -1,11 +1,9 @@
 <?php
-require __DIR__ . '/../../../components/utils/buttonComponent.php';
-require __DIR__ . '/../../../components/utils/inputComponent.php';
-require __DIR__ . '/../../../components/header/headerComponent.php';
-
-require __DIR__ . '/../../../components/sidebar/SidebarComponent.php';
-
-require __DIR__ . '/../../../components/shared/shared.php';
+require_once __DIR__ . '/../../../components/utils/buttonComponent.php';
+require_once __DIR__ . '/../../../components/utils/inputComponent.php';
+require_once __DIR__ . '/../../../components/header/headerComponent.php';
+require_once __DIR__ . '/../../../components/sidebar/index.php';
+require_once __DIR__ . '/../../../components/shared/shared.php';
 
 
 use function Src\Views\Components\Utils\ButtonComponent;

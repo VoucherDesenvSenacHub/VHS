@@ -1,11 +1,11 @@
 <?php
-require "../../../components/header/headerComponent.php";
-require "../../../components/barra_admin/barra_admin.php";
-require "../../../components/utils/inputComponent.php";
-require "../../../components/utils/cardDenunciationComponent.php";
-require "../../../components/utils/coment_admin/comentAdmin.component.php";
-require_once "../../../components/utils/buttonComponent.php";
-require_once "../../../components/filter/filter.php";
+require_once __DIR__ . "/../../../components/header/headerComponent.php";
+require_once __DIR__ . "/../../../components/barra_admin/barra_admin.php";
+require_once __DIR__ . "/../../../components/utils/inputComponent.php";
+require_once __DIR__ . "/../../../components/utils/cardDenunciationComponent.php";
+require_once __DIR__ . "/../../../components/utils/coment_admin/comentAdmin.component.php";
+require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
+require_once __DIR__ . "/../../../components/filter/filter.php";
 
 use function Src\Views\components\filter\Filter;
 use function Src\Views\Components\Utils\ButtonComponent;
@@ -54,15 +54,13 @@ $commets_lista = [
     <title>user management</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/VHS/src/styles/tailwindglobal.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Syne:wght@500..800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/VHS/src/styles/global.css">
 </head>
 
 <body class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center text-white font-[Poppins]">
     <?php echo HeaderComponent(); ?>
-    <div class="flex">
-        <div class="min-w-[220px] position-fixed">
-            <?= barra_admin() ?>
-        </div>
+    <div class="flex gap-10">
+        <?= barra_admin() ?>
         <div class="p-6 pt-8 w-full flex flex-col gap-6">
             <div class="flex flex-col gap-4">
                 <div>
@@ -70,8 +68,8 @@ $commets_lista = [
                 </div>
                 <div class="flex flex-col gap-2">
                     <div class="flex gap-2 w-96">
-                        <?php echo ButtonComponent("Usuários", "studio", "", 13, 2.5, "", "../userManagement/index.php"); ?>
-                        <?php echo ButtonComponent("Denúncias", "studio", "", 13, 2.5, "", "../complaintManagement/index.php"); ?>
+                        <?php echo ButtonComponent("Usuários", "studio", "", 13, 2.5, "", "/VHS/admin/users"); ?>
+                        <?php echo ButtonComponent("Denúncias", "studio", "", 13, 2.5, "", "/VHS/admin/complaints"); ?>
                     </div>
                     <div class="flex items-center justify-center gap-4">
                         <div class="h-full pt-6">
