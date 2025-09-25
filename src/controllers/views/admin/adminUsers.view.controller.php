@@ -18,8 +18,10 @@ class AdminUsersViewController extends Controller {
         if($page > 0){
             $page = $page*7;
         }
+        
+        $idUser = $_SESSION["user"]["id"];
 
-        $users = $this->userModel->getUsers($page, 7);
+        $users = $this->userModel->getUsers($page, 7, $idUser);
         $users = array_slice($users, 0, 7);
 
         $this->view("admin/userManagement/index", ["users" => $users]);   

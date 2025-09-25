@@ -91,8 +91,8 @@ class UserModel extends Model {
         return $this->database->query($sql, [":id" => $id]);    
     }
 
-    public function getUsers(int $offset, int $limit): array {
-        $sql = "SELECT * FROM users WHERE isDeleted = 0 ORDER BY created_at ASC LIMIT $offset, $limit";
+    public function getUsers(int $offset, int $limit, string $idUser): array {
+        $sql = "SELECT * FROM users WHERE isDeleted = 0 AND id NOT IN ('$idUser') ORDER BY created_at ASC LIMIT $offset, $limit";
         return $this->database->query($sql);
     }
 

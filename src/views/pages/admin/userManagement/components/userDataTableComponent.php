@@ -78,6 +78,20 @@ function userDataTableComponent($users)
     $prevPage = $page > 1 ? $page - 1 : 0;
     $nextPage = $page + 1;
 
+    $buttonNext = '';
+    if (count($users) == 7) {
+        $buttonNext = <<<HTML
+            <a href="?page={$nextPage}" class="px-4 py-2 rounded-md border border-gray-600 text-gray-300 hover:bg-gray-700">Próximo</a>
+        HTML;
+    }
+
+    $buttonPrev = '';
+    if ($page > 0) {
+        $buttonPrev = <<<HTML
+            <a href="?page={$prevPage}" class="px-4 py-2 rounded-md border border-gray-600 text-gray-300 hover:bg-gray-700">Anterior</a>
+        HTML;
+    }
+
     return <<<HTML
         <script src="https://cdn.tailwindcss.com"></script>
         <div class="overflow-hidden rounded-lg border border-gray-700 bg-[#1B1B1B] backdrop-blur-sm">
@@ -99,10 +113,16 @@ function userDataTableComponent($users)
             </div>
         </div>
 
-        <div class="flex justify-between items-center mt-4">
-            <a href="?page={$prevPage}" class="px-4 py-2 rounded-md border border-gray-600 text-gray-300 hover:bg-gray-700">Anterior</a>
-            <span class="text-slate-400">Página {$nextPage}</span>
-            <a href="?page={$nextPage}" class="px-4 py-2 rounded-md border border-gray-600 text-gray-300 hover:bg-gray-700">Próximo</a>
+        <div class="grid grid-cols-3 items-center mt-4 text-center">
+            <div class="justify-self-start">
+                {$buttonPrev}
+            </div>
+            <div>
+                <span class="text-slate-400">Página {$nextPage}</span>
+            </div>
+            <div class="justify-self-end">
+                {$buttonNext}
+            </div>
         </div>
 
         <div id="deleteModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50">
