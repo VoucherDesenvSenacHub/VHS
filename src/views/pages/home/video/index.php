@@ -1,7 +1,7 @@
 <?php 
 
 require "../../../components/header/headerComponent.php";
-require "../../../components/sidebar/SidebarComponent.php";
+require "../../../components/sidebar/index.php";
 require "../../../components/cards/index.php";
 require "../../../components/utils/comments/comentaryComponent.php";
 require "../../../components/starrating/StarRatingComponent.php";

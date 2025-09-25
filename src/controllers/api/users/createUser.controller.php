@@ -33,7 +33,7 @@ class CreateUserController extends Controller {
                 v::stringType()->length(3, 150)
             )->key(
                 'email',
-                v::email(),
+                v::email()->setTemplate(""),
             )->key(
                 'password',
                 v::stringType()->length(8, 16)->equals($_POST["confirm_password"])->setTemplate("Senha inválida!")
@@ -79,6 +79,10 @@ class CreateUserController extends Controller {
                 $errors["email"] = "Email já cadastrado!";
             }
 
+            if($_POST["date_birthday"] && strtotime($_POST["date_birthday"]) >= time()) {
+                $errors["date_birthday"] = "Data de aniversário inválida!";
+            }
+
             if(count($errors) > 0) {
                 throw new Error(serialize($errors));
             }
@@ -88,16 +92,16 @@ class CreateUserController extends Controller {
             ]);
 
             $token = uniqid(more_entropy: true) . uniqid(more_entropy: true);
-
             $id = $this->userModel->create($_POST["name"], $_POST["email"], $_POST["password"], $_POST["username"], $_POST["date_birthday"], $token);
-            $this->userModel->updateUserToken($id, $token);
 
             if($_POST["keep_logged_in"] === "on") {
                 setcookie("token", $token, time() + 86400 * 30, "/");
                 return redirect("/VHS/home");
             }
 
-            $_SESSION["token"] = $token;
+            setcookie("token", $token, 0, "/", httponly: true, secure: true);
+            $user = $this->userModel->getUserById($id)[0];
+            $_SESSION["user"] = $user;
 
             return redirect("/VHS/home");
         } catch (NestedValidationException | Error  $exception) {

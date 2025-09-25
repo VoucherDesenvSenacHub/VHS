@@ -5,7 +5,7 @@ $videos = $_SESSION["page_data"]["videos"] ?? [];
 $fast = $_SESSION["page_data"]["fast"] ?? [];
 
 require_once __DIR__ . "/../../../components/header/headerComponent.php";
-require_once __DIR__ . "/../../../components/sidebar/SidebarComponent.php";
+require_once __DIR__ . "/../../../components/sidebar/index.php";
 require_once __DIR__ . "/../../../components/featuredCard/featuredCardComponent.php";
 require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
 require_once __DIR__ . "/../../../components/cards/index.php";

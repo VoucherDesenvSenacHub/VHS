@@ -43,38 +43,37 @@ class SignInController extends Controller {
             
             $schema->assert($_POST);
 
-            $user = $this->userModel->findUserByEmail($_POST["email"]);
-
-            $password = password_verify($_POST["password"], $user[0]["password"]);
-
             if (!verifyRecaptcha($recaptcha)) {
                 return redirect("/VHS/auth/signin?error=1", [
                     'errors' => ['Falha na verificação do reCAPTCHA. Tente novamente.']
                 ]);
             }
 
-            if ($password && $_POST["keep_logged_in"] == "on") {
-                $token = uniqid(more_entropy: true) . uniqid(more_entropy: true);
-                $this->userModel->updateUserToken($user[0]["id"], $token);
-                setcookie("token", $token, time() + 3600 * 24 * 7, path: "/", httponly: true, secure: true);
-                redirect("/VHS/home");
-            }
-            elseif ($password && $_POST["keep_logged_in"] == "off") {
-                $token = uniqid(more_entropy: true) . uniqid(more_entropy: true);
-                $this->userModel->updateUserToken($user[0]["id"], $token);
+            $user = $this->userModel->findUserByEmail($_POST["email"]);
 
-                if($_COOKIE["token"]) {
-                    setcookie("token", "", 1, "/");
-                }
-                
-                $_SESSION["token"] = $token;
-                redirect("/VHS/home");
+            if(empty($user)) {
+                return redirect("/VHS/auth/signin?error=1", ['errors' => ["E-mail ou senha incorretos"]]);
             }
-            else
-            {
+
+            $passwordVerified = password_verify($_POST["password"], $user[0]["password"]);
+
+            if(empty($passwordVerified)) {
                 return redirect("/VHS/auth/signin?error=1", ['errors' => ["Email ou senha incorretos"]]);
             }
 
+            $token = uniqid(more_entropy: true) . uniqid(more_entropy: true);
+            $this->userModel->updateUserToken($user[0]["id"], $token);
+
+            if ($_POST["keep_logged_in"] == "on") {
+                setcookie("token", $token, time() + 3600 * 24 * 7, path: "/", httponly: true, secure: true);
+            }
+
+            if ($_POST["keep_logged_in"] == "off") {
+                setcookie("token", $token, 0, "/", httponly: true, secure: true);
+            }
+
+            $_SESSION["user"] = $user[0];
+            return redirect("/VHS/home");
         } catch (NestedValidationException $exception) {
             $messages = [];
             foreach ($exception->getMessages() as $message) {

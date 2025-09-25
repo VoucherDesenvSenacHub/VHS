@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../../../components/header/headerComponent.php';
 require "../../../components/fastComponent/fastComponent.php";
-require "../../../components/sidebar/SidebarComponent.php";
+require "../../../components/sidebar/index.php";
 
 use function src\views\components\FastComponent\FastComponent;
 use function src\views\components\header\HeaderComponent;
