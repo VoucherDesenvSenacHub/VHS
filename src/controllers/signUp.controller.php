@@ -47,7 +47,11 @@ class SignUpController extends Controller {
             if(!empty($user)) {
                 $errors["username"] = "Nome de usuário já cadastrado!";
             }
-            
+
+            if($_POST["date_birthday"] && strtotime($_POST["date_birthday"]) >= time()) {
+                $errors["date_birthday"] = "Data de aniversário inválida!";
+            }
+
             $user = $this->userModel->getUserByEmail(strtolower($_POST["email"]));
 
             if(!empty($user)) {

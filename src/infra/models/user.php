@@ -13,7 +13,7 @@ class UserModel extends Model {
 
         $id = uniqid(more_entropy: true);
 
-        $stmt = $this->database->exec($sql, [
+        $this->database->exec($sql, [
             ":id" => $id,
             ":name" => $name,   
             ":email" => $email,
