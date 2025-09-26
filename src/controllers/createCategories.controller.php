@@ -22,7 +22,7 @@ class CreateCategoriesController extends Controller
         try {
             $this->CategoryModel = $this->model("category");
 
-            $create = $this->CategoryModel->createCategories($_POST["nameCategory"]);
+            $create = $this->CategoryModel->createCategory($_POST["nameCategory"]);
             if ($create) {
                 echo "Categoria criada com sucesso!";
                 return redirect("/VHS/admin/categories");
@@ -31,10 +31,13 @@ class CreateCategoriesController extends Controller
             }
         } catch (NestedValidationException | Error  $exception) {
             if ($exception instanceof Error) {
-                echo $exception->getMessage();
-            } else {
-                echo $exception->getFullMessage();
+                return redirect("/vhs/admin/categories", [
+                    "errors" => unserialize($exception->getMessage())
+                ]);
             }
+            return redirect("/vhs/admin/categories", [
+                "errors" => $exception->getMessages()
+            ]);
         }
     }
 }

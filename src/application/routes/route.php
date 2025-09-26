@@ -29,6 +29,7 @@ use Src\Application\Controllers\StudioController;
 use Src\Application\Controllers\StudioFastViewController;
 use Src\Application\Controllers\StudioVideoViewController;
 use Src\Application\Middlewares\RedirectUserNotCreatorMiddleware;
+use Src\Application\Middlewares\RedirectUserNotAdminMiddleware;
 use Src\Application\Controllers\SignInViewController;
 use Src\Application\Controllers\ViewEventsController;
 
@@ -40,9 +41,9 @@ $router = new Router();
 
 $router->post('/api/v1/auth/signin', SignInController::class);
 
-$router->post('/api/v1/admin/categories', CreateCategoriesController::class);
-$router->post('/api/v1/admin/categories/update', UpdateCategoriesController::class);
-$router->post('/api/v1/admin/categories/delete', DeleteCategoriesController::class);
+$router->post('/api/v1/admin/categories', CreateCategoriesController::class, RedirectUserNotAdminMiddleware::class);
+$router->post('/api/v1/admin/categories/update', UpdateCategoriesController::class, RedirectUserNotAdminMiddleware::class);
+$router->post('/api/v1/admin/categories/delete', DeleteCategoriesController::class, RedirectUserNotAdminMiddleware::class);
 
 $router->post("/api/v1/signup/password", CreateUserController::class, RedirectUserLoggedMiddleware::class);
 $router->post('/api/v1/auth/signup', SignUpController::class);
@@ -65,7 +66,7 @@ $router->get("/user/settings", UserSettingsViewController::class, RedirectUserNo
 $router->get("/home/events", ViewEventsController::class);
 
 
-$router->get("/admin/categories", AdminCategoriesViewController::class);
+$router->get("/admin/categories", AdminCategoriesViewController::class, RedirectUserNotAdminMiddleware::class);
 
 
 $router->run();

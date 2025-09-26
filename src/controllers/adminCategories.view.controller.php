@@ -11,7 +11,7 @@ class AdminCategoriesViewController extends Controller
     public function index()
     {
         $model = $this->model("category");
-        $listaCategories = $model->getAllCategories();
-        $this->view("/admin/categories/index", ["lista" => $listaCategories]);
+        $listCategories = $model->getAllCategories();
+        $this->view("/admin/categories/index", ["list" => $listCategories]);
     }
 }

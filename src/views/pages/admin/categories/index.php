@@ -10,7 +10,7 @@ use function Src\Views\Components\header\HeaderComponent;
 use function src\views\components\barra_admin\barra_admin;
 use function src\views\components\utils\InputComponent;
 
-$categoryData = $_SESSION["page_data"]["lista"] ?? [];
+$categoryData = $_SESSION["page_data"]["list"] ?? [];
 ?>
 
 <!DOCTYPE html>

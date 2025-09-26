@@ -27,7 +27,7 @@ class UpdateCategoriesController extends Controller
             if (!isset($_POST['updateCategory']) || empty(trim($_POST['updateCategory']))) {
                 throw new Error("O nome da categoria é obrigatório.");
             }
-            $updated = $this->categoryModel->updateCategories(
+            $updated = $this->categoryModel->updateCategory(
                 $idCategory,
                 trim($_POST['updateCategory'])
             );
@@ -38,18 +38,14 @@ class UpdateCategoriesController extends Controller
                 throw new Error("Falha ao atualizar a categoria.");
             }
         } catch (NestedValidationException | Error $exception) {
-            return $this->jsonResponse([
-                'success' => false,
-                'message' => $exception instanceof Error ? $exception->getMessage() : $exception->getFullMessage()
-            ], 400);
+            if ($exception instanceof Error) {
+                return redirect("/vhs/admin/categories", [
+                    "errors" => unserialize($exception->getMessage())
+                ]);
+            }
+            return redirect("/vhs/admin/categories", [
+                "errors" => $exception->getMessages()
+            ]);
         }
-    }
-
-    protected function jsonResponse(array $data, int $statusCode): void
-    {
-        http_response_code($statusCode);
-        header('Content-Type: application/json');
-        echo json_encode($data);
-        exit;
     }
 }

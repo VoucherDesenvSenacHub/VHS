@@ -65,14 +65,14 @@ class CategoryModel extends Model
         return $this->database->query($sql);
     }
 
-    public function createCategories(string $name): bool
+    public function createCategory(string $name): bool
     {
         $sql = "INSERT INTO categories (id, name) VALUES (:id, :name)";
         $id = uniqid(more_entropy: true);
         return $this->database->exec($sql, [":id" => $id, ":name" => $name]);
     }
 
-    public function updateCategories(string $id, string $name): bool
+    public function updateCategory(string $id, string $name): bool
     {
         $sql = "UPDATE categories SET name = :name WHERE id = :id";
         return $this->database->exec($sql, [
