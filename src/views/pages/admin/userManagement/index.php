@@ -1,10 +1,11 @@
 <?php
-require "../../../components/utils/inputComponent.php";
-require "./components/userDataTableComponent.php";
-require "../../../components/header/HeaderComponent.php";
-require "../../../components/barra_admin/barra_admin.php";
-require "../../../components/filter/filter.php";
-require "../../../components/utils/buttonComponent.php";
+require_once __DIR__ . "/../../../components/utils/inputComponent.php";
+require_once __DIR__ . "/components/userDataTableComponent.php";
+require_once __DIR__ . "/../../../components/header/HeaderComponent.php";
+require_once __DIR__ . "/../../../components/barra_admin/barra_admin.php";
+require_once __DIR__ ."/../../../components/filter/filter.php";
+require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
+require_once __DIR__ . "/../../../components/utils/sweetalert.php";
 
 use function Src\Views\Components\userDataTableComponent\userDataTableComponent;
 use function Src\Views\Components\header\HeaderComponent;
@@ -12,72 +13,13 @@ use function src\views\components\barra_admin\barra_admin;
 use function src\views\components\utils\InputComponent;
 use function src\views\components\filter\Filter;
 use function Src\Views\Components\Utils\ButtonComponent;
+use function Src\Application\Utils\showSweetAlert;
 
-$users = [
-    [
-        'name' => 'Bruna Gomes Louveira Miranda',
-        'username' => 'Rafael',
-        'id' => '456aea2d12345678',
-        'status' => 'Ativo',
-        'role' => 'Usuário',
-        'joined' => '14/01/2024',
-        'profile_picture' => 'https://github.com/shadcn.png',
-    ],
-    [
-        'name' => 'Rafael Costa',
-        'username' => 'Rafael_',
-        'id' => '789bcdf12345678',
-        'status' => 'Ativo',
-        'role' => 'Administrador',
-        'joined' => '19/02/2024',
-        'profile_picture' => 'https://github.com/shadcn.png',
-    ],
-    [
-        'name' => 'Rafael Silva',
-        'username' => 'Rafael',
-        'id' => '456aea2d12345678',
-        'status' => 'Suspenso',
-        'role' => 'Usuário',
-        'joined' => '14/01/2024',
-        'profile_picture' => 'https://github.com/shadcn.png',
-    ],
-    [
-        'name' => 'Rafael Costa',
-        'username' => 'Rafael_',
-        'id' => '789bcdf12345678',
-        'status' => 'Ativo',
-        'role' => 'Criador de conteúdo',
-        'joined' => '19/02/2024',
-        'profile_picture' => 'https://github.com/shadcn.png',
-    ],
-    [
-        'name' => 'Rafael Silva',
-        'username' => 'Rafael',
-        'id' => '456aea2d12345678',
-        'status' => 'Ativo',
-        'role' => 'Usuário',
-        'joined' => '14/01/2024',
-        'profile_picture' => 'https://github.com/shadcn.png',
-    ],
-    [
-        'name' => 'Rafael Costa',
-        'username' => 'Rafael_',
-        'id' => '789bcdf12345678',
-        'status' => 'Ativo',
-        'role' => 'Criador de conteúdo',
-        'joined' => '19/02/2024',
-        'profile_picture' => 'https://github.com/shadcn.png',
-    ],
-    [
-        'name' => 'Rafael Costa',
-        'username' => 'Rafael_',
-        'id' => '789bcdf12345678',
-        'status' => 'Ativo',
-        'role' => 'Criador de conteúdo',
-        'joined' => '19/02/2024',
-        'profile_picture' => 'https://github.com/shadcn.png',
-    ],
-];
+$users = $_SESSION["page_data"]["users"];
+$success = $_SESSION["redirect_data"]["success"] ?? null;
+$errors = $_SESSION["redirect_data"]["errors"] ?? null;
+
+unset($_SESSION["redirect_data"]);
 
 ?>
 
@@ -89,16 +31,14 @@ $users = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Gerenciamento de usuários</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/VHS/src/styles/global.css">
     <script src="/VHS/src/styles/tailwindglobal.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Syne:wght@500..800&display=swap" rel="stylesheet" />
 </head>
 
 <body class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center text-white font-[Poppins]">
     <?= HeaderComponent() ?>
-    <div class="flex">
-        <div class="min-w-[220px] position-fixed">
-            <?= barra_admin() ?>
-        </div>
+    <div class="flex gap-10">
+        <?= barra_admin() ?>
         <div class="p-6 pt-8 w-full flex flex-col gap-6">
             <div class="flex flex-col gap-4">
                 <div>
@@ -106,8 +46,8 @@ $users = [
                 </div>
                 <div class="flex flex-col gap-2">
                     <div class="flex gap-2 w-96">
-                        <?php echo ButtonComponent("Usuários", "studio", "", 13, 2.5, "", "../userManagement/index.php"); ?>
-                        <?php echo ButtonComponent("Denúncias", "studio", "", 23, 2.5, "", "../complaintManagement/index.php"); ?>
+                        <?php echo ButtonComponent("Usuários", "studio", "", 13, 2.5, "", "/VHS/admin/users"); ?>
+                        <?php echo ButtonComponent("Denúncias", "studio", "", 23, 2.5, "", "/VHS/admin/complaints"); ?>
                     </div>
                     <div class="flex items-center justify-center gap-4">
                         <div class="h-full pt-6">
@@ -122,6 +62,14 @@ $users = [
             <div class="w-full">
                 <?= userDataTableComponent($users); ?>
             </div>
+            <?php
+                if(isset($errors)){
+                 echo showSweetAlert("Erro ao excluir ou editar usuário", $errors, "error");
+                }
+                if(isset($success)){
+                 echo showSweetAlert("Sucesso ao excluir ou editar usuário", $success, "success");
+                }
+            ?>
         </div>
     </div>
 </body>

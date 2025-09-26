@@ -33,7 +33,7 @@ class Cards {
             case 'mychannel': return self::MyChannel($card);
             case 'channels' : return self::Channels($card);
             case 'fasts'    : return self::Fast($card);
-            default         : return 'Esse card não existe...';
+            default         : return "<h1 class='text-white/50'>Esse card não existe...</h1>";;
         }
     }
 
@@ -41,7 +41,7 @@ class Cards {
         $url        = purifyProperty($card['url']);
         $views      = purifyNumbers($card['views']);
         $thumb_url  = purifyProperty($card['thumbnail_url']);
-        $name       = purifyProperty($card['name']);
+        $name       = purifyProperty($card['username']);
         $avatar_url = purifyProperty($card['avatar_url']);
         $title      = purifyProperty($card['title']);
         $duration   = purifyDuration($card['duration']);
@@ -58,7 +58,7 @@ class Cards {
                 </div>
 
                 <div class='p-4 text-white flex flex-col justify-between h-[50%]'>
-                    <p class='truncate text-[#B7B9D2] text-paragraph pr-24'>
+                    <p class='truncate text-white/50 text-paragraph pr-24'>
                         $name
                     </p>
 
@@ -73,7 +73,7 @@ class Cards {
                         $title
                     </h3>
 
-                    <p class='text-[#808191] text-caption 2xl:text-paragraph'>
+                    <p class='text-white/50 text-caption 2xl:text-paragraph'>
                         $views views • $createdat
                     </p>
                 </div>
@@ -81,7 +81,7 @@ class Cards {
                 <div class='absolute w-full h-full flex items-center justify-end p-5'>
                     <div class='relative w-20 h-20 2xl:w-20 2xl:h-20 flex items-center justify-center'>
                         <div class='absolute flex w-full h-full items-center justify-center rounded-full overflow-hidden bg-gray600 border-2 border-gray600'>
-                            <img src='$avatar_url' class='w-full h-full object-cover' onerror="this.src='/VHS/public/uploads/avatars/default.png'">
+                            <img src='/VHS/public/uploads/avatars/$avatar_url' class='w-full h-full object-cover' onerror="this.src='/VHS/public/uploads/avatars/default.png'">
                         </div>
                     </div>
                 </div>
@@ -90,17 +90,17 @@ class Cards {
     }
 
     private static function Event(array $card) {
-        $url         = purifyProperty($card['url']);
-        $name        = purifyProperty($card['name']);
-        $thumb_url   = purifyProperty($card['thumbnail_url']);
-        $description = purifyProperty($card['description']);
-        $title       = purifyProperty($card['title']);
-        $event_date  = purifyDateTime($card['event_date']);
+        $url        = purifyProperty($card['url']);
+        $name       = purifyProperty($card['name']);
+        $thumb_url  = purifyProperty($card['thumbnail_url']);
+        $category   = purifyProperty($card['category']);
+        $title      = purifyProperty($card['title']);
+        $event_date = purifyDateTime($card['event_date']);
 
         return <<<HTML
             <a href='$url' class='card flex flex-col relative max-w-[310px] h-[310px] 2xl:max-w-[340px] 2xl:h-[340px] bg-gray600 rounded-3xl overflow-hidden shadow-lg transition-all duration-200 border-2 border-gray600 active:scale-[98%]'>
                 <div class='relative w-full h-[50%] bg-white/5'>
-                    <img src='$thumb_url' onerror="this.src='/VHS/public/uploads/thumbs/default.png'" class='w-full h-full object-cover'>
+                    <img src='$thumb_url' onerror="this.src='/VHS/public/uploads/thumbs/default.png'" class='w-full h-full object-cover pointer-events-none'>
 
                     <div class='absolute top-3 right-3 bg-black bg-opacity-70 text-white text-caption 2xl:text-paragraph px-4 py-1 rounded-md'>
                         🔥  
@@ -108,7 +108,7 @@ class Cards {
                 </div>
 
                 <div class='p-3 text-white flex flex-col justify-between h-[50%]'>
-                    <p class='truncate text-[#B7B9D2] text-paragraph'>$name</p>
+                    <p class='truncate text-white/50 text-paragraph'>$name</p>
 
                     <h3 class='text-subtitle leading-tight break-words overflow-hidden line-clamp-3'
                         style='
@@ -121,7 +121,7 @@ class Cards {
                         $title
                     </h3>
 
-                    <p class='text-[#B7B9D2] text-caption 2xl:text-paragraph'>$description • Em $event_date</p>
+                    <p class='text-white/50 text-caption 2xl:text-paragraph'>#$category • $event_date</p>
                 </div>
             </a>
         HTML;
@@ -148,7 +148,7 @@ class Cards {
                 </div>
 
                 <div class='p-4 text-white flex flex-col justify-between flex gap-2 h-[50%]'>
-                    <p class='text-[#808191] text-paragraph'>$createdat</p>
+                    <p class='text-white/50 text-paragraph'>$createdat</p>
 
                     <h3 class='text-subtitle leading-tight break-words overflow-hidden line-clamp-3'
                         style='
@@ -167,7 +167,7 @@ class Cards {
                                 <img src='/VHS/public/icons/comments-card.svg' class='w-full h-full'>
                             </div>
 
-                            <p class='text-[#808191] text-paragraph'>$comments</p>
+                            <p class='text-white/50 text-paragraph'>$comments</p>
                         </div>
 
                         <div class='flex gap-2 items-center'>
@@ -175,7 +175,7 @@ class Cards {
                                 <img src='/VHS/public/icons/star-card.svg' class='w-full h-full'>
                             </div>
 
-                            <p class='text-[#808191] text-paragraph'>$likes</p>
+                            <p class='text-white/50 text-paragraph'>$likes</p>
                         </div>
 
                         <div class='flex gap-2 items-center'>
@@ -183,7 +183,7 @@ class Cards {
                                 <img src='/VHS/public/icons/views-card.svg' class='w-full h-full'>
                             </div>
 
-                            <p class='text-[#808191] text-paragraph'>$views</p>
+                            <p class='text-white/50 text-paragraph'>$views</p>
                         </div>
                     </div>
                 </div>
@@ -211,7 +211,7 @@ class Cards {
                 </div>
 
                 <div class='p-4 text-white flex flex-col justify-between h-[50%]'>
-                    <p class='truncate text-[#B7B9D2] text-paragraph'>$name</p>
+                    <p class='truncate text-white/50 text-paragraph'>$name</p>
 
                     <h3 class='text-subtitle leading-tight break-words overflow-hidden line-clamp-3'
                         style='
@@ -224,7 +224,7 @@ class Cards {
                         $title
                     </h3>
 
-                    <p class='text-[#808191] text-paragraph'>$views views • $createdat</p>
+                    <p class='text-white/50 text-paragraph'>$views views • $createdat</p>
                 </div>
             </a>
         HTML;
@@ -250,12 +250,12 @@ class Cards {
                     <div class='flex gap-6'>
                         <div class='flex items-center gap-2'>
                             <img src='/VHS/public/icons/fastIcon/vector.svg' class='w-5 h-5'>
-                            <p class='text-paragraph text-[#B7B9D2]'>$likes</p>
+                            <p class='text-paragraph text-white/50'>$likes</p>
                         </div>
 
                         <div class='flex items-center gap-2'>
                             <img src='/VHS/public/icons/fastIcon/eyeicon.svg' class='w-5 h-5'>
-                            <p class='text-paragraph text-[#B7B9D2]'>$views</p>
+                            <p class='text-paragraph text-white/50'>$views</p>
                         </div>
                     </div>
                 </div>

@@ -17,7 +17,7 @@ class ViewEventsController extends Controller {
             $events = $this->eventModel->getAllEvents();
             $this->view('/home/events/index', $events);
             return;
-
+            
         } catch (\Throwable $exception) {
             print_r($exception->getMessage());
         }

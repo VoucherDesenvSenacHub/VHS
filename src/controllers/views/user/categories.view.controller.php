@@ -6,7 +6,7 @@ use Src\Application\Core\Controller;
 use Src\Infra\Model\CategoryModel;
 use Src\Infra\Model\VideoModel;
 
-require_once __DIR__ . '/../application/core/controller.php';
+require_once __DIR__ . '/../../../application/core/controller.php';
 
 class CategoriesViewController extends Controller {
     private CategoryModel $categoryModel;

@@ -13,18 +13,10 @@ require_once __DIR__ . "/../../application/utils/redirect.php";
 
 use function Src\Application\Utils\Redirect\redirect;
 
-class RedirectUserNotAdminMiddleware
-{
-    public function execute()
-    {
-        if (empty($_SESSION["user"])) {
-            http_response_code(401);
-            return redirect("/VHS/home");
-        }
-
-        if ($_SESSION["user"]["role"] === "ADMIN") {
-            http_response_code(403);
-            return redirect("/VHS/home");
+class RedirectUserNotAdminMiddleware {
+    public function execute() {
+        if($_SESSION["user"]["role"] != "ADMIN") {
+            return redirect($_SERVER['HTTP_REFERER'] ?? "/VHS/home", ["errors" => "Você não tem permissão para executar essa ação."]);
         }
     }
 }
