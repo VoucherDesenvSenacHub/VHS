@@ -77,20 +77,56 @@ function userDataTableComponent($users)
     if ($page < 1) $page = 0;
     $prevPage = $page > 1 ? $page - 1 : 0;
     $nextPage = $page + 1;
-
     $buttonNext = '';
-    if (count($users) == 7) {
-        $buttonNext = <<<HTML
-            <a href="?page={$nextPage}" class="px-4 py-2 rounded-md border border-gray-600 text-gray-300 hover:bg-gray-700">Próximo</a>
+    
+        if (count($users) == 7) {
+            $_GET['page'] = $nextPage;
+            $buttonNext = <<<HTML
+                <form method="GET" style="display:inline;">
+                    <input type="hidden" name="page" value="{$nextPage}">
         HTML;
-    }
 
-    $buttonPrev = '';
-    if ($page > 0) {
-        $buttonPrev = <<<HTML
-            <a href="?page={$prevPage}" class="px-4 py-2 rounded-md border border-gray-600 text-gray-300 hover:bg-gray-700">Anterior</a>
+            foreach ($_GET as $key => $value) {
+                if ($key !== 'page') {
+                    $safeKey = htmlspecialchars($key);
+                    $safeVal = htmlspecialchars($value);
+                    $buttonNext .= "<input type='hidden' name='{$safeKey}' value='{$safeVal}'>";
+                }
+            }
+
+            $buttonNext .= <<<HTML
+                    <button type="submit" class="px-4 py-2 rounded-md border border-gray-600 text-gray-300 hover:bg-gray-700">
+                        Próximo
+                    </button>
+                </form>
+            HTML;
+        }
+
+        $buttonPrev = '';
+        if ($page > 0) {
+            $_GET['page'] = $prevPage;
+            $buttonPrev = <<<HTML
+                <form method="GET" style="display:inline;">
+                    <input type="hidden" name="page" value="{$prevPage}">
         HTML;
-    }
+
+            foreach ($_GET as $key => $value) {
+                if ($key !== 'page') {
+                    $safeKey = htmlspecialchars($key);
+                    $safeVal = htmlspecialchars($value);
+                    $buttonPrev .= "<input type='hidden' name='{$safeKey}' value='{$safeVal}'>";
+                }
+            }
+
+            $buttonPrev .= <<<HTML
+                    <button type="submit" class="px-4 py-2 rounded-md border border-gray-600 text-gray-300 hover:bg-gray-700">
+                        Anterior
+                    </button>
+                </form>
+            HTML;
+        }
+
+    
 
     return <<<HTML
         <script src="https://cdn.tailwindcss.com"></script>
