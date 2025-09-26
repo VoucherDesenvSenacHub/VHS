@@ -29,12 +29,10 @@ use Src\Application\Controllers\StudioController;
 use Src\Application\Controllers\StudioFastViewController;
 use Src\Application\Controllers\StudioVideoViewController;
 use Src\Application\Middlewares\RedirectUserNotCreatorMiddleware;
-use Src\Application\Middlewares\RedirectUserNotAdminMiddleware;
 use Src\Application\Controllers\SignInViewController;
 use Src\Application\Controllers\ViewEventsController;
 use Src\Application\Middlewares\RedirectUserNotAdminMiddleware;
 use Src\Application\Controllers\AdminAnalyticsViewController;
-use Src\Application\Controllers\AdminCategoriesViewController;
 use Src\Application\Controllers\AdminComplaintManagementViewController;
 use Src\Application\Controllers\AdminUsersViewController;
 use Src\Application\Controllers\DeleteUserController;
@@ -85,10 +83,6 @@ $router->get("/admin/categories", AdminCategoriesViewController::class, Redirect
 $router->get("/admin/complaints", AdminComplaintManagementViewController::class, RedirectUserNotAdminMiddleware::class);
 $router->get("/admin/users", AdminUsersViewController::class, RedirectUserNotAdminMiddleware::class);
 
-
-
-
-$router->get("/admin/categories", AdminCategoriesViewController::class, RedirectUserNotAdminMiddleware::class);
 
 
 $router->run();
