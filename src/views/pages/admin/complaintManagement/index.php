@@ -14,35 +14,8 @@ use function src\views\components\barra_admin\Barra_Admin;
 use function Src\Views\Components\Utils\Comment;
 use function Src\Views\Components\Utils\InputComponent;
 
-$commets_lista = [
-    [
-        "name" => "Rafael",
-        "text" => "cara muuit legal odio todos vsz seus caras chtos",
-        "thumbnail_url" => "https://www.uai.com.br/uainoticias/wp-content/uploads/2025/04/Ornitorrinco_1744132096128.jpg",
-        "há 2 dias",
-        "https://www.uai.com.br/uainoticias/wp-content/uploads/2025/04/Ornitorrinco_1744132096128.jpg",
-        "created_at" => "há 2 dias",
-        "user_img" => "https://www.uai.com.br/uainoticias/wp-content/uploads/2025/04/Ornitorrinco_1744132096128.jpg",
-        "há 2 dias",
-        "https://www.uai.com.br/uainoticias/wp-content/uploads/2025/04/Ornitorrinco_1744132096128.jpg"
-    ],
-    [
-        "name" => "CAVALO",
-        "text" => "cCAVALO CAVALO VACALO LAVALO CAVALO",
-        "thumbnail_url" => "https://www.uai.com.br/uainoticias/wp-content/uploads/2025/04/Ornitorrinco_1744132096128.jpg",
-        "há 2 dias",
-        "https://www.uai.com.br/uainoticias/wp-content/uploads/2025/04/Ornitorrinco_1744132096128.jpg",
-        "created_at" => "há 200 dias",
-        "user_img" => "https://pm1.aminoapps.com/7041/8504e31011da6a7ea6973a12ab60b7b423d1f8f7r1-800-1000v2_00.jpg"
-    ],
-    [
-        "name" => "Bruno",
-        "text" => "Muito interessante, parabéns!",
-        "thumbnail_url" => "https://www.uai.com.br/uainoticias/wp-content/uploads/2025/04/Ornitorrinco_1744132096128.jpg",
-        "created_at" => "há 3 dias",
-        "user_img" => "https://styles.redditmedia.com/t5_2s2lo/styles/communityIcon_vfzhs4a90gue1.png"
-    ]
-];
+$commets  = $_SESSION["page_data"]["comments"] ?? [];
+
 ?>
 
 <!DOCTYPE html>
@@ -83,13 +56,31 @@ $commets_lista = [
             </div>
             <div class="colocaraqui  flex flex-col gap-4">
                 <?php
-                foreach ($commets_lista as $commet) {
+                if(empty($commets)) {
+                    echo "Nenhum comentário reportado encontrado";
+                }
+                $tz = new DateTimeZone('America/Campo_Grande');
+                foreach ($commets as $comment) {
+                    $created = new DateTime($comment["created_at"], $tz);
+                    $now = new DateTime('now', $tz);
+                    $diff = $now->getTimestamp() - $created->getTimestamp();
+
+                    $time_ago = floor($diff / 86400) . " dias atrás";
+                    if ($diff < 60) {
+                       "há" . $time_ago = $diff . " segundos atrás";
+                    }
+                    if ($diff < 3600) {
+                        $time_ago = floor($diff / 60) . " minutos atrás";
+                    }   
+                    if ($diff < 86400) {
+                        $time_ago = floor($diff / 3600) . " horas atrás";
+                    }
                     echo Comment(
-                        $commet["name"],
-                        $commet["text"],
-                        $commet["thumbnail_url"],
-                        $commet["created_at"],
-                        $commet["user_img"]
+                        $comment["name"],
+                        $comment["text"],
+                         $comment["thumbnail_url"],
+                        "há " . $time_ago,
+                        $comment["user_img"]
                     );
                 }
                 ?>

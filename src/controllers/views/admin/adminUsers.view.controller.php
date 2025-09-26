@@ -15,20 +15,12 @@ class AdminUsersViewController extends Controller {
         $this->userModel = $this->model("user");
         $filterName = $_GET["name"] ?? "";
         $page = $_GET["page"] ?? 0;
-
-        if($page > 0){
-            $page = $page*7;
-        }
+        $page = $page > 0 ? $page * 7 : $page;
         
         $idUser = $_SESSION["user"]["id"];
 
-        $users = $this->userModel->getUsers($page, 7, $idUser);
+        $users = $this->userModel->getUsers($page, 7, $idUser, $filterName);
         $users = array_slice($users, 0, 7);
-
-        if ($filterName) {
-            $users = $this->userModel->getUsersByName($page, 7, $idUser, $filterName);
-            $users = array_slice($users, 0, 7);
-        }
 
         $this->view("admin/userManagement/index", ["users" => $users]);   
     }
