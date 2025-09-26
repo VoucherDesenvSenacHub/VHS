@@ -13,6 +13,7 @@ class AdminUsersViewController extends Controller {
 
     public function index() {
         $this->userModel = $this->model("user");
+        $filterName = $_GET["name"] ?? "";
         $page = $_GET["page"] ?? 0;
 
         if($page > 0){
@@ -23,6 +24,11 @@ class AdminUsersViewController extends Controller {
 
         $users = $this->userModel->getUsers($page, 7, $idUser);
         $users = array_slice($users, 0, 7);
+
+        if ($filterName) {
+            $users = $this->userModel->getUsersByName($page, 7, $idUser, $filterName);
+            $users = array_slice($users, 0, 7);
+        }
 
         $this->view("admin/userManagement/index", ["users" => $users]);   
     }
