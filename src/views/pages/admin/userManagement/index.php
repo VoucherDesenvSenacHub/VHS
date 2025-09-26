@@ -54,7 +54,14 @@ unset($_SESSION["redirect_data"]);
                             <?= Filter() ?>
                         </div>
                         <div class="w-full">
-                            <?= InputComponent(placeholder: "Pesquisar", type: "text") ?>
+                        <form method="GET">
+                            <?= InputComponent(
+                                placeholder: "Pesquisar",
+                                type: "text",
+                                name: "name",
+                                value: $_GET['name'] ?? ""
+                            ) ?>
+                        </form>
                         </div>
                     </div>
                 </div>
