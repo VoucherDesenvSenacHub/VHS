@@ -23,11 +23,22 @@ class UserHistoryModel extends Model {
         return $id;
     }
 
-    public function getHIstoryByUserId(string $user_id): array {
-        $sql = "SELECT * FROM users_history WHERE user_id = :user_id";
-
+    public function getHistoryByUserId(string $user_id): array {
+        $sql = "SELECT uh.*
+                FROM users_history uh
+                INNER JOIN (
+                    SELECT video_id, MAX(video_created_at) AS last_view
+                    FROM users_history
+                    WHERE user_id = :user_id
+                    GROUP BY video_id
+                ) latest 
+                ON uh.video_id = latest.video_id 
+                AND uh.video_created_at = latest.last_view
+                WHERE uh.user_id = :user_id
+                ORDER BY uh.video_created_at DESC";
+    
         return $this->database->query($sql, [":user_id" => $user_id]);
     }
- 
+    
    
 }

@@ -17,10 +17,17 @@ class VideoModel extends Model {
     }
 
     public function getVideoById(string $id): array {
-        $sql = "SELECT * FROM videos WHERE  id = :query";
-
-        return $this->database->query($sql, ['id' => '%' . $id . '%']);
+        $sql = "SELECT * FROM videos WHERE id = :id LIMIT 1";
+        return $this->database->query($sql, [':id' => $id]);
     }
+
+    public function getFastById(string $id): array {
+        $sql = "SELECT * FROM videos WHERE id = :id AND type = 'FAST' LIMIT 1";
+        return $this->database->query($sql, [':id' => $id]);
+
+    }
+    
+    
 
 
     public function getFastByTitle(string $query): array {
