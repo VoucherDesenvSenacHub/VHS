@@ -16,7 +16,7 @@ function HeaderComponent() {
     $UserMenu = UserMenu($avatar_url, $user['name'] ?? 'Você', $user['email'] ?? null);
 
     return <<<HTML
-        <header id='header' class='bg-gradient-to-b from-[#14001B] to-[#14001B]/75 backdrop-blur-lg border-secondary/10 w-full h-20 flex items-center justify-between px-6 sticky top-0 z-20'>  
+        <header id='header' class='backdrop-blur-lg border-b border-secondary/10 w-full h-20 flex items-center justify-between px-6 sticky top-0 z-20'>  
             <div class='flex items-center gap-6'>
                 $BarComponent
                 <a href="/VHS/home">
