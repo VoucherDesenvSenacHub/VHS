@@ -36,6 +36,9 @@ $fields = $_SESSION["redirect_data"]["fields"] ?? [];
                     <h2 class="text-3xl font-semibold title-size text-white max-xl:text-2xl">Criar sua conta</h2>
                     <p class="text-secondary">Informe seus dados para criar sua conta</p>
                 </div>
+                <pre>
+                    <?php var_dump($errors, $fields); ?>
+                </pre>
                 <form class="flex flex-col gap-4 w-full xl:w-96" method="POST" action="/VHS/src/application/routes/route.php/api/v1/auth/signup">
                     <?= InputComponent(
                         placeholder: "Insira seu Nome", 

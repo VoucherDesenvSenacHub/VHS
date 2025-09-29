@@ -16,13 +16,13 @@ use function Src\Views\Components\Utils\Footer;
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\Utils\TextareaComponent;
 
-
-$categorias = $_SESSION["page_data"]["categorias"] ?? [];
-
+$categories = $_SESSION["page_data"]["categories"] ?? [];
 $modal = $_SESSION["redirect_data"]["success"] ?? false;
 
-if($modal){
-    unset($_SESSION["redirect_data"]);  
+$errors = $_SESSION["redirect_data"]["errors"] ?? [];
+$fields = $_SESSION["redirect_data"]["fields"] ?? [];
+
+if ($modal) {
     echo ModalComponent("Criado com sucesso!", "Deseja continuar criando vídeos?");
 }
 
@@ -46,16 +46,16 @@ $botoes = [
     <link rel="stylesheet" href="/VHS/src/styles/global.css">
 </head>
 
-<body> 
+<body>
     <div>
         <?= HeaderComponent() ?>
     </div>
     <div class="flex flex-row w-full">
-        
+
         <div>
             <?= StudioSideMenuComponent() ?>
         </div>
-        
+
         <div class=" relative flex flex-col gap-4 max-w-[1500px] mx-auto w-full">
             <div class="text-white flex flex-col gap-2">
                 <h1 class='text-title font-bold'>Criar conteúdo</h1>
@@ -65,12 +65,23 @@ $botoes = [
                     <?php echo ButtonComponent("Fast", "studio", "", 10.675, 2.5, "", "/VHS/create/fast"); ?>
                     <?php echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5, "", "/VHS/create/event"); ?>
                 </div>
+                <pre>
+                    <?php var_dump($errors, $fields, $modal); ?>
+                </pre>
 
                 <form action="/VHS/api/v1/studio/create/video" enctype="multipart/form-data" method="post">
                     <div id="URL">
                         <h1 class="text-subtitle text-white font-semibold mt-4">URL</h1>
                         <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-                        <?= InputComponent(type: "text", placeholder: "https://youtube.com", name: "url", required: true) ?>
+                        <?= InputComponent(
+                            type: "text",
+                            placeholder: "https://youtube.com",
+                            name: "url",
+                            error: isset($errors["url"]),
+                            errorDescription: isset($errors["url"]) ? $errors["url"] : "",
+                            value: isset($fields["url"]) ? $fields["url"] : ""
+                        )
+                        ?>
                     </div>
 
                     <div id="thumb">
@@ -93,9 +104,8 @@ $botoes = [
                                         <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> ou arraste e solte</p>
                                         <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, JPEG</p>
                                     </div>
-
-                                    <input id="dropzone-file" type="file" class="hidden" accept="image/png, image/jpg, image/jpeg" name="thumbnail" required/>
                                 </label>
+                                <input id="dropzone-file" type="file" class="hidden" accept="image/png, image/jpg, image/jpeg" name="thumbnail" />
                             </div>
 
                         </div>
@@ -103,7 +113,15 @@ $botoes = [
                     <div id="Title">
                         <h1 class="text-3xl text-white font-semibold mt-4">Título</h1>
                         <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-                        <?= InputComponent(type: "text", placeholder: "Tudo sobre o Next.js 15, nova arquitetura de pasta", name: "title", required: true) ?>
+                        <?= InputComponent(
+                            type: "text",
+                            placeholder: "Tudo sobre o Next.js 15, nova arquitetura de pasta",
+                            name: "title",
+                            error: isset($errors["title"]),
+                            errorDescription: isset($errors["title"]) ? $errors["title"] : "",
+                            value: isset($fields["title"]) ? $fields["title"] : ""
+                        )
+                        ?>
                     </div>
                     <div id="Description">
                         <h1 class="text-3xl text-white font-semibold mt-4">Descrição</h1>
@@ -117,27 +135,37 @@ $botoes = [
                                 height: "96",
                                 multiline: true,
                                 name: "description",
-                                required: true
+                                value: isset($fields["description"]) ? $fields["description"] : "",
                             ) ?>
                         </div>
                     </div>
-                    <!-- <div id="Public">
-                        <h1 class="text-3xl text-white font-semibold mt-4">Público</h1>
-                        <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-                        <?= InputComponent(type: "text", placeholder: "Tudo sobre o Next.js 15, nova arquitetura de pasta", name: "target_audience", required: true) ?>
-                    </div> -->
-                    
+
                     <div id="Category">
                         <h1 class="text-3xl text-white font-semibold mt-4">Categoria</h1>
                         <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-                        <select name="category_id" class="px-3 py-1.5 outline outline-1 outline-[#666666] rounded-md placeholder-[#666666] text-zinc-200 w-full h-[45px] bg-transparent" required>
-                            <option selected disabled value="">Selecione uma categoria</option>
-                            <?php foreach ($categorias as $categoria): ?>
-                                <option value="<?= $categoria['id'] ?>" class="text-black">
+                        <!-- Exibe o erro de categoria, se existir -->
+                        <?php if (!empty($errors["category_id"])): ?>
+                            <span class="text-red-500 text-sm">
+                                <?= $errors["category_id"] ?>
+                            </span>
+                        <?php endif; ?>
+
+                        <!-- Campo select -->
+                        <select name="category_id"
+                            class="px-3 py-1.5 outline outline-1 outline-[#666666] rounded-md placeholder-[#666666] text-zinc-200 w-full h-[45px] bg-transparent">
+                            <option disabled value=""
+                                <?= empty($fields['category_id']) ? 'selected' : null ?>>
+                                Selecione uma categoria
+                            </option>
+
+                            <?php foreach ($categories as $categoria): ?>
+                                <option value="<?= $categoria['id'] ?>" class="text-black"
+                                    <?= (isset($fields['category_id']) && $fields['category_id'] == $categoria['id']) ? 'selected' : '' ?>>
                                     <?= htmlspecialchars($categoria['name']) ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>
+
                     </div>
 
                     <div class="flex flex-col sm:flex-row justify-center items-end gap-10 my-6">
@@ -179,5 +207,6 @@ $botoes = [
     </script>
 
 </body>
+<?php unset($_SESSION["redirect_data"]); ?>
 
 </html>

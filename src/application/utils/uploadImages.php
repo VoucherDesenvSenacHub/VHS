@@ -12,9 +12,8 @@ function UploadImages(string $file_name, string $user ,bool $isAvatar = false)
         throw new \Exception("Método inválido");
     }
 
-    // Se o campo não existir ou nenhum arquivo foi enviado
     if (!isset($_FILES[$file_name]) || $_FILES[$file_name]["error"] === UPLOAD_ERR_NO_FILE) {
-        return null; // 👈 não lança exceção, só retorna nulo
+        return null;
     }
 
     $file = $_FILES[$file_name];
@@ -48,7 +47,7 @@ function UploadImages(string $file_name, string $user ,bool $isAvatar = false)
         mkdir($dir, 0777, true);
     }
     
-    $safeName = uniqid() . "-" . basename($origin_name);
+    $safeName = time() . "-" . basename($origin_name);
     $path = $dir . $safeName;
 
     if (!move_uploaded_file($tmp_name, $path)) {

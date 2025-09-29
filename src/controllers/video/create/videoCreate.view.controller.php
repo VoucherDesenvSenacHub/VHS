@@ -15,10 +15,10 @@ class VideoViewController extends Controller
     public function index()
     {
         $this->videoModel = new VideoModel();
-        $categorias = $this->videoModel->getAllCategories();
+        $categories = $this->videoModel->getAllCategories();
 
         $this->view("/studio/content/create/video/index", [
-            "categorias" => $categorias
+            "categories" => $categories
         ]);
     }
 }

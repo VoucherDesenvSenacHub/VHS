@@ -3,17 +3,18 @@
 namespace Src\Application\Controllers;
 
 require_once __DIR__ . '/../../../application/core/controller.php';
-require_once __DIR__ . '/../../../application/utils/uploadArchives.php';
+require_once __DIR__ . '/../../../application/utils/uploadImages.php';
 
 use Src\Application\Core\Controller;
 use Src\Infra\Model\VideoModel;
 use Respect\Validation\Exceptions\NestedValidationException;
 use Respect\Validation\Validator as v;
+use Error;
 
 use function Src\Application\Utils\Redirect\redirect;
 use function Src\Application\Utils\UploadImages;
 
-class VideoController extends Controller{
+class VideoController extends Controller {
     
     public VideoModel $videoModel;
 
@@ -31,15 +32,31 @@ class VideoController extends Controller{
                 "author_id" => $user["id"]
             ]);
 
-            $schema = v::key('url', v::stringType())
-                ->key('title', v::stringType())->notEmpty()
-                ->key('description', v::stringType())->notEmpty()
-                ->key('author_id', v::stringType())->notEmpty()
-                ->key('category_id', v::stringType())->notEmpty()
-                ->key('thumbnail_url', v::stringType())->notEmpty();
+            // Validações
+            $schema = v::key('url', v::stringType()->notEmpty()->setTemplate("URL é obrigatória!"))
+                ->key('title', v::stringType()->length(3, 60)->setTemplate("Título é obrigatório!"))
+                ->key('description', v::stringType())
+                ->key('author_id', v::stringType()->setTemplate("Autor inválido!"))
+                ->key('category_id', v::stringType()->notEmpty()->setTemplate("Categoria é obrigatória!"))
+                ->key('thumbnail_url', v::stringType()->setTemplate("Thumbnail é obrigatória!"));
 
             $schema->assert($data);
 
+            $errors = [];
+
+            if (empty($data["thumbnail_url"])) {
+                $errors["thumbnail"] = "Thumbnail não enviada!";
+            }
+
+            if (empty($data["category_id"])) {
+                $errors["category_id"] = "Categoria é obrigatória!";
+            }
+
+            if (count($errors) > 0) {
+                throw new Error(serialize($errors));
+            }
+
+            // Se passou, cria o vídeo
             $this->videoModel->create(
                 $data["url"],
                 $data["title"],
@@ -49,11 +66,22 @@ class VideoController extends Controller{
                 $data["thumbnail_url"]
             );
 
-            redirect("/VHS/create/video",[
+            redirect("/VHS/create/video", [
                 "success" => true
             ]);
-        } catch (NestedValidationException $exception) {
-            echo $exception->getFullMessage();
+
+        } catch (NestedValidationException | Error $exception) {
+            if ($exception instanceof Error) {
+                return redirect("/VHS/create/video", [
+                    "errors" => unserialize($exception->getMessage()),
+                    "fields" => $_POST
+                ]);
+            }
+
+            redirect("/VHS/create/video", [
+                "errors" => $exception->getMessages(),
+                "fields" => $_POST
+            ]);
         }
     }
 }
