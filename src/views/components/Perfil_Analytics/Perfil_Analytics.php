@@ -1,36 +1,49 @@
 <?php
 namespace Src\Views\Components\Perfil_Analytics;
 
-// Definir cabeçalho HTTP para UTF-8
 header('Content-Type: text/html; charset=UTF-8');
 
-function renderPostComponent($userImagePath, $username = "Freitasdev!", $horaPadrao = "Olá ", $diaSemana = "Terça-feira", $data = "24 de Junho de 2025") {
-    $localImagePath = file_exists($userImagePath) ? $userImagePath : "/VHS/public/images/Avatar.svg";
+function renderPostComponent($userImagePath, $username) {
+    date_default_timezone_set('America/Campo_Grande');
+    setlocale(LC_TIME, 'pt_BR.UTF-8', 'pt_BR', 'portuguese');
+    
+    $weekday = date('l', time());
+
+    switch ($weekday) {
+        case 'Sunday':    $weekday = 'Domingo'; break;
+        case 'Monday':    $weekday = 'Segunda-feira'; break;
+        case 'Tuesday':   $weekday = 'Terça-feira'; break;
+        case 'Wednesday': $weekday = 'Quarta-feira'; break;
+        case 'Thursday':  $weekday = 'Quinta-feira'; break;
+        case 'Friday':    $weekday = 'Sexta-feira'; break;
+        case 'Saturday':  $weekday = 'Sábado'; break;
+    }
+    
+    $timeDefault = date('H:i', time());
+
+    if ($timeDefault < 13 && $timeDefault > 5) {
+        $timeDefault = 'Bom dia';
+    }
+    elseif($timeDefault >= 13 && $timeDefault < 18) {
+        $timeDefault = 'Boa tarde';
+    }
+    else {
+        $timeDefault = 'Boa noite';
+    }
+
+    $data = strftime('%d de %B de %Y', strtotime('now'));
+    
 ?>
     <div class="text-white p-4 flex items-center w-max">
-        <img src="<?php echo htmlspecialchars($localImagePath, ENT_QUOTES, 'UTF-8'); ?>" alt="Foto do usuário" class="w-16 h-16 rounded-full ring-2 ring-purple-400/50">
+        <img src="<?php echo htmlspecialchars($userImagePath, ENT_QUOTES, 'UTF-8'); ?>" alt="Foto do usuário" class="w-16 h-16 rounded-full">
         <div class="ml-4">
-            <span class="text-2xl font-bold"><?php echo htmlspecialchars($horaPadrao, ENT_QUOTES, 'UTF-8'); ?>, <?php echo htmlspecialchars($username, ENT_QUOTES, 'UTF-8'); ?></span>
+            <span class="text-2xl font-bold"><?php echo htmlspecialchars($timeDefault, ENT_QUOTES, 'UTF-8'); ?>, <?php echo htmlspecialchars($username, ENT_QUOTES, 'UTF-8'); ?></span>
             <br>
-            <div class="flex items-center gap-2"">
-                <img class="w-4 h-4" src="../../../../public/icons/calendar.svg" alt="">
-                <span class="text-md font-medium text-gray-400"><?php echo htmlspecialchars(ucfirst($diaSemana), ENT_QUOTES, 'UTF-8'); ?>, <?php echo htmlspecialchars($data, ENT_QUOTES, 'UTF-8'); ?></span>
+            <div class="flex items-center gap-2">
+                <img class="w-4 h-4" src="/VHS/public/icons/calendar.svg" alt="">
+                <span class="text-md font-medium text-gray-400"><?php echo  htmlspecialchars(ucfirst($weekday), ENT_QUOTES, 'UTF-8'); ?>, <?php echo htmlspecialchars($data, ENT_QUOTES, 'UTF-8'); ?></span>
             </div>
         </div>
     </div>
 <?php
 }
-
-// Se for uma requisição AJAX, processar os dados
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['horaPadrao'], $_POST['diaSemana'], $_POST['data'])) {
-    $horaPadrao = $_POST['horaPadrao'];
-    $diaSemana = $_POST['diaSemana'];
-    $data = $_POST['data'];
-    $userImagePath = $_POST['userImagePath'] ?? '/VHS/public/images/Avatar.svg';
-    $username = $_POST['username'] ?? 'Freitasdev';
-
-    // Renderizar o componente com os dados recebidos
-    renderPostComponent($userImagePath, $username, $horaPadrao, $diaSemana, $data);
-    exit;
-}
-?>

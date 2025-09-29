@@ -63,5 +63,3 @@ function chartsCategoryComponent($seriesData, $labels, $title = 'Categorias', $m
     return $html;
 }
 ?>
-
-}

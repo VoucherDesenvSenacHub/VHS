@@ -8,7 +8,7 @@ use Src\Infra\Model\UserModel;
 
 use Respect\Validation\Validator as v;
 
-require_once __DIR__ . '/../application/core/controller.php';
+require_once __DIR__ . '/../../../application/core/controller.php';
 
 class SearchChannelController extends Controller {
     public UserModel $UserModel;

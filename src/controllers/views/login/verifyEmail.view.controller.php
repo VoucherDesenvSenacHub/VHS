@@ -8,8 +8,8 @@ use Src\Infra\Model\UserModel;
 
 use function Src\Application\Utils\Redirect\redirect;
 
-require_once __DIR__ . '/../application/core/controller.php';
-require_once __DIR__ . '/../application/utils/emailTransporter.php';
+require_once __DIR__ . '/../../../application/core/controller.php';
+require_once __DIR__ . '/../../../application/utils/emailTransporter.php';
 
 class VerifyEmailViewController extends Controller {
     private UserModel $userModel;

@@ -9,18 +9,14 @@ use Dotenv\Dotenv;
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../../..");
 $dotenv->load();
 
-use Src\Infra\Model\UserModel;
-
-require_once __DIR__ . "/../../infra/models/user.php";
 require_once __DIR__ . "/../../application/utils/redirect.php";
 
 use function Src\Application\Utils\Redirect\redirect;
 
-class RedirectUserNotLoggedMiddleware {
+class RedirectUserNotAdminMiddleware {
     public function execute() {
-        if(!isset($_COOKIE["token"])) {
-            http_response_code(401);
-            return redirect("/VHS/auth/signin");
-        }   
+        if($_SESSION["user"]["role"] != "ADMIN") {
+            return redirect($_SERVER['HTTP_REFERER'] ?? "/VHS/home", ["errors" => "Você não tem permissão para executar essa ação."]);
+        }
     }
 }

@@ -18,6 +18,7 @@ echo "<style>
     }
 </style>";
 
+// print_r($_SESSION["user"]);
 // print_r($_SESSION["page_data"]["popular_videos"]);
 // print_r($_SESSION["page_data"]["emphasised_videos"]);
 // print_r($_SESSION["page_data"]["categories"]);

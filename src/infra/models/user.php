@@ -13,7 +13,7 @@ class UserModel extends Model {
 
         $id = uniqid(more_entropy: true);
 
-        $stmt = $this->database->exec($sql, [
+        $this->database->exec($sql, [
             ":id" => $id,
             ":name" => $name,   
             ":email" => $email,
@@ -89,5 +89,31 @@ class UserModel extends Model {
         $sql = "SELECT * FROM users_category WHERE user_id = :id";
     
         return $this->database->query($sql, [":id" => $id]);    
+    }
+
+    public function getUsers(int $offset, int $limit, string $idUser): array {
+        $sql = "SELECT * FROM users WHERE isDeleted = 0 AND id NOT IN ('$idUser') ORDER BY created_at ASC LIMIT $offset, $limit";
+        return $this->database->query($sql);
+    }
+
+    public function getUsersByName(int $offset, int $limit, string $idUser, string $name): array {
+        $sql = "SELECT * FROM users WHERE isDeleted = 0 AND id NOT IN ('$idUser') AND name LIKE :name ORDER BY created_at ASC LIMIT $offset, $limit";
+        return $this->database->query($sql, [":name" => "%$name%"]);
+    }
+
+    public function deleteUser(string $id): bool {
+        $sql = "UPDATE users SET isDeleted = 1 WHERE id = :id";
+        return $this->database->exec($sql, [":id" => $id]);
+    }
+
+    public function updateUserAdmin(string $id, string $name, string $role, string $status): bool {
+        $sql = "UPDATE users SET name = :name, role = :role, status = :status WHERE id = :id";
+
+        return $this->database->exec($sql, [
+            ":id" => $id,
+            ":name" => $name,
+            ":role" => $role,
+            ":status" => $status,
+        ]);
     }
 }

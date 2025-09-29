@@ -13,12 +13,14 @@ class EventModel extends Model {
                 users.name,
                 events.url,
                 events.title,
-                events.description,
+                categories.name as category,
                 events.event_date,
                 events.thumbnail_url
             FROM events
                 INNER JOIN users
-                ON events.author_id = users.id;
+                ON events.author_id = users.id
+                INNER JOIN categories
+                ON events.category_id = categories.id;
         SQL;
 
         return $this->database->query($sql, []);

@@ -11,8 +11,8 @@ use Src\Infra\Model\UserModel;
 
 use function Src\Application\Utils\Redirect\redirect;
 
-require_once __DIR__ . '/../application/core/controller.php';
-require_once __DIR__ . '/../application/utils/verifyRecaptcha.php';
+require_once __DIR__ . '/../../../application/core/controller.php';
+require_once __DIR__ . '/../../../application/utils/verifyRecaptcha.php';
 
 class SignUpController extends Controller {
     private UserModel $userModel;
@@ -47,7 +47,11 @@ class SignUpController extends Controller {
             if(!empty($user)) {
                 $errors["username"] = "Nome de usuário já cadastrado!";
             }
-            
+
+            if($_POST["date_birthday"] && strtotime($_POST["date_birthday"]) >= time()) {
+                $errors["date_birthday"] = "Data de aniversário inválida!";
+            }
+
             $user = $this->userModel->getUserByEmail(strtolower($_POST["email"]));
 
             if(!empty($user)) {
