@@ -16,6 +16,59 @@ use function Src\Views\Components\Utils\InputComponent;
 
 $commets  = $_SESSION["page_data"]["comments"] ?? [];
 
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 0;
+    if ($page < 1) $page = 0;
+    $prevPage = $page > 1 ? $page - 1 : 0;
+    $nextPage = $page + 1;
+    $buttonNext = '';
+    
+        if (count($commets) == 7) {
+            $_GET['page'] = $nextPage;
+            $buttonNext = <<<HTML
+                <form method="GET" style="display:inline;">
+                    <input type="hidden" name="page" value="{$nextPage}">
+        HTML;
+
+            foreach ($_GET as $key => $value) {
+                if ($key !== 'page') {
+                    $safeKey = htmlspecialchars($key);
+                    $safeVal = htmlspecialchars($value);
+                    $buttonNext .= "<input type='hidden' name='{$safeKey}' value='{$safeVal}'>";
+                }
+            }
+
+            $buttonNext .= <<<HTML
+                    <button type="submit" class="px-4 py-2 rounded-md border border-gray-600 text-gray-300 hover:bg-gray-700">
+                        Próximo
+                    </button>
+                </form>
+            HTML;
+        }
+
+        $buttonPrev = '';
+        if ($page > 0) {
+            $_GET['page'] = $prevPage;
+            $buttonPrev = <<<HTML
+                <form method="GET" style="display:inline;">
+                    <input type="hidden" name="page" value="{$prevPage}">
+        HTML;
+
+            foreach ($_GET as $key => $value) {
+                if ($key !== 'page') {
+                    $safeKey = htmlspecialchars($key);
+                    $safeVal = htmlspecialchars($value);
+                    $buttonPrev .= "<input type='hidden' name='{$safeKey}' value='{$safeVal}'>";
+                }
+            }
+
+            $buttonPrev .= <<<HTML
+                    <button type="submit" class="px-4 py-2 rounded-md border border-gray-600 text-gray-300 hover:bg-gray-700">
+                        Anterior
+                    </button>
+                </form>
+            HTML;
+        }
+
 ?>
 
 <!DOCTYPE html>
@@ -49,12 +102,19 @@ $commets  = $_SESSION["page_data"]["comments"] ?? [];
                             <?= Filter() ?>
                         </div>
                         <div class="w-full">
-                            <?= InputComponent(placeholder: "Pesquisar", type: "text") ?>
+                        <form method="GET">
+                            <?= InputComponent(
+                                placeholder: "Pesquisar",
+                                type: "text",
+                                name: "comment",
+                                value: $_GET['comment'] ?? ""
+                            ) ?>
+                        </form>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="colocaraqui  flex flex-col gap-4">
+            <div class="flex flex-col gap-4">
                 <?php
                 if(empty($commets)) {
                     echo "Nenhum comentário reportado encontrado";
@@ -66,14 +126,15 @@ $commets  = $_SESSION["page_data"]["comments"] ?? [];
                     $diff = $now->getTimestamp() - $created->getTimestamp();
 
                     $time_ago = floor($diff / 86400) . " dias atrás";
-                    if ($diff < 60) {
-                       "há" . $time_ago = $diff . " segundos atrás";
+    
+                    if ($diff < 86400) {
+                        $time_ago = floor($diff / 3600) . " horas atrás";
                     }
                     if ($diff < 3600) {
                         $time_ago = floor($diff / 60) . " minutos atrás";
-                    }   
-                    if ($diff < 86400) {
-                        $time_ago = floor($diff / 3600) . " horas atrás";
+                    }
+                    if ($diff < 60) {
+                        "há" . $time_ago = $diff . " segundos atrás";
                     }
                     echo Comment(
                         $comment["name"],
@@ -85,6 +146,17 @@ $commets  = $_SESSION["page_data"]["comments"] ?? [];
                 }
                 ?>
             </div>
+            <div class="grid grid-cols-3 items-center mt-4 text-center">
+            <div class="justify-self-start">
+                <?= $buttonPrev ?>
+            </div>
+            <div>
+                <span class="text-slate-400">Página <?= $nextPage ?></span>
+            </div>
+            <div class="justify-self-end">
+                <?= $buttonNext ?>
+            </div>
+        </div>
         </div>
     </div>
 

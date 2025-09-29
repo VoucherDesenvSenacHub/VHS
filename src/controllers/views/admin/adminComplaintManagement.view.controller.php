@@ -21,6 +21,7 @@ class AdminComplaintManagementViewController extends Controller {
 
         $page = $_GET["page"] ?? 0;
         $page = $page > 0 ? $page * 7 : $page;
+        $filterComment = $_GET["comment"] ?? "";
 
         $report_comments = $this->commentModel->getReportComments($page, 7);
         $report_comments = array_slice($report_comments, 0, 7);
