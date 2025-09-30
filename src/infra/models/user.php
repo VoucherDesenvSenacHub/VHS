@@ -111,4 +111,9 @@ class UserModel extends Model {
             ":status" => $status,
         ]);
     }
+
+    public function blockUser(string $id): bool {
+        $sql = "UPDATE users SET status = 0 WHERE id = :id";
+        return $this->database->exec($sql, [":id" => $id]);
+    }
 }

@@ -34,11 +34,25 @@ class AdminComplaintManagementViewController extends Controller {
             $userReported = $this->userModel->getUserById($commentData["user_id"])[0];
             $videoData = $this->videoModel->getVideoById($commentData["video_id"])[0];
 
+            if ($userReported["status"] == 0) {
+                continue;
+            }
+
+            if (isset($filterComment) && $filterComment != "") {
+                if (stripos($commentData["content"], $filterComment) === false) {
+                    continue;
+                }
+            }
+
             $comments[] = [
-                "id" => $report["id"],
+                "reported_user_id" => $userReported["id"],
+                "report_id" => $report["id"],
+                "comment_id" => $report["comment_id"],
+                "user_id" => $report["user_id"],
                 "user_img" => $userReported["avatar_url"],
                 "thumbnail_url" => $videoData["thumbnail_url"],
                 "name" => $userReported["name"],
+                "name_admin" => $userData["name"],
                 "text" => $commentData["content"],
                 "created_at" => $commentData["created_at"]
             ];

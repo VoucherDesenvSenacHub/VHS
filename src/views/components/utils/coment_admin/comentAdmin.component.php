@@ -2,7 +2,7 @@
 
 namespace Src\Views\Components\Utils;
 
-function Comment(string $name, string $text, string $thumbnail_url, string $created_at = null, string $userImg = null): string
+function Comment(string $name, string $text, string $thumbnail_url, string $created_at = null, string $userImg = null, string $reportId, string $commentId, string $reported_user_id, $name_admin): string
 {
     $name = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
     $text = htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
@@ -32,13 +32,30 @@ function Comment(string $name, string $text, string $thumbnail_url, string $crea
                 <div class="mt-2">
                     <ul class="w-full flex gap-3">  
                         <li>
-                            <img src="/VHS/public/icons/comments/dialog.svg" alt="Responder">
+                            <button
+                                class="open-remove flex items-center justify-center text-red-500 hover:bg-red-600/20 rounded"
+                                data-report-id="{$reportId}"
+                                data-name-admin="{$name_admin}">
+                                <img src="/VHS/public/icons/comments/dialog.svg" alt="Remover">
+                            </button>
                         </li>
                         <li>
-                            <img src="/VHS/public/icons/comments/trash.svg" alt="Excluir">
+                            <button 
+                                class="open-delete flex items-center justify-center text-red-500 hover:bg-red-600/20 rounded"
+                                data-report-id="{$reportId}"
+                                data-comment-id="{$commentId}" 
+                                data-name="{$name}">
+                                <img src="/VHS/public/icons/comments/trash.svg" alt="Excluir">
+                            </button>
                         </li>
+
                         <li>
-                            <img src="/VHS/public/icons/comments/user-block.svg" alt="Bloquear usuário">
+                            <button
+                                class="open-block flex items-center justify-center text-red-500 hover:bg-red-600/20 rounded"
+                                data-reported-user-id="{$reported_user_id}"
+                                data-reported-user-name="{$name}">
+                                <img src="/VHS/public/icons/comments/user-block.svg" alt="Bloquear usuário">
+                            </button>
                         </li>
                     </ul>    
                 </div>
