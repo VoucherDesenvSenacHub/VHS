@@ -75,11 +75,11 @@ $categories = $_SESSION["page_data"]["categories"] ?? [];
                 <section class="mb-12">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         <div class="lg:col-span-1">
-                            <?= FeaturedCardComponent($featuredVideos[0]) ?>
+                            <?= count($featuredVideos) == 1 ? FeaturedCardComponent($featuredVideos[0]) : "" ?>
                         </div>
                         
                         <div class="lg:col-span-1">
-                            <?= FeaturedCardComponent($featuredVideos[1]) ?>
+                            <?= count($featuredVideos) == 2 ? FeaturedCardComponent($featuredVideos[1]) : ""?>
                         </div>
                     </div>
                 </section>
