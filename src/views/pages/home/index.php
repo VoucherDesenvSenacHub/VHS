@@ -1,6 +1,4 @@
 <?php
-
-// Requires dos componentes necessários
 require_once __DIR__ . "/../../components/header/headerComponent.php";
 require_once __DIR__ . "/../../components/sidebar/index.php";
 require_once __DIR__ . "/../../components/cards/index.php";
@@ -11,31 +9,16 @@ use function Src\Views\Components\Header\HeaderComponent;
 use function Src\Views\Components\Sidebar\SidebarComponent;
 use function Src\Views\Components\Cards\viewCards;
 use function Views\Components\FeaturedCard\FeaturedCardComponent;
-
-echo "<style>
-    * {
-        color: white;
-    }
-</style>";
-
-// print_r($_SESSION["user"]);
-// print_r($_SESSION["page_data"]["popular_videos"]);
-// print_r($_SESSION["page_data"]["emphasised_videos"]);
-// print_r($_SESSION["page_data"]["categories"]);
-
 use function Src\Application\Utils\showSweetAlert;
 
 $errors = $_SESSION['redirect_data']['errors'] ?? null;
 unset($_SESSION['redirect_data']);
 
-// Mock de dados para a página home
 $featuredVideos = $_SESSION["page_data"]["featured_videos"] ?? [];
 $mostPopularVideos = array_map(function ($video) {
     return $video + ['type_card' => 'video'];
 }, $_SESSION["page_data"]["popular_videos"] ?? []);
 $categories = $_SESSION["page_data"]["categories"] ?? [];
-// TODO: Refatorar renderCards
-
 ?>
 
 

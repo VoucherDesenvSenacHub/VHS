@@ -45,7 +45,7 @@ class UserModel extends Model {
     }
 
     public function getUserByToken(string $token): array {
-        $sql = "SELECT * FROM users WHERE token = :token";
+        $sql = "SELECT id, name, email, username, date_birthday, bio, avatar_url, role, status  FROM users WHERE token = :token AND is_deleted = 0";
 
         return $this->database->query($sql, [":token" => $token]);
     }

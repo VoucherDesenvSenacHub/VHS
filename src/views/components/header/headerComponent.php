@@ -12,7 +12,7 @@ function HeaderComponent() {
     $BarComponent = BarComponent();
     $user = $_SESSION["user"] ?? null;
 
-    $avatar_url = $user['avatar_url'] ?? null;
+    $avatar_url = $user['avatar_url'] ?? '';
     $UserMenu = UserMenu($avatar_url, $user['name'] ?? 'Você', $user['email'] ?? null);
 
     return <<<HTML
