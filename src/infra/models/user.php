@@ -92,12 +92,12 @@ class UserModel extends Model {
     }
 
     public function getUsers(int $offset, int $limit, string $idUser, string $name): array {
-        $sql = "SELECT * FROM users WHERE isDeleted = 0 AND id NOT IN ('$idUser') AND name LIKE :name ORDER BY created_at ASC LIMIT $offset, $limit";
+        $sql = "SELECT * FROM users WHERE is_deleted = 0 AND id NOT IN ('$idUser') AND name LIKE :name ORDER BY created_at ASC LIMIT $offset, $limit";
         return $this->database->query($sql, [":name" => "%$name%"]);
     }
 
     public function deleteUser(string $id): bool {
-        $sql = "UPDATE users SET isDeleted = 1 WHERE id = :id";
+        $sql = "UPDATE users SET is_deleted = 1 WHERE id = :id";
         return $this->database->exec($sql, [":id" => $id]);
     }
 

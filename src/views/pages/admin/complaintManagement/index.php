@@ -7,6 +7,7 @@ require_once __DIR__ . "/../../../components/utils/coment_admin/comentAdmin.comp
 require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
 require_once __DIR__ . "/../../../components/filter/filter.php";
 require_once __DIR__ . "/../../../components/utils/sweetalert.php";
+require_once __DIR__ . "/../../../../application/utils/pagination.php";
 
 use function Src\Views\components\filter\Filter;
 use function Src\Views\Components\Utils\ButtonComponent;
@@ -15,6 +16,7 @@ use function src\views\components\barra_admin\Barra_Admin;
 use function Src\Views\Components\Utils\Comment;
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\Application\Utils\showSweetAlert;
+use function Src\Application\Utils\paginate;
 
 $commets  = $_SESSION["page_data"]["comments"] ?? [];
 $success = $_SESSION["redirect_data"]["success"] ?? null;
@@ -22,58 +24,7 @@ $errors = $_SESSION["redirect_data"]["errors"] ?? null;
 
 unset($_SESSION["redirect_data"]);
 
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 0;
-    if ($page < 1) $page = 0;
-    $prevPage = $page > 1 ? $page - 1 : 0;
-    $nextPage = $page + 1;
-    $buttonNext = '';
-    
-        if (count($commets) == 7) {
-            $_GET['page'] = $nextPage;
-            $buttonNext = <<<HTML
-                <form method="GET" style="display:inline;">
-                    <input type="hidden" name="page" value="{$nextPage}">
-        HTML;
-
-            foreach ($_GET as $key => $value) {
-                if ($key !== 'page') {
-                    $safeKey = htmlspecialchars($key);
-                    $safeVal = htmlspecialchars($value);
-                    $buttonNext .= "<input type='hidden' name='{$safeKey}' value='{$safeVal}'>";
-                }
-            }
-
-            $buttonNext .= <<<HTML
-                    <button type="submit" class="px-4 py-2 rounded-md border border-gray-600 text-gray-300 hover:bg-gray-700">
-                        Próximo
-                    </button>
-                </form>
-            HTML;
-        }
-
-        $buttonPrev = '';
-        if ($page > 0) {
-            $_GET['page'] = $prevPage;
-            $buttonPrev = <<<HTML
-                <form method="GET" style="display:inline;">
-                    <input type="hidden" name="page" value="{$prevPage}">
-        HTML;
-
-            foreach ($_GET as $key => $value) {
-                if ($key !== 'page') {
-                    $safeKey = htmlspecialchars($key);
-                    $safeVal = htmlspecialchars($value);
-                    $buttonPrev .= "<input type='hidden' name='{$safeKey}' value='{$safeVal}'>";
-                }
-            }
-
-            $buttonPrev .= <<<HTML
-                    <button type="submit" class="px-4 py-2 rounded-md border border-gray-600 text-gray-300 hover:bg-gray-700">
-                        Anterior
-                    </button>
-                </form>
-            HTML;
-        }
+$pagination = paginate($commets);
 
 ?>
 
@@ -123,8 +74,11 @@ $page = isset($_GET['page']) ? (int)$_GET['page'] : 0;
             <div class="flex flex-col gap-4">
                 <?php
                 if(empty($commets)) {
-                    echo "Nenhum comentário reportado encontrado";
-                }
+                    echo '
+                    <div class="rounded-lg border border-gray-700 bg-[#1B1B1B] p-6 text-center">
+                        <p class="text-slate-400">Nenhum comentário encontrado.</p>
+                    </div>';
+                    }
                 $tz = new DateTimeZone('America/Campo_Grande');
                 foreach ($commets as $comment) {
                     $created = new DateTime($comment["created_at"], $tz);
@@ -162,17 +116,9 @@ $page = isset($_GET['page']) ? (int)$_GET['page'] : 0;
                 }
                 ?>
             </div>
-            <div class="grid grid-cols-3 items-center mt-4 text-center">
-            <div class="justify-self-start">
-                <?= $buttonPrev ?>
-            </div>
             <div>
-                <span class="text-slate-400">Página <?= $nextPage ?></span>
+                <?= $pagination; ?>
             </div>
-            <div class="justify-self-end">
-                <?= $buttonNext ?>
-            </div>
-        </div>
         </div>
     </div>
 
@@ -245,73 +191,6 @@ $page = isset($_GET['page']) ? (int)$_GET['page'] : 0;
             </div>
         </div>
     </div>
-
-<script>
-    const deleteCommentModal = document.getElementById("deleteCommentModal");
-    const closeDeleteCommentModal = document.getElementById("closeDeleteCommentModal");
-    const deleteReportId = document.getElementById("deleteReportId");
-    const deleteCommentId = document.getElementById("deleteCommentId");
-    const deleteCommentName = document.getElementById("deleteCommentName");
-
-    const blockUserModal = document.getElementById("blockUserModal");
-    const closeBlockUserModal = document.getElementById("closeBlockUserModal");
-    const blockUserId = document.getElementById("blockUserId");
-    const blockUserName = document.getElementById("blockUserName");
-
-    const RemoveReportModal = document.getElementById("RemoveReportModal");
-    const closeRemoveReportModal = document.getElementById("closeRemoveReportModal");
-    const RemoveReportId = document.getElementById("RemoveReportId");
-    const RemoveReportUserName = document.getElementById("RemoveReportUserName");
-
-    document.querySelectorAll(".open-delete").forEach(btn => {
-        btn.addEventListener("click", () => {
-            const report_id = btn.getAttribute("data-report-id");
-            const comment_id = btn.getAttribute("data-comment-id");
-            const name = btn.getAttribute("data-name");
-
-            deleteReportId.value = report_id;
-            deleteCommentId.value = comment_id;
-            deleteCommentName.textContent = name;
-            deleteCommentModal.classList.remove("hidden");
-        });
-    });
-
-    closeDeleteCommentModal.addEventListener("click", () => {
-        deleteCommentModal.classList.add("hidden");
-    });
-
-    document.querySelectorAll(".open-block").forEach(btn => {
-        btn.addEventListener("click", () => {
-            const user_id = btn.getAttribute("data-reported-user-id");
-            const name = btn.getAttribute("data-reported-user-name");
-
-            blockUserId.value = user_id;
-            blockUserName.textContent = name;
-            blockUserModal.classList.remove("hidden");
-        });
-    });
-
-    closeBlockUserModal.addEventListener("click", () => {
-        blockUserModal.classList.add("hidden");
-    });
-
-    document.querySelectorAll(".open-remove").forEach(btn => {
-        btn.addEventListener("click", () => {
-            const report_id = btn.getAttribute("data-report-id");
-            const name = btn.getAttribute("data-name-admin");
-
-            RemoveReportId.value = report_id;
-            RemoveReportUserName.textContent = name;
-            RemoveReportModal.classList.remove("hidden");
-        });
-    });
-
-    closeRemoveReportModal.addEventListener("click", () => {
-        RemoveReportModal.classList.add("hidden");
-    });
-</script>
-
-
+    <script src="/VHS/src/views/pages/admin/complaintManagement/script.js"></script>
 </body>
-
 </html>

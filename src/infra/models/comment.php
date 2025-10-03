@@ -10,7 +10,7 @@ use Src\Application\Core\Model;
 class CommentModel extends Model {
 
     public function getReportComments(int $offset, int $limit) {
-        $sql = "SELECT * FROM report_comments WHERE isDeleted = 0 ORDER BY created_at ASC LIMIT $offset, $limit";
+        $sql = "SELECT * FROM report_comments WHERE is_deleted = 0 ORDER BY created_at ASC LIMIT $offset, $limit";
         return $this->database->query($sql);
     } 
 
@@ -20,12 +20,12 @@ class CommentModel extends Model {
     }
 
     public function deleteComment(string $id) {
-        $sql = "UPDATE comments SET isDeleted = 1 WHERE id = :id";
+        $sql = "UPDATE comments SET is_deleted = 1 WHERE id = :id";
         return $this->database->exec($sql, [":id" => $id]);
     }
 
     public function deleteReportComment( string $id) {
-        $sql = "UPDATE report_comments SET isDeleted = 1 WHERE id = :id";
+        $sql = "UPDATE report_comments SET is_deleted = 1 WHERE id = :id";
         return $this->database->exec($sql, [":id" => $id]);
     }
 }
