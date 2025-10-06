@@ -83,20 +83,18 @@ function SidebarComponent() {
     }
 
     return <<<HTML
-        <aside class="p-7 transition-all border-r border-secondary/10">
-            <h3 class="title text-secondary text-sm mb-6">HOME</h3>
-            <ul class="flex flex-col gap-9">
+        <aside class="h-[91vh] top-16 sticky p-7 transition-all border-r border-secondary/10">
+            <h3 class="title text-secondary text-sm">HOME</h3>
+            <ul class="flex flex-col gap-9 mt-5">
                 $htmlHome
             </ul>
-            
-            <hr class="my-6 border-zinc-700 separator">
-
+            <hr class="my-6 border-b-1 border-secondary/10 separator">
             <h3 class="title text-secondary text-sm my-6">CATEGORIAS</h3>
             <ul class="flex flex-col gap-9">
                 $htmlCategories
             </ul>
-
             <script src="/VHS/src/views/components/sidebar/script.js"></script>
         </aside>
     HTML;
+    
 }
