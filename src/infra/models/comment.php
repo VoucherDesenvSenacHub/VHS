@@ -9,8 +9,8 @@ use Src\Application\Core\Model;
 
 class CommentModel extends Model {
 
-    public function getReportComments(int $offset, int $limit) {
-        $sql = "SELECT * FROM report_comments WHERE is_deleted = 0 ORDER BY created_at ASC LIMIT $offset, $limit";
+    public function getReportComments(int $offset, int $limit, string $ordering) {
+        $sql = "SELECT * FROM report_comments WHERE is_deleted = 0 ORDER BY created_at $ordering LIMIT $offset, $limit";
         return $this->database->query($sql);
     } 
 
