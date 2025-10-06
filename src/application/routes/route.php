@@ -66,9 +66,6 @@ $router->get("/auth/signup", SignUpViewController::class, RedirectUserLoggedMidd
 $router->get("/auth/signup/password", CreatePasswordController::class, RedirectUserLoggedMiddleware::class);
 $router->get("/auth/signup/verify-email", VerifyEmailViewController::class);
 $router->get("/api/v1/auth/signup/verify-email", VerifyEmailController::class);
-$router->get('/studio', StudioController::class, RedirectUserNotCreatorMiddleware::class);
-$router->get('/studio/create/video', StudioVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
-$router->get('/studio/create/fast', StudioFastViewController::class, RedirectUserNotCreatorMiddleware::class);
 
 $router->get("/studio", StudioController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get("/studio/create/video", StudioVideoViewController::class, RedirectUserNotCreatorMiddleware::class);

@@ -6,7 +6,7 @@ function UserMenu(string $avatar_url, string $name, string $email) {
 
     $items = [
         "settings" => [
-            "href" => "/VHS/settings",
+            "href" => "/VHS/user/settings",
             "icon" => "/VHS/public/icons/Settings.svg",
             "title" => "Minha conta",
             "description" => "Gerencia sua conta"
