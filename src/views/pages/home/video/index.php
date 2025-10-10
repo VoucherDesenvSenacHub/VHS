@@ -1,37 +1,24 @@
 <?php 
 
-require "../../../components/header/headerComponent.php";
-require "../../../components/sidebar/index.php";
-require "../../../components/cards/index.php";
-require "../../../components/utils/comments/comentaryComponent.php";
-require "../../../components/starrating/StarRatingComponent.php";
-require "../../../components/shared/shared.php";
+require __DIR__ . "/../../../components/header/headerComponent.php";
+require __DIR__ . "/../../../components/sidebar/index.php";
+require __DIR__ . "/../../../components/cards/index.php";
+require __DIR__ . "/../../../components/utils/comments/comentaryComponent.php";
+require __DIR__ . "/../../../components/starrating/StarRatingComponent.php";
+require __DIR__ . "/../../../components/shared/shared.php";
+require __DIR__ . "/../../../../application/utils/formatViews.php";
 
+use function Src\Application\Utils\formatViews;
 use function Src\Views\Components\Header\HeaderComponent;
 use function Src\Views\Components\Sidebar\SidebarComponent;
 use function Src\Views\Components\Cards\renderCards;
+use function Src\Views\Components\Cards\viewCards;
 use function Src\Views\Components\Utils\Comment;
 use function Src\Views\Components\starrating\StarRatingComponent;
 use function Src\Views\Components\Shared\sharedComponent;
 
-$link = 'https://www.youtube.com/embed/Qjk-cSW-jk4?si=D_1dC9a8td9k1VnJ';
-$title = 'Entendendo Back-End para Iniciantes em Programação (Parte 1) | Série "Começando aos 40';
-$subtitle = 'Este é o 5o episódio da série "Começando aos 40". Você deve assistir os episódios anteriores da série pra entender onde estamos e recomendo assistir os 2 vídeos da série "Sua Linguagem Não É Especial". No episódio de hoje vou começar a introduzir os conceitos básicos para o que chamamos de "back-end", que na prática é a própria introdução à programação.';
-
-$cards = [
-    [
-        "type_card" => "video",
-        "title" => "Como aprender programação do zero e se tornar um excelente desenvolvedor full stack",
-        "duration" => "7 min",
-        "username" => "Rafael Germinari",
-        "thumbnail_url" => "https://t.ctcdn.com.br/69rFkwz-cdviPGZn2p_l6rJH0UA=/1200x675/smart/i533291.png",
-        "avatar_url" => "https://senachub.ms.senac.br/hubinnovation/uploads/fotos/6706850e20f59.jpg",
-        "views" => "53k",
-        "created_at" => "há 2 dias",
-        "url" => "#"
-    ],
-];
-
+$video = $_SESSION["page_data"]["video"];
+$releatedVideos = $_SESSION["page_data"]["releated_videos"];
 ?>
 
 <!DOCTYPE html>
@@ -62,7 +49,7 @@ $cards = [
         <div class="rounded-lg">
           <iframe
             class="w-full md:h-[40rem] rounded-lg"
-            src="<?= $link ?>"
+            src="<?= $video['url'] ?>"
             title="YouTube video player"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -72,34 +59,39 @@ $cards = [
         </div>
         <div class="flex gap-[23rem]">
             <div class="">
-                <h2 class="mt-4 text-xl font-semibold"><?= $title ?></h2>
-                <p class="mt-2 text-sm text-gray-300 whitespace-pre-line"><?= $subtitle ?></p>
-            </div>
+                <h2 class="mt-4 text-xl font-semibold"><?= $video["title"] ?></h2>
+                <p class="mt-2 text-sm text-gray-300 whitespace-pre-line"><?= $video["description"] ?></p>
+                <p class="mt-4"><?= formatViews($video["views"]) ?> Visualizações</p>
+              </div>
             <div class="mt-5 flex">
                 <img class="w-6 h-6 mr-3 cursor-pointer" src="/VHS/public/icons/Share.svg" alt="ShareButton" onclick="openShared()" name="send">
-                <?= sharedComponent('https://www.youtube.com/watch?v=Qjk-cSW-jk4','Sla')?>
+                <?= sharedComponent( $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"], $video["title"])?>
                 <?= StarRatingComponent() ?>
             </div>
         </div>
-  <!-- Parte do canal temporaria até ter o componente para trocar  -->
+
         <a href="/VHS/src/views/pages/home/channel" class="flex items-center mt-10 gap-3">
-          <img src="https://yt3.googleusercontent.com/ytc/AIdro_l9jtAcERHIts0q6LsUtmAGPzQ8p8FzKGAoYRJ1N3Wz3Hs0=s160-c-k-c0x00ffffff-no-rj" alt="Autor" class="w-[67px] h-[68px] rounded-xl">
+          <img src="<?= $video['avatar_url'] ?? "/VHS/public/uploads/avatars/default.png"?>" class="size-16 rounded-xl">
           <div>
-            <p class="text-sm font-bold">Fabio Akita</p>
-            <p class="text-xs text-gray-400">260 mil seguidores</p>
-            <button class="bg-gray-900 text-gray-300 font-bold py-1 px-2 rounded-full hover:bg-gray-800 text-[10px] mt-1">#Tecnologia</button>
+            <p class="text-sm font-bold">
+              <?= $video["username"] ?>
+            </p>
+            <p class="text-xs text-gray-400">
+              <?= $video["followers"] ?? "0 seguidores" ?>
+            </p>
+            <button class="bg-gray-900 text-gray-300 font-bold py-1 px-2 rounded-full hover:bg-gray-800 text-[10px] mt-1">
+              #<?= $video["category_name"] ?>
+            </button>
           </div>
         </a>
       </div>
-  <!-- Parte do canal temporaria até ter o componente certo para trocar  -->
+
       <div class="flex flex-col lg:flex-row gap-6 mt-8">
 
         <div class="w-full lg:flex-[2] rounded-lg">
           <h3 class="text-lg font-semibold mb-4">Recomendados</h3>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <?php for ($i = 0; $i < 6; $i++) {
-              renderCards($cards, 'video');
-            } ?>
+           <?= viewCards($releatedVideos, 'videos'); ?>
           </div>
         </div>
 

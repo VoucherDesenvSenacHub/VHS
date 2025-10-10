@@ -37,6 +37,7 @@ use Src\Application\Controllers\UpdateUserAdminController;
 use Src\Application\Controllers\DeleteCommentsController;
 use Src\Application\Controllers\InactivateUserController;
 use Src\Application\Controllers\DeleteReportCommentsController;
+use Src\Application\Controllers\VideoController;
 
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../../..");
 $dotenv->load();
@@ -79,6 +80,6 @@ $router->get("/admin/categories", AdminCategoriesViewController::class, Redirect
 $router->get("/admin/complaints", AdminComplaintManagementViewController::class, RedirectUserNotAdminMiddleware::class);
 $router->get("/admin/users", AdminUsersViewController::class, RedirectUserNotAdminMiddleware::class);
 
-
+$router->get("/home/video", VideoController::class, RedirectUserNotLoggedMiddleware::class);
 
 $router->run();
