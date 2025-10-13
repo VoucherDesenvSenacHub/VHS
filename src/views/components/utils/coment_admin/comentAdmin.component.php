@@ -1,55 +1,69 @@
 <?php
- 
+
 namespace Src\Views\Components\Utils;
- 
-function Comment(string $name, string $text, string $thumbnail_url, string $created_at = null, string $userImg = null)
+
+function Comment(string $name, string $text, string $thumbnail_url, string $created_at = null, string $userImg = null, string $reportId, string $commentId, string $reported_user_id, $name_admin): string
 {
-    $userImg = $userImg
-        ? "<img src='" . htmlspecialchars($userImg, ENT_QUOTES, 'UTF-8') . "' alt='Imagem de perfil' class='w-full h-full rounded-full mt-1'>"
-        : "<img src='https://png.pngtree.com/png-vector/20220617/ourmid/pngtree-dachshund-dog-animal-care-image-little-vector-png-image_37262910.jpg' alt='Imagem padrão de perfil' class='w-full h-full rounded-full mt-1'>";
- 
     $name = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
- 
     $text = htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
- 
-    $created_at = $created_at ? "<p class='text-xs text-gray-300 font-semibold ml-1'>" . htmlspecialchars($created_at, ENT_QUOTES, 'UTF-8') . "</p>" : "";
- 
-    return (
-        "
-        <div class='w-full flex gap-4 py-2'>
-            <div class='w-14 h-14 rounded-full mt-1 shrink-0'>
-                $userImg
-            </div>
-   
-            <div class='flex flex-col flex-1'>
-                <div class='flex items-baseline'>
-                    <p class='text-lg text-white font-semibold'>$name</p>
-                    $created_at
+    $thumbnail_url = htmlspecialchars($thumbnail_url, ENT_QUOTES, 'UTF-8');
+    $created_at = $created_at ? htmlspecialchars($created_at, ENT_QUOTES, 'UTF-8') : null;
+
+    $createdAtTag = $created_at
+        ? "<p class='text-xs text-gray-300 font-semibold ml-1'>{$created_at}</p>"
+        : "";
+
+    return <<<HTML
+        <div class="w-full flex gap-4 py-2">
+             <div class='flex-shrink-0 w-12 h-12 rounded-full bg-white/10 overflow-hidden'>
+                    <img class='select-none pointer-events-none w-full h-full object-cover' src='/VHS/public/uploads/avatars/{$userImg}' onerror='this.src="/VHS/public/uploads/avatars/default.png"'>
                 </div>
-   
-                <div class='mt-1 text-xs font-semibold text-gray-400 max-w-xl'>
-                    <p>$text</p>
+
+            <div class="flex flex-col flex-1">
+                <div class="flex items-baseline">
+                    <p class="text-lg text-white font-semibold">{$name}</p>
+                    {$createdAtTag}
                 </div>
-               
-                <div class='mt-2'>
-                    <ul class='w-full flex gap-3'>  
+
+                <div class="mt-1 text-xs font-semibold text-gray-400 max-w-xl">
+                    <p>{$text}</p>
+                </div>
+
+                <div class="mt-2">
+                    <ul class="w-full flex gap-3">  
                         <li>
-                            <img src='/VHS/public/icons/comments/dialog.svg'>
+                            <button
+                                class="open-remove flex items-center justify-center text-red-500 hover:bg-red-600/20 rounded"
+                                data-report-id="{$reportId}"
+                                data-name-admin="{$name_admin}">
+                                <img src="/VHS/public/icons/comments/dialog.svg" alt="Remover">
+                            </button>
                         </li>
                         <li>
-                            <img src='/VHS/public/icons/comments/trash.svg'>
+                            <button 
+                                class="open-delete flex items-center justify-center text-red-500 hover:bg-red-600/20 rounded"
+                                data-report-id="{$reportId}"
+                                data-comment-id="{$commentId}" 
+                                data-name="{$name}">
+                                <img src="/VHS/public/icons/comments/trash.svg" alt="Excluir">
+                            </button>
                         </li>
+
                         <li>
-                            <img src='/VHS/public/icons/comments/user-block.svg'>
+                            <button
+                                class="open-block flex items-center justify-center text-red-500 hover:bg-red-600/20 rounded"
+                                data-reported-user-id="{$reported_user_id}"
+                                data-reported-user-name="{$name}">
+                                <img src="/VHS/public/icons/comments/user-block.svg" alt="Bloquear usuário">
+                            </button>
                         </li>
                     </ul>    
                 </div>
+            </div>
 
-                
-                </div>
-                <div> <img class='h-20 rounded-lg' src='$thumbnail_url' alt=''> </div>
+            <div>
+                <img class="h-20 rounded-lg" src="{$thumbnail_url}" alt="Thumbnail do comentário">
+            </div>
         </div>
-        "
-    );
+    HTML;
 }
-
