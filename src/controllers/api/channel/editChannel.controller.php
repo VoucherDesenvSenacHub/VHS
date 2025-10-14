@@ -8,6 +8,8 @@ use Src\Application\Core\Controller;
 use Src\Infra\Model\ChannelModel;
 use function Src\Application\Utils\Redirect\redirect;
 
+require_once __DIR__ . '/../../../application/core/controller.php';
+
 class EditChannelController extends Controller
 {
     protected ChannelModel $channelModel;
@@ -54,8 +56,8 @@ class EditChannelController extends Controller
         } catch (NestedValidationException | Error $exception) {
             return $this->jsonResponse([
                 'success' => false,
-                'message' => $exception instanceof Error 
-                    ? $exception->getMessage() 
+                'message' => $exception instanceof Error
+                    ? $exception->getMessage()
                     : $exception->getFullMessage()
             ], 400);
         }

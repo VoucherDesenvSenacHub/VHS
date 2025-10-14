@@ -48,6 +48,7 @@ $router->post("/api/v1/signup/password", CreateUserController::class, RedirectUs
 $router->post('/api/v1/auth/signup', SignUpController::class);
 $router->post("/api/v1/user/settings", UpdateUserController::class, RedirectUserNotLoggedMiddleware::class);
 $router->post('/api/v1/fast-video', CreateFastVideoController::class, RedirectUserNotCreatorMiddleware::class);
+
 $router->post('/api/v1/channel/edit', EditChannelController::class);
 
 $router->post('/api/v1/user/delete', DeleteUserController::class, RedirectUserNotAdminMiddleware::class);

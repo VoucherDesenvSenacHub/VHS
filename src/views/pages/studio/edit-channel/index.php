@@ -11,10 +11,17 @@ require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/footer.php"
 
 use function Src\Views\Components\Utils\Footer;
 
-// Importando o ButtonComponent
 require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/buttonComponent.php";
 
 use function Src\Views\Components\Utils\ButtonComponent;
+
+require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/inputComponent.php";
+
+use function Src\Views\Components\Utils\InputComponent;
+
+$user = $_SESSION["user"];
+$user["username"] = $user["username"] ?? "Usuário";
+$user["profile_picture"] = $user["profile_picture"] ?? "/VHS/public/images/foto-sem-perfil.jpg"; // Set default profile picture
 ?>
 
 <!DOCTYPE html>
@@ -26,88 +33,135 @@ use function Src\Views\Components\Utils\ButtonComponent;
   <title>Customizar canal</title>
   <link rel="stylesheet" href="/VHS/src/styles/global.css">
   <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Syne:wght@500..800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Syne:wght@500..800&display=stylesheet" />
   <style>
     input,
     textarea {
       color: #ffffff;
     }
+
+    /* 🔹 Header fixo no topo */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 50;
+    }
+
+    /* 🔹 Espaçamento para o conteúdo não ficar por baixo do header */
+    main {
+      margin-top: 100px;
+    }
   </style>
 </head>
 
 <body class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center font-[Poppins]">
+
+  <!-- 🔹 Header fixo -->
   <?php echo HeaderComponent(); ?>
-  <div class="flex">
+
+  <div class="flex mt-24">
     <?php echo StudioSideMenuComponent(); ?>
-    <main class="flex flex-col gap-4 max-w-[1500px] mx-auto">
-      <text class="text-3xl font-bold text-white cursor-default">Customizar canal</text>
+
+    <main class="flex flex-col gap-4 max-w-[1500px] mx-auto px-6">
+      <h1 class="text-3xl font-bold text-white cursor-default">Customizar canal</h1>
+
+      <!-- Form principal -->
       <form id="canalForm" action="#" method="POST" onsubmit="return false;">
+
+        <!-- Foto de perfil -->
         <section class="mb-10 flex flex-col lg:flex-row gap-5">
-          <form action="upload.php" method="POST" enctype="multipart/form-data">
-            <label for="imagemUploadProfile" class="relative group cursor-pointer inline-block w-45 h-45">
-              <img
-                id="profileImage"
-                src="https://media.istockphoto.com/id/1316134499/pt/foto/a-concept-image-of-a-magnifying-glass-on-blue-background-with-a-word-example-zoom-inside-the.jpg?s=612x612&w=0&k=20&c=raTXPP4qnJy_svR1J6dOYeoonbJOWeezfvGd9mAE5vo="
-                alt="Foto de perfil"
-                class="w-45 h-45 rounded-xl object-cover group-hover:brightness-75 transition" />
-              <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
-                <img src="/VHS/public/icons/Download.svg" alt="Download">
-              </div>
-              <input
-                type="file"
-                name="imagem"
-                id="imagemUploadProfile"
-                accept="image/*"
-                class="hidden"
-                required />
-            </label>
-          </form>
+          <label for="imagemUploadProfile" class="border border-gray-600 rounded-md relative group cursor-pointer inline-block w-45 h-45">
+            <img
+              id="profileImage"
+              src="<?php echo htmlspecialchars($user["profile_picture"]); ?>"
+              alt="Foto de perfil"
+              class="w-45 h-45 rounded-xl object-cover group-hover:brightness-75 transition" />
+            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+              <img src="/VHS/public/icons/Download.svg" alt="Download">
+            </div>
+            <input
+              type="file"
+              name="imagemProfile"
+              id="imagemUploadProfile"
+              accept="image/*"
+              class="hidden"
+              required />
+          </label>
           <div class="mt-5">
             <h2 class="text-2xl font-bold text-white cursor-default">Foto de perfil</h2>
-            <p class="text-sm text-gray-300 mb-8">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis, voluptas dicta! Doloremque nemo neque voluptates, officia commodi recusandae adipisci beatae, inventore quod itaque iure quam aliquid deleniti facere optio accusantium.</p>
+            <p class="text-sm text-gray-300 mb-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis, voluptas dicta! Doloremque nemo neque voluptates, officia commodi recusandae.</p>
           </div>
         </section>
+
+        <!-- Banner -->
         <section class="mb-10">
           <h2 class="text-2xl text-base text-white cursor-default mb-2">Banner do canal</h2>
-          <form action="upload.php" method="POST" enctype="multipart/form-data">
-            <label for="imagemUploadBanner" class="relative group cursor-pointer overflow-hidden w-full">
-              <img
-                id="bannerImage"
-                src=""
-                class="h-50 w-full object-cover transition duration-700 rounded-md border border-gray-700" />
-              <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
-                <img src="/VHS/public/icons/Download.svg" alt="Download">
-              </div>
-              <input
-                type="file"
-                name="imagem"
-                id="imagemUploadBanner"
-                accept="image/*"
-                class="hidden"
-                required />
-            </label>
-          </form>
+          <label for="imagemUploadBanner" class="relative group cursor-pointer overflow-hidden w-full">
+            <img
+              id="bannerImage"
+              src=""
+              class="h-50 w-full object-cover transition duration-700 rounded-md border border-gray-600" />
+            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+              <img src="/VHS/public/icons/Download.svg" alt="Download">
+            </div>
+            <input
+              type="file"
+              name="imagemBanner"
+              id="imagemUploadBanner"
+              accept="image/*"
+              class="hidden"
+              required />
+          </label>
         </section>
 
+        <!-- Campos -->
         <div class="flex flex-col">
           <section class="mb-6">
-            <label for="nome" class="text-2xl text-base text-white cursor-default mb-2">Nome do canal</label>
-            <input id="nome" type="text" class="w-full bg-transparent border border-gray-600 text-sm px-4 py-2 rounded-md placeholder-gray-500" placeholder="@Rafael__">
-            <p id="nome-error" class="text-red-500 text-sm mt-1 hidden">Campo obrigatório. Máximo 24 caracteres.</p>
+            <?php
+            echo InputComponent(
+              type: "text",
+              placeholder: "@Rafael__",
+              name: "nome",
+              label: "Nome do canal",
+              label_size: "2xl",
+              width: "full",
+              height: "[45px]",
+              value: $user["username"]
+            );
+            ?>
           </section>
 
           <section class="mb-6">
-            <label for="descricao" class="text-2xl text-base text-white cursor-default mb-2">Descrição</label>
-            <textarea id="descricao" rows="5" class="w-full bg-transparent border border-gray-600 text-sm px-4 py-2 rounded-md placeholder-gray-500" placeholder="Escreva algo sobre o canal..."></textarea>
-            <p id="descricao-error" class="text-red-500 text-sm mt-1 hidden">Campo obrigatório. Máximo 24 caracteres.</p>
+            <?php
+            echo InputComponent(
+              type: "textarea",
+              placeholder: "Escreva algo sobre o canal...",
+              name: "descricao",
+              label: "Descrição",
+              label_size: "2xl",
+              width: "full",
+              height: "auto",
+              className: "min-h-[120px]"
+            );
+            ?>
           </section>
 
           <section class="mb-10">
-            <label for="tags" class="text-2xl text-base text-white cursor-default mb-3">Tags do canal</label>
-            <input id="tags" type="text" class="w-full bg-transparent border border-gray-600 text-sm px-4 py-2 rounded-md placeholder-gray-500" placeholder="#Tecnologia">
-            <p id="tags-error" class="text-red-500 text-sm mt-1 hidden">Campo obrigatório. Máximo 24 caracteres.</p>
+            <?php
+            echo InputComponent(
+              type: "text",
+              placeholder: "#Tecnologia",
+              name: "tags",
+              label: "Tags do canal",
+              label_size: "2xl",
+              width: "full",
+              height: "[45px]"
+            );
+            ?>
           </section>
 
+          <!-- Botões -->
           <div class="flex gap-5 flex-col lg:flex-row self-end">
             <?php
             echo ButtonComponent(
@@ -136,7 +190,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
   <?php echo Footer(); ?>
 
   <script>
-    // Profile image upload handler
+    // Preview imagem perfil
     document.getElementById('imagemUploadProfile').addEventListener('change', function(event) {
       const file = event.target.files[0];
       if (file) {
@@ -148,7 +202,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
       }
     });
 
-    // Banner image upload handler
+    // Preview imagem banner
     document.getElementById('imagemUploadBanner').addEventListener('change', function(event) {
       const file = event.target.files[0];
       if (file) {
@@ -160,6 +214,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
       }
     });
 
+    // Notificação estilizada
     function showNotification(title, subtitle) {
       const existing = document.getElementById("copy-notification");
       if (existing) existing.remove();
@@ -192,40 +247,10 @@ use function Src\Views\Components\Utils\ButtonComponent;
       }, 2000);
     }
 
+    // Ação do botão "Salvar alterações"
     document.getElementById("salvar-btn").addEventListener("click", function(event) {
       event.preventDefault();
-
-      const nome = document.getElementById("nome");
-      const descricao = document.getElementById("descricao");
-      const tags = document.getElementById("tags");
-
-      const nomeError = document.getElementById("nome-error");
-      const descricaoError = document.getElementById("descricao-error");
-      const tagsError = document.getElementById("tags-error");
-
-      let isValid = true;
-      const maxChars = 24;
-
-      function validarCampo(campo, errorElement) {
-        if (campo.value.trim() === "") {
-          errorElement.classList.remove("hidden");
-          return false;
-        } else if (campo.value.trim().length > maxChars) {
-          errorElement.classList.remove("hidden");
-          return false;
-        } else {
-          errorElement.classList.add("hidden");
-          return true;
-        }
-      }
-
-      isValid &= validarCampo(nome, nomeError);
-      isValid &= validarCampo(descricao, descricaoError);
-      isValid &= validarCampo(tags, tagsError);
-
-      if (isValid) {
-        showNotification("Alterações salvas!", "Suas alterações foram salvas com sucesso.");
-      }
+      showNotification("Alterações salvas!", "Suas alterações foram salvas com sucesso.");
     });
   </script>
 </body>

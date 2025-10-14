@@ -13,7 +13,7 @@ class ChannelModel extends Model
     public function findById(string $id): ?array
     {
         $sql = "SELECT * FROM {$this->table} WHERE id = :id LIMIT 1";
-        $result = $this->database->fetch($sql, [":id" => $id]);
+        $result = $this->database->query($sql, [":id" => $id]);
         return $result ?: null;
     }
 
