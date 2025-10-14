@@ -19,6 +19,8 @@ use function Src\Views\Components\Shared\sharedComponent;
 
 $video = $_SESSION["page_data"]["video"];
 $releatedVideos = $_SESSION["page_data"]["releated_videos"];
+$user_avaliation = $_SESSION["page_data"]["user_avaliation"];
+#print_r($video)
 ?>
 
 <!DOCTYPE html>
@@ -30,6 +32,7 @@ $releatedVideos = $_SESSION["page_data"]["releated_videos"];
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/VHS/src/styles/global.css">
   <script type="module" src="/VHS/src/styles/tailwindglobal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="bg-gradient-to-b from-[#20002c] to-black text-white">
 
@@ -66,7 +69,9 @@ $releatedVideos = $_SESSION["page_data"]["releated_videos"];
             <div class="mt-5 flex">
                 <img class="w-6 h-6 mr-3 cursor-pointer" src="/VHS/public/icons/Share.svg" alt="ShareButton" onclick="openShared()" name="send">
                 <?= sharedComponent( $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"], $video["title"])?>
-                <?= StarRatingComponent() ?>
+                <?= StarRatingComponent([
+                  "initial_rating" => $user_avaliation,
+                ]) ?>
             </div>
         </div>
 
@@ -91,7 +96,7 @@ $releatedVideos = $_SESSION["page_data"]["releated_videos"];
         <div class="w-full lg:flex-[2] rounded-lg">
           <h3 class="text-lg font-semibold mb-4">Recomendados</h3>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-           <?= viewCards($releatedVideos, 'videos'); ?>
+          <?= viewCards($releatedVideos, 'videos'); ?>
           </div>
         </div>
 

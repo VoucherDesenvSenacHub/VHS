@@ -45,7 +45,7 @@ class VideoModel extends Model {
     public function getVideoById(string $id): array {
         $sql = "SELECT videos.*, users.username, users.followers,  users.avatar_url, categories.name as category_name FROM videos
         JOIN users ON users.id = videos.author_id
-        JOIN categories ON categories.id = users.category_id
+        JOIN categories ON categories.id = videos.category_id
         WHERE videos.id = :id";
 
         return $this->database->query($sql, [":id" => $id]);

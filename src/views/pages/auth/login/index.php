@@ -16,6 +16,8 @@ if (!empty($errors) && is_array($errors)) {
             $genericError = $error;
         }
     }
+
+    print_r($_SESSION);
 }
 unset($_SESSION['redirect_data']);
 
@@ -60,8 +62,8 @@ use function Src\Views\Components\Utils\ButtonComponent;
                 <?= !empty($genericError) ? "<p id='genericError' class='text-red-500'>Ocorreu um erro interno. Tente novamente mais tarde!</p>" : '' ?>
                 <?= !empty($emailPasswordError) ? "<p id='genericError' class='text-red-500'>Email ou senha incorretos</p>" : '' ?>
                 <a class="text-secondary underline" href="/VHS/src/views/pages/auth/new-password">Esqueceu sua senha? </a>
-                <?= CheckboxComponent("Lembrar de mim", id: "keep_logged_in") ?>
-                <?= ButtonComponent("Acessar Plataforma", "default", className: " g-recaptcha btn-submit mt-4", type: "button", attributes: [
+                <?= CheckboxComponent(label: "Lembrar de mim", id: "keep_logged_in") ?>
+                <?= ButtonComponent(text: "Acessar Plataforma", variant: "default", className: " g-recaptcha btn-submit mt-4", type: "button", attributes: [
                         "data-sitekey" => "6LeZE6MrAAAAAFW6zL9HUPU8eJ616uwPWu92db9a",
                         "data-callback" => "onSubmit",
                         "data-action" => 'submit',
@@ -76,7 +78,7 @@ use function Src\Views\Components\Utils\ButtonComponent;
               </div>
           </form>
               <div class="text-black">
-                <?= ButtonComponent("Entrar pelo Google", "icon", "/VHS/public/images/LogoGoogle.svg", link: "/VHS/src/views/pages/home") ?>
+                <?= ButtonComponent(text: "Entrar pelo Google", variant: "icon", icon: "/VHS/public/images/LogoGoogle.svg", link: "/VHS/src/views/pages/home") ?>
               </div>
               <div class="flex gap-0.5 items-center justify-center">
                 <p class="text-secondary cursor-default">Ainda não tem uma conta?</p>

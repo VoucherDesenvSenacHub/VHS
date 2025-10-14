@@ -44,3 +44,14 @@ body {
     animation: hidden_smooth 0.15s ease-in;
     animation-fill-mode: forwards;
 }
+
+.swal-custom {
+    background: #1E1E1E !important;
+    color: #fff !important;
+    border-radius: 12px !important;
+    padding: 15px 20px !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4) !important;
+    font-family: 'Inter', sans-serif !important;
+    border-bottom: 3px solid !important;
+    border-color: #7b08d3 !important;
+}
