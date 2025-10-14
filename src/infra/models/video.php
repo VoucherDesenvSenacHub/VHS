@@ -36,6 +36,12 @@ class VideoModel extends Model {
 
         return $this->database->query($sql, [":category_id" => $categoryId]);
     }
+
+    public function getVideoById(string $id): array {
+        $sql = "SELECT * FROM videos WHERE id = :id";
+
+        return $this->database->query($sql, [":id" => $id]);
+    }
     // public function GetAllVideos($filter){
     //     switch ($filter) {
     //         case 'videos':

@@ -45,7 +45,7 @@ class UserModel extends Model {
     }
 
     public function getUserByToken(string $token): array {
-        $sql = "SELECT * FROM users WHERE token = :token";
+        $sql = "SELECT id, name, email, username, date_birthday, bio, avatar_url, role, status  FROM users WHERE token = :token AND is_deleted = 0";
 
         return $this->database->query($sql, [":token" => $token]);
     }
@@ -91,18 +91,13 @@ class UserModel extends Model {
         return $this->database->query($sql, [":id" => $id]);    
     }
 
-    public function getUsers(int $offset, int $limit, string $idUser): array {
-        $sql = "SELECT * FROM users WHERE isDeleted = 0 AND id NOT IN ('$idUser') ORDER BY created_at ASC LIMIT $offset, $limit";
-        return $this->database->query($sql);
-    }
-
-    public function getUsersByName(int $offset, int $limit, string $idUser, string $name): array {
-        $sql = "SELECT * FROM users WHERE isDeleted = 0 AND id NOT IN ('$idUser') AND name LIKE :name ORDER BY created_at ASC LIMIT $offset, $limit";
+    public function getUsers(int $offset, int $limit, string $idUser, string $name, string $ordering): array {
+        $sql = "SELECT * FROM users WHERE is_deleted = 0 AND id NOT IN ('$idUser') AND name LIKE :name ORDER BY created_at $ordering LIMIT $offset, $limit";
         return $this->database->query($sql, [":name" => "%$name%"]);
     }
 
     public function deleteUser(string $id): bool {
-        $sql = "UPDATE users SET isDeleted = 1 WHERE id = :id";
+        $sql = "UPDATE users SET is_deleted = 1 WHERE id = :id";
         return $this->database->exec($sql, [":id" => $id]);
     }
 
@@ -115,5 +110,10 @@ class UserModel extends Model {
             ":role" => $role,
             ":status" => $status,
         ]);
+    }
+
+    public function blockUser(string $id): bool {
+        $sql = "UPDATE users SET status = 0 WHERE id = :id";
+        return $this->database->exec($sql, [":id" => $id]);
     }
 }

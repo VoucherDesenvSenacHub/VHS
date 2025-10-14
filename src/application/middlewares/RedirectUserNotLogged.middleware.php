@@ -21,6 +21,11 @@ class RedirectUserNotLoggedMiddleware {
         if(!isset($_COOKIE["token"])) {
             http_response_code(401);
             return redirect("/VHS/auth/signin");
-        }   
+        }
+        $userModel = new UserModel();
+
+        $token = $_COOKIE["token"];
+        $user = $userModel->getUserByToken($token);
+        $_SESSION["user"] = $user[0];
     }
 }
