@@ -1,13 +1,14 @@
 <?php
 
 require __DIR__ . "/../../../components/header/headerComponent.php";
-require __DIR__ . "/../../../components/sidebar/SidebarComponent.php";
+require __DIR__ . "/../../../components/sidebar/index.php";
 require __DIR__ . "/../../../components/cards/index.php";
 require __DIR__ . "/../../../components/featuredCard/featuredCardComponent.php";
 
 use function Src\Views\Components\Header\HeaderComponent;
 use function Src\Views\Components\Sidebar\SidebarComponent;
 use function Src\Views\Components\Cards\renderCards;
+use function Src\Views\Components\Cards\viewCards;
 use function Views\Components\FeaturedCard\FeaturedCardComponent;
 
 $videos = $_SESSION["page_data"]["videos"] ?? [];
@@ -57,7 +58,7 @@ $category = $_SESSION["page_data"]["category"] ?? "Não encontrado!";
                 </section>
                 <section class="mb-12">
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                            <?= renderCards(array_slice($videos, 1), 'video'); ?>
+                            <?= viewCards(array_slice($videos, 1), 'video'); ?>
                     </div>
                 </section>
                 <section>

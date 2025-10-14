@@ -18,14 +18,14 @@ use function Src\Application\Utils\Redirect\redirect;
 
 class RedirectUserNotLoggedMiddleware {
     public function execute() {
-        if(!isset($_COOKIE["token"]) && !isset($_SESSION["token"])) {
+        if(!isset($_COOKIE["token"])) {
+            http_response_code(401);
             return redirect("/VHS/auth/signin");
         }
-        else{
-            $token = $_COOKIE["token"] ?? $_SESSION["token"];
-            $userModel = new UserModel();
-            $user = $userModel->getUserByToken($token);
-            $_SESSION["user"] = $user[0];
-        }
+        $userModel = new UserModel();
+
+        $token = $_COOKIE["token"];
+        $user = $userModel->getUserByToken($token);
+        $_SESSION["user"] = $user[0];
     }
 }

@@ -3,12 +3,12 @@ $history = $_SESSION["page_data"]["history"] ?? [];
 $page = $_SESSION["page_data"]["page"] ?? 1;
 $total_pages = $_SESSION["page_data"]["total_pages"] ?? 1;
 
-require_once __DIR__ . "/../../../components/header/headerComponent.php";
-require_once __DIR__ . "/../../../components/sidebar/SidebarComponent.php";
-require_once __DIR__ . "/../../../components/cards/index.php";
-require_once __DIR__ . "/../../../components/featuredCard/featuredCardComponent.php";
-require_once __DIR__ . "/../../../components/utils/inputComponent.php";
-require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
+require "../../../components/header/headerComponent.php";
+require "../../../components/sidebar/index.php";
+require "../../../components/cards/index.php";
+require "../../../components/featuredCard/featuredCardComponent.php";
+require_once "../../../components/utils/inputComponent.php";
+require_once "../../../components/utils/buttonComponent.php";
 
 use function Src\Views\Components\Header\HeaderComponent;
 use function Src\Views\Components\Sidebar\SidebarComponent;

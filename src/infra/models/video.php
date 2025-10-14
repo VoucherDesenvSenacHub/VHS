@@ -39,15 +39,21 @@ class VideoModel extends Model {
     }
   
     public function getPopularVideos(int $offset = 0, int $limit = 7): array {
-        $sql = "SELECT videos.id, url, title, description, duration, target_audience, views, type, thumbnail_url, videos.created_at, videos.update_at, username, avatar_url FROM videos INNER JOIN users ON videos.author_id = users.id WHERE type = 'VIDEO' ORDER BY views DESC LIMIT $offset, $limit";
+        $sql = "SELECT videos.id, url, title, description, duration, views, thumbnail_url, videos.created_at, videos.update_at, username, avatar_url FROM videos INNER JOIN users ON videos.author_id = users.id ORDER BY views DESC LIMIT $offset, $limit";
 
         return $this->database->query($sql);
     }
 
     public function getVideosByCategory(string $categoryId, int $offset = 0, int $limit = 4): array {
-        $sql = "SELECT videos.id, url, title, description, duration, target_audience, views, type, thumbnail_url, videos.created_at, videos.update_at, username, avatar_url FROM videos INNER JOIN users ON videos.author_id = users.id WHERE type = 'VIDEO' AND category_id = :category_id ORDER BY created_at ASC LIMIT $offset, $limit";
+        $sql = "SELECT videos.id, url, title, description, duration, views, thumbnail_url, videos.created_at, videos.update_at, username, avatar_url FROM videos INNER JOIN users ON videos.author_id = users.id WHERE category_id = :category_id ORDER BY created_at ASC LIMIT $offset, $limit";
 
         return $this->database->query($sql, [":category_id" => $categoryId]);
+    }
+
+    public function getVideoById(string $id): array {
+        $sql = "SELECT * FROM videos WHERE id = :id";
+
+        return $this->database->query($sql, [":id" => $id]);
     }
     // public function GetAllVideos($filter){
     //     switch ($filter) {
@@ -64,7 +70,5 @@ class VideoModel extends Model {
     //             break;
     //     }
     // }
-
-
 }
 

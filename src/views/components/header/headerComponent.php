@@ -3,33 +3,33 @@
 namespace Src\Views\Components\Header;
 
 require_once __DIR__ . '/../utils/barComponent.php';
-use function Src\Views\Components\Utils\BarComponent;
-
 require_once __DIR__ . '/../utils/userMenu.php';
+
+use function Src\Views\Components\Utils\BarComponent;
 use function Src\Views\Components\Utils\UserMenu;
 
 function HeaderComponent() {
-
-    $user = $_SESSION["user"] ?? null;
-    $avatar_url = htmlspecialchars(!empty($user['avatar_url']) ? $user['avatar_url'] : '/VHS/public/icons/user.svg', ENT_QUOTES, 'UTF-8');
-
     $BarComponent = BarComponent();
-    echo UserMenu($avatar_url, $user['name'] ?? 'Você', $user['email'] ?? null);
+    $user = $_SESSION["user"] ?? null;
+
+    $avatar_url = $user['avatar_url'] ?? '';
+    $UserMenu = UserMenu($avatar_url, $user['name'] ?? 'Você', $user['email'] ?? null);
 
     return <<<HTML
-        <header id='header' class='bg-gradient-to-b from-[#000000] to-[#20002c] w-full h-18 flex items-center justify-between p-6 sticky top-0 z-20'>  
+        <header id='header' class='backdrop-blur-lg border-b border-secondary/10 w-full h-20 flex items-center justify-between px-6 sticky top-0 z-20'>  
             <div class='flex items-center gap-6'>
                 $BarComponent
-                <a href="/VHS/src/views/pages/home">
-                    <img src='/VHS/public/logos/Logo.svg' class='w-auto h-8 pointer-events-none select-none'>
+                <a href="/VHS/home">
+                    <img src='/VHS/public/logos/logo.svg' class='w-auto h-8 pointer-events-none select-none'>
                 </a>
             </div>
 
             <div class='flex items-center gap-4'>
                 <div class='flex flex-warp relative'>
-                    <button id='search' class='p-2 rounded-full transition-all duration-200 hover:bg-white/10'>
-                        <img src='/VHS/public/icons/lupa.svg' class='h-4 pointer-events-none'>
+                    <button id='search' class='p-2 rounded-full transition-all duration-200 hover:bg-white/10 active:bg-transparent'>
+                        <img src='/VHS/public/icons/lupa.svg' class='w-5 h-5 pointer-events-none'>
                     </button>
+
                     <div id='search-bar' class='absolute hidden right-14 bg-black/90 rounded-lg w-64 shadow-lg transform translate-x-full opacity-0 transition-all duration-300 ease-in-out'>
                         <form action="/VHS/src/views/pages/home/search?term=&filter=video" method="GET">
                             <input 
@@ -42,14 +42,15 @@ function HeaderComponent() {
                     </div>
                 </div>
 
-                <img src='/VHS/public/icons/Rectangle.svg'>
+                <img src='/VHS/public/icons/rectangle.svg'>
                 
                 <button id='open-user-menu' class='overflow-hidden rounded-full'>
-                    <img src="$avatar_url" class='h-8 w-8 pointer-events-none'>
+                    <img src="/VHS/public/uploads/avatars/{$avatar_url}" onerror='this.src="/VHS/public/uploads/avatars/default.png"' class='h-9 w-9 pointer-events-none'>
                 </button>
             </div>
         </header>
 
+        $UserMenu
         <script src='/VHS/src/views/components/header/headerScript.js'></script>
     HTML;
 }

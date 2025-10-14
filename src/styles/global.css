@@ -4,22 +4,26 @@
     font-family: "Poppins", sans-serif;
 }
 
+input, textarea {
+    cursor: text !important;
+}
+
 body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background: linear-gradient(to top, #000, #20002c);
+    background-color: #14001B;
     background-repeat: no-repeat;
     background-size: cover;
     min-height: 100vh;
 }
 
-a.active {
+.icon.active {
     background-color: #7b08d3;
-}
-
-a.active > img {
-    filter: invert(99%) sepia(100%) saturate(0%) hue-rotate(173deg) brightness(110%) contrast(101%);    
+} .icon.active.active > img {
+    filter: invert(100%) brightness(150%) contrast(150%);    
+} .icon.active + .menu-text {
+    color: white;
 }
 
 @keyframes smooth {

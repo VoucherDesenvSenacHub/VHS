@@ -15,18 +15,16 @@ use function Src\Application\Utils\Redirect\redirect;
 
 class RedirectUserLoggedMiddleware {
     public function execute() {
-        unset($_SESSION["token"]);
+        if(!isset($_COOKIE["token"])) return;
+        
+        $userModel = new UserModel();
 
-        if(isset($_COOKIE["token"])) {
-            $token = $_COOKIE["token"];
-            
-            $userModel = new UserModel();
-            $user = $userModel->getUserByToken($token);
+        $token = $_COOKIE["token"];
+        $user = $userModel->getUserByToken($token);
 
-            if(!empty($user)) {
-                $_SESSION["user"] = $user[0];
-                return redirect("/VHS/home");
-            }
-        }
+        if(!empty($user)) {
+            http_response_code(403);
+            return redirect("/VHS/home");
+        } 
     }
 }
