@@ -1,5 +1,7 @@
 <?php
 $history = $_SESSION["page_data"]["history"] ?? [];
+$page = $_SESSION["page_data"]["page"] ?? 1;
+$total_pages = $_SESSION["page_data"]["total_pages"] ?? 1;
 
 require_once __DIR__ . "/../../../components/header/headerComponent.php";
 require_once __DIR__ . "/../../../components/sidebar/SidebarComponent.php";
@@ -24,11 +26,12 @@ $filter = isset($_GET['filter']) ? htmlspecialchars($_GET['filter']) : 'videos';
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VHS - Home</title>
+  <title>VHS - Histórico</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/VHS/src/styles/global.css">
   <script type="module" src="/VHS/src/styles/tailwindglobal.js"></script>
   <script src="/VHS/src/views/pages/home/history/script.js" defer></script>
+
   <style>
     .line-clamp-2 {
       display: -webkit-box;
@@ -39,7 +42,8 @@ $filter = isset($_GET['filter']) ? htmlspecialchars($_GET['filter']) : 'videos';
     }
   </style>
 </head>
-<body>
+
+<body class="bg-gray-900 text-white">
   <div>
     <?= HeaderComponent() ?>
   </div>
@@ -55,6 +59,7 @@ $filter = isset($_GET['filter']) ? htmlspecialchars($_GET['filter']) : 'videos';
           <h2 class="text-2xl font-bold text-white mb-2">
             <span class="text-purple-400">#</span> Histórico
           </h2>
+
           <p class="text-gray-400 text-sm mb-6">
             Confira os vídeos que você já assistiu!
           </p>
@@ -66,7 +71,7 @@ $filter = isset($_GET['filter']) ? htmlspecialchars($_GET['filter']) : 'videos';
           </div>
 
           <div class="relative">
-            <ul class="flex flex-col gap-3 bg-gray600 p-2 pr-4 filter-menu absolute z-10 top-16 hidden rounded-xl border border-white/20">
+            <ul class="flex flex-col gap-3 bg-gray-700 p-2 pr-4 filter-menu absolute z-10 top-16 hidden rounded-xl border border-white/20">
               <li class="text-white font-medium flex text-base gap-2 items-center ml-1 cursor-pointer">
                 <img src="/VHS/public/icons/clock.svg" class="w-5 h-5" />
                 <p>Mais recentes</p>
@@ -82,25 +87,39 @@ $filter = isset($_GET['filter']) ? htmlspecialchars($_GET['filter']) : 'videos';
 
           <br>
 
-          <?php foreach ($history as $date => $items): ?>
+          <?php if (!empty($history)): ?>
+            <?php foreach ($history as $date => $items): ?>
+              <div class="mb-8">
+                <h3 class="text-secondary text-xl font-medium mb-4">
+                  # <?= $date ?>
+                </h3>
 
-            <div class="mb-8">
-
-              <h3 class="text-secondary text-xl font-medium mb-4">
-
-                # <?= $date ?>
-
-              </h3>
-
-              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-
-                <?= viewCards($items, $filter) ?>
-
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                  <?= viewCards($items, $filter) ?>
+                </div>
               </div>
-              
-            </div>
+            <?php endforeach; ?>
+          <?php else: ?>
+            <p class="text-gray-400 mt-8 text-center">Nenhum item encontrado.</p>
+          <?php endif; ?>
 
-          <?php endforeach; ?>
+          <?php if (!empty($total_pages) && $total_pages > 1): ?>
+            <div class="flex justify-center items-center gap-2 mt-10">
+              <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                <?php if ($i === $page): ?>
+                  <span class="px-4 py-2 bg-purple-600 text-white font-semibold rounded-lg shadow-md">
+                    <?= $i ?>
+                  </span>
+                <?php else: ?>
+                  <a href="?filter=<?= $filter ?>&page=<?= $i ?>"
+                     class="px-4 py-2 bg-purple-800/40 text-white rounded-lg hover:bg-purple-600 transition shadow-sm">
+                     <?= $i ?>
+                  </a>
+                <?php endif; ?>
+              <?php endfor; ?>
+            </div>
+          <?php endif; ?>
+
         </section>
       </div>
     </main>

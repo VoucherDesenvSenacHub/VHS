@@ -27,15 +27,15 @@ class UserHistoryModel extends Model {
         $sql = "SELECT uh.*
                 FROM users_history uh
                 INNER JOIN (
-                    SELECT video_id, MAX(video_created_at) AS last_view
+                    SELECT video_id, MAX(history_created_at) AS last_view
                     FROM users_history
                     WHERE user_id = :user_id
                     GROUP BY video_id
                 ) latest 
                 ON uh.video_id = latest.video_id 
-                AND uh.video_created_at = latest.last_view
+                AND uh.history_created_at = latest.last_view
                 WHERE uh.user_id = :user_id
-                ORDER BY uh.video_created_at DESC";
+                ORDER BY uh.history_created_at DESC";
     
         return $this->database->query($sql, [":user_id" => $user_id]);
     }
