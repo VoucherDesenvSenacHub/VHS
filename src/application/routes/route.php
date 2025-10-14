@@ -6,10 +6,8 @@ require_once __DIR__ . '/../../../vendor/autoload.php';
 
 use Dotenv\Dotenv;
 use Src\Application\Routes\Router;
-use Src\Application\Controllers\OiController;
 use Src\Application\Controllers\CategoriesViewController;
-use Src\Application\Controllers\ContentVideoEditViewController;
-use Src\Application\Controllers\ContentVideoViewController;
+use Src\Application\Controllers\StudioContentVideoViewController;
 use Src\Application\Controllers\CreateUserController;
 use Src\Application\Controllers\SignUpController;
 use Src\Application\Controllers\SignUpViewController;
@@ -21,14 +19,14 @@ use Src\Application\Middlewares\RedirectUserLoggedMiddleware;
 use Src\Application\Controllers\SignInController;
 use Src\Application\Controllers\UpdateUserController;
 use Src\Application\Controllers\VideoController;
-use Src\Application\Controllers\VideoViewController;
+use Src\Application\Controllers\StudioCreateVideoViewController;
 use Src\Application\Controllers\VerifyEmailViewController;
 use Src\Application\Controllers\CreateFastVideoController;
 use Src\Application\Controllers\VideoUpdateController;
 use Src\Application\Middlewares\RedirectUserNotLoggedMiddleware;
 use Src\Application\Controllers\StudioController;
 use Src\Application\Controllers\StudioFastViewController;
-use Src\Application\Controllers\StudioVideoViewController;
+use Src\Application\Controllers\StudioUpdateVideoViewController;
 use Src\Application\Middlewares\RedirectUserNotCreatorMiddleware;
 use Src\Application\Controllers\SignInViewController;
 use Src\Application\Controllers\ViewEventsController;
@@ -70,9 +68,8 @@ $router->get('/home', HomeController::class);
 $router->get('/home', HomeController::class, RedirectUserNotLoggedMiddleware::class);
 $router->get('/home/categories', CategoriesViewController::class, RedirectUserNotLoggedMiddleware::class);
 
-$router->get('/create/video', VideoViewController::class);
-$router->get('/content/video', ContentVideoViewController::class);
-$router->get('/content/video/edit', ContentVideoEditViewController::class);
+$router->get('/content/video', StudioContentVideoViewController::class);
+$router->get('/content/video/edit', StudioUpdateVideoViewController::class);
 
 $router->get('/auth/signin', SignInViewController::class, RedirectUserLoggedMiddleware::class);
 $router->get("/auth/signup", SignUpViewController::class, RedirectUserLoggedMiddleware::class);
@@ -81,8 +78,8 @@ $router->get("/auth/signup/verify-email", VerifyEmailViewController::class);
 $router->get("/api/v1/auth/signup/verify-email", VerifyEmailController::class);
 
 $router->get("/studio", StudioController::class, RedirectUserNotCreatorMiddleware::class);
-$router->get("/studio/create/video", StudioVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
-$router->get("/studio/create/fast", StudioFastViewController::class, RedirectUserNotCreatorMiddleware::class);
+$router->get("/studio/create/video", StudioCreateVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
+$router->get("/studio/create/fast",StudioFastViewController::class, RedirectUserNotCreatorMiddleware::class);
 
 $router->get("/user/settings", UserSettingsViewController::class, RedirectUserNotLoggedMiddleware::class);
 $router->get("/home/events", ViewEventsController::class, RedirectUserNotLoggedMiddleware::class);

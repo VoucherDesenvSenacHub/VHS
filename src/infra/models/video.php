@@ -13,7 +13,7 @@ class VideoModel extends Model
     public function create(string $url, string $title, string $description = '', string $category_id, string $author_id, string $thumbnail_url)
     {
 
-        $sql = "INSERT INTO videos(id, url, title, description, author_id, category_id, type ,thumbnail_url) VALUES(:id, :url, :title, :description, :author_id, :category_id, :type ,:thumbnail_url)";
+        $sql = "INSERT INTO videos(id, url, title, description, author_id, category_id, thumbnail_url) VALUES(:id, :url, :title, :description, :author_id, :category_id, :thumbnail_url)";
 
         $id = uniqid();
 
@@ -24,7 +24,6 @@ class VideoModel extends Model
             ":description" => $description,
             ":author_id" => $author_id,
             ":category_id" => $category_id,
-            ":type" => "VIDEO",
             ":thumbnail_url" => $thumbnail_url
         ]);
 
@@ -44,6 +43,14 @@ class VideoModel extends Model
         ]);
 
         return $stmt;
+    }
+
+    public function delete($id){
+        
+        $sql = "UPDATE videos SET is_deleted = 1 WHERE id = :id";
+
+        return $this->database->query($sql, [":id" => $id]);
+         
     }
 
     public function getVideoByTitle(string $query): array
@@ -74,12 +81,7 @@ class VideoModel extends Model
 
         return $this->database->query($sql, [":category_id" => $categoryId]);
     }
-
-    public function getVideoById(string $id): array {
-        $sql = "SELECT * FROM videos WHERE id = :id";
-
-        return $this->database->query($sql, [":id" => $id]);
-    }
+    
     // public function GetAllVideos($filter){
     //     switch ($filter) {
     //         case 'videos':
@@ -104,12 +106,12 @@ class VideoModel extends Model
     }
 
     public function getAllVideos(){
-        $sql = "SELECT * FROM videos WHERE type = 'VIDEO'";
+        $sql = "SELECT * FROM videos WHERE is_deleted = 0";
 
         return $this->database->query($sql);
     }
 
-    public function getVideoByID($id){
+    public function getVideoByID(string $id): array{
         $sql = "SELECT * FROM videos WHERE id = :id";
 
         $stmt = $this->database->query($sql, [":id" => $id]);

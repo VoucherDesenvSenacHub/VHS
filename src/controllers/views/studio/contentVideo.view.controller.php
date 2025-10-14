@@ -8,7 +8,7 @@ use Src\Infra\Model\VideoModel;
 require_once __DIR__ . '/../../../application/core/controller.php';
 require_once __DIR__ . '/../../../infra/models/video.php';
 
-class ContentVideoViewController extends Controller
+class StudioContentVideoViewController extends Controller
 {
     public VideoModel $videoModel;
 

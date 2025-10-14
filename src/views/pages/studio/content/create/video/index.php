@@ -65,9 +65,6 @@ $botoes = [
                     <?php echo ButtonComponent("Fast", "studio", "", 10.675, 2.5, "", "/VHS/create/fast"); ?>
                     <?php echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5, "", "/VHS/create/event"); ?>
                 </div>
-                <pre>
-                    <?php var_dump($errors, $fields, $modal); ?>
-                </pre>
 
                 <form action="/VHS/api/v1/studio/create/video" enctype="multipart/form-data" method="post">
                     <div id="URL">
@@ -84,32 +81,39 @@ $botoes = [
                         ?>
                     </div>
 
-                    <div id="thumb">
-                        <h1 class="text-subtitle text-white font-semibold mt-4">Thumbnail</h1>
-                        <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-                        <div class="mt-2 bg-background w-full h-full md:h-[500px] border-2 rounded-xl border-solid flex items-center justify-center relative overflow-hidden -mt-8 flex-wrap">
-                            <div id="uploadArea" class="flex flex-col items-center justify-center w-full h-full">
-                                <label for="dropzone-file"
-                                    class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                    <div id="thumb" class="flex flex-col gap-2">
+                        <div>
+                            <h1 class="text-subtitle text-white font-semibold mt-4">Thumbnail</h1>
+                            <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
+                            <div class="mt-2 bg-background w-full h-full md:h-[500px] border-2 rounded-xl border-solid flex items-center justify-center relative overflow-hidden -mt-8 flex-wrap">
+                                <div id="uploadArea" class="flex flex-col items-center justify-center w-full h-full">
+                                    <label for="dropzone-file"
+                                        class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
 
-                                    <div id="preview" class="hidden w-full h-full">
-                                        <img id="thumbnailPreview" class="object-cover w-full h-full rounded-lg" alt="Preview" />
-                                    </div>
+                                        <div id="preview" class="hidden w-full h-full">
+                                            <img id="thumbnailPreview" class="object-cover w-full h-full rounded-lg" alt="Preview" />
+                                        </div>
 
-                                    <div id="uploadText" class="flex flex-col items-center justify-center pt-5 pb-6">
-                                        <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="none" viewBox="0 0 20 16">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                                        </svg>
-                                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> ou arraste e solte</p>
-                                        <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, JPEG</p>
-                                    </div>
-                                </label>
-                                <input id="dropzone-file" type="file" class="hidden" accept="image/png, image/jpg, image/jpeg" name="thumbnail" />
+                                        <div id="uploadText" class="flex flex-col items-center justify-center pt-5 pb-6">
+                                            <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="none" viewBox="0 0 20 16">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                            </svg>
+                                            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Clique para dar upload</span> ou arraste e solte</p>
+                                            <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, JPEG</p>
+                                        </div>
+                                    </label>
+                                    <input id="dropzone-file" type="file" class="hidden" accept="image/png, image/jpg, image/jpeg" name="thumbnail" />
+                                </div>
                             </div>
-
                         </div>
+                        <?php if (!empty($errors["thumbnail_url"])): ?>
+                            <span class="text-red-500 font-medium">
+                                <?= $errors["thumbnail_url"] ?>
+                            </span>
+                        <?php endif; ?>
                     </div>
+                    
                     <div id="Title">
                         <h1 class="text-3xl text-white font-semibold mt-4">Título</h1>
                         <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
@@ -123,6 +127,7 @@ $botoes = [
                         )
                         ?>
                     </div>
+                    
                     <div id="Description">
                         <h1 class="text-3xl text-white font-semibold mt-4">Descrição</h1>
                         <p class="text-paragraph text-gray-400 p-0 mb-2">
@@ -140,32 +145,28 @@ $botoes = [
                         </div>
                     </div>
 
-                    <div id="Category">
-                        <h1 class="text-3xl text-white font-semibold mt-4">Categoria</h1>
-                        <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-                        <!-- Exibe o erro de categoria, se existir -->
+                    <div id="Category" class="flex flex-col gap-2">
+                        <div>
+                            <h1 class="text-3xl text-white font-semibold mt-4">Categoria</h1>
+                            <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
+                            <select name="category_id"
+                                class="px-3 py-1.5 outline outline-1 outline-[#666666] rounded-md placeholder-[#666666] text-zinc-200 w-full h-[45px] bg-transparent">
+                                <option value="" <?= empty($fields['category_id']) ? 'selected' : null ?> class="text-black">
+                                    Selecione uma categoria
+                                </option>
+                                <?php foreach ($categories as $categoria): ?>
+                                    <option value="<?= $categoria['id'] ?>" class="text-black"
+                                        <?= (isset($fields['category_id']) && $fields['category_id'] == $categoria['id']) ? 'selected' : '' ?>>
+                                        <?= htmlspecialchars($categoria['name']) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
                         <?php if (!empty($errors["category_id"])): ?>
-                            <span class="text-red-500 text-sm">
+                            <span class="text-red-500 font-medium">
                                 <?= $errors["category_id"] ?>
                             </span>
                         <?php endif; ?>
-
-                        <!-- Campo select -->
-                        <select name="category_id"
-                            class="px-3 py-1.5 outline outline-1 outline-[#666666] rounded-md placeholder-[#666666] text-zinc-200 w-full h-[45px] bg-transparent">
-                            <option disabled value=""
-                                <?= empty($fields['category_id']) ? 'selected' : null ?>>
-                                Selecione uma categoria
-                            </option>
-
-                            <?php foreach ($categories as $categoria): ?>
-                                <option value="<?= $categoria['id'] ?>" class="text-black"
-                                    <?= (isset($fields['category_id']) && $fields['category_id'] == $categoria['id']) ? 'selected' : '' ?>>
-                                    <?= htmlspecialchars($categoria['name']) ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-
                     </div>
 
                     <div class="flex flex-col sm:flex-row justify-center items-end gap-10 my-6">
@@ -195,8 +196,8 @@ $botoes = [
                             const uploadText = document.getElementById('uploadText');
 
                             previewImg.src = e.target.result;
-                            previewDiv.classList.remove('hidden'); // mostra preview
-                            uploadText.classList.add('hidden'); // esconde texto
+                            previewDiv.classList.remove('hidden');
+                            uploadText.classList.add('hidden');
                         };
 
                         reader.readAsDataURL(file);

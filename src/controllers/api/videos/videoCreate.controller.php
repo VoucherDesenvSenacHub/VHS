@@ -14,8 +14,9 @@ use Error;
 use function Src\Application\Utils\Redirect\redirect;
 use function Src\Application\Utils\UploadImages;
 
-class VideoController extends Controller {
-    
+class VideoController extends Controller
+{
+
     public VideoModel $videoModel;
 
     public function index()
@@ -24,7 +25,7 @@ class VideoController extends Controller {
             $this->videoModel = $this->model("video");
 
             $user = $_SESSION["user"];
-            
+
             $imgPath = UploadImages("thumbnail", $user["name"]);
 
             $data = array_merge($_POST, [
@@ -38,7 +39,7 @@ class VideoController extends Controller {
                 ->key('description', v::stringType())
                 ->key('author_id', v::stringType()->setTemplate("Autor inválido!"))
                 ->key('category_id', v::stringType()->notEmpty()->setTemplate("Categoria é obrigatória!"))
-                ->key('thumbnail_url', v::stringType()->setTemplate("Thumbnail é obrigatória!"));
+                ->key('thumbnail_url', v::stringType()->setTemplate("Thumbnail é obrigatório!"));
 
             $schema->assert($data);
 
@@ -46,10 +47,6 @@ class VideoController extends Controller {
 
             if (empty($data["thumbnail_url"])) {
                 $errors["thumbnail"] = "Thumbnail não enviada!";
-            }
-
-            if (empty($data["category_id"])) {
-                $errors["category_id"] = "Categoria é obrigatória!";
             }
 
             if (count($errors) > 0) {
@@ -66,10 +63,9 @@ class VideoController extends Controller {
                 $data["thumbnail_url"]
             );
 
-            redirect("/VHS/create/video", [
+            redirect("/VHS/studio/create/video", [
                 "success" => true
             ]);
-
         } catch (NestedValidationException | Error $exception) {
             if ($exception instanceof Error) {
                 return redirect("/VHS/create/video", [
@@ -78,7 +74,7 @@ class VideoController extends Controller {
                 ]);
             }
 
-            redirect("/VHS/create/video", [
+            redirect("/VHS/studio/create/video", [
                 "errors" => $exception->getMessages(),
                 "fields" => $_POST
             ]);
