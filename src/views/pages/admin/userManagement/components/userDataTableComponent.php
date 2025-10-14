@@ -1,11 +1,22 @@
 <?php
-
 namespace src\views\components\userDataTableComponent;
+
 use DateTime;
 
+require_once __DIR__ . '/../../../../../application/utils/pagination.php';
+use function Src\Application\Utils\paginate;
+
 function userDataTableComponent($users)
-{
+{   
+    if (empty($users)) {
+        return <<<HTML
+            <div class="rounded-lg border border-gray-700 bg-[#1B1B1B] p-6 text-center">
+                <p class="text-slate-400">Nenhum usuário encontrado.</p>
+            </div>
+        HTML;
+    }
     $rows = '';
+    $pagination = paginate($users);
 
     foreach ($users as $user) {
         $initials = strtoupper(substr($user['name'], 0, 1) . substr(strrchr($user['name'], ' '), 1, 1));
@@ -73,61 +84,6 @@ function userDataTableComponent($users)
         HTML;
     }
 
-    $page = isset($_GET['page']) ? (int)$_GET['page'] : 0;
-    if ($page < 1) $page = 0;
-    $prevPage = $page > 1 ? $page - 1 : 0;
-    $nextPage = $page + 1;
-    $buttonNext = '';
-    
-        if (count($users) == 7) {
-            $_GET['page'] = $nextPage;
-            $buttonNext = <<<HTML
-                <form method="GET" style="display:inline;">
-                    <input type="hidden" name="page" value="{$nextPage}">
-        HTML;
-
-            foreach ($_GET as $key => $value) {
-                if ($key !== 'page') {
-                    $safeKey = htmlspecialchars($key);
-                    $safeVal = htmlspecialchars($value);
-                    $buttonNext .= "<input type='hidden' name='{$safeKey}' value='{$safeVal}'>";
-                }
-            }
-
-            $buttonNext .= <<<HTML
-                    <button type="submit" class="px-4 py-2 rounded-md border border-gray-600 text-gray-300 hover:bg-gray-700">
-                        Próximo
-                    </button>
-                </form>
-            HTML;
-        }
-
-        $buttonPrev = '';
-        if ($page > 0) {
-            $_GET['page'] = $prevPage;
-            $buttonPrev = <<<HTML
-                <form method="GET" style="display:inline;">
-                    <input type="hidden" name="page" value="{$prevPage}">
-        HTML;
-
-            foreach ($_GET as $key => $value) {
-                if ($key !== 'page') {
-                    $safeKey = htmlspecialchars($key);
-                    $safeVal = htmlspecialchars($value);
-                    $buttonPrev .= "<input type='hidden' name='{$safeKey}' value='{$safeVal}'>";
-                }
-            }
-
-            $buttonPrev .= <<<HTML
-                    <button type="submit" class="px-4 py-2 rounded-md border border-gray-600 text-gray-300 hover:bg-gray-700">
-                        Anterior
-                    </button>
-                </form>
-            HTML;
-        }
-
-    
-
     return <<<HTML
         <script src="https://cdn.tailwindcss.com"></script>
         <div class="overflow-hidden rounded-lg border border-gray-700 bg-[#1B1B1B] backdrop-blur-sm">
@@ -149,17 +105,7 @@ function userDataTableComponent($users)
             </div>
         </div>
 
-        <div class="grid grid-cols-3 items-center mt-4 text-center">
-            <div class="justify-self-start">
-                {$buttonPrev}
-            </div>
-            <div>
-                <span class="text-slate-400">Página {$nextPage}</span>
-            </div>
-            <div class="justify-self-end">
-                {$buttonNext}
-            </div>
-        </div>
+        {$pagination}
 
         <div id="deleteModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50">
             <div class="bg-[#1B1B1B] border border-gray-700 rounded-lg p-6 w-full max-w-md">
@@ -226,56 +172,6 @@ function userDataTableComponent($users)
                 </form>
             </div>
         </div>
-
-        <script>
-            const modal = document.getElementById("deleteModal");
-            const closeBtn = document.getElementById("closeDeleteModal");
-            const userIdInput = document.getElementById("deleteUserId");
-            const userNameSpan = document.getElementById("deleteUserName");
-
-            document.querySelectorAll(".open-delete").forEach(btn => {
-                btn.addEventListener("click", () => {
-                    const id = btn.getAttribute("data-id");
-                    const name = btn.getAttribute("data-name");
-
-                    userIdInput.value = id;
-                    userNameSpan.textContent = name;
-                    modal.classList.remove("hidden");
-                });
-            });
-
-            closeBtn.addEventListener("click", () => {
-                modal.classList.add("hidden");
-            });
-
-
-            const editModal = document.getElementById("editModal");
-            const closeEditBtn = document.getElementById("closeEditModal");
-
-            const editUserId = document.getElementById("editUserId");
-            const editName = document.getElementById("editName");
-            const editRole = document.getElementById("editRole");
-            const editStatus = document.getElementById("editStatus");
-
-            document.querySelectorAll(".open-edit").forEach(btn => {
-                btn.addEventListener("click", () => {
-                    const id = btn.getAttribute("data-id");
-                    const name = btn.getAttribute("data-name");
-                    const role = btn.getAttribute("data-role");
-                    const status = btn.getAttribute("data-status");
-
-                    editUserId.value = id;
-                    editName.value = name;
-                    editRole.value = role;
-                    editStatus.value = status;
-
-                    editModal.classList.remove("hidden");
-                });
-            });
-
-            closeEditBtn.addEventListener("click", () => {
-                editModal.classList.add("hidden");
-            });
-        </script>
+        <script src="/VHS/src/views/pages/admin/userManagement/components/script.js"></script>
     HTML;
 }
