@@ -60,7 +60,7 @@ class VideoUpdateController extends Controller
                 $data["thumbnail_url"]
             );
 
-            redirect("/VHS/content/video", [
+            redirect("/VHS/studio/content/video", [
                 "success" => true
             ]);
         } catch (NestedValidationException $exception) {

@@ -15,7 +15,10 @@ class StudioContentVideoViewController extends Controller
     public function index()
     {
         $this->videoModel = new VideoModel();
-        $videos = $this->videoModel->getAllVideos();
+
+        $author_id = $_SESSION["user"]["id"];
+
+        $videos = $this->videoModel->getAllVideos($author_id);
 
         $this->view("/studio/content/index", [
             "videos" => $videos

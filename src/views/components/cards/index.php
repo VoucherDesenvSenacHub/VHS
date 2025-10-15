@@ -10,7 +10,8 @@ use function Src\Application\Utils\Purify\purifyDuration;
 use function Src\Application\Utils\Purify\purifyCreatedAt;
 use function Src\Application\Utils\Purify\purifyDateTime;
 
-function viewCards(array $cards, string $type) {
+function viewCards(array $cards, string $type)
+{
     $html = '';
 
     foreach ($cards as $card) {
@@ -24,20 +25,29 @@ function viewCards(array $cards, string $type) {
     return $html;
 }
 
-class Cards {
+class Cards
+{
 
-    public static function Renderer(array $card, string $type) {
+    public static function Renderer(array $card, string $type)
+    {
         switch ($type) {
-            case 'videos'   : return self::Video($card);
-            case 'events'   : return self::Event($card);
-            case 'mychannel': return self::MyChannel($card);
-            case 'channels' : return self::Channels($card);
-            case 'fasts'    : return self::Fast($card);
-            default         : return "<h1 class='text-white/50'>Esse card não existe...</h1>";;
+            case 'videos':
+                return self::Video($card);
+            case 'events':
+                return self::Event($card);
+            case 'mychannel':
+                return self::MyChannel($card);
+            case 'channels':
+                return self::Channels($card);
+            case 'fasts':
+                return self::Fast($card);
+            default:
+                return "<h1 class='text-white/50'>Esse card não existe...</h1>";;
         }
     }
 
-    private static function Video(array $card) {
+    private static function Video(array $card)
+    {
         $url        = purifyProperty($card['url']);
         $views      = purifyNumbers($card['views']);
         $thumb_url  = purifyProperty($card['thumbnail_url']);
@@ -46,7 +56,7 @@ class Cards {
         $title      = purifyProperty($card['title']);
         $duration   = purifyDuration($card['duration']);
         $created_at  = purifyCreatedAt($card['created_at']);
-        
+
         return <<<HTML
             <a href='$url' class='card flex flex-col relative max-w-[310px] h-[310px] 2xl:max-w-[340px] 2xl:h-[340px] bg-gray600 rounded-3xl overflow-hidden shadow-lg transition-all duration-200 border-2 border-gray600 active:scale-[98%]'>
                 <div class='relative w-full h-[50%] bg-white/5'>
@@ -89,7 +99,8 @@ class Cards {
         HTML;
     }
 
-    private static function Event(array $card) {
+    private static function Event(array $card)
+    {
         $url        = purifyProperty($card['url']);
         $name       = purifyProperty($card['name']);
         $thumb_url  = purifyProperty($card['thumbnail_url']);
@@ -127,26 +138,25 @@ class Cards {
         HTML;
     }
 
-    private static function MyChannel(array $card): string {
-        $id       = purifyProperty($card['id']);
-        $url        = purifyProperty($card['url']);
+    private static function MyChannel(array $card): string
+    {
+        $id = purifyProperty($card['id']);
         $thumbnail_url  = purifyProperty($card['thumbnail_url']);
         $title      = purifyProperty($card['title']);
-        // $comments   = purifyNumbers($card['comments']);
-        // $likes      = purifyNumbers($card['likes']);
-        $views      = purifyNumbers($card['views']) ?? null;
+        $comments   = purifyNumbers($card['comments']);
         $created_at = purifyCreatedAt($card['created_at']);
         $duration   = purifyDuration($card['duration']);
 
         return <<<HTML
-            <a href='/VHS/content/video/edit?id=$id' class='card flex flex-col cursor-pointer max-w-[340px] h-[340px] bg-[#1B1B1B] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
-                <div class='relative w-full h-[50%]'>
-                    <img src='$thumbnail_url' class='w-full h-full object-cover'>
-                    
-                    <div class='absolute top-3 right-3 bg-black bg-opacity-70 text-white text-caption px-2 py-1 rounded-md'>
-                        <p class='text-white text-paragraph'>$duration</p>
+            <div class="card flex flex-col max-w-[340px] h-[360px] bg-[#1B1B1B] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                <a href='/VHS/studio/content/video/analytic?id=$id' class='cursor-pointer'>
+                    <div class='relative w-full h-full'>
+                        <img src='$thumbnail_url' class='w-full h-full object-cover'>
+                        <div class='absolute top-3 right-3 bg-black bg-opacity-70 text-white text-caption px-2 py-1 rounded-md'>
+                            <p class='text-white text-paragraph'>$duration</p>
+                        </div>
                     </div>
-                </div>
+                </a>
 
                 <div class='p-4 text-white flex flex-col justify-between flex gap-2 h-[50%]'>
                     <p class='text-[#808191] text-paragraph'>$created_at</p>
@@ -167,8 +177,7 @@ class Cards {
                             <div>
                                 <img src='/VHS/public/icons/comments-card.svg' class='w-full h-full'>
                             </div>
-
-
+                            <p class='truncate text-white/50 text-paragraph'>$comments</p>
                         </div>
 
                         <div class='flex gap-2 items-center'>
@@ -182,16 +191,23 @@ class Cards {
                             <div>
                                 <img src='/VHS/public/icons/views-card.svg' class='w-full h-full'>
                             </div>
+                        </div>
 
-                            <p class='text-white/50 text-paragraph'>$views</p>
+                        <div id='options'>
+                            <img src="/VHS/public/icons/fastIcon/3botao.svg" alt="" class='w-ful h-full'>
                         </div>
                     </div>
                 </div>
-            </a>
+                <div class='hidden' id=''>
+                        <a href="/VHS/studio/content/video/edit?id=$id">Editar Vídeo</a>
+                        <a href="/VHS/studio/content/video/">Remover Vídeo</a>
+                </div>
+            </div>
         HTML;
     }
 
-    private static function Channels(array $card) {
+    private static function Channels(array $card)
+    {
         $url       = purifyProperty($card['url']);
         $thumb_url = purifyProperty($card['thumbnail_url']);
         $name      = purifyProperty($card['name']);
@@ -230,7 +246,8 @@ class Cards {
         HTML;
     }
 
-    private static function Fast(array $card) {
+    private static function Fast(array $card)
+    {
         $url       = purifyProperty($card['url']);
         $thumb_url = purifyProperty($card['thumbnail_url']);
         $title     = purifyProperty($card['title']);
@@ -264,5 +281,4 @@ class Cards {
             <script src='/VHS/src/views/components/CardFastComponent/cardFast.js' defer></script>
         HTML;
     }
-    
 }

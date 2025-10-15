@@ -68,9 +68,6 @@ $router->get('/home', HomeController::class);
 $router->get('/home', HomeController::class, RedirectUserNotLoggedMiddleware::class);
 $router->get('/home/categories', CategoriesViewController::class, RedirectUserNotLoggedMiddleware::class);
 
-$router->get('/content/video', StudioContentVideoViewController::class);
-$router->get('/content/video/edit', StudioUpdateVideoViewController::class);
-
 $router->get('/auth/signin', SignInViewController::class, RedirectUserLoggedMiddleware::class);
 $router->get("/auth/signup", SignUpViewController::class, RedirectUserLoggedMiddleware::class);
 $router->get("/auth/signup/password", CreatePasswordController::class, RedirectUserLoggedMiddleware::class);
@@ -80,6 +77,8 @@ $router->get("/api/v1/auth/signup/verify-email", VerifyEmailController::class);
 $router->get("/studio", StudioController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get("/studio/create/video", StudioCreateVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get("/studio/create/fast",StudioFastViewController::class, RedirectUserNotCreatorMiddleware::class);
+$router->get('/studio/content/video', StudioContentVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
+$router->get('/studio/content/video/edit', StudioUpdateVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
 
 $router->get("/user/settings", UserSettingsViewController::class, RedirectUserNotLoggedMiddleware::class);
 $router->get("/home/events", ViewEventsController::class, RedirectUserNotLoggedMiddleware::class);
