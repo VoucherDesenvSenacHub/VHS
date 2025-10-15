@@ -9,12 +9,16 @@ async function rating() {
     })
 
     const formData = new FormData();
-    formData.append("stars", stars);
+    formData.append("stars", currentRating);
+    formData.append("videoId", location.href.split("?id=")[1]);
 
-    await fetch("/api/v1/rating", {
+    const res = await fetch("/VHS/api/v1/json/video/rating", {
         method: "POST",
-        body: formData
+        body: formData,
+        withCredentials: 'include'
     });
+    
+    console.log(await res.ok);
     
     Swal.fire({
         toast: true,

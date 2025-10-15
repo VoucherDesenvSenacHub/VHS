@@ -20,6 +20,7 @@ use function Src\Views\Components\Shared\sharedComponent;
 $video = $_SESSION["page_data"]["video"];
 $releatedVideos = $_SESSION["page_data"]["releated_videos"];
 $user_avaliation = $_SESSION["page_data"]["user_avaliation"];
+  
 #print_r($video)
 ?>
 

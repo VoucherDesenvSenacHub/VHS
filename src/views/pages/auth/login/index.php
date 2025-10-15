@@ -17,7 +17,6 @@ if (!empty($errors) && is_array($errors)) {
         }
     }
 
-    print_r($_SESSION);
 }
 unset($_SESSION['redirect_data']);
 

@@ -11,14 +11,14 @@ class AvaliationModel extends Model {
         SQL;
 
         return $this->database->query($sql, [
-            ":user_id" => $videoId,
-            ":video_id" => $userId,
+            ":user_id" => $userId,
+            ":video_id" => $videoId,
         ]);
     }
 
     public function addAvaliation(int $stars, string $videoId, string $userId) {
         $sql = <<<SQL
-            INSERT INTO videos_avaliations(id, stars, user_id, video_id) VALUE (:id, :stars, :video_id, :user_id)
+            INSERT INTO videos_avaliations(id, stars, user_id, video_id) VALUE (:id, :stars, :user_id, :video_id)
         SQL;
 
         return $this->database->query($sql, [
@@ -26,6 +26,18 @@ class AvaliationModel extends Model {
             ":stars"=> $stars,
             ":video_id"=> $videoId,
             ":user_id"=> $userId,
+        ]);
+    }
+
+    public function updateAvaliation(int $stars, string $videoId, string $userId) {
+        $sql = <<<SQL
+            UPDATE videos_avaliations SET stars = :stars WHERE video_id = :video_id AND user_id = :user_id
+        SQL;
+
+        return $this->database->query($sql, [
+            ":video_id" => $videoId,
+            ":user_id" => $userId,
+            ":stars"=> $stars,
         ]);
     }
 }

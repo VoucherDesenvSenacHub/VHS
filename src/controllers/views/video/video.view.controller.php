@@ -30,14 +30,14 @@ class VideoController extends Controller {
         $this->videoModel->incrementViewCount($_GET["id"]);
 
         $userAvaliation = $this->avaliationModel->getAvaliation(
-            $_SESSION["user"]["id"],
             $video["id"],
+            $_SESSION["user"]["id"]
         );
 
         $stars = 0;
-        
+
         if(!empty($userAvaliation)) {
-            $userAvaliation = $userAvaliation[0]["stars"];
+            $stars = $userAvaliation[0]["stars"];
         }
 
         $this->view("/home/video/index", [

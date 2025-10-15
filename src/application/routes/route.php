@@ -37,6 +37,7 @@ use Src\Application\Controllers\UpdateUserAdminController;
 use Src\Application\Controllers\DeleteCommentsController;
 use Src\Application\Controllers\InactivateUserController;
 use Src\Application\Controllers\DeleteReportCommentsController;
+use Src\Application\Controllers\VideoAvaliationController;
 use Src\Application\Controllers\VideoController;
 
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../../..");
@@ -57,7 +58,7 @@ $router->post('/api/v1/user/update', UpdateUserAdminController::class, RedirectU
 $router->post('/api/v1/comments/delete', DeleteCommentsController::class, RedirectUserNotAdminMiddleware::class);
 $router->post('/api/v1/users/block', inactivateUserController::class, RedirectUserNotAdminMiddleware::class);
 $router->post('/api/v1/comments/report/remove', DeleteReportCommentsController::class, RedirectUserNotAdminMiddleware::class);
-
+$router->post("/api/v1/json/video/rating", VideoAvaliationController::class);
 # Views Routes
 
 $router->get('/home', HomeController::class, RedirectUserNotLoggedMiddleware::class);
