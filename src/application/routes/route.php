@@ -32,6 +32,7 @@ use Src\Application\Controllers\AdminAnalyticsViewController;
 use Src\Application\Controllers\AdminCategoriesViewController;
 use Src\Application\Controllers\AdminComplaintManagementViewController;
 use Src\Application\Controllers\AdminUsersViewController;
+use Src\Application\Controllers\CreateCommentController;
 use Src\Application\Controllers\DeleteUserController;
 use Src\Application\Controllers\UpdateUserAdminController;
 use Src\Application\Controllers\DeleteCommentsController;
@@ -55,6 +56,7 @@ $router->post('/api/v1/fast-video', CreateFastVideoController::class, RedirectUs
 $router->post('/api/v1/user/delete', DeleteUserController::class, RedirectUserNotAdminMiddleware::class);
 $router->post('/api/v1/user/update', UpdateUserAdminController::class, RedirectUserNotAdminMiddleware::class);
 
+$router->post("/api/v1/comment", CreateCommentController::class, RedirectUserNotLoggedMiddleware::class);
 $router->post('/api/v1/comments/delete', DeleteCommentsController::class, RedirectUserNotAdminMiddleware::class);
 $router->post('/api/v1/users/block', inactivateUserController::class, RedirectUserNotAdminMiddleware::class);
 $router->post('/api/v1/comments/report/remove', DeleteReportCommentsController::class, RedirectUserNotAdminMiddleware::class);

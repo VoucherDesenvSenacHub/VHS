@@ -7,8 +7,12 @@ require __DIR__ . "/../../../components/utils/comments/comentaryComponent.php";
 require __DIR__ . "/../../../components/starrating/StarRatingComponent.php";
 require __DIR__ . "/../../../components/shared/shared.php";
 require __DIR__ . "/../../../../application/utils/formatViews.php";
+require __DIR__ . "/../../../../application/utils/pagination.php";
+require __DIR__ . "/../../../components/utils/inputComponent.php";
+require __DIR__ . "/../../../components/utils/buttonComponent.php";
 
 use function Src\Application\Utils\formatViews;
+use function Src\Application\Utils\paginate;
 use function Src\Views\Components\Header\HeaderComponent;
 use function Src\Views\Components\Sidebar\SidebarComponent;
 use function Src\Views\Components\Cards\renderCards;
@@ -16,10 +20,14 @@ use function Src\Views\Components\Cards\viewCards;
 use function Src\Views\Components\Utils\Comment;
 use function Src\Views\Components\starrating\StarRatingComponent;
 use function Src\Views\Components\Shared\sharedComponent;
+use function Src\Views\Components\Utils\ButtonComponent;
+use function Src\Views\Components\Utils\InputComponent;
 
 $video = $_SESSION["page_data"]["video"];
 $releatedVideos = $_SESSION["page_data"]["releated_videos"];
 $user_avaliation = $_SESSION["page_data"]["user_avaliation"];
+$comments = $_SESSION["page_data"]["comments"];
+$totalComments = $_SESSION["page_data"]["total_comments"];
   
 #print_r($video)
 ?>
@@ -101,11 +109,20 @@ $user_avaliation = $_SESSION["page_data"]["user_avaliation"];
           </div>
         </div>
 
-        <div class="w-full lg:flex-1 bg-[#1B1B1B] p-4 rounded-lg mt-10">
-          <h3 class="text-lg font-semibold mb-4">11 Comentários</h3>
-          <?php for ($i = 0; $i < 11; $i++) {
-            echo Comment('João da Silva', 'Comentário de exemplo para layout.', 'Há 5 Dias', 'https://img.freepik.com/vetores-gratis/circulo-azul-com-usuario-branco_78370-4707.jpg?semt=ais_items_boosted&w=740');
-          } ?>
+        <div id="comments" class="max-w-lg w-full lg:flex-1 bg-[#1B1B1B] p-4 rounded-lg mt-10 flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl font-semibold mb-4"><?=$totalComments?> Comentários</h3>
+            <?php 
+              foreach($comments as $comment) {
+              # print_r($comment);
+                echo Comment($comment["username"], $comment["content"], $comment["created_at"], $comment["avatar_url"]);
+              }
+            ?>
+          </div>
+          <form action="/VHS/api/v1/comment?videoId=<?=$_GET["id"]?>" method="post">
+            <?= InputComponent(type: "text", placeholder: "Comentar...", name: "content") ?>
+          </form>
+          <?= paginate($comments) ?>
         </div>
 
       </div>

@@ -33,7 +33,7 @@ class VideoModel extends Model {
     public function getPopularVideos(int $offset = 0, int $limit = 7): array {
         $sql = "SELECT videos.id, url, title, description, duration, views, thumbnail_url, videos.created_at, videos.update_at, username, avatar_url FROM videos INNER JOIN users ON videos.author_id = users.id ORDER BY views DESC LIMIT $offset, $limit";
 
-        return $this->database->query($sql);
+    return $this->database->query($sql);
     }
 
     public function getVideosByCategory(string $categoryId, int $offset = 0, int $limit = 4): array {
