@@ -11,7 +11,7 @@ function ModalComponent(string $title, string $description)
     return <<<HTML
         <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div class="border border-white rounded-xl shadow-lg p-6 w-[400px] text-white">
-                <h2 class="text-xl font-bold mb-2">$title</h2>
+                <h2 class="text-xl font-bold mb-2 text-center">$title</h2>
                 <p class="mb-4">$description</p>
                 <div class="flex justify-end gap-4">
     HTML

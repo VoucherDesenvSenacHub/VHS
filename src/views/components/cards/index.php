@@ -3,12 +3,14 @@
 namespace Src\Views\Components\Cards;
 
 require_once __DIR__ . "/../../../application/utils/purify/index.php";
+require __DIR__ . "/../modal/removeVideo.component.php";
 
 use function Src\Application\Utils\Purify\purifyProperty;
 use function Src\Application\Utils\Purify\purifyNumbers;
 use function Src\Application\Utils\Purify\purifyDuration;
 use function Src\Application\Utils\Purify\purifyCreatedAt;
 use function Src\Application\Utils\Purify\purifyDateTime;
+use function Src\Views\Components\Modal\RemoveVideoComponent;
 
 function viewCards(array $cards, string $type)
 {
@@ -146,6 +148,12 @@ class Cards
         $comments   = purifyNumbers($card['comments']);
         $created_at = purifyCreatedAt($card['created_at']);
         $duration   = purifyDuration($card['duration']);
+        
+        $modalVideoRemove = RemoveVideoComponent(
+            'Remover Vídeo',
+            'Tem certeza que deseja excluir o vídeo?',
+            $id
+        );
 
         return <<<HTML
             <div class="card flex flex-col max-w-[340px] h-[360px] bg-[#1B1B1B] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
@@ -158,7 +166,7 @@ class Cards
                     </div>
                 </a>
 
-                <div class='p-4 text-white flex flex-col justify-between flex gap-2 h-[50%]'>
+                <div class='relative p-4 text-white flex flex-col justify-between flex gap-2 h-[50%]'>
                     <p class='text-[#808191] text-paragraph'>$created_at</p>
 
                     <h3 class='text-subtitle leading-tight break-words overflow-hidden line-clamp-3'
@@ -193,14 +201,23 @@ class Cards
                             </div>
                         </div>
 
-                        <div id='options'>
+                        <div class='cursor-pointer video_options'>
                             <img src="/VHS/public/icons/fastIcon/3botao.svg" alt="" class='w-ful h-full'>
                         </div>
                     </div>
+                    <div class='w-[70%] h-[50%] absolute flex flex-col z-10 bg-[#666] p-3 text-white gap-3 bottom-9 right-5 rounded-lg hidden options'>
+                        <a href="/VHS/studio/content/video/edit?id=$id" class='flex gap-2'>
+                            <img src="/VHS/public/icons/pencill.svg" alt="">
+                            Editar Vídeo
+                        </a>
+                        <div class='flex gap-2 cursor-pointer remove_video'>
+                            <img src="/VHS/public/icons/trash.svg" alt="" class='fill-black'>
+                            Remover Vídeo
+                        </div>
+                    </div>
                 </div>
-                <div class='hidden' id=''>
-                        <a href="/VHS/studio/content/video/edit?id=$id">Editar Vídeo</a>
-                        <a href="/VHS/studio/content/video/">Remover Vídeo</a>
+                <div class='hidden modal_remove_video'>
+                    $modalVideoRemove
                 </div>
             </div>
         HTML;

@@ -170,7 +170,7 @@ $botoes = [
                     </div>
 
                     <div class="flex flex-col sm:flex-row justify-center items-end gap-10 my-6">
-                        <?= ButtonComponent(text: "Cancelar", variant: "outline", id: "cancel-button", width: 27.5, link: "/home") ?>
+                        <?= ButtonComponent(text: "Cancelar", type: "button", variant: "outline", id: "cancel-button", width: 27.5, link: "/home") ?>
                         <?= ButtonComponent(text: "Salvar Alterações", variant: "default", id: "publish-button", width: 27.5) ?>
                     </div>
                 </form>

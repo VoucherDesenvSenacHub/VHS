@@ -72,6 +72,7 @@ $conteudos = []
                 <form action="/VHS/api/v1/studio/content/video/edit" enctype="multipart/form-data" method="post">
                     <input type="hidden" name="id" value="<?= htmlspecialchars($video["id"]) ?>">
                     <input type="hidden" name="old_thumbnail" value="<?= htmlspecialchars($video["thumbnail_url"]) ?>">
+                    
                     <div class="w-full h-full md:h-[400px] border-2 rounded-xl border-solid flex items-center justify-center relative overflow-hidden -mt-8 flex-wrap">
                         <div id="uploadArea" class="flex flex-col items-center justify-center w-full h-full">
                             <label for="dropzone-file"
@@ -94,11 +95,13 @@ $conteudos = []
                             </label>
                         </div>
                     </div>
+                    
                     <div id="Title">
                         <h1 class="text-3xl text-white font-semibold mt-4">Título</h1>
                         <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
                         <?= InputComponent(type: "text", placeholder: "Tudo sobre o Next.js 15, nova arquitetura de pasta", value: $video["title"], name: "title") ?>
                     </div>
+                    
                     <div id="Description">
                         <h1 class="text-3xl text-white font-semibold mt-4">Descrição</h1>
                         <p class="text-paragraph text-gray-400 p-0 mb-2">
@@ -114,11 +117,6 @@ $conteudos = []
                             ) ?>
                         </div>
                     </div>
-                    <!-- <div id="Public">
-                            <h1 class="text-3xl text-white font-semibold mt-4">Público</h1>
-                            <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-                            <?= InputComponent(type: "text", placeholder: "Estudante de Nível Técnico de tecnologia, Entusiasta em foguetes") ?>
-                        </div> -->
 
                     <div id="Category">
                         <h1 class="text-3xl text-white font-semibold mt-4">Categoria</h1>
@@ -133,7 +131,6 @@ $conteudos = []
                             <?php endforeach; ?>
                         </select>
                     </div>
-
 
                     <div class="flex justify-center items-end gap-10 my-6">
                         <?= ButtonComponent(text: "Cancelar", variant: "outline", id: "cancel-button", width: 27.5, link: "/home") ?>

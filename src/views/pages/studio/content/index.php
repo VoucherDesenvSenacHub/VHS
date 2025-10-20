@@ -44,11 +44,11 @@ $videos = $_SESSION["page_data"]["videos"];
             </div>
             <div class="flex gap-4 w-96 my-4">
                 <?php
-                    echo ButtonComponent("Videos", "studio", "", 10.675, 2.5,"",'/VHS/content/video');
-                    echo ButtonComponent("Fast", "studio", "", 10.675, 2.5,"","/VHS/content/fast");
-                    echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5,"","/VHS/content/event");
+                echo ButtonComponent("Videos", "studio", "", 10.675, 2.5, "", '/VHS/content/video');
+                echo ButtonComponent("Fast", "studio", "", 10.675, 2.5, "", "/VHS/content/fast");
+                echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5, "", "/VHS/content/event");
                 ?>
-            </div>  
+            </div>
 
             <?= InputComponent("text", "Pesquisar", icon: "/VHS/public/icons/Filter.svg", iconPosition: "left", onClickIcon: "showFilterMenu()") ?>
 
@@ -64,12 +64,12 @@ $videos = $_SESSION["page_data"]["videos"];
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-5">
                 <?php
-                    echo viewCards($videos, 'mychannel');
+                echo viewCards($videos, 'mychannel');
                 ?>
             </div>
         </div>
     </div>
-
+    <script src="/VHS/src/views/components/cards/script.js" defer></script>
 </body>
 
 </html>

@@ -14,9 +14,8 @@ use Error;
 use function Src\Application\Utils\Redirect\redirect;
 use function Src\Application\Utils\UploadImages;
 
-class VideoController extends Controller
+class VideoCreateController extends Controller
 {
-
     public VideoModel $videoModel;
 
     public function index()

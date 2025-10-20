@@ -1,19 +1,19 @@
 <?php
-require "../../../../components/header/headerComponent.php";
-require "../../../../components/studioSideMenu/studioSideMenuComponent.php";
-require "../../../../components/utils/Title_and_buttons.php";
-require "../../../../components/utils/userActivityCardsComponent.php";
-require "../../../../components/charts/chartComponent.php";
-require "../../../../components/utils/buttonComponent.php";
+require __DIR__ . "/../../../../components/header/headerComponent.php";
+require __DIR__ . "/../../../../components/studioSideMenu/studioSideMenuComponent.php";
+require __DIR__ . "/../../../../components/utils/userActivityCardsComponent.php";
+require __DIR__ . "/../../../../components/charts/chartComponent.php";
+require __DIR__ . "/../../../../components/utils/buttonComponent.php";
 
 use function src\views\components\Charts\renderChartComponent;
 use function Src\Views\Components\Utils\ButtonComponent;
 use function src\views\components\utils\UserActivityCardsComponent;
-use function src\views\components\Utils\Title_and_buttons;
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
 use function src\views\components\Header\HeaderComponent;
 
 // TODO: REFATORAR ESSE GRAFICO FEITO PELO GROK
+
+$video = $_SESSION["page_data"]["video"];
 
 $seriesDataLine = [10, 15, 25, 20, 18, 12, 15];
 $categoriesLine = ['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB', 'DOM'];
@@ -23,6 +23,9 @@ $botoes = [
     ['texto' => 'Comentarios', 'link' => './FeastPage.php'],
     ['texto' => 'Analytics', 'link' => './EventosPage.php']
 ];
+
+$id = $video["id"];
+
 ?>
 
 
@@ -57,7 +60,7 @@ $botoes = [
             <div class="flex gap-4 w-96 my-4">
                 <div class="flex gap-3 w-[28rem]">
                         <?php
-                        echo ButtonComponent("Edição", "studio", "", 10.675, 2.5,"",'/VHS/src/views/pages/studio/content/video');
+                        echo ButtonComponent("Edição", "studio", "", 10.675, 2.5,"","/VHS/studio/content/video/edit?id=$id");
                         echo ButtonComponent("Comentários", "studio", "", 10.675, 2.5,"","/VHS/src/views/pages/studio/content/video/comments.php");
                         echo ButtonComponent("Analytics", "studio", "", 10.675, 2.5,"","/VHS/src/views/pages/studio/content/video/analytics.php");
                         ?>

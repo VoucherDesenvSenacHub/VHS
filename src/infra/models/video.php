@@ -32,7 +32,6 @@ class VideoModel extends Model
 
     public function update(string $id, string $title, string $description, string $category_id, string $thumbnail_url)
     {
-
         $sql = "UPDATE videos SET title = :title, description = :description, category_id = :category_id, thumbnail_url = :thumbnail_url WHERE id = :id";
 
         $stmt = $this->database->query($sql, [
@@ -48,7 +47,6 @@ class VideoModel extends Model
 
     public function delete($id)
     {
-
         $sql = "UPDATE videos SET is_deleted = 1 WHERE id = :id";
 
         return $this->database->query($sql, [":id" => $id]);

@@ -18,7 +18,7 @@ use Src\Application\Controllers\VerifyEmailController;
 use Src\Application\Middlewares\RedirectUserLoggedMiddleware;
 use Src\Application\Controllers\SignInController;
 use Src\Application\Controllers\UpdateUserController;
-use Src\Application\Controllers\VideoController;
+use Src\Application\Controllers\VideoCreateController;
 use Src\Application\Controllers\StudioCreateVideoViewController;
 use Src\Application\Controllers\VerifyEmailViewController;
 use Src\Application\Controllers\CreateFastVideoController;
@@ -40,6 +40,8 @@ use Src\Application\Controllers\UpdateUserAdminController;
 use Src\Application\Controllers\DeleteCommentsController;
 use Src\Application\Controllers\InactivateUserController;
 use Src\Application\Controllers\DeleteReportCommentsController;
+use Src\Application\Controllers\StudioAnalyticsVideoViewController;
+use Src\Application\Controllers\VideoDeleteController;
 
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../../..");
 $dotenv->load();
@@ -59,9 +61,9 @@ $router->post('/api/v1/user/update', UpdateUserAdminController::class, RedirectU
 $router->post('/api/v1/comments/delete', DeleteCommentsController::class, RedirectUserNotAdminMiddleware::class);
 $router->post('/api/v1/users/block', inactivateUserController::class, RedirectUserNotAdminMiddleware::class);
 $router->post('/api/v1/comments/report/remove', DeleteReportCommentsController::class, RedirectUserNotAdminMiddleware::class);
-$router->post('/api/v1/studio/create/video', VideoController::class);
+$router->post('/api/v1/studio/create/video', VideoCreateController::class);
 $router->post('/api/v1/studio/content/video/edit', VideoUpdateController::class);
-
+$router->post('/api/v1/video/delete', VideoDeleteController::class);
 
 #views routes
 $router->get('/home', HomeController::class);
@@ -79,6 +81,7 @@ $router->get("/studio/create/video", StudioCreateVideoViewController::class, Red
 $router->get("/studio/create/fast",StudioFastViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get('/studio/content/video', StudioContentVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get('/studio/content/video/edit', StudioUpdateVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
+$router->get('/studio/content/video/analytic', StudioAnalyticsVideoViewController::class);
 
 $router->get("/user/settings", UserSettingsViewController::class, RedirectUserNotLoggedMiddleware::class);
 $router->get("/home/events", ViewEventsController::class, RedirectUserNotLoggedMiddleware::class);
