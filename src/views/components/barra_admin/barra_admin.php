@@ -1,7 +1,9 @@
 <?php
+
 namespace Src\Views\Components\barra_admin;
 
-function barra_admin() {
+function barra_admin()
+{
     $menu = [
         "home" => [
             [
@@ -15,10 +17,15 @@ function barra_admin() {
                 "link" => "/VHS/admin/users"
             ],
             [
-                "icon" => "/VHS/public/icons/sidebar_admin/layout-grid.svg",
-                "text" => "Denuncias",
+                "icon" => "/VHS/public/icons/sidebar_admin/user-round-x.svg",
+                "text" => "Denúncias",
                 "link" => "/VHS/admin/complaints"
-            ]
+            ],
+            [
+                "icon" => "/VHS/public/icons/sidebar_admin/layout-grid.svg",
+                "text" => "Categorias",
+                "link" => "/VHS/admin/categories"
+            ],
         ]
     ];
 
