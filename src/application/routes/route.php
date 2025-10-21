@@ -1,84 +1,81 @@
 <?php
 
-require_once __DIR__ . '/../../application/routes/route.config.php';
-require_once __DIR__ . '/../../vendor/routes.autoload.php';
-require_once __DIR__ . '/../../../vendor/autoload.php';
+require_once __DIR__ . "/../../../vendor/autoload.php";
+require_once __DIR__ . "/../../vendor/routes.autoload.php";
+require_once __DIR__ . "/../../application/routes/route.config.php";
+
+use Src\Application\Middlewares\{
+    RedirectUserLoggedMiddleware     AS RedirectUserLogged,
+    RedirectUserNotLoggedMiddleware  AS RedirectUserNotLogged,
+    RedirectUserNotCreatorMiddleware AS RedirectUserNotCreator,
+    RedirectUserNotAdminMiddleware   AS RedirectUserNotAdmin
+};
+
+use Src\Application\Controllers\{
+    SignUpController,
+    SignInController,
+    DeleteUserController,
+    CreateUserController,
+    UpdateUserController,
+    VerifyEmailController,
+    DeleteCommentsController,
+    InactivateUserController,
+    CreateFastVideoController,
+    UpdateUserAdminController,
+    DeleteReportCommentsController
+};
+
+use Src\Application\Controllers\{
+    HomeController,
+    StudioController,
+    SignUpViewController,
+    SignInViewController,
+    CreatePasswordController,
+    CategoriesViewController,
+    StudioFastViewController,
+    AdminUsersViewController,
+    StudioVideoViewController,
+    VerifyEmailViewController,
+    UserSettingsViewController,
+    AdminAnalyticsViewController,
+    AdminCategoriesViewController,
+    AdminComplaintManagementViewController
+};
 
 use Dotenv\Dotenv;
-use Src\Application\Routes\Router;
-use Src\Application\Controllers\OiController;
-use Src\Application\Controllers\CategoriesViewController;
-use Src\Application\Controllers\CreateUserController;
-use Src\Application\Controllers\SignUpController;
-use Src\Application\Controllers\SignUpViewController;
-use Src\Application\Controllers\CreatePasswordController;
-use Src\Application\Controllers\HomeController;
-use Src\Application\Controllers\UserSettingsViewController;
-use Src\Application\Controllers\VerifyEmailController;
-use Src\Application\Middlewares\RedirectUserLoggedMiddleware;
-use Src\Application\Controllers\SignInController;
-use Src\Application\Controllers\UpdateUserController;
-use Src\Application\Controllers\VerifyEmailViewController;
-use Src\Application\Controllers\CreateFastVideoController;
-use Src\Application\Middlewares\RedirectUserNotLoggedMiddleware;
-use Src\Application\Controllers\StudioController;
-use Src\Application\Controllers\StudioFastViewController;
-use Src\Application\Controllers\StudioVideoViewController;
-use Src\Application\Middlewares\RedirectUserNotCreatorMiddleware;
-use Src\Application\Controllers\SignInViewController;
-use Src\Application\Controllers\ViewEventsController;
-use Src\Application\Middlewares\RedirectUserNotAdminMiddleware;
-use Src\Application\Controllers\AdminAnalyticsViewController;
-use Src\Application\Controllers\AdminCategoriesViewController;
-use Src\Application\Controllers\AdminComplaintManagementViewController;
-use Src\Application\Controllers\AdminUsersViewController;
-use Src\Application\Controllers\DeleteUserController;
-use Src\Application\Controllers\UpdateUserAdminController;
-use Src\Application\Controllers\DeleteCommentsController;
-use Src\Application\Controllers\InactivateUserController;
-use Src\Application\Controllers\DeleteReportCommentsController;
-
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../../..");
 $dotenv->load();
+
+use Src\Application\Routes\Router;
 $router = new Router();
 
-# API Routes
+# -- API Routes -- #
 
-$router->post('/api/v1/auth/signin', SignInController::class);
-$router->post("/api/v1/signup/password", CreateUserController::class, RedirectUserLoggedMiddleware::class);
-$router->post('/api/v1/auth/signup', SignUpController::class);
-$router->post("/api/v1/user/settings", UpdateUserController::class, RedirectUserNotLoggedMiddleware::class);
-$router->post('/api/v1/fast-video', CreateFastVideoController::class, RedirectUserNotCreatorMiddleware::class);
+$router->POST("/api/v1/auth/signin", SignInController::class);
+$router->POST("/api/v1/auth/signup", SignUpController::class);
+$router->POST("/api/v1/user/delete", DeleteUserController::class, RedirectUserNotAdmin::class);
+$router->POST("/api/v1/signup/password", CreateUserController::class, RedirectUserLogged::class);
+$router->POST("/api/v1/user/settings", UpdateUserController::class, RedirectUserNotLogged::class);
+$router->POST("/api/v1/users/block", InactivateUserController::class, RedirectUserNotAdmin::class);
+$router->POST("/api/v1/user/update", UpdateUserAdminController::class, RedirectUserNotAdmin::class);
+$router->POST("/api/v1/fast-video", CreateFastVideoController::class, RedirectUserNotCreator::class);
+$router->POST("/api/v1/comments/delete", DeleteCommentsController::class, RedirectUserNotAdmin::class);
+$router->POST("/api/v1/comments/report/remove", DeleteReportCommentsController::class, RedirectUserNotAdmin::class);
 
-$router->post('/api/v1/user/delete', DeleteUserController::class, RedirectUserNotAdminMiddleware::class);
-$router->post('/api/v1/user/update', UpdateUserAdminController::class, RedirectUserNotAdminMiddleware::class);
+# -- VIEWS Routes -- #
 
-$router->post('/api/v1/comments/delete', DeleteCommentsController::class, RedirectUserNotAdminMiddleware::class);
-$router->post('/api/v1/users/block', inactivateUserController::class, RedirectUserNotAdminMiddleware::class);
-$router->post('/api/v1/comments/report/remove', DeleteReportCommentsController::class, RedirectUserNotAdminMiddleware::class);
-
-# Views Routes
-
-$router->get('/home', HomeController::class, RedirectUserNotLoggedMiddleware::class);
-$router->get('/home/categories', CategoriesViewController::class, RedirectUserNotLoggedMiddleware::class);
-$router->get('/auth/signin', SignInViewController::class, RedirectUserLoggedMiddleware::class);
-$router->get("/auth/signup", SignUpViewController::class, RedirectUserLoggedMiddleware::class);
-$router->get("/auth/signup/password", CreatePasswordController::class, RedirectUserLoggedMiddleware::class);
-$router->get("/auth/signup/verify-email", VerifyEmailViewController::class);
-$router->get("/api/v1/auth/signup/verify-email", VerifyEmailController::class);
-
-$router->get("/studio", StudioController::class, RedirectUserNotCreatorMiddleware::class);
-$router->get("/studio/create/video", StudioVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
-$router->get("/studio/create/fast", StudioFastViewController::class, RedirectUserNotCreatorMiddleware::class);
-
-$router->get("/user/settings", UserSettingsViewController::class, RedirectUserNotLoggedMiddleware::class);
-$router->get("/home/events", ViewEventsController::class, RedirectUserNotLoggedMiddleware::class);
-
-$router->get("/admin/analytics", AdminAnalyticsViewController::class, RedirectUserNotAdminMiddleware::class);
-$router->get("/admin/categories", AdminCategoriesViewController::class, RedirectUserNotAdminMiddleware::class);
-$router->get("/admin/complaints", AdminComplaintManagementViewController::class, RedirectUserNotAdminMiddleware::class);
-$router->get("/admin/users", AdminUsersViewController::class, RedirectUserNotAdminMiddleware::class);
-
-
-
-$router->run();
+$router->GET("/home", HomeController::class, RedirectUserNotLogged::class);
+$router->GET("/auth/signup/verify-email", VerifyEmailViewController::class);
+$router->GET("/api/v1/auth/signup/verify-email", VerifyEmailController::class);
+$router->GET("/studio", StudioController::class, RedirectUserNotCreator::class);
+$router->GET("/auth/signin", SignInViewController::class, RedirectUserLogged::class);
+$router->GET("/auth/signup", SignUpViewController::class, RedirectUserLogged::class);
+$router->GET("/admin/users", AdminUsersViewController::class, RedirectUserNotAdmin::class);
+$router->GET("/home/categories", CategoriesViewController::class, RedirectUserNotLogged::class);
+$router->GET("/user/settings", UserSettingsViewController::class, RedirectUserNotLogged::class);
+$router->GET("/auth/signup/password", CreatePasswordController::class, RedirectUserLogged::class);
+$router->GET("/admin/analytics", AdminAnalyticsViewController::class, RedirectUserNotAdmin::class);
+$router->GET("/studio/create/fast", StudioFastViewController::class, RedirectUserNotCreator::class);
+$router->GET("/admin/categories", AdminCategoriesViewController::class, RedirectUserNotAdmin::class);
+$router->GET("/studio/create/video", StudioVideoViewController::class, RedirectUserNotCreator::class);
+$router->GET("/admin/complaints", AdminComplaintManagementViewController::class, RedirectUserNotAdmin::class);
