@@ -12,6 +12,22 @@ use function src\views\components\barra_admin\barra_admin;
 use function src\views\components\utils\InputComponent;
 
 $categoryData = $_SESSION["page_data"]["list"] ?? [];
+$errors = $_SESSION['redirect_data']['errors'] ?? [];
+$fields = $_SESSION['redirect_data']['fields'] ?? [];
+
+if (!empty($errors) && is_array($errors)) {
+    foreach ($errors as $error) {
+        if (str_contains(strtolower($error), 'email') && !str_contains(strtolower($error), 'senha')) {
+            $emailError = $error;
+        } elseif (str_contains(strtolower($error), 'senha') && !str_contains(strtolower($error), 'email')) {
+            $passwordError = $error;
+        } elseif (str_contains(strtolower($error), 'email') && str_contains(strtolower($error), 'senha')) {
+            $emailPasswordError = $error;
+        } else {
+            $genericError = $error;
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
