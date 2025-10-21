@@ -1,22 +1,22 @@
 <?php
 
-require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/studioSideMenu/studioSideMenuComponent.php";
+require_once __DIR__ . "/../../../components/studioSideMenu/studioSideMenuComponent.php";
+require_once __DIR__ . "/../../../components/header/headerComponent.php";
+require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
+require_once __DIR__ . "/../../../components/utils/comments_studio/commentStudioComponent.php";
+require_once __DIR__ . "/../../../components/utils/inputComponent.php";
+require_once __DIR__ . "/../../../components/utils/footer.php";
+
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
-
-require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/header/headerComponent.php";
 use function src\views\components\header\HeaderComponent;
-
-require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/buttonComponent.php";
 use function src\views\components\Utils\ButtonComponent;
-
-require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/comments_studio/commentStudioComponent.php";
 use function Src\Views\Components\Utils\CommentStudioComponent;
-require_once "../../../components/utils/inputComponent.php";
-
-require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/footer.php";
 use function src\views\components\Utils\Footer;
 use function Src\Views\Components\Utils\InputComponent;
 
+print_r($_SESSION["page_data"]["comments"]);
+
+$comments = $_SESSION["page_data"]["comments"];
 ?>
 
 <!DOCTYPE html>
@@ -50,15 +50,15 @@ use function Src\Views\Components\Utils\InputComponent;
 
       <div class="w-full flex flex-col gap-4">
         <?php
-        for ($i = 0; $i < 8; $i++) {
+        foreach ($comments as $comment){
           echo CommentStudioComponent(
-            "Celestino",
-            "Muito emocionante! Eu sei! Não teria coragem de entrar nessas casas como você kkk Tudo sobre o Next.js 15, nova arquitetura de pasta!",
-            "há 5 dias",
-            null,
-            "https://i.ibb.co/v6xs3ZB6/CUUJVx-Nyw4c-HD-5.jpg"
+            name: "Teste",
+            text: $comment["content"],
+            created_at: $comment["created_at"],
+            userImg: null,
+            thumbnailURL: $comment["thumbnail_url"]
           );
-        }
+        };
         ?>
       </div>
     </div>

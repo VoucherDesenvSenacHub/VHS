@@ -24,8 +24,13 @@ class CommentModel extends Model {
         return $this->database->exec($sql, [":id" => $id]);
     }
 
-    public function deleteReportComment( string $id) {
+    public function deleteReportComment(string $id) {
         $sql = "UPDATE report_comments SET is_deleted = 1 WHERE id = :id";
         return $this->database->exec($sql, [":id" => $id]);
+    }
+
+    public function getStudioComments(int $offset, int $limit, string $author_id) {
+        $sql = "SELECT comments.*, videos.thumbnail_url FROM comments INNER JOIN videos ON videos.id = comments.video_id WHERE videos.author_id = :author_id AND comments.is_deleted = 0 ORDER BY created_at DESC LIMIT $offset, $limit";
+        return $this->database->query($sql, [":author_id" => $author_id]);
     }
 }

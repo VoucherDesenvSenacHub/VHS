@@ -16,7 +16,6 @@ class VideoModel extends Model {
         return $this->database->query($sql, ['query' => '%' . $query . '%']);
     }
 
-
     public function getFastByTitle(string $query): array {
 
         
@@ -42,20 +41,6 @@ class VideoModel extends Model {
 
         return $this->database->query($sql, [":id" => $id]);
     }
-    // public function GetAllVideos($filter){
-    //     switch ($filter) {
-    //         case 'videos':
-    //             $result = $this->getVideoByTitle();
-    //             return $result;
-    //             break;
-    //         case "fast":
-    //             $result = $this->getFastByTitle();
-    //             return $result;
-    //             break;
-    //         default:
-    //             # code...
-    //             break;
-    //     }
-    // }
+    
 }
 

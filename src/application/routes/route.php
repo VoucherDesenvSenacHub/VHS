@@ -37,6 +37,7 @@ use Src\Application\Controllers\UpdateUserAdminController;
 use Src\Application\Controllers\DeleteCommentsController;
 use Src\Application\Controllers\InactivateUserController;
 use Src\Application\Controllers\DeleteReportCommentsController;
+use Src\Application\Controllers\StudioCommentsViewController;
 
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../../..");
 $dotenv->load();
@@ -70,6 +71,7 @@ $router->get("/api/v1/auth/signup/verify-email", VerifyEmailController::class);
 $router->get("/studio", StudioController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get("/studio/create/video", StudioVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get("/studio/create/fast", StudioFastViewController::class, RedirectUserNotCreatorMiddleware::class);
+$router->get("/studio/comments", StudioCommentsViewController::class, RedirectUserNotCreatorMiddleware::class);
 
 $router->get("/user/settings", UserSettingsViewController::class, RedirectUserNotLoggedMiddleware::class);
 $router->get("/home/events", ViewEventsController::class, RedirectUserNotLoggedMiddleware::class);
