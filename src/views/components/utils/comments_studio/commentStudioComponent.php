@@ -2,11 +2,13 @@
 
 namespace Src\Views\Components\Utils;
 
-function CommentStudioComponent(string $name, string $text,  string | null $created_at = null, string | null $userImg = null, string | null $thumbnailURL = null, string | null $videoId = null, $isVideoComments = false)
+function CommentStudioComponent(string $name, string $text,  string | null $created_at = null, string | null $userImg = null, string | null $thumbnailURL = null, string | null $videoId = null, $isVideoComments = false, string | null $comment_id = null)
 {
-    $userImg = $userImg
-        ? "<img src='" . htmlspecialchars($userImg, ENT_QUOTES, 'UTF-8') . "' alt='Imagem de perfil' class='w-full h-full rounded-full mt-1 object-cover'>"
-        : "<img src='https://png.pngtree.com/png-vector/20220617/ourmid/pngtree-dachshund-dog-animal-care-image-little-vector-png-image_37262910.jpg' alt='Imagem padrão de perfil' class='w-full h-full rounded-full mt-1'>";
+    $userImg = <<<HTML
+                <div class='flex-shrink-0 w-12 h-12 rounded-full bg-white/10 overflow-hidden'>
+                    <img class='select-none pointer-events-none w-full h-full object-cover' src='/VHS/public/uploads/avatars/{$userImg}' onerror='this.src="/VHS/public/uploads/avatars/default.png"'>
+                </div>
+    HTML;
 
     $name = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
 
@@ -19,6 +21,8 @@ function CommentStudioComponent(string $name, string $text,  string | null $crea
     $created_at = $created_at ? "<p class='text-xs text-gray-300 font-semibold ml-1'>" . htmlspecialchars($created_at, ENT_QUOTES, 'UTF-8') . "</p>" : "";
 
     $thubnailHTML = "";
+
+    $comment_id = htmlspecialchars($comment_id, ENT_QUOTES, 'UTF-8');
 
 
     if (!$isVideoComments) {
@@ -55,7 +59,11 @@ function CommentStudioComponent(string $name, string $text,  string | null $crea
                             <img src='/VHS/public/icons/comments/trash.svg'>
                         </li>
                         <li>
-                            <img src='/VHS/public/icons/comments/favorite-comment.svg'>
+                            <form method='POST' action='/VHS/api/comments/likeCommentsCreator'>
+                                <input type='hidden' name='comment_id' value='$comment_id'>
+                                <button type='submit'>
+                                    <img src='/VHS/public/icons/comments/favorite-comment.svg'>
+                                </button>
                         </li>
                         <li>
                             <img src='/VHS/public/icons/comments/user-block.svg'>

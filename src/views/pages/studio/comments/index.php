@@ -14,8 +14,6 @@ use function Src\Views\Components\Utils\CommentStudioComponent;
 use function src\views\components\Utils\Footer;
 use function Src\Views\Components\Utils\InputComponent;
 
-print_r($_SESSION["page_data"]["comments"]);
-
 $comments = $_SESSION["page_data"]["comments"];
 ?>
 
@@ -52,11 +50,12 @@ $comments = $_SESSION["page_data"]["comments"];
         <?php
         foreach ($comments as $comment){
           echo CommentStudioComponent(
-            name: "Teste",
+            name: $comment["name"],
             text: $comment["content"],
             created_at: $comment["created_at"],
-            userImg: null,
-            thumbnailURL: $comment["thumbnail_url"]
+            userImg: $comment["avatar_url"],
+            thumbnailURL: $comment["thumbnail_url"],
+            comment_id: $comment["id"]
           );
         };
         ?>

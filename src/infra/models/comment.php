@@ -30,7 +30,24 @@ class CommentModel extends Model {
     }
 
     public function getStudioComments(int $offset, int $limit, string $author_id) {
-        $sql = "SELECT comments.*, videos.thumbnail_url FROM comments INNER JOIN videos ON videos.id = comments.video_id WHERE videos.author_id = :author_id AND comments.is_deleted = 0 ORDER BY created_at DESC LIMIT $offset, $limit";
+        $sql = "SELECT comments.*, videos.thumbnail_url, users.name, users.avatar_url FROM comments 
+        INNER JOIN videos ON videos.id = comments.video_id 
+        INNER JOIN users ON users.id = comments.user_id 
+        WHERE videos.author_id = :author_id AND comments.is_deleted = 0 ORDER BY created_at DESC LIMIT $offset, $limit";
         return $this->database->query($sql, [":author_id" => $author_id]);
     }
+
+    public function addCreatorLikeToComment(string $id){
+        $sql = "UPDATE comments SET creator_like = 1 WHERE id = :id";
+        return $this->database->exec($sql, [":id" => $id]);
+    }
+
+    public function getAuthorIdVideoCommentById(int $id) {
+        $sql = "SELECT videos.author_id FROM comments
+        INNER JOIN videos ON videos.id = comments.video_id
+        WHERE comments.id = :id AND comments.is_deleted = 0
+        ";
+        return $this->database->query($sql, [":id" => $id]);
+    }
+
 }
