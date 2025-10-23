@@ -38,6 +38,7 @@ use Src\Application\Controllers\DeleteCommentsController;
 use Src\Application\Controllers\InactivateUserController;
 use Src\Application\Controllers\DeleteReportCommentsController;
 use Src\Application\Controllers\StudioCommentsViewController;
+use Src\Application\Controllers\LikeCommentsCreatorController;
 
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../../..");
 $dotenv->load();
@@ -57,6 +58,7 @@ $router->post('/api/v1/user/update', UpdateUserAdminController::class, RedirectU
 $router->post('/api/v1/comments/delete', DeleteCommentsController::class, RedirectUserNotAdminMiddleware::class);
 $router->post('/api/v1/users/block', inactivateUserController::class, RedirectUserNotAdminMiddleware::class);
 $router->post('/api/v1/comments/report/remove', DeleteReportCommentsController::class, RedirectUserNotAdminMiddleware::class);
+$router->post('/api/v1/studio/comments/creator-like', LikeCommentsCreatorController::class, RedirectUserNotCreatorMiddleware::class);
 
 # Views Routes
 

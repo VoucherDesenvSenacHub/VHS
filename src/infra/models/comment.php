@@ -37,12 +37,12 @@ class CommentModel extends Model {
         return $this->database->query($sql, [":author_id" => $author_id]);
     }
 
-    public function addCreatorLikeToComment(string $id){
-        $sql = "UPDATE comments SET creator_like = 1 WHERE id = :id";
-        return $this->database->exec($sql, [":id" => $id]);
+    public function CreatorLikeToComment(string $id, int $like){
+        $sql = "UPDATE comments SET creator_like = :like WHERE id = :id";
+        return $this->database->exec($sql, [":id" => $id, ":like" => $like]);
     }
 
-    public function getAuthorIdVideoCommentById(int $id) {
+    public function getAuthorIdVideoCommentById(string $id) {
         $sql = "SELECT videos.author_id FROM comments
         INNER JOIN videos ON videos.id = comments.video_id
         WHERE comments.id = :id AND comments.is_deleted = 0
