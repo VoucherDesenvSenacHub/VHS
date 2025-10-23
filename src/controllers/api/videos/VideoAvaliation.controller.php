@@ -38,19 +38,20 @@ class VideoAvaliationController extends Controller {
         
         $this->videoModel = $this->model("video");
         
-
         if(empty($this->videoModel->getVideoById($videoId))) {
             header($contentType, true, 404);
             echo json_encode([
                 "success"=> false,
                 "message"=> "Vídeo não encontrado"
             ]);
+            return;
         }
 
         $existsAvaliation = $this->avaliationModel->getAvaliation(
             $videoId,
             $currentUserId,
         );
+
 
         if(empty($existsAvaliation)) {
             $this->avaliationModel->addAvaliation($stars, $videoId, $currentUserId);

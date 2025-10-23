@@ -10,9 +10,11 @@ require __DIR__ . "/../../../../application/utils/formatViews.php";
 require __DIR__ . "/../../../../application/utils/pagination.php";
 require __DIR__ . "/../../../components/utils/inputComponent.php";
 require __DIR__ . "/../../../components/utils/buttonComponent.php";
+require __DIR__ . "/../../../components/utils/sweetalert.php";
 
 use function Src\Application\Utils\formatViews;
 use function Src\Application\Utils\paginate;
+use function Src\Application\Utils\showSweetAlert;
 use function Src\Views\Components\Header\HeaderComponent;
 use function Src\Views\Components\Sidebar\SidebarComponent;
 use function Src\Views\Components\Cards\renderCards;
@@ -28,28 +30,37 @@ $releatedVideos = $_SESSION["page_data"]["releated_videos"];
 $user_avaliation = $_SESSION["page_data"]["user_avaliation"];
 $comments = $_SESSION["page_data"]["comments"];
 $totalComments = $_SESSION["page_data"]["total_comments"];
-  
-#print_r($video)
+
+
+if($_SESSION["redirect_data"]["success"] ?? false) {
+  echo showSweetAlert($_SESSION["redirect_data"]["success"], "", "success");
+  unset($_SESSION["redirect_data"]["success"]);
+}
+
+if($_SESSION["redirect_data"]["errors"] ?? false) {
+  echo showSweetAlert($_SESSION["redirect_data"]["errors"], "", "error");
+  unset($_SESSION["redirect_data"]["errors"]);
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <title>VHS - Home</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="/VHS/src/styles/global.css">
-  <script type="module" src="/VHS/src/styles/tailwindglobal.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</head>
-<body class="bg-gradient-to-b from-[#20002c] to-black text-white">
-
-  <header class="w-full">
-    <?= HeaderComponent() ?>
-  </header>
-
-  <div class="flex">
+  <head>
+    <meta charset="UTF-8">
+    <title>VHS - Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/VHS/src/styles/global.css">
+    <script type="module" src="/VHS/src/styles/tailwindglobal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body class="bg-gradient-to-b from-[#20002c] to-black text-white">
+    
+    <header class="w-full">
+      <?= HeaderComponent() ?>
+    </header>
+    
+    <div class="flex">
 
     <aside class="w-[240px]">
       <?= SidebarComponent() ?>
@@ -76,7 +87,7 @@ $totalComments = $_SESSION["page_data"]["total_comments"];
                 <p class="mt-4"><?= formatViews($video["views"]) ?> Visualizações</p>
               </div>
             <div class="mt-5 flex">
-                <img class="w-6 h-6 mr-3 cursor-pointer" src="/VHS/public/icons/Share.svg" alt="ShareButton" onclick="openShared()" name="send">
+                <img class="w-6 h-6 mr-3 cursor-pointer" src="/VHS/public/icons/share.svg" alt="ShareButton" onclick="openShared()" name="send">
                 <?= sharedComponent( $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"], $video["title"])?>
                 <?= StarRatingComponent([
                   "initial_rating" => $user_avaliation,
@@ -114,8 +125,7 @@ $totalComments = $_SESSION["page_data"]["total_comments"];
             <h3 class="text-xl font-semibold mb-4"><?=$totalComments?> Comentários</h3>
             <?php 
               foreach($comments as $comment) {
-              # print_r($comment);
-                echo Comment($comment["username"], $comment["content"], $comment["created_at"], $comment["avatar_url"]);
+                echo Comment($comment["id"], $comment["username"], $comment["content"], $comment["created_at"], $comment["avatar_url"]);
               }
             ?>
           </div>

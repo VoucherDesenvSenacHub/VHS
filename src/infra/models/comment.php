@@ -43,4 +43,10 @@ class CommentModel extends Model {
 
         return $this->database->query($sql, [":id" => uniqid(), ":content"=> $content,":video_id" => $videoId,":user_id"=> $userId]);
     }
+
+    public function updateComment(string $id, string $newContent) {
+        $sql = "UPDATE comments SET content = :content WHERE id = :id AND is_deleted = 0";
+
+        return $this->database->exec($sql, [":id" => $id, ":content"=> $newContent]);
+    }
 }

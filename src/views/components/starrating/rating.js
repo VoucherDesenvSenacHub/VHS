@@ -10,15 +10,31 @@ async function rating() {
 
     const formData = new FormData();
     formData.append("stars", currentRating);
-    formData.append("videoId", location.href.split("?id=")[1]);
+    formData.append("videoId", location.href.split("id=")[1].replace("#comments", ""));
 
     const res = await fetch("/VHS/api/v1/json/video/rating", {
         method: "POST",
         body: formData,
         withCredentials: 'include'
     });
-    
-    console.log(await res.ok);
+
+    if(!res.ok) {
+        return Swal.fire({
+            toast: true,
+            icon: "error",
+            title: "Ocorreu um erro ao avaliar o avaliar o vídeo!",
+            position: 'bottom-end',
+            showConfirmButton: false,
+            timer: 4000,
+            timerProgressBar: true,
+            customClass: {
+                popup: 'swal-custom',
+                title: 'swal-title',
+                htmlContainer: 'swal-text',
+                icon: 'swal-icon'
+            }
+        });
+    }
     
     Swal.fire({
         toast: true,

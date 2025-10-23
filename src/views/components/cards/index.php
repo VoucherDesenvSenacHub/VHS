@@ -38,6 +38,7 @@ class Cards {
     }
 
     private static function Video(array $card) {
+        $id         = purifyProperty($card["id"]);
         $url        = purifyProperty($card['url']);
         $views      = purifyNumbers($card['views']);
         $thumb_url  = purifyProperty($card['thumbnail_url']);
