@@ -37,16 +37,16 @@ $videos = $_SESSION["page_data"]["videos"];
             echo StudioSideMenuComponent();
             ?>
         </div>
-        <div class="max-w-[1500px] mx-auto">
+        <div class="max-w-[1500px] md:p-0 p-4 mx-auto">
             <div>
-                <h1 class="font-semibold text-title text-white">Conteúdo do canal</h1>
-                <p class="text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
+                <h1 class="font-semibold md:text-title text-xl text-white">Conteúdo do canal</h1>
+                <p class="text-gray-300 md:text-paragraph text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
             </div>
             <div class="flex gap-4 w-96 my-4">
                 <?php
-                echo ButtonComponent("Videos", "studio", "", 10.675, 2.5, "", '/VHS/content/video');
-                echo ButtonComponent("Fast", "studio", "", 10.675, 2.5, "", "/VHS/content/fast");
-                echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5, "", "/VHS/content/event");
+                echo ButtonComponent("Videos", "studio", "", 10.675, 2.5, "", '/VHS/studio/content/video');
+                echo ButtonComponent("Fast", "studio", "", 10.675, 2.5, "", "/VHS/studio/content/fast");
+                echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5, "", "/VHS/studio/content/event");
                 ?>
             </div>
 
@@ -62,7 +62,7 @@ $videos = $_SESSION["page_data"]["videos"];
                     <p class="text-[13px] flex items-center text-gray-200">Mais antigos</p>
                 </div>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-5">
+            <div class="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-5">
                 <?php
                 echo viewCards($videos, 'mychannel');
                 ?>

@@ -148,7 +148,7 @@ class Cards
         $comments   = purifyNumbers($card['comments']);
         $created_at = purifyCreatedAt($card['created_at']);
         $duration   = purifyDuration($card['duration']);
-        
+
         $modalVideoRemove = RemoveVideoComponent(
             'Remover Vídeo',
             'Tem certeza que deseja excluir o vídeo?',
@@ -157,12 +157,10 @@ class Cards
 
         return <<<HTML
             <div class="card flex flex-col max-w-[340px] h-[360px] bg-[#1B1B1B] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
-                <a href='/VHS/studio/content/video/analytic?id=$id' class='cursor-pointer'>
-                    <div class='relative w-full h-full'>
-                        <img src='$thumbnail_url' class='w-full h-full object-cover'>
-                        <div class='absolute top-3 right-3 bg-black bg-opacity-70 text-white text-caption px-2 py-1 rounded-md'>
-                            <p class='text-white text-paragraph'>$duration</p>
-                        </div>
+                <a href='/VHS/studio/content/video/analytic?id=$id' class='cursor-pointer relative w-full h-[50%]'>
+                    <img src='$thumbnail_url' class='w-full h-full object-cover'>
+                    <div class='absolute top-3 right-3 bg-black bg-opacity-70 text-white text-caption px-2 py-1 rounded-md'>
+                        <p class='text-white text-paragraph'>$duration</p>
                     </div>
                 </a>
 

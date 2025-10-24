@@ -16,7 +16,7 @@ function ModalComponent(string $title, string $description)
                 <div class="flex justify-end gap-4">
     HTML
         . ButtonComponent(text: "Cancelar", variant: "outline", width: 10.5, className: "btn-cancel", link: '/VHS/home')
-        . ButtonComponent(text: "Confimar", variant: "default", width: 10.5, className: "btn-confirm", link: '/VHS/create/video')
+        . ButtonComponent(text: "Confimar", variant: "default", width: 10.5, className: "btn-confirm", link: '/VHS/studio/create/video')
         . <<<HTML
                 </div>
             </div>

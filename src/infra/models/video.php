@@ -125,10 +125,22 @@ class VideoModel extends Model
     return $this->database->query($sql, [":author_id" => $author_id]);
 }
 
-
     public function getVideoByID(string $id): array
     {
-        $sql = "SELECT * FROM videos WHERE id = :id";
+        $sql = "SELECT 
+            v.*, 
+            COUNT(c.id) AS comments
+        FROM 
+            videos v
+        LEFT JOIN 
+            comments c ON c.video_id = v.id AND c.is_deleted = 0
+        WHERE 
+            v.is_deleted = 0 AND v.id = :id
+        GROUP BY 
+            v.id
+        ORDER BY 
+            v.created_at DESC
+    ";
 
         $stmt = $this->database->query($sql, [":id" => $id]);
 

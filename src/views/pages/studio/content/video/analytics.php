@@ -60,9 +60,9 @@ $id = $video["id"];
             <div class="flex gap-4 w-96 my-4">
                 <div class="flex gap-3 w-[28rem]">
                         <?php
-                        echo ButtonComponent("Edição", "studio", "", 10.675, 2.5,"","/VHS/studio/content/video/edit?id=$id");
-                        echo ButtonComponent("Comentários", "studio", "", 10.675, 2.5,"","/VHS/src/views/pages/studio/content/video/comments.php");
-                        echo ButtonComponent("Analytics", "studio", "", 10.675, 2.5,"","/VHS/src/views/pages/studio/content/video/analytics.php");
+                        echo ButtonComponent(text: "Edição", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/content/video/edit?id=$id");
+                        echo ButtonComponent(text: "Comentários", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/content/video/commentary?id=$id");
+                        echo ButtonComponent(text: "Analytics", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/content/video/analytic?id=$id");
                         ?>
                 </div>
             </div> 
@@ -72,7 +72,7 @@ $id = $video["id"];
 
                     <div class="flex flex-row gap-4 mb-2">
 
-                        <?= UserActivityCardsComponent("Usuários", 60700) ?>
+                        <?= UserActivityCardsComponent("Usuários", $video["comments"]) ?>
 
 
                         <?= UserActivityCardsComponent("Qtd. Vídeos", 60700) ?>
@@ -91,13 +91,12 @@ $id = $video["id"];
                     </div>
                 </div>
 
-                <div class="ml-24  w-[570px] rounded-xl">
-                    <img src="https://pbs.twimg.com/media/Df_Uj8QX4AMwcFM.jpg:large" alt=""
+                <div class="ml-24 w-[570px] rounded-xl">
+                    <img src="<?= htmlspecialchars($video["thumbnail_url"]) ?>" alt=""
                         class="rounded-xl h-[300px] w-full object-cover">
 
                     <div class="mt-4 ml-2">
-                        <h3 class="text-xl font-semibold text-white">Entrei na Hotel abandonado e encontramos isso 😨😧😱😰😱 FT Renato Garcia
-                        </h3>
+                        <h3 class="text-xl font-semibold text-white"><?= $video["title"] ?></h3>
                         <p class="text-sm text-gray-400 mt-1"># 🚀💻🛠️</p>
                     </div>
                 </div>

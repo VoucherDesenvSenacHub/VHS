@@ -52,24 +52,26 @@ $botoes = [
     </div>
     <div class="flex flex-row w-full">
 
-        <div>
+        <div class="md:block hidden">
             <?= StudioSideMenuComponent() ?>
         </div>
 
-        <div class=" relative flex flex-col gap-4 max-w-[1500px] mx-auto w-full">
+        <div class="relative flex flex-col gap-4 max-w-[1500px] mx-auto w-full">
             <div class="text-white flex flex-col gap-2">
-                <h1 class='text-title font-bold'>Criar conteúdo</h1>
-                <h1 class='text-paragraph text-gray-400'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</h1>
-                <div class="mt-2 flex gap-2 w-96">
-                    <?php echo ButtonComponent("Vídeo", "studio", "", 10.675, 2.5, "", "/VHS/create/video"); ?>
-                    <?php echo ButtonComponent("Fast", "studio", "", 10.675, 2.5, "", "/VHS/create/fast"); ?>
-                    <?php echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5, "", "/VHS/create/event"); ?>
+                <div class="flex flex-col p-4 md:p-0">
+                    <h1 class='md:text-title text-xl font-bold'>Criar conteúdo</h1>
+                    <p class='md:text-paragraph text-sm text-gray-400 md:mt-2'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
+                    <div class="mt-4 flex gap-2 w-96">
+                        <?php echo ButtonComponent(text: "Vídeo", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/create/video"); ?>
+                        <?php echo ButtonComponent(text: "Fast", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/create/fast"); ?>
+                        <?php echo ButtonComponent(text: "Eventos", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/create/event"); ?>
+                    </div>
                 </div>
 
-                <form action="/VHS/api/v1/studio/create/video" enctype="multipart/form-data" method="post">
+                <form action="/VHS/api/v1/studio/create/video" enctype="multipart/form-data" method="post" class="md:p-0 p-4 flex flex-col gap-8 md:gap-4 md:mt-4">
                     <div id="URL">
-                        <h1 class="text-subtitle text-white font-semibold mt-4">URL</h1>
-                        <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
+                        <h1 class="md:text-subtitle text-lg text-white font-semibold">URL</h1>
+                        <p class="md:text-paragraph text-sm text-gray-400 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
                         <?= InputComponent(
                             type: "text",
                             placeholder: "https://youtube.com",
@@ -83,9 +85,9 @@ $botoes = [
 
                     <div id="thumb" class="flex flex-col gap-2">
                         <div>
-                            <h1 class="text-subtitle text-white font-semibold mt-4">Thumbnail</h1>
-                            <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-                            <div class="mt-2 bg-background w-full h-full md:h-[500px] border-2 rounded-xl border-solid flex items-center justify-center relative overflow-hidden -mt-8 flex-wrap">
+                            <h1 class="md:text-subtitle text-lg text-white font-semibold">Thumbnail</h1>
+                            <p class="md:text-paragraph text-sm text-gray-400 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
+                            <div class="md:mt-2 md:h-[500px] bg-background mt-4 w-full h-[300px] border-2 rounded-xl border-solid flex items-center justify-center relative overflow-hidden -mt-8 flex-wrap">
                                 <div id="uploadArea" class="flex flex-col items-center justify-center w-full h-full">
                                     <label for="dropzone-file"
                                         class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
@@ -113,10 +115,10 @@ $botoes = [
                             </span>
                         <?php endif; ?>
                     </div>
-                    
+
                     <div id="Title">
-                        <h1 class="text-3xl text-white font-semibold mt-4">Título</h1>
-                        <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
+                        <h1 class="md:text-subtitle text-lg text-white font-semibold">Título</h1>
+                        <p class="text-sm text-gray-400 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
                         <?= InputComponent(
                             type: "text",
                             placeholder: "Tudo sobre o Next.js 15, nova arquitetura de pasta",
@@ -127,10 +129,10 @@ $botoes = [
                         )
                         ?>
                     </div>
-                    
+
                     <div id="Description">
-                        <h1 class="text-3xl text-white font-semibold mt-4">Descrição</h1>
-                        <p class="text-paragraph text-gray-400 p-0 mb-2">
+                        <h1 class="md:text-subtitle text-lg text-white font-semibold">Descrição</h1>
+                        <p class="text-sm text-gray-400 mb-2">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl.
                         </p>
                         <div class="">
@@ -147,8 +149,8 @@ $botoes = [
 
                     <div id="Category" class="flex flex-col gap-2">
                         <div>
-                            <h1 class="text-3xl text-white font-semibold mt-4">Categoria</h1>
-                            <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
+                            <h1 class="md:text-subtitle text-lg text-white font-semibold">Categoria</h1>
+                            <p class="text-sm text-gray-400 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
                             <select name="category_id"
                                 class="px-3 py-1.5 outline outline-1 outline-[#666666] rounded-md placeholder-[#666666] text-zinc-200 w-full h-[45px] bg-transparent">
                                 <option value="" <?= empty($fields['category_id']) ? 'selected' : null ?> class="text-black">
@@ -169,9 +171,13 @@ $botoes = [
                         <?php endif; ?>
                     </div>
 
-                    <div class="flex flex-col sm:flex-row justify-center items-end gap-10 my-6">
-                        <?= ButtonComponent(text: "Cancelar", type: "button", variant: "outline", id: "cancel-button", width: 27.5, link: "/home") ?>
-                        <?= ButtonComponent(text: "Salvar Alterações", variant: "default", id: "publish-button", width: 27.5) ?>
+                    <div class="flex flex-col sm:flex-row justify-center items-end gap-10 my-4">
+                        <div class="w-full order-2 md:order-1">
+                            <?= ButtonComponent(text: "Cancelar", type: "button", variant: "outline", id: "cancel-button", width: 27.5, link: "/home", ) ?>
+                        </div>
+                        <div class="w-full order-1 md:order-2">
+                            <?= ButtonComponent(text: "Salvar Alterações", variant: "default", id: "publish-button", width: 27.5, ) ?>
+                        </div>
                     </div>
                 </form>
             </div>
