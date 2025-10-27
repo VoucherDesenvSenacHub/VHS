@@ -6,7 +6,9 @@ require_once __DIR__ . "/../../../components/cards/index.php";
 require_once __DIR__ . "/../../../components/utils/inputComponent.php";
 require_once __DIR__ . "/../../../components/studioSideMenu/studioSideMenuComponent.php";
 require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
+require_once __DIR__ . "/../../../../application/utils/pagination.php";
 
+use function Src\Application\Utils\paginate;
 use function src\views\components\Utils\ButtonComponent;
 use function Src\Views\Components\Cards\viewCards;
 use function Src\Views\Components\header\HeaderComponent;
@@ -30,27 +32,25 @@ $videos = $_SESSION["page_data"]["videos"];
 </head>
 
 <body class="w-full bg-[#0C0118]">
-    <?php echo HeaderComponent(); ?>
+    <?- HeaderComponent(); ?>
     <div class="flex">
         <div class="max-xl:hidden mr-4">
-            <?php
-            echo StudioSideMenuComponent();
-            ?>
+            <?= StudioSideMenuComponent(); ?>
         </div>
-        <div class="max-w-[1500px] md:p-0 p-4 mx-auto">
+        <div class="w-[1400px] md:p-0 p-4 mx-auto">
             <div>
                 <h1 class="font-semibold md:text-title text-xl text-white">Conteúdo do canal</h1>
                 <p class="text-gray-300 md:text-paragraph text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
             </div>
             <div class="flex gap-4 w-96 my-4">
                 <?php
-                echo ButtonComponent("Videos", "studio", "", 10.675, 2.5, "", '/VHS/studio/content/video');
-                echo ButtonComponent("Fast", "studio", "", 10.675, 2.5, "", "/VHS/studio/content/fast");
-                echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5, "", "/VHS/studio/content/event");
+                echo ButtonComponent(text: "Videos", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/content/video");
+                echo ButtonComponent(text: "Fast", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/content/fast");
+                echo ButtonComponent(text: "Eventos", variant: "studio", width: 10.675,  height: 2.5, link: "/VHS/studio/content/event");
                 ?>
             </div>
 
-            <?= InputComponent("text", "Pesquisar", icon: "/VHS/public/icons/Filter.svg", iconPosition: "left", onClickIcon: "showFilterMenu()") ?>
+            <?= InputComponent(type: "text", placeholder: "Pesquisar", icon: "/VHS/public/icons/Filter.svg", iconPosition: "left", onClickIcon: "showFilterMenu()") ?>
 
             <div id="filter" class="absolute left-[16.5rem] z-10 hidden flex flex-col bg-gray-900 rounded-lg p-2 max-w-32 border-[0.5px] border-gray-500">
                 <div class="flex">
@@ -63,10 +63,9 @@ $videos = $_SESSION["page_data"]["videos"];
                 </div>
             </div>
             <div class="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-5">
-                <?php
-                echo viewCards($videos, 'mychannel');
-                ?>
+                <?= viewCards($videos, 'mychannel'); ?>
             </div>
+            <?= paginate($videos, 8) ?>
         </div>
     </div>
     <script src="/VHS/src/views/components/cards/script.js" defer></script>

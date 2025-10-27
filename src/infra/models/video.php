@@ -104,9 +104,9 @@ class VideoModel extends Model
         return $this->database->query($sql);
     }
 
-   public function getAllVideos(string $author_id)
-{
-    $sql = "
+    public function getAllVideos(string $author_id, int $offset = 0, int $limit = 8): array
+    {
+        $sql = "
         SELECT 
             v.*, 
             COUNT(c.id) AS comments
@@ -120,10 +120,18 @@ class VideoModel extends Model
             v.id
         ORDER BY 
             v.created_at DESC
+        LIMIT $offset, $limit
     ";
 
-    return $this->database->query($sql, [":author_id" => $author_id]);
-}
+        return $this->database->query($sql, [":author_id" => $author_id]);
+    }
+
+    public function countVideos(string $author_id): int
+    {
+        $sql = "SELECT COUNT(*) as total FROM videos WHERE is_deleted = 0 AND author_id = :author_id";
+        $stmt = $this->database->query($sql, [":author_id" => $author_id]);
+        return (int)$stmt[0]['total'];
+    }
 
     public function getVideoByID(string $id): array
     {
