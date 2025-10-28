@@ -55,11 +55,15 @@ function categoriesDataTableComponent(array $categories, int $page = 1, int $per
                             </td>
                             <td class="px-6 py-4 bg-[#660BAD]/5 border-l border-[#660BAD]/20">
                                 <div class="flex items-center justify-center gap-2">
-                                    <button id="<?php echo $openModalId; ?>" class="h-8 w-8 p-0 flex items-center justify-center text-[#660BAD] hover:bg-[#660BAD] hover:text-white transition-all border border-[#660BAD]/40 rounded" data-category-id="<?php echo htmlspecialchars($category['id'], ENT_QUOTES, 'UTF-8'); ?>">
-                                        <i data-lucide="edit" class="h-4 w-4"></i>
+                                    <button id="<?php echo $openModalId; ?>" class="h-9 w-9 p-1 flex items-center justify-center text-[#660BAD] hover:bg-[#660BAD]/50 hover:border-[#660BAD] hover:text-white transition-all border border-[#660BAD]/60 rounded" data-category-id="<?php echo htmlspecialchars($category['id'], ENT_QUOTES, 'UTF-8'); ?>">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5">
+                                            <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32L19.513 8.2Z" />
+                                        </svg>
                                     </button>
-                                    <button id="<?php echo $openDeleteModalId; ?>" class="h-8 w-8 p-0 flex items-center justify-center text-[#660BAD] hover:bg-[#660BAD] hover:text-white transition-all border border-[#660BAD]/40 rounded">
-                                        <i data-lucide="trash-2" class="h-4 w-4"></i>
+                                    <button id="<?php echo $openDeleteModalId; ?>" class="h-9 w-9 p-1 flex items-center justify-center text-[#660BAD] hover:bg-red-500/30 hover:border-red-500/40 hover:text-red-500 transition-all border border-[#660BAD]/60 rounded">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5">
+                                            <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z" clip-rule="evenodd" />
+                                        </svg>
                                     </button>
                                 </div>
                             </td>
@@ -86,9 +90,9 @@ function categoriesDataTableComponent(array $categories, int $page = 1, int $per
         <!-- Modal de edição -->
         <div id="<?php echo $overlayId; ?>" class="absolute inset-0 bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 hidden"></div>
         <div id="<?php echo $modalId; ?>" class="absolute inset-0 z-20 opacity-0 transition-opacity duration-400 hidden flex items-center justify-center">
-            <div class="min-w-[400px] flex flex-col gap-4 p-8 bg-gray-900 text-gray-50 border border-gray-700 rounded-lg transform -translate-y-12 transition-transform duration-300">
+            <div class="max-w-sm w-full flex flex-col gap-3 p-6 bg-gray-900 text-gray-50 border border-gray-700 rounded-lg transform -translate-y-12 transition-transform duration-300">
                 <div class="flex justify-center items-center">
-                    <h2 class="text-2xl font-bold text-white cursor-default">Editar Categoria</h2>
+                    <h2 class="text-lg font-bold text-white cursor-default">Editar Categoria</h2>
                 </div>
                 <form method="POST" action="/VHS/src/application/routes/route.php/api/v1/admin/categories/update" class="edit-category-form">
                     <div class="flex flex-col gap-4 w-full">
@@ -106,9 +110,9 @@ function categoriesDataTableComponent(array $categories, int $page = 1, int $per
                                 name="categoryId"
                                 value="<?php echo htmlspecialchars($category['id'], ENT_QUOTES, 'UTF-8'); ?>" />
                         </div>
-                        <div class="mt-4 flex justify-between gap-2">
-                            <button type="button" id="<?php echo $closeModalId; ?>" class="outline outline-1 px-4 py-2 outline-[#660BAD] rounded-md transition-colors hover:bg-gray-800 w-[200px] h-[50px]">Cancelar</button>
-                            <button type="submit" class="bg-[#660BAD] transition-colors hover:bg-purple-700 text-gray-50 px-4 py-2 rounded-md w-[200px] h-[50px]">Salvar</button>
+                        <div class=" flex justify-between gap-2">
+                            <button type="button" id="<?php echo $closeModalId; ?>" class="transition-colors w-full px-4 py-2 rounded-md border border-gray-600 text-gray-300 hover:bg-gray-700">Cancelar</button>
+                            <button type="submit" class="transition-colors w-full px-4 py-2 rounded-md bg-[#660BAD] text-white hover:bg-[#53088A]">Salvar</button>
                         </div>
                     </div>
                 </form>
@@ -119,9 +123,9 @@ function categoriesDataTableComponent(array $categories, int $page = 1, int $per
         <div id="<?php echo $deleteOverlayId; ?>" class="absolute inset-0 bg-black bg-opacity-50 z-10 opacity-0 transition-opacity duration-300 hidden"></div>
         <div id="<?php echo $deleteModalId; ?>" class="absolute inset-0 z-20 opacity-0 transition-opacity duration-300 hidden flex items-center justify-center">
             <input type="hidden" name="id" value="<?php echo htmlspecialchars($category['id'], ENT_QUOTES, 'UTF-8'); ?>" />
-            <div class="min-w-[300px] flex flex-col gap-4 p-8 bg-gray-900 text-gray-50 border border-gray-700 rounded-lg transform -translate-y-12 transition-transform duration-300">
+            <div class="max-w-sm w-full flex flex-col gap-3 p-6 bg-gray-900 text-gray-50 border border-gray-700 rounded-lg transform -translate-y-12 transition-transform duration-300">
                 <div class="flex justify-center items-center">
-                    <h2 class="text-2xl font-bold text-white cursor-default">Confirmar Exclusão</h2>
+                    <h2 class="text-lg font-bold text-white">Confirmar Exclusão</h2>
                 </div>
                 <form method="POST" action="/VHS/src/application/routes/route.php/api/v1/admin/categories/delete">
                     <input
@@ -129,11 +133,11 @@ function categoriesDataTableComponent(array $categories, int $page = 1, int $per
                         name="categoryId"
                         value="<?php echo htmlspecialchars($category['id'], ENT_QUOTES, 'UTF-8'); ?>" />
                     <div class="flex flex-col gap-4 w-full">
-                        <p class="text-gray-300 text-center">Tem certeza que deseja excluir a categoria <br><strong><?php echo htmlspecialchars($category['name'], ENT_QUOTES, 'UTF-8'); ?></strong>?</p>
+                        <p class="text-sm text-slate-300 text-center">Tem certeza que deseja excluir a categoria <strong><?php echo htmlspecialchars($category['name'], ENT_QUOTES, 'UTF-8'); ?></strong>?</p>
                     </div>
-                    <div class="mt-4 flex justify-between gap-2">
-                        <button type="button" id="<?php echo $closeDeleteModalId; ?>" class="outline outline-1 px-4 py-2 outline-[#660BAD] rounded-md hover:bg-gray-800 w-full transition-colors h-[50px]">Cancelar</button>
-                        <button type="submit" class="bg-[#660BAD] transition-colors hover:bg-purple-700 text-gray-50 px-4 py-2 rounded-md w-full h-[50px]">Excluir</button>
+                    <div class="flex mt-4 justify-between gap-2">
+                        <button type="button" id="<?php echo $closeDeleteModalId; ?>" class="transition-colors px-4 py-2 rounded-md w-full border border-gray-600 text-gray-300 hover:bg-gray-700">Cancelar</button>
+                        <button type="submit" class="transition-colors px-4 py-2 rounded-md w-full bg-red-600 text-white hover:bg-red-700">Excluir</button>
                     </div>
                 </form>
             </div>

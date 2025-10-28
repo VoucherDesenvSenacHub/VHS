@@ -87,7 +87,6 @@ if (!empty($errors) && is_array($errors)) {
                     <div class="flex w-full justify-start">
                         <label for="categoryName" class="text-right text-gray-300">Nome</label>
                     </div>
-                    <!-- <input name="nameCategory" id="categoryName" type="text" class="col-span-3 bg-gray-800 border border-gray-700 text-gray-50 p-2 rounded" placeholder="Digite o nome" / -->
                     <?= InputComponent(
                         placeholder: "Digite o nome",
                         name: "nameCategory",
