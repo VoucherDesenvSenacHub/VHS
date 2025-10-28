@@ -38,7 +38,7 @@ function barra_admin()
                     <img src="{$value['icon']}" alt="{$value['text']}" class="w-full h-full">
                 </a>
                 <a href="{$value['link']}" class="text-secondary
-                    hover:text-gray-300 transition-all menu-text">
+                    hover:text-gray-500 transition-color menu-text">
                     {$value['text']}
                 </a>
             </li>

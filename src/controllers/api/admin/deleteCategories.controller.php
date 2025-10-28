@@ -24,15 +24,13 @@ class DeleteCategoriesController extends Controller
             if (empty($existingCategory)) {
                 throw new Error("Categoria não encontrada.");
             }
-            $delete = $this->categoryModel->deleteCategories(
-                $idCategory,
-            );
-            if ($delete) {
-                echo "Categoria deletada com sucesso!";
-                return redirect('/VHS/admin/categories');
-            } else {
-                throw new Error("Falha ao deletar a categoria.");
+            $delete = $this->categoryModel->deleteCategories($idCategory);
+            if (!$delete) {
+                throw new Error("Falha ao excluir a categoria.");
             }
+            return redirect('/vhs/admin/categories', [
+                "success" => "Categoria excluída com sucesso!"
+            ]);
         } catch (NestedValidationException | Error $exception) {
             if ($exception instanceof Error) {
                 return redirect("/vhs/admin/categories", [

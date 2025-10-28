@@ -3,14 +3,11 @@
 namespace Src\Application\Controllers;
 
 use Error;
-use Respect\Validation\Exceptions\NestedValidationException;
 use Src\Application\Core\Controller;
-
 use Src\Infra\Model\CategoryModel;
 use function Src\Application\Utils\Redirect\redirect;
 
 require_once __DIR__ . '/../../../application/core/controller.php';
-require_once __DIR__ . '/../../../application/utils/verifyRecaptcha.php';
 
 class CreateCategoriesController extends Controller
 {
@@ -21,21 +18,40 @@ class CreateCategoriesController extends Controller
         try {
             $this->CategoryModel = $this->model("category");
 
+            if (isset($_SESSION["redirect_data"]["fields"])) {
+                $_POST = array_merge($_POST, $_SESSION["redirect_data"]["fields"]);
+            }
+
+            if (!isset($_POST["nameCategory"])) {
+                throw new Error(serialize(["nameCategory" => "Nome da categoria é obrigatório"]));
+            }
+
+            if (strlen($_POST["nameCategory"]) < 3) {
+                throw new Error(serialize(["nameCategory" => "Nome deve ter no mínimo 3 caracteres"]));
+            }
+
+            if (strlen($_POST["nameCategory"]) > 24) {
+                throw new Error(serialize(["nameCategory" => "Nome deve ter no máximo 24 caracteres"]));
+            }
+
+            $categoryExists = $this->CategoryModel->findByName($_POST["nameCategory"]);
+            if (!empty($categoryExists)) {
+                throw new Error(serialize(["nameCategory" => "Essa categoria já existe!"]));
+            }
+
             $create = $this->CategoryModel->createCategory($_POST["nameCategory"]);
-            if ($create) {
-                echo "Categoria criada com sucesso!";
-                return redirect("/VHS/admin/categories");
-            } else {
-                throw new Error("- Erro ao criar categoria");
+            if (!$create) {
+                throw new Error(serialize(["nameCategory" => "Erro ao criar categoria"]));
             }
-        } catch (NestedValidationException | Error  $exception) {
-            if ($exception instanceof Error) {
-                return redirect("/vhs/admin/categories", [
-                    "errors" => unserialize($exception->getMessage())
-                ]);
-            }
-            return redirect("/vhs/admin/categories", [
-                "errors" => $exception->getMessages()
+
+            return redirect("/VHS/admin/categories", ["success" => "Categoria criada com sucesso"]);
+        } catch (Error $exception) {
+            $message = $exception->getMessage();
+            $errors = unserialize($message) ?: ["nameCategory" => $message];
+
+            return redirect("/VHS/admin/categories", [
+                "errors" => $errors,
+                "fields" => $_POST
             ]);
         }
     }

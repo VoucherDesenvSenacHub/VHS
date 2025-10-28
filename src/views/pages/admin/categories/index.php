@@ -5,29 +5,30 @@ require_once __DIR__ . "/../../../components/header/HeaderComponent.php";
 require_once __DIR__ . "/../../../components/barra_admin/barra_admin.php";
 require_once __DIR__ . "/../../../components/filter/filter.php";
 require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
+require_once __DIR__ . "/../../../components/utils/sweetalert.php";
 
 use function Src\Views\Components\categoriesDataTableComponent\categoriesDataTableComponent;
 use function Src\Views\Components\header\HeaderComponent;
 use function src\views\components\barra_admin\barra_admin;
 use function src\views\components\utils\InputComponent;
+use function Src\Application\Utils\showSweetAlert;
 
 $categoryData = $_SESSION["page_data"]["list"] ?? [];
 $errors = $_SESSION['redirect_data']['errors'] ?? [];
+$success = $_SESSION["redirect_data"]["success"] ?? null;
 $fields = $_SESSION['redirect_data']['fields'] ?? [];
+unset($_SESSION['redirect_data']);
 
 if (!empty($errors) && is_array($errors)) {
     foreach ($errors as $error) {
-        if (str_contains(strtolower($error), 'email') && !str_contains(strtolower($error), 'senha')) {
-            $emailError = $error;
-        } elseif (str_contains(strtolower($error), 'senha') && !str_contains(strtolower($error), 'email')) {
-            $passwordError = $error;
-        } elseif (str_contains(strtolower($error), 'email') && str_contains(strtolower($error), 'senha')) {
-            $emailPasswordError = $error;
+        if (str_contains(strtolower($error), 'nameCategory')) {
+            $nameCategoryError = $error;
         } else {
             $genericError = $error;
         }
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -45,9 +46,7 @@ if (!empty($errors) && is_array($errors)) {
 <body class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center text-white font-[Poppins]">
     <?= HeaderComponent() ?>
     <div class="flex gap-10">
-        <div class="min-w-[220px] position-fixed">
-            <?= barra_admin() ?>
-        </div>
+        <?= barra_admin() ?>
         <div class="p-6 pt-8 w-full flex flex-col gap-6">
             <div class="flex flex-col gap-4">
                 <div class="flex justify-between items-center">
@@ -65,6 +64,15 @@ if (!empty($errors) && is_array($errors)) {
             <div class="w-full">
                 <?= categoriesDataTableComponent($categoryData); ?>
             </div>
+            <?php
+            if (!empty($errors) && is_array($errors)) {
+                $errorMessage = is_array($errors) ? implode(", ", $errors) : $errors;
+                echo showSweetAlert($errorMessage, "", "error");
+            }
+            if (isset($success)) {
+                echo showSweetAlert($success, "", "success");
+            }
+            ?>
         </div>
     </div>
 
@@ -79,7 +87,15 @@ if (!empty($errors) && is_array($errors)) {
                     <div class="flex w-full justify-start">
                         <label for="categoryName" class="text-right text-gray-300">Nome</label>
                     </div>
-                    <input name="nameCategory" id="categoryName" type="text" class="col-span-3 bg-gray-800 border border-gray-700 text-gray-50 p-2 rounded" placeholder="Digite o nome" />
+                    <!-- <input name="nameCategory" id="categoryName" type="text" class="col-span-3 bg-gray-800 border border-gray-700 text-gray-50 p-2 rounded" placeholder="Digite o nome" / -->
+                    <?= InputComponent(
+                        placeholder: "Digite o nome",
+                        name: "nameCategory",
+                        type: "text",
+                        value: isset($fields["nameCategory"]) ? $fields["nameCategory"] : "",
+                        error: isset($errors["nameCategory"]),
+                        errorDescription: isset($errors["nameCategory"]) ? $errors["nameCategory"] : ""
+                    ) ?>
                 </div>
                 <div class="mt-4 flex justify-between gap-2">
                     <button id="closeModalBtn" type="button" class="outline outline-1 px-4 py-2 outline-[#660BAD] rounded-md transition-colors hover:bg-gray-800 w-[200px] h-[50px]">Cancelar</button>
@@ -119,11 +135,8 @@ if (!empty($errors) && is_array($errors)) {
         openModalBtn.addEventListener('click', openModal);
         closeModalBtn.addEventListener('click', closeModal);
         saveCategoryBtn.addEventListener('click', () => {
-            console.log('Category Name:', document.getElementById('categoryName').value);
-            closeModal();
+            document.querySelector('form').dispatchEvent(new Event('submit'));
         });
-
-        modalOverlay.addEventListener('click', closeModal);
     </script>
 </body>
 

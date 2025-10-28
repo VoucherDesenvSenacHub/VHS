@@ -85,7 +85,7 @@
                 </div>
                 <div class='relative flex justify-center items-center'> 
                     $icon
-                    <input name='$name' type='$type' placeholder='$placeholder' class='$input_style $className' value='$value'>
+                    <input  name='$name' type='$type' placeholder='$placeholder' class='$input_style $className' value='$value'>
                 </div>
                 $errorElement
             </div>

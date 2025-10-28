@@ -25,18 +25,26 @@ class UpdateCategoriesController extends Controller
                 throw new Error("Categoria não encontrada.");
             }
             if (!isset($_POST['updateCategory']) || empty(trim($_POST['updateCategory']))) {
-                throw new Error("O nome da categoria é obrigatório.");
+                throw new Error(serialize(["updateCategory" => "Nome da categoria é obrigatório"]));
+            }
+            if (strlen($_POST['updateCategory']) < 3) {
+                throw new Error(serialize(["updateCategory" => "Nome deve ter no mínimo 3 caracteres"]));
+            }
+            if (strlen($_POST['updateCategory']) > 24) {
+                throw new Error(serialize(["updateCategory" => "Nome deve ter no máximo 24 caracteres"]));
+            }
+            $categoryExists = $this->categoryModel->findByName($_POST['updateCategory']);
+            if (!empty($categoryExists)) {
+                throw new Error(serialize(["updateCategory" => "Essa categoria já existe!"]));
             }
             $updated = $this->categoryModel->updateCategory(
                 $idCategory,
                 trim($_POST['updateCategory'])
             );
-            if ($updated) {
-                echo "Categoria atualizada com sucesso!";
-                return redirect('/VHS/admin/categories');
-            } else {
-                throw new Error("Falha ao atualizar a categoria.");
+            if (!$updated) {
+                throw new Error(serialize(["updateCategory" => "Erro ao editar categoria"]));
             }
+            return redirect('/VHS/admin/categories', ["success" => "Categoria editada com sucesso!"]);
         } catch (NestedValidationException | Error $exception) {
             if ($exception instanceof Error) {
                 return redirect("/vhs/admin/categories", [
