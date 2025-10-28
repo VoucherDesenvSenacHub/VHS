@@ -43,11 +43,11 @@ class SignInController extends Controller {
             
             $schema->assert($_POST);
 
-            if (!verifyRecaptcha($recaptcha)) {
-                return redirect("/VHS/auth/signin?error=1", [
-                    'errors' => ['Falha na verificação do reCAPTCHA. Tente novamente.']
-                ]);
-            }
+            // if (!verifyRecaptcha($recaptcha)) {
+            //     return redirect("/VHS/auth/signin?error=1", [
+            //         'errors' => ['Falha na verificação do reCAPTCHA. Tente novamente.']
+            //     ]);
+            // }
 
             $user = $this->userModel->findUserByEmail($_POST["email"]);
 
