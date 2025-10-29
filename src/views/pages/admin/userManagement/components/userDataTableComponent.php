@@ -130,7 +130,6 @@ function userDataTableComponent($users)
                 </div>
             </div>
         </div>
-
         <div id="editModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50">
             <div class="bg-[#1B1B1B] border border-gray-700 rounded-lg p-6 w-full max-w-md">
                 <h2 class="text-lg font-bold text-white text-center">Editar usuário</h2>
@@ -145,28 +144,31 @@ function userDataTableComponent($users)
                             required
                         >
                     </div>
-
                     <div>
                         <label for="editRole" class="block text-sm text-slate-300 mb-1">Perfil</label>
-                        <select name="role" id="editRole" 
-                                class="w-full rounded-md border border-gray-600 bg-gray-800 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#660BAD]" 
-                                required>
+                        <select 
+                            name="role" 
+                            id="editRole" 
+                            class="w-full rounded-md border border-gray-600 bg-gray-800 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#660BAD]" 
+                            required
+                        >
                             <option value="ADMIN">Admin</option>
                             <option value="USER">Usuário</option>
                             <option value="CREATOR">Criador</option>
                         </select>
                     </div>
-
                     <div>
                         <label for="editStatus" class="block text-sm text-slate-300 mb-1">Status</label>
-                        <select name="status" id="editStatus" 
-                                class="w-full rounded-md border border-gray-600 bg-gray-800 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#660BAD]" 
-                                required>
+                        <select 
+                            name="status" 
+                            id="editStatus" 
+                            class="w-full rounded-md border border-gray-600 bg-gray-800 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#660BAD]" 
+                            required
+                        >
                             <option value=1>Ativo</option>
                             <option value=0>Inativo</option>
                         </select>
                     </div>
-
                     <div class="mt-6 flex justify-between gap-2">
                         <button type="button" id="closeEditModal" class="transition-colors w-full px-4 py-2 rounded-md border border-gray-600 text-gray-300 hover:bg-gray-700">
                             Cancelar

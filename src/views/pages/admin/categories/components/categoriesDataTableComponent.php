@@ -2,21 +2,20 @@
 
 namespace Src\Views\Components\CategoriesDataTableComponent;
 
-function copyNotify(): string
-{
-    return '
-        <div id="copy-notification" class="fixed bottom-4 right-4 bg-gray-800 text-white p-4 rounded-md shadow-lg hidden opacity-0 translate-y-5 transition-all duration-300">
-            <div class="title font-bold"></div>
-            <div class="subtitle text-sm"></div>
-        </div>';
-}
+require_once __DIR__ . '/../../../../../application/utils/pagination.php';
 
-function categoriesDataTableComponent(array $categories, int $page = 1, int $perPage = 7): void
+use function Src\Application\Utils\paginate;
+
+function categoriesDataTableComponent(array $categories)
 {
-    $totalCategories = count($categories);
-    $totalPages = ceil($totalCategories / $perPage);
-    $offset = ($page - 1) * $perPage;
-    $displayCategories = array_slice($categories, $offset, $perPage);
+    $pagination = paginate($categories);
+    if (empty($categories)) {
+        return <<<HTML
+            <div class="rounded-lg border border-gray-700 bg-[#1B1B1B] p-6 text-center">
+                <p class="text-slate-400">Nenhuma categoria criada.</p>
+            </div>
+        HTML;
+    }
 
 ?>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -33,11 +32,8 @@ function categoriesDataTableComponent(array $categories, int $page = 1, int $per
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-700">
-                    <?php foreach ($displayCategories as $category): ?>
+                    <?php foreach ($categories as $category): ?>
                         <?php
-                        if (!isset($category['id'])) {
-                            continue; // Pula categorias sem ID para evitar erros
-                        }
                         $modalId = 'modal-' . htmlspecialchars($category['id'], ENT_QUOTES, 'UTF-8');
                         $overlayId = 'overlay-' . htmlspecialchars($category['id'], ENT_QUOTES, 'UTF-8');
                         $openModalId = 'openModal-' . htmlspecialchars($category['id'], ENT_QUOTES, 'UTF-8');
@@ -73,12 +69,10 @@ function categoriesDataTableComponent(array $categories, int $page = 1, int $per
             </table>
         </div>
     </div>
+    <?php echo $pagination; ?>
 
-    <?php foreach ($displayCategories as $category): ?>
+    <?php foreach ($categories as $category): ?>
         <?php
-        if (!isset($category['id'])) {
-            continue; // Pula categorias sem ID
-        }
         $modalId = 'modal-' . htmlspecialchars($category['id'], ENT_QUOTES, 'UTF-8');
         $overlayId = 'overlay-' . htmlspecialchars($category['id'], ENT_QUOTES, 'UTF-8');
         $closeModalId = 'closeModal-' . htmlspecialchars($category['id'], ENT_QUOTES, 'UTF-8');
@@ -144,36 +138,7 @@ function categoriesDataTableComponent(array $categories, int $page = 1, int $per
         </div>
     <?php endforeach; ?>
 
-    <?php if ($totalCategories > $perPage): ?>
-        <div class="mt-6 flex items-center justify-between text-sm text-slate-400">
-            <div>Mostrando <?php echo ($offset + 1); ?> a <?php echo min($offset + $perPage, $totalCategories); ?> de <?php echo $totalCategories; ?> categorias</div>
-            <div class="flex items-center gap-2">
-                <?php if ($page > 1): ?>
-                    <a href="?page=<?php echo ($page - 1); ?>" class="border border-slate-700 text-slate-400 bg-transparent px-3 py-1 rounded text-sm">Anterior</a>
-                <?php else: ?>
-                    <button class="border border-slate-700 text-slate-400 bg-transparent px-3 py-1 rounded text-sm cursor-not-allowed" disabled>Anterior</button>
-                <?php endif; ?>
-                <?php if ($page < $totalPages): ?>
-                    <a href="?page=<?php echo ($page + 1); ?>" class="border border-slate-700 text-slate-400 bg-transparent px-3 py-1 rounded text-sm">Próximo</a>
-                <?php else: ?>
-                    <button class="border border-slate-700 text-slate-400 bg-transparent px-3 py-1 rounded text-sm cursor-not-allowed" disabled>Próximo</button>
-                <?php endif; ?>
-            </div>
-        </div>
-    <?php else: ?>
-        <div class="mt-6 flex items-center justify-between text-sm text-slate-400">
-            <div>Mostrando <?php echo $totalCategories; ?> de <?php echo $totalCategories; ?> categorias</div>
-            <div class="flex items-center gap-2">
-                <button class="border border-slate-700 text-slate-400 bg-transparent px-3 py-1 rounded text-sm cursor-not-allowed" disabled>Anterior</button>
-                <button class="border border-slate-700 text-slate-400 bg-transparent px-3 py-1 rounded text-sm cursor-not-allowed" disabled>Próximo</button>
-            </div>
-        </div>
-    <?php endif; ?>
-
     <script>
-        lucide.createIcons();
-
-        // Inicializa modais de edição dinamicamente
         document.querySelectorAll("[id^=openModal-]").forEach(button => {
             const categoryId = button.dataset.categoryId;
             const modal = document.getElementById(`modal-${categoryId}`);
@@ -182,7 +147,6 @@ function categoriesDataTableComponent(array $categories, int $page = 1, int $per
             const modalContent = modal.querySelector("div");
 
             button.addEventListener("click", () => {
-                // Atualiza a URL com o parâmetro update=id
                 const newUrl = new URL(window.location.href);
                 newUrl.searchParams.set('update', categoryId);
                 window.history.pushState({}, '', newUrl);
@@ -197,7 +161,6 @@ function categoriesDataTableComponent(array $categories, int $page = 1, int $per
             });
 
             window[`closeModal${categoryId}`] = () => {
-                // Remove o parâmetro update da URL ao fechar o modal
                 const newUrl = new URL(window.location.href);
                 newUrl.searchParams.delete('update');
                 window.history.pushState({}, '', newUrl);
@@ -228,7 +191,6 @@ function categoriesDataTableComponent(array $categories, int $page = 1, int $per
             });
         });
 
-        // Inicializa modais de exclusão dinamicamente
         document.querySelectorAll("[id^=openDeleteModal-]").forEach(button => {
             const categoryId = button.id.replace("openDeleteModal-", "");
             const modal = document.getElementById(`delete-modal-${categoryId}`);
@@ -273,8 +235,6 @@ function categoriesDataTableComponent(array $categories, int $page = 1, int $per
             });
         });
 
-        // Manipula envio do formulário via AJAX
-        // Inicializa modais de edição dinamicamente
         document.querySelectorAll("[id^=openModal-]").forEach(button => {
             const categoryId = button.dataset.categoryId;
             const modal = document.getElementById(`modal-${categoryId}`);
@@ -283,7 +243,6 @@ function categoriesDataTableComponent(array $categories, int $page = 1, int $per
             const modalContent = modal.querySelector("div");
 
             button.addEventListener("click", () => {
-                // ✅ Atualiza a URL para /admin/categories/{id}
                 const baseUrl = window.location.origin + window.location.pathname;
                 window.history.pushState({}, '', `${baseUrl}/${categoryId}`);
 
@@ -325,31 +284,6 @@ function categoriesDataTableComponent(array $categories, int $page = 1, int $per
                 }
             });
         });
-
-        function showNotification(title, subtitle) {
-            const existing = document.getElementById("copy-notification");
-            if (existing) existing.remove();
-
-            document.body.insertAdjacentHTML("beforeend", <?php echo json_encode(copyNotify()); ?>);
-            const notification = document.getElementById("copy-notification");
-
-            notification.querySelector(".title").textContent = title;
-            notification.querySelector(".subtitle").textContent = subtitle;
-
-            notification.classList.remove("hidden");
-
-            requestAnimationFrame(() => {
-                notification.classList.remove("opacity-0", "translate-y-5");
-                notification.classList.add("opacity-100", "translate-y-0");
-            });
-
-            setTimeout(() => {
-                notification.classList.remove("opacity-100", "translate-y-0");
-                notification.classList.add("opacity-0", "translate-y-5");
-
-                setTimeout(() => notification.remove(), 300);
-            }, 2000);
-        }
     </script>
 <?php
 }
