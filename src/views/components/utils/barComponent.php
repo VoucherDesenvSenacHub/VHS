@@ -2,7 +2,8 @@
 
 namespace Src\Views\Components\Utils;
 
-function BarComponent() {
+function BarComponent()
+{
     return <<<HTML
         <button id='barrinha' class='barrinha min-w-10 min-h-10 rounded-xl hover:bg-white/10 active:bg-transparent flex items-center justify-center transition-all duration-200'>
             <svg width="28" height="25" viewBox="0 0 28 25" fill="none" xmlns="http://www.w3.org/2000/svg">

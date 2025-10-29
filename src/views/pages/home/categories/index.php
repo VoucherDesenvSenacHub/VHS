@@ -17,6 +17,7 @@ $category = $_SESSION["page_data"]["category"] ?? "Não encontrado!";
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,13 +35,14 @@ $category = $_SESSION["page_data"]["category"] ?? "Não encontrado!";
         }
     </style>
 </head>
+
 <body class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center text-white">
     <div>
         <?= HeaderComponent() ?>
     </div>
 
-    <div class="flex flex-col md:flex-row w-full">
-        <div class="hidden md:block">
+    <div class="flex  md:flex-row w-full">
+        <div class="">
             <?= SidebarComponent() ?>
         </div>
 
@@ -48,8 +50,8 @@ $category = $_SESSION["page_data"]["category"] ?? "Não encontrado!";
             <div class="max-w-[1500px] mx-auto">
                 <h2 class="text-2xl font-bold text-white mb-2"><span class="text-purple-400">#</span> <?= $category ?></h2>
                 <p class="text-gray-400 text-sm mb-6">Confira os vídeos mais populares da nossa plataforma VHS da categoria, <?= $category ?></p>
-                
-                
+
+
                 <section class="mb-12">
                     <div class="grid grid-cols-1 gap-6">
                         <div class="lg:col-span-1">
@@ -58,7 +60,7 @@ $category = $_SESSION["page_data"]["category"] ?? "Não encontrado!";
                 </section>
                 <section class="mb-12">
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                            <?= viewCards(array_slice($videos, 1), 'video'); ?>
+                        <?= viewCards(array_slice($videos, 1), 'video'); ?>
                     </div>
                 </section>
                 <section>
@@ -68,4 +70,5 @@ $category = $_SESSION["page_data"]["category"] ?? "Não encontrado!";
         </main>
     </div>
 </body>
+
 </html>

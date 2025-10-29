@@ -2,7 +2,8 @@
 
 namespace Src\Views\Components\Sidebar;
 
-function SidebarComponent() {
+function SidebarComponent()
+{
     $menu = [
         "home" => [
             [
@@ -83,7 +84,7 @@ function SidebarComponent() {
     }
 
     return <<<HTML
-        <aside class="h-[91vh] top-16 sticky p-7 transition-all border-r border-secondary/10">
+        <aside id="sidebar" class=" hidden sm:block h-[91vh] top-16 sticky p-7 transition-all border-r border-secondary/10">
             <h3 class="title text-secondary text-sm">HOME</h3>
             <ul class="flex flex-col gap-9 mt-5">
                 $htmlHome
@@ -96,5 +97,4 @@ function SidebarComponent() {
             <script src="/VHS/src/views/components/sidebar/script.js"></script>
         </aside>
     HTML;
-    
 }

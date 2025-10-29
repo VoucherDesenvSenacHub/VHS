@@ -11,6 +11,7 @@ use function Src\Views\Components\Sidebar\SidebarComponent;
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,22 +20,28 @@ use function Src\Views\Components\Sidebar\SidebarComponent;
     <link rel="stylesheet" href="/VHS/src/styles/global.css">
     <title>VHS - Fast</title>
 </head>
+
 <body>
     <?= HeaderComponent() ?>
 
-    <div class="flex flex-col md:flex-row w-full">
-        <div class="hidden md:block">
+    <div class="flex md:flex-row w-full">
+        <div class="">
             <?= SidebarComponent() ?>
         </div>
 
         <section class="flex flex-col justify-center max-w-[1500px] mx-auto w-1/4 min-w-[33rem]" style="height: calc(100vh - 10rem);">
             <?= FastComponent(
-                ['video_url' => '/VHS/src/views/components/fastComponent/video_test.mp4',
-                    'titulo' => 'JOGANDO EURO TRUCK SIMULATOR 2! MUITO TOP!','user' =>'Bolsonaro','userimg' => 'https://agenciainfra.com/blog/wp-content/uploads/2021/09/bolsonaro-foto-fabio-rodrigues-pozzebom-agencia-brasil.jpg']) ?>
+                [
+                    'video_url' => '/VHS/src/views/components/fastComponent/video_test.mp4',
+                    'titulo' => 'JOGANDO EURO TRUCK SIMULATOR 2! MUITO TOP!',
+                    'user' => 'Bolsonaro',
+                    'userimg' => 'https://agenciainfra.com/blog/wp-content/uploads/2021/09/bolsonaro-foto-fabio-rodrigues-pozzebom-agencia-brasil.jpg'
+                ]
+            ) ?>
         </section>
 
     </div>
 
 </body>
+
 </html>
- 

@@ -32,7 +32,7 @@ $videoHTMX = [
     "url" => "https://youtube.com/watch?v=htmx",
     "type_card" => "video",
     "description" => "RocketSeat",
-    "duration" => "16 min", 
+    "duration" => "16 min",
     "title" => "HTMX: HTML com Super Poderes | RocketSeat - Discover",
     "username" => "Diego da RocketSeat",
     "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
@@ -61,12 +61,12 @@ $mostPopularVideos = [
         "comments" => 67
     ],
     [
-        "url" => "https://youtube.com/watch?v=nextjs2", 
+        "url" => "https://youtube.com/watch?v=nextjs2",
         "type_card" => "video",
         "description" => "Rafael Germano",
         "duration" => "7 min",
         "title" => "Tudo sobre o Next.js 15, nova arquitetura de pasta",
-        "username" => "Rafael Germano", 
+        "username" => "Rafael Germano",
         "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
         "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g",
         "views" => "5.5k views",
@@ -77,14 +77,14 @@ $mostPopularVideos = [
     ],
     [
         "url" => "https://youtube.com/watch?v=nextjs3",
-        "type_card" => "video", 
+        "type_card" => "video",
         "description" => "Rafael Germano",
         "duration" => "7 min",
         "title" => "Tudo sobre o Next.js 15, nova arquitetura de pasta",
         "username" => "Rafael Germano",
         "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
         "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g",
-        "views" => "5.5k views", 
+        "views" => "5.5k views",
         "created_at" => "há 7 dias",
         "maked_for" => "Online",
         "likes" => 890,
@@ -93,7 +93,7 @@ $mostPopularVideos = [
     [
         "url" => "https://youtube.com/watch?v=startups",
         "type_card" => "video",
-        "description" => "Rafael Germano", 
+        "description" => "Rafael Germano",
         "duration" => "7 min",
         "title" => "10 Mitos sobre tech startups - Parte 1",
         "username" => "Rafael Germano",
@@ -101,7 +101,7 @@ $mostPopularVideos = [
         "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g",
         "views" => "10k views",
         "created_at" => "há 5 dias",
-        "maked_for" => "Online", 
+        "maked_for" => "Online",
         "likes" => 1200,
         "comments" => 89
     ]
@@ -112,7 +112,7 @@ $techVideos = [
         "url" => "https://youtube.com/watch?v=neovim",
         "type_card" => "video",
         "description" => "Rafael Germano",
-        "duration" => "7 min", 
+        "duration" => "7 min",
         "title" => "Como configurar o NEOVIM para ser uma",
         "username" => "Rafael Germano",
         "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
@@ -129,7 +129,7 @@ $techVideos = [
         "description" => "Rafael Germano",
         "duration" => "7 min",
         "title" => "10 Mitos sobre tech startups - Parte 1",
-        "username" => "Rafael Germano", 
+        "username" => "Rafael Germano",
         "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
         "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g",
         "views" => "8.5k views",
@@ -145,7 +145,7 @@ $techVideos = [
         "duration" => "7 min",
         "title" => "Tudo sobre o Next.js 15, nova arquitetura de pasta",
         "username" => "Rafael Germano",
-        "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png", 
+        "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
         "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g",
         "views" => "8.5k views",
         "created_at" => "há 2 semanas atrás",
@@ -161,7 +161,7 @@ $techVideos = [
         "title" => "Aprenda PYTHON em 1 hora",
         "username" => "Rafael Germano",
         "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
-        "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g", 
+        "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g",
         "views" => "8.5k views",
         "created_at" => "há 2 semanas atrás",
         "maked_for" => "Online",
@@ -210,7 +210,7 @@ $healthVideos = [
         "username" => "Rafael Germano",
         "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
         "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g",
-        "views" => "8.5k views", 
+        "views" => "8.5k views",
         "created_at" => "há 3 semanas atrás",
         "maked_for" => "Online",
         "likes" => 750,
@@ -300,6 +300,7 @@ $styleVideos = [
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -318,13 +319,14 @@ $styleVideos = [
         }
     </style>
 </head>
+
 <body>
     <div>
         <?= HeaderComponent() ?>
     </div>
 
-    <div class="flex flex-col md:flex-row w-full">
-        <div class="hidden md:block">
+    <div class="flex md:flex-row w-full">
+        <div class="">
             <?= SidebarComponent() ?>
         </div>
 
@@ -336,21 +338,19 @@ $styleVideos = [
                         Confira os vídeos que você já assistiu!
                     </p>
                     <div class="flex gap-2 max-w-96 mb-4">
-                        <?= ButtonComponent("Vídeos", "studio", width:8, height:2.5) ?>
-                        <?= ButtonComponent("Fast", "studio", width:8, height:2.5) ?>
-                        <?= ButtonComponent("Eventos", "studio", width:8, height:2.5) ?>
+                        <?= ButtonComponent("Vídeos", "studio", width: 8, height: 2.5) ?>
+                        <?= ButtonComponent("Fast", "studio", width: 8, height: 2.5) ?>
+                        <?= ButtonComponent("Eventos", "studio", width: 8, height: 2.5) ?>
                     </div>
                     <div class="relative">
                         <ul class="flex flex-col gap-3 bg-gray600 p-2 pr-4 filter-menu absolute z-10 top-16 hidden rounded-xl border border-white/20">
                             <li
-                                class=" text-white font-medium flex text-base gap-2 items-center ml-1 cursor-pointer"
-                            >
+                                class=" text-white font-medium flex text-base gap-2 items-center ml-1 cursor-pointer">
                                 <img src="/VHS/public/icons/clock.svg" class="w-5 h-5" />
                                 <p>Mais recentes</p>
                             </li>
                             <li
-                                class=" text-white font-medium flex text-base gap-2 items-center ml-1 cursor-pointer"
-                            >
+                                class=" text-white font-medium flex text-base gap-2 items-center ml-1 cursor-pointer">
                                 <img src="/VHS/public/icons/clock2.svg" class="w-5" />
                                 <p>Mais antigos</p>
                             </li>
@@ -374,4 +374,5 @@ $styleVideos = [
         </main>
     </div>
 </body>
+
 </html>

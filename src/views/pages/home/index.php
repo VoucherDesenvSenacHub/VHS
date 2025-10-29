@@ -25,6 +25,7 @@ $categories = $_SESSION["page_data"]["categories"] ?? [];
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,27 +43,29 @@ $categories = $_SESSION["page_data"]["categories"] ?? [];
         }
     </style>
 </head>
+
 <body>
     <div>
         <?= HeaderComponent() ?>
     </div>
 
-    <div class="flex flex-col md:flex-row w-full">
-        <div class="hidden md:block">
+    <div class="flex md:flex-row w-full">
+        <div>
             <?= SidebarComponent() ?>
+
         </div>
 
         <main class="flex-1 px-4 sm:px-6 py-4 mx-auto">
             <div class="max-w-[1500px] mx-auto">
-                
+
                 <section class="mb-12">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         <div class="lg:col-span-1">
                             <?= count($featuredVideos) == 1 ? FeaturedCardComponent($featuredVideos[0]) : "" ?>
                         </div>
-                        
+
                         <div class="lg:col-span-1">
-                            <?= count($featuredVideos) == 2 ? FeaturedCardComponent($featuredVideos[1]) : ""?>
+                            <?= count($featuredVideos) == 2 ? FeaturedCardComponent($featuredVideos[1]) : "" ?>
                         </div>
                     </div>
                 </section>
@@ -70,7 +73,7 @@ $categories = $_SESSION["page_data"]["categories"] ?? [];
                 <section class="mb-12">
                     <h2 class="text-2xl font-bold text-white mb-2"><span class="text-purple-400">#</span> Mais populares</h2>
                     <p class="text-gray-400 text-sm mb-6">Confira os vídeos mais populares da nossa plataforma VHS</p>
-                    
+
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                         <?= viewCards($mostPopularVideos, 'videos'); ?>
                     </div>
@@ -79,7 +82,7 @@ $categories = $_SESSION["page_data"]["categories"] ?? [];
                 <?php foreach ($categories as $category): ?>
                     <section class="mb-12">
                         <h2 class="text-2xl font-bold text-white mb-6"><span class="text-purple-400">#</span> <?= $category['name'] ?? "" ?></h2>
-                        
+
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                             <?= viewCards($category["videos"], 'videos'); ?>
                         </div>
@@ -90,4 +93,5 @@ $categories = $_SESSION["page_data"]["categories"] ?? [];
     </div>
     <?php echo isset($errors) ? showSweetAlert('Sem Permissão!', $errors, 'error') : ''; ?>
 </body>
+
 </html>

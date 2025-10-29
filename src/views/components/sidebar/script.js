@@ -5,6 +5,9 @@ const sidebar = document.querySelector("aside");
 const icons = document.querySelectorAll(".icon");
 const separator = document.querySelector(".separator");
 
+// var state = 1;
+
+
 let isExpanded = true;
 sidebar.style.transition = "width 0.3s ease";
 sidebar.style.overflow = "hidden";
@@ -35,6 +38,8 @@ function toggleSidebar(state) {
     isExpanded = state !== undefined ? state : !isExpanded;
 
     sidebar.style.width = isExpanded ? "12rem" : "5.5rem";
+    sidebar.classList.toggle("hidden", isExpanded);
+
     separator.style.width = isExpanded ? "auto" : "2rem";
 
     titles.forEach(title => {

@@ -124,12 +124,11 @@ $videos = [
             </div>
             <div class="flex gap-4 w-96 my-4">
                 <?php
-                    echo ButtonComponent("Videos", "studio", "", 10.675, 2.5,"",'/VHS/src/views/pages/studio/content');
-                    echo ButtonComponent("Fast", "studio", "", 10.675, 2.5,"","/VHS/src/views/pages/studio/content/fast.php");
-                    echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5,"","/VHS/src/views/pages/studio/content");
+                echo ButtonComponent("Videos", "studio", "", 10.675, 2.5, "", '/VHS/src/views/pages/studio/content');
+                echo ButtonComponent("Fast", "studio", "", 10.675, 2.5, "", "/VHS/src/views/pages/studio/content/fast.php");
+                echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5, "", "/VHS/src/views/pages/studio/content");
                 ?>
-            </div>  
-
+            </div>
             <?= InputComponent("text", "Pesquisar", icon: "/VHS/public/icons/Filter.svg", iconPosition: "left", onClickIcon: "showFilterMenu()") ?>
 
             <div id="filter" class="absolute left-[16.5rem] z-10 hidden flex flex-col bg-gray-900 rounded-lg p-2 max-w-32 border-[0.5px] border-gray-500">
@@ -144,42 +143,42 @@ $videos = [
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-5">
                 <?php
-                    echo CardFast([
-                        'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
-                        'titulo' => 'espero vocês lá',
-                        'likes' => '50K',
-                        'views' => '540K'
-                    ]);     
-                    echo CardFast([
-                        'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
-                        'titulo' => 'espero vocês lá',
-                        'likes' => '50K',
-                        'views' => '540K'
-                    ]);     
-                    echo CardFast([
-                        'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
-                        'titulo' => 'espero vocês lá',
-                        'likes' => '50K',
-                        'views' => '540K'
-                    ]);      
-                    echo CardFast([
+                echo CardFast([
                     'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
                     'titulo' => 'espero vocês lá',
                     'likes' => '50K',
                     'views' => '540K'
-                    ]);      
-                    echo CardFast([
+                ]);
+                echo CardFast([
                     'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
                     'titulo' => 'espero vocês lá',
                     'likes' => '50K',
                     'views' => '540K'
-                    ]);      
-                    echo CardFast([
+                ]);
+                echo CardFast([
                     'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
                     'titulo' => 'espero vocês lá',
                     'likes' => '50K',
                     'views' => '540K'
-                    ]);       
+                ]);
+                echo CardFast([
+                    'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                    'titulo' => 'espero vocês lá',
+                    'likes' => '50K',
+                    'views' => '540K'
+                ]);
+                echo CardFast([
+                    'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                    'titulo' => 'espero vocês lá',
+                    'likes' => '50K',
+                    'views' => '540K'
+                ]);
+                echo CardFast([
+                    'thumbnail_url' => '/VHS/public/images/imgCardtst.jpg',
+                    'titulo' => 'espero vocês lá',
+                    'likes' => '50K',
+                    'views' => '540K'
+                ]);
                 ?>
             </div>
         </div>
