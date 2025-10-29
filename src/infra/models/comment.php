@@ -71,4 +71,10 @@ class CommentModel extends Model {
         return $this->database->query($sql, [":id" => $id]);
     }
 
+    public function verifyCommentIdVideoForUser(string $userId, string $commentId) {
+        $sql = "SELECT videos.id FROM comments JOIN videos ON videos.id = comments.video_id
+        WHERE comments.id = :commentId AND videos.author_id = :userId";
+        return $this->database->exec($sql, ["commentId"=> $commentId, ":userId" => $userId]);
+    }
+
 }

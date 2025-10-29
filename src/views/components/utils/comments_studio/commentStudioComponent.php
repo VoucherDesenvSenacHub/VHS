@@ -56,16 +56,13 @@ function CommentStudioComponent(string $name, string $text,  string | null $crea
                 <div class='mt-2'>
                     <ul class='w-full flex gap-3'>  
                         <li>
-                            <img src='/VHS/public/icons/comments/dialog.svg'>
+                            <img src='/VHS/public/icons/comments/trash.svg' onclick='deleteComment(event,"{$comment_id}", "{$name}")'>
                         </li>
                         <li>
-                            <img src='/VHS/public/icons/comments/trash.svg'>
+                            <img like="$creator_like" src=' $likeSrc' onclick='likeComment(event, "{$comment_id}", "{$creator_like}")'>
                         </li>
                         <li>
-                            <img like="$creator_like" id='favorite-comement{$comment_id}' src=' $likeSrc' onclick='likeComment(event, "{$comment_id}", "{$creator_like}")'>
-                        </li>
-                        <li>
-                            <img src='/VHS/public/icons/comments/user-block.svg'>
+                            <img src='/VHS/public/icons/comments/user-block.svg' onclick='blockUser(event, "{$comment_id}", "{$name}")'>
                         </li>
                     </ul>    
                 </div>

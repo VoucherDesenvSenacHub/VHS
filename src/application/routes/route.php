@@ -42,6 +42,7 @@ use Src\Application\Controllers\VideoAvaliationController;
 use Src\Application\Controllers\VideoController;
 use Src\Application\Controllers\StudioCommentsViewController;
 use Src\Application\Controllers\LikeCommentsCreatorController;
+use Src\Application\Controllers\DeleteCommentStudioController;
 
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../../..");
 $dotenv->load();
@@ -65,8 +66,9 @@ $router->post('/api/v1/comments/report/remove', DeleteReportCommentsController::
 $router->post("/api/v1/json/video/rating", VideoAvaliationController::class);
 $router->post('/api/v1/comment/edit', UpdateCommentController::class, RedirectUserNotLoggedMiddleware::class);
 $router->post('/api/v1/comment/delete', DeleteCommentController::class, RedirectUserNotAdminMiddleware::class);
-$router->post('/api/v1/studio/comments/creator-like', LikeCommentsCreatorController::class, RedirectUserNotCreatorMiddleware::class);
 
+$router->post('/api/v1/studio/comments/creator-like', LikeCommentsCreatorController::class, RedirectUserNotCreatorMiddleware::class);
+$router->post('/api/v1/studio/comment/delete', DeleteCommentStudioController::class, RedirectUserNotCreatorMiddleware::class);
 # Views Routes
 
 $router->get('/home', HomeController::class, RedirectUserNotLoggedMiddleware::class);
