@@ -2,7 +2,7 @@
 
 namespace Src\Views\Components\Utils;
 
-function CommentStudioComponent(string $name, string $text,  string | null $created_at = null, string | null $userImg = null, string | null $thumbnailURL = null, string | null $videoId = null, $isVideoComments = false, string | null $comment_id = null, int | null $creator_like = null)
+function CommentStudioComponent(string $name, string $text,  string | null $created_at = null, string | null $userImg = null, string | null $thumbnailURL = null, string | null $videoId = null, $isVideoComments = false, string | null $comment_id = null, int | null $creator_like = null, string | null $user_blocked_id = null)
 {
     $userImg = <<<HTML
                 <div class='flex-shrink-0 w-12 h-12 rounded-full bg-white/10 overflow-hidden'>
@@ -25,6 +25,10 @@ function CommentStudioComponent(string $name, string $text,  string | null $crea
     $comment_id = htmlspecialchars($comment_id, ENT_QUOTES, 'UTF-8');
 
     $creator_like = htmlspecialchars($creator_like, ENT_QUOTES, 'UTF-8');
+
+    $user_blocked_id = htmlspecialchars($user_blocked_id, ENT_QUOTES, 'UTF-8');
+
+    $current_user_id = $_SESSION['user']['id'];
 
     if (!$isVideoComments) {
         $thubnailHTML .= <<<HTML
@@ -62,7 +66,7 @@ function CommentStudioComponent(string $name, string $text,  string | null $crea
                             <img like="$creator_like" src=' $likeSrc' onclick='likeComment(event, "{$comment_id}", "{$creator_like}")'>
                         </li>
                         <li>
-                            <img src='/VHS/public/icons/comments/user-block.svg' onclick='blockUser(event, "{$comment_id}", "{$name}")'>
+                            <img src='/VHS/public/icons/comments/user-block.svg' onclick='blockUser(event, "{$current_user_id}", "{$name}", "{$user_blocked_id}")'>
                         </li>
                     </ul>    
                 </div>

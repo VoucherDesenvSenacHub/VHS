@@ -43,6 +43,7 @@ use Src\Application\Controllers\VideoController;
 use Src\Application\Controllers\StudioCommentsViewController;
 use Src\Application\Controllers\LikeCommentsCreatorController;
 use Src\Application\Controllers\DeleteCommentStudioController;
+use Src\Application\Controllers\UserBlockedUserController;
 
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../../..");
 $dotenv->load();
@@ -69,6 +70,7 @@ $router->post('/api/v1/comment/delete', DeleteCommentController::class, Redirect
 
 $router->post('/api/v1/studio/comments/creator-like', LikeCommentsCreatorController::class, RedirectUserNotCreatorMiddleware::class);
 $router->post('/api/v1/studio/comment/delete', DeleteCommentStudioController::class, RedirectUserNotCreatorMiddleware::class);
+$router->post('/api/v1/studio/users/block', UserBlockedUserController::class, RedirectUserNotCreatorMiddleware::class);
 # Views Routes
 
 $router->get('/home', HomeController::class, RedirectUserNotLoggedMiddleware::class);

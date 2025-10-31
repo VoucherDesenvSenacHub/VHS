@@ -74,7 +74,7 @@
       event.target.src = '/VHS/public/icons/comments/favorite-comment-filled.svg';
     }
 
-    async function blockUser(event, userId, userName) {
+    async function blockUser(event, userId, userName, userBlockedId) {
         event.preventDefault();
 
             Swal.fire({
@@ -83,13 +83,19 @@
                 icon: "warning",
                 preConfirm: async () => {
                     formData.append("userId", userId);
+                    formData.append("userBlockedId", userBlockedId)
 
                     try {
-                        const res = await fetch(`/VHS/api/v1/studio/userBlock`, {
+                        const res = await fetch(`/VHS/api/v1/studio/users/block`, {
                             method: "POST",
                             body: formData,
                             withCredentials: 'include'
                         });
+
+                        if (res.status == 403){
+                            Swal.showValidationMessage("Você não pode se blockear na aplicação.");
+                            return;
+                        }
 
                         if (!res.ok) {
                             Swal.showValidationMessage("Ocorreu um erro ao blockear o usuário.");
@@ -103,6 +109,9 @@
                             timer: 1500,
                             showConfirmButton: false
                         });
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 1500);
                     } catch (error) {
                         console.error(error);
                         Swal.showValidationMessage("Erro ao enviar a requisição.");

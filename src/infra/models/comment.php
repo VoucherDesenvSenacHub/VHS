@@ -77,4 +77,10 @@ class CommentModel extends Model {
         return $this->database->exec($sql, ["commentId"=> $commentId, ":userId" => $userId]);
     }
 
+    public function deleteCommentsInChannelBlocked(string $userId, string $userBlockedId){
+        $sql = "UPDATE comments INNER JOIN videos ON videos.id = comments.video_id
+        SET comments.is_deleted = 1 WHERE videos.author_id = :userId AND comments.user_id = :userBlockedId";
+        return $this->database->exec($sql, ["userId" => $userId, "userBlockedId" => $userBlockedId]);
+    }
+
 }

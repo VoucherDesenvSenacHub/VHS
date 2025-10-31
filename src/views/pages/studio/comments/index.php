@@ -57,7 +57,8 @@ $comments = $_SESSION["page_data"]["comments"];
             userImg: $comment["avatar_url"],
             thumbnailURL: $comment["thumbnail_url"],
             comment_id: $comment["id"],
-            creator_like: $comment["creator_like"]
+            creator_like: $comment["creator_like"],
+            user_blocked_id: $comment["user_id"]
           );
         };
         ?>
