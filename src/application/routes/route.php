@@ -60,6 +60,7 @@ $router->post("/api/v1/comment", CreateCommentController::class, RedirectUserNot
 $router->post('/api/v1/comments/delete', DeleteCommentsController::class, RedirectUserNotAdminMiddleware::class);
 $router->post('/api/v1/users/block', inactivateUserController::class, RedirectUserNotAdminMiddleware::class);
 $router->post('/api/v1/comments/report/remove', DeleteReportCommentsController::class, RedirectUserNotAdminMiddleware::class);
+$router->post('/api/v1/comments/report', ReportCommentController::class, RedirectUserNotLoggedMiddleware::class);
 $router->post("/api/v1/json/video/rating", VideoAvaliationController::class);
 $router->post('/api/v1/comment/edit', UpdateCommentController::class, RedirectUserNotLoggedMiddleware::class);
 $router->post('/api/v1/comment/delete', DeleteCommentController::class, RedirectUserNotAdminMiddleware::class);

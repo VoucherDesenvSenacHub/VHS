@@ -36,7 +36,7 @@ class CreateCommentController extends Controller {
             $videoId = $_GET["videoId"];
             
             if (!$schema->validate($_POST)) {
-                return redirect("/VHS/home/video?id=$videoId");
+                return redirect("/VHS/home/video?id=$videoId#comments", ["errors" => "O comentário deve ter entre 1 e 200 caracteres"]);
             }
 
             $videoExists = $this->videoModel->getVideoById($videoId);
@@ -51,7 +51,7 @@ class CreateCommentController extends Controller {
                 $_SESSION["user"]["id"]
             );
 
-            return redirect("/VHS/home/video?id=$videoId#comments");
+            return redirect("/VHS/home/video?id=$videoId#comments", ["success" => "Comentário criado com sucesso!"]);
 
         } catch (Error $exception) {
             print_r($exception);
