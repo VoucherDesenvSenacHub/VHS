@@ -63,7 +63,12 @@ class CategoryModel extends Model
         ]);
     }
 
-    public function getAllCategories(int $offset, int $limit): array
+    public function getAllCategories(): array
+    {
+        $sql = "SELECT * FROM categories ORDER BY name DESC";
+        return $this->database->query($sql);
+    }
+    public function getCategories(int $offset, int $limit): array
     {
         $sql = "SELECT * FROM categories ORDER BY name DESC LIMIT $offset, $limit";
         return $this->database->query($sql);
