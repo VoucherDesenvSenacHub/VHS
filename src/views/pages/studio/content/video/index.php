@@ -47,7 +47,7 @@ $conteudos = []
             <?= StudioSideMenuComponent() ?>
         </div>
         
-        <div class="flex flex-col gap-4 max-w-[1500px] w-full mx-auto">
+        <div class="flex flex-col gap-4 max-w-[1500px] w-full mx-auto px-6">
             <div class="text-white flex flex-col gap-2">
                 <div>
                     <h1 class="font-semibold text-title text-white">Edicao de video</h1>

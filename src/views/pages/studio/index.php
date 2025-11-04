@@ -50,7 +50,7 @@ $botoes = [
             <?= StudioSideMenuComponent() ?>
         </div>
 
-        <main class="max-w-[1500px] mx-auto">
+        <main class="max-w-[1500px] mx-auto px-6 pt-[1.18rem]">
             <section class="flex gap-4">
                 <img src="https://cdn.pipocamoderna.com.br/wp-content/uploads/2025/05/Virginia-Fonseca.jpg" alt="" class="size-12 rounded-full">
                 <div>

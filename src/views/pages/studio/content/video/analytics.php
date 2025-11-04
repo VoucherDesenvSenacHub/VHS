@@ -51,7 +51,7 @@ $botoes = [
         <div class="hidden md:block">
             <?= StudioSideMenuComponent() ?>
         </div>
-        <div class="flex-1 px-4 py-6 max-w-[1500px] m-auto">
+        <div class="flex-1 px-4 py-6 max-w-[1500px] m-auto px-6">
             <h1 class="text-title font-semibold mb-2">Analytics do vídeo</h1>
             <p class="text-sm text-gray-300 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
             <div class="flex gap-4 w-96 my-4">

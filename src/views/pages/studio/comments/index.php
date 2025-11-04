@@ -35,9 +35,11 @@ $comments = $_SESSION["page_data"]["comments"];
   <div class="flex">
     <?php echo StudioSideMenuComponent(); ?>
 
-    <div class="flex-1 px-10 py-6">
-        <h1 class="text-2xl font-semibold mb-2 text-white">Últimos comentários do vídeo</h1>
-        <p class="text-sm text-gray-300 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
+    <div class="flex flex-col gap-4 max-w-[1500px] mx-auto w-full px-6 pt-[1.18rem]">
+      <div class="flex-col gap-4">
+          <h1 class="text-2xl font-semibold text-white">Últimos comentários do vídeo</h1>
+        <p class="text-secondary text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
+      </div>
     <!-- 
       <div class="flex gap-3 mb-6">
         <?php echo ButtonComponent("Edição", "studio", "", 10.675, 2.5); ?>

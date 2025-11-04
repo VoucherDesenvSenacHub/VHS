@@ -52,7 +52,7 @@ function StudioSideMenuComponent(){
             </li>
         </ul>
     </aside>
-    <script src="\VHS\src\views\components\studioSideMenu\studioSideMenuScript.js"></script>
+    <script src="/VHS/src/views/components/studioSideMenu/script.js"></script>
 HTML;
 }
 ?>

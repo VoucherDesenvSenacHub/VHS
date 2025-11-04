@@ -56,7 +56,7 @@ class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-re
         <div class="hidden md:block">
             <?= SidebarComponent() ?>
     </div>
-    <div class="flex flex-col gap-4 p-6 flex-grow max-w-[1200px] mx-auto ">
+    <div class="flex flex-col gap-4 p-6 flex-grow max-w-[1200px] mx-auto px-6 ">
     <div>
         <h2 class="font-semibold text-3xl text-gray-200 mb-2">Gerenciar Perfil</h2>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae cum repellat expedita beatae distinctio magnam sequi dolorum aliquam. Omnis ab laudantium sunt perferendis rerum. Architecto quae exercitationem laborum dolorum vitae.</p>

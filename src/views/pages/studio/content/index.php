@@ -115,7 +115,7 @@ $videos = [
             echo StudioSideMenuComponent();
             ?>
         </div>
-        <div class="max-w-[1500px] mx-auto">
+        <div class="max-w-[1500px] mx-auto px-6">
             <div>
                 <h1 class="font-semibold text-title text-white">Conteúdo do canal</h1>
                 <p class="text-gray-300">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
