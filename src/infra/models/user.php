@@ -62,7 +62,7 @@ class UserModel extends Model {
         return $this->database->exec($sql, [":token" => $token, ":id" => $id]);
     }
 
-    public function updateUser(string $userId, string $name, string $email, string $username, ?string $password = null, ?string $avatar): bool {
+    public function updateUser(string $userId, string $name, string $email, string $username, string $password, string $avatar): bool {
         $sql = "UPDATE users SET name = :name, email = :email, username = :username" . ($password ? ", password = :password" : "") . ", avatar_url = :avatar_url WHERE id = :id";    
         
         return $this->database->exec($sql, [

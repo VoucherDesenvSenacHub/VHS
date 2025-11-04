@@ -19,7 +19,7 @@ function FastComponent(array $data): string {
     );
 
     return <<<HTML
-        <div class='w-full min-h-full relative flex items-center justify-center current-fast'>
+        <div class='snap-center touch-pan-y overflow-auto w-full min-h-full relative flex items-center justify-center current-fast'>
             <video src='{$video}' class='object-cover h-full absolute -z-10 rounded-xl' loop></video>
             <img src='/VHS/public/icons/fastIcon/setinha.svg' alt='' class=' absolute left-[0.5rem] top-[1rem]'/>
             <img src='/VHS/public/icons/fastIcon/Play.svg' alt='' class='size-16 play'/>
@@ -40,6 +40,5 @@ function FastComponent(array $data): string {
                 <h2 class="font-medium">{$titulo}</h2>
             </div>
         </div>
-        <script src='/VHS/src/views/components/fastComponent/fastComponent.js'></script>
     HTML;
 }
