@@ -6,6 +6,7 @@ require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
 require_once __DIR__ . "/../../../components/utils/comments_studio/commentStudioComponent.php";
 require_once __DIR__ . "/../../../components/utils/inputComponent.php";
 require_once __DIR__ . "/../../../components/utils/footer.php";
+require_once __DIR__ ."/../../../components/filter/filter.php";
 
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
 use function src\views\components\header\HeaderComponent;
@@ -13,8 +14,12 @@ use function src\views\components\Utils\ButtonComponent;
 use function Src\Views\Components\Utils\CommentStudioComponent;
 use function src\views\components\Utils\Footer;
 use function Src\Views\Components\Utils\InputComponent;
+use function src\views\components\filter\Filter;
 
 $comments = $_SESSION["page_data"]["comments"];
+
+$title = 'Últimos comentários do video';
+if (isset($_GET["ordering"])) $title = 'Primeiros comentários do video';
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +42,7 @@ $comments = $_SESSION["page_data"]["comments"];
 
     <div class="flex flex-col gap-4 max-w-[1500px] mx-auto w-full px-6 pt-[1.18rem]">
       <div class="flex-col gap-4">
-          <h1 class="text-2xl font-semibold text-white">Últimos comentários do vídeo</h1>
+          <h1 class="text-2xl font-semibold text-white"><?=$title?></h1>
         <p class="text-secondary text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
       </div>
     <!-- 
@@ -47,7 +52,21 @@ $comments = $_SESSION["page_data"]["comments"];
         <?php echo ButtonComponent("Analytics", "studio", "", 10.675, 2.5); ?>
       </div> -->
 
-      <?= InputComponent("text", "Pesquisar", icon: "/VHS/public/icons/Filter.svg", iconPosition: "left", onClickIcon: "showFilterMenu()", className: "w-full !bg-[#15141A] text-white px-4 py-2 rounded-md border border-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-600") ?>
+     <div class="flex items-center justify-center gap-4">
+                        <div class="h-full pt-6">
+                            <?= Filter() ?>
+                        </div>
+                        <div class="w-full">
+                        <form method="GET">
+                            <?= InputComponent(
+                                placeholder: "Pesquisar",
+                                type: "text",
+                                name: "content",
+                                value: $_GET['content'] ?? ""
+                            ) ?>
+                        </form>
+                        </div>
+      </div>
 
       <div class="w-full flex flex-col gap-4">
         <?php
