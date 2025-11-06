@@ -24,7 +24,7 @@ class VideoDeleteController extends Controller
             $this->videoModel->delete($id);
 
             redirect("/VHS/studio/content/video", [
-                "success" => true
+                "success_delete" => true
             ]);
         } catch (NestedValidationException $exception) {
             echo $exception->getFullMessage();

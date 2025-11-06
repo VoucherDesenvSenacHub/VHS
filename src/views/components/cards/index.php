@@ -156,18 +156,18 @@ class Cards
         );
 
         return <<<HTML
-            <div class="card flex flex-col max-w-[340px] h-[360px] bg-[#1B1B1B] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+            <div class="card flex flex-col max-w-[290px] h-[300px] lg:max-w-[340px] lg:h-[360px] bg-[#1B1B1B] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
                 <a href='/VHS/studio/content/video/analytic?id=$id' class='cursor-pointer relative w-full h-[50%]'>
                     <img src='$thumbnail_url' class='w-full h-full object-cover'>
                     <div class='absolute top-3 right-3 bg-black bg-opacity-70 text-white text-caption px-2 py-1 rounded-md'>
-                        <p class='text-white text-paragraph'>$duration</p>
+                        <p class='text-white lg:text-paragraph'>$duration</p>
                     </div>
                 </a>
 
                 <div class='relative p-4 text-white flex flex-col justify-between flex gap-2 h-[50%]'>
-                    <p class='text-[#808191] text-paragraph'>$created_at</p>
+                    <p class='text-[#808191] lg:text-paragraph'>$created_at</p>
 
-                    <h3 class='text-subtitle leading-tight break-words overflow-hidden line-clamp-3'
+                    <h3 class='lg:text-subtitle text-lg leading-tight break-words overflow-hidden line-clamp-3'
                         style='
                             display: -webkit-box;
                             -webkit-line-clamp: 2;

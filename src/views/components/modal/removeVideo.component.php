@@ -12,16 +12,14 @@ function RemoveVideoComponent(string $title, string $description, string $id)
         text: "Cancelar",
         type: "button",
         variant: "outline",
-        width: 10.5,
-        className: "btn-cancel",
+        className: "btn-cancel w-[10.675rem] h-[2.5rem]",
         link: "/VHS/studio/content/video"
     );
 
     $confirmButton = ButtonComponent(
         text: "Confirmar",
         variant: "default",
-        width: 10.5,
-        className: "btn-confirm"
+        className: "btn-confirm w-[10.675rem] h-[2.5rem]"
     );
 
     return <<<HTML

@@ -7,8 +7,10 @@ require_once __DIR__ . "/../../../components/utils/inputComponent.php";
 require_once __DIR__ . "/../../../components/studioSideMenu/studioSideMenuComponent.php";
 require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
 require_once __DIR__ . "/../../../../application/utils/pagination.php";
+require_once __DIR__ . "/../../../components/utils/sweetalert.php";
 
 use function Src\Application\Utils\paginate;
+use function Src\Application\Utils\showSweetAlert;
 use function src\views\components\Utils\ButtonComponent;
 use function Src\Views\Components\Cards\viewCards;
 use function Src\Views\Components\header\HeaderComponent;
@@ -16,6 +18,10 @@ use function src\views\components\studioSideMenu\StudioSideMenuComponent;
 use function Src\Views\Components\Utils\InputComponent;
 
 $videos = $_SESSION["page_data"]["videos"];
+
+$success_edit = $_SESSION["redirect_data"]["success_edit"] ?? null;
+
+$success_delete = $_SESSION["redirect_data"]["success_delete"] ?? null;
 
 ?>
 
@@ -32,21 +38,21 @@ $videos = $_SESSION["page_data"]["videos"];
 </head>
 
 <body class="w-full bg-[#0C0118]">
-    <?- HeaderComponent(); ?>
+    <?= HeaderComponent(); ?>
     <div class="flex">
         <div class="max-xl:hidden mr-4">
             <?= StudioSideMenuComponent(); ?>
         </div>
-        <div class="w-[1400px] md:p-0 p-4 mx-auto">
+        <div class="w-[1400px] xl:p-0 p-4 mx-auto">
             <div>
-                <h1 class="font-semibold md:text-title text-xl text-white">Conteúdo do canal</h1>
-                <p class="text-gray-300 md:text-paragraph text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
+                <h1 class="font-semibold xl:text-title text-xl text-white">Conteúdo do canal</h1>
+                <p class="text-gray-300 xl:text-paragraph text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
             </div>
-            <div class="flex gap-4 w-96 my-4">
+            <div class="my-4 flex gap-2 w-full flex-col md:w-96 md:flex-row">
                 <?php
-                echo ButtonComponent(text: "Videos", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/content/video");
-                echo ButtonComponent(text: "Fast", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/content/fast");
-                echo ButtonComponent(text: "Eventos", variant: "studio", width: 10.675,  height: 2.5, link: "/VHS/studio/content/event");
+                echo ButtonComponent(text: "Videos", variant: "studio", link: "/VHS/studio/content/video", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]");
+                echo ButtonComponent(text: "Fast", variant: "studio", link: "/VHS/studio/content/fast", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]");
+                echo ButtonComponent(text: "Eventos", variant: "studio", link: "/VHS/studio/content/event", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]");
                 ?>
             </div>
 
@@ -62,13 +68,26 @@ $videos = $_SESSION["page_data"]["videos"];
                     <p class="text-[13px] flex items-center text-gray-200">Mais antigos</p>
                 </div>
             </div>
-            <div class="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-5">
                 <?= viewCards($videos, 'mychannel'); ?>
             </div>
-            <?= paginate($videos, 8) ?>
+            <div class="mb-5">
+                <?= paginate($videos, 8) ?>
+            </div>
+            <?php
+                if(isset($success_edit)){
+                    echo showSweetAlert("Vídeo editado com sucesso!", "", "success");
+                }
+                
+                if(isset($success_delete)){
+                    echo showSweetAlert("Vídeo deletado com sucesso!", "", "success");
+                }
+            ?>
         </div>
     </div>
     <script src="/VHS/src/views/components/cards/script.js" defer></script>
 </body>
+
+<?php unset($_SESSION["redirect_data"]); ?>
 
 </html>

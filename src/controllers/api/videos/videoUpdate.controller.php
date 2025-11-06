@@ -61,7 +61,7 @@ class VideoUpdateController extends Controller
             );
 
             redirect("/VHS/studio/content/video", [
-                "success" => true
+                "success_edit" => true
             ]);
         } catch (NestedValidationException $exception) {
             echo $exception->getFullMessage();

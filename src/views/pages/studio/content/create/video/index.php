@@ -7,7 +7,9 @@ require_once __DIR__ . '/../../../../../components/utils/footer.php';
 require_once __DIR__ . '/../../../../../components/utils/inputComponent.php';
 require_once __DIR__ . '/../../../../../components/utils/textareaComponent.php';
 require_once __DIR__ . '/../../../../../components/modal/modal.component.php';
+require_once __DIR__ . '/../../../../../components/utils/sweetalert.php';
 
+use function Src\Application\Utils\showSweetAlert;
 use function Src\Views\Components\Modal\ModalComponent;
 use function Src\Views\Components\Header\HeaderComponent;
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
@@ -17,12 +19,12 @@ use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\Utils\TextareaComponent;
 
 $categories = $_SESSION["page_data"]["categories"] ?? [];
-$modal = $_SESSION["redirect_data"]["success"] ?? false;
+$success = $_SESSION["redirect_data"]["success"] ?? null;
 
-$errors = $_SESSION["redirect_data"]["errors"] ?? [];
+$errors = $_SESSION["redirect_data"]["errors"] ?? null;
 $fields = $_SESSION["redirect_data"]["fields"] ?? [];
 
-if ($modal) {
+if ($success) {
     echo ModalComponent("Criado com sucesso!", "Deseja continuar criando vídeos?");
 }
 
@@ -61,10 +63,10 @@ $botoes = [
                 <div class="flex flex-col p-4 md:p-0">
                     <h1 class='md:text-title text-xl font-bold'>Criar conteúdo</h1>
                     <p class='md:text-paragraph text-sm text-gray-400 md:mt-2'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-                    <div class="mt-4 flex gap-2 w-96">
-                        <?php echo ButtonComponent(text: "Vídeo", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/create/video"); ?>
-                        <?php echo ButtonComponent(text: "Fast", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/create/fast"); ?>
-                        <?php echo ButtonComponent(text: "Eventos", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/create/event"); ?>
+                    <div class="mt-4 flex gap-2 w-full flex-col md:w-96 md:flex-row">
+                        <?php echo ButtonComponent(text: "Vídeo", variant: "studio", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]", link: "/VHS/studio/create/video"); ?>
+                        <?php echo ButtonComponent(text: "Fast", variant: "studio", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]", link: "/VHS/studio/create/fast"); ?>
+                        <?php echo ButtonComponent(text: "Eventos", variant: "studio", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]", link: "/VHS/create/event"); ?>
                     </div>
                 </div>
 
@@ -101,7 +103,7 @@ $botoes = [
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                                             </svg>
-                                            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Clique para dar upload</span> ou arraste e solte</p>
+                                            <p class="mb-2 text-xs md:text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Clique para dar upload</span> ou arraste e solte</p>
                                             <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, JPEG</p>
                                         </div>
                                     </label>
@@ -180,6 +182,14 @@ $botoes = [
                         </div>
                     </div>
                 </form>
+                <?php 
+                    if(isset($success)){
+                      echo showSweetAlert("Vídeo criado com sucesso!", "", "success");
+                    }
+                    if(isset($errors)){
+                        echo showSweetAlert("Falha em criar o vídeo!", "Falta de preencimento de campos", "error");
+                    }
+                ?>
             </div>
         </div>
     </div>
