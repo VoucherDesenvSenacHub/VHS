@@ -1,6 +1,7 @@
 <?php
 namespace src\views\components\starrating;
 
+
 function StarRatingComponent(array $config = [])
 {
     $defaults = [
@@ -15,7 +16,8 @@ function StarRatingComponent(array $config = [])
     $config = array_merge($defaults, $config);
     ob_start();
     ?>
-    <div class="star-rating inline-flex gap-1.5 justify-end w-full" id="<?php echo htmlspecialchars($config['id']); ?>"
+    <script src="/VHS/src/views/components/starrating/rating.js"></script>
+    <div onclick="rating()" class="star-rating inline-flex gap-1.5 justify-end w-full" id="<?php echo htmlspecialchars($config['id']); ?>"
         role="radiogroup" aria-label="Classificação por estrelas">
         <?php for ($i = 1; $i <= $config['num_stars']; $i++):
             $is_active = $i <= $config['initial_rating'] ? 'active' : ''; ?>
@@ -62,6 +64,7 @@ function StarRatingComponent(array $config = [])
                 star.addEventListener('click', function () {
                     const rating = this.getAttribute('data-rating');
                     currentRating = rating;
+
                     updateStars(rating);
                     <?php if (!empty($config['on_click_callback'])): ?>
                         try {
