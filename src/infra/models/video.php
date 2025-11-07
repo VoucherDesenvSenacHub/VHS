@@ -50,5 +50,9 @@ class VideoModel extends Model {
         return $this->database->query($sql, [":id" => $id]);
     }
     
+    public function getAllViewsByUserId(string $userId): array {
+        $sql = "SELECT SUM(videos.views) as views, AVG(videos.views) as average FROM videos WHERE author_id = :userId";
+        return $this->database->query($sql, [":userId"=> $userId]);
+    }
 }
 

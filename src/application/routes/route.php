@@ -6,7 +6,6 @@ require_once __DIR__ . '/../../../vendor/autoload.php';
 
 use Dotenv\Dotenv;
 use Src\Application\Routes\Router;
-use Src\Application\Controllers\OiController;
 use Src\Application\Controllers\CategoriesViewController;
 use Src\Application\Controllers\CreateUserController;
 use Src\Application\Controllers\SignUpController;
@@ -21,7 +20,6 @@ use Src\Application\Controllers\UpdateUserController;
 use Src\Application\Controllers\VerifyEmailViewController;
 use Src\Application\Controllers\CreateFastVideoController;
 use Src\Application\Middlewares\RedirectUserNotLoggedMiddleware;
-use Src\Application\Controllers\StudioController;
 use Src\Application\Controllers\StudioFastViewController;
 use Src\Application\Controllers\StudioVideoViewController;
 use Src\Application\Middlewares\RedirectUserNotCreatorMiddleware;
@@ -44,6 +42,7 @@ use Src\Application\Controllers\StudioCommentsViewController;
 use Src\Application\Controllers\LikeCommentsCreatorController;
 use Src\Application\Controllers\DeleteCommentStudioController;
 use Src\Application\Controllers\UserBlockedUserController;
+use Src\Application\Controllers\StudioAnalyticsViewController;
 
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../../..");
 $dotenv->load();
@@ -81,7 +80,7 @@ $router->get("/auth/signup/password", CreatePasswordController::class, RedirectU
 $router->get("/auth/signup/verify-email", VerifyEmailViewController::class);
 $router->get("/api/v1/auth/signup/verify-email", VerifyEmailController::class);
 
-$router->get("/studio", StudioController::class, RedirectUserNotCreatorMiddleware::class);
+$router->get("/studio/analytics", StudioAnalyticsViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get("/studio/create/video", StudioVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get("/studio/create/fast", StudioFastViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get("/studio/comments", StudioCommentsViewController::class, RedirectUserNotCreatorMiddleware::class);

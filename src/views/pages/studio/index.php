@@ -16,6 +16,10 @@ use function src\views\components\Utils\Title_and_buttons;
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
 use function src\views\components\Header\HeaderComponent;
 
+$followers = $_SESSION["page_data"]["count_followers"][0]['COUNT(id)'];
+$views = $_SESSION["page_data"]["all_views"];
+$avereng_views = (int)$_SESSION["page_data"]["average_views"];
+
 $seriesDataLine = [10, 15, 25, 20, 18, 12, 15];
 $categoriesLine = ['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB', 'DOM'];
 
@@ -67,9 +71,9 @@ $botoes = [
             <div class="grid grid-cols-2">            
                 <div>
                     <section class="mt-4 flex gap-4">
-                        <?= UserActivityCardsComponent("Seguidores", 6700) ?>
-                        <?= UserActivityCardsComponent("Visualizações", 67000) ?>
-                        <?= UserActivityCardsComponent("M. Visualizações", 32000) ?>
+                        <?= UserActivityCardsComponent("Seguidores", $followers) ?>
+                        <?= UserActivityCardsComponent("Visualizações", $views) ?>
+                        <?= UserActivityCardsComponent("M. Visualizações", $avereng_views) ?>
                         <?= UserActivityCardsComponent("M. Avaliações", 4.5) ?>
                     </section>
 
