@@ -83,7 +83,7 @@ function SidebarComponent() {
     }
 
     return <<<HTML
-        <aside class="h-[91vh] top-16 sticky p-7 transition-all border-r border-secondary/10">
+        <aside class="h-[91vh] w-64 top-16 sticky p-7 transition-all border-r border-secondary/10">
             <h3 class="title text-secondary text-sm">HOME</h3>
             <ul class="flex flex-col gap-9 mt-5">
                 $htmlHome

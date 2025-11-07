@@ -23,20 +23,21 @@
         array $attributes = []
         ){
         
-        $type = htmlspecialchars($type, ENT_QUOTES, 'UTF-8');
+        $type = htmlspecialchars(string: $type, flags: ENT_QUOTES, encoding: 'UTF-8');
         
-        $placeholder = htmlspecialchars($placeholder, ENT_QUOTES, 'UTF-8');
+        $placeholder = htmlspecialchars(string: $placeholder, flags: ENT_QUOTES, encoding: 'UTF-8');
 
-        $name = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
+        $name = htmlspecialchars(string: $name, flags: ENT_QUOTES, encoding: 'UTF-8');
 
         $orientationIcon = "";
         $padding = "";
 
-        if (strpos($iconPosition, "left") !== false) {
+        if ($iconPosition === "right") {
             $padding = "pl-10";
             $orientationIcon = "left-2.5";
         }
-        elseif (strpos($iconPosition, "right") !== false) {
+
+        if ($iconPosition === "left") {
             $padding = "pr-10";
             $orientationIcon = "right-2.5";
         }

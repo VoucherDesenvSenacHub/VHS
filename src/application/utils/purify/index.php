@@ -9,7 +9,7 @@ function purifyProperty($property) {
         return $property;
     }
 
-    return htmlspecialchars(strip_tags($property), ENT_QUOTES, 'UTF-8');
+    return htmlspecialchars(string: $property ?? "");
 }
 
 function purifyNumbers($num) {

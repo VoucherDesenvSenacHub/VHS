@@ -34,11 +34,14 @@ use Src\Application\Controllers\AdminAnalyticsViewController;
 use Src\Application\Controllers\AdminCategoriesViewController;
 use Src\Application\Controllers\AdminComplaintManagementViewController;
 use Src\Application\Controllers\AdminUsersViewController;
+use Src\Application\Controllers\CreateCommentController;
 use Src\Application\Controllers\DeleteUserController;
 use Src\Application\Controllers\UpdateUserAdminController;
 use Src\Application\Controllers\DeleteCommentsController;
 use Src\Application\Controllers\InactivateUserController;
 use Src\Application\Controllers\DeleteReportCommentsController;
+use Src\Application\Controllers\VideoAvaliationController;
+use Src\Application\Controllers\VideoController;
 
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../../..");
 $dotenv->load();
@@ -57,9 +60,14 @@ $router->post('/api/v1/channel/edit', EditChannelController::class, RedirectUser
 $router->post('/api/v1/user/delete', DeleteUserController::class, RedirectUserNotAdminMiddleware::class);
 $router->post('/api/v1/user/update', UpdateUserAdminController::class, RedirectUserNotAdminMiddleware::class);
 
+$router->post("/api/v1/comment", CreateCommentController::class, RedirectUserNotLoggedMiddleware::class);
 $router->post('/api/v1/comments/delete', DeleteCommentsController::class, RedirectUserNotAdminMiddleware::class);
 $router->post('/api/v1/users/block', inactivateUserController::class, RedirectUserNotAdminMiddleware::class);
 $router->post('/api/v1/comments/report/remove', DeleteReportCommentsController::class, RedirectUserNotAdminMiddleware::class);
+$router->post('/api/v1/comments/report', ReportCommentController::class, RedirectUserNotLoggedMiddleware::class);
+$router->post("/api/v1/json/video/rating", VideoAvaliationController::class);
+$router->post('/api/v1/comment/edit', UpdateCommentController::class, RedirectUserNotLoggedMiddleware::class);
+$router->post('/api/v1/comment/delete', DeleteCommentController::class, RedirectUserNotAdminMiddleware::class);
 
 # Views Routes
 
@@ -85,6 +93,6 @@ $router->get("/admin/categories", AdminCategoriesViewController::class, Redirect
 $router->get("/admin/complaints", AdminComplaintManagementViewController::class, RedirectUserNotAdminMiddleware::class);
 $router->get("/admin/users", AdminUsersViewController::class, RedirectUserNotAdminMiddleware::class);
 
-
+$router->get("/home/video", VideoController::class, /*RedirectUserNotLoggedMiddleware::class*/);
 
 $router->run();

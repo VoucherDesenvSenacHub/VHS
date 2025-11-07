@@ -30,3 +30,12 @@ if (isset($_GET["logout"])) {
     header("Location: /VHS/home");
     exit;
 }
+
+
+foreach($_GET as $key => $value) {
+    $_GET[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+}
+
+foreach($_POST as $key => $value) {
+    $_POST[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+}

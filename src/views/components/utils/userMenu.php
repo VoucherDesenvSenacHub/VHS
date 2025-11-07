@@ -7,13 +7,13 @@ function UserMenu(string $avatar_url, string $name, string $email) {
     $items = [
         "settings" => [
             "href" => "/VHS/user/settings",
-            "icon" => "/VHS/public/icons/Settings.svg",
+            "icon" => "/VHS/public/icons/settings.svg",
             "title" => "Minha conta",
             "description" => "Gerencia sua conta"
         ],
         "studio" => [
             "href"=> "/VHS/studio",
-            "icon" => "/VHS/public/icons/Studio.svg",
+            "icon" => "/VHS/public/icons/studio.svg",
             "title"=> "VHS Studio",
             "description"=> "Gerencie seu conteúdo",
         ],
@@ -40,7 +40,7 @@ function UserMenu(string $avatar_url, string $name, string $email) {
             $menuHTML .= <<<HTML
                 <a href='{$value["href"]}' class='flex gap-4 items-center w-full border-secondary/25 p-4 hover:bg-white/5 transition-all duration-200'>
                     <div class='flex-shrink-0 size-8 rounded-full bg-white/10 overflow-hidden'>
-                        <img class='select-none pointer-events-none w-full h-full object-cover' src='{$value["icon"]}' onerror='this.src="/VHS/public/icons/Settings.svg"'>
+                        <img class='select-none pointer-events-none w-full h-full object-cover' src='{$value["icon"]}' onerror='this.src="/VHS/public/icons/settings.svg"'>
                     </div>
                     
                     <div class='flex flex-col justify-around flex-grow text-start'>
