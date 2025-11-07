@@ -8,26 +8,18 @@ require_once __DIR__ . '/../../application/core/model.php';
 
 class ChannelModel extends Model
 {
-    protected string $table = "channels";
 
-    public function findById(string $id): ?array
+    public function updateChannel(string $id, string $username, string $description_channel, string $avatar_url, string $banner_url, string $tag): bool
     {
-        $sql = "SELECT * FROM {$this->table} WHERE id = :id LIMIT 1";
-        $result = $this->database->query($sql, [":id" => $id]);
-        return $result ?: null;
-    }
-
-    public function updateChannel(string $id, string $name, string $description, string $avatar_url, string $banner_url, string $tags): bool
-    {
-        $sql = "UPDATE {$this->table} 
-                SET name = :name, description = :description, avatar_url = :avatar_url, banner_url = :banner_url, tags = :tags 
+        $sql = "UPDATE users
+                SET avatar_url = :avatar_url, banner_url = :banner_url, username = :username, description_channel = :description_channel, tag = :tag 
                 WHERE id = :id";
         return $this->database->exec($sql, [
-            ":name" => $name,
-            ":description" => $description,
             ":avatar_url" => $avatar_url,
             ":banner_url" => $banner_url,
-            ":tags" => $tags,
+            ":username" => $username,
+            ":description_channel" => $description_channel,
+            ":tag" => $tag,
             ":id" => $id
         ]);
     }

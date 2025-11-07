@@ -52,7 +52,7 @@ $router->post('/api/v1/auth/signup', SignUpController::class);
 $router->post("/api/v1/user/settings", UpdateUserController::class, RedirectUserNotLoggedMiddleware::class);
 $router->post('/api/v1/fast-video', CreateFastVideoController::class, RedirectUserNotCreatorMiddleware::class);
 
-$router->post('/api/v1/channel/edit', EditChannelController::class);
+$router->post('/api/v1/channel/edit', EditChannelController::class, RedirectUserNotCreatorMiddleware::class);
 
 $router->post('/api/v1/user/delete', DeleteUserController::class, RedirectUserNotAdminMiddleware::class);
 $router->post('/api/v1/user/update', UpdateUserAdminController::class, RedirectUserNotAdminMiddleware::class);
@@ -77,7 +77,7 @@ $router->get("/studio/create/fast", StudioFastViewController::class, RedirectUse
 
 $router->get("/user/settings", UserSettingsViewController::class, RedirectUserNotLoggedMiddleware::class);
 $router->get("/home/events", ViewEventsController::class);
-$router->get('/studio/channel/edit', EditChannelViewController::class);
+$router->get('/studio/channel/edit', EditChannelViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get("/home/events", ViewEventsController::class, RedirectUserNotLoggedMiddleware::class);
 
 $router->get("/admin/analytics", AdminAnalyticsViewController::class, RedirectUserNotAdminMiddleware::class);
