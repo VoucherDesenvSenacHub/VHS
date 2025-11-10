@@ -47,13 +47,9 @@ $pagination = paginate($commets);
         <div class="p-6 pt-8 w-full flex flex-col gap-6">
             <div class="flex flex-col gap-4">
                 <div>
-                    <text class='text-3xl font-bold text-white cursor-default'>Gerenciamento de Usuários</text>
+                    <text class='text-3xl font-bold text-white cursor-default'>Gerenciamento de Denúncias</text>
                 </div>
                 <div class="flex flex-col gap-2">
-                    <div class="flex gap-2 w-96">
-                        <?php echo ButtonComponent("Usuários", "studio", "", 13, 2.5, "", "/VHS/admin/users"); ?>
-                        <?php echo ButtonComponent("Denúncias", "studio", "", 13, 2.5, "", "/VHS/admin/complaints"); ?>
-                    </div>
                     <div class="flex items-center justify-center gap-4">
                         <div class="h-full pt-6">
                             <?= Filter() ?>
