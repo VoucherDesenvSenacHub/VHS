@@ -8,6 +8,10 @@ use Dotenv\Dotenv;
 use Src\Application\Routes\Router;
 use Src\Application\Controllers\OiController;
 use Src\Application\Controllers\CategoriesViewController;
+use Src\Application\Controllers\AdminCategoriesViewController;
+use Src\Application\Controllers\CreateCategoriesController;
+use Src\Application\Controllers\UpdateCategoriesController;
+use Src\Application\Controllers\DeleteCategoriesController;
 use Src\Application\Controllers\CreateUserController;
 use Src\Application\Controllers\SignUpController;
 use Src\Application\Controllers\SignUpViewController;
@@ -31,7 +35,6 @@ use Src\Application\Controllers\EditChannelController;
 use Src\Application\Controllers\EditChannelViewController;
 use Src\Application\Middlewares\RedirectUserNotAdminMiddleware;
 use Src\Application\Controllers\AdminAnalyticsViewController;
-use Src\Application\Controllers\AdminCategoriesViewController;
 use Src\Application\Controllers\AdminComplaintManagementViewController;
 use Src\Application\Controllers\AdminUsersViewController;
 use Src\Application\Controllers\CreateCommentController;
@@ -50,6 +53,11 @@ $router = new Router();
 # API Routes
 
 $router->post('/api/v1/auth/signin', SignInController::class);
+
+$router->post('/api/v1/admin/categories', CreateCategoriesController::class, RedirectUserNotAdminMiddleware::class);
+$router->post('/api/v1/admin/categories/update', UpdateCategoriesController::class, RedirectUserNotAdminMiddleware::class);
+$router->post('/api/v1/admin/categories/delete', DeleteCategoriesController::class, RedirectUserNotAdminMiddleware::class);
+
 $router->post("/api/v1/signup/password", CreateUserController::class, RedirectUserLoggedMiddleware::class);
 $router->post('/api/v1/auth/signup', SignUpController::class);
 $router->post("/api/v1/user/settings", UpdateUserController::class, RedirectUserNotLoggedMiddleware::class);
