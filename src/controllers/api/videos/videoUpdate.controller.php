@@ -25,7 +25,7 @@ class VideoUpdateController extends Controller
 
             $id = $_POST["id"];
 
-            $video = $this->videoModel->getVideoByID($id);
+            $video = $this->videoModel->getVideoStudioByID($id);
             $user = $_SESSION["user"];
 
             if ($video["author_id"] != $user["id"]) {

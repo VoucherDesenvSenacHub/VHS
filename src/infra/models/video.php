@@ -52,6 +52,12 @@ class VideoModel extends Model
         return $this->database->query($sql, [":id" => $id]);
     }
 
+
+    public function incrementViewCount($videoId) {
+        $sql = "UPDATE videos SET views = views + 1 WHERE id = :video_id";
+        return $this->database->query($sql, ["video_id" => $videoId]);
+    }
+
     public function getVideoByTitle(string $query): array
     {
         $sql = "SELECT * FROM videos WHERE (title LIKE :query)";
@@ -88,21 +94,6 @@ class VideoModel extends Model
 
         return $this->database->query($sql, [":id" => $id]);
     }
-    // public function GetAllVideos($filter){
-    //     switch ($filter) {
-    //         case 'videos':
-    //             $result = $this->getVideoByTitle();
-    //             return $result;
-    //             break;
-    //         case "fast":
-    //             $result = $this->getFastByTitle();
-    //             return $result;
-    //             break;
-    //         default:
-    //             # code...
-    //             break;
-    //     }
-    // }
 
     public function getAllCategories()
     {
@@ -113,8 +104,7 @@ class VideoModel extends Model
 
     public function getAllVideos(string $author_id, int $offset = 0, int $limit = 8): array
     {
-        $sql = "
-        SELECT 
+        $sql = "SELECT 
             v.*, 
             COUNT(c.id) AS comments
         FROM 
@@ -140,7 +130,7 @@ class VideoModel extends Model
         return (int)$stmt[0]['total'];
     }
 
-    public function getVideoByID(string $id): array
+    public function getVideoStudioByID(string $id): array
     {
         $sql = "SELECT 
             v.*, 

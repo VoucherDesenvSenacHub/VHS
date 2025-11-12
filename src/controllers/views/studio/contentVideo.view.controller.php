@@ -18,11 +18,16 @@ class StudioContentVideoViewController extends Controller
 
         $author_id = $_SESSION["user"]["id"];
 
-        $page = isset($_GET['page']) ? (int)$_GET['page'] : 0;
-        $offset = $page * 8;
-        $page += 1;
+        $page = $_GET["page"] ?? 0;
 
-        $videos = $this->videoModel->getAllVideos($author_id, $offset);
+        if(!is_numeric($page) || $page < 0) {
+            $page = 0;
+        }
+
+        $limit = 8;
+        $offset = $page * $limit;
+
+        $videos = $this->videoModel->getAllVideos($author_id, $offset, $limit);
 
         $this->view("/studio/content/index", [
             "videos" => $videos
