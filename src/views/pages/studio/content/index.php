@@ -22,12 +22,18 @@ $videos = $_SESSION["page_data"]["videos"];
 $success_edit = $_SESSION["redirect_data"]["success_edit"] ?? null;
 
 $success_delete = $_SESSION["redirect_data"]["success_delete"] ?? null;
+$nextPage = $_SESSION["page_data"]["next_page"];
+print_r($nextPage);
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
+<style>
+    * {
+        color: white;
+    }
+</style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -72,7 +78,7 @@ $success_delete = $_SESSION["redirect_data"]["success_delete"] ?? null;
                 <?= viewCards($videos, 'mychannel'); ?>
             </div>
             <div class="mb-5">
-                <?= paginate($videos, 8) ?>
+                <?= paginate($videos, $nextPage) ?>
             </div>
             <?php
                 if(isset($success_edit)){

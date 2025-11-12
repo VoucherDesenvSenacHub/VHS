@@ -27,10 +27,19 @@ class StudioContentVideoViewController extends Controller
         $limit = 8;
         $offset = $page * $limit;
 
-        $videos = $this->videoModel->getAllVideos($author_id, $offset, $limit);
+        $videos = $this->videoModel->getAllVideos($author_id, $offset, $limit + 1);
+        $nextPage = 0;
+
+        
+        if (count($videos) > $limit) {
+            array_pop($videos);
+            $nextPage = 1;
+        }
+        
 
         $this->view("/studio/content/index", [
-            "videos" => $videos
+            "videos" => $videos,
+            "next_page" => $nextPage
         ]);
     }
 }
