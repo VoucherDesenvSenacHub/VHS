@@ -39,6 +39,8 @@ function paginate($content, $limit) {
         HTML;
     }
 
+    
+
     $buttonPrev = '';
     if ($page > 0) {
         $_GET['page'] = $prevPage;
@@ -79,5 +81,6 @@ function paginate($content, $limit) {
             </div>
         HTML;
     }
+
     return $paginationHTML;
 }

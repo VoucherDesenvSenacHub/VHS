@@ -24,22 +24,21 @@
         string $required = null
         ){
         
-        $type = htmlspecialchars($type, ENT_QUOTES, 'UTF-8');
+        $type = htmlspecialchars(string: $type, flags: ENT_QUOTES, encoding: 'UTF-8');
         
-        $placeholder = htmlspecialchars($placeholder, ENT_QUOTES, 'UTF-8');
+        $placeholder = htmlspecialchars(string: $placeholder, flags: ENT_QUOTES, encoding: 'UTF-8');
 
-        $name = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
-
-        $required = $required ? "required" : "";
+        $name = htmlspecialchars(string: $name, flags: ENT_QUOTES, encoding: 'UTF-8');
 
         $orientationIcon = "";
         $padding = "";
 
-        if (strpos($iconPosition, "left") !== false) {
+        if ($iconPosition === "right") {
             $padding = "pl-10";
             $orientationIcon = "left-2.5";
         }
-        elseif (strpos($iconPosition, "right") !== false) {
+
+        if ($iconPosition === "left") {
             $padding = "pr-10";
             $orientationIcon = "right-2.5";
         }
@@ -88,7 +87,7 @@
                 </div>
                 <div class='relative flex justify-center items-center'> 
                     $icon
-                    <input name='$name' type='$type' placeholder='$placeholder' class='$input_style $className' value='$value' $required>
+                    <input  name='$name' type='$type' placeholder='$placeholder' class='$input_style $className' value='$value'>
                 </div>
                 $errorElement
             </div>
