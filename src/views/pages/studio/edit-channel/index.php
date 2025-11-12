@@ -116,7 +116,7 @@ if (!empty($errors) && is_array($errors)) {
               class="w-full h-32 px-4 py-3 outline outline-1 outline-[#666666] rounded-md placeholder-[#666666] text-zinc-200 rounded-lg text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#666666] resize-none"><?= $user["description_channel"] ?? "" ?></textarea>
           </div>
           </section>
-          <section class="mb-10">
+          <section class="mb-10 mt-4">
             <?php
             echo InputComponent(
               type: "text",

@@ -67,7 +67,7 @@ class EditChannelController extends Controller
             }
 
             if (!isset($_POST["username"])) {
-                throw new Error(serialize(["username" => "Nome da categoria é obrigatório."]));
+                throw new Error(serialize(["username" => "Nome do canal é obrigatório."]));
             }
 
             if (strlen($_POST["username"]) < 3) {
@@ -77,11 +77,14 @@ class EditChannelController extends Controller
             if (strlen($_POST["username"]) > 24) {
                 throw new Error(serialize(["username" => "Nome deve ter no máximo 24 caracteres."]));
             }
-            $user = $this->userModel->getUserByUsername(strtolower($_POST["username"]));
 
-            if (!empty($user)) {
-                throw new Error(serialize(["username" => "Nome de usuário já cadastrado!"]));
+            // Validação: verificar se username já existe (e pertence a outro usuário)
+            $newUsername = $_POST["username"] ?? $_SESSION["user"]["username"];
+            $existing = $this->userModel->getUserByUsername($newUsername);
+            if (!empty($existing) && isset($existing[0]["id"]) && ($existing[0]["id"] !== ($_SESSION["user"]["id"] ?? ""))) {
+                throw new Error(serialize(["username" => "Nome do canal já existe."]));
             }
+
             $updated = $this->channelModel->updateChannel(
                 $_SESSION["user"]["id"] ?? "",
                 $_POST["username"] ?? $_SESSION["user"]["username"],
