@@ -15,7 +15,7 @@ use function Src\Application\Utils\showSweetAlert;
 
 $user = $_SESSION["user"] ?? [];
 $avatar_url = !empty($user['avatar_url']) ? $user['avatar_url'] : 'default.png';
-$banner_url = !empty($user['banner_url']) ? $user['banner_url'] : '';
+$banner_url = !empty($user['banner_url']) ?? $user['banner_url'];
 $errors = $_SESSION['redirect_data']['errors'] ?? [];
 $success = $_SESSION["redirect_data"]["success"] ?? null;
 $fields = $_SESSION['redirect_data']['fields'] ?? [];
