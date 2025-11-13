@@ -13,7 +13,21 @@
         const menu = document.getElementById(menuId);
         menu.classList.toggle('hidden');
     }
+document.addEventListener('click', function(event) {
+    const target = event.target;
 
+    const isMenuButton = target.closest('.comment-options-button');
+
+    const isInsideMenu = target.closest("[id^='comment-options-']");
+
+
+    if (isMenuButton || isInsideMenu) {
+        return;
+    }
+
+   
+    hiddenCommentOptions();
+}); 
 
     function handleEditComment(event, commentId) {
         event.preventDefault();

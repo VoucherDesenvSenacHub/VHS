@@ -84,7 +84,7 @@ if($_SESSION["redirect_data"]["errors"] ?? false) {
                 <p class="mt-2 text-sm text-gray-300 whitespace-pre-line"><?= $video["description"] ?></p>
                 <p class="mt-4"><?= formatViews($video["views"] ?? 0) ?> Visualizações</p>
               </div>
-            <div class="mt-5 flex">
+            <div class="mt-5 flex h-min">
                 <img class="w-6 h-6 mr-3 cursor-pointer" src="/VHS/public/icons/share.svg" alt="ShareButton" onclick="openShared()" name="send">
                 <?= sharedComponent( $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"], $video["title"])?>
                 <?= StarRatingComponent([
@@ -93,7 +93,7 @@ if($_SESSION["redirect_data"]["errors"] ?? false) {
             </div>
         </div>
 
-        <a href="/VHS/src/views/pages/home/channel" class="flex items-center mt-10 gap-3">
+        <a href="/VHS/src/views/pages/home/channel" class="flex items-center mt-10 gap-3 w-min">
           <img src="<?= $video['avatar_url'] ?? "/VHS/public/uploads/avatars/default.png"?>" class="size-16 rounded-xl">
           <div>
             <p class="text-sm font-bold">
@@ -139,6 +139,7 @@ if($_SESSION["redirect_data"]["errors"] ?? false) {
 
     </main>
   </div>
+  <script src='/VHS/src/views/components/utils/comments/script.js'></script> ```
 </body>
 </html>
 
