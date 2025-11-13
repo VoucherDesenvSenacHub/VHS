@@ -139,7 +139,7 @@ if($_SESSION["redirect_data"]["errors"] ?? false) {
 
     </main>
   </div>
-  <script src='/VHS/src/views/components/utils/comments/script.js'></script> ```
+  <script src='/VHS/src/views/components/utils/comments/script.js'></script>
 </body>
 </html>
 
