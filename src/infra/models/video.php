@@ -53,7 +53,8 @@ class VideoModel extends Model
     }
 
 
-    public function incrementViewCount($videoId) {
+    public function incrementViewCount($videoId)
+    {
         $sql = "UPDATE videos SET views = views + 1 WHERE id = :video_id";
         return $this->database->query($sql, ["video_id" => $videoId]);
     }
@@ -77,16 +78,18 @@ class VideoModel extends Model
     {
         $sql = "SELECT videos.id, url, title, description, duration, views, thumbnail_url, videos.created_at, videos.update_at, username, avatar_url FROM videos INNER JOIN users ON videos.author_id = users.id ORDER BY views DESC LIMIT $offset, $limit";
 
-    return $this->database->query($sql);
+        return $this->database->query($sql);
     }
 
-    public function getVideosByCategory(string $categoryId, int $offset = 0, int $limit = 4): array {
+    public function getVideosByCategory(string $categoryId, int $offset = 0, int $limit = 4): array
+    {
         $sql = "SELECT videos.id, url, title, description, duration, views, thumbnail_url, videos.created_at, videos.update_at, username, avatar_url FROM videos INNER JOIN users ON videos.author_id = users.id WHERE videos.category_id = :category_id ORDER BY created_at ASC LIMIT $offset, $limit";
 
         return $this->database->query($sql, [":category_id" => $categoryId]);
     }
 
-    public function getVideoById(string $id): array {
+    public function getVideoById(string $id): array
+    {
         $sql = "SELECT videos.*, users.username, users.followers,  users.avatar_url, categories.name as category_name FROM videos
         JOIN users ON users.id = videos.author_id
         JOIN categories ON categories.id = videos.category_id
@@ -141,10 +144,6 @@ class VideoModel extends Model
             comments c ON c.video_id = v.id AND c.is_deleted = 0
         WHERE 
             v.is_deleted = 0 AND v.id = :id
-        GROUP BY 
-            v.id
-        ORDER BY 
-            v.created_at DESC
     ";
 
         $stmt = $this->database->query($sql, [":id" => $id]);

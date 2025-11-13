@@ -26,9 +26,15 @@ $categorias = $_SESSION["page_data"]["categorias"] ?? [];
 $thumbPath = '';
 if (!empty($video) && !empty($video['thumbnail_url'])) {
     $url = $video['thumbnail_url'];
-    $thumbPath = (strpos($url, '/
-    VHS') === 0) ? $url : '/VHS' . $url;
+
+    $url = preg_replace('#^/VHS+#', '/VHS', $url);
+    if (!str_starts_with($url, '/VHS')) {
+        $url = '/VHS' . $url;
+    }
+
+    $thumbPath = $url;
 }
+
 
 $id = $video["id"];
 
@@ -78,27 +84,26 @@ $conteudos = []
                     <div id="thumb" class="flex flex-col gap-2">
                         <h1 class="md:text-subtitle text-lg text-white font-semibold">Thumbnail</h1>
                         <p class="md:text-paragraph text-sm text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-                        <div class="md:mt-2 md:h-[500px] bg-background mt-4 w-full h-[300px] border-2 rounded-xl border-solid flex items-center justify-center relative overflow-hidden -mt-8 flex-wrap">
-                            <div id="uploadArea" class="flex flex-col items-center justify-center w-full h-full">
-                                <label for="dropzone-file"
-                                    class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                        <div class="md:mt-2 md:h-[500px] bg-background mt-4 w-full h-[300px] border-2 rounded-xl border-solid flex items-center justify-center relative overflow-hidden flex-wrap">
+                            <label for="dropzone-file"
+                                class="flex items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600 relative overflow-hidden">
 
-                                    <div id="preview" class="w-full h-full">
-                                        <img id="thumbnailPreview" src="<?= htmlspecialchars($thumbPath) ?>" class="object-cover w-full h-full rounded-lg" alt="Preview" />
-                                    </div>
+                                <img id="thumbnailPreview"
+                                    src="<?= htmlspecialchars($thumbPath) ?>"
+                                    class="absolute inset-0 object-cover w-full h-full rounded-lg hidden"
+                                    alt="Preview" />
 
-                                    <div id="uploadText" class="flex flex-col items-center justify-center pt-5 pb-6">
-                                        <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="none" viewBox="0 0 20 16">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                                        </svg>
-                                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Clique para dar upload</span> ou arraste e solte</p>
-                                        <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, JPEG</p>
-                                    </div>
+                                <div id="uploadText" class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
+                                    <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="none" viewBox="0 0 20 16">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                    </svg>
+                                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Clique para dar upload</span> ou arraste e solte</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, JPEG</p>
+                                </div>
 
-                                    <input id="dropzone-file" type="file" class="hidden" accept="image/png, image/jpg, image/jpeg" name="thumbnail" />
-                                </label>
-                            </div>
+                                <input id="dropzone-file" type="file" class="hidden" accept="image/png, image/jpg, image/jpeg" name="thumbnail" />
+                            </label>
                         </div>
                     </div>
 
@@ -154,7 +159,6 @@ $conteudos = []
     <footer class=""> <?= Footer() ?> </footer>
 
     <script src="/VHS/src/views/pages/studio/content/video/script.js"></script>
-
 </body>
 
 </html>

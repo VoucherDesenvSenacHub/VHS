@@ -23,7 +23,6 @@ $success_edit = $_SESSION["redirect_data"]["success_edit"] ?? null;
 
 $success_delete = $_SESSION["redirect_data"]["success_delete"] ?? null;
 $nextPage = $_SESSION["page_data"]["next_page"];
-print_r($nextPage);
 
 ?>
 

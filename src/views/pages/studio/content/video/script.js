@@ -4,18 +4,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const uploadText = document.getElementById('uploadText');
 
     const showUploadText = () => {
-        if (uploadText) uploadText.style.display = 'flex';
-        if (previewImg) previewImg.style.display = 'none';
+        uploadText.classList.remove('hidden'); 
+        previewImg.classList.add('hidden'); 
     };
+
     const showPreview = () => {
-        if (uploadText) uploadText.style.display = 'none';
-        if (previewImg) previewImg.style.display = 'block';
+        uploadText.classList.add('hidden'); 
+        previewImg.classList.remove('hidden'); 
     };
 
     // testa a src inicial (pode ser vazia)
     const initialSrc = previewImg?.getAttribute('src') || '';
     if (initialSrc && initialSrc.trim() !== '') {
-        // testa se a imagem realmente carrega (evita mostrar uma img quebrada)
         const tester = new Image();
         tester.onload = () => showPreview();
         tester.onerror = () => showUploadText();
@@ -29,11 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
         inputFile.addEventListener('change', (e) => {
             const file = e.target.files && e.target.files[0];
             if (!file) {
-                // se desmarcou/limpou
                 const src = previewImg.getAttribute('src') || '';
                 if (!src) showUploadText();
                 return;
             }
+
             const reader = new FileReader();
             reader.onload = (ev) => {
                 previewImg.src = ev.target.result;
