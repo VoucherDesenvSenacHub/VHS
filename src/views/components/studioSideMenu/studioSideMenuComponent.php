@@ -7,7 +7,7 @@ function StudioSideMenuComponent(){
         <h2 class="w-[11rem] pt-[1.18rem] ml-[0.5rem] text-gray-400 text-xs font-poppins">VHS STUDIO</h2>
         <ul>
             <li class="menu-item flex items-center text-gray-300 rounded-lg cursor-pointer mt-[1.5rem] transition-transform duration-200">
-                <a href="/studio/analytics" class="flex items-center w-full p-2">
+                <a href="/VHS/studio/analytics" class="flex items-center w-full p-2">
                     <div class="analytics-icon icon w-[2rem] h-[2rem] flex items-center justify-center rounded-[12px] ml-[0.31rem] ">
                         <img src="/VHS/public/icons/sidebar_studio/Analytics.svg" alt="Analytics">
                     </div>

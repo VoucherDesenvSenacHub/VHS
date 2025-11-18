@@ -5,20 +5,25 @@ require_once __DIR__ . "/../../components/utils/Title_and_buttons.php";
 require_once __DIR__ . "/../../components/utils/userActivityCardsComponent.php";
 require_once __DIR__ . "/../../components/charts/chartComponent.php";
 require_once __DIR__ . "/../../components/utils/buttonComponent.php";
-require_once __DIR__ . "/../../components/utils/comments/comentaryComponent.php";
+require_once __DIR__ . "/../../components/utils/comments_studio/commentAnalyticsComponent.php";
 require_once __DIR__ . "/../../components/cards/studioVideoComponent.php";
+require_once __DIR__ . '/../../../application/utils/getCurrentDataTime.php';
 
 use function Src\Views\Components\Cards\StudioVideoComponent;
 use function src\views\components\Charts\renderChartComponent;
-use function Src\Views\Components\Utils\Comment;
+use function Src\Views\Components\Utils\CommentStudioAnalytics;
 use function src\views\components\utils\UserActivityCardsComponent;
 use function src\views\components\Utils\Title_and_buttons;
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
 use function src\views\components\Header\HeaderComponent;
+use function Src\Application\Utils\getCurrentDataTime;
 
+$current_user = $_SESSION['user'];
 $followers = $_SESSION["page_data"]["count_followers"][0]['COUNT(id)'];
 $views = $_SESSION["page_data"]["all_views"];
-$avereng_views = (int)$_SESSION["page_data"]["average_views"];
+$avereng_views = (int)$_SESSION["page_data"]["average_views"] ?? 0;
+$average_avaliations = (int)$_SESSION["page_data"]["average_avaliations"] ?? 0;
+$last_comments = $_SESSION["page_data"]["last_comments"];
 
 $seriesDataLine = [10, 15, 25, 20, 18, 12, 15];
 $categoriesLine = ['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB', 'DOM'];
@@ -28,6 +33,8 @@ $botoes = [
     ['texto' => 'Comentarios', 'link' => './FeastPage.php'],
     ['texto' => 'Analytics', 'link' => './EventosPage.php']
 ];
+
+[$weekday, $timeDefault, $data] = getCurrentDataTime();
 ?>
 
 <!DOCTYPE html>
@@ -56,13 +63,13 @@ $botoes = [
 
         <main class="max-w-[1500px] mx-auto px-6 pt-[1.18rem]">
             <section class="flex gap-4">
-                <img src="https://cdn.pipocamoderna.com.br/wp-content/uploads/2025/05/Virginia-Fonseca.jpg" alt="" class="size-12 rounded-full">
+                <img src='/VHS/public/uploads/avatars/<?= $current_user["avatar_url"]?>' alt="" class="size-12 rounded-full" onerror="this.src='/VHS/public/uploads/avatars/default.png'">
                 <div>
                     <h2 class="text-2xl font-semibold text-white">
-                        Boa tarde, Virginia Fonseca!
+                        <?= $timeDefault ?>, <?= $current_user['username'] ?>!
                     </h2>
                     <p class="text-secondary">
-                        Quinta, 15 de agosto!
+                        <?= $weekday ?>, <?= $data ?>
                     </p>
                 </div>
             </section>
@@ -74,7 +81,7 @@ $botoes = [
                         <?= UserActivityCardsComponent("Seguidores", $followers) ?>
                         <?= UserActivityCardsComponent("Visualizações", $views) ?>
                         <?= UserActivityCardsComponent("M. Visualizações", $avereng_views) ?>
-                        <?= UserActivityCardsComponent("M. Avaliações", 4.5) ?>
+                        <?= UserActivityCardsComponent("M. Avaliações", $average_avaliations) ?>
                     </section>
 
                     <section class="mt-4 bg-gray600 p-6 rounded-lg border border-white/20 relative">
@@ -105,17 +112,17 @@ $botoes = [
                         Útimos comentários
                     </h2>
                     <div class="mt-8">
-                        <?= Comment("Richard Stallman", "Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!", "", "https://media.wired.com/photos/5d815ffe46103c0009de8d56/16:9/w_2400,h_1350,c_limit/science_stallman_473688628.jpg") ?>
-                        <?= Comment("Richard Stallman", "Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!", "", "https://media.wired.com/photos/5d815ffe46103c0009de8d56/16:9/w_2400,h_1350,c_limit/science_stallman_473688628.jpg") ?>
-                        <?= Comment("Richard Stallman", "Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!", "", "https://media.wired.com/photos/5d815ffe46103c0009de8d56/16:9/w_2400,h_1350,c_limit/science_stallman_473688628.jpg") ?>
-                        <?= Comment("Richard Stallman", "Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!", "", "https://media.wired.com/photos/5d815ffe46103c0009de8d56/16:9/w_2400,h_1350,c_limit/science_stallman_473688628.jpg") ?>
-                        <?= Comment("Richard Stallman", "Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!", "", "https://media.wired.com/photos/5d815ffe46103c0009de8d56/16:9/w_2400,h_1350,c_limit/science_stallman_473688628.jpg") ?>
-                        <?= Comment("Richard Stallman", "Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!", "", "https://media.wired.com/photos/5d815ffe46103c0009de8d56/16:9/w_2400,h_1350,c_limit/science_stallman_473688628.jpg") ?>
-                        <?= Comment("Richard Stallman", "Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!", "", "https://media.wired.com/photos/5d815ffe46103c0009de8d56/16:9/w_2400,h_1350,c_limit/science_stallman_473688628.jpg") ?>
-                        <?= Comment("Richard Stallman", "Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!", "", "https://media.wired.com/photos/5d815ffe46103c0009de8d56/16:9/w_2400,h_1350,c_limit/science_stallman_473688628.jpg") ?>
-                        <?= Comment("Richard Stallman", "Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!", "", "https://media.wired.com/photos/5d815ffe46103c0009de8d56/16:9/w_2400,h_1350,c_limit/science_stallman_473688628.jpg") ?>
-                        <?= Comment("Richard Stallman", "Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!", "", "https://media.wired.com/photos/5d815ffe46103c0009de8d56/16:9/w_2400,h_1350,c_limit/science_stallman_473688628.jpg") ?>
-                    </div>
+                        <?php foreach ($last_comments as $comment) : ?>
+                            <?= CommentStudioAnalytics(
+                                $comment['name'],
+                                $comment['content'],
+                                $comment['created_at'],
+                                $comment['avatar_url'],
+                                $comment['video_id'],
+                                $comment['thumbnail_url']
+                            ) ?>
+                        <?php endforeach; ?>
+                        
                 </section>
             </div>
         </main>
