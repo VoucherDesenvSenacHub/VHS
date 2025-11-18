@@ -21,10 +21,6 @@ class VideoModel extends Model {
         return $this->database->query($sql, ['query' => '%' . $query . '%']);
     }
 
-    public function getVideoById(string $id): array {
-        $sql = "SELECT * FROM videos WHERE id = :id LIMIT 1";
-        return $this->database->query($sql, [':id' => $id]);
-    }
 
 
     

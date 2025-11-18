@@ -26,9 +26,7 @@ class UserHistoryModel extends Model
         return $id;
     }
 
-    /**
-     * Retorna histórico filtrando por tipo (VIDEO, FAST, EVENT)
-     */
+
     public function getHistoryByUserId(string $user_id, string $type = 'VIDEO'): array
     {
         $sql = "SELECT uh.*

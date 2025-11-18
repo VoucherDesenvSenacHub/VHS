@@ -90,9 +90,7 @@ class UserHistoryController extends Controller
 }
 
 
-    /**
-     * Mapeia histórico de vídeos e fasts
-     */
+
     private function mapVideoHistory(array $history): array
     {
         $results = [];
@@ -117,6 +115,7 @@ class UserHistoryController extends Controller
                 "description"    => $video["description"] ?? "",
                 "type_card"      => strtolower($video["type"] ?? "video"),
                 "views"          => $video["views"] ?? 0,
+                "id"          => $video["id"] ,
                 "likes"          => $video["likes"] ?? 0,
                 "url"            => $video["url"] ?? "",
                 "avatar_url"     => $author["avatar_url"] ?? "",

@@ -7,6 +7,7 @@ use Src\Infra\Model\AvaliationModel as ModelAvaliationModel;
 use Src\Infra\Model\CommentModel;
 use Src\Infra\Model\UserModel;
 use Src\Infra\Model\VideoModel;
+use Src\Infra\Model\UserHistoryModel;
 
 use function Src\Application\Utils\Redirect\redirect;
 
@@ -15,19 +16,25 @@ require_once __DIR__ . '/../../../application/core/controller.php';
 class VideoController extends Controller {
     private VideoModel $videoModel;
     private ModelAvaliationModel $avaliationModel;
-
     private CommentModel $commentModel;
+    private UserHistoryModel $UserHistoryModel;
 
     public function index() {
         $this->videoModel = $this->model('video');
         $this->avaliationModel = $this->model("avaliation");
         $this->commentModel = $this->model("comment");
+        $this->UserHistoryModel = $this->model("userhistory");
+
+        $user_id  = $_SESSION["user"]["id"];
+        $video_id = $_GET["id"];
         
         $video = $this->videoModel->getVideoById($_GET['id'] ?? "");
 
         if(empty($video)) return redirect("/404");
     
         $video = $video[0];
+
+        $this->UserHistoryModel->create($user_id, $video_id, "VIDEO");
 
         $relatedVideos = $this->videoModel->getVideosByCategory($video["category_id"]); 
 
