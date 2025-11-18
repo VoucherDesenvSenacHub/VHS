@@ -7,38 +7,46 @@ require_once __DIR__ . '/../../application/core/model.php';
 
 use Src\Application\Core\Model;
 
-class UserHistoryModel extends Model {
-    public function create(string $user_id, string $video_id): string {
-        $sql = "INSERT INTO users_history (id, user_id, video_id) VALUES (:id, :user_id, :video_id)";
+class UserHistoryModel extends Model
+{
+    public function create(string $user_id, string $video_id, string $type = 'VIDEO'): string
+    {
+        $sql = "INSERT INTO users_history (id, user_id, video_id, type) 
+                VALUES (:id, :user_id, :video_id, :type)";
 
-        $id = uniqid(more_entropy: true);
+        $id = uniqid('', true);
 
-        $stmt = $this->database->exec($sql, [
+        $this->database->exec($sql, [
             ":id" => $id,
-            ":user_id" => $user_id,   
+            ":user_id" => $user_id,
             ":video_id" => $video_id,
-
+            ":type" => strtoupper($type)
         ]);
 
         return $id;
     }
 
-    public function getHistoryByUserId(string $user_id): array {
+    /**
+     * Retorna histórico filtrando por tipo (VIDEO, FAST, EVENT)
+     */
+    public function getHistoryByUserId(string $user_id, string $type = 'VIDEO'): array
+    {
         $sql = "SELECT uh.*
                 FROM users_history uh
                 INNER JOIN (
-                    SELECT video_id, MAX(history_created_at) AS last_view
+                    SELECT video_id, MAX(created_at) AS last_view
                     FROM users_history
-                    WHERE user_id = :user_id
+                    WHERE user_id = :user_id AND type = :type
                     GROUP BY video_id
                 ) latest 
                 ON uh.video_id = latest.video_id 
-                AND uh.history_created_at = latest.last_view
-                WHERE uh.user_id = :user_id
-                ORDER BY uh.history_created_at DESC";
-    
-        return $this->database->query($sql, [":user_id" => $user_id]);
+                AND uh.created_at = latest.last_view
+                WHERE uh.user_id = :user_id AND uh.type = :type
+                ORDER BY uh.created_at DESC";
+
+        return $this->database->query($sql, [
+            ":user_id" => $user_id,
+            ":type" => strtoupper($type)
+        ]);
     }
-    
-   
 }

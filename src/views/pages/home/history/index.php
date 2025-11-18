@@ -3,12 +3,12 @@ $history = $_SESSION["page_data"]["history"] ?? [];
 $page = $_SESSION["page_data"]["page"] ?? 1;
 $total_pages = $_SESSION["page_data"]["total_pages"] ?? 1;
 
-require "../../../components/header/headerComponent.php";
-require "../../../components/sidebar/index.php";
-require "../../../components/cards/index.php";
-require "../../../components/featuredCard/featuredCardComponent.php";
-require_once "../../../components/utils/inputComponent.php";
-require_once "../../../components/utils/buttonComponent.php";
+require_once __DIR__ . "/../../../components/header/headerComponent.php";
+require_once __DIR__ . "/../../../components/sidebar/index.php";
+require_once __DIR__ . "/../../../components/cards/index.php";
+require_once __DIR__ . "/../../../components/featuredCard/featuredCardComponent.php";
+require_once __DIR__ . "/../../../components/utils/inputComponent.php";
+require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
 
 use function Src\Views\Components\Header\HeaderComponent;
 use function Src\Views\Components\Sidebar\SidebarComponent;
@@ -30,7 +30,6 @@ $filter = isset($_GET['filter']) ? htmlspecialchars($_GET['filter']) : 'videos';
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/VHS/src/styles/global.css">
   <script type="module" src="/VHS/src/styles/tailwindglobal.js"></script>
-  <script src="/VHS/src/views/pages/home/history/script.js" defer></script>
 
   <style>
     .line-clamp-2 {
@@ -43,15 +42,11 @@ $filter = isset($_GET['filter']) ? htmlspecialchars($_GET['filter']) : 'videos';
   </style>
 </head>
 
-<body class="bg-gray-900 text-white">
-  <div>
-    <?= HeaderComponent() ?>
-  </div>
+<body class="bg-background text-white">
+  <div><?= HeaderComponent() ?></div>
 
   <div class="flex flex-col md:flex-row w-full">
-    <div class="hidden md:block">
-      <?= SidebarComponent() ?>
-    </div>
+    <div class="hidden md:block"><?= SidebarComponent() ?></div>
 
     <main class="flex-1 px-4 sm:px-6 py-4 mx-auto">
       <div class="max-w-[1500px] mx-auto">
@@ -102,27 +97,10 @@ $filter = isset($_GET['filter']) ? htmlspecialchars($_GET['filter']) : 'videos';
           <?php else: ?>
             <p class="text-gray-400 mt-8 text-center">Nenhum item encontrado.</p>
           <?php endif; ?>
-
-          <?php if (!empty($total_pages) && $total_pages > 1): ?>
-            <div class="flex justify-center items-center gap-2 mt-10">
-              <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                <?php if ($i === $page): ?>
-                  <span class="px-4 py-2 bg-purple-600 text-white font-semibold rounded-lg shadow-md">
-                    <?= $i ?>
-                  </span>
-                <?php else: ?>
-                  <a href="?filter=<?= $filter ?>&page=<?= $i ?>"
-                     class="px-4 py-2 bg-purple-800/40 text-white rounded-lg hover:bg-purple-600 transition shadow-sm">
-                     <?= $i ?>
-                  </a>
-                <?php endif; ?>
-              <?php endfor; ?>
-            </div>
-          <?php endif; ?>
-
         </section>
       </div>
     </main>
   </div>
+
 </body>
 </html>

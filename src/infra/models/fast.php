@@ -29,5 +29,11 @@ class FastModel extends Model {
         $sql = "SELECT * FROM videos WHERE type ='FAST' and (title LIKE :query)";
 
         return $this->database->query($sql, ['query' => '%' . $query . '%']);
+   
+    }
+        public function getFastById(string $id): array {
+        $sql = "SELECT * FROM fasts WHERE id = :id LIMIT 1";
+        return $this->database->query($sql, [':id' => $id]);
+
     }
 }

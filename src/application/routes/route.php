@@ -39,8 +39,9 @@ use Src\Application\Controllers\DeleteCommentsController;
 use Src\Application\Controllers\InactivateUserController;
 use Src\Application\Controllers\DeleteReportCommentsController;
 use Src\Application\Controllers\UserHistoryController;
-use Src\Application\Routes\Router;
-use Src\Controllers\SignInViewController;
+use Src\Application\Controllers\Userhistory_controller;
+
+
 
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../../..");
 $dotenv->load();
@@ -62,6 +63,9 @@ $router->post('/api/v1/user/update', UpdateUserAdminController::class, RedirectU
 $router->post('/api/v1/comments/delete', DeleteCommentsController::class, RedirectUserNotAdminMiddleware::class);
 $router->post('/api/v1/users/block', inactivateUserController::class, RedirectUserNotAdminMiddleware::class);
 $router->post('/api/v1/comments/report/remove', DeleteReportCommentsController::class, RedirectUserNotAdminMiddleware::class);
+
+
+$router->post('/api/v1/history', UserHistoryController::class, RedirectUserNotLoggedMiddleware::class);
 
 # Views Routes
 
