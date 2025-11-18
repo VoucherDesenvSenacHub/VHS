@@ -22,12 +22,10 @@ function SidebarComponent() {
     $formatedcategories = [];
     
     foreach($categoriesFromDb as $category){
-        $icon = $category['icon'] ?? "/VHS/public/icons/hash.svg";
 
         $text = is_array($category) ? ($category['name'] ?? 'Sem Nome') : $category;
 
         $formatedcategories[] = [
-            "icon" => $icon,
             "text" => $text,
             "link" => "/VHS/src/views/pages/home/categories?category=".urlencode($text)
         ];
@@ -67,9 +65,6 @@ function SidebarComponent() {
     foreach ($menu["categories"] as $value) {
         $htmlCategories .= <<<HTML
             <li class="flex items-center gap-4 transition-colors">
-                <a href="{$value['link']}" class="size-8 bg-[#241A2F] p-1 rounded-lg icon min-w-8">
-                    <img src="{$value['icon']}" class="w-full h-full">
-                </a>
 
                 <a href="{$value['link']}" class="text-secondary/75 hover:text-secondary transition-all menu-text">
                     {$value['text']}
@@ -100,7 +95,7 @@ function SidebarComponent() {
             </ul>
             <hr class="my-6 border-b-1 border-secondary/10 separator">
             <h3 class="title text-secondary text-sm my-6">CATEGORIAS </h3>
-            <ul class="flex flex-col gap-9">
+            <ul class="flex flex-col gap-4 ml-4">
                 $htmlCategories
             </ul>
             <script src="/VHS/src/views/components/sidebar/script.js"></script>
