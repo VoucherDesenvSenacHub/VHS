@@ -1,8 +1,41 @@
 <?php
 
 namespace Src\Views\Components\Sidebar;
+require_once __DIR__ . '/../../../infra/models/category.php';
+
+use Src\Infra\Model\CategoryModel;
 
 function SidebarComponent() {
+    $categoriesFromDb = [];
+
+    try {
+        $categoryModel = new CategoryModel();
+    
+
+        $categoriesFromDb = $categoryModel->getAllCategories(); 
+    } catch (\Exception $e) {
+       
+        $categoriesFromDb = [];
+    }
+
+
+    $formatedcategories = [];
+    
+    foreach($categoriesFromDb as $category){
+        $icon = $category['icon'] ?? "/VHS/public/icons/hash.svg";
+
+        $text = is_array($category) ? ($category['name'] ?? 'Sem Nome') : $category;
+
+        $formatedcategories[] = [
+            "icon" => $icon,
+            "text" => $text,
+            "link" => "/VHS/src/views/pages/home/categories?category=".urlencode($text)
+        ];
+
+
+    };
+
+
     $menu = [
         "home" => [
             [
@@ -26,31 +59,8 @@ function SidebarComponent() {
                 "link" => "/VHS/src/views/pages/home/history"
             ]
         ],
-
-        "categories" => [
-            "tech" => [
-                "icon" => "/VHS/public/icons/cpu.svg",
-                "text" => "Tecnologia",
-                "link" => "/VHS/src/views/pages/home/categories?category=tecnologia"
-            ],
-            "health" => [
-                "icon" => "/VHS/public/icons/saude.svg",
-                "text" => "Saúde",
-                "link" => "/VHS/src/views/pages/home/categories?category=saude"
-            ],
-            "fashion" => [
-                "icon" => "/VHS/public/icons/moda.svg",
-                "text" => "Moda",
-                "link" => "/VHS/src/views/pages/home/categories?category=moda"
-            ],
-            "aesthetics" => [
-                "icon" => "/VHS/public/icons/estetica.svg",
-                "text" => "Estética",
-                "link" => "/VHS/src/views/pages/home/categories?category=estetica"
-            ]
-        ]
+        "categories" => $formatedcategories
     ];
-
     $htmlCategories = "";
     $htmlHome = "";
 
@@ -89,7 +99,7 @@ function SidebarComponent() {
                 $htmlHome
             </ul>
             <hr class="my-6 border-b-1 border-secondary/10 separator">
-            <h3 class="title text-secondary text-sm my-6">CATEGORIAS</h3>
+            <h3 class="title text-secondary text-sm my-6">CATEGORIAS </h3>
             <ul class="flex flex-col gap-9">
                 $htmlCategories
             </ul>
