@@ -31,6 +31,8 @@ use Src\Application\Controllers\StudioVideoViewController;
 use Src\Application\Middlewares\RedirectUserNotCreatorMiddleware;
 use Src\Application\Controllers\SignInViewController;
 use Src\Application\Controllers\ViewEventsController;
+use Src\Application\Controllers\EditChannelController;
+use Src\Application\Controllers\EditChannelViewController;
 use Src\Application\Middlewares\RedirectUserNotAdminMiddleware;
 use Src\Application\Controllers\AdminAnalyticsViewController;
 use Src\Application\Controllers\AdminComplaintManagementViewController;
@@ -61,6 +63,8 @@ $router->post('/api/v1/auth/signup', SignUpController::class);
 $router->post("/api/v1/user/settings", UpdateUserController::class, RedirectUserNotLoggedMiddleware::class);
 $router->post('/api/v1/fast-video', CreateFastVideoController::class, RedirectUserNotCreatorMiddleware::class);
 
+$router->post('/api/v1/channel/edit', EditChannelController::class, RedirectUserNotCreatorMiddleware::class);
+
 $router->post('/api/v1/user/delete', DeleteUserController::class, RedirectUserNotAdminMiddleware::class);
 $router->post('/api/v1/user/update', UpdateUserAdminController::class, RedirectUserNotAdminMiddleware::class);
 
@@ -88,6 +92,8 @@ $router->get("/studio/create/video", StudioVideoViewController::class, RedirectU
 $router->get("/studio/create/fast", StudioFastViewController::class, RedirectUserNotCreatorMiddleware::class);
 
 $router->get("/user/settings", UserSettingsViewController::class, RedirectUserNotLoggedMiddleware::class);
+$router->get("/home/events", ViewEventsController::class);
+$router->get('/studio/channel/edit', EditChannelViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get("/home/events", ViewEventsController::class, RedirectUserNotLoggedMiddleware::class);
 
 $router->get("/admin/analytics", AdminAnalyticsViewController::class, RedirectUserNotAdminMiddleware::class);
