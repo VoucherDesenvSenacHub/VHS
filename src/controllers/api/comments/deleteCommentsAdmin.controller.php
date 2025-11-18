@@ -10,7 +10,6 @@ use Src\Infra\Model\CommentModel;
 use function Src\Application\Utils\Redirect\redirect;
 
 require_once __DIR__ . '/../../../application/core/controller.php';
-require_once __DIR__ . '/../../../application/utils/verifyRecaptcha.php';
 
 class DeleteCommentsController extends Controller {
     private CommentModel $commentModel;

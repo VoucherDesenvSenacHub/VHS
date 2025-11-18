@@ -3,7 +3,7 @@ require_once __DIR__ . "/../../../components/utils/inputComponent.php";
 require_once __DIR__ . "/components/userDataTableComponent.php";
 require_once __DIR__ . "/../../../components/header/HeaderComponent.php";
 require_once __DIR__ . "/../../../components/barra_admin/barra_admin.php";
-require_once __DIR__ ."/../../../components/filter/filter.php";
+require_once __DIR__ . "/../../../components/filter/filter.php";
 require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
 require_once __DIR__ . "/../../../components/utils/sweetalert.php";
 
@@ -45,23 +45,19 @@ unset($_SESSION["redirect_data"]);
                     <text class='text-3xl font-bold text-white cursor-default'>Gerenciamento de Usuários</text>
                 </div>
                 <div class="flex flex-col gap-2">
-                    <div class="flex gap-2 w-96">
-                        <?php echo ButtonComponent("Usuários", "studio", "", 13, 2.5, "", "/VHS/admin/users"); ?>
-                        <?php echo ButtonComponent("Denúncias", "studio", "", 23, 2.5, "", "/VHS/admin/complaints"); ?>
-                    </div>
                     <div class="flex items-center justify-center gap-4">
                         <div class="h-full pt-6">
                             <?= Filter() ?>
                         </div>
                         <div class="w-full">
-                        <form method="GET">
-                            <?= InputComponent(
-                                placeholder: "Pesquisar",
-                                type: "text",
-                                name: "name",
-                                value: $_GET['name'] ?? ""
-                            ) ?>
-                        </form>
+                            <form method="GET">
+                                <?= InputComponent(
+                                    placeholder: "Pesquisar",
+                                    type: "text",
+                                    name: "name",
+                                    value: $_GET['name'] ?? ""
+                                ) ?>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -70,12 +66,12 @@ unset($_SESSION["redirect_data"]);
                 <?= userDataTableComponent($users); ?>
             </div>
             <?php
-                if(isset($errors)){
-                 echo showSweetAlert("Erro ao excluir ou editar usuário", $errors, "error");
-                }
-                if(isset($success)){
-                 echo showSweetAlert("Sucesso ao excluir ou editar usuário", $success, "success");
-                }
+            if (isset($errors)) {
+                echo showSweetAlert("Erro ao excluir ou editar usuário", $errors, "error");
+            }
+            if (isset($success)) {
+                echo showSweetAlert("Sucesso ao excluir ou editar usuário", $success, "success");
+            }
             ?>
         </div>
     </div>
