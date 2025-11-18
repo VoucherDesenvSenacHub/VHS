@@ -78,8 +78,8 @@ if($_SESSION["redirect_data"]["errors"] ?? false) {
             allowfullscreen
           ></iframe>
         </div>
-        <div class="flex gap-[23rem]">
-            <div class="">
+        <div class="flex justify-between">
+            <div class="w-[75%]">
                 <h2 class="mt-4 text-xl font-semibold"><?= $video["title"] ?></h2>
                 <p class="mt-2 text-sm text-gray-300 whitespace-pre-line"><?= $video["description"] ?></p>
                 <p class="mt-4"><?= formatViews($video["views"] ?? 0) ?> Visualizações</p>
