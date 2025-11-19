@@ -11,6 +11,7 @@ use function Src\Application\Utils\Purify\purifyDuration;
 use function Src\Application\Utils\Purify\purifyCreatedAt;
 use function Src\Application\Utils\Purify\purifyDateTime;
 use function Src\Views\Components\Modal\RemoveVideoComponent;
+use function Src\Views\Components\Utils\ButtonComponent;
 
 function viewCards(array $cards, string $type)
 {
@@ -203,14 +204,28 @@ class Cards
                             <img src="/VHS/public/icons/fastIcon/3botao.svg" alt="" class='w-ful h-full'>
                         </div>
                     </div>
-                    <div class='w-[70%] h-[50%] absolute flex flex-col z-10 bg-[#666] p-3 text-white gap-3 bottom-9 right-5 rounded-lg hidden options'>
-                        <a href="/VHS/studio/content/video/edit?id=$id" class='flex gap-2'>
-                            <img src="/VHS/public/icons/pencill.svg" alt="">
-                            Editar Vídeo
+                    <div class='w-[55%] absolute flex flex-col z-10 bg-[#2A2A2C] p-2 text-white bottom-9 right-4 gap-3 rounded-lg hidden options'>
+                        <a href="/VHS/studio/content/video/edit?id=$id">
+                            <button
+                                class="group flex items-center justify-center gap-2 w-[10.675rem]
+                                border border-white/40 rounded-xl py-2 px-4
+                                transition-all duration-200 hover:bg-purple-700"
+                            >
+                                <img src="/VHS/public/icons/pencill.svg"
+                                    class="w-4 h-4 transition-all duration-200 group-hover:brightness-0 group-hover:invert" />
+                                <span class="transition-all duration-200 text-white">Editar vídeo</span>
+                            </button>
                         </a>
-                        <div class='flex gap-2 cursor-pointer remove_video'>
-                            <img src="/VHS/public/icons/trash.svg" alt="" class='fill-black'>
-                            Remover Vídeo
+                        <div class='cursor-pointer remove_video'>
+                            <button
+                                class="group flex items-center justify-center gap-2 w-[10.675rem]
+                                border border-white/40 text-white/80 rounded-xl py-2 px-4
+                                transition-all duration-200 hover:bg-red-600"
+                            >
+                                <img src="/VHS/public/icons/trash.svg"
+                                    class="w-4 h-4 transition-all duration-200 group-hover:brightness-0 group-hover:invert" />
+                                <span class="transition-all duration-200 text-white">Excluir vídeo</span>
+                            </button>
                         </div>
                     </div>
                 </div>

@@ -59,20 +59,20 @@ $conteudos = []
     </div>
     <div class="flex flex-row w-full">
 
-        <div class="md:block hidden">
+        <div class="max-xl:hidden">
             <?= StudioSideMenuComponent() ?>
         </div>
 
-        <div class="relative flex flex-col gap-4 max-w-[1500px] mx-auto w-full">
+        <div class="relative flex flex-col gap-4 max-w-[1500px] mx-auto w-full 2xl:p-0 p-4">
             <div class="text-white flex flex-col gap-2">
                 <div class="flex flex-col p-4 md:p-0">
-                    <h1 class="md:text-title text-xl font-bold">Edição de video</h1>
-                    <p class="md:text-paragraph text-sm text-gray-400 md:mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
-                    <div class="mt-4 flex gap-2 w-96">
+                    <h1 class="font-semibold xl:text-title text-xl md:text-2xl text-white">Edição de video</h1>
+                    <p class="text-gray-300 xl:text-paragraph text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
+                    <div class="mt-4 flex gap-2 w-full flex-col md:w-96 md:flex-row">
                         <?php
-                        echo ButtonComponent(text: "Edição", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/content/video/edit?id=$id");
-                        echo ButtonComponent(text: "Comentários", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/content/video/comentary?id=$id");
-                        echo ButtonComponent(text: "Analytics", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/content/video/analytic?id=$id");
+                        echo ButtonComponent(text: "Edição", variant: "studio", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]", link: "/VHS/studio/content/video/edit?id=$id");
+                        echo ButtonComponent(text: "Comentários", variant: "studio", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]", link: "/VHS/studio/content/video/comentary?id=$id");
+                        echo ButtonComponent(text: "Analytics", variant: "studio", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]", link: "/VHS/studio/content/video/analytic?id=$id");
                         ?>
                     </div>
                 </div>

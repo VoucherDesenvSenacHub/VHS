@@ -54,15 +54,15 @@ $botoes = [
     </div>
     <div class="flex flex-row w-full">
 
-        <div class="md:block hidden">
+        <div class="max-xl:hidden">
             <?= StudioSideMenuComponent() ?>
         </div>
 
-        <div class="relative flex flex-col gap-4 max-w-[1500px] mx-auto w-full">
+        <div class="relative flex flex-col gap-4 max-w-[1500px] mx-auto w-full 2xl:p-0 p-4">
             <div class="text-white flex flex-col gap-2">
                 <div class="flex flex-col p-4 md:p-0">
-                    <h1 class='md:text-title text-xl font-bold'>Criar conteúdo</h1>
-                    <p class='md:text-paragraph text-sm text-gray-400 md:mt-2'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
+                    <h1 class='font-semibold xl:text-title text-xl md:text-2xl text-white'>Criar conteúdo</h1>
+                    <p class='text-gray-300 xl:text-paragraph text-sm'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
                     <div class="mt-4 flex gap-2 w-full flex-col md:w-96 md:flex-row">
                         <?php echo ButtonComponent(text: "Vídeo", variant: "studio", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]", link: "/VHS/studio/create/video"); ?>
                         <?php echo ButtonComponent(text: "Fast", variant: "studio", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]", link: "/VHS/studio/create/fast"); ?>

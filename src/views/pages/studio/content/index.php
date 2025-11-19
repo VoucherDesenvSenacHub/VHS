@@ -28,11 +28,6 @@ $nextPage = $_SESSION["page_data"]["next_page"];
 
 <!DOCTYPE html>
 <html lang="en">
-<style>
-    * {
-        color: white;
-    }
-</style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,12 +40,12 @@ $nextPage = $_SESSION["page_data"]["next_page"];
 <body class="w-full bg-[#0C0118]">
     <?= HeaderComponent(); ?>
     <div class="flex">
-        <div class="max-xl:hidden mr-4">
+        <div class="max-xl:hidden">
             <?= StudioSideMenuComponent(); ?>
         </div>
-        <div class="w-[1400px] xl:p-0 p-4 mx-auto">
+        <div class="w-[1500px] 2xl:p-0 p-4 mx-auto">
             <div>
-                <h1 class="font-semibold xl:text-title text-xl text-white">Conteúdo do canal</h1>
+                <h1 class="font-semibold xl:text-title text-xl md:text-2xl text-white">Conteúdo do canal</h1>
                 <p class="text-gray-300 xl:text-paragraph text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
             </div>
             <div class="my-4 flex gap-2 w-full flex-col md:w-96 md:flex-row">
@@ -73,8 +68,11 @@ $nextPage = $_SESSION["page_data"]["next_page"];
                     <p class="text-[13px] flex items-center text-gray-200">Mais antigos</p>
                 </div>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-5">
-                <?= viewCards($videos, 'mychannel'); ?>
+            
+            <div class="flex mt-5">
+                <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <?= viewCards($videos, 'mychannel'); ?>
+                </div>
             </div>
             <div class="mb-5">
                 <?= paginate($videos, $nextPage) ?>
