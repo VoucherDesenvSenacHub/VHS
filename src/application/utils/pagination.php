@@ -9,7 +9,7 @@ namespace Src\Application\Utils;
  * @param array $content Array de itens a serem paginados
  * @return string HTML completo da paginação
  */
-function paginate($content, $totalPerPage = 10) {
+function paginate($content, $totalPerPage = 7) {
     $page = isset($_GET['page']) ? (int)$_GET['page'] : 0;
     if ($page < 1) $page = 0;
     $prevPage = $page > 1 ? $page - 1 : 0;
