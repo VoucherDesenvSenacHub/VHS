@@ -70,7 +70,7 @@ class VideoModel extends Model {
     public function getViewsCountByWeekDay(string $userId){
         $sql = "SELECT DAYNAME(users_history.created_at) AS day_name, COUNT(*) AS total_views FROM users_history
         JOIN videos ON videos.id = users_history.video_id
-        WHERE videos.author_id = :userId
+        WHERE videos.author_id = :userId AND YEARWEEK(users_history.created_at, 1) = YEARWEEK(CURDATE(), 1)
         GROUP BY DAYOFWEEK(users_history.created_at)
         ORDER BY DAYOFWEEK(users_history.created_at)";
         return $this->database->query($sql, [":userId" => $userId]);
