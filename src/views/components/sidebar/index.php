@@ -94,10 +94,17 @@ function SidebarComponent() {
                 $htmlHome
             </ul>
             <hr class="my-6 border-b-1 border-secondary/10 separator">
-            <h3 class="title text-secondary text-sm my-6">CATEGORIAS </h3>
-            <ul class="flex flex-col gap-4 ml-4">
-                $htmlCategories
-            </ul>
+            <button onclick="CategoriesON(event)" class="flex items-center gap-3 categories-button">
+                <h3 class="title text-secondary text-sm my-6">CATEGORIAS</h3>
+                <img src="/VHS/public/icons/toggle-left.svg" class="size-8 rounded-lg icon min-w-8">
+            </button>
+            <div id="categories-wrapper" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out overflow-hidden">
+
+            <ul id="categories-list" class="flex flex-col min-h-0 ml-4 gap-4 mt-1">
+                 $htmlCategories
+             </ul>
+
+            </div>
             <script src="/VHS/src/views/components/sidebar/script.js"></script>
         </aside>
     HTML;
