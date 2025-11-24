@@ -24,9 +24,8 @@ $views = $_SESSION["page_data"]["all_views"];
 $avereng_views = (int)$_SESSION["page_data"]["average_views"] ?? 0;
 $average_avaliations = (int)$_SESSION["page_data"]["average_avaliations"] ?? 0;
 $last_comments = $_SESSION["page_data"]["last_comments"];
-
-$seriesDataLine = [10, 15, 25, 20, 18, 12, 15];
-$categoriesLine = ['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB', 'DOM'];
+$last_videos = $_SESSION["page_data"]["last_videos"];
+$views_weekly = $_SESSION["page_data"]["views_weekly"];
 
 $botoes = [
     ['texto' => 'Edição', 'link' => './VideosPage.php'],
@@ -48,6 +47,7 @@ $botoes = [
     <link rel="stylesheet" href="/VHS/src/styles/global.css">
     <script src="/VHS/src/styles/tailwindglobal.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/apexcharts'></script>
+    <script src="/VHS/src/views/pages/studio/chart.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.44.0/dist/apexcharts.css">
 </head>
 
@@ -85,12 +85,29 @@ $botoes = [
                     </section>
 
                     <section class="mt-4 bg-gray600 p-6 rounded-lg border border-white/20 relative">
-                        <h2 class="text-white font-semibold absolute z-10">Visualizações por semana</h2>
-                        <div id="studio-chart">
-                        </div>
-                        <script src="/VHS/src/views/pages/studio/chart.js"></script>
+                        <h2 class="text-white font-semibold absolute top-4 left-6 z-10">Visualizações por semana</h2>
+                        <div id="studio-chart" class="h-80 mt-10"></div>
                         <script>
-                            setChart([10, 15, 25, 20, 18, 12, 15], ['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB', 'DOM'], "Semana", "Visualizações", "studio-chart")
+                            <?php
+                            $days_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+                            $ordered = array_fill(0, 7, 0);
+                            foreach ($views_weekly as $row) {
+                                    $day = $row['day_name'] ?? '';
+                                    $views = (int)($row['total_views'] ?? 0);
+                                    $index = array_search($day, $days_order);
+                                    $ordered[$index] = $views;
+                            }
+                            ?>
+
+                            const viewsData = <?= json_encode(array_values($ordered), JSON_UNESCAPED_UNICODE) ?>;
+
+                            setChart(
+                                viewsData,
+                                ['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB', 'DOM'],
+                                'Visualizações esta semana',
+                                'Total de views',
+                                'studio-chart'
+                            );
                         </script>
                     </section>
 
@@ -99,10 +116,14 @@ $botoes = [
                             Ultimos vídeos
                         </h2>
                         <div class="mt-8 pb-4 pt-2 flex flex-col gap-4">
-                            <?= StudioVideoComponent("1", "Virgina fonseca no discord, top demais!", "https://i.imgur.com/OZXgam6.png", 445) ?>
-                            <?= StudioVideoComponent("1", "Virgina fonseca no discord, top demais!", "https://i.imgur.com/OZXgam6.png", 445) ?>
-                            <?= StudioVideoComponent("1", "Virgina fonseca no discord, top demais!", "https://i.imgur.com/OZXgam6.png", 445) ?>
-                            <?= StudioVideoComponent("1", "Virgina fonseca no discord, top demais!", "https://i.imgur.com/OZXgam6.png", 445) ?>
+                            <?php foreach ($last_videos as $video) : ?>
+                                <?= StudioVideoComponent(
+                                    $video['id'],
+                                    $video['title'],
+                                    $video['thumbnail_url'],
+                                    views: $video['views']
+                                ) ?>
+                            <?php endforeach; ?>
                         </div>
                     </section>
                 </div>
@@ -117,9 +138,7 @@ $botoes = [
                                 $comment['name'],
                                 $comment['content'],
                                 $comment['created_at'],
-                                $comment['avatar_url'],
-                                $comment['video_id'],
-                                $comment['thumbnail_url']
+                                $comment['avatar_url']
                             ) ?>
                         <?php endforeach; ?>
                         

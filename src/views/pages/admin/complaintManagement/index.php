@@ -8,6 +8,7 @@ require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
 require_once __DIR__ . "/../../../components/filter/filter.php";
 require_once __DIR__ . "/../../../components/utils/sweetalert.php";
 require_once __DIR__ . "/../../../../application/utils/pagination.php";
+require_once __DIR__ . "/../../../../application/utils/getTimeAgo.php";
 
 use function Src\Views\components\filter\Filter;
 use function Src\Views\Components\Utils\ButtonComponent;
@@ -17,6 +18,7 @@ use function Src\Views\Components\Utils\Comment;
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\Application\Utils\showSweetAlert;
 use function Src\Application\Utils\paginate;
+use function Src\Application\Utils\getTimeAgo;
 
 $commets  = $_SESSION["page_data"]["comments"] ?? [];
 $success = $_SESSION["redirect_data"]["success"] ?? null;
@@ -79,28 +81,13 @@ $pagination = paginate($commets);
                         <p class="text-slate-400">Nenhum comentário encontrado.</p>
                     </div>';
                     }
-                $tz = new DateTimeZone('America/Campo_Grande');
                 foreach ($commets as $comment) {
-                    $created = new DateTime($comment["created_at"], $tz);
-                    $now = new DateTime('now', $tz);
-                    $diff = $now->getTimestamp() - $created->getTimestamp();
-
-                    $time_ago = floor($diff / 86400) . " dias atrás";
-    
-                    if ($diff < 86400) {
-                        $time_ago = floor($diff / 3600) . " horas atrás";
-                    }
-                    if ($diff < 3600) {
-                        $time_ago = floor($diff / 60) . " minutos atrás";
-                    }
-                    if ($diff < 60) {
-                        "há" . $time_ago = $diff . " segundos atrás";
-                    }
+                    $time_ago = getTimeAgo($comment["created_at"]);
                     echo Comment(
                         $comment["name"],
                         $comment["text"],
                          $comment["thumbnail_url"],
-                        "há " . $time_ago,
+                        $time_ago,
                         $comment["user_img"],
                         $comment["report_id"],
                         $comment["comment_id"],

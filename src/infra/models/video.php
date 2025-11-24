@@ -62,4 +62,18 @@ class VideoModel extends Model {
         return $this->database->query($sql, [":userId"=> $userId]);
     }
 
+    public function getLastVideosByUserId(string $userId, int $offset, int $limit) {
+        $sql = "SELECT * FROM videos WHERE author_id = :userId AND is_deleted = 0 ORDER BY created_at DESC LIMIT $offset, $limit";
+        return $this->database->query($sql, [":userId" => $userId]);
+    }
+
+    public function getViewsCountByWeekDay(string $userId){
+        $sql = "SELECT DAYNAME(users_history.created_at) AS day_name, COUNT(*) AS total_views FROM users_history
+        JOIN videos ON videos.id = users_history.video_id
+        WHERE videos.author_id = :userId
+        GROUP BY DAYOFWEEK(users_history.created_at)
+        ORDER BY DAYOFWEEK(users_history.created_at)";
+        return $this->database->query($sql, [":userId" => $userId]);
+    }
+
 }
