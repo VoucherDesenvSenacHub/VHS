@@ -18,7 +18,7 @@ function userDataTableComponent($users)
         HTML;
     }
     $rows = '';
-    $pagination = paginate($users);
+    $pagination = paginate($users, 7);
 
     foreach ($users as $user) {
         $initials = strtoupper(substr($user['name'], 0, 1) . substr(strrchr($user['name'], ' '), 1, 1));

@@ -17,10 +17,11 @@
         string $height = null,
         string $className = "",
         string $onClickIcon = "",
-        bool | null $error = false,
-        string | null $errorDescription = "",
-        string $value = "",
-        array $attributes = []
+        bool $error = false,
+        string $errorDescription = "",
+        string $value = '',
+        array $attributes = [],
+        string $required = null
         ){
         
         $type = htmlspecialchars(string: $type, flags: ENT_QUOTES, encoding: 'UTF-8');

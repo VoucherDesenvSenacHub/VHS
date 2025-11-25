@@ -18,7 +18,7 @@ function StudioSideMenuComponent()
                 </li>
     
                 <li class="flex items-center text-gray-300 rounded-lg cursor-pointer mt-[2rem]">
-                    <a href="/VHS/src/views/pages/studio/content" class="flex items-center w-full p-2">
+                    <a href="/VHS/studio/content/video" class="flex items-center w-full p-2">
                         <div class="conteudo-icon icon w-[2rem] h-[2rem] flex items-center justify-center rounded-[12px] ml-[0.31rem]">
                             <img src="/VHS/public/icons/sidebar_studio/Conteúdo.svg" alt="Conteúdo">
                         </div>
