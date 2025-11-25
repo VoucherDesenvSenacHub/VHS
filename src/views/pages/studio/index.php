@@ -75,9 +75,9 @@ $botoes = [
             </section>
 
 
-            <div class="grid grid-cols-2">            
+            <div class="grid grid-cols-1 md:grid-cols-2">            
                 <div>
-                    <section class="mt-4 flex gap-4">
+                    <section class="mt-4 flex flex-col gap-4 md:flex-row">
                         <?= UserActivityCardsComponent("Seguidores", $followers) ?>
                         <?= UserActivityCardsComponent("Visualizações", $views) ?>
                         <?= UserActivityCardsComponent("M. Visualizações", $avereng_views) ?>
@@ -128,7 +128,7 @@ $botoes = [
                     </section>
                 </div>
                 
-                <section class="p-6 bg-gray600 ml-4 mt-4 rounded-lg border border-white/20 flex flex-col gap-2 max-w-[26rem]">
+                <section class="p-6 bg-gray600 ml-0 md:ml-4 mt-4 rounded-lg border border-white/20 flex flex-col gap-2 max-w-[26rem]">
                     <h2 class="text-white font-semibold absolute z-10 text-xl">
                         Útimos comentários
                     </h2>
