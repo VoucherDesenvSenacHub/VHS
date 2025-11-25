@@ -61,6 +61,7 @@ function CategoriesON(event) {
     
     const button = event.currentTarget;
     const image = button.querySelector('img');
+    const title = button.querySelector('h3');
 
    
     const wrapper = document.getElementById("categories-wrapper");
@@ -75,13 +76,24 @@ function CategoriesON(event) {
 
     if (isOpen) {
     
-        image.src = "/VHS/public/icons/toggle-left.svg";
+        image.classList.remove('active');
+        image.src = "/VHS/public/icons/GridOff.svg";
+
+        title.classList.remove('text-white');
+        title.classList.add('hover:text-secondary');
+        
 
         wrapper.classList.remove('grid-rows-[1fr]');
         wrapper.classList.add('grid-rows-[0fr]');
 
     } else {
-        image.src = "/VHS/public/icons/toggle-right.svg";
+
+        image.classList.add('active');
+        image.src = "/VHS/public/icons/GridOn.svg";
+
+        title.classList.add('text-white');
+        title.classList.remove('hover:text-secondary');
+    
 
         wrapper.classList.remove('grid-rows-[0fr]');
         wrapper.classList.add('grid-rows-[1fr]');

@@ -95,12 +95,12 @@ function SidebarComponent() {
             </ul>
             <hr class="my-6 border-b-1 border-secondary/10 separator">
             <button onclick="CategoriesON(event)" class="flex items-center gap-3 categories-button">
-                <h3 class="title text-secondary text-sm my-6">CATEGORIAS</h3>
-                <img src="/VHS/public/icons/toggle-left.svg" class="size-8 rounded-lg icon min-w-8">
+                <img src="/VHS/public/icons/GridOff.svg" class="size-8 bg-[#241A2F] p-1 rounded-lg icon min-w-8">
+                <h3 class="title text-secondary/75 hover:text-secondary text-sm my-6">CATEGORIAS</h3>
             </button>
             <div id="categories-wrapper" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out overflow-hidden">
 
-            <ul id="categories-list" class="flex flex-col min-h-0 ml-4 gap-4 mt-1">
+            <ul id="categories-list" class=" flex flex-col min-h-0 ml-4 gap-4 mt-1">
                  $htmlCategories
              </ul>
 
