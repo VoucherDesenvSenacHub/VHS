@@ -149,6 +149,8 @@ class Cards
         $thumbnail_url  = purifyProperty($card['thumbnail_url']);
         $title      = purifyProperty($card['title']);
         $comments = purifyNumbers($card['comments'] ?? 0);
+        $avaliations = $card['avaliations'] ?? 0;
+        $views = purifyNumbers($card['views'] ?? 0);    
         $created_at = purifyCreatedAt($card['created_at'], $userTimezone);
         $duration   = purifyDuration($card['duration']);
 
@@ -193,13 +195,14 @@ class Cards
                             <div>
                                 <img src='/VHS/public/icons/star-card.svg' class='w-full h-full'>
                             </div>
-
+                            <p class='truncate text-white/50 text-paragraph'>$avaliations</p>
                         </div>
 
                         <div class='flex gap-2 items-center'>
                             <div>
                                 <img src='/VHS/public/icons/views-card.svg' class='w-full h-full'>
                             </div>
+                            <p class='truncate text-white/50 text-paragraph'>$views</p>
                         </div>
 
                         <div class='cursor-pointer video_options'>

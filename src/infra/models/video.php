@@ -111,11 +111,14 @@ class VideoModel extends Model
     {
         $sql = "SELECT 
             v.*, 
-            COUNT(c.id) AS comments
+            COUNT(DISTINCT c.id) AS comments,
+            CAST(ROUND(AVG(v_ava.stars), 2) AS DECIMAL(10,2)) AS avaliations
         FROM 
             videos v
         LEFT JOIN 
             comments c ON c.video_id = v.id AND c.is_deleted = 0
+        LEFT JOIN
+            videos_avaliations v_ava ON v_ava.video_id = v.id AND v_ava.is_deleted = 0
         WHERE 
             v.is_deleted = 0 AND author_id = :author_id
         GROUP BY 
