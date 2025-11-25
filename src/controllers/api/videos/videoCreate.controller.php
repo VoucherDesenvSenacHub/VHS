@@ -25,6 +25,8 @@ class VideoCreateController extends Controller
 
             $user = $_SESSION["user"];
 
+            $user['timezone'] = $_POST['timezone'] ?? 'UTC';
+
             $imgPath = UploadImages("thumbnail", $user["name"]);
 
             $data = array_merge($_POST, [

@@ -13,9 +13,10 @@ class VideoModel extends Model
     public function create(string $url, string $title, string $description = '', string $category_id, string $author_id, string $thumbnail_url)
     {
 
-        $sql = "INSERT INTO videos(id, url, title, description, author_id, category_id, thumbnail_url) VALUES(:id, :url, :title, :description, :author_id, :category_id, :thumbnail_url)";
+        $sql = "INSERT INTO videos(id, url, title, description, author_id, category_id, thumbnail_url, created_at) VALUES(:id, :url, :title, :description, :author_id, :category_id, :thumbnail_url, :created_at)";
 
         $id = uniqid();
+        $created_at = (new \DateTime('now', new \DateTimeZone('UTC')))->format('Y-m-d H:i:s');
 
         $stmt = $this->database->query($sql, [
             ":id" => $id,
@@ -24,7 +25,8 @@ class VideoModel extends Model
             ":description" => $description,
             ":author_id" => $author_id,
             ":category_id" => $category_id,
-            ":thumbnail_url" => $thumbnail_url
+            ":thumbnail_url" => $thumbnail_url,
+            ":created_at" => $created_at
         ]);
 
         return $stmt;
@@ -59,9 +61,9 @@ class VideoModel extends Model
         return $this->database->query($sql, ["video_id" => $videoId]);
     }
 
-    public function getVideoByTitle(string $query): array
+    public function getVideoByTitle(string $query, int $offset = 0, int $limit = 8): array
     {
-        $sql = "SELECT * FROM videos WHERE (title LIKE :query)";
+        $sql = "SELECT * FROM videos WHERE (title LIKE :query) LIMIT $offset, $limit";
 
         return $this->database->query($sql, ['query' => '%' . $query . '%']);
     }

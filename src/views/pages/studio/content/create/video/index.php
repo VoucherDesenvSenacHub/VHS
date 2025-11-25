@@ -58,7 +58,7 @@ $botoes = [
             <?= StudioSideMenuComponent() ?>
         </div>
 
-        <div class="relative flex flex-col gap-4 max-w-[1500px] mx-auto w-full 2xl:p-0 p-4">
+        <div class="relative flex flex-col gap-4 max-w-[1500px] mx-auto w-full 2xl:p-0 p-2">
             <div class="text-white flex flex-col gap-2">
                 <div class="flex flex-col p-4 md:p-0">
                     <h1 class='font-semibold xl:text-title text-xl md:text-2xl text-white'>Criar conteúdo</h1>
@@ -71,6 +71,7 @@ $botoes = [
                 </div>
 
                 <form action="/VHS/api/v1/studio/create/video" enctype="multipart/form-data" method="post" class="md:p-0 p-4 flex flex-col gap-8 md:gap-4 md:mt-4">
+                    <input type="hidden" name="timezone" id="timezone">
                     <div id="URL">
                         <h1 class="md:text-subtitle text-lg text-white font-semibold">URL</h1>
                         <p class="md:text-paragraph text-sm text-gray-400 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
@@ -197,6 +198,8 @@ $botoes = [
     <footer class=""> <?= Footer() ?> </footer>
 
     <script>
+        document.getElementById('timezone').value = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        
         document.addEventListener("DOMContentLoaded", function() {
             const fileInput = document.getElementById('dropzone-file');
 

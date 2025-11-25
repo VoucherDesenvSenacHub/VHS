@@ -28,6 +28,7 @@ $nextPage = $_SESSION["page_data"]["next_page"];
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -56,7 +57,17 @@ $nextPage = $_SESSION["page_data"]["next_page"];
                 ?>
             </div>
 
-            <?= InputComponent(type: "text", placeholder: "Pesquisar", icon: "/VHS/public/icons/Filter.svg", iconPosition: "left", onClickIcon: "showFilterMenu()") ?>
+            <form action="" method="get">
+                <?= InputComponent(
+                    type: "text",
+                    placeholder: "Pesquisar",
+                    icon: "/VHS/public/icons/Filter.svg",
+                    name: "search",
+                    value: $_SESSION['page_data']['search'] ?? '',
+                    iconPosition: "left",
+                    onClickIcon: "showFilterMenu()"
+                ) ?>
+            </form>
 
             <div id="filter" class="absolute left-[16.5rem] z-10 hidden flex flex-col bg-gray-900 rounded-lg p-2 max-w-32 border-[0.5px] border-gray-500">
                 <div class="flex">
@@ -68,7 +79,7 @@ $nextPage = $_SESSION["page_data"]["next_page"];
                     <p class="text-[13px] flex items-center text-gray-200">Mais antigos</p>
                 </div>
             </div>
-            
+
             <div class="flex mt-5">
                 <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     <?= viewCards($videos, 'mychannel'); ?>
@@ -78,19 +89,37 @@ $nextPage = $_SESSION["page_data"]["next_page"];
                 <?= paginate($videos, $nextPage) ?>
             </div>
             <?php
-                if(isset($success_edit)){
-                    echo showSweetAlert("Vídeo editado com sucesso!", "", "success");
-                }
-                
-                if(isset($success_delete)){
-                    echo showSweetAlert("Vídeo deletado com sucesso!", "", "success");
-                }
+            if (isset($success_edit)) {
+                echo showSweetAlert("Vídeo editado com sucesso!", "", "success");
+            }
+
+            if (isset($success_delete)) {
+                echo showSweetAlert("Vídeo deletado com sucesso!", "", "success");
+            }
             ?>
         </div>
     </div>
     <script src="/VHS/src/views/components/cards/script.js" defer></script>
+    <script defer>
+        const input = document.querySelector("input[name='search']");
+        let timeout = null;
+
+        input.addEventListener("input", () => {
+            clearTimeout(timeout);
+
+            timeout = setTimeout(() => {
+                input.form.submit();
+            }, 1500);
+        });
+    </script>
 </body>
 
-<?php unset($_SESSION["redirect_data"]); ?>
+<?php
+    unset($_SESSION["redirect_data"]);
+    
+    if (!isset($_GET['search'])) {
+        unset($_SESSION['page_data']['search']);
+    }
+?>
 
 </html>

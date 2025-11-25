@@ -11,7 +11,6 @@ use function Src\Application\Utils\Purify\purifyDuration;
 use function Src\Application\Utils\Purify\purifyCreatedAt;
 use function Src\Application\Utils\Purify\purifyDateTime;
 use function Src\Views\Components\Modal\RemoveVideoComponent;
-use function Src\Views\Components\Utils\ButtonComponent;
 
 function viewCards(array $cards, string $type)
 {
@@ -49,7 +48,8 @@ class Cards
         }
     }
 
-    private static function Video(array $card) {
+    private static function Video(array $card)
+    {
         $id         = purifyProperty($card["id"]);
         $url        = purifyProperty($card['url']);
         $views      = purifyNumbers($card['views']);
@@ -143,11 +143,13 @@ class Cards
 
     private static function MyChannel(array $card): string
     {
+        $userTimezone = $_SESSION['user']['timezone'] ?? 'UTC';
+
         $id = purifyProperty($card['id']);
         $thumbnail_url  = purifyProperty($card['thumbnail_url']);
         $title      = purifyProperty($card['title']);
-        $comments   = purifyNumbers($card['comments']);
-        $created_at = purifyCreatedAt($card['created_at']);
+        $comments = purifyNumbers($card['comments'] ?? 0);
+        $created_at = purifyCreatedAt($card['created_at'], $userTimezone);
         $duration   = purifyDuration($card['duration']);
 
         $modalVideoRemove = RemoveVideoComponent(
