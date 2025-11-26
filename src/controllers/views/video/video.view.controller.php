@@ -44,16 +44,14 @@ class VideoController extends Controller {
             $stars = $userAvaliation[0]["stars"];
         }
 
-        $page = $_GET["page"] ?? 1;
+        $page = $_GET["page"] ?? 0;
 
-        if($page < 1) $page = 1;
-
-        if(!is_numeric($page)) {
-            $page = 1;
+        if(!is_numeric($page) || $page < 0) {
+            $page = 0;
         }
 
-        $limit = $page * 10;
-        $offset = $page * $limit - 10;
+        $limit = 10;
+        $offset = $page * $limit;
 
 
         $comments = $this->commentModel->getCommentsByVideoId($video["id"], $offset, $limit);
@@ -66,6 +64,8 @@ class VideoController extends Controller {
             "user_avaliation" => $stars,
             "comments" => $comments,
             "total_comments"=> $totalComments,
+            "offset"=> $offset,
+            "limit"=> $limit,
         ]);
     }
 }

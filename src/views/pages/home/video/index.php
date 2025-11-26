@@ -62,9 +62,7 @@ if($_SESSION["redirect_data"]["errors"] ?? false) {
     
     <div class="flex">
 
-    <aside class="w-[240px]">
-      <?= SidebarComponent() ?>
-    </aside>
+    <?= SidebarComponent() ?>
 
     <main class="flex-1 p-4 max-w-[1500px] m-auto">
 
@@ -84,7 +82,7 @@ if($_SESSION["redirect_data"]["errors"] ?? false) {
             <div class="">
                 <h2 class="mt-4 text-xl font-semibold"><?= $video["title"] ?></h2>
                 <p class="mt-2 text-sm text-gray-300 whitespace-pre-line"><?= $video["description"] ?></p>
-                <p class="mt-4"><?= formatViews($video["views"]) ?> Visualizações</p>
+                <p class="mt-4"><?= formatViews($video["views"] ?? 0) ?> Visualizações</p>
               </div>
             <div class="mt-5 flex">
                 <img class="w-6 h-6 mr-3 cursor-pointer" src="/VHS/public/icons/share.svg" alt="ShareButton" onclick="openShared()" name="send">
@@ -120,19 +118,21 @@ if($_SESSION["redirect_data"]["errors"] ?? false) {
           </div>
         </div>
 
-        <div id="comments" class="max-w-lg w-full lg:flex-1 bg-[#1B1B1B] p-4 rounded-lg mt-10 flex flex-col justify-between">
-          <div>
+        <div id="comments" class="relative max-w-lg w-full lg:flex-1 bg-[#1B1B1B] p-4 rounded-lg mt-10 flex flex-col justify-between">
+          <div class="h-[90%]">
             <h3 class="text-xl font-semibold mb-4"><?=$totalComments?> Comentários</h3>
             <?php 
               foreach($comments as $comment) {
-                echo Comment($comment["id"], $comment["username"], $comment["content"], $comment["created_at"], $comment["avatar_url"]);
+                echo Comment($comment["id"], $comment["username"], $comment["content"], $comment["created_at"], $comment["avatar_url"], $comment["creator_like"]);
               }
             ?>
           </div>
-          <form action="/VHS/api/v1/comment?videoId=<?=$_GET["id"]?>" method="post">
-            <?= InputComponent(type: "text", placeholder: "Comentar...", name: "content") ?>
-          </form>
-          <?= paginate($comments) ?>
+          <div>
+            <form action="/VHS/api/v1/comment?videoId=<?=$_GET["id"]?>" method="post">
+              <?= InputComponent(type: "text", placeholder: "Comentar...", name: "content") ?>
+            </form>
+            <?= paginate($comments) ?>
+          </div>
         </div>
 
       </div>

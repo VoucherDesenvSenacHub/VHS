@@ -1,26 +1,52 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/studioSideMenu/studioSideMenuComponent.php";
-use function src\views\components\studioSideMenu\StudioSideMenuComponent;
+require_once __DIR__ . '/../../../components/studioSideMenu/studioSideMenuComponent.php';
+require_once __DIR__ . '/../../../components/header/headerComponent.php';
+require_once __DIR__ . '/../../../components/utils/footer.php';
+require_once __DIR__ . '/../../../components/utils/inputComponent.php';
+require_once __DIR__ . '/../../../components/utils/buttonComponent.php';
+require_once __DIR__ . '/../../../components/utils/sweetalert.php';
 
-require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/header/headerComponent.php";
-use function src\views\components\header\HeaderComponent;
+use function Src\Views\Components\Utils\InputComponent;
+use function Src\Views\Components\Utils\ButtonComponent;
+use function Src\Views\Components\Utils\Footer;
+use function Src\Views\Components\Header\HeaderComponent;
+use function Src\Views\Components\StudioSideMenu\StudioSideMenuComponent;
+use function Src\Application\Utils\showSweetAlert;
 
-require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/footer.php";
-use function src\views\components\Utils\Footer;
+$user = $_SESSION["user"] ?? [];
+$avatar_url = !empty($user['avatar_url']) ? $user['avatar_url'] : 'default.png';
+$banner_url = !empty($user['banner_url']) ?? $user['banner_url'];
+$errors = $_SESSION['redirect_data']['errors'] ?? [];
+$success = $_SESSION["redirect_data"]["success"] ?? null;
+$fields = $_SESSION['redirect_data']['fields'] ?? [];
+unset($_SESSION['redirect_data']);
+
+if (!empty($errors) && is_array($errors)) {
+  foreach ($errors as $error) {
+    if (str_contains(strtolower($error), 'username')) {
+      $usernameError = $error;
+    } else {
+      $genericError = $error;
+    }
+  }
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Customizar Canal</title>
+  <title>Customizar canal</title>
   <link rel="stylesheet" href="/VHS/src/styles/global.css">
   <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Syne:wght@500..800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Syne:wght@500..800&display=stylesheet" />
+
 </head>
 <body>
 
+<body>
   <?php echo HeaderComponent(); ?>
 
   <div class="flex">
@@ -41,14 +67,7 @@ use function src\views\components\Utils\Footer;
             <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
               <img src="/VHS/public/icons/Download.svg" alt="Download">
             </div>
-            <input
-              type="file"
-              name="imagem"
-              id="imagemUpload"
-              accept="image/*"
-              class="hidden"
-              required
-            />
+            <input type="file" name="avatar" id="imagemUploadProfile" accept="image/*" class="hidden" />
           </label>
         </form>
         <div class="mt-5">
@@ -67,14 +86,7 @@ use function src\views\components\Utils\Footer;
             <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
               <img src="/VHS/public/icons/Download.svg" alt="Download">
             </div>
-            <input
-              type="file"
-              name="imagem"
-              id="imagemUpload"
-              accept="image/*"
-              class="hidden"
-              required
-            />
+            <input type="file" name="banner" id="imagemUploadBanner" accept="image/*" class="hidden" />
           </label>
         </form>
       </section>
@@ -106,7 +118,61 @@ use function src\views\components\Utils\Footer;
     </form>
     </main>
   </div>
-
+  <?php
+  if (!empty($errors) && is_array($errors)) {
+    $errorMessage = is_array($errors) ? implode(", ", $errors) : $errors;
+    echo showSweetAlert($errorMessage, "", "error");
+  }
+  if (isset($success)) {
+    echo showSweetAlert($success, "", "success");
+  }
+  ?>
   <?php echo Footer(); ?>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const profileInput = document.getElementById('imagemUploadProfile');
+      if (profileInput) {
+        profileInput.addEventListener('change', (event) => {
+          const file = event.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              document.getElementById('profileImage').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+      }
+
+      const bannerInput = document.getElementById('imagemUploadBanner');
+      if (bannerInput) {
+        bannerInput.addEventListener('change', (event) => {
+          const file = event.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              const bannerImage = document.getElementById('bannerImage');
+              const placeholderText = document.getElementById('placeholderText');
+              bannerImage.src = e.target.result;
+              bannerImage.style.display = 'block';
+              placeholderText.style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+      }
+
+      const bannerImage = document.getElementById('bannerImage');
+      const placeholderText = document.getElementById('placeholderText');
+      if (bannerImage && bannerImage.src && bannerImage.src !== window.location.href) {
+        bannerImage.style.display = 'block';
+        placeholderText.style.display = 'none';
+      } else {
+        bannerImage.style.display = 'none';
+        placeholderText.style.display = 'block';
+      }
+    });
+  </script>
 </body>
+
 </html>

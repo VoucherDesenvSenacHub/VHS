@@ -2,12 +2,20 @@
 
 namespace Src\Application\Controllers;
 
-require_once __DIR__ . "/../../../application/core/controller.php";
-
 use Src\Application\Core\Controller;
 
-class AdminCategoriesViewController extends Controller {
-    public function index() {
-        $this->view("admin/categories/index");   
+require_once __DIR__ . '/../../../application/core/controller.php';
+
+class AdminCategoriesViewController extends Controller
+{
+    public function index()
+    {
+        $model = $this->model("category");
+        $page = $_GET["page"] ?? 0;
+        $page = $page > 0 ? $page * 7 : $page;
+
+        $listCategories = $model->getCategories($page, 7);
+        $users = array_slice($listCategories, 0, 7);
+        $this->view("/admin/categories/index", ["list" => $listCategories]);
     }
 }

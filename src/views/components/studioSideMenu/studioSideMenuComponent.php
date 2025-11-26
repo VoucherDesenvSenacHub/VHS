@@ -1,4 +1,5 @@
 <?php
+
 namespace src\views\components\studioSideMenu;
 
 function StudioSideMenuComponent(){

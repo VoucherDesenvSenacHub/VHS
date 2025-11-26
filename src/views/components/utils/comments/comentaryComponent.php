@@ -6,7 +6,7 @@ namespace Src\Views\Components\Utils;
 
 
 // TODO: REFATORAR ESSE COMPONENTE
-function Comment(string $id, string $name, string $text, ?string $created_at = null, ?string $userImg = null)  {
+function Comment(string $id, string $name, string $text, ?string $created_at = null, ?string $userImg = null, bool $creatorLike = false)  {
     
     $userRole = $_SESSION["user"]["role"];
     $userName = $_SESSION["user"]["username"];
@@ -14,8 +14,13 @@ function Comment(string $id, string $name, string $text, ?string $created_at = n
     $deleteOption = "";
     $editOption = "";
     $reportOption = "";
+    
+    
+    $creatorLike = $creatorLike ? <<<HTML
+        <img src="/VHS/public/icons/favorite-comment-filled.svg" alt="Curtir" class="w-7 h-7 absolute left-7 mt-10" alt="Curtido pelo criador">
+    HTML : "";
 
-    if($userName !== $name && $userRole === "USER") {
+    if($userName !== $name) {
         $reportOption = <<<HTML
             <li>
                 <form action="/VHS/api/v1/comments/report?commentId=$id" method="post">
@@ -25,7 +30,7 @@ function Comment(string $id, string $name, string $text, ?string $created_at = n
                         data-action="report"
                         class="w-full text-left px-3 pt-1 flex items-center gap-3 text-xs font-semibold text-white transition"
                         >
-                        <img src="/VHS/public/icons/comments_studio/flag.svg" alt="" class="w-4 h-4">
+                        <img src="/VHS/public/icons/comments/shield_warning.svg" alt="" class="w-5 h-5">
                         <span class="text-sm">Denunciar</span>
                     </button>
                 </form>
@@ -33,21 +38,19 @@ function Comment(string $id, string $name, string $text, ?string $created_at = n
         HTML;
     }
 
-    if($userName === $name || $userRole === "ADMIN" || $userRole === "CREATOR") {
+    if($userName === $name) {
         $editOption = <<<HTML
-            <form class="relative" action="/VHS/api/v1/comment/edit?commentId=$id" method="post" onclick="handleEditComment(event, '$id')">
-                <li>
-                    <button
-                    type="button"
-                    role="menuitem"
-                    data-action="edit"
-                    class="w-full text-left px-3 pt-1 flex items-center gap-3 text-xs font-semibold text-white transition"
-                    >
-                        <img src="/VHS/public/icons/comments_studio/pencil.svg" alt="" class="w-4 h-4">
-                        <span class="text-sm">Editar</span>
-                    </button>
-                </li>
-            </form>
+            <li class="mb-2" onclick="handleEditComment(event, '$id')">
+                <button
+                type="button"
+                role="menuitem"
+                data-action="edit"
+                class="w-full text-left px-3 pt-1 flex items-center gap-3 text-xs font-semibold text-white transition"
+                >
+                    <img src="/VHS/public/icons/comments_studio/pencil.svg" alt="" class="w-4 h-4">
+                    <span class="text-sm">Editar</span>
+                </button>
+            </li>
         HTML;
     }
 
@@ -78,7 +81,9 @@ function Comment(string $id, string $name, string $text, ?string $created_at = n
 
 
     return <<<HTML
-        <div class='w-full flex items-center  gap-4 py-2'>
+        <div class='w-full flex items-center gap-4 py-2 relative'>
+            $creatorLike
+
             <div class='size-12  rounded-full mt-1 shrink-0'>
                 $userImg
             </div>
