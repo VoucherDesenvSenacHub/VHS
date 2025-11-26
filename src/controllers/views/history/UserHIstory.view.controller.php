@@ -18,7 +18,7 @@ class UserHistoryController extends Controller
     private UserHistoryModel $userHistoryModel;
     private VideoModel $videoModel;
     private UserModel $userModel;
-    private EventsHistoryModel $eventsHistoryModel;
+
     private EventsModel $eventsModel;
 
     public function __construct()
@@ -26,7 +26,7 @@ class UserHistoryController extends Controller
         $this->userHistoryModel = $this->model("userHistory");
         $this->videoModel = $this->model("video");
         $this->userModel = $this->model("user");
-        $this->eventsHistoryModel = $this->model("eventsHistory");
+
         $this->eventsModel = $this->model("events");
     }
 

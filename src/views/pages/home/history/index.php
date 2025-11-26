@@ -59,7 +59,7 @@ $filter = isset($_GET['filter']) ? htmlspecialchars($_GET['filter']) : 'videos';
             Confira os vídeos que você já assistiu!
           </p>
 
-          <div class="flex gap-2 max-w-96 mb-4">
+          <div class="flex gap-2 max-w-96 mb-4 flex-wrap md:flex-nowrap">
             <?= ButtonComponent("Vídeos", "studio", "", 10.675, 2.5, 1, "?filter=videos") ?>
             <?= ButtonComponent("Fast", "studio", "", 10.675, 2.5, 1, "?filter=fasts") ?>
             <?= ButtonComponent("Eventos", "studio", "", 10.675, 2.5, 1, "?filter=events") ?>

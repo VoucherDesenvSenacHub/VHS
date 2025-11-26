@@ -28,23 +28,27 @@ class UserHistoryModel extends Model
 
 
     public function getHistoryByUserId(string $user_id, string $type = 'VIDEO'): array
-    {
-        $sql = "SELECT uh.*
-                FROM users_history uh
-                INNER JOIN (
-                    SELECT video_id, MAX(created_at) AS last_view
-                    FROM users_history
-                    WHERE user_id = :user_id AND type = :type
-                    GROUP BY video_id
-                ) latest 
-                ON uh.video_id = latest.video_id 
-                AND uh.created_at = latest.last_view
-                WHERE uh.user_id = :user_id AND uh.type = :type
-                ORDER BY uh.created_at DESC";
+{
+    $sql = "SELECT uh.*
+            FROM users_history uh
+            INNER JOIN (
+                SELECT video_id,
+                       DATE(created_at) AS view_date,
+                       MAX(created_at) AS last_view
+                FROM users_history
+                WHERE user_id = :user_id AND type = :type
+                GROUP BY video_id, DATE(created_at)
+            ) latest
+            ON uh.video_id = latest.video_id
+            AND DATE(uh.created_at) = latest.view_date
+            AND uh.created_at = latest.last_view
+            WHERE uh.user_id = :user_id AND uh.type = :type
+            ORDER BY uh.created_at DESC";
 
-        return $this->database->query($sql, [
-            ":user_id" => $user_id,
-            ":type" => strtoupper($type)
-        ]);
-    }
+    return $this->database->query($sql, [
+        ":user_id" => $user_id,
+        ":type" => strtoupper($type)
+    ]);
+}
+
 }
