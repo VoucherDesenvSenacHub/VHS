@@ -49,6 +49,7 @@ use Src\Application\Controllers\DeleteReportCommentsController;
 use Src\Application\Controllers\VideoAvaliationController;
 use Src\Application\Controllers\VideoController;
 use Src\Application\Controllers\StudioAnalyticsVideoViewController;
+use Src\Application\Controllers\StudioCommentsVideoViewController;
 use Src\Application\Controllers\VideoDeleteController;
 
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../../..");
@@ -102,6 +103,7 @@ $router->get("/studio/create/fast",StudioFastViewController::class, RedirectUser
 $router->get('/studio/content/video', StudioContentVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get('/studio/content/video/edit', StudioUpdateVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get('/studio/content/video/analytic', StudioAnalyticsVideoViewController::class);
+$router->get('/studio/content/video/comment', StudioCommentsVideoViewController::class);
 
 $router->get("/user/settings", UserSettingsViewController::class, RedirectUserNotLoggedMiddleware::class);
 $router->get("/home/events", ViewEventsController::class);

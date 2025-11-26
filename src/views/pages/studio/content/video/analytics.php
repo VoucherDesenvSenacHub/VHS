@@ -13,7 +13,7 @@ use function src\views\components\Header\HeaderComponent;
 
 // TODO: REFATORAR ESSE GRAFICO FEITO PELO GROK
 
-$video = $_SESSION["page_data"]["video"];
+$video = $_SESSION["page_data"]["video"][0];
 
 $seriesDataLine = [10, 15, 25, 20, 18, 12, 15];
 $categoriesLine = ['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB', 'DOM'];
@@ -59,20 +59,20 @@ $id = $video["id"];
             <p class="text-sm text-gray-300 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
             <div class="flex gap-4 w-96 my-4">
                 <div class="flex gap-3 w-[28rem]">
-                        <?php
-                        echo ButtonComponent(text: "Edição", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/content/video/edit?id=$id");
-                        echo ButtonComponent(text: "Comentários", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/content/video/commentary?id=$id");
-                        echo ButtonComponent(text: "Analytics", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/content/video/analytic?id=$id");
-                        ?>
+                    <?php
+                    echo ButtonComponent(text: "Edição", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/content/video/edit?id=$id");
+                    echo ButtonComponent(text: "Comentários", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/content/video/comment?id=$id");
+                    echo ButtonComponent(text: "Analytics", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/content/video/analytic?id=$id");
+                    ?>
                 </div>
-            </div> 
+            </div>
             <div class="flex flex-row">
 
                 <div class="grid grid-col-2 gap-8">
 
                     <div class="flex flex-row gap-4 mb-2">
 
-                        <?= UserActivityCardsComponent("Usuários", $video["comments"]) ?>
+                        <?= UserActivityCardsComponent("Usuários", $video["comments"] ?? 0) ?>
 
 
                         <?= UserActivityCardsComponent("Qtd. Vídeos", 60700) ?>
@@ -96,7 +96,7 @@ $id = $video["id"];
                         class="rounded-xl h-[300px] w-full object-cover">
 
                     <div class="mt-4 ml-2">
-                        <h3 class="text-xl font-semibold text-white"><?= $video["title"] ?></h3>
+                        <h3 class="text-xl font-semibold text-white"><?= $video["title"] ?? "" ?></h3>
                         <p class="text-sm text-gray-400 mt-1"># 🚀💻🛠️</p>
                     </div>
                 </div>

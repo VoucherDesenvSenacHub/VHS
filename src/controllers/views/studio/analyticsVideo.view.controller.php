@@ -19,11 +19,9 @@ class StudioAnalyticsVideoViewController extends Controller
         $id =  $_GET["id"] ?? null;
 
         $video = $this->videoModel->getVideoByID($id);
-        $categorias = $this->videoModel->getAllCategories();
 
         $this->view("/studio/content/video/analytics", [
-            "video" => $video,
-            "categorias" => $categorias
+            "video" => $video
         ]);
     }
 }

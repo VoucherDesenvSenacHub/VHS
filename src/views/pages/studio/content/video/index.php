@@ -71,7 +71,7 @@ $conteudos = []
                     <div class="mt-4 flex gap-2 w-full flex-col md:w-96 md:flex-row">
                         <?php
                         echo ButtonComponent(text: "Edição", variant: "studio", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]", link: "/VHS/studio/content/video/edit?id=$id");
-                        echo ButtonComponent(text: "Comentários", variant: "studio", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]", link: "/VHS/studio/content/video/comentary?id=$id");
+                        echo ButtonComponent(text: "Comentários", variant: "studio", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]", link: "/VHS/studio/content/video/comment?id=$id");
                         echo ButtonComponent(text: "Analytics", variant: "studio", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]", link: "/VHS/studio/content/video/analytic?id=$id");
                         ?>
                     </div>
