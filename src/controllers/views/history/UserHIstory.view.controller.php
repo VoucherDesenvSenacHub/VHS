@@ -10,8 +10,10 @@ use Src\Infra\Model\UserModel;
 use Src\Infra\Model\VideoModel;
 use Src\Infra\Model\EventsHistoryModel;
 use Src\Infra\Model\EventsModel;
+use function Src\Views\Components\GetHistoryByFilter;
 
 require_once __DIR__ . '/../../../application/core/controller.php';
+require_once __DIR__ . '/../../../views/components/history/gethistorybyfilter.php';
 
 class UserHistoryController extends Controller
 {
@@ -41,7 +43,7 @@ class UserHistoryController extends Controller
             $filter = $_GET["filter"] ?? "videos";
             $filter = strtolower($filter);
 
-            $history = $this->getHistoryByFilter($userId, $filter);
+            $history = GetHistoryByFilter($this->userHistoryModel,$userId, $filter);
 
 
             usort($history, fn($a, $b) =>
@@ -59,6 +61,7 @@ class UserHistoryController extends Controller
             $this->view("home/history/index", [
                 "history" => $resultsByDate,
                 "filter" => $filter,
+                ""
             ]);
         } catch (NestedValidationException | Error $exception) {
             $errors = $exception instanceof NestedValidationException
@@ -69,25 +72,8 @@ class UserHistoryController extends Controller
         }
     }
 
-  private function getHistoryByFilter(string $userId, string $filter): array
-{
-    switch ($filter) {
-        case 'videos':
-         
-            return $this->mapVideoHistory($this->userHistoryModel->getHistoryByUserId($userId, 'VIDEO'));
 
-        case 'fasts':
-            
-            return $this->mapVideoHistory($this->userHistoryModel->getHistoryByUserId($userId, 'FAST'));
 
-        case 'events':
-            
-            return $this->mapVideoHistory($this->userHistoryModel->getHistoryByUserId($userId, 'Event'));
-
-        default:
-            return [];
-    }
-}
 
 
 
