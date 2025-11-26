@@ -7,15 +7,17 @@ require_once __DIR__ . '/../../application/core/model.php';
 
 use Src\Application\Core\Model;
 
-class UserModel extends Model {
-    public function create(string $name, string $email, string $password, string $username, string $date_birthday, string $token): string {
+class UserModel extends Model
+{
+    public function create(string $name, string $email, string $password, string $username, string $date_birthday, string $token): string
+    {
         $sql = "INSERT INTO users (id, name, email, password, username, date_birthday, token) VALUES (:id, :name, :email, :password, :username, :date_birthday, :token)";
 
         $id = uniqid(more_entropy: true);
 
         $this->database->exec($sql, [
             ":id" => $id,
-            ":name" => $name,   
+            ":name" => $name,
             ":email" => $email,
             ":password" => $password,
             ":username" => $username,
@@ -26,82 +28,96 @@ class UserModel extends Model {
         return $id;
     }
 
-    public function getUserById(string $id): array {
+    public function getUserById(string $id): array
+    {
         $sql = "SELECT * FROM users WHERE id = :id";
 
         return $this->database->query($sql, [":id" => $id]);
     }
 
-    public function getUserByEmail(string $email): array {
+    public function getUserByEmail(string $email): array
+    {
         $sql = "SELECT * FROM users WHERE email = :email";
 
         return $this->database->query($sql, [":email" => $email]);
     }
 
-    public function getUserByUsername(string $username): array {
+    public function getUserByUsername(string $username): array
+    {
         $sql = "SELECT * FROM users WHERE username = :username";
 
         return $this->database->query($sql, [":username" => $username]);
     }
 
-    public function getUserByToken(string $token): array {
-        $sql = "SELECT id, name, email, username, date_birthday, bio, avatar_url, role, status  FROM users WHERE token = :token AND is_deleted = 0";
+    public function getUserByToken(string $token): array
+    {
+        $sql = "SELECT * FROM users WHERE token = :token AND is_deleted = 0";
 
         return $this->database->query($sql, [":token" => $token]);
     }
 
-    public function findUserByEmail(string $email): array {
+    public function findUserByEmail(string $email): array
+    {
         $sql = "SELECT * FROM users WHERE email = :email";
         $stmt = $this->database->query($sql, [":email" => $email]);
 
         return $stmt;
     }
 
-    public function updateUserToken(string $id, string $token): bool {
+    public function updateUserToken(string $id, string $token): bool
+    {
         $sql = "UPDATE users SET token = :token WHERE id = :id";
         return $this->database->exec($sql, [":token" => $token, ":id" => $id]);
     }
 
-    public function updateUser(string $userId, string $name, string $email, string $username, ?string $password = null, ?string $avatar): bool {
-        $sql = "UPDATE users SET name = :name, email = :email, username = :username" . ($password ? ", password = :password" : "") . ", avatar_url = :avatar_url WHERE id = :id";    
-        
+
+    public function updateUser(string $userId, string $name, string $email, string $username, ?string $password = null, ?string $avatar): bool
+    {
+        $sql = "UPDATE users SET name = :name, email = :email, username = :username" . ($password ? ", password = :password" : "") . ", avatar_url = :avatar_url WHERE id = :id";
+
         return $this->database->exec($sql, [
             ":name" => $name,
             ":email" => $email,
             ":username" => $username,
-            ...( $password ? [":password" => $password] : [] ),
+            ...($password ? [":password" => $password] : []),
             ":avatar_url" => $avatar ?? null,
             ":id" => $userId
         ]);
     }
 
-    public function updateSentEmailStatus(string $id, bool $status): bool {
+    public function updateSentEmailStatus(string $id, bool $status): bool
+    {
         $sql = "UPDATE users SET email_already_sent = :status  WHERE id = :id";
         return $this->database->exec($sql, [":id" => $id, ":status" => $status]);
     }
 
-    public function verifyEmail(string $id): bool {
+    public function verifyEmail(string $id): bool
+    {
         $sql = "UPDATE users SET verified_email = true WHERE id = :id";
         return $this->database->exec($sql, [":id" => $id]);
     }
 
-    public function getCategoryByUserId(string $id): array {
+    public function getCategoryByUserId(string $id): array
+    {
         $sql = "SELECT * FROM users_category WHERE user_id = :id";
-    
-        return $this->database->query($sql, [":id" => $id]);    
+
+        return $this->database->query($sql, [":id" => $id]);
     }
 
-    public function getUsers(int $offset, int $limit, string $idUser, string $name, string $ordering): array {
+    public function getUsers(int $offset, int $limit, string $idUser, string $name, string $ordering): array
+    {
         $sql = "SELECT * FROM users WHERE is_deleted = 0 AND id NOT IN ('$idUser') AND name LIKE :name ORDER BY created_at $ordering LIMIT $offset, $limit";
         return $this->database->query($sql, [":name" => "%$name%"]);
     }
 
-    public function deleteUser(string $id): bool {
+    public function deleteUser(string $id): bool
+    {
         $sql = "UPDATE users SET is_deleted = 1 WHERE id = :id";
         return $this->database->exec($sql, [":id" => $id]);
     }
 
-    public function updateUserAdmin(string $id, string $name, string $role, string $status): bool {
+    public function updateUserAdmin(string $id, string $name, string $role, string $status): bool
+    {
         $sql = "UPDATE users SET name = :name, role = :role, status = :status WHERE id = :id";
 
         return $this->database->exec($sql, [
@@ -112,7 +128,8 @@ class UserModel extends Model {
         ]);
     }
 
-    public function blockUser(string $id): bool {
+    public function blockUser(string $id): bool
+    {
         $sql = "UPDATE users SET status = 0 WHERE id = :id";
         return $this->database->exec($sql, [":id" => $id]);
     }

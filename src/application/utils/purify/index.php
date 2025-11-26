@@ -9,7 +9,7 @@ function purifyProperty($property) {
         return $property;
     }
 
-    return htmlspecialchars(strip_tags($property), ENT_QUOTES, 'UTF-8');
+    return htmlspecialchars(string: $property ?? "");
 }
 
 function purifyNumbers($num) {
@@ -43,39 +43,28 @@ function purifyDuration($seconds) {
     return sprintf('%02d:%02d', $m, $s);
 }
 
-function purifyCreatedAt(string $date) {
+function purifyCreatedAt(string $date, string $userTimezone = 'UTC') {
     try {
-        date_default_timezone_set('America/Campo_Grande');
-        $dt = new DateTime($date);
+        // data do banco é sempre UTC
+        $dt = new \DateTime($date, new \DateTimeZone('UTC')); 
+        // converte para o fuso do usuário
+        $dt->setTimezone(new \DateTimeZone($userTimezone));
 
-        $now = new DateTime();
+        $now = new \DateTime('now', new \DateTimeZone($userTimezone));
         $diff = $now->diff($dt);
 
-        if ($diff->y > 0) {
-            return "há {$diff->y} ano" . ($diff->y > 1 ? 's' : '');
-        }
+        if ($diff->y > 0) return "há {$diff->y} ano" . ($diff->y > 1 ? 's' : '');
+        if ($diff->m > 0) return "há {$diff->m} mês" . ($diff->m > 1 ? 'es' : '');
+        if ($diff->d > 0) return "há {$diff->d} dia" . ($diff->d > 1 ? 's' : '');
+        if ($diff->h > 0) return "há {$diff->h} hora" . ($diff->h > 1 ? 's' : '');
+        if ($diff->i > 0) return "há {$diff->i} minuto" . ($diff->i > 1 ? 's' : '');
 
-        if ($diff->m > 0) {
-            return "há {$diff->m} mês" . ($diff->m > 1 ? 'es' : '');
-        }
-
-        if ($diff->d > 0) {
-            return "há {$diff->d} dia" . ($diff->d > 1 ? 's' : '');
-        }
-
-        if ($diff->h > 0) {
-            return "há {$diff->h} hora" . ($diff->h > 1 ? 's' : '');
-        }
-
-        if ($diff->i > 0) {
-            return "há {$diff->i} minuto" . ($diff->i > 1 ? 's' : '');
-        }
-        
         return "Agora";
     } catch (\Exception $e) {
         return purifyProperty($date);
     }
 }
+
 
 function purifyDateTime(string $date) {
     try {
