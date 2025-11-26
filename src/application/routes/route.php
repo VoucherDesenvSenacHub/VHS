@@ -88,12 +88,10 @@ $router->post('/api/v1/comment/delete', DeleteCommentController::class, Redirect
 $router->post('/api/v1/studio/create/video', VideoCreateController::class);
 $router->post('/api/v1/studio/content/video/edit', VideoUpdateController::class);
 $router->post('/api/v1/video/delete', VideoDeleteController::class);
-
-#views routes
-$router->get('/home', HomeController::class);
 $router->post('/api/v1/studio/comments/creator-like', LikeCommentsCreatorController::class, RedirectUserNotCreatorMiddleware::class);
 $router->post('/api/v1/studio/comment/delete', DeleteCommentStudioController::class, RedirectUserNotCreatorMiddleware::class);
 $router->post('/api/v1/studio/users/block', UserBlockedUserController::class, RedirectUserNotCreatorMiddleware::class);
+
 # Views Routes
 
 $router->get('/home', HomeController::class, RedirectUserNotLoggedMiddleware::class);
@@ -105,14 +103,13 @@ $router->get("/auth/signup/password", CreatePasswordController::class, RedirectU
 $router->get("/auth/signup/verify-email", VerifyEmailViewController::class);
 $router->get("/api/v1/auth/signup/verify-email", VerifyEmailController::class);
 
-$router->get("/studio", StudioController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get("/studio/create/video", StudioCreateVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get("/studio/create/fast",StudioFastViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get('/studio/content/video', StudioContentVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get('/studio/content/video/edit', StudioUpdateVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get('/studio/content/video/analytic', StudioAnalyticsVideoViewController::class);
 $router->get("/studio/analytics", StudioAnalyticsViewController::class, RedirectUserNotCreatorMiddleware::class);
-$router->get("/studio/create/video", StudioVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
+$router->get("/studio/create/video", StudioCreateVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get("/studio/create/fast", StudioFastViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get("/studio/comments", StudioCommentsViewController::class, RedirectUserNotCreatorMiddleware::class);
 

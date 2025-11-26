@@ -21,12 +21,13 @@ use function Src\Application\Utils\paginate;
 use function Src\Application\Utils\getTimeAgo;
 
 $commets  = $_SESSION["page_data"]["comments"] ?? [];
+$next_page_report_comments = $_SESSION["page_data"]["next_page_report_comments"] ?? 0;
 $success = $_SESSION["redirect_data"]["success"] ?? null;
 $errors = $_SESSION["redirect_data"]["errors"] ?? null;
 
 unset($_SESSION["redirect_data"]);
 
-$pagination = paginate($commets);
+$pagination = paginate($commets, $next_page_report_comments);
 
 ?>
 

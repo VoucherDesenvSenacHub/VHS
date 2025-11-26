@@ -89,9 +89,6 @@ class VideoModel extends Model
         return $this->database->query($sql, [":category_id" => $categoryId]);
     }
 
-    public function getVideoById(string $id): array
-    {
-        $sql = "SELECT videos.*, users.username, users.followers,  users.avatar_url, categories.name as category_name FROM videos
     public function getVideoById(string $id): array {
         $sql = "SELECT videos.*, users.username, users.avatar_url, categories.name as category_name FROM videos
         JOIN users ON users.id = videos.author_id
@@ -156,9 +153,7 @@ class VideoModel extends Model
 
         return $stmt[0];
     }
-}
 
-    
     public function getAllViewsByUserId(string $userId): array {
         $sql = "SELECT SUM(videos.views) as views, AVG(videos.views) as average FROM videos WHERE author_id = :userId";
         return $this->database->query($sql, [":userId"=> $userId]);
