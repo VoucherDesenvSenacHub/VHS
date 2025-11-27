@@ -40,4 +40,19 @@ class AvaliationModel extends Model {
             ":stars"=> $stars,
         ]);
     }
+
+    public function getWeeklyCountAvaliationsByVideoId(string $videoId) {
+        $sql = <<<SQL
+            SELECT 
+                DAYNAME(created_at) AS day_name,
+                COUNT(id) AS total
+            FROM videos_avaliations
+            WHERE video_id = :video_id
+            GROUP BY DAYNAME(created_at)
+        SQL;
+
+        return $this->database->query($sql, [
+            ":video_id" => $videoId,
+        ]);
+    }
 }

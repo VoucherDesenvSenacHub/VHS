@@ -44,7 +44,7 @@ $nextPage = $_SESSION["page_data"]["next_page"];
         <div class="max-xl:hidden">
             <?= StudioSideMenuComponent(); ?>
         </div>
-        <div class="w-[1500px] 2xl:p-0 p-4 mx-auto">
+        <div class="max-w-[1500px] mx-auto px-6">
             <div>
                 <h1 class="font-semibold xl:text-title text-xl md:text-2xl text-white">Conteúdo do canal</h1>
                 <p class="text-gray-300 xl:text-paragraph text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>

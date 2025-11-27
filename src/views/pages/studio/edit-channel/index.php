@@ -44,98 +44,78 @@ if (!empty($errors) && is_array($errors)) {
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Syne:wght@500..800&display=stylesheet" />
 
 </head>
+<body>
 
 <body>
   <?php echo HeaderComponent(); ?>
-  <div class="flex flex-col lg:flex-row">
-    <div class="max-xl:hidden">
-      <?php echo StudioSideMenuComponent(); ?>
-    </div>
-    <main class="flex-1 px-10 py-6">
-      <text class="text-xl lg:text-3xl font-bold text-white cursor-default text-center lg:text-left">
-        Customizar canal
-      </text>
-      <form action="/VHS/src/application/routes/route.php/api/v1/channel/edit" method="POST" enctype="multipart/form-data">
-        <section class="mb-10 mt-6 flex flex-col lg:flex-row gap-4">
-          <label for="imagemUploadProfile" class="border border-gray-600 rounded-xl relative group cursor-pointer inline-block w-36 h-36 mx-auto lg:mx-0 overflow-hidden">
-            <img id="profileImage" src="/VHS/public/uploads/avatars/<?= $avatar_url ?>" alt="Foto de perfil" class="absolute inset-0 w-full h-full rounded-xl object-cover group-hover:brightness-75 transition" />
-            <div class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-70 transition-opacity">
-              <img src="/VHS/public/icons/Download.svg" alt="Download" class="w-5 h-5">
+
+  <div class="flex">
+    <?php echo StudioSideMenuComponent(); ?>
+
+    <main class="flex flex-col max-w-[1500px] mx-auto px-6 pt-[1.18rem] ">
+      <h1 class="text-2xl font-semibold mb-0.5rem text-white">Customizar canal</h1>
+      <p class="text-sm text-gray-300 mb-8">Altere o nome, banner, foto de perfil, descrição do seu canal</p>
+
+      <section class="mb-10 flex flex-col lg:flex-row gap-5">
+        <form action="upload.php" method="POST" enctype="multipart/form-data">
+          <label for="imagemUpload" class="relative group cursor-pointer inline-block w-45 h-45">
+            <img
+              src="/VHS/public/uploads/avatars/{$avatar_url}" onerror='this.src="/VHS/public/uploads/avatars/default.png"'
+              alt="Foto de perfil"
+              class="w-45 h-45 rounded-full object-cover group-hover:brightness-75 transition"
+            />
+            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+              <img src="/VHS/public/icons/Download.svg" alt="Download">
             </div>
             <input type="file" name="avatar" id="imagemUploadProfile" accept="image/*" class="hidden" />
           </label>
+        </form>
+        <div class="mt-5">
+          <h2 class="text-lg font-medium mb-0.5rem text-white">Foto de perfil</h2>
+          <p class="text-sm text-gray-300 mb-8">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis, voluptas dicta! Doloremque nemo neque voluptates, officia commodi recusandae adipisci beatae, inventore quod itaque iure quam aliquid deleniti facere optio accusantium.</p>
+        </div>
+      </section>
 
-          <div class="mt-5 text-center lg:text-left">
-            <h2 class="text-lg lg:text-2xl font-bold text-white cursor-default">Foto de perfil</h2>
-            <p class="text-sm lg:text-base text-gray-300 mb-8">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis, voluptas dicta! Doloremque nemo neque voluptates, officia commodi recusandae.
-            </p>
-          </div>
-        </section>
-        <div class="space-y-2">
-          <h2 class="font-medium text-lg text-white cursor-default">Banner do canal</h2>
-          <label
-            for="imagemUploadBanner"
-            class="relative group rounded-xl overflow-hidden bg-white/5 border border-white/10 hover:border-white/20 transition-colors cursor-pointer block">
-            <div class="aspect-[6/1] flex items-center justify-center bg-gradient-to-br from-white/5 to-white/10">
-              <img id="bannerImage" src="<?= $banner_url ? '/VHS/public/uploads/banner/' . $banner_url : '' ?>" alt="Banner do canal" class="absolute inset-0 w-full h-full object-cover <?= !$banner_url ? 'hidden' : '' ?>" onerror="this.style.display='none'; document.getElementById('placeholderText').style.display='block';" />
-              <span class="text-6xl font-bold text-white/20" id="placeholderText" style="display: <?= $banner_url ? 'none' : 'block' ?>">VHS</span>
-            </div>
-            <div
-              class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-70 transition-opacity">
-              <div class="text-center text-gray-300">
-                <img class="text-3xl mx-auto mb-2" src="/VHS/public/icons/Download.svg" alt="Download">
-                <p class="text-sm font-medium">Clique para alterar o banner</p>
-              </div>
+
+      <section class="mb-10">
+        <h2 class="text-xl font-medium mb-0.5rem text-white">Banner do canal</h2>
+        <p class="text-sm text-gray-400 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <form action="upload.php" method="POST" enctype="multipart/form-data">
+          <label for="imagemUpload" class="relative group cursor-pointer inline-block w-full">
+            <img src="" class="h-50 w-full rounded-md border border-gray-700" />
+            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+              <img src="/VHS/public/icons/Download.svg" alt="Download">
             </div>
             <input type="file" name="banner" id="imagemUploadBanner" accept="image/*" class="hidden" />
           </label>
-        </div>
-        <div class="flex flex-col">
-          <section class="mb-6 mt-6">
-            <?php
-            echo InputComponent(
-              type: "text",
-              placeholder: "@Rafael__",
-              name: "username",
-              label: "Nome do canal",
-              label_size: "lg",
-              width: "full",
-              height: "[35px] lg:[45px]",
-              value: $user["username"],
-              error: isset($errors["username"]),
-              errorDescription: isset($errors["username"]) ? $errors["username"] : ""
-            );
-            ?>
-          </section>
-          <div class="flex flex-col gap-2">
-            <label class="font-lg font-medium text-white cursor-default">Descrição do canal</label>
-            <textarea
-              name="description_channel"
-              placeholder="Escreva algo sobre o canal."
-              class="w-full h-32 px-4 py-3 outline outline-1 outline-[#666666] rounded-md placeholder-[#666666] text-zinc-200 rounded-lg text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#666666] resize-none"><?= $user["description_channel"] ?? "" ?></textarea>
-          </div>
-          </section>
-          <section class="mb-10 mt-4">
-            <?php
-            echo InputComponent(
-              type: "text",
-              placeholder: "#Tecnologia",
-              name: "tag",
-              label: "Tags do canal",
-              label_size: "lg",
-              width: "full",
-              height: "[35px] lg:[45px]",
-              value: $user["tag"] ?? ""
-            );
-            ?>
-          </section>
-          <div class="flex items-center justify-between w-full w-[30rem] gap-4 self-end">
-            <?= ButtonComponent("Cancelar", "outline", null, type: "button"); ?>
-            <?= ButtonComponent("Salvar alterações", "default", null, type: "submit"); ?>
-          </div>
-        </div>
-      </form>
+        </form>
+      </section>
+
+    <form action="" class="flex flex-col">
+    <section class="mb-6">
+        <label for="nome" class="block text-sm mb-1 text-white">Nome do canal</label>
+        <input id="nome" type="text" class="w-full bg-transparent border border-gray-600 text-sm px-4 py-2 rounded-md placeholder-gray-500" placeholder="@Rafael__">
+      </section>
+
+      <section class="mb-6">
+        <label for="descricao" class="block text-sm mb-1 text-white">Descrição</label>
+        <textarea id="descricao" rows="5" class="w-full bg-transparent border border-gray-600 text-sm px-4 py-2 rounded-md placeholder-gray-500" placeholder="Escreva algo sobre o canal..."></textarea>
+      </section>
+
+      <section class="mb-10">
+        <label for="tags" class="block text-sm mb-1 text-white">Tags do canal</label>
+        <input id="tags" type="text" class="w-full bg-transparent border border-gray-600 text-sm px-4 py-2 rounded-md placeholder-gray-500" placeholder="#Tecnologia">
+      </section>
+
+      <div class="flex gap-5 self-start">
+        <button class="px-4 sm:px-6 md:px-8 lg:px-[9.1rem] py-3 bg-[#A347FF] text-white text-xs sm:text-sm rounded-md hover:bg-[#922be8] transition">
+          Salvar alterações
+        </button>
+        <button class="px-4 sm:px-6 md:px-8 lg:px-[10.5rem] py-3 border border-gray-500 text-xs sm:text-sm rounded-md hover:bg-gray-700 transition text-white">
+          Cancelar
+        </button>
+      </div>
+    </form>
     </main>
   </div>
   <?php
