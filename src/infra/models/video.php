@@ -138,6 +138,12 @@ class VideoModel extends Model
         return (int)$stmt[0]['total'];
     }
 
+    public function addShareCount(string $video_id)
+    {
+        $sql = "UPDATE videos SET share_count = share_count + 1 WHERE id = :video_id";
+        return $this->database->query($sql, [":video_id" => $video_id]);
+    }
+
     public function getVideoStudioByID(string $id): array
     {
         $sql = "SELECT 

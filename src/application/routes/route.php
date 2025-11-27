@@ -46,6 +46,7 @@ use Src\Application\Controllers\UpdateUserAdminController;
 use Src\Application\Controllers\DeleteCommentsController;
 use Src\Application\Controllers\InactivateUserController;
 use Src\Application\Controllers\DeleteReportCommentsController;
+use Src\Application\Controllers\ShareVideoController;
 use Src\Application\Controllers\VideoAvaliationController;
 use Src\Application\Controllers\VideoController;
 use Src\Application\Controllers\StudioAnalyticsVideoViewController;
@@ -79,6 +80,7 @@ $router->post('/api/v1/users/block', inactivateUserController::class, RedirectUs
 $router->post('/api/v1/comments/report/remove', DeleteReportCommentsController::class, RedirectUserNotAdminMiddleware::class);
 $router->post('/api/v1/comments/report', ReportCommentController::class, RedirectUserNotLoggedMiddleware::class);
 $router->post("/api/v1/json/video/rating", VideoAvaliationController::class);
+$router->post("/api/v1/json/video/share", ShareVideoController::class, RedirectUserNotLoggedMiddleware::class);
 $router->post('/api/v1/comment/edit', UpdateCommentController::class, RedirectUserNotLoggedMiddleware::class);
 $router->post('/api/v1/comment/delete', DeleteCommentController::class, RedirectUserNotAdminMiddleware::class);
 $router->post('/api/v1/studio/create/video', VideoCreateController::class);

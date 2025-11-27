@@ -54,7 +54,7 @@ class VideoController extends Controller {
         $offset = $page * $limit;
 
 
-        $comments = $this->commentModel->getCommentsByVideoId($video["id"], $offset, $limit);
+        $comments = $this->commentModel->getCommentsByVideoId($video["id"], $offset, $limit + 1);
         $totalComments = $this->commentModel->getTotalCommentsByVideoId($video["id"]);
         $totalComments = $totalComments[0]["total"] ?? 0;
 
@@ -66,6 +66,7 @@ class VideoController extends Controller {
             "total_comments"=> $totalComments,
             "offset"=> $offset,
             "limit"=> $limit,
+            "has_more_comments" => count($comments) > $limit
         ]);
     }
 }

@@ -95,11 +95,20 @@
 
 <script>
 
-    function openShared() {
+    async function openShared() {
         const overlay = document.querySelector('.modal-shared');
         const modal = overlay.querySelector('.modal-content');
         overlay.classList.remove('hidden');
         
+        const data = new FormData();
+        data.append("video_id", "<?= $_GET['id'] ?>");
+
+        await fetch("/VHS/api/v1/json/video/share", {
+            method: "POST",
+            body: data,
+            withCredentials: "include"
+        });
+
         requestAnimationFrame(() => {
             overlay.classList.remove('opacity-0');
             overlay.classList.add('opacity-100');

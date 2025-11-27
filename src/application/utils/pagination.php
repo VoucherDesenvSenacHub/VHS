@@ -16,7 +16,7 @@ function paginate($content, $existsNextPage) {
     $nextPage = $page + 1;
 
     $buttonNext = '';
-    if ($existsNextPage === 1) {
+    if ($existsNextPage) {
         $_GET['page'] = $nextPage;
         $buttonNext = <<<HTML
             <form method="GET" style="display:inline;">
