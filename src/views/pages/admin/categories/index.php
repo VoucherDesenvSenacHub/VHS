@@ -14,6 +14,7 @@ use function src\views\components\utils\InputComponent;
 use function Src\Application\Utils\showSweetAlert;
 
 $categoryData = $_SESSION["page_data"]["list"] ?? [];
+$next_page_categories = $_SESSION["page_data"]["next_page_categories"] ?? 0;
 $errors = $_SESSION['redirect_data']['errors'] ?? [];
 $success = $_SESSION["redirect_data"]["success"] ?? null;
 $fields = $_SESSION['redirect_data']['fields'] ?? [];
@@ -62,7 +63,7 @@ if (!empty($errors) && is_array($errors)) {
                 </div>
             </div>
             <div class="w-full">
-                <?= categoriesDataTableComponent($categoryData); ?>
+                <?= categoriesDataTableComponent($categoryData , $next_page_categories); ?>
             </div>
             <?php
             if (!empty($errors) && is_array($errors)) {

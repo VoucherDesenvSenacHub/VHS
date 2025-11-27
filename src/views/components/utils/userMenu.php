@@ -12,7 +12,7 @@ function UserMenu(string $avatar_url, string $name, string $email) {
             "description" => "Gerencia sua conta"
         ],
         "studio" => [
-            "href"=> "/VHS/studio",
+            "href"=> "/VHS/studio/analytics",
             "icon" => "/VHS/public/icons/studio.svg",
             "title"=> "VHS Studio",
             "description"=> "Gerencie seu conteúdo",

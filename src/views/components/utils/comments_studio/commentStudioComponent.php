@@ -36,7 +36,7 @@ function CommentStudioComponent(string $name, string $text,  string | null $crea
                 <img src="$thumbnailURL" alt="Thumbnail de video" class="w-40 h-full rounded-xl hidden md:block"/>
             </a>
         HTML;
-    }
+    }   
 
     $likeSrc = $creator_like ? '/VHS/public/icons/comments/favorite-comment-filled.svg' : '/VHS/public/icons/comments/favorite-comment.svg';
 

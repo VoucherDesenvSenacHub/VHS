@@ -68,7 +68,6 @@ class VideoModel extends Model
         return $this->database->query($sql, ['query' => '%' . $query . '%']);
     }
 
-
     public function getFastByTitle(string $query): array
     {
         $sql = "SELECT * FROM videos WHERE (title LIKE :query)";
@@ -90,11 +89,11 @@ class VideoModel extends Model
         return $this->database->query($sql, [":category_id" => $categoryId]);
     }
 
-    public function getVideoById(string $id): array
-    {
-        $sql = "SELECT videos.*, users.username, users.followers,  users.avatar_url, categories.name as category_name FROM videos
+    public function getVideoById(string $id): array {
+        $sql = "SELECT videos.*, COUNT(comments.id) as comments, AVG(videos.views) as avg_views, users.username, users.avatar_url, categories.name as category_name FROM videos
         JOIN users ON users.id = videos.author_id
         JOIN categories ON categories.id = videos.category_id
+        JOIN comments ON comments.video_id = videos.id
         WHERE videos.id = :id";
 
         return $this->database->query($sql, [":id" => $id]);
@@ -155,4 +154,39 @@ class VideoModel extends Model
 
         return $stmt[0];
     }
+
+    public function getAllViewsByUserId(string $userId): array {
+        $sql = "SELECT SUM(videos.views) as views, AVG(videos.views) as average FROM videos WHERE author_id = :userId";
+        return $this->database->query($sql, [":userId"=> $userId]);
+    }
+
+    public function getAverageAvailableVideosByUserId(string $userId): array {
+        $sql = "SELECT AVG(videos_avaliations.stars) as average FROM videos_avaliations
+        JOIN videos ON videos.id = videos_avaliations.video_id
+        WHERE videos.author_id = :userId";
+        return $this->database->query($sql, [":userId"=> $userId]);
+    }
+
+    public function getLastVideosByUserId(string $userId, int $offset, int $limit) {
+        $sql = "SELECT * FROM videos WHERE author_id = :userId AND is_deleted = 0 ORDER BY created_at DESC LIMIT $offset, $limit";
+        return $this->database->query($sql, [":userId" => $userId]);
+    }
+
+    public function getViewsCountByWeekDay(string $userId){
+        $sql = "SELECT DAYNAME(users_history.created_at) AS day_name, COUNT(*) AS total FROM users_history
+        JOIN videos ON videos.id = users_history.video_id
+        WHERE videos.author_id = :userId AND YEARWEEK(users_history.created_at, 1) = YEARWEEK(CURDATE(), 1)
+        GROUP BY DAYOFWEEK(users_history.created_at)
+        ORDER BY DAYOFWEEK(users_history.created_at)";
+        return $this->database->query($sql, [":userId" => $userId]);
+    }
+
+    public function getViewsCountByWeekDayVideoId($videoId){
+        $sql = "SELECT DAYNAME(users_history.created_at) AS day_name, COUNT(*) AS total FROM users_history
+        WHERE users_history.video_id = :videoId AND YEARWEEK(users_history.created_at, 1) = YEARWEEK(CURDATE(), 1)
+        GROUP BY DAYOFWEEK(users_history.created_at)
+        ORDER BY DAYOFWEEK(users_history.created_at)";
+        return $this->database->query($sql, [":videoId" => $videoId]);
+    }
+
 }
