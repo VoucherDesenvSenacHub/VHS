@@ -6,7 +6,9 @@ require_once __DIR__ . "/../../../../components/utils/buttonComponent.php";
 require_once __DIR__ . "/../../../../components/utils/comments_studio/commentStudioComponent.php";
 require_once __DIR__ . "/../../../../components/utils/inputComponent.php";
 require_once __DIR__ . "/../../../../components/utils/footer.php";
+require_once __DIR__ . "/../../../../../application/utils/pagination.php";
 
+use function Src\Application\Utils\paginate;
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
 use function src\views\components\header\HeaderComponent;
 use function src\views\components\Utils\ButtonComponent;
@@ -17,6 +19,9 @@ use function Src\Views\Components\Utils\InputComponent;
 $video = $_SESSION["page_data"]["video"][0];
 $id = $video["id"];
 
+$comments = $_SESSION["page_data"]["comments"];
+$nextPage = $_SESSION["page_data"]["next_page"];
+// print_r($comments);
 ?>
 
 <!DOCTYPE html>
@@ -56,23 +61,36 @@ $id = $video["id"];
 
         <div class="mt-4 w-full flex flex-col gap-4">
           <?php
-          for ($i = 0; $i < 8; $i++) {
-            echo CommentStudioComponent("Richard Stallman", "Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!", "", "https://media.wired.com/photos/5d815ffe46103c0009de8d56/16:9/w_2400,h_1350,c_limit/science_stallman_473688628.jpg", isVideoComments: true);
-          }
+          foreach ($comments as $comment) {
+            echo CommentStudioComponent(
+              name: $comment["username"],
+              text: $comment["content"],
+              isVideoComments: true,
+              created_at: $comment["created_at"],
+              userImg: $comment["avatar_url"],
+              comment_id: $comment["id"],
+              creator_like: $comment["creator_like"],
+              user_blocked_id: $comment["user_id"]
+            );
+          };
           ?>
+          <div class="mb-5">
+            <?= paginate($comments, $nextPage) ?>
+          </div>
         </div>
       </div>
       <div class="w-[700px] p-4 pt-36 pl-20">
-        <div class="p-4 rounded-xl shadow-md ">
-          <img src="<?= $video["thumbnail_url"] ?>" alt="Next.js 15" class="rounded-md mb-3 w-120 h-70" />
-          <p class="text-sm text-white font-semibold"><?= $video["title"] ?></p>
-          <p class="text-sm mt-1 text-gray-400 w-120"><?= $video["description"] ?></p>
+        <div class="p-4 rounded-xl shadow-md w-120 text-justify">
+          <img src="<?= $video["thumbnail_url"] ?>" alt="Next.js 15" class="rounded-md mb-3 w-full h-70" />
+          <p class="text-sm text-white font-semibold w-full"><?= $video["title"] ?></p>
+          <p class="text-sm mt-1 text-gray-400 w-full"><?= $video["description"] ?></p>
         </div>
       </div>
     </div>
 
   </div>
   <?php echo Footer(); ?>
+  <script src="/VHS/src/views/components/utils/comments_studio/script.js"></script>
 </body>
 
 </html>

@@ -9,7 +9,6 @@ require __DIR__ . "/../../../components/shared/shared.php";
 require __DIR__ . "/../../../../application/utils/formatViews.php";
 require __DIR__ . "/../../../../application/utils/pagination.php";
 require __DIR__ . "/../../../components/utils/inputComponent.php";
-require __DIR__ . "/../../../components/utils/buttonComponent.php";
 require __DIR__ . "/../../../components/utils/sweetalert.php";
 
 use function Src\Application\Utils\formatViews;
@@ -17,12 +16,10 @@ use function Src\Application\Utils\paginate;
 use function Src\Application\Utils\showSweetAlert;
 use function Src\Views\Components\Header\HeaderComponent;
 use function Src\Views\Components\Sidebar\SidebarComponent;
-use function Src\Views\Components\Cards\renderCards;
 use function Src\Views\Components\Cards\viewCards;
 use function Src\Views\Components\Utils\Comment;
 use function Src\Views\Components\starrating\StarRatingComponent;
 use function Src\Views\Components\Shared\sharedComponent;
-use function Src\Views\Components\Utils\ButtonComponent;
 use function Src\Views\Components\Utils\InputComponent;
 
 $video = $_SESSION["page_data"]["video"];
