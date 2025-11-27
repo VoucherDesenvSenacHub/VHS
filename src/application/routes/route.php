@@ -110,8 +110,6 @@ $router->get('/studio/content/video', StudioContentVideoViewController::class, R
 $router->get('/studio/content/video/edit', StudioUpdateVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get('/studio/content/video/analytic', StudioAnalyticsVideoViewController::class);
 $router->get("/studio/analytics", StudioAnalyticsViewController::class, RedirectUserNotCreatorMiddleware::class);
-$router->get("/studio/create/video", StudioCreateVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
-$router->get("/studio/create/fast", StudioFastViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get("/studio/comments", StudioCommentsViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get('/studio/content/video/comment', StudioCommentsVideoViewController::class);
 
