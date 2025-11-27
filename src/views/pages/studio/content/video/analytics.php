@@ -1,21 +1,26 @@
 <?php
-require __DIR__ . "/../../../../components/header/headerComponent.php";
-require __DIR__ . "/../../../../components/studioSideMenu/studioSideMenuComponent.php";
-require __DIR__ . "/../../../../components/utils/userActivityCardsComponent.php";
-require __DIR__ . "/../../../../components/charts/chartComponent.php";
-require __DIR__ . "/../../../../components/utils/buttonComponent.php";
+require_once __DIR__ . "/../../../../components/header/headerComponent.php";
+require_once __DIR__ . "/../../../../components/studioSideMenu/studioSideMenuComponent.php";
+require_once __DIR__ . "/../../../../components/utils/userActivityCardsComponent.php";
+require_once __DIR__ . "/../../../../components/charts/chartComponent.php";
+require_once __DIR__ . "/../../../../components/utils/buttonComponent.php";
+require_once __DIR__ . "/../../../../components/utils/orderningWeekDayAnalytics.php";
 
 use function src\views\components\Charts\renderChartComponent;
 use function Src\Views\Components\Utils\ButtonComponent;
 use function src\views\components\utils\UserActivityCardsComponent;
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
 use function src\views\components\Header\HeaderComponent;
+use function Src\Views\Components\orderningWeekDayAnalytics;
+
 
 // TODO: REFATORAR ESSE GRAFICO FEITO PELO GROK
 
 $video = $_SESSION["page_data"]["video"];
+$weeklyViews = $_SESSION["page_data"]["weeklyViews"];
+$weeklyAvaliations = $_SESSION["page_data"]["weeklyAvaliations"];
 
-$seriesDataLine = [10, 15, 25, 20, 18, 12, 15];
+$seriesDataLine = [0, 15, 25, 20, 18, 12, 15];
 $categoriesLine = ['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB', 'DOM'];
 
 $botoes = [
@@ -24,7 +29,10 @@ $botoes = [
     ['texto' => 'Analytics', 'link' => './EventosPage.php']
 ];
 
-$id = $video["id"];
+$id = $video['id'];
+
+$ordered_views = orderningWeekDayAnalytics($weeklyViews);
+$ordered_avaliations = orderningWeekDayAnalytics($weeklyAvaliations);
 
 ?>
 
@@ -72,22 +80,22 @@ $id = $video["id"];
 
                     <div class="flex flex-row gap-4 mb-2">
 
-                        <?= UserActivityCardsComponent("Usuários", $video["comments"]) ?>
+                        <?= UserActivityCardsComponent("Visualizações", $video['views']) ?>
 
 
-                        <?= UserActivityCardsComponent("Qtd. Vídeos", 60700) ?>
+                        <?= UserActivityCardsComponent("Comentarios", $video['comments']) ?>
 
 
-                        <?= UserActivityCardsComponent("Parceiros", 60700) ?>
+                        <?= UserActivityCardsComponent("M Visualizações", (int)$video['avg_views']) ?>
 
 
-                        <?= UserActivityCardsComponent("Canais", 60700) ?>
+                        <?= UserActivityCardsComponent("Compartilhados", $video['shared']) ?>
                     </div>
                     <div class="">
-                        <?= renderChartComponent($seriesDataLine, $categoriesLine, 'Semana', 'Usuários') ?>
+                        <?= renderChartComponent($ordered_views, $categoriesLine, 'Semana', 'Visualização') ?>
                     </div>
                     <div class="">
-                        <?= renderChartComponent($seriesDataLine, $categoriesLine, 'Semana', 'Usuários') ?>
+                        <?= renderChartComponent($ordered_avaliations, $categoriesLine, 'Semana', 'Avaliação', 'bar') ?>
                     </div>
                 </div>
 
@@ -97,7 +105,7 @@ $id = $video["id"];
 
                     <div class="mt-4 ml-2">
                         <h3 class="text-xl font-semibold text-white"><?= $video["title"] ?></h3>
-                        <p class="text-sm text-gray-400 mt-1"># 🚀💻🛠️</p>
+                        <p class="text-sm text-gray-400 mt-1"><?= $video['description'] ?></p>
                     </div>
                 </div>
             </div>

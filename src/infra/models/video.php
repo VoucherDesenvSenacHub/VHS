@@ -90,9 +90,10 @@ class VideoModel extends Model
     }
 
     public function getVideoById(string $id): array {
-        $sql = "SELECT videos.*, users.username, users.avatar_url, categories.name as category_name FROM videos
+        $sql = "SELECT videos.*, COUNT(comments.id) as comments, AVG(videos.views) as avg_views, users.username, users.avatar_url, categories.name as category_name FROM videos
         JOIN users ON users.id = videos.author_id
         JOIN categories ON categories.id = videos.category_id
+        JOIN comments ON comments.video_id = videos.id
         WHERE videos.id = :id";
 
         return $this->database->query($sql, [":id" => $id]);
@@ -172,12 +173,20 @@ class VideoModel extends Model
     }
 
     public function getViewsCountByWeekDay(string $userId){
-        $sql = "SELECT DAYNAME(users_history.created_at) AS day_name, COUNT(*) AS total_views FROM users_history
+        $sql = "SELECT DAYNAME(users_history.created_at) AS day_name, COUNT(*) AS total FROM users_history
         JOIN videos ON videos.id = users_history.video_id
         WHERE videos.author_id = :userId AND YEARWEEK(users_history.created_at, 1) = YEARWEEK(CURDATE(), 1)
         GROUP BY DAYOFWEEK(users_history.created_at)
         ORDER BY DAYOFWEEK(users_history.created_at)";
         return $this->database->query($sql, [":userId" => $userId]);
+    }
+
+    public function getViewsCountByWeekDayVideoId($videoId){
+        $sql = "SELECT DAYNAME(users_history.created_at) AS day_name, COUNT(*) AS total FROM users_history
+        WHERE users_history.video_id = :videoId AND YEARWEEK(users_history.created_at, 1) = YEARWEEK(CURDATE(), 1)
+        GROUP BY DAYOFWEEK(users_history.created_at)
+        ORDER BY DAYOFWEEK(users_history.created_at)";
+        return $this->database->query($sql, [":videoId" => $videoId]);
     }
 
 }

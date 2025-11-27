@@ -8,6 +8,8 @@ require_once __DIR__ . "/../../components/utils/buttonComponent.php";
 require_once __DIR__ . "/../../components/utils/comments_studio/commentAnalyticsComponent.php";
 require_once __DIR__ . "/../../components/cards/studioVideoComponent.php";
 require_once __DIR__ . '/../../../application/utils/getCurrentDataTime.php';
+require_once __DIR__ . "/../../components/utils/orderningWeekDayAnalytics.php";
+require_once __DIR__ . "/../../components/charts/chartComponent.php";
 
 use function Src\Views\Components\Cards\StudioVideoComponent;
 use function src\views\components\Charts\renderChartComponent;
@@ -17,6 +19,7 @@ use function src\views\components\Utils\Title_and_buttons;
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
 use function src\views\components\Header\HeaderComponent;
 use function Src\Application\Utils\getCurrentDataTime;
+use function Src\Views\Components\orderningWeekDayAnalytics;
 
 $current_user = $_SESSION['user'];
 $followers = $_SESSION["page_data"]["count_followers"][0]['COUNT(id)'];
@@ -34,6 +37,10 @@ $botoes = [
 ];
 
 [$weekday, $timeDefault, $data] = getCurrentDataTime();
+
+$categoriesLine = ['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB', 'DOM'];
+
+$ordered = orderningWeekDayAnalytics($views_weekly);
 ?>
 
 <!DOCTYPE html>
@@ -85,30 +92,7 @@ $botoes = [
                     </section>
 
                     <section class="mt-4 bg-gray600 p-6 rounded-lg border border-white/20 relative">
-                        <h2 class="text-white font-semibold absolute top-4 left-6 z-10">Visualizações por semana</h2>
-                        <div id="studio-chart" class="h-80 mt-10"></div>
-                        <script>
-                            <?php
-                            $days_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-                            $ordered = array_fill(0, 7, 0);
-                            foreach ($views_weekly as $row) {
-                                    $day = $row['day_name'] ?? '';
-                                    $views = (int)($row['total_views'] ?? 0);
-                                    $index = array_search($day, $days_order);
-                                    $ordered[$index] = $views;
-                            }
-                            ?>
-
-                            const viewsData = <?= json_encode(array_values($ordered), JSON_UNESCAPED_UNICODE) ?>;
-
-                            setChart(
-                                viewsData,
-                                ['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB', 'DOM'],
-                                'Visualizações esta semana',
-                                'Total de views',
-                                'studio-chart'
-                            );
-                        </script>
+                        <?= renderChartComponent($ordered, $categoriesLine, 'Semana', 'Visualizações'); ?>
                     </section>
 
                     <section class="p-6 bg-gray600 mt-4 rounded-lg border border-white/20 flex flex-col gap-2 ">
