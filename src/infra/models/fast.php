@@ -30,4 +30,20 @@ class FastModel extends Model {
 
         return $this->database->query($sql, ['query' => '%' . $query . '%']);
     }
+
+    public function getFasts(int $limit, int $offset): array {
+        $sql = "SELECT fasts.*, username, avatar_url FROM fasts INNER JOIN users ON fasts.author_id = users.id ORDER BY fasts.created_at DESC LIMIT $offset, $limit";
+
+        return $this->database->query($sql, []);
+    }
+
+    public function addView(string $fastId) {
+        $sql = "UPDATE fasts SET views = views + 1 WHERE id = :id";
+        $this->database->exec($sql, [":id" => $fastId]);
+    }
+
+    public function getFastById(string $id): array {
+        $sql = "SELECT fasts.*, username, avatar_url FROM fasts INNER JOIN users ON fasts.author_id = users.id WHERE fasts.id = :id";
+        return $this->database->query($sql, [":id" => $id]);
+    }
 }

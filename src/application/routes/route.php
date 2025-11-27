@@ -5,8 +5,9 @@ require_once __DIR__ . '/../../vendor/routes.autoload.php';
 require_once __DIR__ . '/../../../vendor/autoload.php';
 
 use Dotenv\Dotenv;
+use Src\Application\Controllers\AddLikeFastController;
+use Src\Application\Controllers\AddViewFastController;
 use Src\Application\Routes\Router;
-use Src\Application\Controllers\OiController;
 use Src\Application\Controllers\CategoriesViewController;
 use Src\Application\Controllers\CreateUserController;
 use Src\Application\Controllers\SignUpController;
@@ -38,6 +39,7 @@ use Src\Application\Controllers\UpdateUserAdminController;
 use Src\Application\Controllers\DeleteCommentsController;
 use Src\Application\Controllers\InactivateUserController;
 use Src\Application\Controllers\DeleteReportCommentsController;
+use Src\Application\Controllers\FastController;
 use Src\Application\Controllers\VideoAvaliationController;
 use Src\Application\Controllers\VideoController;
 
@@ -64,6 +66,9 @@ $router->post('/api/v1/comments/report', ReportCommentController::class, Redirec
 $router->post("/api/v1/json/video/rating", VideoAvaliationController::class);
 $router->post('/api/v1/comment/edit', UpdateCommentController::class, RedirectUserNotLoggedMiddleware::class);
 $router->post('/api/v1/comment/delete', DeleteCommentController::class, RedirectUserNotAdminMiddleware::class);
+$router->post("/api/v1/json/fast/like", AddLikeFastController::class, RedirectUserNotLoggedMiddleware::class);
+$router->post("/api/v1/json/fast/view", AddViewFastController::class);
+$router->get('/api/v1/ajax/fasts', GetFastsController::class, RedirectUserNotLoggedMiddleware::class);
 
 # Views Routes
 
@@ -88,5 +93,6 @@ $router->get("/admin/complaints", AdminComplaintManagementViewController::class,
 $router->get("/admin/users", AdminUsersViewController::class, RedirectUserNotAdminMiddleware::class);
 
 $router->get("/home/video", VideoController::class, /*RedirectUserNotLoggedMiddleware::class*/);
+$router->get("/home/fasts", FastController::class, RedirectUserNotLoggedMiddleware::class);
 
 $router->run();
