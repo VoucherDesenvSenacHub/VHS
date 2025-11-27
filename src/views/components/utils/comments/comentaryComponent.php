@@ -74,7 +74,7 @@ function Comment(string $id, string $name, string $text, ?string $created_at = n
 
 
     $userImg = $userImg
-        ? "<img src='" . htmlspecialchars($userImg, ENT_QUOTES, 'UTF-8') . "' alt='Imagem de perfil' class='w-full h-full rounded-full mt-1 object-cover'>"
+        ? "<img src='/VHS/public/uploads/avatars/" . htmlspecialchars($userImg, ENT_QUOTES, 'UTF-8') . "' alt='Imagem de perfil' class='w-full h-full rounded-full mt-1 object-cover'>"
         : "<img src='/VHS/public/uploads/avatars/default.png' alt='Imagem padrão de perfil' class='w-full h-full rounded-full mt-1 object-cover'>";
 
     $created_at = $created_at ? "<p class='text-xs text-gray-300 font-semibold ml-1'>" . htmlspecialchars($created_at, ENT_QUOTES, 'UTF-8') . "</p>" : "";

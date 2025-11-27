@@ -6,7 +6,7 @@ namespace Src\Application\Utils\Redirect;
  * @param array|null $data Salvando na sessão [redirect_data], quando salva mais de uma vez a anterior é substituida
  * @return void
  */
-function redirect(string $route, array | null $data = null, $statusCode = 302): void {
+function redirect(string $route, array | null $data = null, int $status_code = 302): void {
     if(session_status() == 0) {
         session_start();
     }
@@ -16,6 +16,6 @@ function redirect(string $route, array | null $data = null, $statusCode = 302): 
         $_SESSION["redirect_data"] = $data;
     };
 
-    header("Location: $route", true, $statusCode);
+    header("Location: $route", true, $status_code);
 }
 

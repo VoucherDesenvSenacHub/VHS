@@ -40,7 +40,7 @@ use function Src\Views\Components\Utils\InputComponent;
 
   <div class="flex">
     <?php echo StudioSideMenuComponent(); ?>
-    <div class="flex max-w-[1500px] w-full m-auto">
+    <div class="flex max-w-[1500px] w-full m-auto px-6">
     <div class="flex-1 py-6">
       <h1 class="text-title font-semibold mb-2">Comentários do vídeo</h1>
       <p class="text-sm text-gray-300 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>

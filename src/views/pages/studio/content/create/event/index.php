@@ -47,7 +47,7 @@ $conteudos = []
             <?= StudioSideMenuComponent() ?>
         </div>
 
-        <div class="flex flex-col gap-4 max-w-[1500px] mx-auto w-full">
+        <div class="flex flex-col gap-4 max-w-[1500px] mx-auto w-full px-6">
             <div class="text-white flex flex-col gap-2">
                 <h1 class='text-title font-bold'>Criar conteúdo</h1>
                 <h1 class='text-paragraph text-gray-400'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</h1>
