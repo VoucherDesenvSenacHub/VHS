@@ -104,6 +104,17 @@ body {
     margin-top: 1rem !important;
 }
 
+.swal-deny {
+    width: 100% !important;
+    background: #ff0000 !important;
+    color: #fff !important;
+    font-size: 1rem !important;
+    padding: 10px 20px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important;
+    transition: background 0.3s ease !important;
+}
+
 #swal2-validation-message {
     background: none !important;
     color: #fff !important;

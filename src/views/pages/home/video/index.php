@@ -1,23 +1,22 @@
 <?php
 
-require __DIR__ . "/../../../components/header/headerComponent.php";
-require __DIR__ . "/../../../components/sidebar/index.php";
-require __DIR__ . "/../../../components/cards/index.php";
-require __DIR__ . "/../../../components/utils/comments/comentaryComponent.php";
-require __DIR__ . "/../../../components/starrating/StarRatingComponent.php";
-require __DIR__ . "/../../../components/shared/shared.php";
-require __DIR__ . "/../../../../application/utils/formatViews.php";
-require __DIR__ . "/../../../../application/utils/pagination.php";
-require __DIR__ . "/../../../components/utils/inputComponent.php";
-require __DIR__ . "/../../../components/utils/buttonComponent.php";
-require __DIR__ . "/../../../components/utils/sweetalert.php";
+require_once __DIR__ . "/../../../components/header/headerComponent.php";
+require_once __DIR__ . "/../../../components/sidebar/index.php";
+require_once __DIR__ . "/../../../components/cards/index.php";
+require_once __DIR__ . "/../../../components/utils/comments/comentaryComponent.php";
+require_once __DIR__ . "/../../../components/starrating/StarRatingComponent.php";
+require_once __DIR__ . "/../../../components/shared/shared.php";
+require_once __DIR__ . "/../../../../application/utils/formatViews.php";
+require_once __DIR__ . "/../../../../application/utils/pagination.php";
+require_once __DIR__ . "/../../../components/utils/inputComponent.php";
+require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
+require_once __DIR__ . "/../../../components/utils/sweetalert.php";
 
 use function Src\Application\Utils\formatViews;
 use function Src\Application\Utils\paginate;
 use function Src\Application\Utils\showSweetAlert;
 use function Src\Views\Components\Header\HeaderComponent;
 use function Src\Views\Components\Sidebar\SidebarComponent;
-use function Src\Views\Components\Cards\renderCards;
 use function Src\Views\Components\Cards\viewCards;
 use function Src\Views\Components\Utils\Comment;
 use function Src\Views\Components\starrating\StarRatingComponent;
@@ -29,6 +28,7 @@ $video = $_SESSION["page_data"]["video"];
 $releatedVideos = $_SESSION["page_data"]["releated_videos"];
 $user_avaliation = $_SESSION["page_data"]["user_avaliation"];
 $comments = $_SESSION["page_data"]["comments"];
+$nextPageComments = $_SESSION["page_data"]["next_page_comments"];
 $totalComments = $_SESSION["page_data"]["total_comments"];
 
 
@@ -123,7 +123,7 @@ if ($_SESSION["redirect_data"]["errors"] ?? false) {
             <form action="/VHS/api/v1/comment?videoId=<?= $_GET["id"] ?>" method="post">
               <?= InputComponent(type: "text", placeholder: "Comentar...", name: "content") ?>
             </form>
-            <?= paginate($comments) ?>
+            <?= paginate($comments, $nextPageComments ) ?>
           </div>
         </div>
       </div>

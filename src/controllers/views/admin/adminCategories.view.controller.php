@@ -14,8 +14,17 @@ class AdminCategoriesViewController extends Controller
         $page = $_GET["page"] ?? 0;
         $page = $page > 0 ? $page * 7 : $page;
 
-        $listCategories = $model->getCategories($page, 7);
-        $users = array_slice($listCategories, 0, 7);
-        $this->view("/admin/categories/index", ["list" => $listCategories]);
+        $limit = 7;
+
+        $listCategories = $model->getCategories($page, $limit + 1);
+        $listCategories = array_slice($listCategories, 0, $limit + 1);
+
+        $nextPageCategories = 0;
+
+        if (count($listCategories) > $limit) {
+            $nextPageCategories = 1;
+        } 
+        
+        $this->view("/admin/categories/index", ["list" => $listCategories, "next_page_categories" => $nextPageCategories]);
     }
 }

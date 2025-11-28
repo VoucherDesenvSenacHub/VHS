@@ -6,9 +6,9 @@ require_once __DIR__ . '/../../../../../application/utils/pagination.php';
 
 use function Src\Application\Utils\paginate;
 
-function categoriesDataTableComponent(array $categories)
+function categoriesDataTableComponent(array $categories , int $next_page_categories)
 {
-    $pagination = paginate($categories);
+    $pagination = paginate($categories, $next_page_categories);
     if (empty($categories)) {
         return <<<HTML
             <div class="rounded-lg border border-gray-700 bg-[#1B1B1B] p-6 text-center">
@@ -46,7 +46,7 @@ function categoriesDataTableComponent(array $categories)
                             </td>
                             <td class="px-6 py-4">
                                 <div class="text-sm text-slate-300">
-                                    <?php echo isset($category['criado_em']) ? date('d/m/Y', strtotime($category['criado_em'])) : 'N/A'; ?>
+                                    <?php echo isset($category['created_at']) ? date('d/m/Y', strtotime($category['created_at'])) : 'N/A'; ?>
                                 </div>
                             </td>
                             <td class="px-6 py-4 bg-[#660BAD]/5 border-l border-[#660BAD]/20">

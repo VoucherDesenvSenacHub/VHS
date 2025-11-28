@@ -5,25 +5,42 @@ require_once __DIR__ . "/../../components/utils/Title_and_buttons.php";
 require_once __DIR__ . "/../../components/utils/userActivityCardsComponent.php";
 require_once __DIR__ . "/../../components/charts/chartComponent.php";
 require_once __DIR__ . "/../../components/utils/buttonComponent.php";
-require_once __DIR__ . "/../../components/utils/comments/comentaryComponent.php";
+require_once __DIR__ . "/../../components/utils/comments_studio/commentAnalyticsComponent.php";
 require_once __DIR__ . "/../../components/cards/studioVideoComponent.php";
+require_once __DIR__ . '/../../../application/utils/getCurrentDataTime.php';
+require_once __DIR__ . "/../../components/utils/orderningWeekDayAnalytics.php";
+require_once __DIR__ . "/../../components/charts/chartComponent.php";
 
 use function Src\Views\Components\Cards\StudioVideoComponent;
 use function src\views\components\Charts\renderChartComponent;
-use function Src\Views\Components\Utils\Comment;
+use function Src\Views\Components\Utils\CommentStudioAnalytics;
 use function src\views\components\utils\UserActivityCardsComponent;
 use function src\views\components\Utils\Title_and_buttons;
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
 use function src\views\components\Header\HeaderComponent;
+use function Src\Application\Utils\getCurrentDataTime;
+use function Src\Views\Components\orderningWeekDayAnalytics;
 
-$seriesDataLine = [10, 15, 25, 20, 18, 12, 15];
-$categoriesLine = ['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB', 'DOM'];
+$current_user = $_SESSION['user'];
+$followers = $_SESSION["page_data"]["count_followers"][0]['COUNT(id)'];
+$views = $_SESSION["page_data"]["all_views"];
+$avereng_views = (int)$_SESSION["page_data"]["average_views"] ?? 0;
+$average_avaliations = (int)$_SESSION["page_data"]["average_avaliations"] ?? 0;
+$last_comments = $_SESSION["page_data"]["last_comments"];
+$last_videos = $_SESSION["page_data"]["last_videos"];
+$views_weekly = $_SESSION["page_data"]["views_weekly"];
 
 $botoes = [
     ['texto' => 'Edição', 'link' => './VideosPage.php'],
     ['texto' => 'Comentarios', 'link' => './FeastPage.php'],
     ['texto' => 'Analytics', 'link' => './EventosPage.php']
 ];
+
+[$weekday, $timeDefault, $data] = getCurrentDataTime();
+
+$categoriesLine = ['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB', 'DOM'];
+
+$ordered = orderningWeekDayAnalytics($views_weekly);
 ?>
 
 <!DOCTYPE html>
@@ -37,6 +54,7 @@ $botoes = [
     <link rel="stylesheet" href="/VHS/src/styles/global.css">
     <script src="/VHS/src/styles/tailwindglobal.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/apexcharts'></script>
+    <script src="/VHS/src/views/pages/studio/chart.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.44.0/dist/apexcharts.css">
 </head>
 
@@ -50,37 +68,31 @@ $botoes = [
             <?= StudioSideMenuComponent() ?>
         </div>
 
-        <main class="max-w-[1500px] mx-auto">
+        <main class="max-w-[1500px] mx-auto px-6 pt-[1.18rem]">
             <section class="flex gap-4">
-                <img src="https://cdn.pipocamoderna.com.br/wp-content/uploads/2025/05/Virginia-Fonseca.jpg" alt="" class="size-12 rounded-full">
+                <img src='/VHS/public/uploads/avatars/<?= $current_user["avatar_url"]?>' alt="" class="size-12 rounded-full" onerror="this.src='/VHS/public/uploads/avatars/default.png'">
                 <div>
                     <h2 class="text-2xl font-semibold text-white">
-                        Boa tarde, Virginia Fonseca!
+                        <?= $timeDefault ?>, <?= $current_user['username'] ?>!
                     </h2>
                     <p class="text-secondary">
-                        Quinta, 15 de agosto!
+                        <?= $weekday ?>, <?= $data ?>
                     </p>
                 </div>
             </section>
 
 
-            <div class="grid grid-cols-2">            
+            <div class="grid grid-cols-1 md:grid-cols-2">            
                 <div>
-                    <section class="mt-4 flex gap-4">
-                        <?= UserActivityCardsComponent("Seguidores", 6700) ?>
-                        <?= UserActivityCardsComponent("Visualizações", 67000) ?>
-                        <?= UserActivityCardsComponent("M. Visualizações", 32000) ?>
-                        <?= UserActivityCardsComponent("M. Avaliações", 4.5) ?>
+                    <section class="mt-4 flex flex-col gap-4 md:flex-row">
+                        <?= UserActivityCardsComponent("Seguidores", $followers) ?>
+                        <?= UserActivityCardsComponent("Visualizações", $views) ?>
+                        <?= UserActivityCardsComponent("M. Visualizações", $avereng_views) ?>
+                        <?= UserActivityCardsComponent("M. Avaliações", $average_avaliations) ?>
                     </section>
 
                     <section class="mt-4 bg-gray600 p-6 rounded-lg border border-white/20 relative">
-                        <h2 class="text-white font-semibold absolute z-10">Visualizações por semana</h2>
-                        <div id="studio-chart">
-                        </div>
-                        <script src="/VHS/src/views/pages/studio/chart.js"></script>
-                        <script>
-                            setChart([10, 15, 25, 20, 18, 12, 15], ['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB', 'DOM'], "Semana", "Visualizações", "studio-chart")
-                        </script>
+                        <?= renderChartComponent($ordered, $categoriesLine, 'Semana', 'Visualizações'); ?>
                     </section>
 
                     <section class="p-6 bg-gray600 mt-4 rounded-lg border border-white/20 flex flex-col gap-2 ">
@@ -88,30 +100,32 @@ $botoes = [
                             Ultimos vídeos
                         </h2>
                         <div class="mt-8 pb-4 pt-2 flex flex-col gap-4">
-                            <?= StudioVideoComponent("1", "Virgina fonseca no discord, top demais!", "https://i.imgur.com/OZXgam6.png", 445) ?>
-                            <?= StudioVideoComponent("1", "Virgina fonseca no discord, top demais!", "https://i.imgur.com/OZXgam6.png", 445) ?>
-                            <?= StudioVideoComponent("1", "Virgina fonseca no discord, top demais!", "https://i.imgur.com/OZXgam6.png", 445) ?>
-                            <?= StudioVideoComponent("1", "Virgina fonseca no discord, top demais!", "https://i.imgur.com/OZXgam6.png", 445) ?>
+                            <?php foreach ($last_videos as $video) : ?>
+                                <?= StudioVideoComponent(
+                                    $video['id'],
+                                    $video['title'],
+                                    $video['thumbnail_url'],
+                                    views: $video['views']
+                                ) ?>
+                            <?php endforeach; ?>
                         </div>
                     </section>
                 </div>
                 
-                <section class="p-6 bg-gray600 ml-4 mt-4 rounded-lg border border-white/20 flex flex-col gap-2 max-w-[26rem]">
+                <section class="p-6 bg-gray600 ml-0 md:ml-4 mt-4 rounded-lg border border-white/20 flex flex-col gap-2 max-w-[26rem]">
                     <h2 class="text-white font-semibold absolute z-10 text-xl">
                         Útimos comentários
                     </h2>
                     <div class="mt-8">
-                        <?= Comment("Richard Stallman", "Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!", "", "https://media.wired.com/photos/5d815ffe46103c0009de8d56/16:9/w_2400,h_1350,c_limit/science_stallman_473688628.jpg") ?>
-                        <?= Comment("Richard Stallman", "Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!", "", "https://media.wired.com/photos/5d815ffe46103c0009de8d56/16:9/w_2400,h_1350,c_limit/science_stallman_473688628.jpg") ?>
-                        <?= Comment("Richard Stallman", "Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!", "", "https://media.wired.com/photos/5d815ffe46103c0009de8d56/16:9/w_2400,h_1350,c_limit/science_stallman_473688628.jpg") ?>
-                        <?= Comment("Richard Stallman", "Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!", "", "https://media.wired.com/photos/5d815ffe46103c0009de8d56/16:9/w_2400,h_1350,c_limit/science_stallman_473688628.jpg") ?>
-                        <?= Comment("Richard Stallman", "Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!", "", "https://media.wired.com/photos/5d815ffe46103c0009de8d56/16:9/w_2400,h_1350,c_limit/science_stallman_473688628.jpg") ?>
-                        <?= Comment("Richard Stallman", "Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!", "", "https://media.wired.com/photos/5d815ffe46103c0009de8d56/16:9/w_2400,h_1350,c_limit/science_stallman_473688628.jpg") ?>
-                        <?= Comment("Richard Stallman", "Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!", "", "https://media.wired.com/photos/5d815ffe46103c0009de8d56/16:9/w_2400,h_1350,c_limit/science_stallman_473688628.jpg") ?>
-                        <?= Comment("Richard Stallman", "Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!", "", "https://media.wired.com/photos/5d815ffe46103c0009de8d56/16:9/w_2400,h_1350,c_limit/science_stallman_473688628.jpg") ?>
-                        <?= Comment("Richard Stallman", "Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!", "", "https://media.wired.com/photos/5d815ffe46103c0009de8d56/16:9/w_2400,h_1350,c_limit/science_stallman_473688628.jpg") ?>
-                        <?= Comment("Richard Stallman", "Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!", "", "https://media.wired.com/photos/5d815ffe46103c0009de8d56/16:9/w_2400,h_1350,c_limit/science_stallman_473688628.jpg") ?>
-                    </div>
+                        <?php foreach ($last_comments as $comment) : ?>
+                            <?= CommentStudioAnalytics(
+                                $comment['name'],
+                                $comment['content'],
+                                $comment['created_at'],
+                                $comment['avatar_url']
+                            ) ?>
+                        <?php endforeach; ?>
+                        
                 </section>
             </div>
         </main>
