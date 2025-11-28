@@ -24,8 +24,15 @@ class AdminComplaintManagementViewController extends Controller {
         $filterComment = $_GET["comment"] ?? "";
         $ordering = isset($_GET["ordering"]) ? "DESC" : "ASC";
 
-        $report_comments = $this->commentModel->getReportComments($page, 7, $ordering);
-        $report_comments = array_slice($report_comments, 0, 7);
+        $limit = 7;
+        $report_comments = $this->commentModel->getReportComments($page, $limit + 1, $ordering);
+        $report_comments = array_slice($report_comments, 0, $limit + 1);
+
+        $nextPageReportComments = 0;
+
+        if (count($report_comments) > $limit) {
+            $nextPageReportComments = 1;
+        }
 
         $comments = [];
 
@@ -59,6 +66,6 @@ class AdminComplaintManagementViewController extends Controller {
             ];
         }
         
-        $this->view("admin/complaintManagement/index", ["comments" => $comments]);        
+        $this->view("admin/complaintManagement/index", ["comments" => $comments, "next_page_report_comments" => $nextPageReportComments]);        
     }   
 }

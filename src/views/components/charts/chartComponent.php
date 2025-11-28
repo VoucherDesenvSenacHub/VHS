@@ -2,7 +2,7 @@
 
 namespace Src\Views\Components\Charts;
 
-function renderChartComponent($seriesData, $categories, $title = 'Semana', $yAxisTitle = 'Usuários')
+function renderChartComponent($seriesData, $categories, $title = 'Semana', $yAxisTitle = 'Usuários', $type = 'line')
 {
     if (empty($seriesData) || empty($categories)) {
         return '<p class="text-red-500">Erro: Dados ou categorias não fornecidos.</p>';
@@ -18,7 +18,7 @@ function renderChartComponent($seriesData, $categories, $title = 'Semana', $yAxi
     <script>
         var options = {
             chart: {
-                type: 'line',
+                type: '$type',
                 height: 300,
                 background: '#1B1B1B',
                 toolbar: {
@@ -29,6 +29,7 @@ function renderChartComponent($seriesData, $categories, $title = 'Semana', $yAxi
                 name: '{$yAxisTitle}',
                 data: [{$seriesDataJson}]
             }],
+            colors: ['#7b08d3'],
             xaxis: {
                 categories: [{$categoriesJson}],
                 labels: {
@@ -77,7 +78,7 @@ function renderChartComponent($seriesData, $categories, $title = 'Semana', $yAxi
             stroke: {
                 curve: 'smooth',
                 width: 4,
-                colors: ['#BF00FF'],
+                colors: ['#7b08d3'],
                 lineCap: 'round'
             },
             grid: {
