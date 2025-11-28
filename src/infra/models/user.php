@@ -110,6 +110,16 @@ class UserModel extends Model
         return $this->database->query($sql, [":name" => "%$name%"]);
     }
 
+    public function getAllUsers() {
+        $sql = "SELECT COUNT(*) AS all_users FROM users WHERE is_deleted = 0";
+        return $this->database->query($sql);
+    }
+
+    public function getAllChannels() {
+        $sql = "SELECT COUNT(*) AS all_channels FROM users WHERE is_deleted = 0 AND role = 'CREATOR' OR role = 'ADMIN'";
+        return $this->database->query($sql);
+    }
+
     public function deleteUser(string $id): bool
     {
         $sql = "UPDATE users SET is_deleted = 1 WHERE id = :id";

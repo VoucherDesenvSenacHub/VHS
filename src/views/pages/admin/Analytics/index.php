@@ -17,128 +17,23 @@ use function src\views\components\chartsCategoryComponent;
 use function Src\Views\Components\cardActivityHistoryComponent;
 use function Src\Views\Components\cardLatestReportComponent;
 
+$all_users = $_SESSION['page_data']['all_users'];
+$all_videos = $_SESSION['page_data']['all_videos'];
+$all_channels = $_SESSION['page_data']['all_channels'];
+$lasts_reports_comments = $_SESSION['page_data']['lasts_reports_comments'];
+$categories_total = $_SESSION['page_data']['categories_total'];
 
 $seriesDataLine = [10, 15, 25, 20, 18, 12, 15];
 $categoriesLine = ['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB', 'DOM'];
 
-$seriesDataDonut = [3320, 260, 285, 105];
-$labelsDonut = ['Tecnologia', 'Moda', 'Estatística', 'Saúde'];
+$seriesDataDonut = [];
+$labelsDonut = [];
 
-$atividades = [
-    [
-        'data' => '10 de janeiro de 2025',
-        'time' => '08:00',
-        'usuario1' => 'João',
-        'description' => 'alterou o status de',
-        'usuario2' => 'Maria',
-        'causa' => 'atraso'
-    ],
-    [
-        'data' => '10 de janeiro de 2025',
-        'time' => '11:23',
-        'usuario1' => 'João',
-        'description' => 'alterou o status de',
-        'usuario2' => 'Maria',
-        'causa' => 'atraso'
-    ],
-    [
-        'data' => '11 de janeiro de 2025',
-        'time' => '19:05',
-        'usuario1' => 'João',
-        'description' => 'alterou o status de',
-        'usuario2' => 'Maria',
-        'causa' => 'atraso'
-    ],
-    [
-        'data' => '11 de janeiro de 2025',
-        'time' => '19:05',
-        'usuario1' => 'João',
-        'description' => 'alterou o status de',
-        'usuario2' => 'Maria',
-        'causa' => 'atraso'
-    ],
-    [
-        'data' => '11 de janeiro de 2025',
-        'time' => '19:05',
-        'usuario1' => 'João',
-        'description' => 'alterou o status de',
-        'usuario2' => 'Maria',
-        'causa' => 'atraso'
-    ],
-    [
-        'data' => '19 de julho de 2025',
-        'time' => '19:05',
-        'usuario1' => 'João',
-        'description' => 'alterou o status de',
-        'usuario2' => 'Maria',
-        'causa' => 'atraso'
-    ],
-    [
-        'data' => '13 de julho de 2025',
-        'time' => '19:05',
-        'usuario1' => 'João',
-        'description' => 'alterou o status de',
-        'usuario2' => 'Maria',
-        'causa' => 'atraso'
-    ],
-];
+foreach ($categories_total as $category) {
+    array_push($seriesDataDonut, $category['name']);
+    array_push($labelsDonut, $category['total']);
+};
 
-$comentarios = [
-    [
-        'name' => 'Richard Stallman',
-        'description' => 'Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!',
-        'profile' => 'https://github.com/shadcn.png',
-        'commentNumber' => '4',
-        'amountDay' => '4',
-        'amountLike' => '8',
-        'amountResponses' => '13',
-    ],
-    [
-        'name' => 'Richard Stallman',
-        'description' => 'Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!',
-        'profile' => 'https://github.com/shadcn.png',
-        'commentNumber' => '4',
-        'amountDay' => '4',
-        'amountLike' => '8',
-        'amountResponses' => '13',
-    ],
-    [
-        'name' => 'Richard Stallman',
-        'description' => 'Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!',
-        'profile' => 'https://github.com/shadcn.png',
-        'commentNumber' => '4',
-        'amountDay' => '4',
-        'amountLike' => '8',
-        'amountResponses' => '13',
-    ],
-    [
-        'name' => 'Richard Stallman',
-        'description' => 'Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!',
-        'profile' => 'https://github.com/shadcn.png',
-        'commentNumber' => '4',
-        'amountDay' => '4',
-        'amountLike' => '8',
-        'amountResponses' => '13',
-    ],
-    [
-        'name' => 'Richard Stallman',
-        'description' => 'Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!',
-        'profile' => 'https://github.com/shadcn.png',
-        'commentNumber' => '4',
-        'amountDay' => '4',
-        'amountLike' => '8',
-        'amountResponses' => '13',
-    ],
-    [
-        'name' => 'Richard Stallman',
-        'description' => 'Adorei seu projeto Freitas! Você é foda! Uma pena da sua equipe!',
-        'profile' => 'https://github.com/shadcn.png',
-        'commentNumber' => '4',
-        'amountDay' => '4',
-        'amountLike' => '8',
-        'amountResponses' => '13',
-    ],
-];
 $user = $_SESSION["user"] ?? null;
 ?>
 
@@ -162,25 +57,21 @@ $user = $_SESSION["user"] ?? null;
             <?= renderPostComponent("/VHS/public/uploads/avatars/" . $user['avatar_url'] ?? '/VHS/public/uploads/avatars/default.png', $user['name']) ?>
             <div class="flex items-start justify-between flex-row mt-4 gap-6">
                 <div class="grid grid-col-2 items-center gap-6 max-w-[115vh] w-full">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 ">
-                        <?= UserActivityCardsComponent("Usuários", 11000, '/VHS/public/icons/users.svg') ?>
-                        <?= UserActivityCardsComponent("Qtd. Vídeos", 90, '/VHS/public/icons/video.svg') ?>
-                        <?= UserActivityCardsComponent("Parceiros", 2, '/VHS/public/icons/handshake.svg') ?>
-                        <?= UserActivityCardsComponent("Canais", 12, '/VHS/public/icons/Radioo.svg') ?>
+                    <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 ">
+                        <?= UserActivityCardsComponent("Usuários", $all_users, '/VHS/public/icons/users.svg') ?>
+                        <?= UserActivityCardsComponent("Qtd. Vídeos", $all_videos, '/VHS/public/icons/video.svg') ?>
+                        <?= UserActivityCardsComponent("Canais", $all_channels, '/VHS/public/icons/Radioo.svg') ?>
                     </div>
                     <div>
                         <?= renderChartComponent($seriesDataLine, $categoriesLine, 'Semana', 'Usuários') ?>
                     </div>
                     <div>
-                        <?= cardLatestReportComponent($comentarios); ?>
+                        <?= cardLatestReportComponent($lasts_reports_comments); ?>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 gap-6 mx-auto w-full max-w-full lg:max-w-[52vh]">
                     <div class="w-full">
-                        <?= chartsCategoryComponent($seriesDataDonut, $labelsDonut, 'Categorias', 'Tecnologia') ?>
-                    </div>
-                    <div class="w-full">
-                        <?= cardActivityHistoryComponent($atividades) ?>
+                        <?= chartsCategoryComponent($labelsDonut, $seriesDataDonut, 'Categorias', $seriesDataDonut[0]) ?>
                     </div>
                 </div>
             </div>

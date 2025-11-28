@@ -96,4 +96,37 @@ class CategoryModel extends Model
             ":id" => $id
         ]);
     }
+
+    public function getCountVideosByCategories(){
+        $sql = "
+        SELECT name, total
+        FROM (
+            SELECT 
+                c.name,
+                COUNT(v.id) AS total,
+                ROW_NUMBER() OVER (ORDER BY COUNT(v.id) DESC) AS rn
+            FROM categories c
+            LEFT JOIN videos v ON v.category_id = c.id
+            GROUP BY c.id
+        ) t
+        WHERE rn <= 4
+
+        UNION ALL
+
+        SELECT
+            'Outras' AS name,
+            SUM(total) AS total
+        FROM (
+            SELECT 
+                c.name,
+                COUNT(v.id) AS total,
+                ROW_NUMBER() OVER (ORDER BY COUNT(v.id) DESC) AS rn
+            FROM categories c
+            LEFT JOIN videos v ON v.category_id = c.id
+            GROUP BY c.id
+        ) u
+        WHERE rn > 4
+    ";
+        return $this->database->query($sql);
+    }
 }

@@ -132,9 +132,14 @@ class VideoModel extends Model
 
     public function countVideos(string $author_id): int
     {
-        $sql = "SELECT COUNT(*) as total FROM videos WHERE is_deleted = 0 AND author_id = :author_id";
+        $sql = "SELECT COUNT(*) AS total FROM videos WHERE is_deleted = 0 AND author_id = :author_id";
         $stmt = $this->database->query($sql, [":author_id" => $author_id]);
         return (int)$stmt[0]['total'];
+    }
+
+    public function countAllVideos(){
+        $sql = "SELECT COUNT(*) AS all_videos FROM videos WHERE is_deleted = 0";
+        return $this->database->query($sql);
     }
 
     public function getVideoStudioByID(string $id): array
@@ -188,5 +193,4 @@ class VideoModel extends Model
         ORDER BY DAYOFWEEK(users_history.created_at)";
         return $this->database->query($sql, [":videoId" => $videoId]);
     }
-
 }
