@@ -63,7 +63,7 @@ $creator = $_SESSION["page_data"]["channel"];
                     <div class="flex flex-col lg:flex-row w-full justify-between ">
                         <div class="flex flex-row">
                             <div class="w-24 h-24 sm:w-36 sm:h-36 rounded-3xl border-1 border-white/20 overflow-hidden -mt-20 md:-mt-16 ml-4 sm:ml-6 z-10 relative">
-                                <img src="/VHS/public/uploads/avatars/<?= $creator['avatar_url'] ?? "/VHS/public/uploads/avatars/default.png" ?>" class=" object-cover h-full" alt="Perfil">
+                                <img src="/VHS/public/uploads/avatars/<?= $creator['avatar_url']?>" class=" object-cover h-full" alt="Perfil">
                             </div>
                             <div class="flex flex-col md:flex-row items-start sm:items-center mt-4 sm:mt-6 ml-4 sm:ml-6 gap-4 ">
                                 <div>
