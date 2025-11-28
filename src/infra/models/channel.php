@@ -23,4 +23,20 @@ class ChannelModel extends Model
             ":id" => $id
         ]);
     }
+    public function getCreatorsChannel(string $idVideo): array
+    {
+        $sql = "SELECT 
+                u.avatar_url,
+                u.username,
+                u.name,
+                u.followers,
+                u.banner_url,
+                u.description_channel
+            FROM videos v
+            INNER JOIN users u ON u.id = v.author_id
+            WHERE v.id = :idVideo
+    ";
+
+        return $this->database->query($sql, [":idVideo" => $idVideo]);
+    }
 }

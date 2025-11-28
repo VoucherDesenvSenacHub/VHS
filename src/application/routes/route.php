@@ -45,6 +45,7 @@ use Src\Application\Controllers\InactivateUserController;
 use Src\Application\Controllers\DeleteReportCommentsController;
 use Src\Application\Controllers\VideoAvaliationController;
 use Src\Application\Controllers\VideoController;
+use Src\Application\Controllers\ChannelViewController;
 
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../../..");
 $dotenv->load();
@@ -102,5 +103,6 @@ $router->get("/admin/complaints", AdminComplaintManagementViewController::class,
 $router->get("/admin/users", AdminUsersViewController::class, RedirectUserNotAdminMiddleware::class);
 
 $router->get("/home/video", VideoController::class, /*RedirectUserNotLoggedMiddleware::class*/);
+$router->get("/home/channel", ChannelViewController::class, RedirectUserNotLoggedMiddleware::class);
 
 $router->run();
