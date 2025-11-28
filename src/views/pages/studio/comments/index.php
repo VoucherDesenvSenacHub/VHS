@@ -37,13 +37,14 @@ if (isset($_GET["ordering"])) $title = 'Primeiros comentários do video';
 
   <?php echo HeaderComponent(); ?>
 
-  <div class="flex">
-    <?php echo StudioSideMenuComponent(); ?>
+  <div class="flex ">
+    <div class="hidden md:block">
+            <?= StudioSideMenuComponent() ?>
+        </div>
 
     <div class="flex flex-col gap-4 max-w-[1500px] mx-auto w-full px-6 pt-[1.18rem]">
       <div class="flex-col gap-4">
           <h1 class="text-2xl font-semibold text-white"><?=$title?></h1>
-        <p class="text-secondary text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
       </div>
     <!-- 
       <div class="flex gap-3 mb-6">
