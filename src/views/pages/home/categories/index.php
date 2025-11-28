@@ -1,5 +1,6 @@
 <?php
 
+// ... resto do código
 require __DIR__ . "/../../../components/header/headerComponent.php";
 require __DIR__ . "/../../../components/sidebar/index.php";
 require __DIR__ . "/../../../components/cards/index.php";
@@ -11,8 +12,26 @@ use function Src\Views\Components\Cards\renderCards;
 use function Src\Views\Components\Cards\viewCards;
 use function Views\Components\FeaturedCard\FeaturedCardComponent;
 
-$videos = $_SESSION["page_data"]["videos"] ?? [];
-$category = $_SESSION["page_data"]["category"] ?? "Não encontrado!";
+$allCategories = $_SESSION["page_data"]["categories"] ?? [];
+
+
+$currentCategory = $_GET['category'] ?? null;
+
+
+$categoryName = "Não encontrado!";
+$videos = [];
+
+
+if ($currentCategory && !empty($allCategories)) {
+    foreach ($allCategories as $cat) {
+        
+        if ((string)$cat['name'] === (string)$currentCategory) {
+            $categoryName = $cat['name'];
+            $videos = $cat['videos'] ?? []; 
+            break;
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -46,22 +65,33 @@ $category = $_SESSION["page_data"]["category"] ?? "Não encontrado!";
 
         <main class="flex-1 px-4 sm:px-6 py-4 mx-auto">
             <div class="max-w-[1500px] mx-auto">
-                <h2 class="text-2xl font-bold text-white mb-2"><span class="text-purple-400">#</span> <?= $category ?></h2>
-                <p class="text-gray-400 text-sm mb-6">Confira os vídeos mais populares da nossa plataforma VHS da categoria, <?= $category ?></p>
+                <h2 class="text-2xl font-bold text-white mb-2"><span class="text-purple-400">#</span> <?= $categoryName ?></h2>
+                <p class="text-gray-400 text-sm mb-6">Confira os vídeos mais populares da nossa plataforma VHS da categoria, <?= $categoryName ?>.</p>
                 
                 
                 <section class="mb-12">
                     <div class="grid grid-cols-1 gap-6">
                         <div class="lg:col-span-1">
-                            <?= !empty($videos) || !$category ? FeaturedCardComponent($videos[0], true) : "" ?>
+                            <?= !empty($videos) || !$categoryName ? FeaturedCardComponent($videos[0], true) : "" ?>
                         </div>
+                    </div>
                 </section>
                 <section class="mb-12">
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                            <?= viewCards(array_slice($videos, 1), 'video'); ?>
+                        <?php 
+                    
+                        if (count($videos) > 1) {
+                            
+                            echo viewCards(array_slice($videos, 1), 'videos'); 
+                        }
+                        else{
+
+                            echo "<p class='text-gray-200 text-md mb-6'>Nenhum vídeo encontrado...</p>";                            
+                        }
+                        ?>
                     </div>
                 </section>
-                <section>
+                
 
                 </section>
             </div>
