@@ -27,7 +27,7 @@ function SidebarComponent() {
 
         $formatedcategories[] = [
             "text" => $text,
-            "link" => "/VHS/src/views/pages/home/categories?category=".urlencode($text)
+            "link" => "/VHS/home/categories?category=".urlencode($text)
         ];
 
 

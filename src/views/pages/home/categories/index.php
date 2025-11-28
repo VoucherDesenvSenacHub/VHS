@@ -1,6 +1,5 @@
 <?php
-
-// ... resto do código
+// echo "<pre class='bg-black text-white p-4 absolute z-50'>"; print_r($_SESSION["page_data"]["videos"]);echo "</pre>";
 require __DIR__ . "/../../../components/header/headerComponent.php";
 require __DIR__ . "/../../../components/sidebar/index.php";
 require __DIR__ . "/../../../components/cards/index.php";
@@ -8,30 +7,25 @@ require __DIR__ . "/../../../components/featuredCard/featuredCardComponent.php";
 
 use function Src\Views\Components\Header\HeaderComponent;
 use function Src\Views\Components\Sidebar\SidebarComponent;
-use function Src\Views\Components\Cards\renderCards;
 use function Src\Views\Components\Cards\viewCards;
 use function Views\Components\FeaturedCard\FeaturedCardComponent;
 
-$allCategories = $_SESSION["page_data"]["categories"] ?? [];
+$categoryName = $_SESSION["page_data"]["category"] ?? "Não encontrado!";
+
+$videos = $_SESSION["page_data"]["videos"] ?? [];
+
+$FeaturedVideo = $videos[0] ?? [];
+
+foreach ($videos as $video){
+
+    if($video['views'] > $FeaturedVideo['views']){
+
+        $FeaturedVideo = $video;
+    };
+
+};
 
 
-$currentCategory = $_GET['category'] ?? null;
-
-
-$categoryName = "Não encontrado!";
-$videos = [];
-
-
-if ($currentCategory && !empty($allCategories)) {
-    foreach ($allCategories as $cat) {
-        
-        if ((string)$cat['name'] === (string)$currentCategory) {
-            $categoryName = $cat['name'];
-            $videos = $cat['videos'] ?? []; 
-            break;
-        }
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -72,7 +66,7 @@ if ($currentCategory && !empty($allCategories)) {
                 <section class="mb-12">
                     <div class="grid grid-cols-1 gap-6">
                         <div class="lg:col-span-1">
-                            <?= !empty($videos) || !$categoryName ? FeaturedCardComponent($videos[0], true) : "" ?>
+                            <?= !empty($videos) || !$categoryName ? FeaturedCardComponent($FeaturedVideo, true) : "" ?>
                         </div>
                     </div>
                 </section>
