@@ -6,8 +6,10 @@ require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
 require_once __DIR__ . "/../../../components/utils/comments_studio/commentStudioComponent.php";
 require_once __DIR__ . "/../../../components/utils/inputComponent.php";
 require_once __DIR__ . "/../../../components/utils/footer.php";
-require_once __DIR__ ."/../../../components/filter/filter.php";
+require_once __DIR__ . "/../../../../application/utils/pagination.php";
+require_once __DIR__ . "/../../../components/filter/filter.php";
 
+use function Src\Application\Utils\paginate;
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
 use function src\views\components\header\HeaderComponent;
 use function src\views\components\Utils\ButtonComponent;
@@ -17,6 +19,7 @@ use function Src\Views\Components\Utils\InputComponent;
 use function src\views\components\filter\Filter;
 
 $comments = $_SESSION["page_data"]["comments"];
+$nextPage = $_SESSION["page_data"]["next_page"];
 
 $title = 'Últimos comentários do video';
 if (isset($_GET["ordering"])) $title = 'Primeiros comentários do video';
@@ -24,6 +27,7 @@ if (isset($_GET["ordering"])) $title = 'Primeiros comentários do video';
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -33,6 +37,7 @@ if (isset($_GET["ordering"])) $title = 'Primeiros comentários do video';
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Syne:wght@500..800&display=swap" rel="stylesheet" />
 </head>
+
 <body>
 
   <?php echo HeaderComponent(); ?>
@@ -42,35 +47,29 @@ if (isset($_GET["ordering"])) $title = 'Primeiros comentários do video';
 
     <div class="flex flex-col gap-4 max-w-[1500px] mx-auto w-full px-6 pt-[1.18rem]">
       <div class="flex-col gap-4">
-          <h1 class="text-2xl font-semibold text-white"><?=$title?></h1>
+        <h1 class="text-2xl font-semibold text-white"><?= $title ?></h1>
         <p class="text-secondary text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
       </div>
-    <!-- 
-      <div class="flex gap-3 mb-6">
-        <?php echo ButtonComponent("Edição", "studio", "", 10.675, 2.5); ?>
-        <?php echo ButtonComponent("Comentários", "studio", "", 10.675, 2.5); ?>
-        <?php echo ButtonComponent("Analytics", "studio", "", 10.675, 2.5); ?>
-      </div> -->
 
-     <div class="flex items-center justify-center gap-4">
-                        <div class="h-full pt-6">
-                            <?= Filter() ?>
-                        </div>
-                        <div class="w-full">
-                        <form method="GET">
-                            <?= InputComponent(
-                                placeholder: "Pesquisar",
-                                type: "text",
-                                name: "content",
-                                value: $_GET['content'] ?? ""
-                            ) ?>
-                        </form>
-                        </div>
+      <div class="flex items-center justify-center gap-4">
+        <div class="h-full pt-6">
+          <?= Filter() ?>
+        </div>
+        <div class="w-full">
+          <form method="GET">
+            <?= InputComponent(
+              placeholder: "Pesquisar",
+              type: "text",
+              name: "content",
+              value: $_GET['content'] ?? ""
+            ) ?>
+          </form>
+        </div>
       </div>
 
       <div class="w-full flex flex-col gap-4">
         <?php
-        foreach ($comments as $comment){
+        foreach ($comments as $comment) {
           echo CommentStudioComponent(
             name: $comment["name"],
             text: $comment["content"],
@@ -83,6 +82,9 @@ if (isset($_GET["ordering"])) $title = 'Primeiros comentários do video';
           );
         };
         ?>
+        <div class="mb-5">
+          <?= paginate($comments, $nextPage) ?>
+        </div>
       </div>
     </div>
 
@@ -90,4 +92,5 @@ if (isset($_GET["ordering"])) $title = 'Primeiros comentários do video';
   <?php echo Footer(); ?>
   <script src="/VHS/src/views/components/utils/comments_studio/script.js"></script>
 </body>
+
 </html>

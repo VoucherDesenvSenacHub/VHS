@@ -27,14 +27,14 @@ class StudioCommentsVideoViewController extends Controller
             $page = 0;
         }
 
-        // $search = $_GET["search"] ?? null;
-
         $limit = 8;
         $offset = $page * $limit;
+        $filterContent = $_GET["content"] ?? "";
+        $ordering = isset($_GET["ordering"]) ? "ASC" : "DESC";
 
         $video = $this->videoModel->getVideoById($id);
 
-        $comments = $this->commentModel->getCommentsByVideoId($id, $offset, $limit);
+        $comments = $this->commentModel->getStudioVideoComments($id, $offset, $limit + 1, $filterContent, $ordering);
 
         $nextPage = 0;
         

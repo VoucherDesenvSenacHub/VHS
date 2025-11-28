@@ -14,15 +14,22 @@ class StudioCommentsViewController extends Controller {
         $this->commentModel = $this->model("comment");
 
         $page = $_GET["page"] ?? 0;
-        $page = $page > 0 ? $page * 7 : $page;
+        $limit = 8;
+        $offset = $page * $limit;
         $filterContent = $_GET["content"] ?? "";
         $ordering = isset($_GET["ordering"]) ? "ASC" : "DESC";
         
         $idUser = $_SESSION["user"]["id"];
 
-        $comments = $this->commentModel->getStudioComments($page, 7, $idUser, $filterContent, $ordering);
-        $comments = array_slice($comments, 0, 7);
+        $comments = $this->commentModel->getStudioComments($offset, $limit + 1, $idUser, $filterContent, $ordering);
+        
+        $nextPage = 0;
+        
+        if (count($comments) > $limit) {
+            array_pop($comments);
+            $nextPage = 1;
+        }
 
-        $this->view("studio/comments/index", ["comments" => $comments]);   
+        $this->view("studio/comments/index", ["comments" => $comments, "next_page" => $nextPage]);   
     }
 }
