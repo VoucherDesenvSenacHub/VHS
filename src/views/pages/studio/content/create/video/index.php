@@ -62,7 +62,6 @@ $botoes = [
             <div class="text-white flex flex-col gap-2">
                 <div class="flex flex-col p-4 md:p-0">
                     <h1 class='font-semibold xl:text-title text-xl md:text-2xl text-white'>Criar conteúdo</h1>
-                    <p class='text-gray-300 xl:text-paragraph text-sm'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
                     <div class="mt-4 flex gap-2 w-full flex-col md:w-96 md:flex-row">
                         <?php echo ButtonComponent(text: "Vídeo", variant: "studio", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]", link: "/VHS/studio/create/video"); ?>
                         <?php echo ButtonComponent(text: "Fast", variant: "studio", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]", link: "/VHS/studio/create/fast"); ?>
@@ -74,7 +73,6 @@ $botoes = [
                     <input type="hidden" name="timezone" id="timezone">
                     <div id="URL">
                         <h1 class="md:text-subtitle text-lg text-white font-semibold">URL</h1>
-                        <p class="md:text-paragraph text-sm text-gray-400 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
                         <?= InputComponent(
                             type: "text",
                             placeholder: "https://youtube.com",
@@ -89,7 +87,6 @@ $botoes = [
                     <div id="thumb" class="flex flex-col gap-2">
                         <div>
                             <h1 class="md:text-subtitle text-lg text-white font-semibold">Thumbnail</h1>
-                            <p class="md:text-paragraph text-sm text-gray-400 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
                             <div class="md:mt-2 md:h-[500px] bg-background mt-4 w-full h-[300px] border-2 rounded-xl border-solid flex items-center justify-center relative overflow-hidden -mt-8 flex-wrap">
                                 <div id="uploadArea" class="flex flex-col items-center justify-center w-full h-full">
                                     <label for="dropzone-file"
@@ -121,7 +118,6 @@ $botoes = [
 
                     <div id="Title">
                         <h1 class="md:text-subtitle text-lg text-white font-semibold">Título</h1>
-                        <p class="text-sm text-gray-400 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
                         <?= InputComponent(
                             type: "text",
                             placeholder: "Tudo sobre o Next.js 15, nova arquitetura de pasta",
@@ -135,9 +131,6 @@ $botoes = [
 
                     <div id="Description">
                         <h1 class="md:text-subtitle text-lg text-white font-semibold">Descrição</h1>
-                        <p class="text-sm text-gray-400 mb-2">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl.
-                        </p>
                         <div class="">
                             <?= TextareaComponent(
                                 type: "text",
@@ -153,7 +146,6 @@ $botoes = [
                     <div id="Category" class="flex flex-col gap-2">
                         <div>
                             <h1 class="md:text-subtitle text-lg text-white font-semibold">Categoria</h1>
-                            <p class="text-sm text-gray-400 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
                             <select name="category_id"
                                 class="px-3 py-1.5 outline outline-1 outline-[#666666] rounded-md placeholder-[#666666] text-zinc-200 w-full h-[45px] bg-transparent">
                                 <option value="" <?= empty($fields['category_id']) ? 'selected' : null ?> class="text-black">

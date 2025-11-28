@@ -47,7 +47,6 @@ $nextPage = $_SESSION["page_data"]["next_page"];
         <div class="max-w-[1500px] mx-auto px-6">
             <div>
                 <h1 class="font-semibold xl:text-title text-xl md:text-2xl text-white">Conteúdo do canal</h1>
-                <p class="text-gray-300 xl:text-paragraph text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
             </div>
             <div class="my-4 flex gap-2 w-full flex-col md:w-96 md:flex-row">
                 <?php
