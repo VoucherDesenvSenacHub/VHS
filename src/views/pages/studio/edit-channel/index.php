@@ -41,7 +41,7 @@ if (!empty($errors) && is_array($errors)) {
   <title>Customizar canal</title>
   <link rel="stylesheet" href="/VHS/src/styles/global.css">
   <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Syne:wght@500..800&display=stylesheet%22 />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Syne:wght@500..800&display=stylesheet%22" />
  
 </head>
  

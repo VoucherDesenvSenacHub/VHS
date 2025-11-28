@@ -89,7 +89,7 @@ if ($_SESSION["redirect_data"]["errors"] ?? false) {
           </div>
         </div>
         <a href="/VHS/home/channel?id=<?= $video["id"] ?>" class="flex items-center mt-10 gap-3">
-          <img src="<?= $video['avatar_url'] ?? "/VHS/public/uploads/avatars/default.png" ?>" class="size-16 rounded-xl">
+          <img src="/VHS/public/uploads/avatars/<?= $video['avatar_url'] ?? "/VHS/public/uploads/avatars/default.png" ?>" class="size-16 rounded-xl">
           <div>
             <p class="text-sm font-bold">
               <?= $video["username"] ?>
@@ -123,7 +123,7 @@ if ($_SESSION["redirect_data"]["errors"] ?? false) {
             <form action="/VHS/api/v1/comment?videoId=<?= $_GET["id"] ?>" method="post">
               <?= InputComponent(type: "text", placeholder: "Comentar...", name: "content") ?>
             </form>
-            <?= paginate($comments, $nextPageComments ) ?>
+            <?= paginate($comments, $nextPageComments) ?>
           </div>
         </div>
       </div>

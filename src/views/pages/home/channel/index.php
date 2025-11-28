@@ -11,9 +11,12 @@ use function Src\Views\Components\Utils\ButtonComponent;
 use function Src\Views\Components\sidebar\SidebarComponent;
 use function src\views\components\header\HeaderComponent;
 use function Src\Views\Components\utils\Footer;
+use function Src\Views\Components\Cards\viewCards;
 // use function Src\Views\Components\Cards\renderCards;
 
 $creator = $_SESSION["page_data"]["channel"];
+$videos = $_SESSION["page_data"]["videos"];
+$avatar_url = !empty($creator['avatar_url']) ? $creator['avatar_url'] : 'default.png';
 ?>
 
 <!DOCTYPE html>
@@ -63,7 +66,7 @@ $creator = $_SESSION["page_data"]["channel"];
                     <div class="flex flex-col lg:flex-row w-full justify-between ">
                         <div class="flex flex-row">
                             <div class="w-24 h-24 sm:w-36 sm:h-36 rounded-3xl border-1 border-white/20 overflow-hidden -mt-20 md:-mt-16 ml-4 sm:ml-6 z-10 relative">
-                                <img src="/VHS/public/uploads/avatars/<?= $creator['avatar_url']?>" class=" object-cover h-full" alt="Perfil">
+                                <img src="/VHS/public/uploads/avatars/<?= $avatar_url ?>" class=" object-cover h-full" alt="Perfil">
                             </div>
                             <div class="flex flex-col md:flex-row items-start sm:items-center mt-4 sm:mt-6 ml-4 sm:ml-6 gap-4 ">
                                 <div>
@@ -90,14 +93,8 @@ $creator = $_SESSION["page_data"]["channel"];
                     <h1 class="text-white font-bold text-2xl">Conteúdo do Canal</h1>
                     <p class="text-gray-300 mb-4">Confira os vídeos mais populares da nossa plataforma VHS</p>
                     <section class="mb-12">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                            <!-- <?php
-                                    foreach ($videos as $video) {
-                                        echo renderCards($cards, 'channels');
-                                    }
-                                    ?> -->
-
-
+                        <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                            <?= viewCards($videos, 'videos'); ?>
                         </div>
                     </section>
                 </div>
