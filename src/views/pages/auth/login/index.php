@@ -60,7 +60,7 @@ use function Src\Application\Utils\showSweetAlert;
             <?= InputComponent(placeholder: "Insira sua senha", name: "password", type: "password", label: "Senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "w-6 h-6 right-3", value: $fields["password"] ?? "", error: !empty($passwordError), errorDescription: !empty($passwordError) ? $passwordError : "") ?>
             <?= !empty($genericError) ? "<p id='genericError' class='text-red-500'>Ocorreu um erro interno. Tente novamente mais tarde!</p>" : '' ?>
             <?= !empty($emailPasswordError) ? "<p id='genericError' class='text-red-500'>Email ou senha incorretos</p>" : '' ?>
-            <a class="text-secondary underline" href="/VHS/src/views/pages/auth/new-password">Esqueceu sua senha? </a>
+            <a class="text-secondary underline" href="/VHS/auth/reset-password">Esqueceu sua senha? </a>
             <?= CheckboxComponent(label: "Lembrar de mim", id: "keep_logged_in") ?>
             <?= ButtonComponent(text: "Acessar Plataforma", variant: "default", className: " g-recaptcha btn-submit mt-4", type: "button", attributes: [
               "data-sitekey" => "6LeZE6MrAAAAAFW6zL9HUPU8eJ616uwPWu92db9a",

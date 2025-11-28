@@ -49,6 +49,7 @@ if ($step == 1) {
                     <?= $render ?>
                     <?= ButtonComponent($step == 1 ? "Enviar e-mail" : "Redefinir", "default", className: " mt-4", link: $step == "1" ? "?step=2" : "/VHS/home"); ?>
                 </form>
+                <a class="text-secondary underline" href="/VHS/auth/signin">Voltar para login</a>
             </div>
         </div>
     </div>  
