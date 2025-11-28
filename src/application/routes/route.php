@@ -46,6 +46,9 @@ use Src\Application\Controllers\UpdateUserAdminController;
 use Src\Application\Controllers\DeleteCommentsController;
 use Src\Application\Controllers\InactivateUserController;
 use Src\Application\Controllers\DeleteReportCommentsController;
+use Src\Application\Controllers\ResetPasswordController;
+use Src\Application\Controllers\NewPasswordController;
+use Src\Application\Controllers\ResetPasswordViewController;
 use Src\Application\Controllers\VideoAvaliationController;
 use Src\Application\Controllers\VideoController;
 use Src\Application\Controllers\StudioAnalyticsVideoViewController;
@@ -67,6 +70,8 @@ $router->post("/api/v1/signup/password", CreateUserController::class, RedirectUs
 $router->post('/api/v1/auth/signup', SignUpController::class);
 $router->post("/api/v1/user/settings", UpdateUserController::class, RedirectUserNotLoggedMiddleware::class);
 $router->post('/api/v1/fast-video', CreateFastVideoController::class, RedirectUserNotCreatorMiddleware::class);
+$router->post('/api/v1/auth/reset-password', ResetPasswordController::class);
+$router->post('/api/v1/auth/new-password', NewPasswordController::class);
 
 $router->post('/api/v1/channel/edit', EditChannelController::class, RedirectUserNotCreatorMiddleware::class);
 
@@ -93,6 +98,7 @@ $router->get('/home/categories', CategoriesViewController::class, RedirectUserNo
 $router->get('/auth/signin', SignInViewController::class, RedirectUserLoggedMiddleware::class);
 $router->get("/auth/signup", SignUpViewController::class, RedirectUserLoggedMiddleware::class);
 $router->get("/auth/signup/password", CreatePasswordController::class, RedirectUserLoggedMiddleware::class);
+$router->get("/auth/reset-password", ResetPasswordViewController::class);
 $router->get("/auth/signup/verify-email", VerifyEmailViewController::class);
 $router->get("/api/v1/auth/signup/verify-email", VerifyEmailController::class);
 

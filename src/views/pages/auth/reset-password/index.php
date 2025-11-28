@@ -1,18 +1,22 @@
 <?php
-require "../../../components/utils/inputComponent.php";
-require "../../../components/utils/buttonComponent.php";
+require_once __DIR__ . "/../../../components/utils/inputComponent.php";
+require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
+require_once __DIR__ . "/../../../components/utils/sweetalert.php";
 
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\Utils\ButtonComponent;
+use function Src\Application\Utils\showSweetAlert;
 
 $step = $_GET["step"] ?? 1;
 
-if ($step === 1) {
-    $render = InputComponent(placeholder: "Seu e-mail", type: "email");
+if ($step == 1) {
+    $render = InputComponent(name: "email", placeholder: "Seu e-mail", type: "email");
 } else {
+    $token = $_GET['token'] ?? '';
     $render = 
-    InputComponent(placeholder: "Insira sua senha nova", type: "password", label: "Senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "w-6 h-6 right-3") .
-    InputComponent(placeholder: "Confirme nova senha", type: "password", label: "Confirme sua senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "w-6 h-6 right-3");
+    "<input type='hidden' name='token' value='$token'>" .
+    InputComponent(name: "password", placeholder: "Insira sua senha nova", type: "password", label: "Senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "w-6 h-6 right-3") .
+    InputComponent(name: "confirm_password", placeholder: "Confirme nova senha", type: "password", label: "Confirme sua senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "w-6 h-6 right-3");
 }
 
 ?>
@@ -41,12 +45,23 @@ if ($step === 1) {
                         <?= $step == 1 ? "Insira o e-mail da sua conta" : "Insira sua nova senha da sua conta" ?>
                     </p>
                 </div>
-                <div class="flex flex-col gap-4 w-full xl:w-96">
+                <form class="flex flex-col gap-4 w-full xl:w-96" action="<?= $step == 1 ? '/VHS/api/v1/auth/reset-password' : '/VHS/api/v1/auth/new-password' ?>" method="post">
                     <?= $render ?>
                     <?= ButtonComponent($step == 1 ? "Enviar e-mail" : "Redefinir", "default", className: " mt-4", link: $step == "1" ? "?step=2" : "/VHS/home"); ?>
-                </div>
+                </form>
             </div>
         </div>
     </div>  
+    <?php
+        if(isset($_SESSION['redirect_data']['success'])) {
+            echo showSweetAlert('Successo!', $_SESSION['redirect_data']['success'], 'success');
+            unset($_SESSION['redirect_data']['success']);
+        }
+
+        if(isset($_SESSION['redirect_data']['error'])) {
+            echo showSweetAlert('Ocorreu um problema!', $_SESSION['redirect_data']['error'], 'error');
+            unset($_SESSION['redirect_data']['error']);
+        }
+    ?>
 </body>
 </html>

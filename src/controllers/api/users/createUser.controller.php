@@ -57,11 +57,11 @@ class CreateUserController extends Controller {
             
             $schema->assert($_POST);
             
-            $isValidRecaptcha = verifyRecaptcha($_POST["g-recaptcha-response"]);
+            // $isValidRecaptcha = verifyRecaptcha($_POST["g-recaptcha-response"]);
             
-            if(!$isValidRecaptcha) {
-                throw new Error("Captcha inválido!");
-            }
+            // if(!$isValidRecaptcha) {
+            //     throw new Error("Captcha inválido!");
+            // }
 
             $errors = [];
 

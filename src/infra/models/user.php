@@ -97,6 +97,19 @@ class UserModel extends Model
         return $this->database->exec($sql, [":id" => $id]);
     }
 
+    public function updateResetPasswordToken(string $id, ?string $token): bool
+    {   
+        $createdAt = $token ? date("Y-m-d H:i:s") : null;
+        $sql = "UPDATE users SET reset_password_token = :token, reset_password_token_created_at = :created_at WHERE id = :id";
+        return $this->database->exec($sql, [":token" => $token, ":id" => $id, ":created_at" => $createdAt]);
+    }
+
+    public function getUserByResetPasswordToken(string $token): array
+    {
+        $sql = "SELECT * FROM users WHERE reset_password_token = :token";
+        return $this->database->query($sql, [":token" => $token]);
+    }
+
     public function getCategoryByUserId(string $id): array
     {
         $sql = "SELECT * FROM users_category WHERE user_id = :id";

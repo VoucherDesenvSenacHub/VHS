@@ -15,21 +15,22 @@ if (!empty($errors) && is_array($errors)) {
     }
   }
 }
-unset($_SESSION['redirect_data']);
 
 require_once __DIR__ . "/../../../components/utils/inputComponent.php";
 require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
 require_once __DIR__ . "/../../../components/checkbox/checkboxComponent.php";
 require_once __DIR__ . "/../../../../application/utils/redirect.php";
+require_once __DIR__ . "/../../../components/utils/sweetalert.php";
 
 use function App\Views\Components\CheckboxComponent;
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\Utils\ButtonComponent;
+use function Src\Application\Utils\showSweetAlert;
 
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8">
@@ -86,6 +87,17 @@ use function Src\Views\Components\Utils\ButtonComponent;
     </div>
   </div>
   </div>
+  <?php
+    if(isset($_SESSION['redirect_data']['success'])) {
+        echo showSweetAlert('Sucesso!', $_SESSION['redirect_data']['success'], 'success');
+        unset($_SESSION['redirect_data']['success']);
+    }
+
+    if(isset($_SESSION['redirect_data']['error'])) {
+        echo showSweetAlert('Ocorreu um problema!', $_SESSION['redirect_data']['error'], 'error');
+        unset($_SESSION['redirect_data']['error']);
+    }
+  ?>
 </body>
 <script>
   function onSubmit(token) {

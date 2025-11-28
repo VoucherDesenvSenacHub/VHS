@@ -33,9 +33,13 @@ if (isset($_GET["logout"])) {
 
 
 foreach($_GET as $key => $value) {
+    if(!isset($value) || !is_string($value)) return;
+
     $_GET[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
 }
 
 foreach($_POST as $key => $value) {
+    if(!isset($value) || !is_string($value)) return;
+
     $_POST[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
 }
