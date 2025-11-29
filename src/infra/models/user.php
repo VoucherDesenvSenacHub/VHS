@@ -110,6 +110,16 @@ class UserModel extends Model
         return $this->database->query($sql, [":name" => "%$name%"]);
     }
 
+    public function getAllUsers() {
+        $sql = "SELECT COUNT(*) AS all_users FROM users WHERE is_deleted = 0";
+        return $this->database->query($sql);
+    }
+
+    public function getAllChannels() {
+        $sql = "SELECT COUNT(*) AS all_channels FROM users WHERE is_deleted = 0 AND role = 'CREATOR' OR role = 'ADMIN'";
+        return $this->database->query($sql);
+    }
+
     public function deleteUser(string $id): bool
     {
         $sql = "UPDATE users SET is_deleted = 1 WHERE id = :id";
@@ -131,6 +141,20 @@ class UserModel extends Model
     public function blockUser(string $id): bool
     {
         $sql = "UPDATE users SET status = 0 WHERE id = :id";
+        return $this->database->exec($sql, [":id" => $id]);
+    }
+    
+
+    public function getCountUsersLoginByWeekDay(){
+        $sql = "SELECT DAYNAME(users.last_login_date) AS day_name, COUNT(*) AS total FROM users
+        WHERE YEARWEEK(users.last_login_date, 1) = YEARWEEK(CURDATE(), 1)
+        GROUP BY DAYOFWEEK(users.last_login_date)
+        ORDER BY DAYOFWEEK(users.last_login_date)";
+        return $this->database->query($sql);
+    }
+
+    public function updateUserLastLogin(string $id): bool {
+        $sql = "UPDATE users SET last_login_date = NOW() WHERE id = :id";
         return $this->database->exec($sql, [":id" => $id]);
     }
 }

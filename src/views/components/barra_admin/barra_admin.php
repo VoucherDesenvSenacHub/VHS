@@ -46,7 +46,7 @@ function barra_admin()
     }
 
     return <<<HTML
-        <aside class="ml-8 transition-all w-[10.3rem]">
+        <aside class="ml-0 md:ml-8 transition-all w-[10.3rem]">
             <h3 class="mb-4 text-secondary text-sm mt-6 mb-2">ADMINISTRADOR</h3>
             <ul class="flex flex-col gap-6">
                 $htmlHome

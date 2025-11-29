@@ -6,8 +6,8 @@ use function Src\Application\Utils\getCurrentDataTime;
 function renderPostComponent($userImagePath, $username) {
     [$weekday, $timeDefault, $data] = getCurrentDataTime();
 ?>
-    <div class="text-white p-4 flex items-center w-max">
-        <img src="<?php echo htmlspecialchars($userImagePath, ENT_QUOTES, 'UTF-8'); ?>" alt="Foto do usuário" class="w-16 h-16 rounded-full">
+    <div class="text-white p-4 flex items-center">
+        <img src='/VHS/public/uploads/avatars/{$userImagePath}' onerror='this.src="/VHS/public/uploads/avatars/default.png"' alt="Foto do usuário" class="w-16 h-16 rounded-full">
         <div class="ml-4">
             <span class="text-2xl font-bold"><?php echo htmlspecialchars($timeDefault, ENT_QUOTES, 'UTF-8'); ?>, <?php echo htmlspecialchars($username, ENT_QUOTES, 'UTF-8'); ?></span>
             <br>

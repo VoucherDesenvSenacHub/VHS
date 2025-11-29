@@ -1,5 +1,5 @@
 <?php
-namespace Src\Views\Components;
+namespace Src\Application\Utils;
 function orderningWeekDayAnalytics($data){
     $days_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
                             $ordered = array_fill(0, 7, 0);

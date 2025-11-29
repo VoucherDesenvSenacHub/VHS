@@ -8,7 +8,7 @@ function SidebarComponent() {
             [
                 "icon" => "/VHS/public/icons/home.svg",
                 "text" => "Início",
-                "link" => "/VHS/src/views/pages/home"
+                "link" => "/VHS/home"
             ],
             [
                 "icon" => "/VHS/public/icons/fast.svg",
@@ -18,7 +18,7 @@ function SidebarComponent() {
             [
                 "icon" => "/VHS/public/icons/radio.svg",
                 "text" => "Eventos",
-                "link" => "/VHS/src/views/pages/home/events"
+                "link" => "/VHS/home/events"
             ],
             [
                 "icon" => "/VHS/public/icons/youtube.svg",
