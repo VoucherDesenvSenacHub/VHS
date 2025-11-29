@@ -72,14 +72,12 @@ if (!empty($errors) && is_array($errors)) {
         </form>
         <div class="mt-5">
           <h2 class="text-lg font-medium mb-0.5rem text-white">Foto de perfil</h2>
-          <p class="text-sm text-gray-300 mb-8">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis, voluptas dicta! Doloremque nemo neque voluptates, officia commodi recusandae adipisci beatae, inventore quod itaque iure quam aliquid deleniti facere optio accusantium.</p>
         </div>
       </section>
 
 
       <section class="mb-10">
         <h2 class="text-xl font-medium mb-0.5rem text-white">Banner do canal</h2>
-        <p class="text-sm text-gray-400 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         <form action="upload.php" method="POST" enctype="multipart/form-data">
           <label for="imagemUpload" class="relative group cursor-pointer inline-block w-full">
             <img src="" class="h-50 w-full rounded-md border border-gray-700" />

@@ -23,6 +23,8 @@ $success_edit = $_SESSION["redirect_data"]["success_edit"] ?? null;
 
 $success_delete = $_SESSION["redirect_data"]["success_delete"] ?? null;
 $nextPage = $_SESSION["page_data"]["next_page"];
+$search = $_SESSION["page_data"]["search"] ?? '';
+$sort = $_SESSION["page_data"]["sort"] ?? 'desc';
 
 ?>
 
@@ -47,7 +49,7 @@ $nextPage = $_SESSION["page_data"]["next_page"];
         <div class="max-w-[1500px] mx-auto px-6">
             <div>
                 <h1 class="font-semibold xl:text-title text-xl md:text-2xl text-white">Conteúdo do canal</h1>
-                <p class="text-gray-300 xl:text-paragraph text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
+                <p class="text-gray-400 text-sm mt-1">Gerencie seus vídeos</p>
             </div>
             <div class="my-4 flex gap-2 w-full flex-col md:w-96 md:flex-row">
                 <?php
@@ -57,28 +59,30 @@ $nextPage = $_SESSION["page_data"]["next_page"];
                 ?>
             </div>
 
-            <form action="" method="get">
-                <?= InputComponent(
-                    type: "text",
-                    placeholder: "Pesquisar",
-                    icon: "/VHS/public/icons/Filter.svg",
-                    name: "search",
-                    value: $_SESSION['page_data']['search'] ?? '',
-                    iconPosition: "left",
-                    onClickIcon: "showFilterMenu()"
-                ) ?>
+            <form action="" method="get" class="flex flex-col gap-4">
+                <input type="hidden" name="sort" value="<?= htmlspecialchars($sort) ?>">
+                <div class="relative">
+                    <?= InputComponent(
+                        type: "text",
+                        placeholder: "Pesquisar",
+                        icon: "/VHS/public/icons/Filter.svg",
+                        name: "search",
+                        value: $search,
+                        iconPosition: "left",
+                        onClickIcon: "showFilterMenu()"
+                    ) ?>
+                    <div id="filter" class="absolute right-0 top-full mt-2 z-10 hidden flex flex-col bg-[#2A2A2C] rounded-lg p-2 w-48 gap-2 shadow-xl">
+                        <a href="?search=<?= urlencode($search) ?>&sort=desc" class="flex items-center gap-2 p-1 rounded hover:bg-white/5 transition-colors cursor-pointer group">
+                            <img src="/VHS/public/icons/time-svgrepo-com.svg" alt="" class="size-5 rotate-[-110deg] opacity-50 group-hover:opacity-100 transition-opacity <?= $sort === 'desc' ? 'opacity-100' : '' ?>">
+                            <p class="text-[13px] font-poppins text-gray-200 <?= $sort === 'desc' ? 'text-white font-medium' : '' ?>">Mais recentes</p>
+                        </a>
+                        <a href="?search=<?= urlencode($search) ?>&sort=asc" class="flex items-center gap-2 p-1 rounded hover:bg-white/5 transition-colors cursor-pointer group">
+                            <img src="/VHS/public/icons/time-svgrepo-com.svg" class="size-5 opacity-50 group-hover:opacity-100 transition-opacity <?= $sort === 'asc' ? 'opacity-100' : '' ?>" alt="">
+                            <p class="text-[13px] font-poppins text-gray-200 <?= $sort === 'asc' ? 'text-white font-medium' : '' ?>">Mais antigos</p>
+                        </a>
+                    </div>
+                </div>
             </form>
-
-            <div id="filter" class="absolute left-[16.5rem] z-10 hidden flex flex-col bg-gray-900 rounded-lg p-2 max-w-32 border-[0.5px] border-gray-500">
-                <div class="flex">
-                    <img src="/VHS/public/icons/time-svgrepo-com.svg" alt="" class="size-6 rotate-[-110deg]">
-                    <p class="text-[13px] flex items-center text-gray-200">Mais recentes</p>
-                </div>
-                <div class="flex flex-row">
-                    <img src="/VHS/public/icons/time-svgrepo-com.svg" class="size-6" alt="">
-                    <p class="text-[13px] flex items-center text-gray-200">Mais antigos</p>
-                </div>
-            </div>
 
             <div class="flex mt-5">
                 <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -111,15 +115,20 @@ $nextPage = $_SESSION["page_data"]["next_page"];
                 input.form.submit();
             }, 1500);
         });
+
+        function showFilterMenu() {
+            const filter = document.getElementById('filter');
+            filter.classList.toggle('hidden');
+        }
     </script>
 </body>
 
 <?php
-    unset($_SESSION["redirect_data"]);
-    
-    if (!isset($_GET['search'])) {
-        unset($_SESSION['page_data']['search']);
-    }
+unset($_SESSION["redirect_data"]);
+
+if (!isset($_GET['search'])) {
+    unset($_SESSION['page_data']['search']);
+}
 ?>
 
 </html>

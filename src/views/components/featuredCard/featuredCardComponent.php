@@ -32,7 +32,7 @@ function FeaturedCardComponent(array $video, bool $isCategoryPage = false): stri
     $avatar_url = !empty($video['avatar_url']) ? "/VHS/public/uploads/avatars/" . $video['avatar_url'] : '/VHS/public/uploads/avatars/default.png';
 
     return <<<HTML
-    <a href="{$video['url']}" class="block no-underline text-inherit">
+    <a href="/VHS/home/video?id={$video['id']}" class="block no-underline text-inherit">
         <div class="relative bg-gradient-to-r from-red-600/20 to-purple-600/20 rounded-3xl overflow-hidden shadow-lg cursor-pointer $height">
             <img src="{$video['thumbnail_url']}" alt="{$video['title']}" class="absolute inset-0 w-full h-full object-cover">
             <div class="absolute inset-0 bg-black bg-opacity-50"></div>

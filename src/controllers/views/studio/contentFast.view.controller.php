@@ -3,18 +3,18 @@
 namespace Src\Application\Controllers;
 
 use Src\Application\Core\Controller;
-use Src\Infra\Model\VideoModel;
+use Src\Infra\Model\FastModel;
 
 require_once __DIR__ . '/../../../application/core/controller.php';
-require_once __DIR__ . '/../../../infra/models/video.php';
+require_once __DIR__ . '/../../../infra/models/fast.php';
 
-class StudioContentVideoViewController extends Controller
+class StudioContentFastViewController extends Controller
 {
-    public VideoModel $videoModel;
+    public FastModel $fastModel;
 
     public function index()
     {
-        $this->videoModel = new VideoModel();
+        $this->fastModel = new FastModel();
 
         $author_id = $_SESSION["user"]["id"];
 
@@ -30,17 +30,17 @@ class StudioContentVideoViewController extends Controller
         $limit = 8;
         $offset = $page * $limit;
 
-        $videos = $this->videoModel->getAllVideos($author_id, $offset, $limit + 1, $search, $sort);
+        $fasts = $this->fastModel->getAllFasts($author_id, $offset, $limit + 1, $search, $sort);
 
         $nextPage = 0;
 
-        if (count($videos) > $limit) {
-            array_pop($videos);
+        if (count($fasts) > $limit) {
+            array_pop($fasts);
             $nextPage = 1;
         }
 
-        $this->view("/studio/content/index", [
-            "videos" => $videos,
+        $this->view("/studio/content/fast", [
+            "fasts" => $fasts,
             "next_page" => $nextPage,
             "search" => $search,
             "sort" => $sort

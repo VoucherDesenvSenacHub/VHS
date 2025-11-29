@@ -1,8 +1,11 @@
 <?php
 
-$videos = $_SESSION["page_data"]["videos"] ?? [];
 
-$fast = $_SESSION["page_data"]["fast"] ?? [];
+
+$dados = $_SESSION["page_data"]["dados"] ?? [];
+// $videos = $_SESSION["page_data"]["videos"] ?? [];
+
+// $fast = $_SESSION["page_data"]["fast"] ?? [];
 
 require_once __DIR__ . "/../../../components/header/headerComponent.php";
 require_once __DIR__ . "/../../../components/sidebar/index.php";
@@ -13,6 +16,7 @@ require_once __DIR__ . "/../../../components/channel/channelComponent.php";
 // require_once __DIR__ . "/../../../components/CardFastComponent/cardFast.php";
 require_once __DIR__ . "/../../../../controllers/SearchVideoController.php";
 
+
 use function Src\Views\Components\Cards\renderCards;
 use function Src\Views\Components\Channel\channelComponent;
 use function Src\Views\Components\Header\HeaderComponent;
@@ -22,88 +26,11 @@ use function src\Views\Components\CardFast;
 use src\Application\Controllers\SearchVideoController;
 
 
+
+
 $term = isset($_GET['term']) ? htmlspecialchars($_GET['term']) : '';
-$filter = isset($_GET['filter']) ? htmlspecialchars($_GET['filter']) : 'videos';
-$query = isset($_GET['q']) ? htmlspecialchars($_GET['q']) : '';
-
-
-$SearchVideoController = new SearchVideoController();
-$SearchVideoController->index();
-
-
-$mostPopularVideos = [
-    [
-        "url" => "https://youtube.com/watch?v=nextjs1",
-        "type_card" => "event",
-        "description" => "Rafael Germano",
-        "duration" => "7 min",
-        "title" => "Tudo sobre o Next.js 15, nova arquitetura de pasta",
-        "username" => "Rafael Germano",
-        "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
-        "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g",
-        "views" => "5.5k views",
-        "created_at" => "há 7 dias",
-        "maked_for" => "Online",
-        "likes" => 890,
-        "comments" => 67
-    ],
-
-];
-
-$techVideos = [];
-
-$techVideos = array_map(function ($item) {
-    return [
-        "url" => $item["url"],
-        "type_card" => strtolower($item["type"]),
-        "description" => $item["description"], 
-        "duration" => $item["duration"],
-        "title" => $item["title"],
-        "username" => 'Ronan',
-        "thumbnail_url" => $item["thumbnail_url"],
-        "avatar_url" => 'sdjssajkldsj',
-        "views" => $item["views"],
-        "created_at" => $item["created_at"],
-        "maked_for" => 'Onlien', 
-        "likes" => 45,
-        "comments" => 45
-    ];
-}, $videos);
-
-$techFasts = [];
-
-$techFasts = array_map(function ($item) {
-    return [
-        "url" => $item["url"],
-        "type_card" => strtolower($item["type"]),
-        "description" => $item["description"], 
-        "duration" => $item["duration"],
-        "title" => $item["title"],
-        "username" => 'Ronan',
-        "thumbnail_url" => $item["thumbnail_url"],
-        "avatar_url" => 'sdjssajkldsj',
-        "views" => $item["views"],
-        "created_at" => $item["created_at"],
-        "maked_for" => 'Onlien', 
-        "likes" => 45,
-        "comments" => 45
-    ];
-}, $fast);
-
-
-
-$render = [
-    "videos" => [
-        "title" => "Vídeos",
-        "data" => $techVideos,
-        "type_card" => "video"
-    ],
-    "events" => [
-        "title" => "Eventos",
-        "data" => $mostPopularVideos,
-        "type_card" => "event"
-    ]
-];
+$filter = isset($_GET['filter']) ? htmlspecialchars($_GET['filter']) : 'video';
+$query = isset($_GET['query']) ? htmlspecialchars($_GET['query']) : '';
 
 
 ?>
@@ -139,61 +66,29 @@ $render = [
 
         <main class="flex-1 px-4 sm:px-6 py-4 max-w-[1500px] mx-auto">
             <div>
-                <h2 class="text-2xl font-bold text-white mb-2"><span class="text-purple-400">#</span> Resultados para "<?= $term ?>"</h2>
-                <p class="text-gray-400 text-sm mb-6">Confira os resultado para "<?= $term ?>" com a categoria desejada</p>
+                <h2 class="text-2xl font-bold text-white mb-2"><span class="text-purple-400">#</span> Resultados para "<?= $query ?>"</h2>
+                <p class="text-gray-400 text-sm mb-6">Confira os resultado para "<?= $query ?>" com a categoria desejada</p>
                 <div class="flex gap-2 w-[900px] mb-6">
-                    <?= ButtonComponent("Vídeos", "studio", "",10.675, 2.5, 1, "?term=$term&filter=videos&q=$query") ?>
-                    <?= ButtonComponent("Fast", "studio", "",10.675, 2.5, 1, "?term=$term&filter=fast&q=$query") ?>
-                    <?= ButtonComponent("Eventos", "studio", "",10.675, 2.5, 1, "?term=$term&filter=events&q=$query") ?>
-                    <?= ButtonComponent("Canais", "studio", "",10.675, 2.5, 1, "?term=$term&filter=channels&q=$query") ?>
+                    <?= ButtonComponent("Vídeos", "studio", "",10.675, 2.5, 1, "?term=$term&filter=video&query=$query") ?>
+                    <?= ButtonComponent("Fast", "studio", "",10.675, 2.5, 1, "?term=$term&filter=fast&query=$query") ?>
+                    <?= ButtonComponent("Eventos", "studio", "",10.675, 2.5, 1, "?term=$term&filter=event&query=$query") ?>
+                    <?= ButtonComponent("Canais", "studio", "",10.675, 2.5, 1, "?term=$term&filter=channels&query=$query") ?>
                 </div>
             </div>
             <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 <?= $filter === 'channels' ? '!grid-cols-1' : ''?>">
-                <?php 
 
-                if($filter === "channels") {
-                    echo ChannelComponent([
-                    "name" => "Fabio akita",
-                    "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgrByKyCU1H5DtDK2lYIPKafulJ4TzK4SNpg&s",
-                    "category" => "#Tecnologia",
-                    "followers" => 5000
-                    ]);
-                    echo ChannelComponent([
-                    "name" => "Fabio akita",
-                    "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgrByKyCU1H5DtDK2lYIPKafulJ4TzK4SNpg&s",
-                    "category" => "#Tecnologia",
-                    "followers" => 5000
-                    ]);
-                    echo ChannelComponent([
-                    "name" => "Fabio akita",
-                    "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgrByKyCU1H5DtDK2lYIPKafulJ4TzK4SNpg&s",
-                    "category" => "#Tecnologia",
-                    "followers" => 5000
-                    ]);
-                    echo ChannelComponent([
-                    "name" => "Fabio akita",
-                    "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgrByKyCU1H5DtDK2lYIPKafulJ4TzK4SNpg&s",
-                    "category" => "#Tecnologia",
-                    "followers" => 5000
-                    ]);
-                    echo ChannelComponent([
-                    "name" => "Fabio akita",
-                    "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgrByKyCU1H5DtDK2lYIPKafulJ4TzK4SNpg&s",
-                    "category" => "#Tecnologia",
-                    "followers" => 5000
-                    ]);
-                    echo ChannelComponent([
-                    "name" => "Fabio akita",
-                    "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgrByKyCU1H5DtDK2lYIPKafulJ4TzK4SNpg&s",
-                    "category" => "#Tecnologia",
-                    "followers" => 5000
-                    ]);
-                } else if ($filter === "fast") {
-                    echo renderCards($techFasts, 'fast');       
-                } else {
-                    echo renderCards($techVideos, 'video');
+                <?php
+                if ($filter != "channels") {
+                    echo renderCards($dados, $filter); 
+
+                } 
+                else if ($filter == "channels") {
+                    foreach ($dados as $channel) {
+                        echo ChannelComponent($channel);
+                    }
                 }
                 ?>
+        
             </section>
         </main>
 
