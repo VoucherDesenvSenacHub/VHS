@@ -26,6 +26,7 @@ class AdminAnalyticsViewController extends Controller {
         $allChannels = $this->userModel->getAllChannels();
         $lastsReportsComments = $this->commentModel->getReportComments(0,7, 'DESC');
         $categoriesTotal = $this->categoryModel->getCountVideosByCategories();
+        $allCountUsersLoginWeekday = $this->userModel->getCountUsersLoginByWeekDay();
         
         foreach($lastsReportsComments as $report){
             $userData = $this->userModel->getUserById($report["user_id"])[0];
@@ -58,6 +59,7 @@ class AdminAnalyticsViewController extends Controller {
         }
 
         $this->view("admin/analytics/index", ["all_users" => $allUsers[0]['all_users'], "all_videos" => $allVideos[0]['all_videos'],
-         "all_channels" => $allChannels[0]['all_channels'], "lasts_reports_comments" => $last_comments, "categories_total" => $categoriesTotal]);   
+         "all_channels" => $allChannels[0]['all_channels'], "lasts_reports_comments" => $last_comments, "categories_total" => $categoriesTotal,
+         "all_count_users_login_weekday" => $allCountUsersLoginWeekday]);   
     }
 }

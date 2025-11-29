@@ -143,4 +143,18 @@ class UserModel extends Model
         $sql = "UPDATE users SET status = 0 WHERE id = :id";
         return $this->database->exec($sql, [":id" => $id]);
     }
+    
+
+    public function getCountUsersLoginByWeekDay(){
+        $sql = "SELECT DAYNAME(users.last_login_date) AS day_name, COUNT(*) AS total FROM users
+        WHERE YEARWEEK(users.last_login_date, 1) = YEARWEEK(CURDATE(), 1)
+        GROUP BY DAYOFWEEK(users.last_login_date)
+        ORDER BY DAYOFWEEK(users.last_login_date)";
+        return $this->database->query($sql);
+    }
+
+    public function updateUserLastLogin(string $id): bool {
+        $sql = "UPDATE users SET last_login_date = NOW() WHERE id = :id";
+        return $this->database->exec($sql, [":id" => $id]);
+    }
 }

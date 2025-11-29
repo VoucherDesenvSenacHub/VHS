@@ -72,6 +72,8 @@ class SignInController extends Controller {
                 setcookie("token", $token, 0, "/", httponly: true, secure: true);
             }
 
+            $this->userModel->updateUserLastLogin($user[0]["id"]);
+        
             $_SESSION["user"] = $user[0];
             return redirect("/VHS/home");
         } catch (NestedValidationException $exception) {
