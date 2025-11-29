@@ -1,25 +1,52 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-button {
+    display: none;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #14001b00; 
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #4c1d95;
+    border-radius: 4px;
+    border: 2px solid #14001B;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #7b08d3;
+}
+
 * {
     font-family: "Poppins", sans-serif;
+}
+
+input, textarea {
+    cursor: text !important;
 }
 
 body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background: linear-gradient(to top, #000, #20002c);
+    background-color: #14001B;
     background-repeat: no-repeat;
     background-size: cover;
     min-height: 100vh;
 }
 
-a.active {
+.icon.active {
     background-color: #7b08d3;
-}
-
-a.active > img {
-    filter: invert(99%) sepia(100%) saturate(0%) hue-rotate(173deg) brightness(110%) contrast(101%);    
+} .icon.active.active > img {
+    filter: invert(100%) brightness(150%) contrast(150%);    
+} .icon.active + .menu-text {
+    color: white;
 }
 
 @keyframes smooth {
@@ -39,4 +66,83 @@ a.active > img {
 .play.paused {
     animation: hidden_smooth 0.15s ease-in;
     animation-fill-mode: forwards;
+}
+
+.swal-custom {
+    background: #1E1E1E !important;
+    color: #fff !important;
+    border-radius: 12px !important;
+    padding: 15px 20px !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4) !important;
+    font-family: 'Inter', sans-serif !important;
+    border-bottom: 3px solid !important;
+    border-color: #7b08d3 !important;
+}
+
+.swal-title {
+    color: #fff !important;
+    font-size: 1.5rem !important;
+    font-weight: 600 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    margin-top: 1rem !important;
+}
+
+.swal-text {
+    font-size: 1rem !important;
+    margin-top: 0 !important;
+    padding: 0 !important;
+}
+
+.swal2-actions {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    gap: 15px !important;
+    margin-top: 1.5rem !important;
+}
+
+.swal2-confirm {
+    width: 100% !important;
+    background: #7b08d3 !important;
+    color: #fff !important;
+    font-size: 1rem !important;
+    padding: 10px 20px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important;
+    transition: background 0.3s ease !important;
+}
+
+.swal2-popup h2 {
+    font-size: 1.2rem !important;
+}
+    
+.swal2-cancel {
+    display: none !important;
+}
+
+.swal2-input {
+    border-radius: 8px !important;
+    margin: 0px;
+    margin-top: 1rem !important;
+}
+
+.swal-deny {
+    width: 100% !important;
+    background: #ff0000 !important;
+    color: #fff !important;
+    font-size: 1rem !important;
+    padding: 10px 20px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important;
+    transition: background 0.3s ease !important;
+}
+
+#swal2-validation-message {
+    background: none !important;
+    color: #fff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    margin-top: 1rem !important;
+    justify-content: start !important;
 }

@@ -7,15 +7,17 @@ require_once __DIR__ . '/../../application/core/model.php';
 
 use Src\Application\Core\Model;
 
-class UserModel extends Model {
-    public function create(string $name, string $email, string $password, string $username, string $date_birthday, string $token): string {
+class UserModel extends Model
+{
+    public function create(string $name, string $email, string $password, string $username, string $date_birthday, string $token): string
+    {
         $sql = "INSERT INTO users (id, name, email, password, username, date_birthday, token) VALUES (:id, :name, :email, :password, :username, :date_birthday, :token)";
 
         $id = uniqid(more_entropy: true);
 
-        $stmt = $this->database->exec($sql, [
+        $this->database->exec($sql, [
             ":id" => $id,
-            ":name" => $name,   
+            ":name" => $name,
             ":email" => $email,
             ":password" => $password,
             ":username" => $username,
@@ -26,13 +28,22 @@ class UserModel extends Model {
         return $id;
     }
 
-    public function getUserByEmail(string $email) {
+    public function getUserById(string $id): array
+    {
+        $sql = "SELECT * FROM users WHERE id = :id";
+
+        return $this->database->query($sql, [":id" => $id]);
+    }
+
+    public function getUserByEmail(string $email): array
+    {
         $sql = "SELECT * FROM users WHERE email = :email";
 
         return $this->database->query($sql, [":email" => $email]);
     }
 
-    public function getUserByUsername(string $username) {
+    public function getUserByUsername(string $username): array
+    {
         $sql = "SELECT * FROM users WHERE username = :username";
 
         return $this->database->query($sql, [":username" => $username]);
@@ -43,21 +54,112 @@ class UserModel extends Model {
         return $this->database->query($sql, ['query' => '%' . $query . '%']);
     }
 
-    public function getUserByToken(string $token) {
-        $sql = "SELECT * FROM users WHERE token = :token";
+    public function getUserByToken(string $token): array
+    {
+        $sql = "SELECT * FROM users WHERE token = :token AND is_deleted = 0";
 
         return $this->database->query($sql, [":token" => $token]);
     }
 
-    public function findUserByEmail(string $email) {
+    public function findUserByEmail(string $email): array
+    {
         $sql = "SELECT * FROM users WHERE email = :email";
         $stmt = $this->database->query($sql, [":email" => $email]);
 
         return $stmt;
     }
 
-    public function updateUserToken(string $id, string $token) {
+    public function updateUserToken(string $id, string $token): bool
+    {
         $sql = "UPDATE users SET token = :token WHERE id = :id";
         return $this->database->exec($sql, [":token" => $token, ":id" => $id]);
+    }
+
+
+    public function updateUser(string $userId, string $name, string $email, string $username, ?string $password = null, ?string $avatar): bool
+    {
+        $sql = "UPDATE users SET name = :name, email = :email, username = :username" . ($password ? ", password = :password" : "") . ", avatar_url = :avatar_url WHERE id = :id";
+
+        return $this->database->exec($sql, [
+            ":name" => $name,
+            ":email" => $email,
+            ":username" => $username,
+            ...($password ? [":password" => $password] : []),
+            ":avatar_url" => $avatar ?? null,
+            ":id" => $userId
+        ]);
+    }
+
+    public function updateSentEmailStatus(string $id, bool $status): bool
+    {
+        $sql = "UPDATE users SET email_already_sent = :status  WHERE id = :id";
+        return $this->database->exec($sql, [":id" => $id, ":status" => $status]);
+    }
+
+    public function verifyEmail(string $id): bool
+    {
+        $sql = "UPDATE users SET verified_email = true WHERE id = :id";
+        return $this->database->exec($sql, [":id" => $id]);
+    }
+
+    public function getCategoryByUserId(string $id): array
+    {
+        $sql = "SELECT * FROM users_category WHERE user_id = :id";
+
+        return $this->database->query($sql, [":id" => $id]);
+    }
+
+    public function getUsers(int $offset, int $limit, string $idUser, string $name, string $ordering): array
+    {
+        $sql = "SELECT * FROM users WHERE is_deleted = 0 AND id NOT IN ('$idUser') AND name LIKE :name ORDER BY created_at $ordering LIMIT $offset, $limit";
+        return $this->database->query($sql, [":name" => "%$name%"]);
+    }
+
+    public function getAllUsers() {
+        $sql = "SELECT COUNT(*) AS all_users FROM users WHERE is_deleted = 0";
+        return $this->database->query($sql);
+    }
+
+    public function getAllChannels() {
+        $sql = "SELECT COUNT(*) AS all_channels FROM users WHERE is_deleted = 0 AND role = 'CREATOR' OR role = 'ADMIN'";
+        return $this->database->query($sql);
+    }
+
+    public function deleteUser(string $id): bool
+    {
+        $sql = "UPDATE users SET is_deleted = 1 WHERE id = :id";
+        return $this->database->exec($sql, [":id" => $id]);
+    }
+
+    public function updateUserAdmin(string $id, string $name, string $role, string $status): bool
+    {
+        $sql = "UPDATE users SET name = :name, role = :role, status = :status WHERE id = :id";
+
+        return $this->database->exec($sql, [
+            ":id" => $id,
+            ":name" => $name,
+            ":role" => $role,
+            ":status" => $status,
+        ]);
+    }
+
+    public function blockUser(string $id): bool
+    {
+        $sql = "UPDATE users SET status = 0 WHERE id = :id";
+        return $this->database->exec($sql, [":id" => $id]);
+    }
+    
+
+    public function getCountUsersLoginByWeekDay(){
+        $sql = "SELECT DAYNAME(users.last_login_date) AS day_name, COUNT(*) AS total FROM users
+        WHERE YEARWEEK(users.last_login_date, 1) = YEARWEEK(CURDATE(), 1)
+        GROUP BY DAYOFWEEK(users.last_login_date)
+        ORDER BY DAYOFWEEK(users.last_login_date)";
+        return $this->database->query($sql);
+    }
+
+    public function updateUserLastLogin(string $id): bool {
+        $sql = "UPDATE users SET last_login_date = NOW() WHERE id = :id";
+        return $this->database->exec($sql, [":id" => $id]);
     }
 }

@@ -19,24 +19,26 @@
         string $onClickIcon = "",
         bool $error = false,
         string $errorDescription = "",
-        string $value = "",
-        array $attributes = []
+        string $value = '',
+        array $attributes = [],
+        string $required = null
         ){
         
-        $type = htmlspecialchars($type, ENT_QUOTES, 'UTF-8');
+        $type = htmlspecialchars(string: $type, flags: ENT_QUOTES, encoding: 'UTF-8');
         
-        $placeholder = htmlspecialchars($placeholder, ENT_QUOTES, 'UTF-8');
+        $placeholder = htmlspecialchars(string: $placeholder, flags: ENT_QUOTES, encoding: 'UTF-8');
 
-        $name = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
+        $name = htmlspecialchars(string: $name, flags: ENT_QUOTES, encoding: 'UTF-8');
 
         $orientationIcon = "";
         $padding = "";
 
-        if (strpos($iconPosition, "left") !== false) {
+        if ($iconPosition === "right") {
             $padding = "pl-10";
             $orientationIcon = "left-2.5";
         }
-        elseif (strpos($iconPosition, "right") !== false) {
+
+        if ($iconPosition === "left") {
             $padding = "pr-10";
             $orientationIcon = "right-2.5";
         }
@@ -52,7 +54,7 @@
         $description = $description ? "<p class='$description_size text-gray-200'>" . htmlspecialchars($description, ENT_QUOTES, 'UTF-8') . "</p>" : ""; 
 
         $classes = [
-            "px-3 py-1.5 outline outline-1 outline-[#666666] rounded-md placeholder-[#666666] text-zinc-200",
+        "px-3 py-1.5 outline outline-1 outline-[#666666] rounded-md placeholder-[#666666] text-zinc-200 focus:outline-none focus:ring-2 focus:ring-[#666666] resize-none",
             $width = $width ? "w-$width" : "w-full",
             $height = $height ? "h-$height" : "h-[45px]",
             $background ? "bg-$background" : "bg-transparent",
@@ -85,7 +87,7 @@
                 </div>
                 <div class='relative flex justify-center items-center'> 
                     $icon
-                    <input name='$name' type='$type' placeholder='$placeholder' class='$input_style $className' value='$value'>
+                    <input  name='$name' type='$type' placeholder='$placeholder' class='$input_style $className' value='$value'>
                 </div>
                 $errorElement
             </div>

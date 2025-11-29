@@ -1,72 +1,57 @@
 <?php
 
-namespace src\views\components\barra_admin;
+namespace Src\Views\Components\barra_admin;
 
-function Barra_Admin()
+function barra_admin()
 {
-    return '  
-            <aside class="sticky top-24 w-[9.25rem] ml-[1.87rem] transition-all duration-500 ease-in-out" id="sidebar">
-                <h2 class=" pt-[1.18rem] ml-[0.31rem] text-gray-400 text-xs font-poppins">ADMINISTRAÇÃO</h2>
-                <ul class="space-y-4">
-                    <li class="menu-item flex items-center text-gray-300 rounded-lg cursor-pointer mt-[1.5rem] transition-transform duration-200">
-                        <a href="/VHS/src/views/pages/admin/analytics/index.php" class="flex items-center w-full gap-2 p-2">
-                            <button id="analytics-btn" class="icon Analytics-icon p-2 flex items-center justify-center bg-white/5 rounded-lg ml-[0.31rem] ">
-                                <img class="w-6 h-6" src="/VHS/public/icons/sidebar_admin/chart-column.svg" alt="Analytics">
-                            </button>
-                            <h2 class="menu-text text-gray-400 text-sm font-semibold transition-all duration-500 ease-in-out">Analytics</h2>
-                        </a>
-                    </li>
-        
-                    <li class="flex items-center text-gray-300 rounded-lg cursor-pointer farming-[2rem]">
-                        <a href="/VHS/src/views/pages/admin/userManagement/index.php" class="flex items-center w-full gap-2 p-2">
-                            <button id="usuarios-btn" class="icon Usuarios-icon p-2 flex items-center justify-center bg-white/5 rounded-lg ml-[0.31rem]">
-                                <img class="w-6 h-6" src="/VHS/public/icons/sidebar_admin/users.svg" alt="Usuarios">
-                            </button>
-                            <h2 class="menu-text text-gray-400 text-sm font-semibold transition-all duration-500 ease-in-out">Usuários</h2>
-                        </a>
-                    </li>
+    $menu = [
+        "home" => [
+            [
+                "icon" => "/VHS/public/icons/sidebar_admin/chart-column.svg",
+                "text" => "Analytics",
+                "link" => "/VHS/admin/analytics"
+            ],
+            [
+                "icon" => "/VHS/public/icons/sidebar_admin/users.svg",
+                "text" => "Usuários",
+                "link" => "/VHS/admin/users"
+            ],
+            [
+                "icon" => "/VHS/public/icons/sidebar_admin/user-round-x.svg",
+                "text" => "Denúncias",
+                "link" => "/VHS/admin/complaints"
+            ],
+            [
+                "icon" => "/VHS/public/icons/sidebar_admin/layout-grid.svg",
+                "text" => "Categorias",
+                "link" => "/VHS/admin/categories"
+            ],
+        ]
+    ];
 
-                    <li class="flex items-center text-gray-300 rounded-lg cursor-pointer farming-[2rem]">
-                        <a href="/VHS/src/views/pages/admin/categories/index.php" class="flex items-center w-full gap-2 p-2">
-                            <button id="categorias-btn" class="icon Usuarios-icon p-2 flex items-center justify-center bg-white/5 rounded-lg ml-[0.31rem]">
-                                <img class="w-6 h-6" src="/VHS/public/icons/sidebar_admin/layout-grid.svg" alt="Categorias">
-                            </button>
-                            <h2 class="menu-text text-gray-400 text-sm font-semibold transition-all duration-500 ease-in-out">Categorias</h2>
-                        </a>
-                    </li>
-                </ul>
-            </aside>
-            <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    const menuItems = document.querySelectorAll("#sidebar ul li a");
+    $htmlHome = "";
 
-                    // Função para definir o item ativo
-                    function setActiveItem(href) {
-                        menuItems.forEach(item => {
-                            const button = item.querySelector("button");
-                            button.classList.remove("bg-[#660BAD]");
-                            if (item.getAttribute("href") === href) {
-                                button.classList.add("bg-[#660BAD]");
-                            }
-                        });
-                        localStorage.setItem("activeItem", href);
-                    }
+    foreach ($menu["home"] as $value) {
+        $htmlHome .= <<<HTML
+            <li class="flex items-center gap-4 py-2 rounded-lg transition-colors">
+                <a href="{$value['link']}" class="size-8 bg-[#241A2F] p-1.5 rounded-lg icon min-w-8">
+                    <img src="{$value['icon']}" alt="{$value['text']}" class="w-full h-full">
+                </a>
+                <a href="{$value['link']}" class="text-secondary
+                    hover:text-gray-500 transition-color menu-text">
+                    {$value['text']}
+                </a>
+            </li>
+        HTML;
+    }
 
-                    // Verificar o estado salvo no localStorage
-                    const activeItem = localStorage.getItem("activeItem");
-                    if (activeItem) {
-                        setActiveItem(activeItem);
-                    }
-
-                    // Adicionar eventos de clique
-                    menuItems.forEach(item => {
-                        item.addEventListener("click", function(event) {
-                            const href = item.getAttribute("href");
-                            setActiveItem(href);
-                        });
-                    });
-                });
-            </script>
-        ';
+    return <<<HTML
+        <aside class="ml-0 md:ml-8 transition-all w-[10.3rem]">
+            <h3 class="mb-4 text-secondary text-sm mt-6 mb-2">ADMINISTRADOR</h3>
+            <ul class="flex flex-col gap-6">
+                $htmlHome
+            </ul>
+            <script src="/VHS/src/views/components/barra_admin/script.js"></script>
+        </aside>
+    HTML;
 }
-?>

@@ -1,21 +1,26 @@
 <?php
-require "../../../../components/header/headerComponent.php";
-require "../../../../components/studioSideMenu/studioSideMenuComponent.php";
-require "../../../../components/utils/Title_and_buttons.php";
-require "../../../../components/utils/userActivityCardsComponent.php";
-require "../../../../components/charts/chartComponent.php";
-require "../../../../components/utils/buttonComponent.php";
+require_once __DIR__ . "/../../../../components/header/headerComponent.php";
+require_once __DIR__ . "/../../../../components/studioSideMenu/studioSideMenuComponent.php";
+require_once __DIR__ . "/../../../../components/utils/userActivityCardsComponent.php";
+require_once __DIR__ . "/../../../../components/charts/chartComponent.php";
+require_once __DIR__ . "/../../../../components/utils/buttonComponent.php";
+require_once __DIR__ . "/../../../../../application/utils/orderningWeekDayAnalytics.php";
 
 use function src\views\components\Charts\renderChartComponent;
 use function Src\Views\Components\Utils\ButtonComponent;
 use function src\views\components\utils\UserActivityCardsComponent;
-use function src\views\components\Utils\Title_and_buttons;
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
 use function src\views\components\Header\HeaderComponent;
+use function Src\Application\Utils\orderningWeekDayAnalytics;
+
 
 // TODO: REFATORAR ESSE GRAFICO FEITO PELO GROK
 
-$seriesDataLine = [10, 15, 25, 20, 18, 12, 15];
+$video = $_SESSION["page_data"]["video"];
+$weeklyViews = $_SESSION["page_data"]["weeklyViews"];
+$weeklyAvaliations = $_SESSION["page_data"]["weeklyAvaliations"];
+
+$seriesDataLine = [0, 15, 25, 20, 18, 12, 15];
 $categoriesLine = ['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB', 'DOM'];
 
 $botoes = [
@@ -23,6 +28,12 @@ $botoes = [
     ['texto' => 'Comentarios', 'link' => './FeastPage.php'],
     ['texto' => 'Analytics', 'link' => './EventosPage.php']
 ];
+
+$id = $video['id'];
+
+$ordered_views = orderningWeekDayAnalytics($weeklyViews);
+$ordered_avaliations = orderningWeekDayAnalytics($weeklyAvaliations);
+
 ?>
 
 
@@ -51,51 +62,50 @@ $botoes = [
         <div class="hidden md:block">
             <?= StudioSideMenuComponent() ?>
         </div>
-        <div class="flex-1 px-4 py-6 max-w-[1500px] m-auto">
+        <div class="flex-1 px-4 py-6 max-w-auto md:max-w-[1500px] m-auto px-6">
             <h1 class="text-title font-semibold mb-2">Analytics do vídeo</h1>
-            <p class="text-sm text-gray-300 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-            <div class="flex gap-4 w-96 my-4">
-                <div class="flex gap-3 w-[28rem]">
+            <p class="text-sm text-gray-300 mb-4">Analise os dados do seu vídeo, como visualizações e avaliações semanais</p>
+            <div class="flex gap-4 w-full md:w-96 my-4">
+                <div class="flex gap-3 w-[22rem] md:w-[28rem]">
                         <?php
-                        echo ButtonComponent("Edição", "studio", "", 10.675, 2.5,"",'/VHS/src/views/pages/studio/content/video');
-                        echo ButtonComponent("Comentários", "studio", "", 10.675, 2.5,"","/VHS/src/views/pages/studio/content/video/comments.php");
-                        echo ButtonComponent("Analytics", "studio", "", 10.675, 2.5,"","/VHS/src/views/pages/studio/content/video/analytics.php");
+                        echo ButtonComponent(text: "Edição", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/content/video/edit?id=$id");
+                        echo ButtonComponent(text: "Comentários", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/content/video/commentary?id=$id");
+                        echo ButtonComponent(text: "Analytics", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/content/video/analytic?id=$id");
                         ?>
                 </div>
             </div> 
-            <div class="flex flex-row">
+            <div class="flex flex-col md:flex-row">
 
-                <div class="grid grid-col-2 gap-8">
+                <div class="flex flex-col gap-8">
 
-                    <div class="flex flex-row gap-4 mb-2">
+                    <div class="flex flex-col md:flex-row gap-4 mb-2">
 
-                        <?= UserActivityCardsComponent("Usuários", 60700) ?>
-
-
-                        <?= UserActivityCardsComponent("Qtd. Vídeos", 60700) ?>
+                        <?= UserActivityCardsComponent("Visualizações", $video['views']) ?>
 
 
-                        <?= UserActivityCardsComponent("Parceiros", 60700) ?>
+                        <?= UserActivityCardsComponent("Comentarios", $video['comments']) ?>
 
 
-                        <?= UserActivityCardsComponent("Canais", 60700) ?>
+                        <?= UserActivityCardsComponent("M Visualizações", (int)$video['avg_views']) ?>
+
+
+                        <?= UserActivityCardsComponent("Compartilhados", $video['shared']) ?>
                     </div>
                     <div class="">
-                        <?= renderChartComponent($seriesDataLine, $categoriesLine, 'Semana', 'Usuários') ?>
+                        <?= renderChartComponent($ordered_views, $categoriesLine, 'Semana', 'Visualização') ?>
                     </div>
                     <div class="">
-                        <?= renderChartComponent($seriesDataLine, $categoriesLine, 'Semana', 'Usuários') ?>
+                        <?= renderChartComponent($ordered_avaliations, $categoriesLine, 'Semana', 'Avaliação', 'bar') ?>
                     </div>
                 </div>
 
-                <div class="ml-24  w-[570px] rounded-xl">
-                    <img src="https://pbs.twimg.com/media/Df_Uj8QX4AMwcFM.jpg:large" alt=""
+                <div class="mt-4 md:mt-0 ml-0 md:ml-24 w-full md:w-[570px] rounded-xl">
+                    <img src="<?= htmlspecialchars($video["thumbnail_url"]) ?>" alt=""
                         class="rounded-xl h-[300px] w-full object-cover">
 
                     <div class="mt-4 ml-2">
-                        <h3 class="text-xl font-semibold text-white">Entrei na Hotel abandonado e encontramos isso 😨😧😱😰😱 FT Renato Garcia
-                        </h3>
-                        <p class="text-sm text-gray-400 mt-1"># 🚀💻🛠️</p>
+                        <h3 class="text-xl font-semibold text-white"><?= $video["title"] ?></h3>
+                        <p class="text-sm text-gray-400 mt-1"><?= $video['description'] ?></p>
                     </div>
                 </div>
             </div>

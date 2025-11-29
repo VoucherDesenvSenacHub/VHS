@@ -1,24 +1,30 @@
 <?php
 require_once __DIR__ . '/../../../components/header/headerComponent.php';
-require "../../../components/fastComponent/fastComponent.php";
-require "../../../components/sidebar/SidebarComponent.php";
+require_once __DIR__ . "/../../../components/fastComponent/fastComponent.php";
+require_once __DIR__ . "/../../../components/sidebar/index.php";
 
 use function src\views\components\FastComponent\FastComponent;
 use function src\views\components\header\HeaderComponent;
 use function Src\Views\Components\Sidebar\SidebarComponent;
 
+$fasts = $_SESSION["page_data"];
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/VHS/src/styles/tailwindglobal.js"></script>
     <link rel="stylesheet" href="/VHS/src/styles/global.css">
+    <script src="/VHS/src/views/pages/home/fast/script.js" defer></script>
+    <script src="/VHS/src/views/components/fastComponent/fastComponent.js" defer></script>
     <title>VHS - Fast</title>
 </head>
+
 <body>
     <?= HeaderComponent() ?>
 
@@ -27,14 +33,28 @@ use function Src\Views\Components\Sidebar\SidebarComponent;
             <?= SidebarComponent() ?>
         </div>
 
-        <section class="flex flex-col justify-center max-w-[1500px] mx-auto w-1/4 min-w-[33rem]" style="height: calc(100vh - 10rem);">
-            <?= FastComponent(
-                ['video_url' => '/VHS/src/views/components/fastComponent/video_test.mp4',
-                    'titulo' => 'JOGANDO EURO TRUCK SIMULATOR 2! MUITO TOP!','user' =>'Bolsonaro','userimg' => 'https://agenciainfra.com/blog/wp-content/uploads/2021/09/bolsonaro-foto-fabio-rodrigues-pozzebom-agencia-brasil.jpg']) ?>
+        <section onscroll="sectionFastScroll(event)"
+            class="snap-y snap-mandatory overflow-y-scroll mt-8 flex flex-col gap-8 max-w-[1500px] mx-auto w-full max-w-[30rem] max-[480px]:min-h-[calc(100vh_-_5rem)] max-[480px]:mt-0"
+            style="height: calc(100vh - 10rem);">
+            <?php
+            foreach ($fasts as $fast) {
+                echo FastComponent(
+                    [
+                        "id" => $fast["id"],
+                        "url" => "/VHS/public/videos/" . $fast["url"] . ".mp4",
+                        "title" => $fast["title"],
+                        "user" => $fast["username"],
+                        "avatar_url" => $fast["avatar_url"],
+                        "user_liked" => $fast["user_liked"],
+                        "likes" => $fast["likes"]
+                    ]
+                );
+            }
+            ?>
         </section>
 
     </div>
 
 </body>
+
 </html>
- 
