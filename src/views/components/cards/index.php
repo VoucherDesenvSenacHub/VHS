@@ -150,7 +150,7 @@ class Cards
         $title      = purifyProperty($card['title']);
         $comments = purifyNumbers($card['comments'] ?? 0);
         $avaliations = $card['avaliations'] ?? 0;
-        $views = purifyNumbers($card['views'] ?? 0);    
+        $views = purifyNumbers($card['views'] ?? 0);
         $created_at = purifyCreatedAt($card['created_at'], $userTimezone);
         $duration   = purifyDuration($card['duration']);
 
@@ -212,9 +212,9 @@ class Cards
                     <div class='w-[55%] absolute flex flex-col z-10 bg-[#2A2A2C] p-2 text-white bottom-9 right-4 gap-3 rounded-lg hidden options'>
                         <a href="/VHS/studio/content/video/edit?id=$id">
                             <button
-                                class="group flex items-center justify-center gap-2 w-[10.675rem]
+                                class="group flex items-center justify-center gap-2 w-full
                                 border border-white/40 rounded-xl py-2 px-4
-                                transition-all duration-200 hover:bg-purple-700"
+                                transition-all duration-200 hover:bg-purple-700 bg-white/5"
                             >
                                 <img src="/VHS/public/icons/pencill.svg"
                                     class="w-4 h-4 transition-all duration-200 group-hover:brightness-0 group-hover:invert" />
@@ -223,9 +223,9 @@ class Cards
                         </a>
                         <div class='cursor-pointer remove_video'>
                             <button
-                                class="group flex items-center justify-center gap-2 w-[10.675rem]
+                                class="group flex items-center justify-center gap-2 w-full
                                 border border-white/40 text-white/80 rounded-xl py-2 px-4
-                                transition-all duration-200 hover:bg-red-600"
+                                transition-all duration-200 hover:bg-red-600 bg-white/5"
                             >
                                 <img src="/VHS/public/icons/trash.svg"
                                     class="w-4 h-4 transition-all duration-200 group-hover:brightness-0 group-hover:invert" />

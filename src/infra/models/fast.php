@@ -8,10 +8,12 @@ require_once __DIR__ . '/../../application/core/model.php';
 use Src\Application\Core\Model;
 
 
-class FastModel extends Model {
+class FastModel extends Model
+{
 
-    public function createFastVideo(string $id, string $title,  string $author_id, string $duration, int $views, string $thumbnail_url, string $url): bool {
-        
+    public function createFastVideo(string $id, string $title,  string $author_id, string $duration, int $views, string $thumbnail_url, string $url): bool
+    {
+
         $sql = "INSERT INTO fasts (id, title, author_id, duration,  views, thumbnail_url, url) VALUES (:id, :title, :author_id, :duration, :views, :thumbnail_url, :url)";
 
         return $this->database->exec($sql, [
@@ -25,14 +27,27 @@ class FastModel extends Model {
         ]);
     }
 
-    public function getFastByTitle(string $query): array {
+    public function getFastByTitle(string $query): array
+    {
         $sql = "SELECT * FROM videos WHERE type ='FAST' and (title LIKE :query)";
 
         return $this->database->query($sql, ['query' => '%' . $query . '%']);
     }
 
-    public function getAllFasts(string $author_id, int $offset = 0, int $limit = 8): array
+    public function getFastById(string $id): array
     {
+        $sql = "SELECT * FROM fasts WHERE id = :id AND is_deleted = 0";
+
+        $result = $this->database->query($sql, [":id" => $id]);
+
+        return $result[0] ?? [];
+    }
+
+    public function getAllFasts(string $author_id, int $offset = 0, int $limit = 8, ?string $search = null, string $sort = 'desc'): array
+    {
+        $orderBy = $sort === 'asc' ? 'ASC' : 'DESC';
+        $searchCondition = $search ? "AND f.title LIKE :search" : "";
+
         $sql = "SELECT 
             f.*, 
             COUNT(DISTINCT c.id) AS comments
@@ -41,15 +56,21 @@ class FastModel extends Model {
         LEFT JOIN 
             comments c ON c.video_id = f.id AND c.is_deleted = 0
         WHERE 
-            f.is_deleted = 0 AND author_id = :author_id
+            f.is_deleted = 0 AND author_id = :author_id $searchCondition
         GROUP BY 
             f.id
         ORDER BY 
-            f.created_at DESC
+            f.created_at $orderBy
         LIMIT $offset, $limit
     ";
 
-        return $this->database->query($sql, [":author_id" => $author_id]);
+        $params = [":author_id" => $author_id];
+
+        if ($search) {
+            $params[':search'] = '%' . $search . '%';
+        }
+
+        return $this->database->query($sql, $params);
     }
 
     public function countFasts(string $author_id): int
@@ -59,10 +80,20 @@ class FastModel extends Model {
         return (int)$stmt[0]['total'];
     }
 
-    public function delete($id)
+    public function deleteFast(string $id): bool
     {
         $sql = "UPDATE fasts SET is_deleted = 1 WHERE id = :id";
 
-        return $this->database->query($sql, [":id" => $id]);
+        return $this->database->exec($sql, [":id" => $id]);
+    }
+
+    public function updateFast(string $id, string $title): bool
+    {
+        $sql = "UPDATE fasts SET title = :title WHERE id = :id";
+
+        return $this->database->exec($sql, [
+            ":id" => $id,
+            ":title" => $title
+        ]);
     }
 }

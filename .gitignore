@@ -1,3 +1,5 @@
 .env
 vendor
 .htaccess
+public/thumbnails
+public/videos

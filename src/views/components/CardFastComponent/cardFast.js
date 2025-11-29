@@ -1,54 +1,40 @@
-const menuBtns = document.querySelectorAll(".menu-btn");
-const menus = document.querySelectorAll(".menu");
+if (!window.cardFastScriptLoaded) {
+    window.cardFastScriptLoaded = true;
 
-menuBtns.forEach((btn, index) => {
-    btn.addEventListener("click", (e) => {
-        e.stopPropagation();
+    document.querySelectorAll('.current_fast').forEach(card => {
+        const menuBtn = card.querySelector('.menu-btn');
+        const menu = card.querySelector('.menu');
+        const removeFast = card.querySelector('.remove_fast');
+        const modal = card.querySelector('.modal_remove_fast');
 
+        if (menuBtn && menu) {
+            menuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                document.querySelectorAll('.menu').forEach(m => {
+                    if (m !== menu) m.classList.add('hidden');
+                });
+                menu.classList.toggle('hidden');
+            });
 
-        menus.forEach((m, i) => {
-            if (i !== index) m.style.display = "none";
-        });
+            menu.addEventListener('click', (e) => e.stopPropagation());
+        }
 
+        if (removeFast && modal) {
+            removeFast.addEventListener('click', (e) => {
+                e.stopPropagation();
+                modal.classList.remove('hidden');
+                if (menu) menu.classList.add('hidden');
+            });
 
-        menus[index].style.display = menus[index].style.display === "flex" ? "none" : "flex";
-    });
-});
-
-
-document.addEventListener("click", (e) => {
-    menus.forEach(menu => {
-
-        if (!menu.contains(e.target)) {
-            menu.style.display = "none";
+            const content = modal.querySelector('.border');
+            if (content) {
+                content.addEventListener('click', (e) => e.stopPropagation());
+            }
         }
     });
-});
 
-
-menus.forEach(menu => {
-    menu.addEventListener("click", (e) => {
-        e.stopPropagation();
-    });
-});
-
-function confirmDeleteFast(button) {
-    const form = button.closest('form');
-
-    Swal.fire({
-        title: 'Tem certeza?',
-        text: "Você não poderá reverter isso!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Sim, excluir!',
-        cancelButtonText: 'Cancelar',
-        background: '#1f2937', // dark mode bg
-        color: '#fff'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            form.submit();
-        }
+    document.addEventListener('click', () => {
+        document.querySelectorAll('.menu').forEach(menu => menu.classList.add('hidden'));
+        document.querySelectorAll('.modal_remove_fast').forEach(modal => modal.classList.add('hidden'));
     });
 }

@@ -25,18 +25,15 @@ class StudioContentVideoViewController extends Controller
         }
 
         $search = $_GET["search"] ?? null;
+        $sort = $_GET["sort"] ?? 'desc';
 
         $limit = 8;
         $offset = $page * $limit;
 
-        if ($search) {
-            $videos = $this->videoModel->getVideoByTitle($search, $offset, $limit + 1);
-        } else {
-            $videos = $this->videoModel->getAllVideos($author_id, $offset, $limit + 1);
-        }
-        
+        $videos = $this->videoModel->getAllVideos($author_id, $offset, $limit + 1, $search, $sort);
+
         $nextPage = 0;
-        
+
         if (count($videos) > $limit) {
             array_pop($videos);
             $nextPage = 1;
@@ -45,7 +42,8 @@ class StudioContentVideoViewController extends Controller
         $this->view("/studio/content/index", [
             "videos" => $videos,
             "next_page" => $nextPage,
-            "search" => $search
+            "search" => $search,
+            "sort" => $sort
         ]);
     }
 }

@@ -89,7 +89,8 @@ class VideoModel extends Model
         return $this->database->query($sql, [":category_id" => $categoryId]);
     }
 
-    public function getVideoById(string $id): array {
+    public function getVideoById(string $id): array
+    {
         $sql = "SELECT videos.*, COUNT(comments.id) as comments, AVG(videos.views) as avg_views, users.username, users.avatar_url, categories.name as category_name FROM videos
         JOIN users ON users.id = videos.author_id
         JOIN categories ON categories.id = videos.category_id
@@ -106,8 +107,11 @@ class VideoModel extends Model
         return $this->database->query($sql);
     }
 
-    public function getAllVideos(string $author_id, int $offset = 0, int $limit = 8): array
+    public function getAllVideos(string $author_id, int $offset = 0, int $limit = 8, string $search = null, string $sort = 'desc'): array
     {
+        $orderBy = $sort === 'asc' ? 'ASC' : 'DESC';
+        $searchCondition = $search ? "AND v.title LIKE :search" : "";
+
         $sql = "SELECT 
             v.*, 
             COUNT(DISTINCT c.id) AS comments,
@@ -119,15 +123,21 @@ class VideoModel extends Model
         LEFT JOIN
             videos_avaliations v_ava ON v_ava.video_id = v.id AND v_ava.is_deleted = 0
         WHERE 
-            v.is_deleted = 0 AND author_id = :author_id
+            v.is_deleted = 0 AND author_id = :author_id $searchCondition
         GROUP BY 
             v.id
         ORDER BY 
-            v.created_at DESC
+            v.created_at $orderBy
         LIMIT $offset, $limit
     ";
 
-        return $this->database->query($sql, [":author_id" => $author_id]);
+        $params = [":author_id" => $author_id];
+
+        if ($search) {
+            $params[':search'] = '%' . $search . '%';
+        }
+
+        return $this->database->query($sql, $params);
     }
 
     public function countVideos(string $author_id): int
@@ -155,24 +165,28 @@ class VideoModel extends Model
         return $stmt[0];
     }
 
-    public function getAllViewsByUserId(string $userId): array {
+    public function getAllViewsByUserId(string $userId): array
+    {
         $sql = "SELECT SUM(videos.views) as views, AVG(videos.views) as average FROM videos WHERE author_id = :userId";
-        return $this->database->query($sql, [":userId"=> $userId]);
+        return $this->database->query($sql, [":userId" => $userId]);
     }
 
-    public function getAverageAvailableVideosByUserId(string $userId): array {
+    public function getAverageAvailableVideosByUserId(string $userId): array
+    {
         $sql = "SELECT AVG(videos_avaliations.stars) as average FROM videos_avaliations
         JOIN videos ON videos.id = videos_avaliations.video_id
         WHERE videos.author_id = :userId";
-        return $this->database->query($sql, [":userId"=> $userId]);
+        return $this->database->query($sql, [":userId" => $userId]);
     }
 
-    public function getLastVideosByUserId(string $userId, int $offset, int $limit) {
+    public function getLastVideosByUserId(string $userId, int $offset, int $limit)
+    {
         $sql = "SELECT * FROM videos WHERE author_id = :userId AND is_deleted = 0 ORDER BY created_at DESC LIMIT $offset, $limit";
         return $this->database->query($sql, [":userId" => $userId]);
     }
 
-    public function getViewsCountByWeekDay(string $userId){
+    public function getViewsCountByWeekDay(string $userId)
+    {
         $sql = "SELECT DAYNAME(users_history.created_at) AS day_name, COUNT(*) AS total FROM users_history
         JOIN videos ON videos.id = users_history.video_id
         WHERE videos.author_id = :userId AND YEARWEEK(users_history.created_at, 1) = YEARWEEK(CURDATE(), 1)
@@ -181,12 +195,12 @@ class VideoModel extends Model
         return $this->database->query($sql, [":userId" => $userId]);
     }
 
-    public function getViewsCountByWeekDayVideoId($videoId){
+    public function getViewsCountByWeekDayVideoId($videoId)
+    {
         $sql = "SELECT DAYNAME(users_history.created_at) AS day_name, COUNT(*) AS total FROM users_history
         WHERE users_history.video_id = :videoId AND YEARWEEK(users_history.created_at, 1) = YEARWEEK(CURDATE(), 1)
         GROUP BY DAYOFWEEK(users_history.created_at)
         ORDER BY DAYOFWEEK(users_history.created_at)";
         return $this->database->query($sql, [":videoId" => $videoId]);
     }
-
 }

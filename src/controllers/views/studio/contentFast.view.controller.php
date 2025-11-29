@@ -25,18 +25,15 @@ class StudioContentFastViewController extends Controller
         }
 
         $search = $_GET["search"] ?? null;
+        $sort = $_GET["sort"] ?? 'desc';
 
         $limit = 8;
         $offset = $page * $limit;
 
-        if ($search) {
-            $fasts = $this->fastModel->getFastByTitle($search);
-        } else {
-            $fasts = $this->fastModel->getAllFasts($author_id, $offset, $limit + 1);
-        }
-        
+        $fasts = $this->fastModel->getAllFasts($author_id, $offset, $limit + 1, $search, $sort);
+
         $nextPage = 0;
-        
+
         if (count($fasts) > $limit) {
             array_pop($fasts);
             $nextPage = 1;
@@ -45,7 +42,8 @@ class StudioContentFastViewController extends Controller
         $this->view("/studio/content/fast", [
             "fasts" => $fasts,
             "next_page" => $nextPage,
-            "search" => $search
+            "search" => $search,
+            "sort" => $sort
         ]);
     }
 }
