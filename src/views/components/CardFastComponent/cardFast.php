@@ -40,8 +40,13 @@ function CardFast(array $data): string {
                             </li>
 
                             <li class='hover:bg-gray-700 text-white font-semibold flex w-full h-8 text-xs gap-2 items-center'>
-                                <img src='/VHS/public/icons/cardFast/trash.svg'>
-                                <p >Excluir</p>
+                                <form action='/VHS/api/v1/fast/delete' method='POST' class='w-full h-full flex items-center gap-2 px-0'>
+                                    <input type='hidden' name='id' value='{$data['id']}'>
+                                    <button type='button' onclick='confirmDeleteFast(this)' class='flex items-center gap-2 w-full h-full text-left'>
+                                        <img src='/VHS/public/icons/cardFast/trash.svg'>
+                                        <p>Excluir</p>
+                                    </button>
+                                </form>
                             </li>
                         </ul>    
                     </div>
@@ -50,7 +55,5 @@ function CardFast(array $data): string {
             </div>
         </div>
         <script defer src='/VHS/src/views/components/CardFastComponent/cardFast.js'></script>
-
-        
     ";
 }
