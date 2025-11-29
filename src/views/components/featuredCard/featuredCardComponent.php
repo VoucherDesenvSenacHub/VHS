@@ -5,8 +5,8 @@ namespace Views\Components\FeaturedCard;
 use function Src\Application\Utils\formatViews;
 use function Src\Application\Utils\formatDuration;
 
-require_once __DIR__ . '/../../../application/utils/formatViews.php';
-require_once __DIR__ . '/../../../application/utils/formatDuration.php';
+require_once __DIR__ . '/../../../application/helpers/formatViews.php';
+require_once __DIR__ . '/../../../application/helpers/formatDuration.php';
 
 /**
  * Componente para exibir um card de vídeo em destaque.

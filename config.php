@@ -30,3 +30,15 @@ if (isset($_GET["logout"])) {
     header("Location: /VHS/home");
     exit;
 }
+
+foreach(new DirectoryIterator(__DIR__ . "/src/application/helpers") as $file) {
+    if($file->isDir() || $file->isDot()) return;
+
+    require_once $file->getPathname();
+}
+
+foreach(new DirectoryIterator(__DIR__ . "/src/application/core") as $file) {
+    if($file->isDir() || $file->isDot()) return;
+
+    require_once $file->getPathname();
+}

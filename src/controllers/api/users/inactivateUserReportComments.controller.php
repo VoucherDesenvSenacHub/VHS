@@ -10,7 +10,7 @@ use Src\Infra\Model\UserModel;
 use function Src\Application\Utils\Redirect\redirect;
 
 require_once __DIR__ . '/../../../application/core/controller.php';
-require_once __DIR__ . '/../../../application/utils/verifyRecaptcha.php';
+require_once __DIR__ . '/../../../application/helpers/verifyRecaptcha.php';
 
 class InactivateUserController extends Controller {
     private UserModel $userModel;

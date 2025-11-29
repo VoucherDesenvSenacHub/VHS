@@ -9,7 +9,7 @@ use Src\Infra\Model\UserModel;
 use function Src\Application\Utils\Redirect\redirect;
 
 require_once __DIR__ . '/../../../application/core/controller.php';
-require_once __DIR__ . '/../../../application/utils/emailTransporter.php';
+require_once __DIR__ . '/../../../application/helpers/emailTransporter.php';
 
 class VerifyEmailViewController extends Controller {
     private UserModel $userModel;
@@ -34,7 +34,7 @@ class VerifyEmailViewController extends Controller {
             return;
         }
         
-        $file_path = __DIR__ . '/../application/utils/emails/createAccountEmail.html';
+        $file_path = __DIR__ . '/../application/helpers/emails/createAccountEmail.html';
         
         $emailHTML = fopen($file_path, "r");
         $emailHTML = fread($emailHTML, filesize($file_path));

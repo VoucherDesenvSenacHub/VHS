@@ -83,6 +83,6 @@ $router->get("/admin/categories", AdminCategoriesViewController::class, Redirect
 $router->get("/admin/complaints", AdminComplaintManagementViewController::class, RedirectUserNotAdminMiddleware::class);
 $router->get("/admin/users", AdminUsersViewController::class, RedirectUserNotAdminMiddleware::class);
 
-$router->get("/home/video", VideoController::class, /*RedirectUserNotLoggedMiddleware::class*/);
+$router->get("/home/video", VideoController::class, RedirectUserNotLoggedMiddleware::class);
 
 $router->run();

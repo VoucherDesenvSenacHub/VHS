@@ -9,7 +9,7 @@ use Dotenv\Dotenv;
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../../..");
 $dotenv->load();
 
-require_once __DIR__ . "/../../application/utils/redirect.php";
+require_once __DIR__ . "/../../application/helpers/redirect.php";
 
 use function Src\Application\Utils\Redirect\redirect;
 

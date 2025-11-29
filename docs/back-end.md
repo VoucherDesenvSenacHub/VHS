@@ -13,7 +13,7 @@ application/
 │
 ├── routes/            # Definições de rotas
 │
-├── utils/             # Utilitários diversos (e-mails, reCAPTCHA, etc)
+├── helpers/             # Utilitários diversos (e-mails, reCAPTCHA, etc)
 │
 ├── middlewares/       # Middleware HTTP
 │

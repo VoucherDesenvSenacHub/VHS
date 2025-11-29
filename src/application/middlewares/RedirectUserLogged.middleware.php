@@ -9,7 +9,7 @@ use Dotenv\Dotenv;
 use Src\Infra\Model\UserModel;
 
 require_once __DIR__ . "/../../infra/models/user.php";
-require_once __DIR__ . "/../../application/utils/redirect.php";
+require_once __DIR__ . "/../../application/helpers/redirect.php";
 
 use function Src\Application\Utils\Redirect\redirect;
 

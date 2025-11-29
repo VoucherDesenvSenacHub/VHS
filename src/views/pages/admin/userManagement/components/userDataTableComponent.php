@@ -3,7 +3,7 @@ namespace src\views\components\userDataTableComponent;
 
 use DateTime;
 
-require_once __DIR__ . '/../../../../../application/utils/pagination.php';
+require_once __DIR__ . '/../../../../../application/helpers/pagination.php';
 use function Src\Application\Utils\paginate;
 
 function userDataTableComponent($users)

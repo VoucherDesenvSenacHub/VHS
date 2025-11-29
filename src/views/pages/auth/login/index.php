@@ -23,7 +23,7 @@ unset($_SESSION['redirect_data']);
 require_once __DIR__ . "/../../../components/utils/inputComponent.php";
 require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
 require_once __DIR__ . "/../../../components/checkbox/checkboxComponent.php";
-require_once __DIR__ . "/../../../../application/utils/redirect.php";
+require_once __DIR__ . "/../../../../application/helpers/redirect.php";
 
 use function App\Views\Components\CheckboxComponent;
 use function Src\Views\Components\Utils\InputComponent;

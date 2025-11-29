@@ -2,7 +2,7 @@
 
 namespace Src\Views\Components\Utils;
 
-require_once __DIR__ . "../../../../application/utils/purify/index.php";
+require_once __DIR__ . "../../../../application/helpers/purify/index.php";
 
 use function Src\Application\Utils\Purify\purifyProperty;
 

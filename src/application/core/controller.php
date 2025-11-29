@@ -1,6 +1,9 @@
 <?php
 
+
 namespace Src\Application\Core;
+
+
 
 abstract class Controller {
     abstract public function index();
@@ -21,20 +24,20 @@ public function model(string $model) {
      * 
      * @param string $viewName Nome da view, ex: (views/pages/$viewName.php)
      * @param array|null $data Dados que serão utilizados na view
+     * @param string $layout Layout que a página vai usar como base, disponíveis: index, studio, admin
      * @return void
      */
-    public function view(string $viewName, array | null $data = null) {
+    public function view(string $viewName, array | null $data = null, string $layout = "index") {
         $file = __DIR__ . "/../../../src/views/pages/{$viewName}.php";
-
-        if(session_status() === PHP_SESSION_DISABLED) session_start();
-
+        $layout =  __DIR__ . "/../../layouts/$layout.layout.php";
         $_SESSION["page_data"] = $data;
 
-        if (file_exists($file)) {
-            require $file;
+        if (!file_exists($file)) {
+            http_response_code(404);
         }
-
-        http_response_code(404);
+        
+        require_once $layout;        
+        echo indexLayout($file);
     }
 
 }

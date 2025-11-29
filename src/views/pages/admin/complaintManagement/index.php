@@ -7,7 +7,7 @@ require_once __DIR__ . "/../../../components/utils/coment_admin/comentAdmin.comp
 require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
 require_once __DIR__ . "/../../../components/filter/filter.php";
 require_once __DIR__ . "/../../../components/utils/sweetalert.php";
-require_once __DIR__ . "/../../../../application/utils/pagination.php";
+require_once __DIR__ . "/../../../../application/helpers/pagination.php";
 
 use function Src\Views\components\filter\Filter;
 use function Src\Views\Components\Utils\ButtonComponent;
