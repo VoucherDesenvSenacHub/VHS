@@ -8,7 +8,8 @@ require_once __DIR__ . '/../utils/userMenu.php';
 use function Src\Views\Components\Utils\BarComponent;
 use function Src\Views\Components\Utils\UserMenu;
 
-function HeaderComponent() {
+function HeaderComponent()
+{
     $BarComponent = BarComponent();
     $user = $_SESSION["user"] ?? null;
 

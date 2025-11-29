@@ -61,7 +61,7 @@ $avatar_url = !empty($user['avatar_url']) ? $user['avatar_url'] : 'default.png';
                 id="form">
                 <div class="flex flex-col md:flex-row items-center gap-4 w-full">
                     <div class="w-36 h-36 relative overflow-hidden rounded-full">
-                        <img id="profileImage" src="/VHS/public/uploads/avatars/<?= $avatar_url ?>" class="object-cover w-full h-full">
+                        <img id="profileImage" src="/VHS/public/uploads/avatars/$avatar_url" onerror="this.src='/VHS/public/uploads/avatars/default.png'" class="object-cover w-full h-full">
                     </div>
                     <div class="flex space-x-3 w-full md:w-[28rem]">
                         <button id="uploadButton"

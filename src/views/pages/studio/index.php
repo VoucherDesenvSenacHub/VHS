@@ -8,7 +8,7 @@ require_once __DIR__ . "/../../components/utils/buttonComponent.php";
 require_once __DIR__ . "/../../components/utils/comments_studio/commentAnalyticsComponent.php";
 require_once __DIR__ . "/../../components/cards/studioVideoComponent.php";
 require_once __DIR__ . '/../../../application/utils/getCurrentDataTime.php';
-require_once __DIR__ . "/../../components/utils/orderningWeekDayAnalytics.php";
+require_once __DIR__ . "/../../../application/utils/orderningWeekDayAnalytics.php";
 require_once __DIR__ . "/../../components/charts/chartComponent.php";
 
 use function Src\Views\Components\Cards\StudioVideoComponent;
@@ -19,7 +19,7 @@ use function src\views\components\Utils\Title_and_buttons;
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
 use function src\views\components\Header\HeaderComponent;
 use function Src\Application\Utils\getCurrentDataTime;
-use function Src\Views\Components\orderningWeekDayAnalytics;
+use function Src\Application\Utils\orderningWeekDayAnalytics;
 
 $current_user = $_SESSION['user'];
 $followers = $_SESSION["page_data"]["count_followers"][0]['COUNT(id)'];
@@ -68,7 +68,7 @@ $ordered = orderningWeekDayAnalytics($views_weekly);
             <?= StudioSideMenuComponent() ?>
         </div>
 
-        <main class="max-w-[1500px] mx-auto px-6 pt-[1.18rem]">
+        <main class="max-w-auto md:max-w-[1500px] mx-auto px-6 pt-[1.18rem]">
             <section class="flex gap-4">
                 <img src='/VHS/public/uploads/avatars/<?= $current_user["avatar_url"]?>' alt="" class="size-12 rounded-full" onerror="this.src='/VHS/public/uploads/avatars/default.png'">
                 <div>

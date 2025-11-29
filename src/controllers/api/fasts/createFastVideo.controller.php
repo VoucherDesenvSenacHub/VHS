@@ -59,7 +59,7 @@ class CreateFastVideoController extends Controller {
             $videoInfo = $getID3->analyze($videoPath);
             $duration = isset($videoInfo['playtime_seconds']) ? (int)$videoInfo['playtime_seconds'] : 0;
 
-            $id = uniqid() . uniqid();
+            $id = uniqid(more_entropy: true);
 
             $schema = v::key(
                 'title',v::stringType()->length(3, 64)->setTemplate( 'O titulo tem que ter entre 3 a 32 caracteres')
@@ -67,13 +67,14 @@ class CreateFastVideoController extends Controller {
             
             $schema->assert($_POST);
 
-            $id = uniqid().uniqid();
+            $id = uniqid(more_entropy: true);
 
             $this->FastModel->createFastVideo($id,  $_POST["title"], $_SESSION["user"]["id"], $duration,  0, $videoFileName . ".png", $videoFileName . ".mp4");
             
             redirect("/VHS/studio/create/fast?success=1", ['success' => 'Vídeo criado com sucesso!']);
         }
         catch (NestedValidationException | Exception $exception) {
+            print_r($exception);
 
             if($exception instanceof NestedValidationException) {
                 foreach ($exception->getMessages() as $message) {
