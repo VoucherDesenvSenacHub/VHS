@@ -2,18 +2,18 @@
 
     namespace Src\Views\Components\Shared;
     
-    function sharedComponent($url, $title) {
+    function sharedComponent($url, $title, $id) {
         $iframe = '
             <iframe width="560" height="315" src="' . htmlspecialchars($url, ENT_QUOTES) . '" frameborder="0" allowfullscreen></iframe>
         ';
 
         return ("
-            <div class='modal-shared hidden absolute flex inset-0 overflow-hidden bg-black/25 items-center justify-center opacity-0 transition-opacity duration-500'>
+            <div id='modal-shared-{$id}' class='modal-shared hidden absolute flex inset-0 overflow-hidden bg-black/25 items-center justify-center opacity-0 transition-opacity duration-500 z-100'>
                 <div class='modal-content flex flex-col bg-[#1B1B1B] w-auto h-64 rounded-2xl p-6 justify-between shadow-xl scale-95 opacity-0 transition-all duration-300 transform'>
                     <div class='w-full flex flex-row justify-between items-center'>
                         <h2 class='text-white text-xl'>Compartilhar</h2>
             
-                        <button onclick='closeShared()' class='flex justify-center items-center w-7 text-purple-400 hover:text-purple-600'>
+                        <button onclick='closeShared(\"{$id}\")' class='flex justify-center items-center w-7 text-purple-400 hover:text-purple-600'>
                             <img src='/VHS/public/icons/botaoFechar.svg' class='w-full h-full'>
                         </button>
                     </div>
@@ -63,8 +63,8 @@
                     </div>
 
                     <div class='flex flex-row justify-between gap-3'>
-                        <input type='text' id='share-link' value='$url' class='focus:outline-none text-gray-500 text-sm p-2 w-72 border-[1px] border-[#666666] bg-transparent rounded-[10px]' readonly>
-                        <button class='bg-[#6C00C0] hover:bg-[#981AFF] p-3 px-7 rounded-[10px] text-white' onclick='copyLink()'>Copiar</button>
+                        <input type='text' id='share-link-{$id}' value='$url' class='focus:outline-none text-gray-500 text-sm p-2 w-72 border-[1px] border-[#666666] bg-transparent rounded-[10px]' readonly>
+                        <button class='bg-[#6C00C0] hover:bg-[#981AFF] p-3 px-7 rounded-[10px] text-white' onclick='copyLink(\"{$id}\")'>Copiar</button>
                     </div>
                 </div>
             </div>
@@ -95,8 +95,9 @@
 
 <script>
 
-    function openShared() {
-        const overlay = document.querySelector('.modal-shared');
+    function openShared(event, id) {
+        event.stopPropagation();
+        const overlay = document.getElementById('modal-shared-' + id);
         const modal = overlay.querySelector('.modal-content');
         overlay.classList.remove('hidden');
         
@@ -109,8 +110,8 @@
         });
     }
 
-    function closeShared() {
-        const overlay = document.querySelector('.modal-shared');
+    function closeShared(id) {
+        const overlay = document.getElementById('modal-shared-' + id);
         const modal = overlay.querySelector('.modal-content');
 
         overlay.classList.remove('opacity-100');
@@ -124,8 +125,8 @@
         }, 300);
     }
 
-    function copyLink() {
-        const linkInput = document.getElementById('share-link');
+    function copyLink(id) {
+        const linkInput = document.getElementById('share-link-' + id);
         linkInput.select();
 
         navigator.clipboard.writeText(linkInput.value).then(() => {
