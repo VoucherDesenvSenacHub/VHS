@@ -56,3 +56,53 @@ function toggleSidebar(state) {
 toggleButton.addEventListener("click", () => {
     toggleSidebar();
 });
+
+function CategoriesON(event) {
+    
+    const button = event.currentTarget;
+    const image = button.querySelector('img');
+    const title = button.querySelector('h3');
+
+   
+    const wrapper = document.getElementById("categories-wrapper");
+    const list = document.getElementById("categories-list");
+  
+    if (!wrapper || !list) {
+        console.error("Erro: Wrapper ou lista de categorias não encontrados.");
+        return;
+    }
+
+    const isOpen = wrapper.classList.contains('grid-rows-[1fr]');
+
+    if (isOpen) {
+    
+        image.classList.remove('active');
+        image.src = "/VHS/public/icons/GridOff.svg";
+
+        title.classList.remove('text-white');
+        title.classList.add('hover:text-secondary');
+        
+
+        wrapper.classList.remove('grid-rows-[1fr]');
+        wrapper.classList.add('grid-rows-[0fr]');
+
+    } else {
+
+        image.classList.add('active');
+        image.src = "/VHS/public/icons/GridOn.svg";
+
+        title.classList.add('text-white');
+        title.classList.remove('hover:text-secondary');
+    
+
+        wrapper.classList.remove('grid-rows-[0fr]');
+        wrapper.classList.add('grid-rows-[1fr]');
+
+        setTimeout(() => {
+             if(wrapper.classList.contains('grid-rows-[1fr]')) {
+
+                 list.classList.add('max-h-80', 'overflow-y-auto', 'pr-2');
+             }
+        }, 50);
+    }
+}

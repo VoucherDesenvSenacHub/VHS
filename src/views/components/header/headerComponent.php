@@ -13,7 +13,7 @@ function HeaderComponent() {
     $user = $_SESSION["user"] ?? null;
 
     $avatar_url = $user['avatar_url'] ?? '';
-    $UserMenu = UserMenu($avatar_url, $user['name'] ?? 'Você', $user['email'] ?? null);
+    $UserMenu = UserMenu($avatar_url, $user['name'] ?? 'Você', $user['email'] ?? '');
 
     return <<<HTML
         <header id='header' class='backdrop-blur-lg border-b border-secondary/10 w-full h-20 flex items-center justify-between px-6 sticky top-0 z-20'>  

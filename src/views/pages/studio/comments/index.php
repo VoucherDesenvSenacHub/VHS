@@ -1,22 +1,25 @@
 <?php
 
-require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/studioSideMenu/studioSideMenuComponent.php";
+require_once __DIR__ . "/../../../components/studioSideMenu/studioSideMenuComponent.php";
+require_once __DIR__ . "/../../../components/header/headerComponent.php";
+require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
+require_once __DIR__ . "/../../../components/utils/comments_studio/commentStudioComponent.php";
+require_once __DIR__ . "/../../../components/utils/inputComponent.php";
+require_once __DIR__ . "/../../../components/utils/footer.php";
+require_once __DIR__ ."/../../../components/filter/filter.php";
+
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
-
-require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/header/headerComponent.php";
 use function src\views\components\header\HeaderComponent;
-
-require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/buttonComponent.php";
 use function src\views\components\Utils\ButtonComponent;
-
-require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/comments_studio/commentStudioComponent.php";
 use function Src\Views\Components\Utils\CommentStudioComponent;
-require_once "../../../components/utils/inputComponent.php";
-
-require $_SERVER['DOCUMENT_ROOT'] . "/VHS/src/views/components/utils/footer.php";
 use function src\views\components\Utils\Footer;
 use function Src\Views\Components\Utils\InputComponent;
+use function src\views\components\filter\Filter;
 
+$comments = $_SESSION["page_data"]["comments"];
+
+$title = 'Últimos comentários do video';
+if (isset($_GET["ordering"])) $title = 'Primeiros comentários do video';
 ?>
 
 <!DOCTYPE html>
@@ -27,18 +30,22 @@ use function Src\Views\Components\Utils\InputComponent;
   <title>VHS Studio - Últimos comentários do vídeo</title>
   <link rel="stylesheet" href="/VHS/src/styles/global.css">
   <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Syne:wght@500..800&display=swap" rel="stylesheet" />
 </head>
 <body>
 
   <?php echo HeaderComponent(); ?>
 
-  <div class="flex">
-    <?php echo StudioSideMenuComponent(); ?>
+  <div class="flex ">
+    <div class="hidden md:block">
+            <?= StudioSideMenuComponent() ?>
+        </div>
 
-    <div class="flex-1 px-10 py-6">
-        <h1 class="text-2xl font-semibold mb-2 text-white">Últimos comentários do vídeo</h1>
-        <p class="text-sm text-gray-300 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
+    <div class="flex flex-col gap-4 max-w-[1500px] mx-auto w-full px-6 pt-[1.18rem]">
+      <div class="flex-col gap-4">
+          <h1 class="text-2xl font-semibold text-white"><?=$title?></h1>
+      </div>
     <!-- 
       <div class="flex gap-3 mb-6">
         <?php echo ButtonComponent("Edição", "studio", "", 10.675, 2.5); ?>
@@ -46,24 +53,42 @@ use function Src\Views\Components\Utils\InputComponent;
         <?php echo ButtonComponent("Analytics", "studio", "", 10.675, 2.5); ?>
       </div> -->
 
-      <?= InputComponent("text", "Pesquisar", icon: "/VHS/public/icons/Filter.svg", iconPosition: "left", onClickIcon: "showFilterMenu()", className: "w-full !bg-[#15141A] text-white px-4 py-2 rounded-md border border-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-600") ?>
+     <div class="flex items-center justify-center gap-4">
+                        <div class="h-full pt-6">
+                            <?= Filter() ?>
+                        </div>
+                        <div class="w-full">
+                        <form method="GET">
+                            <?= InputComponent(
+                                placeholder: "Pesquisar",
+                                type: "text",
+                                name: "content",
+                                value: $_GET['content'] ?? ""
+                            ) ?>
+                        </form>
+                        </div>
+      </div>
 
       <div class="w-full flex flex-col gap-4">
         <?php
-        for ($i = 0; $i < 8; $i++) {
+        foreach ($comments as $comment){
           echo CommentStudioComponent(
-            "Celestino",
-            "Muito emocionante! Eu sei! Não teria coragem de entrar nessas casas como você kkk Tudo sobre o Next.js 15, nova arquitetura de pasta!",
-            "há 5 dias",
-            null,
-            "https://i.ibb.co/v6xs3ZB6/CUUJVx-Nyw4c-HD-5.jpg"
+            name: $comment["name"],
+            text: $comment["content"],
+            created_at: $comment["created_at"],
+            userImg: $comment["avatar_url"],
+            thumbnailURL: $comment["thumbnail_url"],
+            comment_id: $comment["id"],
+            creator_like: $comment["creator_like"],
+            user_blocked_id: $comment["user_id"]
           );
-        }
+        };
         ?>
       </div>
     </div>
 
   </div>
   <?php echo Footer(); ?>
+  <script src="/VHS/src/views/components/utils/comments_studio/script.js"></script>
 </body>
 </html>
