@@ -23,19 +23,18 @@ function StudioVideoComponent(string $id, string $title, string $thumbnail_url, 
         <div class="flex gap-2">
             <img src="$thumbnail_url" alt="" class="w-32 rounded-lg">
             <div>
-                <h2 class="font-medium text-white">$title</h2>
+                <h2 class="font-medium text-white truncate max-w-[10rem] md:max-w-[33rem]" title="$title">$title</h2>
                 <p class="text-secondary">$views de visualizações</p>
-
                 <div class="flex gap-4 mt-1">
-                    <a href="">
+                    <a href="/VHS/studio/content/video/edit?id=$id">
                         <img src="/VHS/public/icons/pencill.svg" alt="" class="size-5">
                     </a>
 
-                    <a href="">
+                    <a href="/VHS/studio/content/video/analytic?id=$id">
                         <img src="/VHS/public/icons/graph.svg" alt="" class="size-5">
                     </a>
 
-                    <a href="">
+                    <a href="/VHS/home/video?id=$id#comments">
                         <img src="/VHS/public/icons/comentariocomental.svg" alt="" class="size-6">
                     </a>
                 </div>

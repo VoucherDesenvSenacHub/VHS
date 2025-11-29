@@ -74,7 +74,7 @@ function Comment(string $id, string $name, string $text, ?string $created_at = n
 
 
     $userImg = $userImg
-        ? "<img src='" . htmlspecialchars($userImg, ENT_QUOTES, 'UTF-8') . "' alt='Imagem de perfil' class='w-full h-full rounded-full mt-1 object-cover'>"
+        ? "<img src='/VHS/public/uploads/avatars/" . htmlspecialchars($userImg, ENT_QUOTES, 'UTF-8') . "' alt='Imagem de perfil' class='w-full h-full rounded-full mt-1 object-cover'>"
         : "<img src='/VHS/public/uploads/avatars/default.png' alt='Imagem padrão de perfil' class='w-full h-full rounded-full mt-1 object-cover'>";
 
     $created_at = $created_at ? "<p class='text-xs text-gray-300 font-semibold ml-1'>" . htmlspecialchars($created_at, ENT_QUOTES, 'UTF-8') . "</p>" : "";
@@ -100,13 +100,13 @@ function Comment(string $id, string $name, string $text, ?string $created_at = n
             </div>
 
             <div class="relative ml-3 mt-2">
-                <button
-                    type="button"
-                    class="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                    onclick="toggleCommentOptions('$id')"
-                    alt="Abrir opções" class="w-4 h-4">
+                  <button
+                     type="button"
+                     class="comment-options-button w-8 h-8 flex items-center justify-center rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+                     aria-haspopup="true"
+                     aria-expanded="false"
+                     onclick="toggleCommentOptions('$id')"
+                     alt="Abrir opções" class="w-4 h-4">
                     <img src="/VHS/public/icons/comments_studio/ellipsis-vertical.svg" alt="Menu de opções">
                     <span class="sr-only">Abrir menu de opções</span>
                 </button>
@@ -126,7 +126,6 @@ function Comment(string $id, string $name, string $text, ?string $created_at = n
                 </div>
             </div>
         </div>
-        <script src='/VHS/src/views/components/utils/comments/script.js'></script>
         HTML;
 
 }

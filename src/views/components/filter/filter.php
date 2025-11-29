@@ -8,7 +8,7 @@ function Filter() {
         </button>
 
         <div
-            class="bg-[#1B1B1B] text-white rounded-lg p-4 w-48 absolute hidden border-2 border-gray-600 z-10 top-0 ml-10 mt-[17rem]"
+            class="bg-[#1B1B1B] text-white rounded-lg p-4 w-48 absolute hidden border-2 border-gray-600 z-10 ml-10"
             id="menu"
         >
             <ul class="w-full flex flex-col gap-8">
