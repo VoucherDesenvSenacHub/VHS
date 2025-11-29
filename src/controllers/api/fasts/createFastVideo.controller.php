@@ -35,7 +35,7 @@ class CreateFastVideoController extends Controller {
                 mkdir($thumbnailDir, 0777, true);
             }
 
-            $videoFileName = $_POST['title'] . date('Y-m-d_H-i-s');
+            $videoFileName = $_POST['title'] . uniqid();
             $videoPath = $uploadDir . $videoFileName . '.mp4';
             $thumbnailPath = $thumbnailDir . $videoFileName . '.png';
 
@@ -69,7 +69,7 @@ class CreateFastVideoController extends Controller {
 
             $id = uniqid(more_entropy: true);
 
-            $this->FastModel->createFastVideo($id,  $_POST["title"], $_SESSION["user"]["id"], $duration,  0, $videoFileName, $videoFileName);
+            $this->FastModel->createFastVideo($id,  $_POST["title"], $_SESSION["user"]["id"], $duration,  0, $videoFileName . ".png", $videoFileName . ".mp4");
             
             redirect("/VHS/studio/create/fast?success=1", ['success' => 'Vídeo criado com sucesso!']);
         }

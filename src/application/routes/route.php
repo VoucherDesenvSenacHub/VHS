@@ -69,6 +69,10 @@ use Src\Application\Controllers\LikeCommentsCreatorController;
 use Src\Application\Controllers\DeleteCommentStudioController;
 use Src\Application\Controllers\UserBlockedUserController;
 use Src\Application\Controllers\StudioAnalyticsViewController;
+use Src\Application\Controllers\StudioContentFastViewController;
+use Src\Application\Controllers\DeleteFastController;
+use Src\Application\Controllers\StudioUpdateFastViewController;
+use Src\Application\Controllers\FastUpdateController;
 
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../../..");
 $dotenv->load();
@@ -109,6 +113,8 @@ $router->post('/api/v1/video/delete', VideoDeleteController::class);
 $router->post('/api/v1/studio/comments/creator-like', LikeCommentsCreatorController::class, RedirectUserNotCreatorMiddleware::class);
 $router->post('/api/v1/studio/comment/delete', DeleteCommentStudioController::class, RedirectUserNotCreatorMiddleware::class);
 $router->post('/api/v1/studio/users/block', UserBlockedUserController::class, RedirectUserNotCreatorMiddleware::class);
+$router->post('/api/v1/fast/delete', DeleteFastController::class, RedirectUserNotCreatorMiddleware::class);
+$router->post('/api/v1/fast/edit', FastUpdateController::class, RedirectUserNotCreatorMiddleware::class);
 
 # Views Routes
 
@@ -129,6 +135,8 @@ $router->get('/studio/content/video/analytic', StudioAnalyticsVideoViewControlle
 $router->get("/studio/analytics", StudioAnalyticsViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get("/studio/create/video", StudioCreateVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get("/studio/create/fast", StudioFastViewController::class, RedirectUserNotCreatorMiddleware::class);
+$router->get("/studio/content/fast", StudioContentFastViewController::class, RedirectUserNotCreatorMiddleware::class);
+$router->get("/studio/content/fast/edit", StudioUpdateFastViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get("/studio/comments", StudioCommentsViewController::class, RedirectUserNotCreatorMiddleware::class);
 
 $router->get("/home/search/video", SearchVideoController::class);

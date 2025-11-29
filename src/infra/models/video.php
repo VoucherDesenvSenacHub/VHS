@@ -107,8 +107,11 @@ class VideoModel extends Model
         return $this->database->query($sql);
     }
 
-    public function getAllVideos(string $author_id, int $offset = 0, int $limit = 8): array
+    public function getAllVideos(string $author_id, int $offset = 0, int $limit = 8, string $search = null, string $sort = 'desc'): array
     {
+        $orderBy = $sort === 'asc' ? 'ASC' : 'DESC';
+        $searchCondition = $search ? "AND v.title LIKE :search" : "";
+
         $sql = "SELECT 
             v.*, 
             COUNT(DISTINCT c.id) AS comments,
@@ -120,15 +123,21 @@ class VideoModel extends Model
         LEFT JOIN
             videos_avaliations v_ava ON v_ava.video_id = v.id AND v_ava.is_deleted = 0
         WHERE 
-            v.is_deleted = 0 AND author_id = :author_id
+            v.is_deleted = 0 AND author_id = :author_id $searchCondition
         GROUP BY 
             v.id
         ORDER BY 
-            v.created_at DESC
+            v.created_at $orderBy
         LIMIT $offset, $limit
     ";
 
-        return $this->database->query($sql, [":author_id" => $author_id]);
+        $params = [":author_id" => $author_id];
+
+        if ($search) {
+            $params[':search'] = '%' . $search . '%';
+        }
+
+        return $this->database->query($sql, $params);
     }
 
     public function countVideos(string $author_id): int

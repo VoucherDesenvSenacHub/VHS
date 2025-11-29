@@ -1,5 +1,5 @@
 .env
 vendor
 .htaccess
-public/videos
 public/thumbnails
+public/videos
