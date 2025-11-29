@@ -1,8 +1,39 @@
 <?php
 
 namespace Src\Views\Components\Sidebar;
+require_once __DIR__ . '/../../../infra/models/category.php';
+
+use Src\Infra\Model\CategoryModel;
 
 function SidebarComponent() {
+    $categoriesFromDb = [];
+
+    try {
+        $categoryModel = new CategoryModel();
+    
+
+        $categoriesFromDb = $categoryModel->getAllCategories(); 
+    } catch (\Exception $e) {
+       
+        $categoriesFromDb = [];
+    }
+
+
+    $formatedcategories = [];
+    
+    foreach($categoriesFromDb as $category){
+
+        $text = is_array($category) ? ($category['name'] ?? 'Sem Nome') : $category;
+
+        $formatedcategories[] = [
+            "text" => $text,
+            "link" => "/VHS/home/categories?category=".urlencode($text)
+        ];
+
+
+    };
+
+
     $menu = [
         "home" => [
             [
@@ -26,40 +57,14 @@ function SidebarComponent() {
                 "link" => "/VHS/src/views/pages/home/history"
             ]
         ],
-
-        "categories" => [
-            "tech" => [
-                "icon" => "/VHS/public/icons/cpu.svg",
-                "text" => "Tecnologia",
-                "link" => "/VHS/src/views/pages/home/categories?category=tecnologia"
-            ],
-            "health" => [
-                "icon" => "/VHS/public/icons/saude.svg",
-                "text" => "Saúde",
-                "link" => "/VHS/src/views/pages/home/categories?category=saude"
-            ],
-            "fashion" => [
-                "icon" => "/VHS/public/icons/moda.svg",
-                "text" => "Moda",
-                "link" => "/VHS/src/views/pages/home/categories?category=moda"
-            ],
-            "aesthetics" => [
-                "icon" => "/VHS/public/icons/estetica.svg",
-                "text" => "Estética",
-                "link" => "/VHS/src/views/pages/home/categories?category=estetica"
-            ]
-        ]
+        "categories" => $formatedcategories
     ];
-
     $htmlCategories = "";
     $htmlHome = "";
 
     foreach ($menu["categories"] as $value) {
         $htmlCategories .= <<<HTML
             <li class="flex items-center gap-4 transition-colors">
-                <a href="{$value['link']}" class="size-8 bg-[#241A2F] p-1 rounded-lg icon min-w-8">
-                    <img src="{$value['icon']}" class="w-full h-full">
-                </a>
 
                 <a href="{$value['link']}" class="text-secondary/75 hover:text-secondary transition-all menu-text">
                     {$value['text']}
@@ -89,10 +94,17 @@ function SidebarComponent() {
                 $htmlHome
             </ul>
             <hr class="my-6 border-b-1 border-secondary/10 separator">
-            <h3 class="title text-secondary text-sm my-6">CATEGORIAS</h3>
-            <ul class="flex flex-col gap-9">
-                $htmlCategories
-            </ul>
+            <button onclick="CategoriesON(event)" class="flex items-center gap-3 categories-button">
+                <img src="/VHS/public/icons/GridOff.svg" class="size-8 bg-[#241A2F] p-1 rounded-lg icon min-w-8">
+                <h3 class="title text-secondary/75 hover:text-secondary text-sm my-6">CATEGORIAS</h3>
+            </button>
+            <div id="categories-wrapper" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out overflow-hidden">
+
+            <ul id="categories-list" class=" flex flex-col min-h-0 ml-4 gap-4 mt-1">
+                 $htmlCategories
+             </ul>
+
+            </div>
             <script src="/VHS/src/views/components/sidebar/script.js"></script>
         </aside>
     HTML;
