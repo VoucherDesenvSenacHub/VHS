@@ -2,22 +2,14 @@
 
 namespace Src\Application\Routes;
 
-class Router {
+class Router
+{
     private $routes = [];
 
-    public function post(string $path, $controller, $middleware = null) {
-        $this->routes["POST"][$path] = function() use ($controller, $middleware)  {
-            if($middleware !== null) {
-                (new $middleware())->execute();
-            }
-            
-            (new $controller())->index();
-        };
-    }
-
-    public function get(string $path, $controller, $middleware = null) {
-        $this->routes["GET"][$path] = function() use ($controller, $middleware)  {
-            if($middleware !== null) {
+    public function post(string $path, $controller, $middleware = null)
+    {
+        $this->routes["POST"][$path] = function () use ($controller, $middleware) {
+            if ($middleware !== null) {
                 (new $middleware())->execute();
             }
 
@@ -25,19 +17,32 @@ class Router {
         };
     }
 
-    public function all(string $path, $controller, $middleware = null) {
-        $this->routes["GET"][$path] = function() use($controller, $middleware) { 
-            if($middleware !== null) (new $middleware())->execute();
-            (new $controller())->index();
-        };
+    public function get(string $path, $controller, $middleware = null)
+    {
+        $this->routes["GET"][$path] = function () use ($controller, $middleware) {
+            if ($middleware !== null) {
+                (new $middleware())->execute();
+            }
 
-        $this->routes["POST"][$path] = function() use($controller, $middleware) { 
-            if($middleware !== null) (new $middleware())->execute();
             (new $controller())->index();
         };
     }
 
-    public function run() {
+    public function all(string $path, $controller, $middleware = null)
+    {
+        $this->routes["GET"][$path] = function () use ($controller, $middleware) {
+            if ($middleware !== null) (new $middleware())->execute();
+            (new $controller())->index();
+        };
+
+        $this->routes["POST"][$path] = function () use ($controller, $middleware) {
+            if ($middleware !== null) (new $middleware())->execute();
+            (new $controller())->index();
+        };
+    }
+
+    public function run()
+    {
         $method = $_SERVER['REQUEST_METHOD'];
         $path = $_SERVER['PATH_INFO'] ?? '/';
         $pathWithoutGetArgs = explode('?', $path);

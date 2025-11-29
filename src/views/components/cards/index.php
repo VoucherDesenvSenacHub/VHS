@@ -150,7 +150,7 @@ class Cards
         $title      = purifyProperty($card['title']);
         $comments = purifyNumbers($card['comments'] ?? 0);
         $avaliations = $card['avaliations'] ?? 0;
-        $views = purifyNumbers($card['views'] ?? 0);    
+        $views = purifyNumbers($card['views'] ?? 0);
         $created_at = purifyCreatedAt($card['created_at'], $userTimezone);
         $duration   = purifyDuration($card['duration']);
 
