@@ -69,7 +69,7 @@ $ordered_avaliations = orderningWeekDayAnalytics($weeklyAvaliations);
                 <div class="flex gap-3 w-[22rem] md:w-[28rem]">
                         <?php
                         echo ButtonComponent(text: "Edição", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/content/video/edit?id=$id");
-                        echo ButtonComponent(text: "Comentários", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/content/video/commentary?id=$id");
+                        echo ButtonComponent(text: "Comentários", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/content/video/comment?id=$id");
                         echo ButtonComponent(text: "Analytics", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/content/video/analytic?id=$id");
                         ?>
                 </div>

@@ -29,12 +29,12 @@ class StudioCommentsVideoViewController extends Controller
 
         $limit = 8;
         $offset = $page * $limit;
-        $filterContent = $_GET["content"] ?? "";
-        $ordering = isset($_GET["ordering"]) ? "ASC" : "DESC";
+        $search = $_GET["search"] ?? "";
+        $sort = $_GET["sort"] ?? 'desc';
 
         $video = $this->videoModel->getVideoById($id);
 
-        $comments = $this->commentModel->getStudioVideoComments($id, $offset, $limit + 1, $filterContent, $ordering);
+        $comments = $this->commentModel->getStudioVideoComments($id, $offset, $limit + 1, $search, $sort);
 
         $nextPage = 0;
         
@@ -46,7 +46,9 @@ class StudioCommentsVideoViewController extends Controller
         $this->view("/studio/content/video/comments", [
             "video" => $video,
             "comments" => $comments,
-            "next_page" => $nextPage
+            "next_page" => $nextPage,
+            "search" => $search,
+            "sort" => $sort
         ]);
     }
 }

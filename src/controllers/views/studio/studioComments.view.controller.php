@@ -17,11 +17,11 @@ class StudioCommentsViewController extends Controller {
         $limit = 8;
         $offset = $page * $limit;
         $filterContent = $_GET["content"] ?? "";
-        $ordering = isset($_GET["ordering"]) ? "ASC" : "DESC";
+        $sort = $_GET["sort"] ?? 'desc';
         
         $idUser = $_SESSION["user"]["id"];
 
-        $comments = $this->commentModel->getStudioComments($offset, $limit + 1, $idUser, $filterContent, $ordering);
+        $comments = $this->commentModel->getStudioComments($offset, $limit + 1, $idUser, $filterContent, $sort);
         
         $nextPage = 0;
         
@@ -30,6 +30,11 @@ class StudioCommentsViewController extends Controller {
             $nextPage = 1;
         }
 
-        $this->view("studio/comments/index", ["comments" => $comments, "next_page" => $nextPage]);   
+        $this->view("studio/comments/index", [
+            "comments" => $comments, 
+            "next_page" => $nextPage,
+            "search" => $filterContent,
+            "sort" => $sort
+        ]);   
     }
 }

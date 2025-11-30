@@ -2,7 +2,6 @@
 
 require_once __DIR__ . "/../../../components/studioSideMenu/studioSideMenuComponent.php";
 require_once __DIR__ . "/../../../components/header/headerComponent.php";
-require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
 require_once __DIR__ . "/../../../components/utils/comments_studio/commentStudioComponent.php";
 require_once __DIR__ . "/../../../components/utils/inputComponent.php";
 require_once __DIR__ . "/../../../components/utils/footer.php";
@@ -12,14 +11,15 @@ require_once __DIR__ . "/../../../components/filter/filter.php";
 use function Src\Application\Utils\paginate;
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
 use function src\views\components\header\HeaderComponent;
-use function src\views\components\Utils\ButtonComponent;
 use function Src\Views\Components\Utils\CommentStudioComponent;
 use function src\views\components\Utils\Footer;
 use function Src\Views\Components\Utils\InputComponent;
 use function src\views\components\filter\Filter;
 
-$comments = $_SESSION["page_data"]["comments"];
+$comments = $_SESSION["page_data"]["comments"] ?? [];
 $nextPage = $_SESSION["page_data"]["next_page"];
+$search = $_SESSION["page_data"]["search"] ?? '';
+$sort = $_SESSION["page_data"]["sort"] ?? 'desc';
 
 $title = 'Últimos comentários do video';
 if (isset($_GET["ordering"])) $title = 'Primeiros comentários do video';
@@ -44,29 +44,29 @@ if (isset($_GET["ordering"])) $title = 'Primeiros comentários do video';
 
   <div class="flex ">
     <div class="hidden md:block">
-            <?= StudioSideMenuComponent() ?>
-        </div>
+      <?= StudioSideMenuComponent() ?>
+    </div>
 
     <div class="flex flex-col gap-4 max-w-[1500px] mx-auto w-full px-6 pt-[1.18rem]">
       <div class="flex-col gap-4">
-          <h1 class="text-2xl font-semibold text-white"><?=$title?></h1>
+        <h1 class="text-2xl font-semibold text-white"><?= $title ?></h1>
       </div>
 
-      <div class="flex items-center justify-center gap-4">
-        <div class="h-full pt-6">
-          <?= Filter() ?>
+      <form method="GET" class="flex flex-col gap-4">
+        <input type="hidden" name="sort" value="<?= htmlspecialchars($sort) ?>">
+        <div class="relative cursor-pointer">
+          <?= InputComponent(
+            placeholder: "Pesquisar",
+            type: "text",
+            name: "content",
+            value: $search,
+            icon: "/VHS/public/icons/Filter.svg",
+            iconPosition: "left",
+            onClickIcon: "showFilterMenu()"
+          ) ?>
+          <?= Filter($search, $sort) ?>
         </div>
-        <div class="w-full">
-          <form method="GET">
-            <?= InputComponent(
-              placeholder: "Pesquisar",
-              type: "text",
-              name: "content",
-              value: $_GET['content'] ?? ""
-            ) ?>
-          </form>
-        </div>
-      </div>
+      </form>
 
       <div class="w-full flex flex-col gap-4">
         <?php
@@ -92,6 +92,18 @@ if (isset($_GET["ordering"])) $title = 'Primeiros comentários do video';
   </div>
   <?php echo Footer(); ?>
   <script src="/VHS/src/views/components/utils/comments_studio/script.js"></script>
+  <script defer>
+    const input = document.querySelector("input[name='content']");
+    let timeout = null;
+
+    input.addEventListener("input", () => {
+      clearTimeout(timeout);
+
+      timeout = setTimeout(() => {
+        input.form.submit();
+      }, 1500);
+    });
+  </script>
 </body>
 
 </html>
