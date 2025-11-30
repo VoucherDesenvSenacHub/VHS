@@ -6,7 +6,7 @@ require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
 require_once __DIR__ . "/../../../components/utils/comments_studio/commentStudioComponent.php";
 require_once __DIR__ . "/../../../components/utils/inputComponent.php";
 require_once __DIR__ . "/../../../components/utils/footer.php";
-require_once __DIR__ ."/../../../components/filter/filter.php";
+require_once __DIR__ . "/../../../components/filter/filter.php";
 
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
 use function src\views\components\header\HeaderComponent;
@@ -24,6 +24,7 @@ if (isset($_GET["ordering"])) $title = 'Primeiros comentários do video';
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,63 +33,49 @@ if (isset($_GET["ordering"])) $title = 'Primeiros comentários do video';
   <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Syne:wght@500..800&display=swap" rel="stylesheet" />
-</head>
-<body>
+  <div class="flex gap-3 mb-6">
+    <?php echo ButtonComponent("Edição", "studio", "", 10.675, 2.5); ?>
+    <?php echo ButtonComponent("Comentários", "studio", "", 10.675, 2.5); ?>
+    <?php echo ButtonComponent("Analytics", "studio", "", 10.675, 2.5); ?>
+  </div> -->
 
-  <?php echo HeaderComponent(); ?>
-
-  <div class="flex ">
-    <div class="hidden md:block">
-            <?= StudioSideMenuComponent() ?>
-        </div>
-
-    <div class="flex flex-col gap-4 max-w-[1500px] mx-auto w-full px-6 pt-[1.18rem]">
-      <div class="flex-col gap-4">
-          <h1 class="text-2xl font-semibold text-white"><?=$title?></h1>
-      </div>
-    <!-- 
-      <div class="flex gap-3 mb-6">
-        <?php echo ButtonComponent("Edição", "studio", "", 10.675, 2.5); ?>
-        <?php echo ButtonComponent("Comentários", "studio", "", 10.675, 2.5); ?>
-        <?php echo ButtonComponent("Analytics", "studio", "", 10.675, 2.5); ?>
-      </div> -->
-
-     <div class="flex items-center justify-center gap-4">
-                        <div class="h-full pt-6">
-                            <?= Filter() ?>
-                        </div>
-                        <div class="w-full">
-                        <form method="GET">
-                            <?= InputComponent(
-                                placeholder: "Pesquisar",
-                                type: "text",
-                                name: "content",
-                                value: $_GET['content'] ?? ""
-                            ) ?>
-                        </form>
-                        </div>
-      </div>
-
-      <div class="w-full flex flex-col gap-4">
-        <?php
-        foreach ($comments as $comment){
-          echo CommentStudioComponent(
-            name: $comment["name"],
-            text: $comment["content"],
-            created_at: $comment["created_at"],
-            userImg: $comment["avatar_url"],
-            thumbnailURL: $comment["thumbnail_url"],
-            comment_id: $comment["id"],
-            creator_like: $comment["creator_like"],
-            user_blocked_id: $comment["user_id"]
-          );
-        };
-        ?>
-      </div>
+  <div class="flex items-center justify-center gap-4">
+    <div class="h-full pt-6">
+      <?= Filter() ?>
     </div>
+    <div class="w-full">
+      <form method="GET">
+        <?= InputComponent(
+          placeholder: "Pesquisar",
+          type: "text",
+          name: "content",
+          value: $_GET['content'] ?? ""
+        ) ?>
+      </form>
+    </div>
+  </div>
+
+  <div class="w-full flex flex-col gap-4">
+    <?php
+    foreach ($comments as $comment) {
+      echo CommentStudioComponent(
+        name: $comment["name"],
+        text: $comment["content"],
+        created_at: $comment["created_at"],
+        userImg: $comment["avatar_url"],
+        thumbnailURL: $comment["thumbnail_url"],
+        comment_id: $comment["id"],
+        creator_like: $comment["creator_like"],
+        user_blocked_id: $comment["user_id"]
+      );
+    };
+    ?>
+  </div>
+  </div>
 
   </div>
   <?php echo Footer(); ?>
   <script src="/VHS/src/views/components/utils/comments_studio/script.js"></script>
-</body>
+  </body>
+
 </html>

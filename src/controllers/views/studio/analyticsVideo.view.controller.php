@@ -19,7 +19,7 @@ class StudioAnalyticsVideoViewController extends Controller
         $this->videoModel = $this->model("video");
         $this->avaliationModel = $this->model("avaliation");
 
-        $id =  $_GET["id"] ?? null;
+        $id =  $_GET["id"] ?? "";
 
         $video = $this->videoModel->getVideoByID($id);
         $weeklyViews = $this->videoModel->getViewsCountByWeekDayVideoId($id);
@@ -27,7 +27,7 @@ class StudioAnalyticsVideoViewController extends Controller
         $categorias = $this->videoModel->getAllCategories();
 
         $this->view("/studio/content/video/analytics", [
-            "video" => $video[0],
+            "video" => $video[0] ?? [],
             "weeklyViews" => $weeklyViews,
             "weeklyAvaliations" => $weeklyAvaliations,
             "categorias" => $categorias

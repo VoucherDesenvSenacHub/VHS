@@ -12,24 +12,27 @@ use function Src\Application\Utils\Redirect\redirect;
 
 require_once __DIR__ . '/../../../application/core/controller.php';
 
-class VideoController extends Controller {
+class VideoController extends Controller
+{
     private VideoModel $videoModel;
     private ModelAvaliationModel $avaliationModel;
 
     private CommentModel $commentModel;
 
-    public function index() {
+    public function index()
+    {
         $this->videoModel = $this->model('video');
         $this->avaliationModel = $this->model("avaliation");
         $this->commentModel = $this->model("comment");
-        
+
         $video = $this->videoModel->getVideoById($_GET['id'] ?? "");
 
-        if(empty($video)) return redirect("/404");
-    
+        if (empty($video)) return redirect("/404");
+
+
         $video = $video[0];
 
-        $relatedVideos = $this->videoModel->getVideosByCategory($video["category_id"]); 
+        $relatedVideos = $this->videoModel->getVideosByCategory($video["category_id"]);
 
         $this->videoModel->incrementViewCount($_GET["id"]);
 
@@ -40,13 +43,13 @@ class VideoController extends Controller {
 
         $stars = 0;
 
-        if(!empty($userAvaliation)) {
+        if (!empty($userAvaliation)) {
             $stars = $userAvaliation[0]["stars"];
         }
 
         $page = $_GET["page"] ?? 0;
 
-        if(!is_numeric($page) || $page < 0) {
+        if (!is_numeric($page) || $page < 0) {
             $page = 0;
         }
 
@@ -60,7 +63,7 @@ class VideoController extends Controller {
 
         $nextPageComments = 0;
 
-        if(count($comments) > $limit) {
+        if (count($comments) > $limit) {
             array_pop($comments);
             $nextPageComments = 1;
         }
@@ -70,10 +73,10 @@ class VideoController extends Controller {
             "releated_videos" => $relatedVideos,
             "user_avaliation" => $stars,
             "comments" => $comments,
-            "total_comments"=> $totalComments,
-            "next_page_comments"=> $nextPageComments,
-            "offset"=> $offset,
-            "limit"=> $limit,
+            "total_comments" => $totalComments,
+            "next_page_comments" => $nextPageComments,
+            "offset" => $offset,
+            "limit" => $limit,
         ]);
     }
 }

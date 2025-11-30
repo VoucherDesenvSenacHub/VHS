@@ -10,7 +10,8 @@ use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\Header\HeaderComponent;
 use function Src\views\Components\sidebar\SidebarComponent;
 
-$user = $_SESSION["page_data"]["user"] ?? [];
+$user = $_SESSION["user"];
+$userCategories = $_SESSION["page_data"]["user_categories"];
 $categories = $_SESSION["page_data"]["categories"] ?? [];
 $errors = $_SESSION["redirect_data"]["errors"] ?? [];
 $avatar_url = !empty($user['avatar_url']) ? $user['avatar_url'] : 'default.png';
@@ -36,12 +37,15 @@ $avatar_url = !empty($user['avatar_url']) ? $user['avatar_url'] : 'default.png';
         var userCategories = [];
 
         <?php foreach ($categories as $category): ?>
-            categories.push("<?= $category["name"] ?>");
+            categories.push("<?= $category["name"] ?? "" ?>");
         <?php endforeach; ?>
 
-        <?php foreach ($user["categories"] as $category): ?>
-            userCategories.push("<?= $category["name"] ?>");
+        <?php foreach ($userCategories as $category): ?>
+            userCategories.push("<?= $category["name"] ?? "" ?>");
         <?php endforeach; ?>
+
+        console.log(userCategories, "userCategories");
+        console.log(categories, "categories");
     </script>
     <div>
         <?= HeaderComponent() ?>
@@ -61,7 +65,7 @@ $avatar_url = !empty($user['avatar_url']) ? $user['avatar_url'] : 'default.png';
                 id="form">
                 <div class="flex flex-col md:flex-row items-center gap-4 w-full">
                     <div class="w-36 h-36 relative overflow-hidden rounded-full">
-                        <img id="profileImage" src="/VHS/public/uploads/avatars/$avatar_url" onerror="this.src='/VHS/public/uploads/avatars/default.png'" class="object-cover w-full h-full">
+                        <img id="profileImage" src="/VHS/public/uploads/avatars/<?= $avatar_url ?>" onerror="this.src='/VHS/public/uploads/avatars/default.png'" class="object-cover w-full h-full">
                     </div>
                     <div class="flex space-x-3 w-full md:w-[28rem]">
                         <button id="uploadButton"

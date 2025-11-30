@@ -26,21 +26,27 @@ function HeaderComponent()
             </div>
 
             <div class='flex items-center gap-4'>
-                <div class='flex flex-warp relative'>
+                <div class='flex flex-warp relative md:block hidden'>
                     <button id='search' class='p-2 rounded-full transition-all duration-200 hover:bg-white/10 active:bg-transparent'>
                         <img src='/VHS/public/icons/lupa.svg' class='w-5 h-5 pointer-events-none'>
                     </button>
 
-                    <div id='search-bar' class='absolute hidden right-14 bg-black/90 rounded-lg w-64 shadow-lg transform translate-x-full opacity-0 transition-all duration-300 ease-in-out'>
-                        <form action="/VHS/src/views/pages/home/search?term=&filter=video" method="GET">
+                    <div id='search-bar' class='absolute right-14 rounded-lg shadow-lg overflow-hidden w-0 opacity-0 transition-all duration-300 ease-in-out md:block hidden'>
+                        <form action="/VHS/home/search" method="GET">
                             <input 
                                 type='text' 
                                 name='q' 
-                                placeholder='Search...' 
-                                class='w-full bg-white/10 text-white placeholder-white/50 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all duration-200'
+                                placeholder='Pesquisar...' 
+                                class='w-64 bg-white/10 text-white placeholder-white/50 rounded-md py-2 px-3 focus:outline-none transition-all duration-200'
                             >
                         </form>
                     </div>
+                    <style>
+                        #header.search #search-bar {
+                            width: 16rem;
+                            opacity: 1;
+                        }
+                    </style>
                 </div>
 
                 <img src='/VHS/public/icons/rectangle.svg'>

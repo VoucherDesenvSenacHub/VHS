@@ -16,13 +16,12 @@ $videos = $_SESSION["page_data"]["videos"] ?? [];
 
 $FeaturedVideo = $videos[0] ?? [];
 
-foreach ($videos as $video){
+foreach ($videos as $video) {
 
-    if($video['views'] > $FeaturedVideo['views']){
+    if ($video['views'] > $FeaturedVideo['views']) {
 
         $FeaturedVideo = $video;
     };
-
 };
 
 
@@ -30,6 +29,7 @@ foreach ($videos as $video){
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,49 +47,35 @@ foreach ($videos as $video){
         }
     </style>
 </head>
-<body class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center text-white">
-    <div>
-        <?= HeaderComponent() ?>
-    </div>
 
-    <div class="flex flex-col md:flex-row w-full">
-        <div class="hidden md:block">
-            <?= SidebarComponent() ?>
+
+<section class="mb-12">
+    <div class="grid grid-cols-1 gap-6">
+        <div class="lg:col-span-1">
+            <?= !empty($videos) || !$categoryName ? FeaturedCardComponent($FeaturedVideo, true) : "" ?>
         </div>
-
-        <main class="flex-1 px-4 sm:px-6 py-4 mx-auto">
-            <div class="max-w-[1500px] mx-auto">
-                <h2 class="text-2xl font-bold text-white mb-2"><span class="text-purple-400">#</span> <?= $categoryName ?></h2>
-                <p class="text-gray-400 text-sm mb-6">Confira os vídeos mais populares da nossa plataforma VHS da categoria, <?= $categoryName ?>.</p>
-                
-                
-                <section class="mb-12">
-                    <div class="grid grid-cols-1 gap-6">
-                        <div class="lg:col-span-1">
-                            <?= !empty($videos) || !$categoryName ? FeaturedCardComponent($FeaturedVideo, true) : "" ?>
-                        </div>
-                    </div>
-                </section>
-                <section class="mb-12">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        <?php 
-                    
-                        if (count($videos) > 1) {
-                            
-                            echo viewCards(array_slice($videos, 1), 'videos'); 
-                        }
-                        else{
-
-                            echo "<p class='text-gray-200 text-md mb-6'>Nenhum vídeo encontrado...</p>";                            
-                        }
-                        ?>
-                    </div>
-                </section>
-                
-
-                </section>
-            </div>
-        </main>
     </div>
+</section>
+<section class="mb-12">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <?php
+
+        if (count($videos) > 1) {
+
+            echo viewCards(array_slice($videos, 1), 'videos');
+        } else {
+
+            echo "<p class='text-gray-200 text-md mb-6'>Nenhum vídeo encontrado...</p>";
+        }
+        ?>
+    </div>
+</section>
+
+
+</section>
+</div>
+</main>
+</div>
 </body>
+
 </html>

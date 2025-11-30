@@ -26,7 +26,7 @@ class CategoryModel extends Model
 
     public function addCategoryInUser(string $categoryId, string $userId): bool
     {
-        $sql = "INSERT INTO users_category VALUES (:id, :category_id, :user_id)";
+        $sql = "INSERT INTO users_category (id, category_id, user_id) VALUES (:id, :category_id, :user_id)";
         $id = uniqid(more_entropy: true);
         return $this->database->exec($sql, [
             ":id" => $id,
@@ -97,7 +97,8 @@ class CategoryModel extends Model
         ]);
     }
 
-    public function getCountVideosByCategories(){
+    public function getCountVideosByCategories()
+    {
         $sql = "
         SELECT name, total
         FROM (

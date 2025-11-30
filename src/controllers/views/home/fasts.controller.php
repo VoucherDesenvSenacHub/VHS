@@ -25,14 +25,14 @@ class FastController extends Controller
         if ($fastId) {
             $specificFast = $this->fastModel->getFastById($fastId);
             if (!empty($specificFast)) {
-                $fasts = $specificFast;
+                $fasts = [$specificFast];
             }
         }
 
-        $otherFasts = $this->fastModel->getFasts(5, 0);
-        
+        $otherFasts = $this->fastModel->getFasts(0, 5);
+
         if ($fastId) {
-            $otherFasts = array_filter($otherFasts, function($fast) use ($fastId) {
+            $otherFasts = array_filter($otherFasts, function ($fast) use ($fastId) {
                 return $fast['id'] !== $fastId;
             });
         }

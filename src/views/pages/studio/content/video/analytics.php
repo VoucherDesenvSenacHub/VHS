@@ -29,7 +29,7 @@ $botoes = [
     ['texto' => 'Analytics', 'link' => './EventosPage.php']
 ];
 
-$id = $video['id'];
+$id = $video['id'] ?? "";
 
 $ordered_views = orderningWeekDayAnalytics($weeklyViews);
 $ordered_avaliations = orderningWeekDayAnalytics($weeklyAvaliations);
@@ -53,63 +53,49 @@ $ordered_avaliations = orderningWeekDayAnalytics($weeklyAvaliations);
 </head>
 
 <body
-    class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center text-white">
-    <div>
-        <?= HeaderComponent() ?>
+    <?php
+    echo ButtonComponent(text: "Edição", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/content/video/edit?id=$id");
+    echo ButtonComponent(text: "Comentários", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/content/video/commentary?id=$id");
+    echo ButtonComponent(text: "Analytics", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/content/video/analytic?id=$id");
+    ?>
     </div>
+    </div>
+    <div class="flex flex-col md:flex-row">
 
-    <div class="flex flex-col md:flex-row w-full">
-        <div class="hidden md:block">
-            <?= StudioSideMenuComponent() ?>
-        </div>
-        <div class="flex-1 px-4 py-6 max-w-auto md:max-w-[1500px] m-auto px-6">
-            <h1 class="text-title font-semibold mb-2">Analytics do vídeo</h1>
-            <p class="text-sm text-gray-300 mb-4">Analise os dados do seu vídeo, como visualizações e avaliações semanais</p>
-            <div class="flex gap-4 w-full md:w-96 my-4">
-                <div class="flex gap-3 w-[22rem] md:w-[28rem]">
-                        <?php
-                        echo ButtonComponent(text: "Edição", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/content/video/edit?id=$id");
-                        echo ButtonComponent(text: "Comentários", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/content/video/commentary?id=$id");
-                        echo ButtonComponent(text: "Analytics", variant: "studio", width: 10.675, height: 2.5, link: "/VHS/studio/content/video/analytic?id=$id");
-                        ?>
-                </div>
-            </div> 
-            <div class="flex flex-col md:flex-row">
+        <div class="flex flex-col gap-8">
 
-                <div class="flex flex-col gap-8">
+            <div class="flex flex-col md:flex-row gap-4 mb-2">
 
-                    <div class="flex flex-col md:flex-row gap-4 mb-2">
-
-                        <?= UserActivityCardsComponent("Visualizações", $video['views']) ?>
+                <?= UserActivityCardsComponent("Visualizações", $video['views'] ?? 0) ?>
 
 
-                        <?= UserActivityCardsComponent("Comentarios", $video['comments']) ?>
+                <?= UserActivityCardsComponent("Comentarios", $video['comments'] ?? 0) ?>
 
 
-                        <?= UserActivityCardsComponent("M Visualizações", (int)$video['avg_views']) ?>
+                <?= UserActivityCardsComponent("M Visualizações", $video['avg_views'] ?? 0) ?>
 
 
-                        <?= UserActivityCardsComponent("Compartilhados", $video['shared']) ?>
-                    </div>
-                    <div class="">
-                        <?= renderChartComponent($ordered_views, $categoriesLine, 'Semana', 'Visualização') ?>
-                    </div>
-                    <div class="">
-                        <?= renderChartComponent($ordered_avaliations, $categoriesLine, 'Semana', 'Avaliação', 'bar') ?>
-                    </div>
-                </div>
-
-                <div class="mt-4 md:mt-0 ml-0 md:ml-24 w-full md:w-[570px] rounded-xl">
-                    <img src="<?= htmlspecialchars($video["thumbnail_url"]) ?>" alt=""
-                        class="rounded-xl h-[300px] w-full object-cover">
-
-                    <div class="mt-4 ml-2">
-                        <h3 class="text-xl font-semibold text-white"><?= $video["title"] ?></h3>
-                        <p class="text-sm text-gray-400 mt-1"><?= $video['description'] ?></p>
-                    </div>
-                </div>
+                <?= UserActivityCardsComponent("Compartilhados", $video['shared'] ?? 0) ?>
+            </div>
+            <div class="">
+                <?= renderChartComponent($ordered_views, $categoriesLine, 'Semana', 'Visualização') ?>
+            </div>
+            <div class="">
+                <?= renderChartComponent($ordered_avaliations, $categoriesLine, 'Semana', 'Avaliação', 'bar') ?>
             </div>
         </div>
+
+        <div class="mt-4 md:mt-0 ml-0 md:ml-24 w-full md:w-[570px] rounded-xl">
+            <img src="<?= htmlspecialchars($video["thumbnail_url"] ?? "") ?>" alt=""
+                class="rounded-xl h-[300px] w-full object-cover">
+
+            <div class="mt-4 ml-2">
+                <h3 class="text-xl font-semibold text-white"><?= $video["title"] ?? "" ?></h3>
+                <p class="text-sm text-gray-400 mt-1"><?= $video['description'] ?? "" ?></p>
+            </div>
+        </div>
+    </div>
+    </div>
     </div>
 
 </body>

@@ -10,7 +10,7 @@
 }
 
 ::-webkit-scrollbar-track {
-    background-color: #14001b00; 
+    background-color: #14001b00;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -27,7 +27,8 @@
     font-family: "Poppins", sans-serif;
 }
 
-input, textarea {
+input,
+textarea {
     cursor: text !important;
 }
 
@@ -43,24 +44,36 @@ body {
 
 .icon.active {
     background-color: #7b08d3;
-} .icon.active.active > img {
-    filter: invert(100%) brightness(150%) contrast(150%);    
-} .icon.active + .menu-text {
+}
+
+.icon.active.active>img {
+    filter: invert(100%) brightness(150%) contrast(150%);
+}
+
+.icon.active+.menu-text {
     color: white;
 }
 
 @keyframes smooth {
-    from { transform: scale(0.9); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 @keyframes hidden_smooth {
-    to { opacity: 0; }
+    to {
+        opacity: 0;
+    }
 }
 
-.play { 
-    animation: smooth 0.15s 
-    ease-in; 
+.play {
+    animation: smooth 0.15s ease-in;
 }
 
 .play.paused {
@@ -73,7 +86,7 @@ body {
     color: #fff !important;
     border-radius: 12px !important;
     padding: 15px 20px !important;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.4) !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4) !important;
     font-family: 'Inter', sans-serif !important;
     border-bottom: 3px solid !important;
     border-color: #7b08d3 !important;
@@ -109,14 +122,14 @@ body {
     font-size: 1rem !important;
     padding: 10px 20px !important;
     border-radius: 8px !important;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) !important;
     transition: background 0.3s ease !important;
 }
 
 .swal2-popup h2 {
     font-size: 1.2rem !important;
 }
-    
+
 .swal2-cancel {
     display: none !important;
 }
@@ -134,7 +147,7 @@ body {
     font-size: 1rem !important;
     padding: 10px 20px !important;
     border-radius: 8px !important;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) !important;
     transition: background 0.3s ease !important;
 }
 

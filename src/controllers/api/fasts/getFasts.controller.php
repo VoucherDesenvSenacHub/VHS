@@ -37,7 +37,7 @@ class GetFastsController extends Controller
             $fastsHTML .= FastComponent(
                 [
                     "id" => $fast["id"],
-                    "url" => "/VHS/public/videos/" . $fast["url"] . ".mp4",
+                    "url" => "/VHS/public/videos/" . $fast["url"],
                     "title" => $fast["title"],
                     "user" => $fast["username"],
                     "avatar_url" => $fast["avatar_url"],
@@ -45,9 +45,7 @@ class GetFastsController extends Controller
                     "user_liked" => $this->fastLikeModel->getLikeByUserAndFast($_SESSION["user"]["id"], $fast["id"]) ? true : false
                 ]
             );
-
         }
         echo $fastsHTML;
-
     }
 }

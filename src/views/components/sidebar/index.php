@@ -1,36 +1,36 @@
 <?php
 
 namespace Src\Views\Components\Sidebar;
+
 require_once __DIR__ . '/../../../infra/models/category.php';
 
 use Src\Infra\Model\CategoryModel;
 
-function SidebarComponent() {
+function SidebarComponent()
+{
     $categoriesFromDb = [];
 
     try {
         $categoryModel = new CategoryModel();
-    
 
-        $categoriesFromDb = $categoryModel->getAllCategories(); 
+
+        $categoriesFromDb = $categoryModel->getAllCategories();
     } catch (\Exception $e) {
-       
+
         $categoriesFromDb = [];
     }
 
 
     $formatedcategories = [];
-    
-    foreach($categoriesFromDb as $category){
+
+    foreach ($categoriesFromDb as $category) {
 
         $text = is_array($category) ? ($category['name'] ?? 'Sem Nome') : $category;
 
         $formatedcategories[] = [
             "text" => $text,
-            "link" => "/VHS/home/categories?category=".urlencode($text)
+            "link" => "/VHS/home/categories?category=" . urlencode($text)
         ];
-
-
     };
 
 
@@ -88,7 +88,7 @@ function SidebarComponent() {
     }
 
     return <<<HTML
-        <aside class="h-[91vh] w-64 top-16 sticky p-7 transition-all border-r border-secondary/10">
+        <aside id="main-sidebar" class="h-[calc(100vh-4rem)] md:h-[calc(100vh-5rem)] w-64 top-16 md:top-20 sticky p-7 transition-all border-r border-secondary/10">
             <h3 class="title text-secondary text-sm">HOME</h3>
             <ul class="flex flex-col gap-9 mt-5">
                 $htmlHome
@@ -108,5 +108,4 @@ function SidebarComponent() {
             <script src="/VHS/src/views/components/sidebar/script.js"></script>
         </aside>
     HTML;
-    
 }

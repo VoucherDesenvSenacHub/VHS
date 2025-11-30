@@ -13,7 +13,8 @@ namespace Src\Views\Components\Channel;
  */
 
 
-function formatFollowers(int $followers) {
+function formatFollowers(int $followers)
+{
     $followersStr = strval($followers);
 
     if ($followers < 1000) {
@@ -21,31 +22,35 @@ function formatFollowers(int $followers) {
     }
 
     if ($followers < 10000) {
-        return $followersStr[0] ."k";
+        return $followersStr[0] . "k";
     }
 
-    if($followers < 100000) {
+    if ($followers < 100000) {
         return $followersStr[0] . $followersStr[1] . "k";
     }
-    
-    if($followers < 1000000) {
+
+    if ($followers < 1000000) {
         return $followersStr[0] . $followersStr[1] . $followersStr[2] . "k";
     }
 
     return 1 . "M+";
 }
 
-function ChannelComponent(array $channel) {
+function ChannelComponent(array $channel)
+{
     $channel = [
         "name" => htmlspecialchars($channel["name"]),
+        "username" => htmlspecialchars($channel["username"]),
         "avatar_url" => htmlspecialchars($channel["avatar_url"]),
         "category" => htmlspecialchars($channel["category"]),
-        "followers" => formatFollowers($channel["followers"]),  
+        "followers" => formatFollowers($channel["followers"]),
     ];
-    
+
+    $avatarURL = $channel["avatar_url"] ?? "/VHS/public/uploads/avatars/default.png";
+
     return <<<HTML
-        <div class="flex gap-4 font-semibold text-xl">
-            <img src='$channel[avatar_url]' class="size-20 rounded-xl" alt="" draggable="false"/>
+        <a class="flex gap-4 font-semibold text-xl" href="/VHS/home/channel/{$channel['username']}">
+            <img src='$avatarURL' onerror="this.src='/VHS/public/uploads/avatars/default.png'" class="size-20 rounded-full" alt="" draggable="false"/>
             <div class="flex flex-col gap-0.5">
                 <h3>
                     $channel[name]
@@ -53,10 +58,10 @@ function ChannelComponent(array $channel) {
                 <p class="text-[#C4C4C4] font-medium text-sm">
                     $channel[followers] de seguidores
                 </p>
-                <div class="bg-[#202024] text-[#C4C4C4] text-sm text-center rounded-xl py-1">
-                    $channel[category]
+                <div class="bg-[#202024] text-[#C4C4C4] text-sm text-center rounded-xl py-1 px-3 w-fit mt-1">
+                    # $channel[category]
                 </div>
             </div>
-        </div>
+        </a>
     HTML;
 }

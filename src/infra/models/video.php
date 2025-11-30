@@ -63,14 +63,7 @@ class VideoModel extends Model
 
     public function getVideoByTitle(string $query, int $offset = 0, int $limit = 8): array
     {
-        $sql = "SELECT * FROM videos WHERE (title LIKE :query) LIMIT $offset, $limit";
-
-        return $this->database->query($sql, ['query' => '%' . $query . '%']);
-    }
-
-    public function getFastByTitle(string $query): array
-    {
-        $sql = "SELECT * FROM videos WHERE (title LIKE :query)";
+        $sql = "SELECT videos.*, users.username, users.avatar_url FROM videos INNER JOIN users ON videos.author_id = users.id WHERE (title LIKE :query) AND videos.is_deleted = 0 LIMIT $offset, $limit";
 
         return $this->database->query($sql, ['query' => '%' . $query . '%']);
     }
@@ -91,11 +84,24 @@ class VideoModel extends Model
 
     public function getVideoById(string $id): array
     {
-        $sql = "SELECT videos.*, COUNT(comments.id) as comments, AVG(videos.views) as avg_views, users.username, users.avatar_url, categories.name as category_name FROM videos
-        JOIN users ON users.id = videos.author_id
-        JOIN categories ON categories.id = videos.category_id
-        JOIN comments ON comments.video_id = videos.id
-        WHERE videos.id = :id";
+        $sql = "SELECT
+            v.*,
+            u.username,
+            u.avatar_url,
+            c.name as category_name,
+            COUNT(com.id) as comments_count
+        FROM
+            videos v
+        JOIN
+            users u ON u.id = v.author_id
+        JOIN
+            categories c ON c.id = v.category_id
+        LEFT JOIN
+            comments com ON com.video_id = v.id AND com.is_deleted = 0
+        WHERE
+            v.id = :id AND v.is_deleted = 0
+        GROUP BY
+            v.id, u.username, u.avatar_url, c.name";
 
         return $this->database->query($sql, [":id" => $id]);
     }
@@ -208,5 +214,11 @@ class VideoModel extends Model
         GROUP BY DAYOFWEEK(users_history.created_at)
         ORDER BY DAYOFWEEK(users_history.created_at)";
         return $this->database->query($sql, [":videoId" => $videoId]);
+    }
+
+    public function getAllVideosByUserId(string $userId, int $offset, int $limit)
+    {
+        $sql = "SELECT videos.*, users.username, users.avatar_url FROM videos INNER JOIN users ON videos.author_id = users.id WHERE videos.author_id = :userId AND videos.is_deleted = 0 ORDER BY videos.created_at DESC LIMIT $offset, $limit";
+        return $this->database->query($sql, [":userId" => $userId]);
     }
 }

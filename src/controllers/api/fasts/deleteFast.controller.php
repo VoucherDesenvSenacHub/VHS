@@ -21,7 +21,7 @@ class DeleteFastController extends Controller
 
             $id = $_POST["id"];
 
-            $this->fastModel->delete($id);
+            $this->fastModel->deleteFast($id);
 
             redirect("/VHS/studio/content/fast", [
                 "success_delete" => true

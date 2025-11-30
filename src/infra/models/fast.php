@@ -27,16 +27,22 @@ class FastModel extends Model
         ]);
     }
 
-    public function getFastByTitle(string $query): array
+    public function getFastByTitle(string $query, int $offset = 0, int $limit = 8): array
     {
-        $sql = "SELECT * FROM videos WHERE type ='FAST' and (title LIKE :query)";
+        $sql = "SELECT * FROM fasts WHERE (title LIKE :query) AND is_deleted = 0 LIMIT $offset, $limit";
 
         return $this->database->query($sql, ['query' => '%' . $query . '%']);
     }
 
+    public function getFasts(int $offset = 0, int $limit = 8): array
+    {
+        $sql = "SELECT fasts.*, users.username, users.avatar_url FROM fasts INNER JOIN users ON fasts.author_id = users.id WHERE fasts.is_deleted = 0 ORDER BY fasts.created_at DESC LIMIT $offset, $limit";
+        return $this->database->query($sql);
+    }
+
     public function getFastById(string $id): array
     {
-        $sql = "SELECT * FROM fasts WHERE id = :id AND is_deleted = 0";
+        $sql = "SELECT fasts.*, users.username, users.avatar_url FROM fasts INNER JOIN users ON fasts.author_id = users.id WHERE fasts.id = :id AND fasts.is_deleted = 0";
 
         $result = $this->database->query($sql, [":id" => $id]);
 

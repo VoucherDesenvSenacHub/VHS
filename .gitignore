@@ -3,3 +3,4 @@ vendor
 .htaccess
 public/thumbnails
 public/videos
+public/uploads

@@ -34,14 +34,14 @@ $fasts = $_SESSION["page_data"];
         </div>
 
         <section onscroll="sectionFastScroll(event)"
-            class="snap-y snap-mandatory overflow-y-scroll mt-8 flex flex-col gap-8 max-w-[1500px] mx-auto w-full max-w-[30rem] max-[480px]:min-h-[calc(100vh_-_5rem)] max-[480px]:mt-0"
+            class="snap-y snap-mandatory overflow-y-scroll mt-8 flex flex-col gap-8 max-w-[1500px] w-full max-w-[35rem] 2xl:max-w-[38rem] mx-auto max-[560px]:min-h-[calc(100vh_-_5rem)] max-[560px]:mt-0"
             style="height: calc(100vh - 10rem);">
             <?php
             foreach ($fasts as $fast) {
                 echo FastComponent(
                     [
                         "id" => $fast["id"],
-                        "url" => "/VHS/public/videos/" . $fast["url"] . ".mp4",
+                        "url" => "/VHS/public/videos/" . $fast["url"],
                         "title" => $fast["title"],
                         "user" => $fast["username"],
                         "avatar_url" => $fast["avatar_url"],

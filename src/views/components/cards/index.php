@@ -283,8 +283,8 @@ class Cards
 
     private static function Fast(array $card)
     {
-        $url       = purifyProperty($card['url']);
-        $thumb_url = purifyProperty($card['thumbnail_url']);
+        $url       = "/VHS/home/fasts?id=" . $card['id'];
+        $thumb_url = "/VHS/public/thumbnails/" . $card['thumbnail_url'];
         $title     = purifyProperty($card['title']);
         $likes     = purifyNumbers($card['likes']);
         $views     = purifyNumbers($card['views']);
