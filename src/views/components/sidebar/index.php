@@ -44,13 +44,9 @@ function SidebarComponent()
             [
                 "icon" => "/VHS/public/icons/fast.svg",
                 "text" => "Fast",
-                "link" => "/VHS/src/views/pages/home/fast"
+                "link" => "/VHS/home/fasts"
             ],
-            [
-                "icon" => "/VHS/public/icons/radio.svg",
-                "text" => "Eventos",
-                "link" => "/VHS/home/events"
-            ],
+
             [
                 "icon" => "/VHS/public/icons/youtube.svg",
                 "text" => "Histórico",
@@ -88,7 +84,7 @@ function SidebarComponent()
     }
 
     return <<<HTML
-        <aside id="main-sidebar" class="h-[calc(100vh-4rem)] md:h-[calc(100vh-5rem)] w-64 top-16 md:top-20 sticky p-7 transition-all border-r border-secondary/10">
+        <aside id="main-sidebar" class="h-[calc(100vh-5rem)] w-64 top-20 sticky p-7 transition-all border-r border-secondary/10">
             <h3 class="title text-secondary text-sm">HOME</h3>
             <ul class="flex flex-col gap-9 mt-5">
                 $htmlHome

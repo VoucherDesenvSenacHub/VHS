@@ -5,7 +5,7 @@ namespace Src\Application\Controllers;
 use Src\Application\Core\Controller;
 use Src\Infra\Model\VideoModel;
 use Src\Infra\Model\UserModel;
-use Src\Infra\Model\EventModel;
+
 use Src\Infra\Model\UsersFollowersModel;
 use Src\Infra\Model\UsersCategoryModel;
 use Src\Infra\Model\FastModel;
@@ -17,7 +17,7 @@ class SearchController extends Controller
     private FastModel $fastModel;
     private UserModel $userModel;
     private FastLikeModel $fastLikeModel;
-    private EventModel $eventModel;
+
     private UsersFollowersModel $usersFollowersModel;
     private UsersCategoryModel $usersCategoryModel;
 
@@ -27,7 +27,7 @@ class SearchController extends Controller
         $this->fastModel = $this->model("fast");
         $this->fastLikeModel = $this->model("fastLike");
         $this->userModel = $this->model("user");
-        $this->eventModel = $this->model("event");
+
         $this->usersFollowersModel = $this->model("usersFollowers");
         $this->usersCategoryModel = $this->model("usersCategory");
 
@@ -61,13 +61,7 @@ class SearchController extends Controller
                     $data[$key]['category'] = $categories[0]['name'] ?? 'Sem categoria';
                 }
                 break;
-            case 'event':
-                if (method_exists($this->eventModel, 'getEventByTitle')) {
-                    $data = $this->eventModel->getEventByTitle($query, $offset, $limit + 1);
-                } else {
-                    $data = [];
-                }
-                break;
+
             default:
                 $data = $this->videoModel->getVideoByTitle($query, $offset, $limit + 1);
                 break;

@@ -7,6 +7,8 @@ use Src\Infra\Model\AvaliationModel as ModelAvaliationModel;
 use Src\Infra\Model\CommentModel;
 use Src\Infra\Model\UserModel;
 use Src\Infra\Model\VideoModel;
+use Src\Infra\Model\UsersFollowersModel;
+use Src\Infra\Model\HistoryModel;
 
 use function Src\Application\Utils\Redirect\redirect;
 
@@ -16,18 +18,21 @@ class VideoController extends Controller
 {
     private VideoModel $videoModel;
     private ModelAvaliationModel $avaliationModel;
-
     private CommentModel $commentModel;
+    private UsersFollowersModel $usersFollowersModel;
+    private HistoryModel $historyModel;
 
     public function index()
     {
         $this->videoModel = $this->model('video');
         $this->avaliationModel = $this->model("avaliation");
         $this->commentModel = $this->model("comment");
+        $this->usersFollowersModel = $this->model("usersFollowers");
+        $this->historyModel = $this->model("history");
 
         $video = $this->videoModel->getVideoById($_GET['id'] ?? "");
 
-        if (empty($video)) return redirect("/404");
+        if (empty($video)) return redirect("/VHS/404");
 
 
         $video = $video[0];
@@ -35,6 +40,10 @@ class VideoController extends Controller
         $relatedVideos = $this->videoModel->getVideosByCategory($video["category_id"]);
 
         $this->videoModel->incrementViewCount($_GET["id"]);
+
+        if (isset($_SESSION['user'])) {
+            $this->historyModel->addToHistory($_SESSION['user']['id'], $_GET["id"]);
+        }
 
         $userAvaliation = $this->avaliationModel->getAvaliation(
             $video["id"],
@@ -68,6 +77,11 @@ class VideoController extends Controller
             $nextPageComments = 1;
         }
 
+        $isFollowing = false;
+        if (isset($_SESSION['user'])) {
+            $isFollowing = $this->usersFollowersModel->isFollowing($_SESSION['user']['id'], $video['author_id']);
+        }
+
         $this->view("/home/video/index", [
             "video" => $video,
             "releated_videos" => $relatedVideos,
@@ -77,6 +91,7 @@ class VideoController extends Controller
             "next_page_comments" => $nextPageComments,
             "offset" => $offset,
             "limit" => $limit,
+            "is_following" => $isFollowing
         ]);
     }
 }

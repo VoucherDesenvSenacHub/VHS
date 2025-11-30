@@ -102,4 +102,10 @@ class FastModel extends Model
             ":title" => $title
         ]);
     }
+
+    public function addView(string $id): bool
+    {
+        $sql = "UPDATE fasts SET views = views + 1 WHERE id = :id";
+        return $this->database->exec($sql, [":id" => $id]);
+    }
 }

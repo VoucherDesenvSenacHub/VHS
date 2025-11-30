@@ -55,7 +55,7 @@ $sort = $_SESSION["page_data"]["sort"] ?? 'desc';
                 <?php
                 echo ButtonComponent(text: "Videos", variant: "studio", link: "/VHS/studio/content/video", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]");
                 echo ButtonComponent(text: "Fast", variant: "studio", link: "/VHS/studio/content/fast", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]");
-                echo ButtonComponent(text: "Eventos", variant: "studio", link: "/VHS/studio/content/event", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]");
+
                 ?>
             </div>
 

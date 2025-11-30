@@ -4,7 +4,6 @@ require_once __DIR__ . '/../../application/routes/route.config.php';
 require_once __DIR__ . '/../../vendor/routes.autoload.php';
 require_once __DIR__ . '/../../../vendor/autoload.php';
 
-
 use Dotenv\Dotenv;
 use Src\Application\Controllers\AddLikeFastController;
 use Src\Application\Controllers\AddViewFastController;
@@ -38,7 +37,7 @@ use Src\Application\Controllers\StudioFastViewController;
 use Src\Application\Controllers\StudioUpdateVideoViewController;
 use Src\Application\Middlewares\RedirectUserNotCreatorMiddleware;
 use Src\Application\Controllers\SignInViewController;
-use Src\Application\Controllers\ViewEventsController;
+
 use Src\Application\Controllers\EditChannelController;
 use Src\Application\Controllers\EditChannelViewController;
 use Src\Application\Middlewares\RedirectUserNotAdminMiddleware;
@@ -69,6 +68,7 @@ use Src\Application\Controllers\StudioUpdateFastViewController;
 use Src\Application\Controllers\UserBlockedUserController;
 use Src\Application\Controllers\FollowUserController;
 use Src\Application\Controllers\UnfollowUserController;
+use Src\Controllers\Views\History\HistoryViewController;
 
 $router = new Router();
 
@@ -137,9 +137,8 @@ $router->get("/home/search", SearchController::class, RedirectUserNotLoggedMiddl
 $router->get("/home/channel", ChannelController::class, RedirectUserNotLoggedMiddleware::class);
 $router->get("/seed/users", SeedUsersController::class);
 $router->get("/user/settings", UserSettingsViewController::class, RedirectUserNotLoggedMiddleware::class);
-$router->get("/home/events", ViewEventsController::class);
 $router->get('/studio/channel/edit', EditChannelViewController::class, RedirectUserNotCreatorMiddleware::class);
-$router->get("/home/events", ViewEventsController::class, RedirectUserNotLoggedMiddleware::class);
+
 
 $router->get("/admin/analytics", AdminAnalyticsViewController::class, RedirectUserNotAdminMiddleware::class);
 $router->get("/admin/categories", AdminCategoriesViewController::class, RedirectUserNotAdminMiddleware::class);
@@ -148,5 +147,6 @@ $router->get("/admin/users", AdminUsersViewController::class, RedirectUserNotAdm
 
 $router->get("/home/video", VideoController::class, /*RedirectUserNotLoggedMiddleware::class*/);
 $router->get("/home/fasts", FastController::class, RedirectUserNotLoggedMiddleware::class);
+$router->get("/home/history", HistoryViewController::class, RedirectUserNotLoggedMiddleware::class);
 
 $router->run();

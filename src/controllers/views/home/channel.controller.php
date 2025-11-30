@@ -72,7 +72,6 @@ class ChannelController extends Controller
         } elseif ($tab === 'about') {
             $content = [];
         } else {
-            // Default to videos
             $content = $this->videoModel->getAllVideosByUserId($userId, $offset, $limit + 1);
         }
 

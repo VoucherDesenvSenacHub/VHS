@@ -88,20 +88,15 @@ class VideoModel extends Model
             v.*,
             u.username,
             u.avatar_url,
-            c.name as category_name,
-            COUNT(com.id) as comments_count
+            c.name as category_name
         FROM
             videos v
-        JOIN
+        INNER JOIN
             users u ON u.id = v.author_id
-        JOIN
+        INNER JOIN
             categories c ON c.id = v.category_id
-        LEFT JOIN
-            comments com ON com.video_id = v.id AND com.is_deleted = 0
         WHERE
-            v.id = :id AND v.is_deleted = 0
-        GROUP BY
-            v.id, u.username, u.avatar_url, c.name";
+            v.id = :id AND v.is_deleted = 0";
 
         return $this->database->query($sql, [":id" => $id]);
     }
@@ -220,5 +215,34 @@ class VideoModel extends Model
     {
         $sql = "SELECT videos.*, users.username, users.avatar_url FROM videos INNER JOIN users ON videos.author_id = users.id WHERE videos.author_id = :userId AND videos.is_deleted = 0 ORDER BY videos.created_at DESC LIMIT $offset, $limit";
         return $this->database->query($sql, [":userId" => $userId]);
+    }
+
+    public function getHistoryByUserId(string $userId, int $offset, int $limit)
+    {
+        $sql = "SELECT 
+            v.*, 
+            u.username, 
+            u.avatar_url,
+            uh.created_at as watched_at
+        FROM 
+            users_history uh
+        INNER JOIN 
+            videos v ON uh.video_id = v.id
+        INNER JOIN 
+            users u ON v.author_id = u.id
+        WHERE 
+            uh.user_id = :userId AND v.is_deleted = 0
+        ORDER BY 
+            uh.created_at DESC 
+        LIMIT $offset, $limit";
+
+        return $this->database->query($sql, [":userId" => $userId]);
+    }
+
+    public function countHistoryByUserId(string $userId): int
+    {
+        $sql = "SELECT COUNT(*) as total FROM users_history uh INNER JOIN videos v ON uh.video_id = v.id WHERE uh.user_id = :userId AND v.is_deleted = 0";
+        $result = $this->database->query($sql, [":userId" => $userId]);
+        return (int)($result[0]['total'] ?? 0);
     }
 }

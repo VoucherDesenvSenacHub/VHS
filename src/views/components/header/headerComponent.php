@@ -31,7 +31,7 @@ function HeaderComponent()
                         <img src='/VHS/public/icons/lupa.svg' class='w-5 h-5 pointer-events-none'>
                     </button>
 
-                    <div id='search-bar' class='absolute right-14 rounded-lg shadow-lg overflow-hidden w-0 opacity-0 transition-all duration-300 ease-in-out md:block hidden'>
+                    <div id='search-bar' class='absolute top-0 right-14 rounded-lg shadow-lg overflow-hidden w-0 opacity-0 transition-all duration-300 ease-in-out md:block hidden'>
                         <form action="/VHS/home/search" method="GET">
                             <input 
                                 type='text' 
