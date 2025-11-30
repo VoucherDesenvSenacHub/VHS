@@ -4,11 +4,11 @@ require_once __DIR__ . "/../../../components/cards/index.php";
 require_once __DIR__ . "/../../../components/utils/inputComponent.php";
 require_once __DIR__ . "/../../../components/studioSideMenu/studioSideMenuComponent.php";
 require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
-require_once __DIR__ . "/../../../components/CardFastComponent/cardFast.php";
+require_once __DIR__ . "/../../../components/fastCard/index.php";
 require_once __DIR__ . "/../../../../application/utils/pagination.php";
 
 use function Src\Application\Utils\paginate;
-use function Src\Views\Components\CardFast;
+use function Src\Views\Components\FastCard\FastCardComponent;
 use function src\views\components\Utils\ButtonComponent;
 use function Src\Views\Components\header\HeaderComponent;
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
@@ -104,13 +104,13 @@ $sort = $_SESSION["page_data"]["sort"] ?? 'desc';
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     <?php
                     foreach ($fasts as $fast) {
-                        echo CardFast([
+                        echo FastCardComponent([
                             'id' => $fast['id'],
-                            'thumbnail_url' => "/VHS/public/thumbnails/" . $fast['thumbnail_url'],
-                            'titulo' => $fast['title'],
+                            'thumbnail_url' => $fast['thumbnail_url'],
+                            'title' => $fast['title'],
                             'likes' => $fast['likes'] ?? '0',
                             'views' => $fast['views'] ?? '0'
-                        ]);
+                        ], true);
                     }
                     ?>
                 </div>
@@ -122,6 +122,9 @@ $sort = $_SESSION["page_data"]["sort"] ?? 'desc';
 
         </main>
     </div>
+
+    <!-- Script to handle card options menu (same as video cards) -->
+    <script src="/VHS/src/views/components/cards/script.js" defer></script>
 
     <script defer>
         const input = document.querySelector("input[name='search']");

@@ -58,6 +58,7 @@ use Src\Application\Controllers\FastUpdateController;
 use Src\Application\Controllers\VideoAvaliationController;
 use Src\Application\Controllers\VideoController;
 use Src\Application\Controllers\StudioAnalyticsVideoViewController;
+use Src\Application\Controllers\StudioAnalyticsViewController;
 use Src\Application\Controllers\VideoDeleteController;
 use Src\Application\Controllers\StudioCommentsViewController;
 use Src\Application\Controllers\LikeCommentsCreatorController;
@@ -126,7 +127,7 @@ $router->get("/studio/create/fast", StudioFastViewController::class, RedirectUse
 $router->get('/studio/content/video', StudioContentVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get('/studio/content/video/edit', StudioUpdateVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get('/studio/content/video/analytic', StudioAnalyticsVideoViewController::class);
-$router->get("/studio/analytics", StudioAnalyticsVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
+$router->get("/studio/analytics", StudioAnalyticsViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get("/studio/create/video", StudioCreateVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get("/studio/create/fast", StudioFastViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get("/studio/content/fast", StudioContentFastViewController::class, RedirectUserNotCreatorMiddleware::class);
