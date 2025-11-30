@@ -6,15 +6,20 @@ require_once __DIR__ . "/../../../components/barra_admin/barra_admin.php";
 require_once __DIR__ . "/../../../components/filter/filter.php";
 require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
 require_once __DIR__ . "/../../../components/utils/sweetalert.php";
+require_once __DIR__ . "/../../../components/filter/filter.php";
 
 use function Src\Views\Components\categoriesDataTableComponent\categoriesDataTableComponent;
 use function Src\Views\Components\header\HeaderComponent;
 use function src\views\components\barra_admin\barra_admin;
 use function src\views\components\utils\InputComponent;
 use function Src\Application\Utils\showSweetAlert;
+use function src\views\components\filter\Filter;
 
 $categoryData = $_SESSION["page_data"]["list"] ?? [];
 $next_page_categories = $_SESSION["page_data"]["next_page_categories"] ?? 0;
+$search = $_SESSION["page_data"]["search"] ?? '';
+$sort = $_SESSION["page_data"]["sort"] ?? 'desc';
+
 $errors = $_SESSION['redirect_data']['errors'] ?? [];
 $success = $_SESSION["redirect_data"]["success"] ?? null;
 $fields = $_SESSION['redirect_data']['fields'] ?? [];
@@ -46,24 +51,39 @@ if (!empty($errors) && is_array($errors)) {
 
 <body class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center text-white font-[Poppins]">
     <?= HeaderComponent() ?>
-    <div class="flex gap-10">
-        <?= barra_admin() ?>
+    <div class="flex">
+        <div class="max-lg:hidden">
+            <?= barra_admin() ?>
+        </div>
+
         <div class="p-6 pt-8 w-full flex flex-col gap-6">
             <div class="flex flex-col gap-4">
-                <div class="flex justify-between items-center">
+                <div class="flex flex-col items-normal gap-3 justify-between md:items-center md:gap-0 md:flex-row">
                     <div>
-                        <text class='text-3xl font-bold text-white cursor-default'>Gerenciamento de Categorias</text>
+                        <text class='font-semibold xl:text-title text-xl md:text-2xl cursor-default'>Gerenciamento de Categorias</text>
                     </div>
                     <div class="flex">
-                        <button id="openModalBtn" type="button" class="bg-[#660BAD] transition-colors hover:bg-purple-700 text-gray-50 px-4 py-2 rounded-md w-[200px] h-[50px]">Cadastrar</button>
+                        <button id="openModalBtn" type="button" class="bg-[#660BAD] transition-colors hover:bg-purple-700 text-gray-50 px-4 py-2 rounded-md w-full md:w-[200px] h-[50px]">Cadastrar</button>
                     </div>
                 </div>
-                <div class="w-full">
-                    <?= InputComponent(placeholder: "Pesquisar", type: "text") ?>
-                </div>
+                <form method="get" class="flex flex-col gap-4">
+                    <input type="hidden" name="sort" value="<?= htmlspecialchars($sort) ?>">
+                    <div class="relative cursor-pointer">
+                        <?= InputComponent(
+                            placeholder: "Pesquisar",
+                            type: "text",
+                            icon: "/VHS/public/icons/Filter.svg",
+                            name: "search",
+                            value: $search,
+                            iconPosition: "left",
+                            onClickIcon: "showFilterMenu()"
+                        ) ?>
+                        <?= Filter($search, $sort) ?>
+                    </div>
+                </form>
             </div>
             <div class="w-full">
-                <?= categoriesDataTableComponent($categoryData , $next_page_categories); ?>
+                <?= categoriesDataTableComponent($categoryData, $next_page_categories); ?>
             </div>
             <?php
             if (!empty($errors) && is_array($errors)) {
@@ -111,6 +131,8 @@ if (!empty($errors) && is_array($errors)) {
         const categoryModal = document.getElementById('categoryModal');
         const closeModalBtn = document.getElementById('closeModalBtn');
         const saveCategoryBtn = document.getElementById('saveCategoryBtn');
+        const input = document.querySelector("input[name='search']");
+        let timeout = null;
 
         function openModal() {
             modalOverlay.classList.remove('hidden');
@@ -136,6 +158,14 @@ if (!empty($errors) && is_array($errors)) {
         closeModalBtn.addEventListener('click', closeModal);
         saveCategoryBtn.addEventListener('click', () => {
             document.querySelector('form').dispatchEvent(new Event('submit'));
+        });
+
+        input.addEventListener("input", () => {
+            clearTimeout(timeout);
+
+            timeout = setTimeout(() => {
+                input.form.submit();
+            }, 1500);
         });
     </script>
 </body>

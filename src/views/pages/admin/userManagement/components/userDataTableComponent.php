@@ -8,7 +8,7 @@ require_once __DIR__ . '/../../../../../application/utils/pagination.php';
 
 use function Src\Application\Utils\paginate;
 
-function userDataTableComponent($users)
+function userDataTableComponent($users, $nextPage)
 {
     if (empty($users)) {
         return <<<HTML
@@ -18,7 +18,7 @@ function userDataTableComponent($users)
         HTML;
     }
     $rows = '';
-    $pagination = paginate($users, 7);
+    $pagination = paginate($users, $nextPage);
 
     foreach ($users as $user) {
         $initials = strtoupper(substr($user['name'], 0, 1) . substr(strrchr($user['name'], ' '), 1, 1));

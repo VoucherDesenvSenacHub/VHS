@@ -15,6 +15,9 @@ use function src\views\components\filter\Filter;
 use function Src\Application\Utils\showSweetAlert;
 
 $users = $_SESSION["page_data"]["users"];
+$nextPage = $_SESSION["page_data"]["next_page"];
+$search = $_SESSION["page_data"]["search"] ?? '';
+$sort = $_SESSION["page_data"]["sort"] ?? 'desc';
 $success = $_SESSION["redirect_data"]["success"] ?? null;
 $errors = $_SESSION["redirect_data"]["errors"] ?? null;
 
@@ -35,35 +38,36 @@ unset($_SESSION["redirect_data"]);
 
 <body class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center text-white font-[Poppins] overflow-x-hidden">
     <?= HeaderComponent() ?>
-    <div class="flex gap-10">
-        <div class="hidden md:block">
+    <div class="flex">
+        <div class="max-lg:hidden">
             <?= barra_admin() ?>
         </div>
         <div class="p-6 pt-8 w-full flex flex-col gap-6">
             <div class="flex flex-col gap-4">
                 <div>
-                    <text class='text-xl md:text-3xl font-bold text-white text-center md:text-left'>Gerenciamento de Usuários</text>
+                    <text class='font-semibold xl:text-title text-2xl text-center md:text-left'>Gerenciamento de Usuários</text>
                 </div>
-                <div class="flex flex-col gap-2">
-                    <div class="flex items-center justify-center gap-4">
-                        <div class="h-full pt-6">
-                            <?= Filter() ?>
-                        </div>
-                        <div class="w-full">
-                            <form method="GET">
-                                <?= InputComponent(
-                                    placeholder: "Pesquisar",
-                                    type: "text",
-                                    name: "name",
-                                    value: $_GET['name'] ?? ""
-                                ) ?>
-                            </form>
-                        </div>
+
+                <form method="GET" class="flex flex-col gap-4">
+                    <input type="hidden" name="sort" value="<?= htmlspecialchars($sort) ?>">
+                    <div class="relative cursor-pointer">
+                        <?= InputComponent(
+                            placeholder: "Pesquisar",
+                            type: "text",
+                            icon: "/VHS/public/icons/Filter.svg",
+                            name: "name",
+                            value: $search,
+                            iconPosition: "left",
+                            onClickIcon: "showFilterMenu()"
+                        ) ?>
+
+                        <?= Filter($search, $sort) ?>
                     </div>
-                </div>
+                </form>
+
             </div>
             <div class="w-full overflow-x-auto">
-                <?= userDataTableComponent($users); ?>
+                <?= userDataTableComponent($users, $nextPage); ?>
             </div>
             <?php
             if (isset($errors)) {
@@ -75,6 +79,19 @@ unset($_SESSION["redirect_data"]);
             ?>
         </div>
     </div>
+
+    <script defer>
+        const input = document.querySelector("input[name='name']");
+        let timeout = null;
+
+        input.addEventListener("input", () => {
+            clearTimeout(timeout);
+
+            timeout = setTimeout(() => {
+                input.form.submit();
+            }, 1500);
+        });
+    </script>
 </body>
 
 </html>

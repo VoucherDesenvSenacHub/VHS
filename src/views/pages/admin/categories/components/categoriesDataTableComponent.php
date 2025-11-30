@@ -84,7 +84,7 @@ function categoriesDataTableComponent(array $categories , int $next_page_categor
         <!-- Modal de edição -->
         <div id="<?php echo $overlayId; ?>" class="absolute inset-0 bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 hidden"></div>
         <div id="<?php echo $modalId; ?>" class="absolute inset-0 z-20 opacity-0 transition-opacity duration-400 hidden flex items-center justify-center">
-            <div class="max-w-sm w-full flex flex-col gap-3 p-6 bg-gray-900 text-gray-50 border border-gray-700 rounded-lg transform -translate-y-12 transition-transform duration-300">
+            <div class="max-w-sm w-[300px] md:w-full flex flex-col gap-3 p-6 bg-gray-900 text-gray-50 border border-gray-700 rounded-lg transform -translate-y-12 transition-transform duration-300">
                 <div class="flex justify-center items-center">
                     <h2 class="text-lg font-bold text-white cursor-default">Editar Categoria</h2>
                 </div>
@@ -117,7 +117,7 @@ function categoriesDataTableComponent(array $categories , int $next_page_categor
         <div id="<?php echo $deleteOverlayId; ?>" class="absolute inset-0 bg-black bg-opacity-50 z-10 opacity-0 transition-opacity duration-300 hidden"></div>
         <div id="<?php echo $deleteModalId; ?>" class="absolute inset-0 z-20 opacity-0 transition-opacity duration-300 hidden flex items-center justify-center">
             <input type="hidden" name="id" value="<?php echo htmlspecialchars($category['id'], ENT_QUOTES, 'UTF-8'); ?>" />
-            <div class="max-w-sm w-full flex flex-col gap-3 p-6 bg-gray-900 text-gray-50 border border-gray-700 rounded-lg transform -translate-y-12 transition-transform duration-300">
+            <div class="max-w-sm w-[300px] md:w-full flex flex-col gap-3 p-6 bg-gray-900 text-gray-50 border border-gray-700 rounded-lg transform -translate-y-12 transition-transform duration-300">
                 <div class="flex justify-center items-center">
                     <h2 class="text-lg font-bold text-white">Confirmar Exclusão</h2>
                 </div>

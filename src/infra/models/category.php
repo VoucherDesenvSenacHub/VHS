@@ -68,10 +68,11 @@ class CategoryModel extends Model
         $sql = "SELECT * FROM categories ORDER BY name DESC";
         return $this->database->query($sql);
     }
-    public function getCategories(int $offset, int $limit): array
+    
+    public function getCategories(int $offset, int $limit, string $search, string $ordering): array
     {
-        $sql = "SELECT * FROM categories ORDER BY name DESC LIMIT $offset, $limit";
-        return $this->database->query($sql);
+        $sql = "SELECT * FROM categories WHERE name LIKE :name ORDER BY name $ordering LIMIT $offset, $limit";
+        return $this->database->query($sql, ["name" => "%$search%"]);
     }
 
     public function createCategory(string $name): bool

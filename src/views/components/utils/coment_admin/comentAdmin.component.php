@@ -62,7 +62,7 @@ function Comment(string $name, string $text, string $thumbnail_url, string $crea
             </div>
 
             <div>
-                <img class="h-20 rounded-lg" src="{$thumbnail_url}" alt="Thumbnail do comentário">
+                <img class="h-20 rounded-lg hidden md:block" src="{$thumbnail_url}" alt="Thumbnail do comentário">
             </div>
         </div>
     HTML;

@@ -71,7 +71,7 @@ $sort = $_SESSION["page_data"]["sort"] ?? 'desc';
             <?php endif; ?>
           <?php endforeach; ?>
 
-          <div class="relative w-full">
+          <div class="relative w-full cursor-pointer">
             <?= InputComponent(
               placeholder: "Pesquisar",
               type: "text",

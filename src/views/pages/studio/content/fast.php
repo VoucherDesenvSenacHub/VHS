@@ -6,9 +6,11 @@ require_once __DIR__ . "/../../../components/studioSideMenu/studioSideMenuCompon
 require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
 require_once __DIR__ . "/../../../components/CardFastComponent/cardFast.php";
 require_once __DIR__ . "/../../../../application/utils/pagination.php";
+require_once __DIR__ . "/../../../components/filter/filter.php";
 
 use function Src\Application\Utils\paginate;
 use function Src\Views\Components\CardFast;
+use function src\views\components\filter\Filter;
 use function src\views\components\Utils\ButtonComponent;
 use function Src\Views\Components\header\HeaderComponent;
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
@@ -58,7 +60,7 @@ $sort = $_SESSION["page_data"]["sort"] ?? 'desc';
 
             <form action="" method="get" class="flex flex-col gap-4">
                 <input type="hidden" name="sort" value="<?= htmlspecialchars($sort) ?>">
-                <div class="relative">
+                <div class="relative cursor-pointer">
                     <?= InputComponent(
                         type: "text",
                         placeholder: "Pesquisar",
@@ -68,16 +70,7 @@ $sort = $_SESSION["page_data"]["sort"] ?? 'desc';
                         iconPosition: "left",
                         onClickIcon: "showFilterMenu()"
                     ) ?>
-                    <div id="filter" class="absolute right-0 top-full mt-2 z-10 hidden flex flex-col bg-[#2A2A2C] rounded-lg p-2 w-48 gap-2 shadow-xl">
-                        <a href="?search=<?= urlencode($search) ?>&sort=desc" class="flex items-center gap-2 p-1 rounded hover:bg-white/5 transition-colors cursor-pointer group">
-                            <img src="/VHS/public/icons/time-svgrepo-com.svg" alt="" class="size-5 rotate-[-110deg] opacity-50 group-hover:opacity-100 transition-opacity <?= $sort === 'desc' ? 'opacity-100' : '' ?>">
-                            <p class="text-[13px] font-poppins text-gray-200 <?= $sort === 'desc' ? 'text-white font-medium' : '' ?>">Mais recentes</p>
-                        </a>
-                        <a href="?search=<?= urlencode($search) ?>&sort=asc" class="flex items-center gap-2 p-1 rounded hover:bg-white/5 transition-colors cursor-pointer group">
-                            <img src="/VHS/public/icons/time-svgrepo-com.svg" class="size-5 opacity-50 group-hover:opacity-100 transition-opacity <?= $sort === 'asc' ? 'opacity-100' : '' ?>" alt="">
-                            <p class="text-[13px] font-poppins text-gray-200 <?= $sort === 'asc' ? 'text-white font-medium' : '' ?>">Mais antigos</p>
-                        </a>
-                    </div>
+                    <?= Filter($search, $sort) ?>
                 </div>
             </form>
 
