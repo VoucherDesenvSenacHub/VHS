@@ -10,7 +10,7 @@ function sharedComponent($url, $title, $id)
 
     return (<<<HTML
             <div id='modal-shared-{$id}' class='modal-shared hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 transition-all duration-300'>
-                <div class='modal-content bg-[#1F1F22] border border-white/10 w-full max-w-lg rounded-2xl p-6 shadow-2xl scale-95 opacity-0 transition-all duration-300 transform'>
+                <div class='modal-content bg-[#121214] border border-white/10 w-full max-w-lg rounded-2xl p-6 shadow-2xl scale-95 opacity-0 transition-all duration-300 transform'>
                     <div class='flex justify-between items-center mb-6'>
                         <h2 class='text-white text-xl font-bold'>Compartilhar</h2>
                         <button onclick='closeShared("{$id}")' class='text-gray-400 hover:text-white transition-colors p-1 rounded-lg hover:bg-white/5'>
@@ -84,7 +84,7 @@ function sharedComponent($url, $title, $id)
 function copyNotify()
 {
     return ("
-            <div id='copy-notification' class='hidden fixed bottom-6 right-6 z-[110] flex items-center gap-4 bg-[#1F1F22] border border-purple-500/50 p-4 rounded-xl shadow-2xl transform translate-y-10 opacity-0 transition-all duration-300'>
+            <div id='copy-notification' class='hidden fixed bottom-6 right-6 z-[110] flex items-center gap-4 bg-[#121214] border border-purple-500/50 p-4 rounded-xl shadow-2xl transform translate-y-10 opacity-0 transition-all duration-300'>
                 <div class='w-10 h-10 bg-purple-500/20 rounded-full flex items-center justify-center text-purple-400'>
                     <svg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
                         <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 13l4 4L19 7' />

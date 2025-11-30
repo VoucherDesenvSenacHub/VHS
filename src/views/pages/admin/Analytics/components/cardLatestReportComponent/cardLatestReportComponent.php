@@ -5,11 +5,11 @@ namespace Src\Views\Components;
 require_once __DIR__ . "/../../../../../../application/utils/getTimeAgo.php";
 
 use function Src\Application\Utils\getTimeAgo;
+
 function cardLatestReportComponent(array $videos)
-{
-    {
+{ {
         $html = <<<HTML
-            <div class='bg-[#1B1B1B] p-6 w-full rounded-xl border border-gray-700 space-y-2'>
+            <div class='w-full space-y-2'>
                 <style>
                     .custom-scroll::-webkit-scrollbar {
                         display: none;
@@ -25,7 +25,6 @@ function cardLatestReportComponent(array $videos)
                         transform: scale(1.1);
                     }
                 </style>
-                <text class='font-sans text-2xl font-bold text-white cursor-default'>Últimas Denúncias</text>
                 <div class='h-52 overflow-y-auto custom-scroll'>
         HTML;
 

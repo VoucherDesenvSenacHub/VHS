@@ -21,6 +21,7 @@ use function Src\Views\Components\Cards\viewCards;
 use function Src\Views\Components\Utils\Comment;
 use function Src\Views\Components\starrating\StarRatingComponent;
 use function Src\Views\Components\Shared\sharedComponent;
+use function Src\Views\Components\Utils\ButtonComponent;
 use function Src\Views\Components\Utils\InputComponent;
 
 $video = $_SESSION["page_data"]["video"];
@@ -120,19 +121,19 @@ if ($_SESSION["redirect_data"]["errors"] ?? false) {
             </div>
 
             <div class="flex items-center gap-2 w-full sm:w-auto self-end">
-              <div class="flex items-center bg-[#1F1F22] rounded-full px-2 py-1">
+              <div class="flex items-center bg-[#121214] rounded-full px-2 py-1">
                 <?= StarRatingComponent([
                   "initial_rating" => $user_avaliation,
                 ]) ?>
               </div>
 
-              <button class="flex items-center gap-2 bg-[#1F1F22] hover:bg-[#3F3F46] px-4 py-2 rounded-full transition-colors" onclick="toggleTheaterMode()" title="Modo Teatro">
+              <button class="flex items-center gap-2 bg-[#121214] hover:bg-[#3F3F46] px-4 py-2 rounded-full transition-colors" onclick="toggleTheaterMode()" title="Modo Teatro">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
                 </svg>
               </button>
 
-              <button class="flex items-center gap-2 bg-[#1F1F22] hover:bg-[#3F3F46] px-4 py-2 rounded-full transition-colors" onclick="openShared(event, '<?= $video['id'] ?>')">
+              <button class="flex items-center gap-2 bg-[#121214] hover:bg-[#3F3F46] px-4 py-2 rounded-full transition-colors" onclick="openShared(event, '<?= $video['id'] ?>')">
                 <img class="w-5 h-5" src="/VHS/public/icons/share.svg" alt="Share">
                 <span class="text-sm font-medium">Compartilhar</span>
               </button>
@@ -142,7 +143,7 @@ if ($_SESSION["redirect_data"]["errors"] ?? false) {
           </div>
 
           <!-- Description Box -->
-          <div class="bg-[#1F1F22] p-4 rounded-xl mb-6 hover:bg-[#27272A] transition-colors cursor-pointer group" onclick="this.classList.toggle('line-clamp-none')">
+          <div class="bg-[#121214] p-4 rounded-xl mb-6 hover:bg-[#27272A] transition-colors cursor-pointer group" onclick="this.classList.toggle('line-clamp-none')">
             <div class="flex gap-2 text-sm font-bold mb-2 text-white">
               <span><?= formatViews($video["views"] ?? 0) ?> visualizações</span>
               <span class="text-gray-400">•</span>

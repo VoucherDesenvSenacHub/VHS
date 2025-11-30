@@ -29,14 +29,14 @@ $avatar_url = !empty($user['avatar_url']) ? $user['avatar_url'] : 'default.png';
     <script src="/VHS/src/styles/tailwindglobal.js"></script>
     <script src="/VHS/src/views/pages/user/settings/script.js" defer></script>
     <style>
-        .glass-panel {
+        /* .bg-[#121214] border border-white/5 {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.05);
-        }
+        } */
 
         .category-btn.active {
-            background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+            background-color: rgb(107 33 168);
             border-color: transparent;
             color: white;
             box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
@@ -66,7 +66,7 @@ $avatar_url = !empty($user['avatar_url']) ? $user['avatar_url'] : 'default.png';
             <?= SidebarComponent() ?>
         </div>
 
-        <main class="flex-1 md:ml-64 p-6 w-full max-w-[1600px] mx-auto">
+        <main class="flex-1 p-6 w-full max-w-[1600px] mx-auto">
 
             <!-- Header Section -->
             <div class="mb-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
@@ -83,7 +83,7 @@ $avatar_url = !empty($user['avatar_url']) ? $user['avatar_url'] : 'default.png';
                 <!-- Left Column: Avatar & Basic Info -->
                 <div class="lg:col-span-1 space-y-6">
                     <!-- Avatar Card -->
-                    <div class="glass-panel rounded-3xl p-8 flex flex-col items-center text-center relative overflow-hidden group">
+                    <div class="bg-[#121214] border border-white/5 rounded-3xl p-8 flex flex-col items-center text-center relative overflow-hidden group">
                         <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-purple-900/20 to-transparent"></div>
 
                         <div class="relative w-40 h-40 mb-6">
@@ -111,7 +111,7 @@ $avatar_url = !empty($user['avatar_url']) ? $user['avatar_url'] : 'default.png';
                     </div>
 
                     <!-- Quick Stats or Info (Optional decoration) -->
-                    <div class="glass-panel rounded-3xl p-6">
+                    <div class="bg-[#121214] border border-white/5 rounded-3xl p-6">
                         <h4 class="text-sm font-bold text-gray-400 uppercase tracking-wider mb-4">Status da Conta</h4>
                         <div class="flex items-center gap-3 mb-3">
                             <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
@@ -128,7 +128,7 @@ $avatar_url = !empty($user['avatar_url']) ? $user['avatar_url'] : 'default.png';
                 <div class="lg:col-span-2 space-y-8">
 
                     <!-- Personal Info -->
-                    <div class="glass-panel rounded-3xl p-8">
+                    <div class="bg-[#121214] border border-white/5 rounded-3xl p-8">
                         <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-3">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -170,7 +170,7 @@ $avatar_url = !empty($user['avatar_url']) ? $user['avatar_url'] : 'default.png';
                     </div>
 
                     <!-- Security -->
-                    <div class="glass-panel rounded-3xl p-8">
+                    <div class="bg-[#121214] border border-white/5 rounded-3xl p-8">
                         <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-3">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
@@ -196,7 +196,7 @@ $avatar_url = !empty($user['avatar_url']) ? $user['avatar_url'] : 'default.png';
                     </div>
 
                     <!-- Interests -->
-                    <div class="glass-panel rounded-3xl p-8">
+                    <div class="bg-[#121214] border border-white/5 rounded-3xl p-8">
                         <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-3">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />

@@ -39,7 +39,7 @@ function CommentStudioComponent(string $name, string $text,  string | null $crea
     }
 
     $likeSrc = $creator_like ? '/VHS/public/icons/comments/favorite-comment-filled.svg' : '/VHS/public/icons/comments/favorite-comment.svg';
-    
+
     return
         <<<HTML
         <div class='w-full flex gap-4 py-2'>
@@ -60,13 +60,13 @@ function CommentStudioComponent(string $name, string $text,  string | null $crea
                 <div class='mt-2'>
                     <ul class='w-full flex gap-3 cursor-pointer'>  
                         <li>
-                            <img src='/VHS/public/icons/comments/trash.svg' onclick='deleteComment(event,"{$comment_id}", "{$name}")'>
+                            <img class="size-6" src='/VHS/public/icons/comments/trash.svg' onclick='deleteComment(event,"{$comment_id}", "{$name}")'>
                         </li>
                         <li>
-                            <img like="$creator_like" src=' $likeSrc' onclick='likeComment(event, "{$comment_id}", "{$creator_like}")'>
+                            <img class="size-6" like="$creator_like" src=' $likeSrc' onclick='likeComment(event, "{$comment_id}", "{$creator_like}")'>
                         </li>
                         <li>
-                            <img src='/VHS/public/icons/comments/user-block.svg' onclick='blockUser(event, "{$current_user_id}", "{$name}", "{$user_blocked_id}")'>
+                            <img class="size-6" src='/VHS/public/icons/comments/user-block.svg' onclick='blockUser(event, "{$current_user_id}", "{$name}", "{$user_blocked_id}")'>
                         </li>
                     </ul>    
                 </div>

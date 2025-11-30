@@ -40,144 +40,183 @@ $pagination = paginate($comments, $next_page_report_comments);
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/VHS/src/styles/tailwindglobal.js"></script>
     <link rel="stylesheet" href="/VHS/src/styles/global.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Syne:wght@500..800&display=swap" rel="stylesheet" />
 </head>
 
-<body class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center text-white font-[Poppins]">
+<body class="w-full min-h-screen bg-gradient-to-b from-[#100018] to-black text-white overflow-x-hidden font-[Poppins]">
     <?php echo HeaderComponent(); ?>
-    <div class="flex">
-        <div class="max-lg:hidden">
+
+    <div class="flex flex-col md:flex-row w-full">
+        <div class="hidden md:block">
             <?= barra_admin() ?>
         </div>
-        
-        <div class="p-6 pt-8 w-full flex flex-col gap-6">
-            <div class="flex flex-col gap-4">
+
+        <main class="flex-1 p-8 w-full max-w-[1600px] mx-auto">
+
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-8">
                 <div>
-                    <text class='font-semibold xl:text-title text-2xl text-white cursor-default'>Gerenciamento de Denúncias</text>
+                    <h1 class="text-2xl font-bold text-white">Gerenciamento de Denúncias</h1>
+                    <p class="text-gray-400 mt-1">Analise e modere os comentários reportados</p>
+                </div>
+            </div>
+
+            <div class="bg-[#121214] border border-white/5 rounded-2xl p-6 shadow-xl">
+                <div class="flex flex-col md:flex-row gap-4 mb-8 items-center justify-between">
+                    <div class="w-full">
+                        <form method="GET" class="w-full relative">
+                            <input type="hidden" name="sort" value="<?= htmlspecialchars($sort) ?>">
+                            <?= InputComponent(
+                                placeholder: "Pesquisar denúncias...",
+                                type: "text",
+                                name: "comment",
+                                value: $search,
+                                icon: "/VHS/public/icons/filter.svg",
+                                iconPosition: "left",
+                                width: "full",
+                                onClickIcon: "showFilterMenu()"
+                            ) ?>
+                            <?= Filter($search, $sort) ?>
+                        </form>
+                    </div>
                 </div>
 
-                <form method="GET" class="flex flex-col gap-4">
-                    <input type="hidden" name="sort" value="<?= htmlspecialchars($sort) ?>">
-                    <div class="relative w-full cursor-pointer">
-                        <?= InputComponent(
-                            placeholder: "Pesquisar",
-                            type: "text",
-                            icon: "/VHS/public/icons/Filter.svg",
-                            name: "comment",
-                            value: $search,
-                            iconPosition: "left",
-                            onClickIcon: "showFilterMenu()"
-                        ) ?>
+                <div class="flex flex-col gap-4">
+                    <?php
+                    if (empty($comments)) {
+                        echo '
+                        <div class="rounded-2xl border border-white/5 bg-[#121214] p-12 text-center">
+                            <div class="flex flex-col items-center justify-center gap-4">
+                                <div class="p-4 rounded-full bg-white/5">
+                                    <svg class="w-8 h-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-medium text-white">Nenhuma denúncia encontrada</h3>
+                                    <p class="text-gray-400 mt-1">Tudo limpo por aqui! 🎉</p>
+                                </div>
+                            </div>
+                        </div>';
+                    }
+                    foreach ($comments as $comment) {
+                        $time_ago = getTimeAgo($comment["created_at"]);
+                        echo Comment(
+                            $comment["name"],
+                            $comment["text"],
+                            $comment["thumbnail_url"],
+                            $time_ago,
+                            $comment["user_img"],
+                            $comment["report_id"],
+                            $comment["comment_id"],
+                            $comment["reported_user_id"],
+                            $comment["name_admin"]
+                        );
+                    }
+                    if (isset($errors)) {
+                        echo showSweetAlert("Erro ao processar ação", $errors, "error");
+                    }
+                    if (isset($success)) {
+                        echo showSweetAlert("Sucesso", $success, "success");
+                    }
+                    ?>
+                </div>
 
-                        <?= Filter($search, $sort) ?>
-                    </div>
-                </form>
-
+                <div class="mt-6">
+                    <?= $pagination; ?>
+                </div>
             </div>
-            <div class="flex flex-col gap-4">
-                <?php
-                if (empty($comments)) {
-                    echo '
-                    <div class="rounded-lg border border-gray-700 bg-[#1B1B1B] p-6 text-center">
-                        <p class="text-slate-400">Nenhum comentário encontrado.</p>
-                    </div>';
-                }
-                foreach ($comments as $comment) {
-                    $time_ago = getTimeAgo($comment["created_at"]);
-                    echo Comment(
-                        $comment["name"],
-                        $comment["text"],
-                        $comment["thumbnail_url"],
-                        $time_ago,
-                        $comment["user_img"],
-                        $comment["report_id"],
-                        $comment["comment_id"],
-                        $comment["reported_user_id"],
-                        $comment["name_admin"]
-                    );
-                }
-                if (isset($errors)) {
-                    echo showSweetAlert("Erro ao excluir ou editar usuário", $errors, "error");
-                }
-                if (isset($success)) {
-                    echo showSweetAlert("Sucesso ao excluir ou editar usuário", $success, "success");
-                }
-                ?>
-            </div>
-            <div>
-                <?= $pagination; ?>
-            </div>
-        </div>
+        </main>
     </div>
 
-    <div id="deleteCommentModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-        <div class="bg-[#1B1B1B] border border-gray-700 rounded-lg p-6 w-full max-w-md">
-            <h2 class="text-lg font-bold text-white">Excluir comentário</h2>
-            <p class="text-sm text-slate-400 mt-2">
-                Tem certeza que deseja excluir o comentário de
-                <span id="deleteCommentName" class="font-semibold text-white"></span>?
-            </p>
-
-            <div class="mt-6 flex justify-end gap-3">
-                <button id="closeDeleteCommentModal" class="px-4 py-2 rounded-md border border-gray-600 text-gray-300 hover:bg-gray-700">
+    <!-- Modals -->
+    <div id="deleteCommentModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm transition-all duration-300">
+        <div class="bg-[#121214] border border-white/10 rounded-2xl p-6 w-full max-w-md shadow-2xl transform scale-100 transition-all">
+            <div class="flex flex-col items-center text-center gap-4">
+                <div class="p-3 bg-red-500/10 rounded-full">
+                    <svg class="w-8 h-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold text-white">Excluir Comentário</h2>
+                    <p class="text-sm text-gray-400 mt-2">
+                        Tem certeza que deseja excluir o comentário de <span id="deleteCommentName" class="font-semibold text-white"></span>?
+                    </p>
+                </div>
+            </div>
+            <div class="mt-6 flex gap-3">
+                <button id="closeDeleteCommentModal" class="flex-1 h-full px-4 py-2.5 rounded-xl border border-white/10 text-gray-300 hover:bg-white/5 transition-colors font-medium">
                     Cancelar
                 </button>
-
-                <form action="/VHS/api/v1/comments/delete" method="POST">
+                <form class="flex-1" action="/VHS/api/v1/comments/delete" method="POST">
                     <input type="hidden" name="report_id" id="deleteReportId">
                     <input type="hidden" name="comment_id" id="deleteCommentId">
-                    <button type="submit" class="px-4 py-2 rounded-md bg-red-600 text-white hover:bg-red-700">
-                        Sim, excluir
+                    <button type="submit" class="w-full px-4 py-2.5 rounded-xl bg-red-500 hover:bg-red-600 text-white transition-colors font-medium shadow-lg shadow-red-500/20">
+                        Excluir
                     </button>
                 </form>
             </div>
         </div>
     </div>
 
-    <div id="blockUserModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-        <div class="bg-[#1B1B1B] border border-gray-700 rounded-lg p-6 w-full max-w-md">
-            <h2 class="text-lg font-bold text-white">Inativar Usuário</h2>
-            <p class="text-sm text-slate-400 mt-2">
-                Tem certeza que deseja inativar o usuário
-                <span id="blockUserName" class="font-semibold text-white"></span>?
-            </p>
-
-            <div class="mt-6 flex justify-end gap-3">
-                <button id="closeBlockUserModal" class="px-4 py-2 rounded-md border border-gray-600 text-gray-300 hover:bg-gray-700">
+    <div id="blockUserModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm transition-all duration-300">
+        <div class="bg-[#121214] border border-white/10 rounded-2xl p-6 w-full max-w-md shadow-2xl transform scale-100 transition-all">
+            <div class="flex flex-col items-center text-center gap-4">
+                <div class="p-3 bg-red-500/10 rounded-full">
+                    <svg class="w-8 h-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold text-white">Inativar Usuário</h2>
+                    <p class="text-sm text-gray-400 mt-2">
+                        Tem certeza que deseja inativar o usuário <span id="blockUserName" class="font-semibold text-white"></span>?
+                    </p>
+                </div>
+            </div>
+            <div class="mt-6 flex gap-3">
+                <button id="closeBlockUserModal" class="flex-1 h-full px-4 py-2.5 rounded-xl border border-white/10 text-gray-300 hover:bg-white/5 transition-colors font-medium">
                     Cancelar
                 </button>
-
-                <form action="/VHS/api/v1/users/block" method="POST">
+                <form class="flex-1" action="/VHS/api/v1/users/block" method="POST">
                     <input type="hidden" name="user_id" id="blockUserId">
-                    <button type="submit" class="px-4 py-2 rounded-md bg-red-600 text-white hover:bg-red-700">
-                        Sim, inativar
+                    <button type="submit" class="w-full px-4 py-2.5 rounded-xl bg-red-500 hover:bg-red-600 text-white transition-colors font-medium shadow-lg shadow-red-500/20">
+                        Inativar
                     </button>
                 </form>
             </div>
         </div>
     </div>
 
-    <div id="RemoveReportModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-        <div class="bg-[#1B1B1B] border border-gray-700 rounded-lg p-6 w-full max-w-md">
-            <h2 class="text-lg font-bold text-white">Remover Solicitação</h2>
-            <p class="text-sm text-slate-400 mt-2">
-                Tem certeza que deseja remover a solicitação de
-                <span id="RemoveReportUserName" class="font-semibold text-white"></span>?
-            </p>
-
-            <div class="mt-6 flex justify-end gap-3">
-                <button id="closeRemoveReportModal" class="px-4 py-2 rounded-md border border-gray-600 text-gray-300 hover:bg-gray-700">
+    <div id="RemoveReportModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm transition-all duration-300">
+        <div class="bg-[#121214] border border-white/10 rounded-2xl p-6 w-full max-w-md shadow-2xl transform scale-100 transition-all">
+            <div class="flex flex-col items-center text-center gap-4">
+                <div class="p-3 bg-green-500/10 rounded-full">
+                    <svg class="w-8 h-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold text-white">Remover Solicitação</h2>
+                    <p class="text-sm text-gray-400 mt-2">
+                        Deseja remover a denúncia de <span id="RemoveReportUserName" class="font-semibold text-white"></span> e manter o comentário?
+                    </p>
+                </div>
+            </div>
+            <div class="mt-6 flex gap-3">
+                <button id="closeRemoveReportModal" class="flex-1 h-full px-4 py-2.5 rounded-xl border border-white/10 text-gray-300 hover:bg-white/5 transition-colors font-medium">
                     Cancelar
                 </button>
-
-                <form action="/VHS/api/v1/comments/report/remove" method="POST">
+                <form class="flex-1" action="/VHS/api/v1/comments/report/remove" method="POST">
                     <input type="hidden" name="user_id" id="RemoveReportId">
-                    <button type="submit" class="px-4 py-2 rounded-md bg-green-600 text-white hover:bg-green-700">
-                        Sim, remover
+                    <button type="submit" class="w-full px-4 h-full py-2.5 rounded-xl bg-green-600 hover:bg-green-700 text-white transition-colors font-medium shadow-lg shadow-green-600/20">
+                        Manter
                     </button>
                 </form>
             </div>
         </div>
     </div>
+
     <script src="/VHS/src/views/pages/admin/complaintManagement/script.js"></script>
     <script defer>
         const input = document.querySelector("input[name='comment']");
@@ -199,4 +238,5 @@ if (!isset($_GET['comment'])) {
     unset($_SESSION['page_data']['search']);
 }
 ?>
+
 </html>

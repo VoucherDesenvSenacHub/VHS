@@ -6,13 +6,23 @@ require_once __DIR__ . '/../../../../../application/utils/pagination.php';
 
 use function Src\Application\Utils\paginate;
 
-function categoriesDataTableComponent(array $categories , int $next_page_categories)
+function categoriesDataTableComponent(array $categories, int $next_page_categories)
 {
     $pagination = paginate($categories, $next_page_categories);
     if (empty($categories)) {
         return <<<HTML
-            <div class="rounded-lg border border-gray-700 bg-[#1B1B1B] p-6 text-center">
-                <p class="text-slate-400">Nenhuma categoria criada.</p>
+            <div class="rounded-2xl border border-white/5 bg-[#121214] p-12 text-center">
+                <div class="flex flex-col items-center justify-center gap-4">
+                    <div class="p-4 rounded-full bg-white/5">
+                        <svg class="w-8 h-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-medium text-white">Nenhuma categoria encontrada</h3>
+                        <p class="text-gray-400 mt-1">Crie novas categorias para organizar o conteúdo.</p>
+                    </div>
+                </div>
             </div>
         HTML;
     }
@@ -21,17 +31,17 @@ function categoriesDataTableComponent(array $categories , int $next_page_categor
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <div class="overflow-hidden rounded-lg border border-gray-700 bg-[#1B1B1B] backdrop-blur-sm">
+    <div class="overflow-hidden rounded-xl border border-white/5 bg-[#121214]">
         <div class="overflow-x-auto">
             <table class="w-full">
                 <thead>
-                    <tr class="border-b border-gray-700 bg-gray-800/80">
-                        <th class="px-6 py-4 text-left text-sm font-semibold text-slate-300">Nome</th>
-                        <th class="px-6 py-4 text-left text-sm font-semibold text-slate-300">Data de Criação</th>
-                        <th class="px-6 py-4 text-center text-sm font-semibold text-white bg-[#660BAD] border-l border-[#660BAD]/30">Ações</th>
+                    <tr class="border-b border-white/5 bg-white/[0.02]">
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Nome</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Data de Criação</th>
+                        <th class="px-6 py-4 text-right text-xs font-semibold text-gray-400 uppercase tracking-wider">Ações</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-700">
+                <tbody class="divide-y divide-white/5">
                     <?php foreach ($categories as $category): ?>
                         <?php
                         $modalId = 'modal-' . htmlspecialchars($category['id'], ENT_QUOTES, 'UTF-8');
@@ -40,25 +50,32 @@ function categoriesDataTableComponent(array $categories , int $next_page_categor
                         $closeModalId = 'closeModal-' . htmlspecialchars($category['id'], ENT_QUOTES, 'UTF-8');
                         $openDeleteModalId = 'openDeleteModal-' . htmlspecialchars($category['id'], ENT_QUOTES, 'UTF-8');
                         ?>
-                        <tr class="group transition-colors hover:bg-[#660BAD]/10">
+                        <tr class="group transition-colors hover:bg-white/[0.02]">
                             <td class="px-6 py-4">
-                                <div class="font-semibold text-white"><?php echo htmlspecialchars($category['name'], ENT_QUOTES, 'UTF-8'); ?></div>
+                                <div class="flex items-center gap-3">
+                                    <div class="p-2 rounded-lg bg-[#660BAD]/10 text-[#660BAD]">
+                                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                                        </svg>
+                                    </div>
+                                    <span class="font-medium text-white"><?php echo htmlspecialchars($category['name'], ENT_QUOTES, 'UTF-8'); ?></span>
+                                </div>
                             </td>
                             <td class="px-6 py-4">
-                                <div class="text-sm text-slate-300">
+                                <div class="text-sm text-gray-400">
                                     <?php echo isset($category['created_at']) ? date('d/m/Y', strtotime($category['created_at'])) : 'N/A'; ?>
                                 </div>
                             </td>
-                            <td class="px-6 py-4 bg-[#660BAD]/5 border-l border-[#660BAD]/20">
-                                <div class="flex items-center justify-center gap-2">
-                                    <button id="<?php echo $openModalId; ?>" class="h-9 w-9 p-1 flex items-center justify-center text-[#660BAD] hover:bg-[#660BAD]/50 hover:border-[#660BAD] hover:text-white transition-all border border-[#660BAD]/60 rounded" data-category-id="<?php echo htmlspecialchars($category['id'], ENT_QUOTES, 'UTF-8'); ?>">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5">
-                                            <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32L19.513 8.2Z" />
+                            <td class="px-6 py-4">
+                                <div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <button id="<?php echo $openModalId; ?>" class="p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 transition-all" title="Editar" data-category-id="<?php echo htmlspecialchars($category['id'], ENT_QUOTES, 'UTF-8'); ?>">
+                                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                         </svg>
                                     </button>
-                                    <button id="<?php echo $openDeleteModalId; ?>" class="h-9 w-9 p-1 flex items-center justify-center text-[#660BAD] hover:bg-red-500/30 hover:border-red-500/40 hover:text-red-500 transition-all border border-[#660BAD]/60 rounded">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5">
-                                            <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z" clip-rule="evenodd" />
+                                    <button id="<?php echo $openDeleteModalId; ?>" class="p-2 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-500/10 transition-all" title="Excluir">
+                                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                         </svg>
                                     </button>
                                 </div>
@@ -69,7 +86,9 @@ function categoriesDataTableComponent(array $categories , int $next_page_categor
             </table>
         </div>
     </div>
-    <?php echo $pagination; ?>
+    <div class="mt-6">
+        <?php echo $pagination; ?>
+    </div>
 
     <?php foreach ($categories as $category): ?>
         <?php
@@ -82,56 +101,75 @@ function categoriesDataTableComponent(array $categories , int $next_page_categor
         ?>
 
         <!-- Modal de edição -->
-        <div id="<?php echo $overlayId; ?>" class="absolute inset-0 bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 hidden"></div>
-        <div id="<?php echo $modalId; ?>" class="absolute inset-0 z-20 opacity-0 transition-opacity duration-400 hidden flex items-center justify-center">
-            <div class="max-w-sm w-[300px] md:w-full flex flex-col gap-3 p-6 bg-gray-900 text-gray-50 border border-gray-700 rounded-lg transform -translate-y-12 transition-transform duration-300">
-                <div class="flex justify-center items-center">
-                    <h2 class="text-lg font-bold text-white cursor-default">Editar Categoria</h2>
-                </div>
-                <form method="POST" action="/VHS/src/application/routes/route.php/api/v1/admin/categories/update" class="edit-category-form">
-                    <div class="flex flex-col gap-4 w-full">
-                        <div class="flex flex-col w-full justify-start">
-                            <div class="flex w-full justify-start">
-                                <label class="text-right text-gray-300">Nome</label>
-                            </div>
-                            <input
-                                name="updateCategory"
-                                class="col-span-3 bg-gray-800 border border-gray-700 text-gray-50 p-2 rounded"
-                                value="<?php echo htmlspecialchars($category['name'], ENT_QUOTES, 'UTF-8'); ?>"
-                                required />
-                            <input
-                                type="hidden"
-                                name="categoryId"
-                                value="<?php echo htmlspecialchars($category['id'], ENT_QUOTES, 'UTF-8'); ?>" />
-                        </div>
-                        <div class=" flex justify-between gap-2">
-                            <button type="button" id="<?php echo $closeModalId; ?>" class="transition-colors w-full px-4 py-2 rounded-md border border-gray-600 text-gray-300 hover:bg-gray-700">Cancelar</button>
-                            <button type="submit" class="transition-colors w-full px-4 py-2 rounded-md bg-[#660BAD] text-white hover:bg-[#53088A]">Salvar</button>
-                        </div>
+        <div id="<?php echo $overlayId; ?>" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden transition-opacity duration-300 z-40"></div>
+        <div id="<?php echo $modalId; ?>" class="fixed inset-0 flex items-center justify-center hidden z-50 p-4">
+            <div class="w-full max-w-md bg-[#121214] border border-white/10 rounded-2xl p-6 shadow-2xl transform scale-95 opacity-0 transition-all duration-300">
+                <div class="flex flex-col gap-6">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-xl font-bold text-white">Editar Categoria</h2>
+                        <button id="<?php echo $closeModalId; ?>" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
                     </div>
-                </form>
+
+                    <form method="POST" action="/VHS/src/application/routes/route.php/api/v1/admin/categories/update">
+                        <div class="flex flex-col gap-4">
+                            <div class="flex flex-col gap-2">
+                                <label class="text-sm font-medium text-gray-300">Nome</label>
+                                <input
+                                    name="updateCategory"
+                                    class="w-full bg-[#09090B] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#660BAD] focus:ring-1 focus:ring-[#660BAD] transition-all"
+                                    value="<?php echo htmlspecialchars($category['name'], ENT_QUOTES, 'UTF-8'); ?>"
+                                    required />
+                                <input
+                                    type="hidden"
+                                    name="categoryId"
+                                    value="<?php echo htmlspecialchars($category['id'], ENT_QUOTES, 'UTF-8'); ?>" />
+                            </div>
+
+                            <div class="flex gap-3 mt-2">
+                                <button type="button" onclick="document.getElementById('<?php echo $closeModalId; ?>').click()" class="flex-1 px-4 py-2.5 rounded-xl border border-white/10 text-gray-300 hover:bg-white/5 transition-colors font-medium">
+                                    Cancelar
+                                </button>
+                                <button type="submit" class="flex-1 px-4 py-2.5 rounded-xl bg-[#660BAD] hover:bg-[#7a15c5] text-white transition-colors font-medium shadow-lg shadow-purple-900/20">
+                                    Salvar Alterações
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
 
         <!-- Modal de exclusão -->
-        <div id="<?php echo $deleteOverlayId; ?>" class="absolute inset-0 bg-black bg-opacity-50 z-10 opacity-0 transition-opacity duration-300 hidden"></div>
-        <div id="<?php echo $deleteModalId; ?>" class="absolute inset-0 z-20 opacity-0 transition-opacity duration-300 hidden flex items-center justify-center">
-            <input type="hidden" name="id" value="<?php echo htmlspecialchars($category['id'], ENT_QUOTES, 'UTF-8'); ?>" />
-            <div class="max-w-sm w-[300px] md:w-full flex flex-col gap-3 p-6 bg-gray-900 text-gray-50 border border-gray-700 rounded-lg transform -translate-y-12 transition-transform duration-300">
-                <div class="flex justify-center items-center">
-                    <h2 class="text-lg font-bold text-white">Confirmar Exclusão</h2>
-                </div>
-                <form method="POST" action="/VHS/src/application/routes/route.php/api/v1/admin/categories/delete">
-                    <input
-                        type="hidden"
-                        name="categoryId"
-                        value="<?php echo htmlspecialchars($category['id'], ENT_QUOTES, 'UTF-8'); ?>" />
-                    <div class="flex flex-col gap-4 w-full">
-                        <p class="text-sm text-slate-300 text-center">Tem certeza que deseja excluir a categoria <strong><?php echo htmlspecialchars($category['name'], ENT_QUOTES, 'UTF-8'); ?></strong>?</p>
+        <div id="<?php echo $deleteOverlayId; ?>" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden transition-opacity duration-300 z-40"></div>
+        <div id="<?php echo $deleteModalId; ?>" class="fixed inset-0 flex items-center justify-center hidden z-50 p-4">
+            <div class="w-full max-w-md bg-[#121214] border border-white/10 rounded-2xl p-6 shadow-2xl transform scale-95 opacity-0 transition-all duration-300">
+                <div class="flex flex-col items-center text-center gap-4">
+                    <div class="p-3 bg-red-500/10 rounded-full">
+                        <svg class="w-8 h-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
                     </div>
-                    <div class="flex mt-4 justify-between gap-2">
-                        <button type="button" id="<?php echo $closeDeleteModalId; ?>" class="transition-colors px-4 py-2 rounded-md w-full border border-gray-600 text-gray-300 hover:bg-gray-700">Cancelar</button>
-                        <button type="submit" class="transition-colors px-4 py-2 rounded-md w-full bg-red-600 text-white hover:bg-red-700">Excluir</button>
+                    <div>
+                        <h2 class="text-xl font-bold text-white">Excluir Categoria</h2>
+                        <p class="text-sm text-gray-400 mt-2">
+                            Tem certeza que deseja excluir a categoria <span class="font-semibold text-white"><?php echo htmlspecialchars($category['name'], ENT_QUOTES, 'UTF-8'); ?></span>?
+                        </p>
+                    </div>
+                </div>
+
+                <form method="POST" action="/VHS/src/application/routes/route.php/api/v1/admin/categories/delete">
+                    <input type="hidden" name="categoryId" value="<?php echo htmlspecialchars($category['id'], ENT_QUOTES, 'UTF-8'); ?>" />
+                    <div class="mt-6 flex gap-3">
+                        <button type="button" id="<?php echo $closeDeleteModalId; ?>" class="flex-1 px-4 py-2.5 rounded-xl border border-white/10 text-gray-300 hover:bg-white/5 transition-colors font-medium">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="flex-1 px-4 py-2.5 rounded-xl bg-red-500 hover:bg-red-600 text-white transition-colors font-medium shadow-lg shadow-red-500/20">
+                            Sim, excluir
+                        </button>
                     </div>
                 </form>
             </div>
@@ -139,150 +177,55 @@ function categoriesDataTableComponent(array $categories , int $next_page_categor
     <?php endforeach; ?>
 
     <script>
-        document.querySelectorAll("[id^=openModal-]").forEach(button => {
-            const categoryId = button.dataset.categoryId;
-            const modal = document.getElementById(`modal-${categoryId}`);
-            const overlay = document.getElementById(`overlay-${categoryId}`);
-            const closeModalButton = document.getElementById(`closeModal-${categoryId}`);
-            const modalContent = modal.querySelector("div");
-
-            button.addEventListener("click", () => {
-                const newUrl = new URL(window.location.href);
-                newUrl.searchParams.set('update', categoryId);
-                window.history.pushState({}, '', newUrl);
-
+        function setupModal(triggerBtn, modal, overlay, closeBtn, content) {
+            triggerBtn.addEventListener("click", () => {
                 modal.classList.remove("hidden");
                 overlay.classList.remove("hidden");
-                modal.classList.add("opacity-100");
-                overlay.classList.add("opacity-100");
-                modalContent.classList.remove("-translate-y-12");
+                // Force reflow
+                void modal.offsetWidth;
+
+                modal.classList.remove("opacity-0");
+                overlay.classList.remove("opacity-0"); // Fix: overlay opacity class
+                content.classList.remove("scale-95", "opacity-0");
+                content.classList.add("scale-100", "opacity-100");
                 document.body.classList.add("overflow-hidden");
-                modalContent.focus();
             });
 
-            window[`closeModal${categoryId}`] = () => {
-                const newUrl = new URL(window.location.href);
-                newUrl.searchParams.delete('update');
-                window.history.pushState({}, '', newUrl);
+            const close = () => {
+                modal.classList.add("opacity-0");
+                overlay.classList.add("opacity-0"); // Fix: overlay opacity class
+                content.classList.remove("scale-100", "opacity-100");
+                content.classList.add("scale-95", "opacity-0");
 
-                modal.classList.remove("opacity-100");
-                overlay.classList.remove("opacity-100");
-                modalContent.classList.add("-translate-y-12");
                 setTimeout(() => {
                     modal.classList.add("hidden");
                     overlay.classList.add("hidden");
                     document.body.classList.remove("overflow-hidden");
-                    button.focus();
                 }, 300);
             };
 
-            closeModalButton.addEventListener("click", window[`closeModal${categoryId}`]);
+            if (closeBtn) closeBtn.addEventListener("click", close);
+            overlay.addEventListener("click", close);
+        }
 
-            modal.addEventListener("click", (event) => {
-                if (event.target === modal || event.target === overlay) {
-                    window[`closeModal${categoryId}`]();
-                }
-            });
+        document.querySelectorAll("[id^=openModal-]").forEach(button => {
+            const id = button.dataset.categoryId;
+            const modal = document.getElementById(`modal-${id}`);
+            const overlay = document.getElementById(`overlay-${id}`);
+            const closeBtn = document.getElementById(`closeModal-${id}`);
+            const content = modal.querySelector("div");
 
-            document.addEventListener("keydown", (event) => {
-                if (event.key === "Escape" && !modal.classList.contains("hidden")) {
-                    window[`closeModal${categoryId}`]();
-                }
-            });
+            setupModal(button, modal, overlay, closeBtn, content);
         });
 
         document.querySelectorAll("[id^=openDeleteModal-]").forEach(button => {
-            const categoryId = button.id.replace("openDeleteModal-", "");
-            const modal = document.getElementById(`delete-modal-${categoryId}`);
-            const overlay = document.getElementById(`delete-overlay-${categoryId}`);
-            const cancelButton = document.getElementById(`cancel-delete-${categoryId}`);
-            const modalContent = modal.querySelector("div");
+            const id = button.id.replace("openDeleteModal-", "");
+            const modal = document.getElementById(`delete-modal-${id}`);
+            const overlay = document.getElementById(`delete-overlay-${id}`);
+            const closeBtn = document.getElementById(`cancel-delete-${id}`);
+            const content = modal.querySelector("div");
 
-            button.addEventListener("click", () => {
-                modal.classList.remove("hidden");
-                overlay.classList.remove("hidden");
-                modal.classList.add("opacity-100");
-                overlay.classList.add("opacity-100");
-                modalContent.classList.remove("-translate-y-12");
-                document.body.classList.add("overflow-hidden");
-                modalContent.focus();
-            });
-
-            window[`closeDeleteModal${categoryId}`] = () => {
-                modal.classList.remove("opacity-100");
-                overlay.classList.remove("opacity-100");
-                modalContent.classList.add("-translate-y-12");
-                setTimeout(() => {
-                    modal.classList.add("hidden");
-                    overlay.classList.add("hidden");
-                    document.body.classList.remove("overflow-hidden");
-                    button.focus();
-                }, 300);
-            };
-
-            cancelButton.addEventListener("click", window[`closeDeleteModal${categoryId}`]);
-
-            modal.addEventListener("click", (event) => {
-                if (event.target === modal || event.target === overlay) {
-                    window[`closeDeleteModal${categoryId}`]();
-                }
-            });
-
-            document.addEventListener("keydown", (event) => {
-                if (event.key === "Escape" && !modal.classList.contains("hidden")) {
-                    window[`closeDeleteModal${categoryId}`]();
-                }
-            });
-        });
-
-        document.querySelectorAll("[id^=openModal-]").forEach(button => {
-            const categoryId = button.dataset.categoryId;
-            const modal = document.getElementById(`modal-${categoryId}`);
-            const overlay = document.getElementById(`overlay-${categoryId}`);
-            const closeModalButton = document.getElementById(`closeModal-${categoryId}`);
-            const modalContent = modal.querySelector("div");
-
-            button.addEventListener("click", () => {
-                const baseUrl = window.location.origin + window.location.pathname;
-                window.history.pushState({}, '', `${baseUrl}/${categoryId}`);
-
-                modal.classList.remove("hidden");
-                overlay.classList.remove("hidden");
-                modal.classList.add("opacity-100");
-                overlay.classList.add("opacity-100");
-                modalContent.classList.remove("-translate-y-12");
-                document.body.classList.add("overflow-hidden");
-                modalContent.focus();
-            });
-
-            window[`closeModal${categoryId}`] = () => {
-                const baseUrl = window.location.origin + window.location.pathname.split('/').slice(0, -1).join('/');
-                window.history.pushState({}, '', baseUrl);
-
-                modal.classList.remove("opacity-100");
-                overlay.classList.remove("opacity-100");
-                modalContent.classList.add("-translate-y-12");
-                setTimeout(() => {
-                    modal.classList.add("hidden");
-                    overlay.classList.add("hidden");
-                    document.body.classList.remove("overflow-hidden");
-                    button.focus();
-                }, 300);
-            };
-
-            closeModalButton.addEventListener("click", window[`closeModal${categoryId}`]);
-
-            modal.addEventListener("click", (event) => {
-                if (event.target === modal || event.target === overlay) {
-                    window[`closeModal${categoryId}`]();
-                }
-            });
-
-            document.addEventListener("keydown", (event) => {
-                if (event.key === "Escape" && !modal.classList.contains("hidden")) {
-                    window[`closeModal${categoryId}`]();
-                }
-            });
+            setupModal(button, modal, overlay, closeBtn, content);
         });
     </script>
 <?php

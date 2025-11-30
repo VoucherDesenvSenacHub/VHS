@@ -39,58 +39,120 @@ use function Src\Views\Components\Utils\ButtonComponent;
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="/VHS/src/styles/tailwindglobal.js"></script>
   <link rel="stylesheet" href="/VHS/src/styles/global.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Syne:wght@500..800&display=swap" rel="stylesheet" />
 </head>
 
-<body>
-  <div class="flex min-h-screen text-white xl:justify-start justify-center max-w-[1920px] mx-auto">
-    <div class="flex justify-center mr-24 xl:mr-24 max-xl:hidden">
-      <img src="/VHS/public/images/Cassete.svg" alt="" class="relative right-14 mr-28 w-6/16">
+<body class="bg-gradient-to-b from-[#100018] to-black min-h-screen font-[Poppins] overflow-x-hidden">
+  <div class="flex min-h-screen text-white xl:justify-start justify-center mx-auto relative">
+
+
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+      <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#660BAD]/20 rounded-full blur-[120px]"></div>
+      <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#660BAD]/10 rounded-full blur-[120px]"></div>
     </div>
-    <div class="relative xl:min-w-1/2 xl:mx-20 flex items-center justify-center w-full max-w-md xl:max-w-none xl:w-auto px-4 xl:px-0">
-      <div class="flex flex-col gap-4">
-        <div class="flex items-center flex-col gap-2">
-          <img src="/VHS/public/logos/Logo.svg" alt="">
-          <p class="text-3xl font-semibold text-white max-xl:text-2xl">Entrar na sua conta</p>
-          <p class="text-secondary">Informe seus dados para entrar sua conta</p>
+
+    <div class="flex justify-center items-center mr-24 xl:mr-24 max-xl:hidden z-10 w-1/2">
+      <img src="/VHS/public/images/Cassete.svg" alt="" class="w-full max-w-[600px] drop-shadow-[0_0_50px_rgba(102,11,173,0.3)] animate-float">
+    </div>
+
+    <div class="relative xl:min-w-1/2 xl:mx-20 flex items-center justify-center w-full max-w-[35rem] xl:w-auto px-4 xl:px-0 z-10">
+      <div class="flex flex-col gap-6 w-full p-8 rounded-3xl border border-white/5 bg-white/[0.02] backdrop-blur-xl shadow-2xl">
+        <div class="flex items-center flex-col gap-3 mb-2">
+          <img src="/VHS/public/logos/Logo.svg" alt="" class="h-12 w-auto mb-2">
+          <h1 class="text-3xl font-bold text-white tracking-tight">Bem-vindo de volta!</h1>
+          <p class="text-gray-400 text-center text-sm">Informe seus dados para acessar sua conta</p>
         </div>
+
         <form action="/VHS/src/application/routes/route.php/api/v1/auth/signin" method="POST">
-          <div class="flex flex-col gap-4 w-full xl:w-96">
-            <?= InputComponent(placeholder: "Insira seu e-mail", name: "email", type: "email", label: "Email", icon: "/VHS/public/icons/Vector.svg", iconPosition: "w-6 h-6 right-3", value: $fields["email"] ?? "", error: !empty($emailError), errorDescription: !empty($emailError) ? $emailError : "") ?>
-            <?= InputComponent(placeholder: "Insira sua senha", name: "password", type: "password", label: "Senha", icon: "/VHS/public/icons/eyeOff.svg", iconPosition: "w-6 h-6 right-3", value: $fields["password"] ?? "", error: !empty($passwordError), errorDescription: !empty($passwordError) ? $passwordError : "") ?>
-            <?= !empty($genericError) ? "<p id='genericError' class='text-red-500'>Ocorreu um erro interno. Tente novamente mais tarde!</p>" : '' ?>
-            <?= !empty($emailPasswordError) ? "<p id='genericError' class='text-red-500'>Email ou senha incorretos</p>" : '' ?>
-            <a class="text-secondary underline" href="/VHS/src/views/pages/auth/new-password">Esqueceu sua senha? </a>
-            <?= CheckboxComponent(label: "Lembrar de mim", id: "keep_logged_in") ?>
-            <?= ButtonComponent(text: "Acessar Plataforma", variant: "default", className: " g-recaptcha btn-submit mt-4", type: "button", attributes: [
+          <div class="flex flex-col gap-5 w-full">
+            <?= InputComponent(
+              placeholder: "seu@email.com",
+              name: "email",
+              type: "email",
+              label: "Email",
+              icon: "/VHS/public/icons/Vector.svg",
+              iconPosition: "right",
+              value: $fields["email"] ?? "",
+              error: !empty($emailError),
+              errorDescription: !empty($emailError) ? $emailError : ""
+            ) ?>
+
+            <div class="flex flex-col gap-1">
+              <?= InputComponent(
+                placeholder: "Sua senha secreta",
+                name: "password",
+                type: "password",
+                label: "Senha",
+                icon: "/VHS/public/icons/eyeOff.svg",
+                iconPosition: "right",
+                value: $fields["password"] ?? "",
+                error: !empty($passwordError),
+                errorDescription: !empty($passwordError) ? $passwordError : ""
+              ) ?>
+              <div class="flex justify-end mt-1">
+                <a class="text-[#660BAD] hover:text-[#8a2be2] transition-colors font-medium" href="/VHS/src/views/pages/auth/new-password">Esqueceu sua senha?</a>
+              </div>
+            </div>
+
+            <?= !empty($genericError) ? "<div class='p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-500 text-sm text-center'>Ocorreu um erro interno. Tente novamente mais tarde!</div>" : '' ?>
+            <?= !empty($emailPasswordError) ? "<div class='p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-500 text-sm text-center'>Email ou senha incorretos</div>" : '' ?>
+
+            <div class="flex items-center relative top-8">
+              <?= CheckboxComponent(label: "Lembrar de mim", id: "keep_logged_in") ?>
+            </div>
+
+            <?= ButtonComponent(text: "Acessar Plataforma", variant: "default", className: "w-full py-3.5 text-base font-semibold shadow-lg shadow-purple-900/20 hover:shadow-purple-900/40 transition-all duration-300 g-recaptcha btn-submit mt-2", type: "button", attributes: [
               "data-sitekey" => "6LeZE6MrAAAAAFW6zL9HUPU8eJ616uwPWu92db9a",
               "data-callback" => "onSubmit",
               "data-action" => 'submit',
               "onClick" => '() => grecaptcha.execute()'
             ]) ?>
 
-          </div>
-          <div class="flex items-center text-white cursor-default">
-            <div class="flex-grow border-t border-gray300"></div>
-            <span class="px-3 text-sm font-semibold">OU</span>
-            <div class="flex-grow border-t border-gray300"></div>
+            <p class="text-[10px] text-gray-500 text-center leading-tight opacity-60">
+              Este site é protegido pelo reCAPTCHA e aplicam-se a
+              <a href="https://policies.google.com/privacy" target="_blank" class="text-[#660BAD] hover:underline">Política de Privacidade</a> e os
+              <a href="https://policies.google.com/terms" target="_blank" class="text-[#660BAD] hover:underline">Termos de Serviço</a> do Google.
+            </p>
+
           </div>
         </form>
-        <div class="text-black">
-          <?= ButtonComponent(text: "Entrar pelo Google", variant: "icon", icon: "/VHS/public/images/LogoGoogle.svg", link: "/VHS/home") ?>
-        </div>
-        <div class="flex gap-0.5 items-center justify-center">
-          <p class="text-secondary cursor-default">Ainda não tem uma conta?</p>
-          <a class="text-primary underline" href="/VHS/auth/signup">Cadastrar</a>
+
+        <div class="flex gap-1.5 items-center justify-center mt-2">
+          <p class="text-gray-400 text-sm">Ainda não tem uma conta?</p>
+          <a class="text-[#660BAD] hover:text-[#8a2be2] font-semibold text-sm transition-colors" href="/VHS/auth/signup">Criar conta</a>
         </div>
       </div>
     </div>
   </div>
-  </div>
+
+  <script>
+    function onSubmit(token) {
+      document.querySelector("form").submit();
+    }
+  </script>
+  <style>
+    .grecaptcha-badge {
+      visibility: hidden;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-20px);
+      }
+
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
+  </style>
 </body>
-<script>
-  function onSubmit(token) {
-    document.querySelector("form").submit();
-  }
-</script>
 
 </html>
