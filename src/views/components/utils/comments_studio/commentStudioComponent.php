@@ -36,11 +36,11 @@ function CommentStudioComponent(string $name, string $text,  string | null $crea
                 <img src="$thumbnailURL" alt="Thumbnail de video" class="w-40 h-full rounded-xl hidden md:block"/>
             </a>
         HTML;
-    }   
+    }
 
     $likeSrc = $creator_like ? '/VHS/public/icons/comments/favorite-comment-filled.svg' : '/VHS/public/icons/comments/favorite-comment.svg';
-
-    return 
+    
+    return
         <<<HTML
         <div class='w-full flex gap-4 py-2'>
             <div class='w-14 h-14 rounded-full mt-1 shrink-0'>
@@ -58,7 +58,7 @@ function CommentStudioComponent(string $name, string $text,  string | null $crea
                 </div>
                 
                 <div class='mt-2'>
-                    <ul class='w-full flex gap-3'>  
+                    <ul class='w-full flex gap-3 cursor-pointer'>  
                         <li>
                             <img src='/VHS/public/icons/comments/trash.svg' onclick='deleteComment(event,"{$comment_id}", "{$name}")'>
                         </li>
@@ -71,8 +71,6 @@ function CommentStudioComponent(string $name, string $text,  string | null $crea
                     </ul>    
                 </div>
             </div>
-
-            
             $thubnailHTML
         </div>
     HTML;

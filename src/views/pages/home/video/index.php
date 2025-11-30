@@ -21,7 +21,6 @@ use function Src\Views\Components\Cards\viewCards;
 use function Src\Views\Components\Utils\Comment;
 use function Src\Views\Components\starrating\StarRatingComponent;
 use function Src\Views\Components\Shared\sharedComponent;
-use function Src\Views\Components\Utils\ButtonComponent;
 use function Src\Views\Components\Utils\InputComponent;
 
 $video = $_SESSION["page_data"]["video"];

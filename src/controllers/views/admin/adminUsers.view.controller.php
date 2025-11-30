@@ -14,17 +14,32 @@ class AdminUsersViewController extends Controller {
     public function index() {
         $this->userModel = $this->model("user");
         $filterName = $_GET["name"] ?? "";
-        $ordering = isset($_GET["ordering"]) ? "DESC" : "ASC";
-
+        $sort = $_GET["sort"] ?? 'desc';
 
         $page = $_GET["page"] ?? 0;
-        $page = $page > 0 ? $page * 7 : $page;
-        
+        if (!is_numeric($page) || $page < 0) {
+            $page = 0;
+        }
+
+        $limit = 8;
+        $offset = $page * $limit;
+
         $idUser = $_SESSION["user"]["id"];
 
-        $users = $this->userModel->getUsers($page, 7, $idUser, $filterName, $ordering);
-        $users = array_slice($users, 0, 7);
+        $users = $this->userModel->getUsers($offset, $limit + 1, $idUser, $filterName, $sort);
+        
+        $nextPage = 0;
 
-        $this->view("admin/userManagement/index", ["users" => $users]);   
+        if (count($users) > $limit) {
+            array_pop($users);
+            $nextPage = 1;
+        }
+
+        $this->view("admin/userManagement/index", [
+            "users" => $users,
+            "next_page" => $nextPage,
+            "search" => $filterName,
+            "sort" => $sort
+        ]);   
     }
 }

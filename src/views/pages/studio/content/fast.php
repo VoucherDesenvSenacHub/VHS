@@ -6,6 +6,7 @@ require_once __DIR__ . "/../../../components/studioSideMenu/studioSideMenuCompon
 require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
 require_once __DIR__ . "/../../../components/fastCard/index.php";
 require_once __DIR__ . "/../../../../application/utils/pagination.php";
+require_once __DIR__ . "/../../../components/filter/filter.php";
 
 use function Src\Application\Utils\paginate;
 use function Src\Views\Components\FastCard\FastCardComponent;

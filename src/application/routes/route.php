@@ -3,6 +3,15 @@
 require_once __DIR__ . '/../../application/routes/route.config.php';
 require_once __DIR__ . '/../../vendor/routes.autoload.php';
 require_once __DIR__ . '/../../../vendor/autoload.php';
+// require_once __DIR__ . '/../../controllers/signUp.controller.php';
+// require_once __DIR__ . '/../../controllers/signIn.controller.php';
+// require_once __DIR__ . '/../../controllers/signUpView.controller.php';
+// require_once __DIR__ . '/../../controllers/createPassword.controller.php';
+// require_once __DIR__ . '/../../controllers/home.controller.php';
+// #require_once __DIR__ . '/../../controllers/verfiyEmail.controller.php';
+// require_once __DIR__ . '/../../application/middlewares/RedirectUserLoggedMiddleware.php';
+// require_once __DIR__ . '/../../controllers/signIn.view.controller.php';
+// require_once __DIR__ . '/../../controllers/SearchVideoController.php';
 
 use Dotenv\Dotenv;
 use Src\Application\Controllers\AddLikeFastController;
@@ -59,6 +68,7 @@ use Src\Application\Controllers\VideoAvaliationController;
 use Src\Application\Controllers\VideoController;
 use Src\Application\Controllers\StudioAnalyticsVideoViewController;
 use Src\Application\Controllers\StudioAnalyticsViewController;
+use Src\Application\Controllers\StudioCommentsVideoViewController;
 use Src\Application\Controllers\VideoDeleteController;
 use Src\Application\Controllers\StudioCommentsViewController;
 use Src\Application\Controllers\LikeCommentsCreatorController;
@@ -128,11 +138,10 @@ $router->get('/studio/content/video', StudioContentVideoViewController::class, R
 $router->get('/studio/content/video/edit', StudioUpdateVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get('/studio/content/video/analytic', StudioAnalyticsVideoViewController::class);
 $router->get("/studio/analytics", StudioAnalyticsViewController::class, RedirectUserNotCreatorMiddleware::class);
-$router->get("/studio/create/video", StudioCreateVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
-$router->get("/studio/create/fast", StudioFastViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get("/studio/content/fast", StudioContentFastViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get("/studio/content/fast/edit", StudioUpdateFastViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get("/studio/comments", StudioCommentsViewController::class, RedirectUserNotCreatorMiddleware::class);
+$router->get('/studio/content/video/comment', StudioCommentsVideoViewController::class);
 
 $router->get("/home/search", SearchController::class, RedirectUserNotLoggedMiddleware::class);
 $router->get("/home/channel", ChannelController::class, RedirectUserNotLoggedMiddleware::class);

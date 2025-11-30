@@ -7,11 +7,13 @@ require_once __DIR__ . "/../../../components/utils/inputComponent.php";
 require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
 require_once __DIR__ . "/../../../../application/utils/pagination.php";
 require_once __DIR__ . "/../../../components/utils/sweetalert.php";
+require_once __DIR__ . "/../../../components/filter/filter.php";
 
 use function Src\Application\Utils\paginate;
 use function Src\Application\Utils\showSweetAlert;
 use function src\views\components\Utils\ButtonComponent;
 use function Src\Views\Components\Cards\viewCards;
+use function src\views\components\filter\Filter;
 use function Src\Views\Components\header\HeaderComponent;
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
 use function Src\Views\Components\Utils\InputComponent;
@@ -140,11 +142,6 @@ $sort = $_SESSION["page_data"]["sort"] ?? 'desc';
                 input.form.submit();
             }, 1000);
         });
-
-        function showFilterMenu() {
-            const filter = document.getElementById('filter');
-            filter.classList.toggle('hidden');
-        }
     </script>
 </body>
 

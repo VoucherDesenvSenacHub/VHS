@@ -2,14 +2,13 @@
 
 require_once __DIR__ . "/../../../components/studioSideMenu/studioSideMenuComponent.php";
 require_once __DIR__ . "/../../../components/header/headerComponent.php";
-require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
 require_once __DIR__ . "/../../../components/utils/comments_studio/commentStudioComponent.php";
 require_once __DIR__ . "/../../../components/utils/inputComponent.php";
 require_once __DIR__ . "/../../../components/filter/filter.php";
 
+use function Src\Application\Utils\paginate;
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
 use function src\views\components\header\HeaderComponent;
-use function src\views\components\Utils\ButtonComponent;
 use function Src\Views\Components\Utils\CommentStudioComponent;
 use function Src\Views\Components\Utils\InputComponent;
 use function src\views\components\filter\Filter;
@@ -98,6 +97,18 @@ $search = $_GET['content'] ?? "";
   </div>
 
   <script src="/VHS/src/views/components/utils/comments_studio/script.js"></script>
+  <script defer>
+    const input = document.querySelector("input[name='content']");
+    let timeout = null;
+
+    input.addEventListener("input", () => {
+      clearTimeout(timeout);
+
+      timeout = setTimeout(() => {
+        input.form.submit();
+      }, 1500);
+    });
+  </script>
 </body>
 
 </html>

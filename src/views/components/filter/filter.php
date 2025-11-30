@@ -1,57 +1,45 @@
 <?php
+
 namespace src\views\components\filter;
 
-function Filter() {
+function Filter(string $pesquisa, string $ordenacao)
+{
+    $pesquisaEncoded = urlencode($pesquisa);
+
+    $maisRecentesSelected = $ordenacao === 'desc' ? 'opacity-100 text-white font-medium' : '';
+    $maisAntigosSelected = $ordenacao === 'asc' ? 'opacity-100 text-white font-medium' : '';
+
     return <<<HTML
-        <button id="filtro" class="focus:outline-none">
-            <img class="size-7" src="/VHS/public/icons/Filter.svg" alt="Filtro">
-        </button>
+<div id="filter" class="absolute right-0 top-full mt-2 z-10 hidden flex flex-col bg-[#2A2A2C] rounded-lg p-2 w-48 gap-2 shadow-xl cursor-pointer">
 
-        <div
-            class="bg-[#1B1B1B] text-white rounded-lg p-4 w-48 absolute hidden border-2 border-gray-600 z-10 ml-10"
-            id="menu"
-        >
-            <ul class="w-full flex flex-col gap-8">
-                <li
-                    class=" text-white font-semibold flex w-32 h-5 text-base gap-2 items-center ml-1 cursor-pointer"
-                >
-                    <form method="GET">
-                        <button type="submit">
-                            <img src="/VHS/public/icons/clock2.svg" class="w-5" />
-                            <p class="ml-1">Mais recentes</p>
-                        </button>
-                    </form>
-                </li>
-                <li
-                    class=" text-white font-semibold flex w-32 h-5 text-base gap-2 items-center ml-1 cursor-pointer"
-                >
-                    <form method="GET">
-                        <button>
-                            <input type="hidden" name="ordering"/>
-                            <img src="/VHS/public/icons/clock2.svg" class="w-5" />
-                            <p class="ml-1">Mais antigos</p>
-                        </button>
-                    </form>
-                </li>
-            </ul>
-        </div>
+    <a href="?search={$pesquisaEncoded}&sort=desc" 
+       class="flex items-center gap-2 p-1 rounded hover:bg-white/5 transition-colors cursor-pointer group">
+       
+        <img src="/VHS/public/icons/time-svgrepo-com.svg" 
+             class="size-5 rotate-[-110deg] opacity-50 group-hover:opacity-100 transition-opacity {$maisRecentesSelected}">
+             
+        <p class="text-[13px] font-poppins text-gray-200 {$maisRecentesSelected}">
+            Mais recentes
+        </p>
+    </a>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                const filtrobtn = document.getElementById("filtro");
-                const menubtn = document.getElementById("menu");
+    <a href="?search={$pesquisaEncoded}&sort=asc" 
+       class="flex items-center gap-2 p-1 rounded hover:bg-white/5 transition-colors cursor-pointer group">
+       
+        <img src="/VHS/public/icons/time-svgrepo-com.svg" 
+             class="size-5 opacity-50 group-hover:opacity-100 transition-opacity {$maisAntigosSelected}">
+             
+        <p class="text-[13px] font-poppins text-gray-200 {$maisAntigosSelected}">
+            Mais antigos
+        </p>
+    </a>
+</div>
 
-                filtrobtn.addEventListener("click", () => {
-                    menubtn.style.display = menubtn.style.display === "flex" ? "none" : "flex";
-                });
-
-                document.addEventListener("click", (event) => {
-                    if (!filtrobtn.contains(event.target) && !menubtn.contains(event.target)) {
-                        menubtn.style.display = "none";
-                    }
-                });
-            });
-        </script>
-    HTML;
+<script>
+    function showFilterMenu() {
+        const filter = document.getElementById('filter');
+        filter.classList.toggle('hidden');
+    }
+</script>
+HTML;
 }
-?>
