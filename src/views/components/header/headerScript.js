@@ -41,19 +41,5 @@ document.addEventListener("click", (e) => {
     }
 });
 
-document.getElementById('button-myaccount').addEventListener('click', () => {
-    window.location.href = '#';
-});
 
-document.getElementById('button-vhs-studio').addEventListener('click', () => {
-    window.location.href = '#';
-});
-
-document.getElementById('button-dashboard').addEventListener('click', () => {
-    window.location.href = '#';
-});
-
-document.getElementById('button-logout').addEventListener('click', () => {
-    window.location.href = '#';
-});
 

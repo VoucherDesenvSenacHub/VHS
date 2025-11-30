@@ -2,25 +2,35 @@ const categoriesInput = document.querySelector("#categoriesInput");
 const categoriesElements = document.querySelectorAll(".category-btn");
 
 categoriesElements.forEach((category) => {
-    console.log(category.textContent.trim(), userCategories);
+    // Check initial state
+    if (userCategories.includes(category.textContent.trim())) {
+        category.classList.add("active");
+        // Add checkmark visually if needed, or just rely on color
+        // category.innerHTML = `✓ ${category.textContent.trim()}`; 
 
-    if(userCategories.includes(category.textContent.trim())) {
-        category.classList.add("bg-purple-600");
-        category.innerText = "× " + category.textContent.trim();
-        categoriesInput.value += categoriesInput.value.includes(category.textContent.trim()) ? "" : category.textContent.trim().replace("× ", "") + ",";
+        // Update hidden input
+        updateInput(category.textContent.trim(), true);
     }
-    
+
     category.addEventListener("click", () => {
-        category.classList.toggle("bg-purple-600");
+        category.classList.toggle("active");
+        const isActive = category.classList.contains("active");
 
-        if(category.classList.contains("bg-purple-600")) {
-            categoriesInput.value += categoriesInput.value.includes(category.textContent.trim()) ? "" : category.textContent.trim() + ",";
-            category.innerText = "× " + category.textContent.trim();
-            return;
-        } 
-
-        category.innerText = category.textContent.trim().replace("× ", "");
-        categoriesInput.value = categoriesInput.value.replace(category.textContent.trim() + ",", "");
+        updateInput(category.textContent.trim(), isActive);
     });
-})
+});
+
+function updateInput(categoryName, add) {
+    let currentValues = categoriesInput.value ? categoriesInput.value.split(',').filter(Boolean) : [];
+
+    if (add) {
+        if (!currentValues.includes(categoryName)) {
+            currentValues.push(categoryName);
+        }
+    } else {
+        currentValues = currentValues.filter(c => c !== categoryName);
+    }
+
+    categoriesInput.value = currentValues.join(',') + (currentValues.length ? ',' : '');
+}
 
