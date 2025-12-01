@@ -41,9 +41,9 @@ class VideoController extends Controller
 
         $this->videoModel->incrementViewCount($_GET["id"]);
 
-        if (isset($_SESSION['user'])) {
-            $this->historyModel->addToHistory($_SESSION['user']['id'], $_GET["id"]);
-        }
+
+        $this->historyModel->addToHistory($_SESSION['user']['id'], $_GET["id"]);
+
 
         $userAvaliation = $this->avaliationModel->getAvaliation(
             $video["id"],

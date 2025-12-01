@@ -30,8 +30,8 @@ class EditChannelController extends Controller
                 $fileName = time() . "_" . uniqid() . "_" . ($_SESSION["user"]["id"] ?? "default") . ".png";
                 $uploadFile = __DIR__ . "/../../../../public/uploads/avatars/" . $fileName;
 
-                if ($_FILES["avatar"]["size"] > 2 * 1024 * 1024) {
-                    $errors["avatar"] = "Arquivo muito grande (máx. 2MB)";
+                if ($_FILES["avatar"]["size"] > 6 * 1024 * 1024) {
+                    $errors["avatar"] = "Arquivo muito grande (máx. 6MB)";
                 }
 
                 if (!in_array($_FILES["avatar"]["type"], $imageTypes)) {
@@ -48,8 +48,8 @@ class EditChannelController extends Controller
                 $fileName = time() . "_" . uniqid() . "_" . ($_SESSION["user"]["id"] ?? "default") . ".png";
                 $uploadFile = __DIR__ . "/../../../../public/uploads/banners/" . $fileName;
 
-                if ($_FILES["banner"]["size"] > 2 * 1024 * 1024) {
-                    $errors["banner"] = "Arquivo muito grande (máx. 2MB)";
+                if ($_FILES["banner"]["size"] > 6 * 1024 * 1024) {
+                    $errors["banner"] = "Arquivo muito grande (máx. 6MB)";
                 }
 
                 if (!in_array($_FILES["banner"]["type"], $imageTypes)) {
@@ -79,6 +79,16 @@ class EditChannelController extends Controller
             }
 
 
+            $name = $_POST["name"] ?? $_SESSION["user"]["name"];
+
+            if (strlen($name) < 3) {
+                throw new Error(serialize(["name" => "Nome deve ter no mínimo 3 caracteres."]));
+            }
+
+            if (strlen($name) > 24) {
+                throw new Error(serialize(["name" => "Nome deve ter no máximo 64 caracteres."]));
+            }
+
             $newUsername = $_POST["username"] ?? $_SESSION["user"]["username"];
             $existing = $this->userModel->getUserByUsername($newUsername);
             if (!empty($existing) && isset($existing[0]["id"]) && ($existing[0]["id"] !== ($_SESSION["user"]["id"] ?? ""))) {
@@ -89,6 +99,7 @@ class EditChannelController extends Controller
 
             $updated = $this->channelModel->updateChannel(
                 $_SESSION["user"]["id"] ?? "",
+                $name,
                 $_POST["username"] ?? $_SESSION["user"]["username"],
                 $description,
                 $avatarUrl,
@@ -100,12 +111,13 @@ class EditChannelController extends Controller
                 throw new Error("Falha ao atualizar o canal.");
             }
 
-            // Atualiza sessão
+
             $_SESSION["user"]["avatar_url"] = $avatarUrl;
             $_SESSION["user"]["banner_url"] = $bannerUrl;
             $_SESSION["user"]["username"] = $_POST["username"] ?? $_SESSION["user"]["username"];
             $_SESSION["user"]["description_channel"] = $description;
             $_SESSION["user"]["background_color"] = $_POST["background_color"] ?? $_SESSION["user"]["background_color"] ?? "#100018";
+
 
             return redirect('/VHS/studio/channel/edit', ["success" => "Canal atualizado com sucesso!"]);
         } catch (Error $exception) {
