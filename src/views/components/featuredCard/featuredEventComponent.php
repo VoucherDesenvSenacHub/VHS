@@ -18,8 +18,8 @@ function FeaturedEventCard(array $event, bool $isEventPage = true) {
 
             <div class="relative z-10 p-6 h-full gap-2 flex flex-col justify-between">
                 <div class="mt-auto">
-                    <p class="text-white text-lg font-medium">{$event['name']}</p>
-                    <p class="text-gray-200 text-sm">{$event['description']} • $date</p>
+                    <p class="text-white text-lg font-medium">{$event['author_name']}</p>
+                    <p class="text-gray-200 text-sm">{$event['category']} • $date</p>
                 </div>
 
                 <div>
