@@ -35,7 +35,7 @@ class VideoUpdateController extends Controller
                  return;
             }
 
-            $imgPath = UploadImages('thumbnail', $user["name"]);
+            $imgPath = UploadImages('thumbnail', $user["name"], false, $_POST['old_thumbnail'] ?? null);
             if ($imgPath === null) {
                 $imgPath = $_POST['old_thumbnail'] ?? $video["thumbnail_url"];
             }

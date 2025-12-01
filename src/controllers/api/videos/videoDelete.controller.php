@@ -21,6 +21,15 @@ class VideoDeleteController extends Controller
 
             $id = $_POST["id"];
 
+            $video = $this->videoModel->getVideoStudioByID($id);
+
+            if (!empty($video['thumbnail_url'])) {
+                $thumbPath = __DIR__ . "/../../../../public" . str_replace("/VHS/public", "", $video['thumbnail_url']);
+                if (file_exists($thumbPath)) {
+                    unlink($thumbPath);
+                }
+            }
+
             $this->videoModel->delete($id);
 
             redirect("/VHS/studio/content/video", [

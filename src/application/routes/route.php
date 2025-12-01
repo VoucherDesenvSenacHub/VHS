@@ -3,15 +3,15 @@
 require_once __DIR__ . '/../../application/routes/route.config.php';
 require_once __DIR__ . '/../../vendor/routes.autoload.php';
 require_once __DIR__ . '/../../../vendor/autoload.php';
-require_once __DIR__ . '/../../controllers/signUp.controller.php';
-require_once __DIR__ . '/../../controllers/signIn.controller.php';
-require_once __DIR__ . '/../../controllers/signUpView.controller.php';
-require_once __DIR__ . '/../../controllers/createPassword.controller.php';
-require_once __DIR__ . '/../../controllers/home.controller.php';
-#require_once __DIR__ . '/../../controllers/verfiyEmail.controller.php';
-require_once __DIR__ . '/../../application/middlewares/RedirectUserLoggedMiddleware.php';
-require_once __DIR__ . '/../../controllers/signIn.view.controller.php';
-require_once __DIR__ . '/../../controllers/SearchVideoController.php';
+// require_once __DIR__ . '/../../controllers/signUp.controller.php';
+// require_once __DIR__ . '/../../controllers/signIn.controller.php';
+// require_once __DIR__ . '/../../controllers/signUpView.controller.php';
+// require_once __DIR__ . '/../../controllers/createPassword.controller.php';
+// require_once __DIR__ . '/../../controllers/home.controller.php';
+// #require_once __DIR__ . '/../../controllers/verfiyEmail.controller.php';
+// require_once __DIR__ . '/../../application/middlewares/RedirectUserLoggedMiddleware.php';
+// require_once __DIR__ . '/../../controllers/signIn.view.controller.php';
+// require_once __DIR__ . '/../../controllers/SearchVideoController.php';
 
 use Dotenv\Dotenv;
 use Src\Application\Controllers\AddLikeFastController;
