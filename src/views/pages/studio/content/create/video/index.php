@@ -25,7 +25,7 @@ $errors = $_SESSION["redirect_data"]["errors"] ?? null;
 $fields = $_SESSION["redirect_data"]["fields"] ?? [];
 
 if ($success) {
-    echo ModalComponent("Criado com sucesso!", "Deseja continuar criando vídeos?");
+    echo ModalComponent("Criado com sucesso!", "Deseja continuar criando vídeos?", "/VHS/home", "/VHS/studio/create/video");
 }
 
 $botoes = [
@@ -65,7 +65,7 @@ $botoes = [
                     <div class="mt-4 flex gap-2 w-full flex-col md:w-96 md:flex-row">
                         <?php echo ButtonComponent(text: "Vídeo", variant: "studio", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]", link: "/VHS/studio/create/video"); ?>
                         <?php echo ButtonComponent(text: "Fast", variant: "studio", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]", link: "/VHS/studio/create/fast"); ?>
-                        <?php echo ButtonComponent(text: "Eventos", variant: "studio", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]", link: "/VHS/create/event"); ?>
+                        <?php echo ButtonComponent(text: "Eventos", variant: "studio", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]", link: "/VHS/studio/create/event"); ?>
                     </div>
                 </div>
 

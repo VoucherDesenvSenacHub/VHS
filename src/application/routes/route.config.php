@@ -2,40 +2,21 @@
 
 namespace Src\Application\Routes;
 
-class Router
-{
+class Router {
+
     private $routes = [];
 
-    public function post(string $path, $controller, $middleware = null)
+    public function POST(string $path, $controller, $middleware = null)
     {
-        $this->routes["POST"][$path] = function () use ($controller, $middleware) {
-            if ($middleware !== null) {
-                (new $middleware())->execute();
-            }
-
-            (new $controller())->index();
-        };
-    }
-
-    public function get(string $path, $controller, $middleware = null)
-    {
-        $this->routes["GET"][$path] = function () use ($controller, $middleware) {
-            if ($middleware !== null) {
-                (new $middleware())->execute();
-            }
-
-            (new $controller())->index();
-        };
-    }
-
-    public function all(string $path, $controller, $middleware = null)
-    {
-        $this->routes["GET"][$path] = function () use ($controller, $middleware) {
+        $this->routes["POST"][$path] = function() use ($controller, $middleware) {
             if ($middleware !== null) (new $middleware())->execute();
             (new $controller())->index();
         };
+    }
 
-        $this->routes["POST"][$path] = function () use ($controller, $middleware) {
+    public function GET(string $path, $controller, $middleware = null)
+    {
+        $this->routes["GET"][$path] = function() use ($controller, $middleware) {
             if ($middleware !== null) (new $middleware())->execute();
             (new $controller())->index();
         };
