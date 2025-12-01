@@ -123,7 +123,7 @@ function time_elapsed_string($datetime, $full = false)
     <div class="flex min-h-screen">
         <?= StudioSideMenuComponent(); ?>
 
-        <main class="flex-1 p-8 w-full max-w-[1600px] mx-auto">
+        <main class="flex-1 p-4 md:p-8 w-full max-w-[1600px] mx-auto">
 
             <!-- General Dashboard Layout -->
             <!-- Header Section -->

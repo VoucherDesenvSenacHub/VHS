@@ -48,7 +48,7 @@ use function Src\Application\Utils\paginate;
     </div>
 
     <div class="flex flex-col md:flex-row w-full">
-        <div class="hidden md:block h-full z-40">
+        <div>
             <?= SidebarComponent() ?>
         </div>
 
@@ -103,7 +103,7 @@ use function Src\Application\Utils\paginate;
             </div>
 
             <?php if (empty($data)): ?>
-                <div class="flex flex-col items-center justify-center py-20 bg-white/5 rounded-3xl border border-white/5 border-dashed">
+                <div class="flex flex-col items-center justify-center py-20 bg-[#121214] rounded-3xl border border-white/5 border-dashed">
                     <div class="w-20 h-20 bg-gray-800 rounded-full flex items-center justify-center mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />

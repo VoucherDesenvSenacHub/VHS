@@ -11,31 +11,31 @@ function StudioSideMenuComponent()
         [
             'title' => 'Analytics',
             'href' => '/VHS/studio/analytics',
-            'icon' => '/VHS/public/icons/sidebar_studio/Analytics.svg',
+            'icon' => '/VHS/public/icons/sidebar_admin/chart-column.svg',
             'active' => strpos($currentPath, '/studio/analytics') !== false
         ],
         [
             'title' => 'Conteúdo',
             'href' => '/VHS/studio/content/video',
-            'icon' => '/VHS/public/icons/sidebar_studio/Conteúdo.svg',
+            'icon' => '/VHS/public/icons/video.svg',
             'active' => strpos($currentPath, '/studio/content') !== false
         ],
         [
             'title' => 'Customizar',
             'href' => '/VHS/studio/channel/edit',
-            'icon' => '/VHS/public/icons/sidebar_studio/Customizar.svg',
+            'icon' => '/VHS/public/icons/lapis.svg',
             'active' => strpos($currentPath, '/studio/channel/edit') !== false
         ],
         [
             'title' => 'Comentários',
             'href' => '/VHS/studio/comments',
-            'icon' => '/VHS/public/icons/sidebar_studio/Comentários.svg',
+            'icon' => '/VHS/public/icons/message-circle.svg',
             'active' => strpos($currentPath, '/studio/comments') !== false
         ],
         [
             'title' => 'Criar',
             'href' => '/VHS/studio/create/video',
-            'icon' => '/VHS/public/icons/sidebar_studio/Criar.svg',
+            'icon' => '/VHS/public/icons/upload.svg',
             'active' => strpos($currentPath, '/studio/create') !== false
         ]
     ];
@@ -61,7 +61,7 @@ function StudioSideMenuComponent()
     }
 
     return <<<HTML
-    <aside class="hidden xl:flex flex-col w-64 h-screen sticky top-0 border-r border-white/5 bg-gradient-to-b from-[#100018] to-black">
+    <aside id="studio-sidebar" class="flex flex-col w-0 xl:w-64 h-screen sticky top-0 border-r border-white/5 bg-gradient-to-b from-[#100018] to-black overflow-hidden transition-all duration-300">
         <div class="px-6 py-6">
             <h2 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Studio</h2>
             <div class="h-0.5 w-8 bg-purple-600 rounded-full"></div>
@@ -81,6 +81,7 @@ function StudioSideMenuComponent()
                 <span class="text-sm font-medium">Voltar para VHS</span>
             </a>
         </div>
+        <script src="/VHS/src/views/components/studioSideMenu/script.js"></script>
     </aside>
     HTML;
 }

@@ -33,7 +33,7 @@ function Comment(string $name, string $text, string $thumbnail_url, string $crea
                     </div>
 
                     <!-- Actions -->
-                    <div class="flex items-center gap-2 mt-auto">
+                    <div class="flex flex-wrap items-center gap-2 mt-auto">
                         <button
                             class="open-remove flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-green-400 bg-green-400/10 hover:bg-green-400/20 border border-green-400/20 transition-all"
                             data-report-id="{$reportId}"

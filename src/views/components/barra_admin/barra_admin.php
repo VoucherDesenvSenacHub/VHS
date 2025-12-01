@@ -57,7 +57,7 @@ function barra_admin()
     }
 
     return <<<HTML
-        <aside class="hidden md:flex flex-col w-64 h-screen sticky top-0 border-r border-white/5 bg-gradient-to-b from-[#100018] to-black z-50">
+        <aside id="admin-sidebar" class="flex flex-col w-0 md:w-64 h-screen sticky top-0 border-r border-white/5 bg-gradient-to-b from-[#100018] to-black z-50 overflow-hidden transition-all duration-300">
             <div class="px-6 py-6">
                 <h2 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Administrador</h2>
                 <div class="h-0.5 w-8 bg-purple-600 rounded-full"></div>

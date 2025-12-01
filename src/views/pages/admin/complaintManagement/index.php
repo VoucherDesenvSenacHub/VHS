@@ -47,11 +47,11 @@ $pagination = paginate($comments, $next_page_report_comments);
     <?php echo HeaderComponent(); ?>
 
     <div class="flex flex-col md:flex-row w-full">
-        <div class="hidden md:block">
+        <div>
             <?= barra_admin() ?>
         </div>
 
-        <main class="flex-1 p-8 w-full max-w-[1600px] mx-auto">
+        <main class="flex-1 p-4 md:p-8 w-full max-w-[1600px] mx-auto">
 
             <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-8">
                 <div>
@@ -71,7 +71,7 @@ $pagination = paginate($comments, $next_page_report_comments);
                                 name: "comment",
                                 value: $search,
                                 icon: "/VHS/public/icons/filter.svg",
-                                iconPosition: "left",
+                                iconPosition: "right",
                                 width: "full",
                                 onClickIcon: "showFilterMenu()"
                             ) ?>

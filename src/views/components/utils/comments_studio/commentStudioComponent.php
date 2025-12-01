@@ -33,7 +33,7 @@ function CommentStudioComponent(string $name, string $text,  string | null $crea
     if (!$isVideoComments) {
         $thubnailHTML .= <<<HTML
             <a href="/VHS/pages/home/video.php?id=$videoId">
-                <img src="$thumbnailURL" alt="Thumbnail de video" class="w-40 h-full rounded-xl hidden md:block"/>
+                <img src="$thumbnailURL" alt="Thumbnail de video" class="w-40 h-20 object-cover rounded-xl hidden md:block"/>
             </a>
         HTML;
     }
@@ -48,7 +48,7 @@ function CommentStudioComponent(string $name, string $text,  string | null $crea
             </div>
     
             <div class='flex flex-col flex-1'>
-                <div class='flex items-baseline'>
+                <div class='flex flex-col md:flex-row gap-2 items-baseline'>
                     <p class='text-lg text-white font-semibold'>$name</p> 
                     $created_at
                 </div>

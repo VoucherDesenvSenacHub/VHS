@@ -33,7 +33,7 @@ $videoUrl = "/VHS/public/videos/" . $fast['url'] ?? '';
     <div class="flex min-h-screen">
         <?= StudioSideMenuComponent(); ?>
 
-        <main class="flex-1 p-8 w-full max-w-[1600px] mx-auto">
+        <main class="flex-1 p-4 md:p-8 w-full max-w-[1600px] mx-auto">
 
             <!-- Header & Navigation -->
             <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 mb-8">

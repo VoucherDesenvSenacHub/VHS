@@ -28,6 +28,7 @@ function userDataTableComponent($users, $nextPage)
         HTML;
     }
     $rows = '';
+    $mobileCards = '';
     $pagination = paginate($users, $nextPage);
 
     foreach ($users as $user) {
@@ -67,6 +68,52 @@ function userDataTableComponent($users, $nextPage)
                     Inativo
                   </span>"
         };
+
+        // Mobile Card
+        $mobileCards .= <<<HTML
+            <div class="bg-[#121214] border border-white/5 rounded-xl p-5 space-y-4 shadow-lg">
+                <div class="flex items-start justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                        <div class="h-12 w-12 rounded-full ring-2 ring-white/10 flex items-center justify-center overflow-hidden shadow-lg shrink-0">
+                            {$profileHtml}
+                        </div>
+                        <div>
+                            <div class="font-medium text-white text-lg">{$user['name']}</div>
+                            <div class="text-sm text-gray-500">@{$user['username']}</div>
+                        </div>
+                    </div>
+                    <div>
+                        {$statusBadge}
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4 py-3 border-y border-white/5">
+                    <div>
+                        <div class="text-xs text-gray-500 mb-1 uppercase tracking-wider">Perfil</div>
+                        {$role}
+                    </div>
+                    <div>
+                        <div class="text-xs text-gray-500 mb-1 uppercase tracking-wider">Membro desde</div>
+                        <div class="text-sm text-gray-300">{$date}</div>
+                    </div>
+                </div>
+
+                <div class="flex gap-3">
+                    <button data-id="{$user['id']}" data-name="{$user['name']}" data-role="{$user['role']}" data-status="{$user['status']}" class="open-edit flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-purple-500/10 text-purple-400 hover:bg-purple-500/20 transition-all font-medium text-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4">
+                            <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32L19.513 8.2Z" />
+                        </svg>
+                        Editar
+                    </button>
+                    <button data-id="{$user['id']}" data-name="{$user['name']}" class="open-delete flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-all font-medium text-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4">
+                            <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z" clip-rule="evenodd" />
+                        </svg>
+                        Excluir
+                    </button>
+                </div>
+            </div>
+        HTML;
 
         $rows .= <<<HTML
             <tr class="group border-b border-white/5 hover:bg-white/[0.02] transition-colors">
@@ -110,7 +157,9 @@ function userDataTableComponent($users, $nextPage)
 
     return <<<HTML
         <script src="https://cdn.tailwindcss.com"></script>
-        <div class="overflow-hidden rounded-xl border border-white/5 bg-[#121214]">
+        
+        <!-- Desktop Table View -->
+        <div class="hidden lg:block overflow-hidden rounded-xl border border-white/5 bg-[#121214]">
             <table class="w-full text-left border-collapse">
                 <thead>
                     <tr class="border-b border-white/5 bg-white/[0.02]">
@@ -125,6 +174,11 @@ function userDataTableComponent($users, $nextPage)
                     {$rows}
                 </tbody>
             </table>
+        </div>
+
+        <!-- Mobile Card View -->
+        <div class="lg:hidden space-y-4">
+            {$mobileCards}
         </div>
 
         <div class="mt-6">

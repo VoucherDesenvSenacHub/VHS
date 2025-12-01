@@ -39,7 +39,7 @@ $avatar_url = !empty($user['avatar_url']) ? $user['avatar_url'] : 'default.png';
             background-color: rgb(107 33 168);
             border-color: transparent;
             color: white;
-            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+            /* box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4); */
         }
     </style>
 </head>
@@ -62,7 +62,7 @@ $avatar_url = !empty($user['avatar_url']) ? $user['avatar_url'] : 'default.png';
     <?= HeaderComponent() ?>
 
     <div class="flex flex-1">
-        <div class="hidden md:block h-full z-40">
+        <div>
             <?= SidebarComponent() ?>
         </div>
 

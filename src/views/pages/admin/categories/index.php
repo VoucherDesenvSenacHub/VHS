@@ -53,11 +53,11 @@ if (!empty($errors) && is_array($errors)) {
     <?= HeaderComponent() ?>
 
     <div class="flex flex-col md:flex-row w-full">
-        <div class="hidden md:block">
+        <div>
             <?= barra_admin() ?>
         </div>
 
-        <main class="flex-1 p-8 w-full max-w-[1600px] mx-auto">
+        <main class="flex-1 p-4 md:p-8 w-full max-w-[1600px] mx-auto">
 
             <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-8">
                 <div>
@@ -83,7 +83,7 @@ if (!empty($errors) && is_array($errors)) {
                                 icon: "/VHS/public/icons/filter.svg",
                                 name: "search",
                                 value: $search,
-                                iconPosition: "left",
+                                iconPosition: "right",
                                 width: "full",
                                 onClickIcon: "showFilterMenu()"
                             ) ?>

@@ -39,11 +39,11 @@ unset($_SESSION["redirect_data"]);
     <?= HeaderComponent() ?>
 
     <div class="flex flex-col md:flex-row w-full">
-        <div class="hidden md:block">
+        <div>
             <?= barra_admin() ?>
         </div>
 
-        <main class="flex-1 p-8 w-full max-w-[1600px] mx-auto">
+        <main class="flex-1 p-4 md:p-8 w-full max-w-[1600px] mx-auto">
 
             <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-8">
                 <div>
@@ -52,7 +52,7 @@ unset($_SESSION["redirect_data"]);
                 </div>
             </div>
 
-            <div class="bg-[#121214] border border-white/5 rounded-2xl p-6 shadow-xl">
+            <div class="bg-[#121214] border border-white/5 rounded-2xl p-4 lg:p-6 shadow-xl">
                 <div class="flex flex-col md:flex-row gap-4 mb-8 items-center justify-between">
                     <div class="w-full">
                         <form method="GET" class="w-full relative">
@@ -62,7 +62,7 @@ unset($_SESSION["redirect_data"]);
                                 name: "name",
                                 value: $_GET['name'] ?? "",
                                 icon: "/VHS/public/icons/filter.svg",
-                                iconPosition: "left",
+                                iconPosition: "right",
                                 width: "full",
                                 onClickIcon: "showFilterMenu()"
                             ) ?>

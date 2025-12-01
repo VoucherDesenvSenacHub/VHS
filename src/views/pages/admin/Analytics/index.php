@@ -58,11 +58,11 @@ $user = $_SESSION["user"] ?? null;
     <?= HeaderComponent() ?>
 
     <div class="flex flex-col md:flex-row w-full">
-        <div class="hidden md:block">
+        <div>
             <?= Barra_Admin() ?>
         </div>
 
-        <main class="flex-1 p-8 w-full max-w-[1600px] mx-auto">
+        <main class="flex-1 p-4 md:p-8 w-full max-w-[1600px] mx-auto">
 
             <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-8">
                 <div class="flex items-center gap-4">

@@ -97,7 +97,7 @@ function SidebarComponent()
     }
 
     return <<<HTML
-        <aside id="main-sidebar" class="hidden md:flex flex-col w-64 h-[calc(100vh-5rem)] sticky top-20 border-r border-white/5 bg-[#0C0118]/50 backdrop-blur-sm transition-all duration-300">
+        <aside id="main-sidebar" class="flex flex-col w-0 md:w-64 h-screen sticky top-0 border-r border-white/5 bg-gradient-to-b from-[#100018] to-black z-50 overflow-hidden transition-all duration-300">
             <div class="px-6 py-6">
                 <h2 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Menu Principal</h2>
                 <div class="h-0.5 w-8 bg-purple-600 rounded-full"></div>
@@ -108,7 +108,7 @@ function SidebarComponent()
                     $htmlHome
                 </ul>
 
-                <div class="px-6 mb-2">
+                <div class="px-6 mb-2" id="categories-button">
                     <button onclick="CategoriesON(event)" class="flex items-center gap-3 group w-full text-left">
                         <div class="w-6 h-6 flex items-center justify-center bg-white/5 rounded-lg group-hover:bg-white/10 transition-colors">
                             <img src="/VHS/public/icons/GridOff.svg" class="w-4 h-4 opacity-70 group-hover:opacity-100 transition-opacity">

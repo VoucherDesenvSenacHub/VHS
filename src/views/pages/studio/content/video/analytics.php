@@ -126,13 +126,13 @@ function time_elapsed_string($datetime, $full = false)
     <?= HeaderComponent(); ?>
 
     <div class="flex flex-col md:flex-row w-full">
-        <div class="hidden md:block">
+        <div>
             <?= StudioSideMenuComponent() ?>
         </div>
 
         <div class="flex flex-col md:flex-row w-full">
 
-            <main class="flex-1 p-8 w-full max-w-[1600px] mx-auto">
+            <main class="flex-1 p-4 md:p-8 w-full max-w-[1600px] mx-auto">
 
                 <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 mb-8">
                     <div>

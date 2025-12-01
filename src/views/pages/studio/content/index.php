@@ -47,7 +47,7 @@ $sort = $_SESSION["page_data"]["sort"] ?? 'desc';
     <div class="flex min-h-screen">
         <?= StudioSideMenuComponent(); ?>
 
-        <main class="flex-1 p-8 w-full max-w-[1600px] mx-auto">
+        <main class="flex-1 p-4 md:p-8 w-full max-w-[1600px] mx-auto">
 
             <div class="mb-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                 <div>
@@ -59,10 +59,10 @@ $sort = $_SESSION["page_data"]["sort"] ?? 'desc';
             <div class="flex flex-col lg:flex-row gap-6 mb-8 items-center justify-between">
                 <!-- Custom Tabs -->
                 <div class="flex p-1 bg-[#121214] border border-white/5 rounded-xl w-full lg:w-auto">
-                    <a href="/VHS/studio/content/video" class="flex-1 lg:flex-none px-8 py-2.5 rounded-lg text-sm font-medium bg-purple-600 text-white shadow-lg transition-all">
+                    <a href="/VHS/studio/content/video" class="flex-1 lg:flex-none px-8 py-2.5 rounded-lg text-sm font-medium bg-purple-600 text-white shadow-lg transition-all text-center">
                         Vídeos
                     </a>
-                    <a href="/VHS/studio/content/fast" class="flex-1 lg:flex-none px-8 py-2.5 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all">
+                    <a href="/VHS/studio/content/fast" class="flex-1 lg:flex-none px-8 py-2.5 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-center">
                         Shorts
                     </a>
                 </div>
@@ -70,36 +70,14 @@ $sort = $_SESSION["page_data"]["sort"] ?? 'desc';
                 <!-- Premium Search Input -->
                 <form action="" method="get" class="flex flex-col md:flex-row gap-4 w-full lg:w-auto items-center">
                     <input type="hidden" name="sort" value="<?= htmlspecialchars($sort) ?>">
-
-                    <div class="relative group w-full md:w-80">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <svg class="h-5 w-5 text-gray-500 group-focus-within:text-purple-500 transition-colors" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-                            </svg>
-                        </div>
-                        <input
-                            type="text"
-                            name="search"
-                            value="<?= htmlspecialchars($search) ?>"
-                            placeholder="Pesquisar vídeos..."
-                            class="block w-full pl-10 pr-10 py-2.5 bg-[#121214] border border-white/10 rounded-xl text-gray-300 placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 sm:text-sm transition-all">
-                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer" onclick="showFilterMenu()">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
-                            </svg>
-                        </div>
-
-                        <div id="filter" class="absolute right-0 top-full mt-2 z-20 hidden w-48 bg-[#1E1E20] border border-white/10 rounded-xl shadow-2xl overflow-hidden">
-                            <div class="p-2 space-y-1">
-                                <a href="?search=<?= urlencode($search) ?>&sort=desc" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white/5 transition-colors group <?= $sort === 'desc' ? 'bg-purple-500/10' : '' ?>">
-                                    <span class="text-sm font-medium <?= $sort === 'desc' ? 'text-purple-400' : 'text-gray-300' ?>">Mais recentes</span>
-                                </a>
-                                <a href="?search=<?= urlencode($search) ?>&sort=asc" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white/5 transition-colors group <?= $sort === 'asc' ? 'bg-purple-500/10' : '' ?>">
-                                    <span class="text-sm font-medium <?= $sort === 'asc' ? 'text-purple-400' : 'text-gray-300' ?>">Mais antigos</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    <?= InputComponent(
+                        type: "text",
+                        placeholder: "Pesquisar vídeos...",
+                        name: "search",
+                        icon: "/VHS/public/icons/Filter.svg",
+                        value: $search
+                    ) ?>
+                    <?= Filter($search, $sort) ?>
                 </form>
             </div>
 

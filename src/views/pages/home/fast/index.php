@@ -23,24 +23,14 @@ $fasts = $_SESSION["page_data"];
     <script src="/VHS/src/views/pages/home/fast/script.js" defer></script>
     <script src="/VHS/src/views/components/fastComponent/fastComponent.js" defer></script>
     <style>
-        .glass-header {
-            background: rgba(32, 0, 44, 0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        /* Hide scrollbar for Chrome, Safari and Opera */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
 
-        /* Hide scrollbar for IE, Edge and Firefox */
+
         .no-scrollbar {
             -ms-overflow-style: none;
-            /* IE and Edge */
             scrollbar-width: none;
-            /* Firefox */
         }
     </style>
 </head>
@@ -50,7 +40,7 @@ $fasts = $_SESSION["page_data"];
     <?= HeaderComponent() ?>
 
     <div class="flex flex-1 h-screen">
-        <div class="hidden lg:block fixed h-full z-40">
+        <div>
             <?= SidebarComponent() ?>
         </div>
 

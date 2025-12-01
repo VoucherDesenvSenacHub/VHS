@@ -56,7 +56,7 @@ $categories = $_SESSION["page_data"]["categories"] ?? [];
     <?= HeaderComponent() ?>
 
     <div class="flex flex-1">
-        <div class="hidden md:block h-full z-40">
+        <div class="h-full z-40">
             <?= SidebarComponent() ?>
         </div>
 

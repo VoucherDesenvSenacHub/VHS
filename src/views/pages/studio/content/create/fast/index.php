@@ -51,7 +51,7 @@ unset($_SESSION['redirect_data']);
 
     <div class="flex min-h-screen">
         <?= StudioSideMenuComponent(); ?>
-        <main class="flex-1 p-8 w-full max-w-[1600px] mx-auto">
+        <main class="flex-1 p-4 md:p-8 w-full max-w-[1600px] mx-auto">
 
             <div class="mb-8">
                 <h1 class="text-2xl font-bold text-white">Criar Conteúdo</h1>
@@ -60,10 +60,10 @@ unset($_SESSION['redirect_data']);
 
             <div class="flex flex-col lg:flex-row gap-6 mb-8 items-center justify-between">
                 <div class="flex p-1 bg-[#121214] border border-white/5 rounded-xl w-full lg:w-auto">
-                    <a href="/VHS/studio/create/video" class="flex-1 lg:flex-none px-8 py-2.5 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all">
+                    <a href="/VHS/studio/create/video" class="flex-1 lg:flex-none px-8 py-2.5 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-center">
                         Vídeo
                     </a>
-                    <a href="/VHS/studio/create/fast" class="flex-1 lg:flex-none px-8 py-2.5 rounded-lg text-sm font-medium bg-purple-600 text-white shadow-lg transition-all">
+                    <a href="/VHS/studio/create/fast" class="flex-1 lg:flex-none px-8 py-2.5 rounded-lg text-sm font-medium bg-purple-600 text-white shadow-lg transition-all text-center">
                         Shorts
                     </a>
                 </div>

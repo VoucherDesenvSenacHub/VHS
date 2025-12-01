@@ -45,11 +45,11 @@ $sort = $_SESSION["page_data"]["sort"] ?? 'desc';
   <?= HeaderComponent(); ?>
 
   <div class="flex flex-col md:flex-row w-full">
-    <div class="hidden md:block">
+    <div>
       <?= StudioSideMenuComponent() ?>
     </div>
 
-    <main class="flex-1 p-8 w-full max-w-[1600px] mx-auto">
+    <main class="flex-1 p-4 md:p-8 w-full max-w-[1600px] mx-auto">
 
       <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 mb-8">
         <div>
@@ -91,7 +91,7 @@ $sort = $_SESSION["page_data"]["sort"] ?? 'desc';
                   icon: "/VHS/public/icons/Filter.svg",
                   name: "search",
                   value: $search,
-                  iconPosition: "left",
+                  iconPosition: "right",
                   onClickIcon: "showFilterMenu()",
                   width: "full"
                 ) ?>

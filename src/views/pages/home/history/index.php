@@ -91,7 +91,7 @@ $historyVideos = array_map(function ($video) {
     <?= HeaderComponent() ?>
 
     <div class="flex flex-1">
-        <div class="hidden md:block h-full z-40">
+        <div>
             <?= SidebarComponent() ?>
         </div>
 
@@ -128,7 +128,7 @@ $historyVideos = array_map(function ($video) {
             </div>
 
             <?php if (empty($historyVideos)): ?>
-                <div class="flex flex-col items-center justify-center py-20 bg-white/5 rounded-3xl border border-white/5 border-dashed">
+                <div class="flex flex-col items-center justify-center py-20 bg-[#121214] rounded-3xl border border-white/5 border-dashed">
                     <div class="w-20 h-20 bg-gray-800 rounded-full flex items-center justify-center mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />

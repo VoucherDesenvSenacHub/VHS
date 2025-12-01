@@ -65,7 +65,7 @@ if ($_SESSION["redirect_data"]["errors"] ?? false) {
 
   <div class="flex pt-20">
 
-    <div class="hidden md:block">
+    <div>
       <?= SidebarComponent() ?>
     </div>
 
