@@ -158,7 +158,7 @@
                             </div>
     
                             <div class="flex flex-row justify-between gap-10 mt-5">
-                                <?= ButtonComponent(type: "button", text: "Cancelar", variant: "outline", id: "cancel-button", width: 27.5, link: "/VHS/studio") ?>
+                                <?= ButtonComponent(type: "button", text: "Cancelar", variant: "outline", id: "cancel-button", width: 27.5, link: "/VHS/studio/analytics") ?>
                                 <?= ButtonComponent(type: "submit", text: "Publicar", variant: "default", id: "publish-button", width: 27.5) ?>
                             </div>
                         </form>
