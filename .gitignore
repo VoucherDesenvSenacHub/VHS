@@ -1,5 +1,6 @@
 .env
 vendor
 .htaccess
-public/thumbnails
-public/videos
+public/uploads/videos/**
+public/uploads/thumbnails/**
+!public/uploads/thumbnails/default.png
