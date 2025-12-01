@@ -14,11 +14,17 @@ class EventsController extends Controller {
 
     public function index() {
         $this->eventModel = $this->model("event");
+
         $events = $this->eventModel->read();
+        $popularEvents = $this->eventModel->getPopularEvents();
+
+        $nextEventResult = $this->eventModel->getNextEvent();
+        $nextEvent = $nextEventResult[0] ?? null;
 
         $this->view('/home/events/index', [
-            "events" => $events
+            "events" => $events,
+            "popularEvents" => $popularEvents,
+            "nextEvent" => $nextEvent
         ]);
     }
-    
 }
