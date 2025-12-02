@@ -63,7 +63,7 @@ class Cards
         return <<<HTML
             <a href='/VHS/home/video?id=$id' class='card flex flex-col relative max-w-[310px] h-[310px] 2xl:max-w-[340px] 2xl:h-[340px] bg-gray600 rounded-3xl overflow-hidden shadow-lg transition-all duration-200 border-2 border-gray600 active:scale-[98%]'>
                 <div class='relative w-full h-[50%] bg-white/5'>
-                    <img src='$thumb_url' onerror="this.src='/VHS/public/uploads/thumbs/default.png'" class='w-full h-full object-cover'>
+                    <img src='$thumb_url' onerror="this.src='/VHS/public/uploads/thumbnails/default.png'" class='w-full h-full object-cover'>
 
                     <div class='absolute top-3 right-3 bg-black/75 px-2 py-1 rounded-md'>
                         <p class='text-white text-caption 2xl:text-paragraph'>$duration</p>
@@ -114,7 +114,7 @@ class Cards
         return <<<HTML
             <a href='$url' class='card flex flex-col relative max-w-[310px] h-[310px] 2xl:max-w-[340px] 2xl:h-[340px] bg-gray600 rounded-3xl overflow-hidden shadow-lg transition-all duration-200 border-2 border-gray600 active:scale-[98%]'>
                 <div class='relative w-full h-[50%] bg-white/5'>
-                    <img src='$thumb_url' onerror="this.src='/VHS/public/uploads/thumbs/default.png'" class='w-full h-full object-cover pointer-events-none'>
+                    <img src='$thumb_url' onerror="this.src='/VHS/public/uploads/thumbnails/default.png'" class='w-full h-full object-cover pointer-events-none'>
 
                     <div class='absolute top-3 right-3 bg-black bg-opacity-70 text-white text-caption 2xl:text-paragraph px-4 py-1 rounded-md'>
                         🔥  
@@ -254,7 +254,7 @@ class Cards
         return <<<HTML
             <a href='$url' class='card flex flex-col relative max-w-[310px] h-[310px] 2xl:max-w-[340px] 2xl:h-[340px] bg-gray600 rounded-3xl overflow-hidden shadow-lg transition-all duration-200 border-2 border-gray600 active:scale-[98%]'>
                 <div class='relative w-full h-[50%] bg-white/5'>
-                    <img src='$thumb_url' onerror="this.src='/VHS/public/uploads/thumbs/default.png'" class='w-full h-full object-cover'>
+                    <img src='$thumb_url' onerror="this.src='/VHS/public/uploads/thumbnails/default.png'" class='w-full h-full object-cover'>
 
                     <div class='absolute top-3 right-3 bg-black bg-opacity-70 px-2 py-1 rounded-md'>
                         <p class='text-white text-paragraph'>$duration</p>
@@ -291,7 +291,7 @@ class Cards
 
         return <<<HTML
             <a href='$url' class='current_fast box-border flex-shrink-0 w-[340px] h-[35rem] relative flex flex-col justify-end bg-white/10 rounded-3xl overflow-hidden'>
-                <img src='$thumb_url' class='w-full h-full object-cover absolute inset-0' onerror="this.src='/VHS/public/uploads/thumbs/default.png'">
+                <img src='$thumb_url' class='w-full h-full object-cover absolute inset-0' onerror="this.src='/VHS/public/uploads/thumbnails/default.png'">
                 <div class='absolute inset-0 bg-gradient-to-t from-black/75 to-transparent'></div>
                 
                 <div class='relative z-10 w-full p-4 flex flex-col gap-4'>

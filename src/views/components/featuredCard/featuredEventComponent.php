@@ -13,7 +13,7 @@ function FeaturedEventCard(array $event, bool $isEventPage = true) {
 
     return <<<HTML
         <div class="relative w-full max-h-96 bg-secondary/25 rounded-3xl overflow-hidden shadow-lg cursor-pointer border-2 border-gray300/75 $height">
-            <img src="{$event['thumbnail_url']}" onerror='this.src="/VHS/public/uploads/thumbs/default.png"' class="absolute inset-0 w-full h-full object-cover opacity-70">
+            <img src="{$event['thumbnail_url']}" onerror='this.src="/VHS/public/uploads/thumbnails/default.png"' class="absolute inset-0 w-full h-full object-cover opacity-70">
             <div class="absolute inset-0 bg-gradient-to-t from-black/75 to-transparent"></div>
 
             <div class="relative z-10 p-6 h-full gap-2 flex flex-col justify-between">
