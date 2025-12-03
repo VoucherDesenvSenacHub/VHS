@@ -19,6 +19,8 @@ $video = $_SESSION["page_data"]["video"];
 $weeklyViews = $_SESSION["page_data"]["weeklyViews"];
 $weeklyAvaliations = $_SESSION["page_data"]["weeklyAvaliations"];
 $isGeneral = $_SESSION["page_data"]["isGeneral"] ?? false;
+$Allcomments = $_SESSION["page_data"]["Allcomments"];
+$Averegevideo = $_SESSION["page_data"]["Averegevideo"];
 $latestVideos = $_SESSION["page_data"]["latestVideos"] ?? [];
 $latestComments = $_SESSION["page_data"]["latestComments"] ?? [];
 $followersCount = $_SESSION["page_data"]["followersCount"] ?? 0;
@@ -162,8 +164,8 @@ function time_elapsed_string($datetime, $full = false)
                         <!-- Stats Cards -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                             <?= UserActivityCardsComponent("Visualizações", $video['views'] ?? 0) ?>
-                            <?= UserActivityCardsComponent("Comentários", $video['comments'] ?? 0) ?>
-                            <?= UserActivityCardsComponent("Média Vis.", $video['avg_views'] ?? 0) ?>
+                            <?= UserActivityCardsComponent("Comentários", $Allcomments[0]['total'] ?? 0) ?>
+                            <?= UserActivityCardsComponent("Média Vis.", (int)$Averegevideo[0]['total'] ?? 0) ?>
                             <?= UserActivityCardsComponent("Compartilhados", $video['shared'] ?? 0) ?>
                         </div>
 

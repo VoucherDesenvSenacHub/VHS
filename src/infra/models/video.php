@@ -190,6 +190,11 @@ class VideoModel extends Model
         return $this->database->query($sql, [":userId" => $userId]);
     }
 
+    public function getAverageVideoByVideoId($id){
+        $sql = "SELECT AVG(views) AS total FROM videos WHERE id = :id";
+        return $this->database->query($sql,[":id" => $id]);
+    }
+
     public function getLastVideosByUserId(string $userId, int $offset, int $limit)
     {
         $sql = "SELECT * FROM videos WHERE author_id = :userId AND is_deleted = 0 ORDER BY created_at DESC LIMIT $offset, $limit";
