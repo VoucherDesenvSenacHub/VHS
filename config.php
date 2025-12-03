@@ -1,6 +1,7 @@
 <?php
 
 require __DIR__ . "/vendor/autoload.php";
+
 use Dotenv\Dotenv;
 
 $dotenv = Dotenv::createImmutable(__DIR__);
@@ -25,17 +26,21 @@ if (isset($_GET["logout"])) {
             $params["httponly"]
         );
     }
-    
+
     session_destroy();
     header("Location: /VHS/home");
     exit;
 }
 
 
-foreach($_GET as $key => $value) {
+foreach ($_GET as $key => $value) {
+    if (!is_string($value)) return;
+
     $_GET[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
 }
 
-foreach($_POST as $key => $value) {
+foreach ($_POST as $key => $value) {
+    if (!is_string($value)) return;
+
     $_POST[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
 }

@@ -15,6 +15,7 @@ use function src\views\components\filter\Filter;
 use function Src\Application\Utils\showSweetAlert;
 
 $users = $_SESSION["page_data"]["users"];
+$nextPage = $_SESSION["page_data"]["next_page"];
 $success = $_SESSION["redirect_data"]["success"] ?? null;
 $errors = $_SESSION["redirect_data"]["errors"] ?? null;
 
@@ -22,7 +23,7 @@ unset($_SESSION["redirect_data"]);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8" />
@@ -31,40 +32,50 @@ unset($_SESSION["redirect_data"]);
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/VHS/src/styles/global.css">
     <script src="/VHS/src/styles/tailwindglobal.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Syne:wght@500..800&display=swap" rel="stylesheet" />
 </head>
 
-<body class="w-full min-h-screen bg-gradient-to-b from-[#20002c] to-[#000000] bg-no-repeat bg-cover bg-center text-white font-[Poppins] overflow-x-hidden">
+<body class="w-full min-h-screen bg-gradient-to-b from-[#100018] to-black text-white overflow-x-hidden font-[Poppins]">
     <?= HeaderComponent() ?>
-    <div class="flex gap-10">
-        <div class="hidden md:block">
+
+    <div class="flex flex-col md:flex-row w-full">
+        <div>
             <?= barra_admin() ?>
         </div>
-        <div class="p-6 pt-8 w-full flex flex-col gap-6">
-            <div class="flex flex-col gap-4">
+
+        <main class="flex-1 p-4 md:p-8 w-full max-w-[1600px] mx-auto">
+
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-8">
                 <div>
-                    <text class='text-xl md:text-3xl font-bold text-white text-center md:text-left'>Gerenciamento de Usuários</text>
+                    <h1 class="text-2xl font-bold text-white">Gerenciamento de Usuários</h1>
+                    <p class="text-gray-400 mt-1">Administre os usuários da plataforma</p>
                 </div>
-                <div class="flex flex-col gap-2">
-                    <div class="flex items-center justify-center gap-4">
-                        <div class="h-full pt-6">
-                            <?= Filter() ?>
-                        </div>
-                        <div class="w-full">
-                            <form method="GET">
-                                <?= InputComponent(
-                                    placeholder: "Pesquisar",
-                                    type: "text",
-                                    name: "name",
-                                    value: $_GET['name'] ?? ""
-                                ) ?>
-                            </form>
-                        </div>
+            </div>
+
+            <div class="bg-[#121214] border border-white/5 rounded-2xl p-4 lg:p-6 shadow-xl">
+                <div class="flex flex-col md:flex-row gap-4 mb-8 items-center justify-between">
+                    <div class="w-full">
+                        <form method="GET" class="w-full relative">
+                            <?= InputComponent(
+                                placeholder: "Pesquisar usuários...",
+                                type: "text",
+                                name: "name",
+                                value: $_GET['name'] ?? "",
+                                icon: "/VHS/public/icons/filter.svg",
+                                iconPosition: "right",
+                                width: "full",
+                                onClickIcon: "showFilterMenu()"
+                            ) ?>
+                            <?= Filter($_GET['name'] ?? "", $_GET['sort'] ?? "") ?>
+                        </form>
                     </div>
                 </div>
+
+                <div class="w-full overflow-x-auto">
+                    <?= userDataTableComponent($users, $nextPage); ?>
+                </div>
             </div>
-            <div class="w-full overflow-x-auto">
-                <?= userDataTableComponent($users); ?>
-            </div>
+
             <?php
             if (isset($errors)) {
                 echo showSweetAlert("Erro ao excluir ou editar usuário", $errors, "error");
@@ -73,7 +84,7 @@ unset($_SESSION["redirect_data"]);
                 echo showSweetAlert("Sucesso ao excluir ou editar usuário", $success, "success");
             }
             ?>
-        </div>
+        </main>
     </div>
 </body>
 

@@ -48,8 +48,9 @@ class UserModel extends Model
 
         return $this->database->query($sql, [":username" => $username]);
     }
-    public function getCreatorByUsername(string $query): array{
-        $sql = "SELECT * FROM users WHERE role ='CREATOR' and (username LIKE :query)";
+    public function getCreatorByUsername(string $query, int $offset = 0, int $limit = 8): array
+    {
+        $sql = "SELECT * FROM users WHERE role ='CREATOR' and (username LIKE :query) LIMIT $offset, $limit";
 
         return $this->database->query($sql, ['query' => '%' . $query . '%']);
     }
@@ -104,7 +105,7 @@ class UserModel extends Model
 
     public function getCategoryByUserId(string $id): array
     {
-        $sql = "SELECT * FROM users_category WHERE user_id = :id";
+        $sql = "SELECT users_category.*, categories.name FROM users_category INNER JOIN categories ON users_category.category_id = categories.id WHERE user_id = :id";
 
         return $this->database->query($sql, [":id" => $id]);
     }
@@ -115,12 +116,14 @@ class UserModel extends Model
         return $this->database->query($sql, [":name" => "%$name%"]);
     }
 
-    public function getAllUsers() {
+    public function getAllUsers()
+    {
         $sql = "SELECT COUNT(*) AS all_users FROM users WHERE is_deleted = 0";
         return $this->database->query($sql);
     }
 
-    public function getAllChannels() {
+    public function getAllChannels()
+    {
         $sql = "SELECT COUNT(*) AS all_channels FROM users WHERE is_deleted = 0 AND role = 'CREATOR' OR role = 'ADMIN'";
         return $this->database->query($sql);
     }
@@ -148,9 +151,10 @@ class UserModel extends Model
         $sql = "UPDATE users SET status = 0 WHERE id = :id";
         return $this->database->exec($sql, [":id" => $id]);
     }
-    
 
-    public function getCountUsersLoginByWeekDay(){
+
+    public function getCountUsersLoginByWeekDay()
+    {
         $sql = "SELECT DAYNAME(users.last_login_date) AS day_name, COUNT(*) AS total FROM users
         WHERE YEARWEEK(users.last_login_date, 1) = YEARWEEK(CURDATE(), 1)
         GROUP BY DAYOFWEEK(users.last_login_date)
@@ -158,7 +162,8 @@ class UserModel extends Model
         return $this->database->query($sql);
     }
 
-    public function updateUserLastLogin(string $id): bool {
+    public function updateUserLastLogin(string $id): bool
+    {
         $sql = "UPDATE users SET last_login_date = NOW() WHERE id = :id";
         return $this->database->exec($sql, [":id" => $id]);
     }

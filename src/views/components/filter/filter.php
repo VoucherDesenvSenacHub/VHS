@@ -1,57 +1,57 @@
 <?php
+
 namespace src\views\components\filter;
 
-function Filter() {
+function Filter(string $pesquisa, string $ordenacao)
+{
+    $pesquisaEncoded = urlencode($pesquisa);
+
+    $maisRecentesSelected = $ordenacao === 'desc' ? 'opacity-100 text-white font-medium' : '';
+    $maisAntigosSelected = $ordenacao === 'asc' ? 'opacity-100 text-white font-medium' : '';
+
     return <<<HTML
-        <button id="filtro" class="focus:outline-none">
-            <img class="size-7" src="/VHS/public/icons/Filter.svg" alt="Filtro">
-        </button>
+<div id="filter" class="absolute right-0 top-full mt-2 z-20 hidden flex flex-col bg-[#121214] border border-white/10 rounded-xl p-2 w-48 gap-1 shadow-2xl backdrop-blur-xl cursor-pointer transform origin-top-right transition-all">
 
-        <div
-            class="bg-[#1B1B1B] text-white rounded-lg p-4 w-48 absolute hidden border-2 border-gray-600 z-10 ml-10"
-            id="menu"
-        >
-            <ul class="w-full flex flex-col gap-8">
-                <li
-                    class=" text-white font-semibold flex w-32 h-5 text-base gap-2 items-center ml-1 cursor-pointer"
-                >
-                    <form method="GET">
-                        <button type="submit">
-                            <img src="/VHS/public/icons/clock2.svg" class="w-5" />
-                            <p class="ml-1">Mais recentes</p>
-                        </button>
-                    </form>
-                </li>
-                <li
-                    class=" text-white font-semibold flex w-32 h-5 text-base gap-2 items-center ml-1 cursor-pointer"
-                >
-                    <form method="GET">
-                        <button>
-                            <input type="hidden" name="ordering"/>
-                            <img src="/VHS/public/icons/clock2.svg" class="w-5" />
-                            <p class="ml-1">Mais antigos</p>
-                        </button>
-                    </form>
-                </li>
-            </ul>
+    <a href="?search={$pesquisaEncoded}&sort=desc" 
+       class="flex items-center gap-3 p-2.5 rounded-lg hover:bg-white/5 transition-all cursor-pointer group {$maisRecentesSelected}">
+       
+        <div class="p-1.5 rounded-md bg-white/5 group-hover:bg-white/10 transition-colors">
+            <img src="/VHS/public/icons/time-svgrepo-com.svg" 
+                 class="size-4 rotate-[-110deg] opacity-60 group-hover:opacity-100 transition-opacity">
         </div>
+             
+        <p class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">
+            Mais recentes
+        </p>
+    </a>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                const filtrobtn = document.getElementById("filtro");
-                const menubtn = document.getElementById("menu");
+    <a href="?search={$pesquisaEncoded}&sort=asc" 
+       class="flex items-center gap-3 p-2.5 rounded-lg hover:bg-white/5 transition-all cursor-pointer group {$maisAntigosSelected}">
+       
+        <div class="p-1.5 rounded-md bg-white/5 group-hover:bg-white/10 transition-colors">
+            <img src="/VHS/public/icons/time-svgrepo-com.svg" 
+                 class="size-4 opacity-60 group-hover:opacity-100 transition-opacity">
+        </div>
+             
+        <p class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">
+            Mais antigos
+        </p>
+    </a>
+</div>
 
-                filtrobtn.addEventListener("click", () => {
-                    menubtn.style.display = menubtn.style.display === "flex" ? "none" : "flex";
-                });
-
-                document.addEventListener("click", (event) => {
-                    if (!filtrobtn.contains(event.target) && !menubtn.contains(event.target)) {
-                        menubtn.style.display = "none";
-                    }
-                });
-            });
-        </script>
-    HTML;
+<script>
+    function showFilterMenu() {
+        const filter = document.getElementById('filter');
+        filter.classList.toggle('hidden');
+        
+        // Close when clicking outside
+        document.addEventListener('click', function(event) {
+            const isClickInside = filter.contains(event.target) || event.target.closest('[onclick*="showFilterMenu"]');
+            if (!isClickInside && !filter.classList.contains('hidden')) {
+                filter.classList.add('hidden');
+            }
+        }, { once: true }); // Use once to avoid stacking listeners, though logic might need refinement for toggle
+    }
+</script>
+HTML;
 }
-?>

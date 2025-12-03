@@ -33,14 +33,14 @@ function CommentStudioComponent(string $name, string $text,  string | null $crea
     if (!$isVideoComments) {
         $thubnailHTML .= <<<HTML
             <a href="/VHS/pages/home/video.php?id=$videoId">
-                <img src="$thumbnailURL" alt="Thumbnail de video" class="w-40 h-full rounded-xl hidden md:block"/>
+                <img src="$thumbnailURL" alt="Thumbnail de video" class="w-40 h-20 object-cover rounded-xl hidden md:block"/>
             </a>
         HTML;
-    }   
+    }
 
     $likeSrc = $creator_like ? '/VHS/public/icons/comments/favorite-comment-filled.svg' : '/VHS/public/icons/comments/favorite-comment.svg';
 
-    return 
+    return
         <<<HTML
         <div class='w-full flex gap-4 py-2'>
             <div class='w-14 h-14 rounded-full mt-1 shrink-0'>
@@ -48,7 +48,7 @@ function CommentStudioComponent(string $name, string $text,  string | null $crea
             </div>
     
             <div class='flex flex-col flex-1'>
-                <div class='flex items-baseline'>
+                <div class='flex flex-col md:flex-row gap-2 items-baseline'>
                     <p class='text-lg text-white font-semibold'>$name</p> 
                     $created_at
                 </div>
@@ -58,21 +58,19 @@ function CommentStudioComponent(string $name, string $text,  string | null $crea
                 </div>
                 
                 <div class='mt-2'>
-                    <ul class='w-full flex gap-3'>  
+                    <ul class='w-full flex gap-3 cursor-pointer'>  
                         <li>
-                            <img src='/VHS/public/icons/comments/trash.svg' onclick='deleteComment(event,"{$comment_id}", "{$name}")'>
+                            <img class="size-6" src='/VHS/public/icons/comments/trash.svg' onclick='deleteComment(event,"{$comment_id}", "{$name}")'>
                         </li>
                         <li>
-                            <img like="$creator_like" src=' $likeSrc' onclick='likeComment(event, "{$comment_id}", "{$creator_like}")'>
+                            <img class="size-6" like="$creator_like" src=' $likeSrc' onclick='likeComment(event, "{$comment_id}", "{$creator_like}")'>
                         </li>
                         <li>
-                            <img src='/VHS/public/icons/comments/user-block.svg' onclick='blockUser(event, "{$current_user_id}", "{$name}", "{$user_blocked_id}")'>
+                            <img class="size-6" src='/VHS/public/icons/comments/user-block.svg' onclick='blockUser(event, "{$current_user_id}", "{$name}", "{$user_blocked_id}")'>
                         </li>
                     </ul>    
                 </div>
             </div>
-
-            
             $thubnailHTML
         </div>
     HTML;

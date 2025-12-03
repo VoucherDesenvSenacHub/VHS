@@ -2,58 +2,86 @@
 
 namespace src\views\components\studioSideMenu;
 
-function StudioSideMenuComponent(){
+function StudioSideMenuComponent()
+{
+    // Get current path to set active state
+    $currentPath = $_SERVER['REQUEST_URI'];
+
+    $menuItems = [
+        [
+            'title' => 'Analytics',
+            'href' => '/VHS/studio/analytics',
+            'icon' => '/VHS/public/icons/sidebar_admin/chart-column.svg',
+            'active' => strpos($currentPath, '/studio/analytics') !== false
+        ],
+        [
+            'title' => 'Conteúdo',
+            'href' => '/VHS/studio/content/video',
+            'icon' => '/VHS/public/icons/video.svg',
+            'active' => strpos($currentPath, '/studio/content') !== false
+        ],
+        [
+            'title' => 'Customizar',
+            'href' => '/VHS/studio/channel/edit',
+            'icon' => '/VHS/public/icons/lapis.svg',
+            'active' => strpos($currentPath, '/studio/channel/edit') !== false
+        ],
+        [
+            'title' => 'Comentários',
+            'href' => '/VHS/studio/comments',
+            'icon' => '/VHS/public/icons/message-circle.svg',
+            'active' => strpos($currentPath, '/studio/comments') !== false
+        ],
+        [
+            'title' => 'Criar',
+            'href' => '/VHS/studio/create/video',
+            'icon' => '/VHS/public/icons/upload.svg',
+            'active' => strpos($currentPath, '/studio/create') !== false
+        ]
+    ];
+
+    $itemsHtml = '';
+    foreach ($menuItems as $item) {
+        $activeClass = $item['active']
+            ? 'bg-purple-600/20 text-white border-r-2 border-purple-500'
+            : 'text-gray-400 hover:bg-white/5 hover:text-white border-r-2 border-transparent';
+
+        $iconOpacity = $item['active'] ? 'opacity-100' : 'opacity-70 group-hover:opacity-100';
+
+        $itemsHtml .= <<<HTML
+            <li class="mb-2">
+                <a href="{$item['href']}" class="group flex items-center gap-4 px-6 py-3.5 transition-all duration-300 {$activeClass}">
+                    <div class="w-6 h-6 flex items-center justify-center">
+                        <img src="{$item['icon']}" alt="{$item['title']}" class="w-full h-full object-contain transition-opacity {$iconOpacity}">
+                    </div>
+                    <span class="font-medium text-sm tracking-wide">{$item['title']}</span>
+                </a>
+            </li>
+        HTML;
+    }
+
     return <<<HTML
-    <aside class="w-44 ml-[1.87rem] transition-all duration-500 ease-in-out top-20 z-10 h-full" id="sidebar">
-        <h2 class="w-[11rem] pt-[1.18rem] ml-[0.5rem] text-gray-400 text-xs font-poppins">VHS STUDIO</h2>
-        <ul>
-            <li class="menu-item flex items-center text-gray-300 rounded-lg cursor-pointer mt-[1.5rem] transition-transform duration-200">
-                <a href="/VHS/studio/analytics" class="flex items-center w-full p-2">
-                    <div class="analytics-icon icon w-[2rem] h-[2rem] flex items-center justify-center rounded-[12px] ml-[0.31rem] ">
-                        <img src="/VHS/public/icons/sidebar_studio/Analytics.svg" alt="Analytics">
-                    </div>
-                    <h2 class="menu-text ml-[1rem] text-gray-400 text-sm font-semibold transition-all duration-500 ease-in-out">Analytics</h2>
-                </a>
-            </li>
+    <aside id="studio-sidebar" class="flex flex-col w-0 xl:w-64 h-screen sticky top-0 border-r border-white/5 bg-gradient-to-b from-[#100018] to-black overflow-hidden transition-all duration-300">
+        <div class="px-6 py-6">
+            <h2 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Studio</h2>
+            <div class="h-0.5 w-8 bg-purple-600 rounded-full"></div>
+        </div>
+        
+        <nav class="flex-1 overflow-y-auto custom-scrollbar">
+            <ul class="flex flex-col">
+                $itemsHtml
+            </ul>
+        </nav>
 
-            <li class="flex items-center text-gray-300 rounded-lg cursor-pointer mt-[2rem]">
-                <a href="/VHS/studio/content/video" class="flex items-center w-full p-2">
-                    <div class="conteudo-icon icon w-[2rem] h-[2rem] flex items-center justify-center rounded-[12px] ml-[0.31rem]">
-                        <img src="/VHS/public/icons/sidebar_studio/Conteúdo.svg" alt="Conteúdo">
-                    </div>
-                    <h2 class="menu-text ml-[1rem] text-gray-400 text-sm font-semibold transition-all duration-500 ease-in-out">Conteúdo</h2>
-                </a>
-            </li>
-
-            <li class="flex items-center text-gray-300 rounded-lg cursor-pointer mt-[2rem]">
-                <a href="/VHS/studio/channel/edit" class="flex items-center w-full p-2">
-                    <div class="customizar-icon icon w-[2rem] h-[2rem] flex items-center justify-center rounded-[12px] ml-[0.31rem]">
-                        <img src="/VHS/public/icons/sidebar_studio/Customizar.svg" alt="Customizar" class="w-[3rem] h-[3rem]">
-                    </div>
-                    <h2 class="menu-text ml-[1rem] text-gray-400 text-sm font-semibold transition-all duration-500 ease-in-out">Customizar</h2>
-                </a>
-            </li>
-
-            <li class="flex items-center text-gray-300 rounded-lg cursor-pointer mt-[2rem]">
-                <a href="/VHS/studio/comments" class="flex items-center w-full p-2">
-                    <div class="comentarios-icon icon w-[2rem] h-[2rem] flex items-center justify-center rounded-[12px] ml-[0.31rem]">
-                        <img src="/VHS/public/icons/sidebar_studio/Comentários.svg" alt="Comentários" class="w-[3rem] h-[3rem]">
-                    </div>
-                    <h2 class="menu-text ml-[1rem] text-gray-400 text-sm font-semibold transition-all duration-500 ease-in-out">Comentários</h2>
-                </a>
-            </li>
-
-            <li class="flex items-center text-gray-300 rounded-lg cursor-pointer mt-[2rem]">
-                <a href="/VHS/studio/create/video" class="flex items-center w-full p-2">
-                    <div class="criar-icon icon w-[2rem] h-[2rem] flex items-center justify-center rounded-[12px] ml-[0.31rem]">
-                        <img src="/VHS/public/icons/sidebar_studio/Criar.svg" alt="Criar">
-                    </div>
-                    <h2 class="menu-text ml-[1rem] text-gray-400 text-sm font-semibold transition-all duration-500 ease-in-out">Criar</h2>
-                </a>
-            </li>
-        </ul>
+        <div class="p-6 border-t border-white/5">
+            <a href="/VHS/home" class="flex items-center gap-3 text-gray-400 hover:text-white transition-colors group">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span class="text-sm font-medium">Voltar para VHS</span>
+            </a>
+        </div>
+        <script src="/VHS/src/views/components/studioSideMenu/script.js"></script>
     </aside>
-    <script src="/VHS/src/views/components/studioSideMenu/script.js"></script>
-HTML;
+    HTML;
 }
-?>

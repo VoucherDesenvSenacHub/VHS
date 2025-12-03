@@ -20,17 +20,22 @@ class AdminComplaintManagementViewController extends Controller {
         $this->videoModel = $this->model("video");
 
         $page = $_GET["page"] ?? 0;
-        $page = $page > 0 ? $page * 7 : $page;
-        $filterComment = $_GET["comment"] ?? "";
-        $ordering = isset($_GET["ordering"]) ? "DESC" : "ASC";
 
+         if (!is_numeric($page) || $page < 0) {
+            $page = 0;
+        }
+        
+        $filterComment = $_GET["comment"] ?? "";
+        $sort = $_GET["sort"] ?? 'desc';
+        
         $limit = 7;
-        $report_comments = $this->commentModel->getReportComments($page, $limit + 1, $ordering);
-        $report_comments = array_slice($report_comments, 0, $limit + 1);
+        $offset = $page * $limit;
+        $report_comments = $this->commentModel->getReportComments($offset, $limit + 1, $sort);
 
         $nextPageReportComments = 0;
 
         if (count($report_comments) > $limit) {
+            array_pop($report_comments);
             $nextPageReportComments = 1;
         }
 
@@ -66,6 +71,11 @@ class AdminComplaintManagementViewController extends Controller {
             ];
         }
         
-        $this->view("admin/complaintManagement/index", ["comments" => $comments, "next_page_report_comments" => $nextPageReportComments]);        
+        $this->view("admin/complaintManagement/index", [
+            "comments" => $comments, 
+            "next_page_report_comments" => $nextPageReportComments,
+            "search" => $filterComment,
+            "sort" => $sort
+        ]);        
     }   
 }

@@ -14,10 +14,12 @@ require_once __DIR__ . '/../../../application/utils/redirect.php';
 
 use function Src\Application\Utils\Redirect\redirect;
 
-class CreateFastVideoController extends Controller {
+class CreateFastVideoController extends Controller
+{
     public FastModel $FastModel;
-    public function index() {
-        try{
+    public function index()
+    {
+        try {
             $uploadDir = __DIR__ . '/../../../../public/videos/';
             $thumbnailDir = __DIR__ . '/../../../../public/thumbnails/';
 
@@ -30,12 +32,12 @@ class CreateFastVideoController extends Controller {
             if (!is_dir($uploadDir)) {
                 mkdir($uploadDir, 0777, true);
             }
-            
-            if(!is_dir($thumbnailDir)){
+
+            if (!is_dir($thumbnailDir)) {
                 mkdir($thumbnailDir, 0777, true);
             }
 
-            $videoFileName = $_POST['title'] . uniqid();
+            $videoFileName = time() . uniqid();
             $videoPath = $uploadDir . $videoFileName . '.mp4';
             $thumbnailPath = $thumbnailDir . $videoFileName . '.png';
 
@@ -62,27 +64,27 @@ class CreateFastVideoController extends Controller {
             $id = uniqid(more_entropy: true);
 
             $schema = v::key(
-                'title',v::stringType()->length(3, 64)->setTemplate( 'O titulo tem que ter entre 3 a 32 caracteres')
+                'title',
+                v::stringType()->length(3, 64)->setTemplate('O titulo tem que ter entre 3 a 32 caracteres')
             );
-            
+
             $schema->assert($_POST);
 
             $id = uniqid(more_entropy: true);
 
             $this->FastModel->createFastVideo($id,  $_POST["title"], $_SESSION["user"]["id"], $duration,  0, $videoFileName . ".png", $videoFileName . ".mp4");
-            
+
             redirect("/VHS/studio/create/fast?success=1", ['success' => 'Vídeo criado com sucesso!']);
-        }
-        catch (NestedValidationException | Exception $exception) {
+        } catch (NestedValidationException | Exception $exception) {
             print_r($exception);
 
-            if($exception instanceof NestedValidationException) {
+            if ($exception instanceof NestedValidationException) {
                 foreach ($exception->getMessages() as $message) {
                     $messages[] = $message;
                 }
                 return redirect("/VHS/studio/create/fast?error=1", ['errors' => $messages[0], 'fields' => $_POST['title']]);
             }
-            
+
             return redirect("/VHS/studio/create/fast?error=1", ['errors' => $exception->getMessage(), 'fields' => $_POST['title']]);
         }
     }

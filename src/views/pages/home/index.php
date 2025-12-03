@@ -21,10 +21,9 @@ $mostPopularVideos = array_map(function ($video) {
 $categories = $_SESSION["page_data"]["categories"] ?? [];
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,61 +32,102 @@ $categories = $_SESSION["page_data"]["categories"] ?? [];
     <link rel="stylesheet" href="/VHS/src/styles/global.css">
     <script type="module" src="/VHS/src/styles/tailwindglobal.js"></script>
     <style>
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+        .glass-header {
+            background: rgba(32, 0, 44, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Custom scrollbar for horizontal scrolling if needed */
+        .hide-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
     </style>
 </head>
-<body>
-    <div>
-        <?= HeaderComponent() ?>
-    </div>
 
-    <div class="flex flex-col md:flex-row w-full">
-        <div class="hidden md:block">
+<body class="bg-gradient-to-b from-[#100018] to-black text-white min-h-screen flex flex-col overflow-x-hidden">
+
+    <?= HeaderComponent() ?>
+
+    <div class="flex flex-1">
+        <div class="h-full z-40">
             <?= SidebarComponent() ?>
         </div>
 
-        <main class="flex-1 px-4 sm:px-6 py-4 mx-auto">
-            <div class="max-w-[1500px] mx-auto">
-                
-                <section class="mb-12">
+        <main class="flex-1 p-6 w-full max-w-[1920px] mx-auto">
+
+            <!-- Featured Section -->
+            <?php if (!empty($featuredVideos)): ?>
+                <section class="mb-12 relative">
+                    <div class="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                    <div class="flex items-center gap-2 mb-6">
+                        <div class="w-1 h-6 bg-purple-500 rounded-full"></div>
+                        <h2 class="text-2xl font-bold text-white">Destaques</h2>
+                    </div>
+
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <div class="lg:col-span-1">
-                            <?= count($featuredVideos) == 1 ? FeaturedCardComponent($featuredVideos[0]) : "" ?>
-                        </div>
-                        
-                        <div class="lg:col-span-1">
-                            <?= count($featuredVideos) == 2 ? FeaturedCardComponent($featuredVideos[1]) : ""?>
-                        </div>
+                        <?php if (isset($featuredVideos[0])): ?>
+                            <div class="lg:col-span-1 transform hover:scale-[1.01] transition-transform duration-300">
+                                <?= FeaturedCardComponent($featuredVideos[0]) ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if (isset($featuredVideos[1])): ?>
+                            <div class="lg:col-span-1 transform hover:scale-[1.01] transition-transform duration-300">
+                                <?= FeaturedCardComponent($featuredVideos[1]) ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </section>
+            <?php endif; ?>
 
-                <section class="mb-12">
-                    <h2 class="text-2xl font-bold text-white mb-2"><span class="text-purple-400">#</span> Mais populares</h2>
-                    <p class="text-gray-400 text-sm mb-6">Confira os vídeos mais populares da nossa plataforma VHS</p>
-                    
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                        <?= viewCards($mostPopularVideos, 'videos'); ?>
+            <!-- Most Popular Section -->
+            <section class="mb-16">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-2">
+                        <div class="w-1 h-6 bg-blue-500 rounded-full"></div>
+                        <h2 class="text-2xl font-bold text-white">Mais Populares</h2>
                     </div>
-                </section>
+                    <a href="#" class="text-sm text-purple-400 hover:text-purple-300 font-medium transition-colors">Ver todos</a>
+                </div>
 
-                <?php foreach ($categories as $category): ?>
-                    <section class="mb-12">
-                        <h2 class="text-2xl font-bold text-white mb-6"><span class="text-purple-400">#</span> <?= $category['name'] ?? "" ?></h2>
-                        
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                            <?= viewCards($category["videos"], 'videos'); ?>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+                    <?= viewCards($mostPopularVideos, 'videos'); ?>
+                </div>
+            </section>
+
+            <!-- Categories Sections -->
+            <?php foreach ($categories as $category): ?>
+                <?php if (!empty($category["videos"])): ?>
+                    <section class="mb-12 border-t border-white/5 pt-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center gap-2">
+                                <div class="w-1 h-6 bg-pink-500 rounded-full"></div>
+                                <h2 class="text-2xl font-bold text-white"><?= htmlspecialchars($category['name']) ?></h2>
+                            </div>
+                            <a href="/VHS/home/categories?category=<?= urlencode($category['name']) ?>" class="text-sm text-purple-400 hover:text-purple-300 font-medium transition-colors">
+                                Ver mais de <?= htmlspecialchars($category['name']) ?>
+                            </a>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+                            <?= viewCards(array_slice($category["videos"], 0, 5), 'videos'); ?>
                         </div>
                     </section>
-                <?php endforeach; ?>
-            </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
+
         </main>
     </div>
+
     <?php echo isset($errors) ? showSweetAlert('Sem Permissão!', $errors, 'error') : ''; ?>
 </body>
+
 </html>

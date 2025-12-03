@@ -69,6 +69,17 @@ class CommentModel extends Model {
         return $this->database->query($sql, [":author_id" => $author_id, ":content" => "%$content%"]);
     }
 
+    public function getStudioVideoComments(string $videoId, int $offset, int $limit, string $content, string $ordering) {
+        $sql = "SELECT comments.*, videos.thumbnail_url, users.name, users.avatar_url FROM comments 
+        INNER JOIN videos ON videos.id = comments.video_id 
+        INNER JOIN users ON users.id = comments.user_id 
+        WHERE videos.id = :video_id AND comments.is_deleted = 0 
+        AND comments.content LIKE :content 
+        ORDER BY created_at $ordering 
+        LIMIT $offset, $limit";
+        return $this->database->query($sql, [":video_id" => $videoId, ":content" => "%$content%"]);
+    }
+
     public function CreatorLikeToComment(string $id, int $like){
         $sql = "UPDATE comments SET creator_like = :like WHERE id = :id";
         return $this->database->exec($sql, [":id" => $id, ":like" => $like]);

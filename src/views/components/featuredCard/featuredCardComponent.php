@@ -24,7 +24,8 @@ require_once __DIR__ . '/../../../application/utils/formatDuration.php';
  * 
  * @return string Retorna o HTML do card de vídeo.
  */
-function FeaturedCardComponent(array $video, bool $isCategoryPage = false): string{
+function FeaturedCardComponent(array $video, bool $isCategoryPage = false): string
+{
     $height = $isCategoryPage ? 'h-[450px]' : 'h-[330px]';
 
     $views = formatViews($video['views']);

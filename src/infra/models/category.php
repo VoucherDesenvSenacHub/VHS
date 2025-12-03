@@ -26,7 +26,7 @@ class CategoryModel extends Model
 
     public function addCategoryInUser(string $categoryId, string $userId): bool
     {
-        $sql = "INSERT INTO users_category VALUES (:id, :category_id, :user_id)";
+        $sql = "INSERT INTO users_category (id, category_id, user_id) VALUES (:id, :category_id, :user_id)";
         $id = uniqid(more_entropy: true);
         return $this->database->exec($sql, [
             ":id" => $id,
@@ -68,10 +68,11 @@ class CategoryModel extends Model
         $sql = "SELECT * FROM categories ORDER BY name DESC";
         return $this->database->query($sql);
     }
-    public function getCategories(int $offset, int $limit): array
+    
+    public function getCategories(int $offset, int $limit, string $search, string $ordering): array
     {
-        $sql = "SELECT * FROM categories ORDER BY name DESC LIMIT $offset, $limit";
-        return $this->database->query($sql);
+        $sql = "SELECT * FROM categories WHERE name LIKE :name ORDER BY name $ordering LIMIT $offset, $limit";
+        return $this->database->query($sql, ["name" => "%$search%"]);
     }
 
     public function createCategory(string $name): bool
@@ -97,7 +98,8 @@ class CategoryModel extends Model
         ]);
     }
 
-    public function getCountVideosByCategories(){
+    public function getCountVideosByCategories()
+    {
         $sql = "
         SELECT name, total
         FROM (

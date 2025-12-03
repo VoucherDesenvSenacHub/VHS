@@ -1,146 +1,41 @@
 <?php
-require "../../../components/utils/buttonComponent.php";
-require "../../../components/header/headerComponent.php";
-require "../../../components/utils/footer.php";
-require "../../../components/sidebar/index.php";
-require "../../../components/cards/videoCard.php";
-require "../../../components/cards/channelCard.php";
-require "../../../components/cards/index.php";
 
+require_once __DIR__ . "/../../../components/header/headerComponent.php";
+require_once __DIR__ . "/../../../components/sidebar/index.php";
+require_once __DIR__ . "/../../../components/cards/index.php";
+require_once __DIR__ . "/../../../components/fastComponent/fastComponent.php";
+require_once __DIR__ . "/../../../../application/utils/pagination.php";
+require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
+
+use function Src\Views\Components\Header\HeaderComponent;
+use function Src\Views\Components\Sidebar\SidebarComponent;
+use function Src\Views\Components\Cards\viewCards;
+use function Src\Views\Components\FastComponent\FastComponent;
+use function Src\Application\Utils\paginate;
 use function Src\Views\Components\Utils\ButtonComponent;
-use function Src\Views\Components\sidebar\SidebarComponent;
-use function src\views\components\header\HeaderComponent;
-use function Src\Views\Components\utils\Footer;
-use function Src\Views\Components\Cards\renderCards;
 
-$dados = [
-    [
-        'texto' => 'pop0x',
-        'link1' => 'https://www.microsoft.com/pt-br',
-        'link2' => 'https://www.instagram.com/microsoft/',
-        'link3' => 'https://www.office.com/',
-        'Descrição' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sed lobortis urna. Suspendisse suscipit lorem in accumsan venenatis. Nunc iaculis vitae orci sed consequat. Suspendisse semper dolor urna, et dictum sem egestas egestas. Mauris dapibus aliquet neque, sit amet sodales lectus vehicula ac. Nulla non est quis tortor aliquam mollis eu et sem. Nullam tempus volutpat vestibulum. Nam porttitor fermentum est nec dapibus. Nulla cursus ante purus, at posuere justo venenatis sed. Etiam lacinia quam vitae mauris tincidunt ultricies. Maecenas ipsum dolor, blandit a sem'
-    ],
-    ['Seguidores' => '4.5k', 'tipo' => 'Parceiro']
-];
-
-$videos = [
-    [
-        "url" => "https://youtube.com/@example3",
-        "type_card" => "Curso",
-        "description" => "CSS Avançado",
-        "duration" => 900,
-        "title" => "Dominando Tailwind CSS em 2025",
-        "username" => "Style Master",
-        "thumbnail_url" => "https://t.ctcdn.com.br/69rFkwz-cdviPGZn2p_l6rJH0UA=/1200x675/smart/i533291.png",
-        "avatar_url" => "https://cdn.awsli.com.br/10/10790/produto/292478529/fix-copo-bola-foto-1-7hxddc8b9q.jpg",
-        "account_type" => "verified",
-        "views" => 500000,
-        "created_at" => "2024-06-01 12:00:00"
-    ],
-    [
-        "url" => "https://youtube.com/@example3",
-        "type_card" => "Curso",
-        "description" => "CSS Avançado",
-        "duration" => 900,
-        "title" => "Dominando Tailwind CSS em 2025",
-        "username" => "Style Master",
-        "thumbnail_url" => "https://t.ctcdn.com.br/69rFkwz-cdviPGZn2p_l6rJH0UA=/1200x675/smart/i533291.png",
-        "avatar_url" => "https://cdn.awsli.com.br/10/10790/produto/292478529/fix-copo-bola-foto-1-7hxddc8b9q.jpg",
-        "account_type" => "verified",
-        "views" => 500000,
-        "created_at" => "2024-06-01 12:00:00"
-    ],
-    [
-        "url" => "https://youtube.com/@example3",
-        "type_card" => "Curso",
-        "description" => "CSS Avançado",
-        "duration" => 900,
-        "title" => "Dominando Tailwind CSS em 2025",
-        "username" => "Style Master",
-        "thumbnail_url" => "https://t.ctcdn.com.br/69rFkwz-cdviPGZn2p_l6rJH0UA=/1200x675/smart/i533291.png",
-        "avatar_url" => "https://cdn.awsli.com.br/10/10790/produto/292478529/fix-copo-bola-foto-1-7hxddc8b9q.jpg",
-        "account_type" => "verified",
-        "views" => 500000,
-        "created_at" => "2024-06-01 12:00:00"
-    ],
-    [
-        "url" => "https://youtube.com/@example3",
-        "type_card" => "Curso",
-        "description" => "CSS Avançado",
-        "duration" => 900,
-        "title" => "Dominando Tailwind CSS em 2025",
-        "username" => "Style Master",
-        "thumbnail_url" => "https://t.ctcdn.com.br/69rFkwz-cdviPGZn2p_l6rJH0UA=/1200x675/smart/i533291.png",
-        "avatar_url" => "https://cdn.awsli.com.br/10/10790/produto/292478529/fix-copo-bola-foto-1-7hxddc8b9q.jpg",
-        "account_type" => "verified",
-        "views" => 500000,
-        "created_at" => "2024-06-01 12:00:00"
-    ],
-    [
-        "url" => "https://youtube.com/@example3",
-        "type_card" => "Curso",
-        "description" => "CSS Avançado",
-        "duration" => 900,
-        "title" => "Dominando Tailwind CSS em 2025",
-        "username" => "Style Master",
-        "thumbnail_url" => "https://t.ctcdn.com.br/69rFkwz-cdviPGZn2p_l6rJH0UA=/1200x675/smart/i533291.png",
-        "avatar_url" => "https://cdn.awsli.com.br/10/10790/produto/292478529/fix-copo-bola-foto-1-7hxddc8b9q.jpg",
-        "account_type" => "verified",
-        "views" => 500000,
-        "created_at" => "2024-06-01 12:00:00"
-    ],
-    [
-        "url" => "https://youtube.com/@example3",
-        "type_card" => "Curso",
-        "description" => "CSS Avançado",
-        "duration" => 900,
-        "title" => "Dominando Tailwind CSS em 2025",
-        "username" => "Style Master",
-        "thumbnail_url" => "https://t.ctcdn.com.br/69rFkwz-cdviPGZn2p_l6rJH0UA=/1200x675/smart/i533291.png",
-        "avatar_url" => "https://cdn.awsli.com.br/10/10790/produto/292478529/fix-copo-bola-foto-1-7hxddc8b9q.jpg",
-        "account_type" => "verified",
-        "views" => 500000,
-        "created_at" => "2024-06-01 12:00:00"
-    ],
-    [
-        "url" => "https://youtube.com/@example3",
-        "type_card" => "video",
-        "description" => "CSS Avançado",
-        "duration" => 900,
-        "title" => "Dominando Tailwind CSS em 2025",
-        "username" => "Style Master",
-        "thumbnail_url" => "https://t.ctcdn.com.br/69rFkwz-cdviPGZn2p_l6rJH0UA=/1200x675/smart/i533291.png",
-        "avatar_url" => "https://cdn.awsli.com.br/10/10790/produto/292478529/fix-copo-bola-foto-1-7hxddc8b9q.jpg",
-        "account_type" => "verified",
-        "views" => 500000,
-        "created_at" => "2024-06-01 12:00:00"
-    ],
-    [
-        "url" => "https://youtube.com/@example3",
-        "type_card" => "Curso",
-        "description" => "CSS Avançado",
-        "duration" => 900,
-        "title" => "Dominando Tailwind CSS em 2025",
-        "username" => "Style Master",
-        "thumbnail_url" => "https://t.ctcdn.com.br/69rFkwz-cdviPGZn2p_l6rJH0UA=/1200x675/smart/i533291.png",
-        "avatar_url" => "https://cdn.awsli.com.br/10/10790/produto/292478529/fix-copo-bola-foto-1-7hxddc8b9q.jpg",
-        "account_type" => "verified",
-        "views" => 500000,
-        "created_at" => "2024-06-01 12:00:00"
-    ],
-];
+$user = $data['user'];
+$content = $data['content'];
+$tab = $data['tab'];
+$existsNextPage = $data['existsNextPage'];
+$page = $data['page'];
+$username = $data['user']['username'];
+$isFollowing = $data['isFollowing'] ?? false;
+$user['avatar_url'] = '/VHS/public/uploads/avatars/' . $user['avatar_url'];
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VHS - <?= htmlspecialchars($user['name']) ?></title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/VHS/src/styles/global.css">
     <script type="module" src="/VHS/src/styles/tailwindglobal.js"></script>
+    <script src="/VHS/src/views/pages/home/fast/script.js" defer></script>
+    <script src="/VHS/src/views/components/fastComponent/fastComponent.js" defer></script>
     <style>
         .line-clamp-2 {
             display: -webkit-box;
@@ -150,97 +45,135 @@ $videos = [
             overflow: hidden;
         }
     </style>
-    <title>VHS - Canal</title>
 </head>
 
-<body class="">
-    <div class="flex flex-col justify-between">
-        <header>
-            <?= HeaderComponent(); ?>
-        </header>
+<body class="w-full min-h-screen bg-no-repeat bg-cover bg-center text-white" style="background: linear-gradient(to bottom, <?= $user['background_color'] ?? '#20002c' ?>, #13001aff);">
+    <div>
+        <?= HeaderComponent() ?>
+    </div>
 
-        <div class="flex flex-col md:flex-row w-full">
-            <!-- Sidebar -->
-            <div class="hidden md:block">
-                <?= SidebarComponent(); ?>
-            </div>
-
-            <main class="flex flex-col flex-grow px-4 sm:px-8 md:px-12 -mt-8 max-w-[1500px] w-full mx-auto">
-                <!-- Banner principal -->
-                <div id="Content" class="mt-6 sm:mt-12 w-full">
-                    <div class="relative rounded-2xl overflow-hidden">
-                        <img src="https://i.imgur.com/Af9Zjam.png" class="w-full h-48 sm:h-64 md:h-72 lg:h-80 object-cover rounded-2xl" alt="Grande">
-                    </div>
-                    <div class="flex flex-col lg:flex-row w-full justify-between ">
-
-                        <!-- Imagem de perfil sobreposta -->
-                            <div class="flex flex-row">
-                                <div class="w-24 h-24 sm:w-36 sm:h-36 rounded-3xl border-1 border-white/20 overflow-hidden -mt-20 md:-mt-16 ml-4 sm:ml-6 z-10 relative">
-                                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiLFs8LhCWIlGFM1mpCK4Mm5pH8KCj_KGYq8LUlkx6yQJyvb1h-RQ4pnxWRf0kfUvp6FVc0zfvxTkFyQHQ59Q18kU-2bO0f6PaMlkfBCrqs3knp08P7C1dRtJEDm7c7OcPVzvWmpQagXuEf/s1600/600px-SuperMarioRun_icon.png" class=" object-cover h-full" alt="Perfil">
-                                </div>
-                                <div class="flex flex-col md:flex-row items-start sm:items-center mt-4 sm:mt-6 ml-4 sm:ml-6 gap-4 ">
-                                    <div>
-                                        <h1 class="text-white font-bold text-2xl"><?= $dados[0]['texto']; ?></h1>
-                                        <p class="text-gray-300">
-                                            <?= $dados[1]['Seguidores'] ?> Seguidores | <span class="text-white ml-1"><?= $dados[1]['tipo'] ?></span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        <div class="self-end w-96">
-                            <?= ButtonComponent('Seguir', 'outline', null) ?>
-                        </div>
-                    </div>
-                </div>
-                <!-- Bio e Links -->
-                <div class="flex flex-col lg:flex-row justify-between mt-6 gap-6">
-                    <div class="md:w-2/3">
-                        <p class="text-gray-300 text-sm sm:text-base">
-                            <?= $dados[0]['Descrição'] ?>
-                        </p>
-                    </div>
-
-                    <table class="text-white text-sm border-separate border-spacing-4 md:border-spacing-6">
-                        <tr>
-                            <td><img src="/VHS/public/icons/Union.svg" alt=""></td>
-                            <td><a class="text-cyan-500 break-all" href="<?= $dados[0]['link1'] ?>"><?= $dados[0]['link1'] ?></a></td>
-                        </tr>
-                        <tr>
-                            <td><img src="/VHS/public/icons/Vector1.svg" alt=""></td>
-                            <td><a class="text-cyan-500 break-all" href="<?= $dados[0]['link2'] ?>"><?= $dados[0]['link2'] ?></a></td>
-                        </tr>
-                        <tr>
-                            <td><img src="/VHS/public/icons/World.svg" alt=""></td>
-                            <td><a class="text-cyan-500 break-all" href="<?= $dados[0]['link3'] ?>"><?= $dados[0]['link3'] ?></a></td>
-                        </tr>
-                    </table>
-                </div>
-
-                <!-- Grid de vídeos -->
-                <div class="mt-10">
-                    <h1 class="text-white font-bold text-2xl">Conteúdo do Canal</h1>
-                    <p class="text-gray-300 mb-4">Confira os vídeos mais populares da nossa plataforma VHS</p>
-                    <section class="mb-12">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-
-                            <?php
-                            foreach ($videos as $video) {
-                                echo renderCards($cards, 'channels');
-                            }
-                            ?>
-
-
-                        </div>
-
-                    </section>
-                </div>
-            </main>
+    <div class="flex flex-col md:flex-row w-full">
+        <div>
+            <?= SidebarComponent() ?>
         </div>
 
-        <footer>
-            <?= Footer() ?>
-        </footer>
+        <main class="flex-1 px-4 sm:px-6 py-4 max-w-[1500px] mx-auto w-full">
+
+            <!-- Channel Header -->
+            <div class="mb-8">
+                <div class="h-32 md:h-48 bg-gradient-to-r from-purple-900 to-blue-900 rounded-xl mb-[-3rem] overflow-hidden relative">
+                    <?php if (!empty($user['banner_url'])): ?>
+                        <img src="/VHS/public/uploads/banners/<?= $user['banner_url'] ?>" class="w-full h-full object-cover absolute inset-0">
+                    <?php endif; ?>
+                </div>
+                <div class="pl-6 flex flex-col sm:flex-row items-start sm:items-end gap-4">
+                    <img src="<?= $user['avatar_url'] ?? '/VHS/public/uploads/avatars/default.png' ?>"
+                        onerror="this.src='/VHS/public/uploads/avatars/default.png'"
+                        class="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 object-cover relative"
+                        style="border-color: <?= $user['background_color'] ?? '#20002c' ?>; background-color: <?= $user['background_color'] ?? '#20002c' ?>;"
+                        alt="<?= $user['name'] ?>">
+
+                    <div class="flex-1 mb-2">
+                        <h1 class="text-2xl md:text-3xl font-bold relative z-50"><?= ($user['name']) ?></h1>
+                        <p class="text-gray-400">@<?= ($user['username']) ?></p>
+                        <div class="flex items-center gap-4 mt-2 text-sm text-gray-300">
+                            <span><?= $user['followers'] ?> seguidores</span>
+                            <span class="bg-white/10 px-2 py-0.5 rounded text-xs"><?= ($user['category']) ?></span>
+                        </div>
+                    </div>
+
+                    <!-- Subscribe Button -->
+                    <div class="flex flex-col gap-2 w-full max-w-[12rem]">
+                        <?php if ($user['id'] != $_SESSION['user']['id']): ?>
+                            <div id="subscribeContainer" onclick="toggleSubscribe('<?= $user['id'] ?>')">
+                                <?= ButtonComponent(
+                                    text: $isFollowing ? 'Inscrito' : 'Inscrever-se',
+                                    variant: $isFollowing ? 'default' : 'outline',
+                                    className: " w-full rounded-xl"
+                                )
+                                ?>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="border-b border-white/10 mb-6">
+                <div class="flex gap-6">
+                    <a href="?tab=videos&username=<?= $username ?>" class="pb-3 px-2 border-b-2 transition-colors <?= $tab === 'videos' ? 'border-purple-500 text-white' : 'border-transparent text-gray-400 hover:text-white' ?>">
+                        Vídeos
+                    </a>
+                    <a href="?tab=fasts&username=<?= $username ?>" class="pb-3 px-2 border-b-2 transition-colors <?= $tab === 'fasts' ? 'border-purple-500 text-white' : 'border-transparent text-gray-400 hover:text-white' ?>">
+                        Fasts
+                    </a>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <?php if (empty($content)): ?>
+                <div class="flex flex-col items-center justify-center py-20 text-center">
+                    <img src="/VHS/public/icons/search-empty.svg" onerror="this.style.display='none'" class="w-32 h-32 mb-4 opacity-50">
+                    <h3 class="text-xl font-semibold text-gray-300">Nenhum conteúdo encontrado</h3>
+                    <p class="text-gray-500 mt-2">Este canal ainda não publicou <?= $tab === 'videos' ? 'vídeos' : 'fasts' ?>.</p>
+                </div>
+            <?php else: ?>
+                <?php if ($tab === 'videos'): ?>
+                    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        <?= viewCards($content, 'videos') ?>
+                    </section>
+                <?php else: ?>
+                    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        <?= viewCards($content, 'fasts') ?>
+                    </section>
+                <?php endif; ?>
+
+                <div class="mt-8 mb-8">
+                    <?= paginate($content, $existsNextPage) ?>
+                </div>
+            <?php endif; ?>
+
+        </main>
     </div>
+
+    <script>
+        async function toggleSubscribe(followingId) {
+            const container = document.getElementById('subscribeContainer');
+            const btn = container.querySelector('button') || container.querySelector('div'); // ButtonComponent might render a div or button
+            const isFollowing = btn.innerText.trim() === 'Inscrito';
+            const url = isFollowing ? '/VHS/api/v1/json/user/unfollow' : '/VHS/api/v1/json/user/follow';
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        following_id: followingId
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    if (isFollowing) {
+                        btn.innerText = 'Inscrever-se';
+                        btn.classList.remove("bg-purple-700");
+                        btn.classList.add("border-purple-700");
+                        btn.classList.add("border");
+                    } else {
+                        btn.innerText = 'Inscrito';
+                        btn.classList.add("bg-purple-700");
+                    }
+                } else {
+                    console.error('Action failed:', data.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+    </script>
 </body>
 
 </html>

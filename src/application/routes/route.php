@@ -3,15 +3,15 @@
 require_once __DIR__ . '/../../application/routes/route.config.php';
 require_once __DIR__ . '/../../vendor/routes.autoload.php';
 require_once __DIR__ . '/../../../vendor/autoload.php';
-require_once __DIR__ . '/../../controllers/signUp.controller.php';
-require_once __DIR__ . '/../../controllers/signIn.controller.php';
-require_once __DIR__ . '/../../controllers/signUpView.controller.php';
-require_once __DIR__ . '/../../controllers/createPassword.controller.php';
-require_once __DIR__ . '/../../controllers/home.controller.php';
-#require_once __DIR__ . '/../../controllers/verfiyEmail.controller.php';
-require_once __DIR__ . '/../../application/middlewares/RedirectUserLoggedMiddleware.php';
-require_once __DIR__ . '/../../controllers/signIn.view.controller.php';
-require_once __DIR__ . '/../../controllers/SearchVideoController.php';
+// require_once __DIR__ . '/../../controllers/signUp.controller.php';
+// require_once __DIR__ . '/../../controllers/signIn.controller.php';
+// require_once __DIR__ . '/../../controllers/signUpView.controller.php';
+// require_once __DIR__ . '/../../controllers/createPassword.controller.php';
+// require_once __DIR__ . '/../../controllers/home.controller.php';
+// #require_once __DIR__ . '/../../controllers/verfiyEmail.controller.php';
+// require_once __DIR__ . '/../../application/middlewares/RedirectUserLoggedMiddleware.php';
+// require_once __DIR__ . '/../../controllers/signIn.view.controller.php';
+// require_once __DIR__ . '/../../controllers/SearchVideoController.php';
 
 use Dotenv\Dotenv;
 use Src\Application\Controllers\AddLikeFastController;
@@ -46,39 +46,42 @@ use Src\Application\Controllers\StudioFastViewController;
 use Src\Application\Controllers\StudioUpdateVideoViewController;
 use Src\Application\Middlewares\RedirectUserNotCreatorMiddleware;
 use Src\Application\Controllers\SignInViewController;
-use Src\Application\Controllers\ViewEventsController;
+
 use Src\Application\Controllers\EditChannelController;
 use Src\Application\Controllers\EditChannelViewController;
 use Src\Application\Middlewares\RedirectUserNotAdminMiddleware;
 use Src\Application\Controllers\AdminAnalyticsViewController;
 use Src\Application\Controllers\AdminComplaintManagementViewController;
 use Src\Application\Controllers\AdminUsersViewController;
+use Src\Application\Controllers\ChannelController;
 use Src\Application\Controllers\CreateCommentController;
 use Src\Application\Controllers\DeleteUserController;
 use Src\Application\Controllers\UpdateUserAdminController;
 use Src\Application\Controllers\DeleteCommentsController;
+use Src\Application\Controllers\DeleteCommentStudioController;
+use Src\Application\Controllers\DeleteFastController;
 use Src\Application\Controllers\InactivateUserController;
 use Src\Application\Controllers\DeleteReportCommentsController;
 use Src\Application\Controllers\FastController;
+use Src\Application\Controllers\FastUpdateController;
 use Src\Application\Controllers\VideoAvaliationController;
 use Src\Application\Controllers\VideoController;
 use Src\Application\Controllers\StudioAnalyticsVideoViewController;
+use Src\Application\Controllers\StudioAnalyticsViewController;
+use Src\Application\Controllers\StudioCommentsVideoViewController;
 use Src\Application\Controllers\VideoDeleteController;
 use Src\Application\Controllers\StudioCommentsViewController;
 use Src\Application\Controllers\LikeCommentsCreatorController;
-use Src\Application\Controllers\DeleteCommentStudioController;
-use Src\Application\Controllers\UserBlockedUserController;
-use Src\Application\Controllers\StudioAnalyticsViewController;
+use Src\Application\Controllers\SearchController;
+use Src\Application\Controllers\SeedUsersController;
 use Src\Application\Controllers\StudioContentFastViewController;
-use Src\Application\Controllers\DeleteFastController;
 use Src\Application\Controllers\StudioUpdateFastViewController;
-use Src\Application\Controllers\FastUpdateController;
+use Src\Application\Controllers\UserBlockedUserController;
+use Src\Application\Controllers\FollowUserController;
+use Src\Application\Controllers\UnfollowUserController;
+use Src\Controllers\Views\History\HistoryViewController;
 
-$dotenv = Dotenv::createImmutable(__DIR__ . "/../../..");
-$dotenv->load();
 $router = new Router();
-
-# API Routes
 
 $router->post('/api/v1/auth/signin', SignInController::class);
 
@@ -95,6 +98,8 @@ $router->post('/api/v1/channel/edit', EditChannelController::class, RedirectUser
 
 $router->post('/api/v1/user/delete', DeleteUserController::class, RedirectUserNotAdminMiddleware::class);
 $router->post('/api/v1/user/update', UpdateUserAdminController::class, RedirectUserNotAdminMiddleware::class);
+$router->post('/api/v1/json/user/follow', FollowUserController::class, RedirectUserNotLoggedMiddleware::class);
+$router->post('/api/v1/json/user/unfollow', UnfollowUserController::class, RedirectUserNotLoggedMiddleware::class);
 
 $router->post("/api/v1/comment", CreateCommentController::class, RedirectUserNotLoggedMiddleware::class);
 $router->post('/api/v1/comments/delete', DeleteCommentsController::class, RedirectUserNotAdminMiddleware::class);
@@ -133,17 +138,17 @@ $router->get('/studio/content/video', StudioContentVideoViewController::class, R
 $router->get('/studio/content/video/edit', StudioUpdateVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get('/studio/content/video/analytic', StudioAnalyticsVideoViewController::class);
 $router->get("/studio/analytics", StudioAnalyticsViewController::class, RedirectUserNotCreatorMiddleware::class);
-$router->get("/studio/create/video", StudioCreateVideoViewController::class, RedirectUserNotCreatorMiddleware::class);
-$router->get("/studio/create/fast", StudioFastViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get("/studio/content/fast", StudioContentFastViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get("/studio/content/fast/edit", StudioUpdateFastViewController::class, RedirectUserNotCreatorMiddleware::class);
 $router->get("/studio/comments", StudioCommentsViewController::class, RedirectUserNotCreatorMiddleware::class);
+$router->get('/studio/content/video/comment', StudioCommentsVideoViewController::class);
 
-$router->get("/home/search/video", SearchVideoController::class);
+$router->get("/home/search", SearchController::class, RedirectUserNotLoggedMiddleware::class);
+$router->get("/home/channel", ChannelController::class, RedirectUserNotLoggedMiddleware::class);
+$router->get("/seed/users", SeedUsersController::class);
 $router->get("/user/settings", UserSettingsViewController::class, RedirectUserNotLoggedMiddleware::class);
-$router->get("/home/events", ViewEventsController::class);
 $router->get('/studio/channel/edit', EditChannelViewController::class, RedirectUserNotCreatorMiddleware::class);
-$router->get("/home/events", ViewEventsController::class, RedirectUserNotLoggedMiddleware::class);
+
 
 $router->get("/admin/analytics", AdminAnalyticsViewController::class, RedirectUserNotAdminMiddleware::class);
 $router->get("/admin/categories", AdminCategoriesViewController::class, RedirectUserNotAdminMiddleware::class);
@@ -152,5 +157,6 @@ $router->get("/admin/users", AdminUsersViewController::class, RedirectUserNotAdm
 
 $router->get("/home/video", VideoController::class, /*RedirectUserNotLoggedMiddleware::class*/);
 $router->get("/home/fasts", FastController::class, RedirectUserNotLoggedMiddleware::class);
+$router->get("/home/history", HistoryViewController::class, RedirectUserNotLoggedMiddleware::class);
 
 $router->run();

@@ -4,159 +4,157 @@ require_once __DIR__ . "/../../../../components/utils/inputComponent.php";
 require_once __DIR__ . "/../../../../components/utils/textareaComponent.php";
 require_once __DIR__ . "/../../../../components/header/headerComponent.php";
 require_once __DIR__ . "/../../../../components/studioSideMenu/studioSideMenuComponent.php";
-require_once __DIR__ . "/../../../../components/utils/Title_and_buttons.php";
-require_once __DIR__ . "/../../../../components/utils/footer.php";
+require_once __DIR__ . "/../../../../components/utils/sweetalert.php";
 
 use function Src\Views\Components\Utils\ButtonComponent;
 use function Src\Views\Components\Utils\InputComponent;
 use function Src\Views\Components\Utils\TextareaComponent;
 use function Src\views\components\header\HeaderComponent;
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
-use function src\views\components\utils\Footer;
-
-$botoes = [
-    ['texto' => 'Edição', 'link' => ''],
-    ['texto' => 'Comentários', 'link' => '../components/teste.php'],
-    ['texto' => 'Analytics', 'link' => '']
-];
+use function Src\Application\Utils\showSweetAlert;
 
 $video = $_SESSION["page_data"]["video"] ?? [];
 $categorias = $_SESSION["page_data"]["categorias"] ?? [];
 
+$id = $video["id"] ?? "";
 $thumbPath = '';
+
 if (!empty($video) && !empty($video['thumbnail_url'])) {
     $url = $video['thumbnail_url'];
-
     $url = preg_replace('#^/VHS+#', '/VHS', $url);
     if (!str_starts_with($url, '/VHS')) {
         $url = '/VHS' . $url;
     }
-
     $thumbPath = $url;
 }
-
-
-$id = $video["id"];
-
-$conteudos = []
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VHS - Edição de Vídeo</title>
+    <title>VHS Studio - Edição de Vídeo</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/VHS/src/styles/global.css">
     <script src="/VHS/src/styles/tailwindglobal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
-<body class="">
-    <div>
-        <?= HeaderComponent() ?>
-    </div>
-    <div class="flex flex-row w-full">
+<body class="w-full min-h-screen bg-gradient-to-b from-[#100018] to-black text-white overflow-x-hidden">
+    <?= HeaderComponent(); ?>
 
-        <div class="max-xl:hidden">
-            <?= StudioSideMenuComponent() ?>
-        </div>
-        
-        <div class="flex flex-col gap-4 max-w-[1500px] w-full mx-auto px-6">
-            <div class="text-white flex flex-col gap-2">
-                <div class="flex flex-col p-4 md:p-0">
-                    <h1 class="font-semibold xl:text-title text-xl md:text-2xl text-white">Edição de video</h1>
-                    <p class="text-gray-300 xl:text-paragraph text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pellentesque elit nisl,</p>
-                    <div class="mt-4 flex gap-2 w-full flex-col md:w-96 md:flex-row">
-                        <?php
-                        echo ButtonComponent(text: "Edição", variant: "studio", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]", link: "/VHS/studio/content/video/edit?id=$id");
-                        echo ButtonComponent(text: "Comentários", variant: "studio", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]", link: "/VHS/studio/content/video/comentary?id=$id");
-                        echo ButtonComponent(text: "Analytics", variant: "studio", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]", link: "/VHS/studio/content/video/analytic?id=$id");
-                        ?>
+    <div class="flex min-h-screen">
+        <?= StudioSideMenuComponent(); ?>
+
+        <main class="flex-1 p-4 md:p-8 w-full max-w-[1600px] mx-auto">
+
+            <!-- Header & Navigation -->
+            <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 mb-8">
+                <div>
+                    <h1 class="text-2xl font-bold text-white">Edição de Vídeo</h1>
+                    <p class="text-gray-400 mt-1">Atualize os detalhes do seu vídeo</p>
+                </div>
+
+                <div class="flex p-1 bg-[#121214] border border-white/5 rounded-xl">
+                    <a href="/VHS/studio/content/video/edit?id=<?= $id ?>" class="px-6 py-2 rounded-lg text-sm font-medium bg-purple-600 text-white shadow-lg transition-all">
+                        Edição
+                    </a>
+                    <a href="/VHS/studio/content/video/commentary?id=<?= $id ?>" class="px-6 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all">
+                        Comentários
+                    </a>
+                    <a href="/VHS/studio/content/video/analytic?id=<?= $id ?>" class="px-6 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all">
+                        Analytics
+                    </a>
+                </div>
+            </div>
+
+            <form action="/VHS/api/v1/studio/content/video/edit" enctype="multipart/form-data" method="post" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <input type="hidden" name="id" value="<?= htmlspecialchars($video["id"] ?? "") ?>">
+                <input type="hidden" name="old_thumbnail" value="<?= htmlspecialchars($video["thumbnail_url"] ?? "") ?>">
+
+                <!-- Left Column: Main Info -->
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="bg-[#121214] border border-white/5 rounded-2xl p-6 space-y-6">
+                        <h2 class="text-lg font-semibold text-white mb-4">Detalhes</h2>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Título</label>
+                            <?= InputComponent(
+                                type: "text",
+                                placeholder: "Título do vídeo",
+                                value: $video["title"] ?? "",
+                                name: "title"
+                            ) ?>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Descrição</label>
+                            <?= TextareaComponent(
+                                type: "text",
+                                placeholder: "Descrição do vídeo...",
+                                height: "48",
+                                name: "description",
+                                value: $video["description"] ?? ""
+                            ) ?>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Categoria</label>
+                            <div class="relative">
+                                <select name="category_id" class="w-full bg-[#050505] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-500 transition-colors appearance-none cursor-pointer">
+                                    <?php foreach ($categorias as $categoria): ?>
+                                        <option value="<?= $categoria['id'] ?>" <?= ($video["category_id"] == $categoria['id']) ? "selected" : "" ?>>
+                                            <?= htmlspecialchars($categoria['name']) ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none">
+                                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <form action="/VHS/api/v1/studio/content/video/edit" enctype="multipart/form-data" method="post" class="md:p-0 p-4 flex flex-col gap-8 md:gap-4 md:mt-4">
-                    <input type="hidden" name="id" value="<?= htmlspecialchars($video["id"]) ?>">
-                    <input type="hidden" name="old_thumbnail" value="<?= htmlspecialchars($video["thumbnail_url"]) ?>">
+                <!-- Right Column: Thumbnail & Actions -->
+                <div class="lg:col-span-1 space-y-6">
+                    <div class="bg-[#121214] border border-white/5 rounded-2xl p-6 sticky top-24">
+                        <h2 class="text-lg font-semibold text-white mb-4">Thumbnail</h2>
 
-                    <div id="thumb" class="flex flex-col gap-2">
-                        <h1 class="md:text-subtitle text-lg text-white font-semibold">Thumbnail</h1>
-                        <p class="md:text-paragraph text-sm text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-                        <div class="md:mt-2 md:h-[500px] bg-background mt-4 w-full h-[300px] border-2 rounded-xl border-solid flex items-center justify-center relative overflow-hidden flex-wrap">
-                            <label for="dropzone-file"
-                                class="flex items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600 relative overflow-hidden">
+                        <div class="relative w-full aspect-video rounded-xl border-2 border-dashed border-white/10 hover:border-purple-500/50 transition-colors overflow-hidden group bg-[#050505]">
+                            <input id="dropzone-file" type="file" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" accept="image/png, image/jpg, image/jpeg" name="thumbnail" />
 
-                                <img id="thumbnailPreview"
-                                    src="<?= htmlspecialchars($thumbPath) ?>"
-                                    class="absolute inset-0 object-cover w-full h-full rounded-lg hidden"
-                                    alt="Preview" />
-
-                                <div id="uploadText" class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
-                                    <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="none" viewBox="0 0 20 16">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                            <div id="uploadText" class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center <?= !empty($thumbPath) ? 'hidden' : '' ?>">
+                                <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                                    <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                     </svg>
-                                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Clique para dar upload</span> ou arraste e solte</p>
-                                    <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, JPEG</p>
                                 </div>
+                                <p class="text-sm text-gray-400 font-medium">Clique ou arraste uma imagem</p>
+                                <p class="text-xs text-gray-500 mt-1">PNG, JPG ou JPEG</p>
+                            </div>
 
-                                <input id="dropzone-file" type="file" class="hidden" accept="image/png, image/jpg, image/jpeg" name="thumbnail" />
-                            </label>
+                            <img id="thumbnailPreview" src="<?= htmlspecialchars($thumbPath) ?>" class="absolute inset-0 w-full h-full object-cover <?= empty($thumbPath) ? 'hidden' : '' ?>" alt="Preview" />
+
+                            <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                                <span class="text-white text-sm font-medium">Alterar imagem</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 flex flex-col gap-3">
+                            <?= ButtonComponent(text: "Salvar Alterações", variant: "default", type: "submit", className: "w-full") ?>
+                            <?= ButtonComponent(text: "Cancelar", variant: "outline", type: "button", link: "/VHS/studio/content/video", className: "w-full") ?>
                         </div>
                     </div>
+                </div>
+            </form>
 
-                    <div id="Title">
-                        <h1 class="md:text-subtitle text-lg text-white font-semibold">Título</h1>
-                        <p class="text-paragraph text-gray-400 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-                        <?= InputComponent(type: "text", placeholder: "Tudo sobre o Next.js 15, nova arquitetura de pasta", value: $video["title"], name: "title") ?>
-                    </div>
-
-                    <div id="Description">
-                        <h1 class="md:text-subtitle text-lg text-white font-semibold">Descrição</h1>
-                        <p class="text-paragraph text-gray-400 mb-2">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl.
-                        </p>
-                        <div class="">
-                            <?= TextareaComponent(
-                                type: "text",
-                                placeholder: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.  😍😍😍",
-                                height: "96",
-                                name: "description",
-                                value: $video["description"]
-                            ) ?>
-                        </div>
-                    </div>
-
-                    <div id="Category">
-                        <h1 class="md:text-subtitle text-lg text-white font-semibold">Categoria</h1>
-                        <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-                        <select name="category_id" class="px-3 py-1.5 outline outline-1 outline-[#666666] rounded-md placeholder-[#666666] text-zinc-200 w-full h-[45px] bg-transparent">
-                            <?php foreach ($categorias as $categoria): ?>
-                                <option value="<?= $categoria['id'] ?>"
-                                    class="text-black"
-                                    <?= ($video["category_id"] == $categoria['id']) ? "selected" : "" ?>>
-                                    <?= htmlspecialchars($categoria['name']) ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-
-                    <div class="flex flex-col sm:flex-row justify-center items-end gap-10 my-4">
-                        <div class="w-full order-2 md:order-1">
-                            <?= ButtonComponent(text: "Cancelar", type: "button", variant: "outline", id: "cancel-button", width: 27.5, link: "/VHS/studio/content/video",) ?>
-                        </div>
-                        <div class="w-full order-1 md:order-2">
-                            <?= ButtonComponent(text: "Salvar Alterações", variant: "default", id: "publish-button", width: 27.5,) ?>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+        </main>
     </div>
-
-    <footer class=""> <?= Footer() ?> </footer>
 
     <script src="/VHS/src/views/pages/studio/content/video/script.js"></script>
 </body>

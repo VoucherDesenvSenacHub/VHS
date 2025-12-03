@@ -4,11 +4,13 @@ require_once __DIR__ . "/../../../components/cards/index.php";
 require_once __DIR__ . "/../../../components/utils/inputComponent.php";
 require_once __DIR__ . "/../../../components/studioSideMenu/studioSideMenuComponent.php";
 require_once __DIR__ . "/../../../components/utils/buttonComponent.php";
-require_once __DIR__ . "/../../../components/CardFastComponent/cardFast.php";
+require_once __DIR__ . "/../../../components/fastCard/index.php";
 require_once __DIR__ . "/../../../../application/utils/pagination.php";
+require_once __DIR__ . "/../../../components/filter/filter.php";
 
 use function Src\Application\Utils\paginate;
-use function Src\Views\Components\CardFast;
+use function Src\Views\Components\FastCard\FastCardComponent;
+use function src\views\components\filter\Filter;
 use function src\views\components\Utils\ButtonComponent;
 use function Src\Views\Components\header\HeaderComponent;
 use function src\views\components\studioSideMenu\StudioSideMenuComponent;
@@ -22,83 +24,89 @@ $sort = $_SESSION["page_data"]["sort"] ?? 'desc';
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VHS Studio - Conteúdo do canal</title>
+    <title>VHS Studio - Shorts</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="/VHS/src/styles/tailwindglobal.js"></script>
     <script src="/VHS/src/styles/tailwindglobal.js"></script>
     <link rel="stylesheet" href="/VHS/src/styles/global.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
-<body class="w-full bg-[#0C0118]">
-    <?php echo HeaderComponent(); ?>
-    <div class="flex">
-        <div class="max-xl:hidden mr-4">
-            <?php
-            echo StudioSideMenuComponent();
-            ?>
-        </div>
-        <div class="max-w-[1500px] w-full mx-auto px-6">
-            <div>
-                <h1 class="mt-8 font-semibold xl:text-title text-xl md:text-2xl text-white">Conteúdo do canal</h1>
-                <p class="text-gray-400 text-sm mt-1">Gerencie seus vídeos curtos</p>
-            </div>
-            <div class="my-4 flex gap-2 w-full flex-col md:w-96 md:flex-row">
-                <?php
-                echo ButtonComponent(text: "Videos", variant: "studio", link: "/VHS/studio/content/video", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]");
-                echo ButtonComponent(text: "Fast", variant: "studio", link: "/VHS/studio/content/fast", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]");
-                echo ButtonComponent(text: "Eventos", variant: "studio", link: "/VHS/studio/content/event", className: "sm:w-full md:w-[10.675rem] lg:h-[2.5rem]");
-                ?>
+<body class="w-full min-h-screen bg-gradient-to-b from-[#100018] to-black text-white overflow-x-hidden">
+    <?= HeaderComponent(); ?>
+
+    <div class="flex min-h-screen">
+        <?= StudioSideMenuComponent(); ?>
+
+        <main class="flex-1 p-4 md:p-8 w-full max-w-[1600px] mx-auto">
+
+            <div class="mb-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <h1 class="text-2xl font-bold text-white">Conteúdo do canal</h1>
+                    <p class="text-gray-400 mt-1">Gerencie seus vídeos curtos</p>
+                </div>
             </div>
 
-            <form action="" method="get" class="flex flex-col gap-4">
-                <input type="hidden" name="sort" value="<?= htmlspecialchars($sort) ?>">
-                <div class="relative">
+            <div class="flex flex-col lg:flex-row gap-6 mb-8 items-center justify-between">
+                <!-- Custom Tabs -->
+                <div class="flex p-1 bg-[#121214] border border-white/5 rounded-xl w-full lg:w-auto">
+                    <a href="/VHS/studio/content/video" class="flex-1 lg:flex-none px-8 py-2.5 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-center">
+                        Vídeos
+                    </a>
+                    <a href="/VHS/studio/content/fast" class="flex-1 lg:flex-none px-8 py-2.5 rounded-lg text-sm font-medium bg-purple-600 text-white shadow-lg transition-all text-center">
+                        Shorts
+                    </a>
+                </div>
+
+                <!-- Premium Search Input -->
+                <form action="" method="get" class="flex flex-col md:flex-row gap-4 w-full lg:w-auto items-center">
+                    <input type="hidden" name="sort" value="<?= htmlspecialchars($sort) ?>">
+
                     <?= InputComponent(
                         type: "text",
-                        placeholder: "Pesquisar",
-                        icon: "/VHS/public/icons/Filter.svg",
+                        placeholder: "Pesquisar Fasts...",
                         name: "search",
-                        value: $search,
-                        iconPosition: "left",
-                        onClickIcon: "showFilterMenu()"
+                        icon: "/VHS/public/icons/Filter.svg",
+                        value: $search
                     ) ?>
-                    <div id="filter" class="absolute right-0 top-full mt-2 z-10 hidden flex flex-col bg-[#2A2A2C] rounded-lg p-2 w-48 gap-2 shadow-xl">
-                        <a href="?search=<?= urlencode($search) ?>&sort=desc" class="flex items-center gap-2 p-1 rounded hover:bg-white/5 transition-colors cursor-pointer group">
-                            <img src="/VHS/public/icons/time-svgrepo-com.svg" alt="" class="size-5 rotate-[-110deg] opacity-50 group-hover:opacity-100 transition-opacity <?= $sort === 'desc' ? 'opacity-100' : '' ?>">
-                            <p class="text-[13px] font-poppins text-gray-200 <?= $sort === 'desc' ? 'text-white font-medium' : '' ?>">Mais recentes</p>
-                        </a>
-                        <a href="?search=<?= urlencode($search) ?>&sort=asc" class="flex items-center gap-2 p-1 rounded hover:bg-white/5 transition-colors cursor-pointer group">
-                            <img src="/VHS/public/icons/time-svgrepo-com.svg" class="size-5 opacity-50 group-hover:opacity-100 transition-opacity <?= $sort === 'asc' ? 'opacity-100' : '' ?>" alt="">
-                            <p class="text-[13px] font-poppins text-gray-200 <?= $sort === 'asc' ? 'text-white font-medium' : '' ?>">Mais antigos</p>
-                        </a>
-                    </div>
-                </div>
-            </form>
+                    <?= Filter($search, $sort) ?>
+                </form>
+            </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-5">
-                <?php
-                foreach ($fasts as $fast) {
-                    echo CardFast([
-                        'id' => $fast['id'],
-                        'thumbnail_url' => "/VHS/public/thumbnails/" . $fast['thumbnail_url'],
-                        'titulo' => $fast['title'],
-                        'likes' => $fast['likes'] ?? '0',
-                        'views' => $fast['views'] ?? '0'
-                    ]);
-                }
-                ?>
-            </div>
-            <div class="mb-5">
-                <?= paginate($fasts, $nextPage) ?>
-            </div>
-        </div>
+            <?php if (empty($fasts)): ?>
+                <div class="flex flex-col items-center justify-center py-20 text-center">
+                    <h3 class="text-xl font-bold text-white mb-2">Nenhum short encontrado</h3>
+                </div>
+            <?php else: ?>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <?php
+                    foreach ($fasts as $fast) {
+                        echo FastCardComponent([
+                            'id' => $fast['id'],
+                            'thumbnail_url' => $fast['thumbnail_url'],
+                            'title' => $fast['title'],
+                            'likes' => $fast['likes'] ?? '0',
+                            'views' => $fast['views'] ?? '0'
+                        ], true);
+                    }
+                    ?>
+                </div>
+
+                <div class="mt-8">
+                    <?= paginate($fasts, $nextPage) ?>
+                </div>
+            <?php endif; ?>
+
+        </main>
     </div>
+
+    <!-- Script to handle card options menu (same as video cards) -->
+    <script src="/VHS/src/views/components/cards/script.js" defer></script>
+
     <script defer>
         const input = document.querySelector("input[name='search']");
         let timeout = null;
@@ -108,7 +116,7 @@ $sort = $_SESSION["page_data"]["sort"] ?? 'desc';
 
             timeout = setTimeout(() => {
                 input.form.submit();
-            }, 1500);
+            }, 1000);
         });
 
         function showFilterMenu() {
