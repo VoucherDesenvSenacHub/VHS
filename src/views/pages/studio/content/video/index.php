@@ -61,7 +61,7 @@ if (!empty($video) && !empty($video['thumbnail_url'])) {
                     <a href="/VHS/studio/content/video/edit?id=<?= $id ?>" class="px-6 py-2 rounded-lg text-sm font-medium bg-purple-600 text-white shadow-lg transition-all">
                         Edição
                     </a>
-                    <a href="/VHS/studio/content/video/commentary?id=<?= $id ?>" class="px-6 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all">
+                    <a href="/VHS/studio/content/video/comment?id=<?= $id ?>" class="px-6 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all">
                         Comentários
                     </a>
                     <a href="/VHS/studio/content/video/analytic?id=<?= $id ?>" class="px-6 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all">

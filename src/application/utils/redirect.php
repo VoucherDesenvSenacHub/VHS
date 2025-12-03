@@ -12,7 +12,7 @@ function redirect(string $route, array | null $data = null, int $status_code = 3
     }
 
     if($data) {
-        echo var_dump($data);
+        // echo var_dump($data);
         $_SESSION["redirect_data"] = $data;
     };
 

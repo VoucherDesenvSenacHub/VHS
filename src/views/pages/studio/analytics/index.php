@@ -239,7 +239,7 @@ function time_elapsed_string($datetime, $full = false)
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                             </svg>
                                         </a>
-                                        <a href="/VHS/studio/content/video/commentary?id=<?= $vid['id'] ?>" class="p-2 text-gray-400 hover:text-white hover:bg-white/10 rounded-lg" title="Ver Comentários">
+                                        <a href="/VHS/studio/content/video/comment?id=<?= $vid['id'] ?>" class="p-2 text-gray-400 hover:text-white hover:bg-white/10 rounded-lg" title="Ver Comentários">
                                             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                                             </svg>
