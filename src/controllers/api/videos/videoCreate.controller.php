@@ -4,6 +4,7 @@ namespace Src\Application\Controllers;
 
 require_once __DIR__ . '/../../../application/core/controller.php';
 require_once __DIR__ . '/../../../application/utils/uploadImages.php';
+require_once __DIR__ . '/../../../application/utils/youtube.php';
 
 use Src\Application\Core\Controller;
 use Src\Infra\Model\VideoModel;
@@ -13,6 +14,8 @@ use Error;
 
 use function Src\Application\Utils\Redirect\redirect;
 use function Src\Application\Utils\UploadImages;
+use function Src\Application\Utils\YouTube\getYoutubeDurationSeconds;
+use function Src\Application\Utils\YouTube\getYoutubeIdFromUrl;
 
 class VideoCreateController extends Controller
 {
@@ -54,14 +57,28 @@ class VideoCreateController extends Controller
                 throw new Error(serialize($errors));
             }
 
-            // Se passou, cria o vídeo
+            $videoId = getYoutubeIdFromUrl($data['url']);
+
+            if (!$videoId) {
+                throw new Error(serialize(["url" => "URL de vídeo inválida!"]));
+            }
+
+            $duration = getYoutubeDurationSeconds($videoId, $_ENV['YOUTUBE_API_KEY']);
+
+            if ($duration === null) {
+                throw new Error(serialize(["url" => "Não foi possível obter a duração do vídeo!"]));
+            }
+
+            $data['duration'] = $duration;
+
             $this->videoModel->create(
                 $data["url"],
                 $data["title"],
                 $data["description"],
                 $data["category_id"],
                 $data["author_id"],
-                $data["thumbnail_url"]
+                $data["thumbnail_url"],
+                $data["duration"]
             );
 
             redirect("/VHS/studio/create/video", [

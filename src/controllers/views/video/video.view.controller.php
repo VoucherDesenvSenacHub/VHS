@@ -4,6 +4,7 @@ namespace Src\Application\Controllers;
 
 use Src\Application\Core\Controller;
 use Src\Infra\Model\AvaliationModel as ModelAvaliationModel;
+use Src\Infra\Model\ChannelModel;
 use Src\Infra\Model\CommentModel;
 use Src\Infra\Model\UserModel;
 use Src\Infra\Model\VideoModel;
@@ -43,6 +44,8 @@ class VideoController extends Controller
 
 
         $this->historyModel->addToHistory($_SESSION['user']['id'], $_GET["id"]);
+
+        $followers = $this->usersFollowersModel->getCountUserFollowers($video['author_id']);
 
 
         $userAvaliation = $this->avaliationModel->getAvaliation(
@@ -91,7 +94,8 @@ class VideoController extends Controller
             "next_page_comments" => $nextPageComments,
             "offset" => $offset,
             "limit" => $limit,
-            "is_following" => $isFollowing
+            "is_following" => $isFollowing,
+            'followers' => $followers
         ]);
     }
 }

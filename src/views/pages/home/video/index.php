@@ -32,6 +32,7 @@ $nextPageComments = $_SESSION["page_data"]["next_page_comments"];
 $totalComments = $_SESSION["page_data"]["total_comments"];
 $isFollowing = $_SESSION["page_data"]["is_following"] ?? false;
 $video["avatar_url"] = "/VHS/public/uploads/avatars/" . $video["avatar_url"] ?? "/VHS/public/uploads/avatars/default.png";
+$followers = $_SESSION["page_data"]["followers"];
 
 if ($_SESSION["redirect_data"]["success"] ?? false) {
   echo showSweetAlert($_SESSION["redirect_data"]["success"], "", "success");
@@ -102,7 +103,7 @@ if ($_SESSION["redirect_data"]["errors"] ?? false) {
                     <?= $video["username"] ?>
                   </p>
                   <p class="text-xs text-gray-400">
-                    <?= $video["followers"] ?? "0" ?> seguidores
+                    <?= $followers[0]['COUNT(id)'] ?? "0" ?> seguidores
                   </p>
                 </div>
               </a>

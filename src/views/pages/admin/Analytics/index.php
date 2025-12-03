@@ -22,6 +22,7 @@ use function Src\Application\Utils\orderningWeekDayAnalytics;
 $allUsers = $_SESSION['page_data']['all_users'];
 $allVideos = $_SESSION['page_data']['all_videos'];
 $allChannels = $_SESSION['page_data']['all_channels'];
+$allReports = $_SESSION['page_data']['all_reports'];
 $lastsReportsComments = $_SESSION['page_data']['lasts_reports_comments'];
 $categoriesTotal = $_SESSION['page_data']['categories_total'];
 $activities = $_SESSION['page_data']['activities'] ?? [];
@@ -75,7 +76,7 @@ $user = $_SESSION["user"] ?? null;
                 <?= UserActivityCardsComponent("Usuários", $allUsers, '/VHS/public/icons/users.svg') ?>
                 <?= UserActivityCardsComponent("Qtd. Vídeos", $allVideos, '/VHS/public/icons/video.svg') ?>
                 <?= UserActivityCardsComponent("Canais", $allChannels, '/VHS/public/icons/Radioo.svg') ?>
-                <?= UserActivityCardsComponent("Denúncias", $allChannels, '/VHS/public/icons/warning.svg') ?>
+                <?= UserActivityCardsComponent("Denúncias", $allReports, '/VHS/public/icons/warning.svg') ?>
             </div>
 
             <!-- Row 2: Chart & Categories -->
@@ -107,14 +108,6 @@ $user = $_SESSION["user"] ?? null;
                     <div class="bg-[#121214] border border-white/5 rounded-2xl p-6 shadow-xl h-full">
                         <h3 class="text-lg font-semibold text-white mb-6">Últimas Denúncias</h3>
                         <?= cardLatestReportComponent($lastsReportsComments); ?>
-                    </div>
-                </div>
-
-                <!-- Actions (1/3) -->
-                <div class="xl:col-span-1">
-                    <div class="bg-[#121214] border border-white/5 rounded-2xl p-6 shadow-xl h-full">
-                        <h3 class="text-lg font-semibold text-white mb-6">Ações</h3>
-                        <?= cardActivityHistoryComponent($activities); ?>
                     </div>
                 </div>
             </div>

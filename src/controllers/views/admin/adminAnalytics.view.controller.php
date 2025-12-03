@@ -27,6 +27,7 @@ class AdminAnalyticsViewController extends Controller
         $allUsers = $this->userModel->getAllUsers();
         $allVideos = $this->videoModel->countAllVideos();
         $allChannels = $this->userModel->getAllChannels();
+        $allReports = $this->commentModel->getAllReports();
         $lastsReportsComments = $this->commentModel->getReportComments(0, 7, 'DESC');
         $categoriesTotal = $this->categoryModel->getCountVideosByCategories();
         $allCountUsersLoginWeekday = $this->userModel->getCountUsersLoginByWeekDay();
@@ -93,6 +94,7 @@ class AdminAnalyticsViewController extends Controller
             "all_users" => $allUsers[0]['all_users'],
             "all_videos" => $allVideos[0]['all_videos'],
             "all_channels" => $allChannels[0]['all_channels'],
+            "all_reports" => $allReports[0]['all_reports'],
             "lasts_reports_comments" => $last_comments,
             "categories_total" => $categoriesTotal,
             "all_count_users_login_weekday" => $allCountUsersLoginWeekday,

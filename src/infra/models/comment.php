@@ -105,4 +105,9 @@ class CommentModel extends Model {
         return $this->database->exec($sql, ["userId" => $userId, "userBlockedId" => $userBlockedId]);
     }
 
+    public function getAllReports(){
+        $sql = "SELECT COUNT(id) AS all_reports FROM report_comments WHERE is_deleted = 0";
+        return $this->database->query($sql);
+    }
+
 }

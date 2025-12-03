@@ -159,7 +159,7 @@ function time_elapsed_string($datetime, $full = false)
                                     </svg>
                                 </span>
                             </div>
-                            <h3 class="text-2xl font-bold text-white"><?= number_format($followersCount, 0, ',', '.') ?>k</h3>
+                            <h3 class="text-2xl font-bold text-white"><?= number_format($followersCount, 0, ',', '.') ?></h3>
                         </div>
 
                         <!-- Visualizações -->
@@ -172,7 +172,7 @@ function time_elapsed_string($datetime, $full = false)
                                     </svg>
                                 </span>
                             </div>
-                            <h3 class="text-2xl font-bold text-white"><?= number_format($video['views'], 0, ',', '.') ?>k</h3>
+                            <h3 class="text-2xl font-bold text-white"><?= number_format($video['views'], 0, ',', '.') ?></h3>
                         </div>
 
                         <!-- M. Visualizações -->
@@ -185,7 +185,7 @@ function time_elapsed_string($datetime, $full = false)
                                     </svg>
                                 </span>
                             </div>
-                            <h3 class="text-2xl font-bold text-white"><?= $video['avg_views'] ?>k</h3>
+                            <h3 class="text-2xl font-bold text-white"><?= $video['avg_views'] ?></h3>
                         </div>
 
                         <!-- M. Avaliações -->
@@ -198,7 +198,7 @@ function time_elapsed_string($datetime, $full = false)
                                     </svg>
                                 </span>
                             </div>
-                            <h3 class="text-2xl font-bold text-white"><?= $video['avg_stars'] ?>k</h3>
+                            <h3 class="text-2xl font-bold text-white"><?= $video['avg_stars'] ?></h3>
                         </div>
                     </div>
 

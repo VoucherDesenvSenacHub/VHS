@@ -10,10 +10,12 @@ use Src\Application\Core\Model;
 class VideoModel extends Model
 {
 
-    public function create(string $url, string $title, string $description = '', string $category_id, string $author_id, string $thumbnail_url)
+    public function create(string $url, string $title, string $description = '', string $category_id, string $author_id, string $thumbnail_url, string $duration) 
     {
 
-        $sql = "INSERT INTO videos(id, url, title, description, author_id, category_id, thumbnail_url, created_at) VALUES(:id, :url, :title, :description, :author_id, :category_id, :thumbnail_url, :created_at)";
+        $sql = "INSERT INTO videos(id, url, title, description, author_id, category_id, thumbnail_url, duration, views , created_at) 
+        VALUES(:id, :url, :title, :description, :author_id, :category_id, :thumbnail_url, :duration, :views, :created_at)
+        ";
 
         $id = uniqid();
         $created_at = (new \DateTime('now', new \DateTimeZone('UTC')))->format('Y-m-d H:i:s');
@@ -26,6 +28,8 @@ class VideoModel extends Model
             ":author_id" => $author_id,
             ":category_id" => $category_id,
             ":thumbnail_url" => $thumbnail_url,
+            ":duration" => $duration,
+            ":views" => 0,
             ":created_at" => $created_at
         ]);
 
